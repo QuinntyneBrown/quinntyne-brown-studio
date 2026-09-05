@@ -36,7 +36,7 @@ All mutable aggregates carry a version. Updates carry `expectedVersion`; handler
 | `IPhotoAnalysisService` | photo ID, preview, rubric version → structured advisory findings or failure |
 | `IEmailSender` | recipient, template, token link, deduplication ID → accepted delivery job |
 
-Concrete feature requests and handlers appear in each feature's class and sequence diagrams. Names repeated across diagrams denote the same contract. A diagram scoped to a slice shows only the relevant projection of a shared aggregate.
+Concrete feature requests and handlers appear in each feature's class and sequence diagrams. The [shared interface and state catalog](contracts.md) fixes route ownership, quote fields, state transitions, and uniqueness constraints. Names repeated across diagrams denote the same contract. A diagram scoped to a slice shows only the relevant projection of a shared aggregate.
 
 ## Authorization and media
 
