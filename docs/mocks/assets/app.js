@@ -46,8 +46,9 @@
       'service-error':['The studio is temporarily unavailable. Please try again in a moment.','error']
     };
     const entry = messages[state];
-    return entry ? notice(entry[0],entry[1],state === 'expired-link' ? link(site,'forgot-password','Get a new link','btn secondary small') : btn('Dismiss','dismiss-state','secondary small')) : '';
+    return entry ? `<div id="state-notice">${notice(entry[0],entry[1],state === 'expired-link' ? link(site,'forgot-password','Get a new link','btn secondary small') : btn('Dismiss','dismiss-state','secondary small'))}</div>` : '';
   }
+  function clearErrorState(){state='default';document.getElementById('state-notice')?.remove();const selector=document.getElementById('state-select');if(selector)selector.value='default';}
   function brand() { return `<a class="brand" href="${site==='admin'?url('admin','dashboard'):url('marketing','home')}">Quinntyne Brown<span>Photography studio</span></a>`; }
   function publicHeader(client=false) {
     const nav = client ? [['galleries','Your sessions'],['albums','Albums'],['requests','Print requests']] : [['portfolio','Portfolio'],['services','Services'],['prints','Prints'],['promotions','Packages']];
@@ -335,7 +336,7 @@
       else if(values.password!==values.confirmPassword)document.getElementById('auth-feedback').innerHTML=notice('The passwords don’t match. Please try again.','error');
       else {document.getElementById('auth-feedback').innerHTML=notice('Password reset preview complete. You can sign in now.','success')+link(site,'login','Return to sign in →','text-link');form.reset();}
     }
-    if(form.id==='consultation-form'){if(failOnce(form,'Your message couldn’t be sent. Your details are still here. Please try again.'))return;openDialog('submitted');form.reset();}
+    if(form.id==='consultation-form'){if(failOnce(form,'Your message couldn’t be sent. Your details are still here. Please try again.'))return;clearErrorState();form.querySelectorAll('.notice.error').forEach(e=>e.remove());openDialog('submitted');form.reset();}
     if(form.id==='entity-form'){
       if(failOnce(form,'We couldn’t save these changes. Please try saving again.'))return;
       const key=form.dataset.key,id=form.dataset.id||`${key.slice(0,2)}-${Date.now()}`,previous=db[key].find(r=>r.id===id)||{};
@@ -346,8 +347,8 @@
       if(key==='sessions'){if(db.schedules.some(s=>s.date===r.date&&(s.photographer==='All photographers'||s.photographer===r.photographer))||db.sessions.some(s=>s.id!==id&&s.date===r.date&&s.photographer===r.photographer)){toast('This photographer already has a session or unavailable block on that date.');return;}}
       const index=db[key].findIndex(r=>r.id===id);index<0?db[key].push(r):db[key][index]=r;save();dirty=false;navigate(url('admin',key,'saved=1'));
     }
-    if(form.id==='rates-form'){if(failOnce(form,'Rates couldn’t be saved. Try again.'))return;for(const k of Object.keys(db.rates))db.rates[k]=Number(values[k]);save();dirty=false;toast('Rates saved. The quote calculator is up to date.');}
-    if(form.id==='print-prices-form'){if(failOnce(form,'Print prices couldn’t be saved. Try again.'))return;db.prints.forEach(p=>{p.price=Number(values[p.id]);p.available=!!form.elements[p.id+'-available'].checked;});save();dirty=false;toast('Print prices updated for the website and client galleries.');}
+    if(form.id==='rates-form'){if(failOnce(form,'Rates couldn’t be saved. Try again.'))return;for(const k of Object.keys(db.rates))db.rates[k]=Number(values[k]);save();dirty=false;clearErrorState();form.querySelectorAll('.notice.error').forEach(e=>e.remove());toast('Rates saved. The quote calculator is up to date.');}
+    if(form.id==='print-prices-form'){if(failOnce(form,'Print prices couldn’t be saved. Try again.'))return;db.prints.forEach(p=>{p.price=Number(values[p.id]);p.available=!!form.elements[p.id+'-available'].checked;});save();dirty=false;clearErrorState();form.querySelectorAll('.notice.error').forEach(e=>e.remove());toast('Print prices updated for the website and client galleries.');}
     if(form.id==='album-form'){if(failOnce(form,'Your album couldn’t be saved. Try again.'))return;const id=form.dataset.id||'a-'+Date.now();const a={...values,id,photos:[...selected]},idx=db.albums.findIndex(a=>a.id===id);idx<0?db.albums.push(a):db.albums[idx]=a;save();navigate(url('client','album',`id=${id}`));}
     if(form.id==='album-name-form'){const id=form.dataset.id;if(id){db.albums.find(a=>a.id===id).name=values.name;save();closeDialog();render();toast('Album renamed.');}else{const a={...values,id:'a-'+Date.now(),photos:[...selected]};db.albums.push(a);save();navigate(url('client','album-editor',`id=${a.id}`));}}
     if(form.id==='album-add-form'){const a=db.albums.find(a=>a.id===values.album);a.photos=[...new Set([...a.photos,...selected])];save();closeDialog();toast(`${selected.size} photographs added to ${a.name}.`);}
@@ -361,7 +362,7 @@
       const conflict=values.end<=values.time||db.schedules.some(s=>s.id!==form.dataset.id&&s.date===values.date&&(s.photographer==='All photographers'||values.photographer==='All photographers'||s.photographer===values.photographer)&&values.time<s.end&&values.end>s.time)||db.sessions.some(s=>s.date===values.date&&(values.photographer==='All photographers'||s.photographer===values.photographer));
       if(conflict){document.getElementById('schedule-feedback').innerHTML=notice('This time is invalid or overlaps an existing session or unavailable block. Choose another time.','error');return;}
       if(failOnce(form,'The schedule couldn’t be saved. Check the time and try again.'))return;
-      const r={...values,id:form.dataset.id||'sc-'+Date.now(),kind:'Unavailable'},idx=db.schedules.findIndex(s=>s.id===r.id);idx<0?db.schedules.push(r):db.schedules[idx]=r;save();closeDialog();render();toast('Availability saved. Quote availability is up to date.');
+      const r={...values,id:form.dataset.id||'sc-'+Date.now(),kind:'Unavailable'},idx=db.schedules.findIndex(s=>s.id===r.id);idx<0?db.schedules.push(r):db.schedules[idx]=r;save();closeDialog();clearErrorState();render();toast('Availability saved. Quote availability is up to date.');
     }
   });
   document.addEventListener('keydown',event=>{const d=document.getElementById('mock-dialog');if(d.open&&d.dataset.kind==='photo'&&['ArrowLeft','ArrowRight'].includes(event.key)){event.preventDefault();activePhoto=(activePhoto+(event.key==='ArrowRight'?1:7))%8;openDialog('photo');}});

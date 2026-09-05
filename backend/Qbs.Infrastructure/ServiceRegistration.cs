@@ -1,0 +1,108 @@
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Qbs.Application;
+
+namespace Qbs.Infrastructure;
+
+public static class ServiceRegistration
+{
+    public static IServiceCollection AddStudio(
+        this IServiceCollection services,
+        IConfiguration config,
+        bool controlled
+    )
+    {
+        var identityDatabase = "qbs-" + Guid.NewGuid();
+        services.AddDbContext<StudioDbContext>(o =>
+        {
+            if (controlled)
+                o.UseInMemoryDatabase(identityDatabase);
+            else
+                o.UseSqlServer(
+                    config.GetConnectionString("Studio")
+                        ?? throw new InvalidOperationException(
+                            "ConnectionStrings:Studio is required."
+                        )
+                );
+        });
+        if (controlled)
+        {
+            services.AddSingleton<IStudioStore, MemoryStudioStore>();
+            services.AddSingleton<IPhotoStorage, FilePhotoStorage>();
+            services.AddSingleton<IRouteDistanceService, ControlledRoutes>();
+            services.AddSingleton<IPhotoAnalysisService, ControlledAnalysis>();
+            services.AddSingleton<IEmailSender, ControlledEmail>();
+            services.AddSingleton<IJobQueue, MemoryJobQueue>();
+        }
+        else
+        {
+            services.AddScoped<IStudioStore, SqlStudioStore>();
+            services.AddSingleton<IPhotoStorage, AzurePhotoStorage>();
+            services.AddHttpClient<IRouteDistanceService, AzureMapsRoutes>();
+            services.AddHttpClient<IPhotoAnalysisService, AzurePhotoAnalysis>();
+            services.AddSingleton<IEmailSender, AzureEmailSender>();
+            services.AddSingleton<IJobQueue, AzureJobQueue>();
+        }
+        services.AddSingleton<IClock, SystemClock>();
+        services.AddSingleton<IRawPreviewConverter, RawPreviewConverter>();
+        var keys = services.AddDataProtection().SetApplicationName("QuinntyneBrownStudio");
+        if (config["DataProtection:BlobUri"] is { } blob)
+            keys.PersistKeysToAzureBlobStorage(
+                new Uri(blob),
+                new Azure.Identity.DefaultAzureCredential()
+            );
+        if (config["DataProtection:KeyUri"] is { } key)
+            keys.ProtectKeysWithAzureKeyVault(
+                new Uri(key),
+                new Azure.Identity.DefaultAzureCredential()
+            );
+        if (config["DataProtection:Directory"] is { } directory)
+            keys.PersistKeysToFileSystem(new DirectoryInfo(directory));
+        services
+            .AddIdentity<IdentityUser<Guid>, IdentityRole<Guid>>(o =>
+            {
+                o.Password.RequiredLength = 8;
+                o.User.RequireUniqueEmail = true;
+                o.SignIn.RequireConfirmedEmail = true;
+                o.Lockout.MaxFailedAccessAttempts = 5;
+                o.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+            })
+            .AddEntityFrameworkStores<StudioDbContext>()
+            .AddDefaultTokenProviders();
+        services.Configure<SecurityStampValidatorOptions>(o =>
+            o.ValidationInterval = TimeSpan.Zero
+        );
+        services.ConfigureApplicationCookie(o =>
+        {
+            o.Cookie.Name = "__Host-qbs";
+            o.Cookie.HttpOnly = true;
+            o.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.Always;
+            o.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Lax;
+            o.Cookie.Path = "/";
+            o.Events.OnRedirectToLogin = ctx =>
+            {
+                ctx.Response.StatusCode = 401;
+                return Task.CompletedTask;
+            };
+            o.Events.OnRedirectToAccessDenied = ctx =>
+            {
+                ctx.Response.StatusCode = 403;
+                return Task.CompletedTask;
+            };
+        });
+        services.AddScoped<IdentityAccounts>();
+        services.AddScoped<IIdentityAccounts>(sp => sp.GetRequiredService<IdentityAccounts>());
+        services.AddScoped<AdminCatalog>();
+        services.AddScoped<Scheduling>();
+        services.AddScoped<Presentation>();
+        services.AddScoped<ClientWorkflows>();
+        services.AddScoped<PhotoWorkflows>();
+        services.AddScoped<AnalysisWorkflows>();
+        services.AddScoped<RetentionWorkflows>();
+        services.AddMediatR(o => o.RegisterServicesFromAssemblyContaining<CalculateQuote>());
+        return services;
+    }
+}

@@ -1,0 +1,43 @@
+<header class="page__header">
+  <div>
+    <p class="page__eyebrow">Client deliverables</p>
+    <h1>Print requests</h1>
+    <p class="page__description">Review what your clients would like to hold on to.</p>
+  </div>
+</header>
+@if (message()) {
+  <qbs-notice [message]="message()" [error]="error()" />
+}
+@if (!requests().length) {
+  <qbs-empty message="No print requests yet." />
+}
+<div class="records">
+  @for (request of requests(); track request.id) {
+    <article class="records__row">
+      <div>
+        <h3>{{ request.lines.length }} print selections · {{ request.total }} CAD</h3>
+        <p class="records__detail">{{ request.id }} · {{ request.state }}</p>
+      </div>
+      <button class="button button--secondary" (click)="selected.set(request)">Open request</button>
+    </article>
+  }
+</div>
+@if (selected(); as request) {
+  <section class="panel section">
+    <h2>Submitted request</h2>
+    @for (line of request.lines; track $index) {
+      <div class="price__line">
+        <span
+          >{{ line.name }} · {{ line.dimensions }} · {{ line.finish }} × {{ line.quantity }}</span
+        ><span>{{ line.amount }} CAD</span>
+      </div>
+    }
+    <p class="price__total">{{ request.total }} CAD</p>
+    <p>{{ request.notes }}</p>
+    <div class="form__actions">
+      <button class="button" [disabled]="request.state === 'Reviewed'" (click)="review()">
+        Mark reviewed</button
+      ><button class="button button--secondary" (click)="selected.set(null)">Close</button>
+    </div>
+  </section>
+}

@@ -1,0 +1,15 @@
+{
+  "name": "@qbs/application",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^22.1.0",
+    "@angular/core": "^22.1.0",
+    "@qbs/domain": "0.0.1",
+    "@qbs/api": "0.0.1",
+    "@qbs/components": "0.0.1"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

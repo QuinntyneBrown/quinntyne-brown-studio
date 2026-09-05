@@ -1,0 +1,159 @@
+<header class="page__header">
+  <div>
+    <p class="page__eyebrow">Session workspace</p>
+    <h1>{{ session()?.name || 'Session' }}</h1>
+    <p class="page__description">{{ session()?.startsAt }} · {{ session()?.service }}</p>
+  </div>
+</header>
+@if (message()) {
+  <qbs-notice [message]="message()" [error]="error()" />
+}
+<section class="panel">
+  <h2>Add photographs</h2>
+  <p class="text--muted">
+    JPEG and supported camera RAW files. Up to 1,000 files, 250 MB each. Reselect the same files to
+    resume an interrupted batch.
+  </p>
+  <label class="field session__files"
+    ><span>Select photos</span
+    ><input
+      type="file"
+      multiple
+      accept=".jpg,.jpeg,.cr2,.cr3,.nef,.arw,.dng"
+      [disabled]="upload.busy()"
+      (change)="files($event)"
+  /></label>
+  @for (row of upload.rows(); track $index) {
+    <div class="session__upload">
+      <span>{{ row.name }}</span
+      ><progress
+        max="100"
+        [value]="row.progress"
+        [attr.aria-label]="row.name + ' upload progress'"
+      ></progress
+      ><span>{{ row.state }}</span>
+      @if (row.error) {
+        <small class="field__error">{{ row.error }}</small>
+      }
+    </div>
+  }
+</section>
+<section class="section">
+  <div class="section__header">
+    <h2>Session photographs</h2>
+    <button class="button button--secondary" [disabled]="!selected().length" (click)="analyze()">
+      Suggest promising photos
+    </button>
+  </div>
+  @if (!photos().length) {
+    <qbs-empty message="Photos will appear here after upload." />
+  }
+  <qbs-photos
+    [photos]="photos()"
+    [selectable]="true"
+    [selected]="selected()"
+    (selection)="toggle($event)"
+    (opened)="opened.set($event)"
+  />
+  @if (nextCursor()) {
+    <button class="button button--secondary" (click)="more()">Load more photographs</button>
+  }
+  @for (photo of photos(); track photo.id) {
+    @if (photo.state === 'Failed') {
+      <button class="button button--secondary" (click)="retryPhoto(photo.id)">
+        Retry preview · {{ photo.name }}
+      </button>
+    }
+  }
+  @if (analysis(); as batch) {
+    <aside class="panel">
+      <h2>AI-generated guidance</h2>
+      <p class="text--muted">
+        Suggestions support your review. They do not publish or select photographs.
+      </p>
+      @for (item of batch.photos; track item.photoId) {
+        <div class="records__row">
+          <div>
+            <span class="badge">{{ item.state }}</span>
+            @if (item.result) {
+              <p>{{ item.result.recommendation }}</p>
+              @for (finding of item.result.findings; track $index) {
+                <p>{{ finding.criterion }} · {{ finding.outcome }} — {{ finding.explanation }}</p>
+              }
+            }
+            @if (item.error) {
+              <p class="field__error">{{ item.error }}</p>
+            }
+          </div>
+        </div>
+      }
+      <button class="button button--secondary" (click)="retryAnalysis()">
+        Retry failed analysis
+      </button>
+    </aside>
+  }
+</section>
+<section class="section layout__split">
+  <div class="panel">
+    <h2>Client access</h2>
+    <p class="text--muted">
+      Only assigned clients can view this session while its photos remain available.
+    </p>
+    @for (client of people(); track client.id) {
+      <label class="session__client"
+        ><input
+          type="checkbox"
+          [checked]="assignments.includes(client.id)"
+          (change)="toggleClient(client.id)"
+        />{{ client.email }}</label
+      >
+    }
+    <button class="button" (click)="saveAssignments()">Save gallery access</button>
+  </div>
+  @if (retention(); as r) {
+    <div class="panel">
+      <h2>Photo retention</h2>
+      <p>Expires: {{ r.expiresAt || 'No photos uploaded' }}</p>
+      <p>{{ r.photoCount }} photos · {{ r.state }}</p>
+      <div class="stack">
+        <label class="field"
+          ><span>Retention months for new uploads</span
+          ><input type="number" min="1" max="120" [(ngModel)]="months" /></label
+        ><label class="field"
+          ><span>Extend expiry (timestamp with offset)</span
+          ><input [(ngModel)]="extension" placeholder="2028-06-01T10:00:00-04:00" /></label
+        ><button class="button button--secondary" (click)="extend()">Update retention</button>
+      </div>
+      <div class="form__actions">
+        <p>
+          {{ r.publishedReferences }} published galleries and {{ r.unreviewedRequests }} unreviewed
+          print requests reference these photos.
+        </p>
+        <button
+          class="button button--danger"
+          [disabled]="r.publishedReferences > 0 || r.unreviewedRequests > 0"
+          (click)="confirming.set(true)"
+        >
+          Delete session photos
+        </button>
+      </div>
+    </div>
+  }
+</section>
+@if (opened(); as photo) {
+  <qbs-dialog [title]="photo.name" (closed)="opened.set(null)"
+    ><img class="image__preview" [src]="photo.url" [alt]="photo.name"
+  /></qbs-dialog>
+}
+@if (confirming()) {
+  <qbs-dialog title="Delete session photographs?" (closed)="confirming.set(false)"
+    ><p>
+      This permanently removes {{ retention().photoCount }} original files and previews. Album and
+      reviewed print history retain unavailable placeholders.
+    </p>
+    <div class="form__actions">
+      <button class="button button--danger" (click)="deletion()">Confirm permanent deletion</button
+      ><button class="button button--secondary" (click)="confirming.set(false)">Cancel</button>
+    </div></qbs-dialog
+  >
+}

@@ -76,7 +76,7 @@ The viewport matrix is 390 × 844, 768 × 1024, and 1440 × 900 CSS pixels. The 
 
 The design baseline selects .NET 10 LTS, EF Core 10, Angular/CLI 22, Node.js 24.15 or a later compatible 24.x patch, and TypeScript 6.0.x. Exact package patches and toolchain lockfiles are recorded at implementation. The supported combinations are documented in the [Angular compatibility table](https://angular.dev/reference/versions); the runtime lifecycle is documented in the [.NET support policy](https://dotnet.microsoft.com/en-us/platform/support/policy).
 
-MediatR remains mandatory. The dependency-selection review compares current official releases and their license terms against the project's actual eligibility. The [official license conditions](https://mediatr.io/) and [release history](https://github.com/LuckyPennySoftware/MediatR/releases) are the evidence sources. Eligibility, selected version, license evidence, and selection date: `<TO SUPPLY>` under `G-MEDIATR`. A presumed community license or an unverified older version does not close this gate.
+MediatR remains mandatory. The dependency-selection review compares current official releases and their license terms against the project's actual eligibility. The [official license conditions](https://mediatr.io/) and [release history](https://github.com/LuckyPennySoftware/MediatR/releases) are the evidence sources. The implementation selects MediatR **12.5.0**, the final pre-v13 release, under the user-approved open-source selection on **2026-09-05**. The [tagged Apache-2.0 license](https://github.com/LuckyPennySoftware/MediatR/blob/v12.5.0/LICENSE) and [12.5.0 package record](https://www.nuget.org/packages/MediatR/12.5.0) establish freely usable terms without commercial/community eligibility assumptions. The project and package lock pin that exact release. G-MEDIATR is closed for this selection; changing the major version requires a new dependency review.
 
 Azure Container Apps hosts the API, gateway, and background worker. Azure SQL stores application and identity records. Blob Storage stores private originals and derivatives. Storage Queues transports processing work. Azure Communication Services Email delivers invitations and recovery messages. The component catalog deploys to Azure Static Web Apps and operates without the API. Development, staging, and production use distinct identities, secrets, databases, storage accounts, and queues. Subscription, region, DNS names, verified sender, capacity configuration, and model deployment identifiers: `<TO SUPPLY>` under `G-ENV`.
 
@@ -87,7 +87,7 @@ Azure Container Apps hosts the API, gateway, and background worker. Azure SQL st
 | G-RAW | Studio camera models, valid/corrupt samples, conversion and orientation results | `<TO SUPPLY>` |
 | G-UPLOAD | Boundary files and measured interruption/resume report on OD-04 profile | `<TO SUPPLY>` |
 | G-AI | Studio-approved rubric, evaluation set, threshold, Azure model/version/region qualification | `<TO SUPPLY>` |
-| G-MEDIATR | Latest qualifying release, actual eligibility, dated official licensing evidence | `<TO SUPPLY>` |
+| G-MEDIATR | User-selected latest pre-v13 release and dated official licensing evidence | Closed: MediatR 12.5.0, Apache-2.0, 2026-09-05 |
 | G-ENV | Environment identifiers, email sender, deployable configurations and isolation evidence | `<TO SUPPLY>` |
 
 These gates prevent acceptance claims for unverified product behavior. They do not prevent the requirements and proposed designs from being reviewed.

@@ -1,6 +1,6 @@
 # Quinntyne Brown Studio — detailed designs
 
-This design set describes the proposed production platform against the approved 2026-09-05 requirements baseline. The existing HTML prototype is the visual reference. Product implementation and production acceptance remain subsequent work.
+This design set describes the proposed production platform against the approved 2026-09-05 requirements baseline. The existing HTML prototype is the visual reference. The implementation is now available in the repository. The [implementation report](../implementation/README.md) records the delivered structure, verification results, and remaining acceptance evidence.
 
 The feature pages contain their background, concrete components and interfaces, exact L2 requirements with L1 parents, and inline rendered diagrams. The [shared architecture](architecture.md), [decision baseline](../specs/decisions.md), and [acceptance register](acceptance.md) establish common contracts and evidence gates.
 

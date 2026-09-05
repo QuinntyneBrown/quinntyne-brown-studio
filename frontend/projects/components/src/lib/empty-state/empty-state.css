@@ -1,0 +1,12 @@
+.empty-state {
+  padding: 70px 24px;
+  border: 1px dashed #dce0d5;
+  text-align: center;
+  color: #74766e;
+  background: #fafbf8;
+}
+.empty-state span {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 16px;
+}

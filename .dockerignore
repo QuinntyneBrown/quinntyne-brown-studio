@@ -1,0 +1,9 @@
+.git
+.artifacts
+**/node_modules
+**/bin
+**/obj
+**/dist
+**/.angular
+**/test-results
+docs/mocks

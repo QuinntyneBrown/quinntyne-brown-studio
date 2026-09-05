@@ -1,0 +1,334 @@
+<header class="page__header">
+  <div>
+    <p class="page__eyebrow">Studio configuration</p>
+    <h1>{{ title() }}</h1>
+    <p class="page__description">Keep the details current. Changes apply to subsequent requests.</p>
+  </div>
+</header>
+@if (message()) {
+  <qbs-notice [message]="message()" [error]="error()" />
+}
+@if (loading()) {
+  <p role="status">Loading…</p>
+} @else {
+  @if (kind() === 'studios' || kind() === 'content' || kind() === 'invitations') {
+    <div class="records">
+      @for (item of items(); track item.id) {
+        <div class="records__row">
+          <span>{{ item.name || item.pageKey || item.email }}</span>
+          @if (kind() !== 'invitations') {
+            <button class="button button--secondary" (click)="edit(item)">Edit</button>
+          }
+        </div>
+      }
+    </div>
+    @if (kind() !== 'invitations') {
+      <button class="button button--secondary settings__new" (click)="newRecord()">
+        New {{ kind() === 'studios' ? 'studio' : 'content' }}
+      </button>
+    }
+  }
+  <form class="form" (ngSubmit)="save()">
+    @switch (kind()) {
+      @case ('rates') {
+        <h2>Photography · per hour</h2>
+        <div class="form__grid">
+          @for (service of services; track service) {
+            <label class="field"
+              ><span>{{ service }} rate (CAD)</span
+              ><input
+                type="number"
+                min="0"
+                step="0.01"
+                [(ngModel)]="draft.serviceRates[service]"
+                [name]="service"
+                placeholder="Not configured"
+            /></label>
+          }
+        </div>
+        <h3>Session expenses</h3>
+        <div class="form__grid">
+          @for (cost of costs; track cost) {
+            <label class="field"
+              ><span
+                >{{ cost }} ·
+                {{
+                  cost === 'travel'
+                    ? 'per kilometre'
+                    : cost === 'assistant'
+                      ? 'per hour'
+                      : cost === 'lunch'
+                        ? 'per person'
+                        : 'per unit/session'
+                }}</span
+              ><input
+                type="number"
+                min="0"
+                step="0.01"
+                [(ngModel)]="draft.costRates[cost]"
+                [name]="cost"
+                placeholder="Not configured"
+            /></label>
+          }
+        </div>
+      }
+      @case ('discounts') {
+        <h2>Advance booking</h2>
+        <div class="form__grid">
+          <label class="field"
+            ><span>Enable advance discount</span
+            ><input
+              type="checkbox"
+              name="advance-enabled"
+              [(ngModel)]="draft.advanceRule.enabled" /></label
+          ><label class="field"
+            ><span>Days in advance</span
+            ><input
+              type="number"
+              min="0"
+              name="threshold"
+              [(ngModel)]="draft.advanceRule.threshold"
+              required /></label
+          ><label class="field"
+            ><span>Advance percentage</span
+            ><input
+              type="number"
+              min="0"
+              max="100"
+              step="0.01"
+              name="advance-percent"
+              [(ngModel)]="draft.advanceRule.percentage"
+              required
+          /></label>
+        </div>
+        <h3>Slow-day discount</h3>
+        <div class="form__grid">
+          <label class="field"
+            ><span>Enable weekday discount</span
+            ><input
+              type="checkbox"
+              name="weekday-enabled"
+              [(ngModel)]="draft.weekdayRule.enabled" /></label
+          ><label class="field"
+            ><span>Weekday percentage</span
+            ><input
+              type="number"
+              min="0"
+              max="100"
+              step="0.01"
+              name="weekday-percent"
+              [(ngModel)]="draft.weekdayRule.percentage"
+          /></label>
+        </div>
+        <div class="field__choices settings__days">
+          @for (day of weekdays; track day) {
+            <label
+              ><input
+                type="checkbox"
+                [checked]="draft.weekdayRule.weekdays.includes(day)"
+                (change)="toggleDay(day)"
+              />{{ day }}</label
+            >
+          }
+        </div>
+        <h3>Discount codes</h3>
+        @for (code of draft.codeRules; track $index; let i = $index) {
+          <div class="settings__code">
+            <div class="form__grid">
+              <label class="field"
+                ><span>Code</span
+                ><input [(ngModel)]="code.code" [name]="'code' + i" required /></label
+              ><label class="field"
+                ><span>Percentage</span
+                ><input
+                  type="number"
+                  min="0"
+                  max="100"
+                  step="0.01"
+                  [(ngModel)]="code.percentage"
+                  [name]="'percentage' + i"
+                  required /></label
+              ><label class="field"
+                ><span>Valid from</span
+                ><input type="date" [(ngModel)]="code.validFrom" [name]="'from' + i" /></label
+              ><label class="field"
+                ><span>Valid through</span
+                ><input type="date" [(ngModel)]="code.validTo" [name]="'to' + i" /></label
+              ><label class="field"
+                ><span>Enabled</span
+                ><input type="checkbox" [(ngModel)]="code.enabled" [name]="'enabled' + i"
+              /></label>
+            </div>
+            <button
+              class="button button--secondary"
+              type="button"
+              (click)="draft.codeRules.splice(i, 1)"
+            >
+              Remove code
+            </button>
+          </div>
+        }
+        <button
+          class="button button--secondary"
+          type="button"
+          (click)="
+            draft.codeRules.push({
+              code: '',
+              percentage: 0,
+              enabled: false,
+              validFrom: null,
+              validTo: null,
+            })
+          "
+        >
+          Add code
+        </button>
+        <p class="page__description">
+          Only the largest eligible discount applies. Equal discounts prefer code, advance, then
+          weekday.
+        </p>
+      }
+      @case ('studios') {
+        <h2>{{ draft.id ? 'Edit studio' : 'New studio' }}</h2>
+        <div class="form__grid">
+          <label class="field"
+            ><span>Studio name</span><input name="name" [(ngModel)]="draft.name" required /></label
+          ><label class="field"
+            ><span>Hourly fee (CAD)</span
+            ><input
+              type="number"
+              min="0"
+              step="0.01"
+              name="fee"
+              [(ngModel)]="draft.hourlyFee"
+              required /></label
+          ><label class="field"
+            ><span>Address</span
+            ><input
+              name="address"
+              [(ngModel)]="address"
+              (ngModelChange)="draft.resolvedAddress = null"
+              required /></label
+          ><button class="button button--secondary" type="button" (click)="resolve()">
+            Find address
+          </button>
+        </div>
+        @for (candidate of candidates(); track $index) {
+          <button class="settings__candidate" type="button" (click)="choose(candidate)">
+            {{ candidate.label }} · Select
+          </button>
+        }
+        @if (draft.resolvedAddress) {
+          <p class="page__description">Selected: {{ draft.resolvedAddress.label }}</p>
+        }
+        <div class="form__grid">
+          <label class="field"
+            ><span>Available in quotes</span
+            ><input type="checkbox" name="enabled" [(ngModel)]="draft.enabled" /></label
+          ><label class="field"
+            ><span>Use as travel base</span
+            ><input type="checkbox" name="base" [(ngModel)]="draft.isBase"
+          /></label>
+        </div>
+      }
+      @case ('content') {
+        <h2>Page copy</h2>
+        <div class="stack">
+          <label class="field"
+            ><span>Page</span
+            ><select name="page" [(ngModel)]="pageKey">
+              <option>home</option>
+              <option>services</option>
+              <option>contact</option>
+            </select></label
+          ><label class="field"
+            ><span>Heading</span
+            ><input name="heading" [(ngModel)]="draft.heading" maxlength="200" required /></label
+          ><label class="field"
+            ><span>Body</span
+            ><textarea
+              name="body"
+              [(ngModel)]="draft.body"
+              maxlength="10000"
+              required
+            ></textarea></label
+          ><label class="field"
+            ><span>Publish this revision</span
+            ><input type="checkbox" name="publish" [(ngModel)]="draft.publish"
+          /></label>
+        </div>
+      }
+      @case ('schedule') {
+        <h2>Working and unavailable time</h2>
+        <p class="text--muted">
+          Use Toronto timestamps with an explicit UTC offset, for example 2027-06-01T09:00:00-04:00.
+        </p>
+        @for (group of ['workingWindows', 'unavailableWindows']; track group) {
+          <h3>{{ group === 'workingWindows' ? 'Working windows' : 'Unavailable windows' }}</h3>
+          @for (window of draft[group]; track $index; let i = $index) {
+            <div class="form__grid settings__window">
+              <label class="field"
+                ><span>Start with offset</span
+                ><input
+                  [(ngModel)]="window.startsAt"
+                  [name]="group + 'start' + i"
+                  required /></label
+              ><label class="field"
+                ><span>End with offset</span
+                ><input [(ngModel)]="window.endsAt" [name]="group + 'end' + i" required /></label
+              ><button
+                class="button button--secondary"
+                type="button"
+                (click)="draft[group].splice(i, 1)"
+              >
+                Remove interval
+              </button>
+            </div>
+          }
+          <button
+            class="button button--secondary"
+            type="button"
+            (click)="draft[group].push({ startsAt: '', endsAt: '' })"
+          >
+            Add {{ group === 'workingWindows' ? 'working' : 'unavailable' }} interval
+          </button>
+        }
+        <h3>Travel buffers</h3>
+        <div class="form__grid">
+          <label class="field"
+            ><span>Minutes before</span
+            ><input
+              type="number"
+              min="0"
+              step="15"
+              name="before"
+              [(ngModel)]="draft.buffers.before" /></label
+          ><label class="field"
+            ><span>Minutes after</span
+            ><input type="number" min="0" step="15" name="after" [(ngModel)]="draft.buffers.after"
+          /></label>
+        </div>
+      }
+      @case ('invitations') {
+        <h2>Invite a client</h2>
+        <label class="field"
+          ><span>Client email</span
+          ><input type="email" name="email" [(ngModel)]="draft.email" required
+        /></label>
+        <p class="page__description">
+          The invitation link expires after 24 hours. Gallery access is assigned separately within a
+          session.
+        </p>
+      }
+    }
+    <div class="form__actions">
+      <button
+        class="button"
+        type="submit"
+        [disabled]="busy() || (kind() === 'studios' && !draft.resolvedAddress)"
+      >
+        {{ busy() ? 'Saving…' : kind() === 'invitations' ? 'Send invitation' : 'Save' }}
+      </button>
+    </div>
+  </form>
+}

@@ -1,0 +1,220 @@
+{
+  "recordedAt": "2026-09-05T10:28:50.735501+00:00",
+  "baseCommit": "38ef5a2e8ebabecfd17be40bfeaf999db90a271d",
+  "sourceState": "Local working tree; not a CI result or an implementation commit.",
+  "backend": {
+    "total": 44,
+    "passed": 44,
+    "tests": [
+      {
+        "name": "Qbs.AcceptanceTests.PhotoProcessingTests.AC_L2_028_02_Invalid_uploaded_bytes_are_reported_as_rejected_without_a_preview_job",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.WorkflowAcceptanceTests.AC_L2_036_01_AC_L2_064_01_Print_snapshots_are_idempotent_and_immutable",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.SqlStoreTests.Transaction_rolls_back_record_and_outbox_together",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.IdentityAcceptanceTests.AC_L2_062_01_Invitation_and_recovery_are_single_use_and_recovery_is_account_neutral",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.PlatformAcceptanceTests.AC_L2_003_01_Administration_rejects_anonymous_and_client(resource: \"vendors\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.DiscountAndTimeTests.AC_L2_014_02_Invalid_code_preserves_other_eligible_discounts",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.SqlStoreTests.Database_rejects_duplicate_client_idempotency_keys",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.PlatformAcceptanceTests.AC_L2_012_02_Unconfigured_quote_is_unavailable_not_zero",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.WorkflowAcceptanceTests.AC_L2_026_01_AC_L2_028_01_Upload_manifest_rejects_invalid_files_and_oversized_batches",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.WorkflowAcceptanceTests.AC_L2_062_01_Mutations_require_antiforgery_even_for_authenticated_administrators",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.PlatformAcceptanceTests.AC_L2_003_01_Administration_rejects_anonymous_and_client(resource: \"sessions\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.DiscountAndTimeTests.AC_L2_015_02_Advance_threshold_uses_Toronto_calendar_days(days: 91, expected: \"10\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.WorkflowAcceptanceTests.AC_L2_008_01_AC_L2_009_01_AC_L2_010_01_AC_L2_013_01_Quotes_use_saved_decimal_rates(service: \"Headshot\", expected: \"786.72\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.PlatformAcceptanceTests.AC_L2_023_01_Equipment_persists_valid_changes_and_rejects_stale_or_negative_edits",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.PlatformAcceptanceTests.AC_L2_024_01_AC_L2_025_01_Vendor_roles_and_contact_validation(role: \"SecondShooter\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.WorkflowAcceptanceTests.AC_L2_008_01_AC_L2_009_01_AC_L2_010_01_AC_L2_013_01_Quotes_use_saved_decimal_rates(service: \"Wedding\", expected: \"434.72\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.PlatformAcceptanceTests.AC_L2_003_01_Administration_rejects_anonymous_and_client(resource: \"content\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.PlatformAcceptanceTests.AC_L2_003_01_Administration_rejects_anonymous_and_client(resource: \"print-requests\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.PublishingAcceptanceTests.AC_L2_018_01_AC_L2_018_02_AC_L2_019_01_Stale_or_invalid_configuration_cannot_replace_saved_rates",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.RetentionAcceptanceTests.AC_L2_061_01_AC_L2_034_01_Expiry_is_enforced_without_scheduler_and_notices_are_once_per_revision",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.PlatformAcceptanceTests.AC_L2_024_01_AC_L2_025_01_Vendor_roles_and_contact_validation(role: \"MakeupArtist\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.PublishingAcceptanceTests.AC_L2_004_01_AC_L2_005_01_Drafts_and_unpublished_galleries_are_not_public",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.PlatformAcceptanceTests.AC_L2_007_01_Promotion_publication_and_noneditable_notice",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.DiscountAndTimeTests.AC_L2_058_01_Nonexistent_spring_time_is_rejected_and_both_fall_offsets_are_valid",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.DiscountAndTimeTests.AC_L2_017_01_AC_L2_057_01_Ties_prefer_code_then_advance_then_weekday",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.DiscountAndTimeTests.AC_L2_015_02_Advance_threshold_uses_Toronto_calendar_days(days: 89, expected: \"0\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.PublishingAcceptanceTests.AC_L2_035_01_AC_L2_036_02_Private_or_repriced_prints_create_no_request",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.PlatformAcceptanceTests.AC_L2_003_01_Administration_rejects_anonymous_and_client(resource: \"equipment\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.DiscountAndTimeTests.AC_L2_015_02_Advance_threshold_uses_Toronto_calendar_days(days: 90, expected: \"10\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.PhotoProcessingTests.AC_L2_030_01_AC_L2_030_02_Advisory_analysis_does_not_publish_or_assign_photos",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.WorkflowAcceptanceTests.AC_L2_021_01_AC_L2_022_01_AC_L2_058_01_Schedules_reject_overlapping_commitments",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.PlatformAcceptanceTests.AC_L2_003_01_Administration_rejects_anonymous_and_client(resource: \"rates\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.PlatformAcceptanceTests.AC_L2_003_01_Administration_rejects_anonymous_and_client(resource: \"public-galleries\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.PlatformAcceptanceTests.AC_L2_020_01_Print_price_changes_have_one_public_source",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.PlatformAcceptanceTests.AC_L2_033_02_AC_L2_034_01_Client_isolation_and_empty_galleries",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.WorkflowAcceptanceTests.AC_L2_061_01_Deletion_requires_current_impact_and_blocks_publication",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.WorkflowAcceptanceTests.AC_L2_008_01_AC_L2_009_01_AC_L2_010_01_AC_L2_013_01_Quotes_use_saved_decimal_rates(service: \"FamilyPortrait\", expected: \"962.72\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.WorkflowAcceptanceTests.AC_L2_008_01_AC_L2_009_01_AC_L2_010_01_AC_L2_013_01_Quotes_use_saved_decimal_rates(service: \"Event\", expected: \"610.72\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.WorkerRecoveryTests.Expired_execution_lease_is_reprocessed_after_a_worker_crash",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.SqlStoreTests.Concurrent_stale_updates_allow_only_one_commit",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.WorkflowAcceptanceTests.AC_L2_037_01_AC_L2_065_01_Albums_preserve_order_and_revoked_placeholders",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.PhotoProcessingTests.AC_L2_027_01_AC_L2_028_02_AC_L2_029_01_AC_L2_059_01_Original_integrity_and_repeated_finalization",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.IdentityAcceptanceTests.AC_L2_003_01_AC_L2_032_01_AC_L2_032_02_Real_identity_cookie_enforces_roles_credentials_and_logout",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Qbs.AcceptanceTests.PlatformAcceptanceTests.AC_L2_024_01_AC_L2_025_01_Vendor_roles_and_contact_validation(role: \"Assistant\")",
+        "outcome": "Passed"
+      }
+    ],
+    "trxSha256": "3feb6a899f54df925023b9626cb718642cb23574979f18d4d4e59d1c6ce6fdb2"
+  },
+  "frontend": {
+    "passed": 72,
+    "unexpected": 0,
+    "flaky": 0,
+    "browsers": [
+      "Chromium",
+      "Firefox",
+      "WebKit"
+    ],
+    "viewports": [
+      [
+        390,
+        844
+      ],
+      [
+        768,
+        1024
+      ],
+      [
+        1440,
+        900
+      ]
+    ],
+    "reportSha256": "ccf7ec071a5de09a681a489764bc1bb23567756ffa1c28ef45cc3363c7c23ba4"
+  },
+  "externalGates": [
+    "G-RAW",
+    "G-UPLOAD",
+    "G-AI",
+    "G-ENV"
+  ],
+  "evidenceScope": "Local controlled tests plus three real SQL LocalDB tests. No live Azure qualification."
+}

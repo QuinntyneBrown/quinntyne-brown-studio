@@ -1,0 +1,173 @@
+<header class="page__header">
+  <div>
+    <p class="page__eyebrow">Plan something meaningful</p>
+    <h1>Your session, thoughtfully priced.</h1>
+    <p class="page__description">
+      Explore a live estimate, shaped around your plans. Every detail can be refined together.
+    </p>
+  </div>
+</header>
+<div class="layout__split">
+  <div class="stack">
+    <section class="panel">
+      <h2>The occasion</h2>
+      <div class="form__grid">
+        <label class="field"
+          ><span>Photography service</span
+          ><select name="service" [(ngModel)]="input.service" (ngModelChange)="changed()">
+            <option value="Wedding">Wedding</option>
+            <option value="Event">Event</option>
+            <option value="Headshot">Headshots</option>
+            <option value="FamilyPortrait">Family portraits</option>
+          </select></label
+        ><label class="field"
+          ><span>Session date</span
+          ><input type="date" [(ngModel)]="date" (ngModelChange)="changed()" /></label
+        ><label class="field"
+          ><span>Start time</span
+          ><input type="time" step="900" [(ngModel)]="start" (ngModelChange)="changed()" /></label
+        ><label class="field"
+          ><span>End time</span
+          ><input type="time" step="900" [(ngModel)]="end" (ngModelChange)="changed()" /></label
+        ><label class="field"
+          ><span>Toronto time offset</span
+          ><select [(ngModel)]="offset" (ngModelChange)="changed()">
+            <option value="-04:00">Daylight time (UTC−04:00)</option>
+            <option value="-05:00">Standard time (UTC−05:00)</option>
+          </select></label
+        >
+      </div>
+    </section>
+    <section class="panel">
+      <h2>The places</h2>
+      <p class="text--muted">Locations are visited in the order you add them.</p>
+      <div class="quote__address">
+        <label class="field"
+          ><span>Address</span><input [(ngModel)]="address" (keydown.enter)="resolve()" /></label
+        ><button class="button button--secondary" (click)="resolve()" [disabled]="!address.trim()">
+          Find address
+        </button>
+      </div>
+      @for (candidate of addresses(); track $index) {
+        <button class="quote__candidate" (click)="add(candidate)">
+          {{ candidate.label }} · Select
+        </button>
+      }
+      @for (stop of input.locations; track $index) {
+        <div class="quote__location">
+          <h3>{{ $index + 1 }}. {{ stop.location.label }}</h3>
+          <div class="form__grid">
+            <label class="field"
+              ><span>Parking (CAD)</span
+              ><input
+                type="number"
+                min="0"
+                step="0.01"
+                [(ngModel)]="stop.parkingAmount"
+                (ngModelChange)="changed()" /></label
+            ><label class="field"
+              ><span>Studio</span
+              ><select [(ngModel)]="stop.studioId" (ngModelChange)="changed()">
+                <option [ngValue]="null">No studio</option>
+                @for (studio of studios(); track studio.id) {
+                  <option [value]="studio.id">{{ studio.name }}</option>
+                }
+              </select></label
+            >
+            @if (stop.studioId) {
+              <label class="field"
+                ><span>Studio hours</span
+                ><input
+                  type="number"
+                  min="0"
+                  step="0.25"
+                  [(ngModel)]="stop.studioHours"
+                  (ngModelChange)="changed()"
+              /></label>
+            }
+          </div>
+          <button class="button button--secondary" (click)="remove($index)">Remove location</button>
+        </div>
+      }
+    </section>
+    <section class="panel">
+      <h2>The details</h2>
+      <div class="form__grid">
+        <label class="field"
+          ><span>Assistants</span
+          ><input
+            type="number"
+            min="0"
+            [(ngModel)]="input.assistantCount"
+            (ngModelChange)="changed()" /></label
+        ><label class="field"
+          ><span>Equipment rental units</span
+          ><input
+            type="number"
+            min="0"
+            [(ngModel)]="input.equipmentUnits"
+            (ngModelChange)="changed()" /></label
+        ><label class="field"
+          ><span>Lunches</span
+          ><input
+            type="number"
+            min="0"
+            [(ngModel)]="input.lunchCount"
+            (ngModelChange)="changed()" /></label
+        ><label class="field"
+          ><span>Discount code</span><input [(ngModel)]="input.code" (ngModelChange)="changed()"
+        /></label>
+      </div>
+    </section>
+  </div>
+  <aside class="panel panel--soft quote__summary">
+    <p class="page__eyebrow">Your estimate</p>
+    <h2>A little clarity,<br />before we begin.</h2>
+    @if (busy()) {
+      <p role="status">Updating your quote…</p>
+    }
+    @if (message()) {
+      <qbs-notice [message]="message()" [error]="true" />
+    }
+    @if (result(); as quote) {
+      @for (line of quote.lines; track $index) {
+        <div class="price__line">
+          <span
+            >{{ line.kind }}
+            @if (line.locationIndex !== null) {
+              · location {{ line.locationIndex + 1 }}
+            }</span
+          ><span>{{ line.amount.amount }} CAD</span>
+        </div>
+      }
+      <div class="price__line">
+        <span>Subtotal</span><span>{{ quote.subtotal.amount }} CAD</span>
+      </div>
+      <div class="price__line">
+        <span>Discount · {{ quote.discount.percentage }}%</span
+        ><span>−{{ quote.discount.amount.amount }} CAD</span>
+      </div>
+      <div class="price__line price__total">
+        <span>Estimate</span><span>{{ quote.total.amount }} CAD</span>
+      </div>
+      @if (quote.discount.codeError) {
+        <qbs-notice [message]="quote.discount.codeError" [error]="true" />
+      }
+      <qbs-notice
+        [message]="
+          quote.availability.available
+            ? 'A photographer is currently available.'
+            : 'No photographer is currently available for this time.'
+        "
+      />
+    } @else if (!busy() && !message()) {
+      <p class="text--muted">
+        Add your session details and a resolved location to see an estimate.
+      </p>
+    }
+    <p class="quote__note">
+      CAD before tax. Tax and final consultation adjustments are excluded. Availability is
+      indicative and does not reserve a session.
+    </p>
+  </aside>
+</div>

@@ -1,0 +1,47 @@
+<section class="login">
+  <p class="page__eyebrow">{{ site === 'admin' ? 'Studio team' : 'Your private collection' }}</p>
+  <h1>{{ title }}</h1>
+  <p class="page__description">
+    {{
+      mode === 'login'
+        ? 'Sign in to your Quinntyne Brown Studio account.'
+        : 'Continue securely with your studio account.'
+    }}
+  </p>
+  @if (message()) {
+    <qbs-notice [message]="message()" [error]="error()" />
+  }
+  <form class="login__form" (ngSubmit)="submit()">
+    @if (mode === 'login' || mode === 'recovery') {
+      <label class="field"
+        ><span>Email</span
+        ><input type="email" name="email" [(ngModel)]="email" autocomplete="username" required
+      /></label>
+    }
+    @if (mode !== 'recovery') {
+      <label class="field"
+        ><span>Password</span
+        ><input
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          [autocomplete]="mode === 'login' ? 'current-password' : 'new-password'"
+          minlength="8"
+          required
+      /></label>
+    }
+    <button class="button" [disabled]="busy()">
+      {{
+        busy()
+          ? 'Please wait…'
+          : mode === 'login'
+            ? 'Sign in'
+            : mode === 'recovery'
+              ? 'Send recovery instructions'
+              : 'Save password'
+      }}
+    </button>
+  </form>
+  <a routerLink="/forgot-password">Forgot your password?</a
+  ><a routerLink="/login">Back to sign in</a>
+</section>

@@ -1,0 +1,116 @@
+import { ResourceDefinition } from '@qbs/domain';
+export const RESOURCES: ResourceDefinition[] = [
+  {
+    key: 'equipment',
+    title: 'Equipment',
+    singular: 'equipment',
+    description: 'The tools behind every session.',
+    fields: [
+      { key: 'name', label: 'Name', required: true },
+      { key: 'description', label: 'Description', type: 'textarea' },
+      { key: 'quantity', label: 'Quantity', type: 'number', min: 0, required: true },
+      {
+        key: 'referenceRentalRate',
+        label: 'Reference rental rate',
+        type: 'number',
+        min: 0,
+        step: '0.01',
+      },
+    ],
+  },
+  {
+    key: 'vendors',
+    title: 'Preferred vendors',
+    singular: 'vendor',
+    description: 'People you trust to help bring a session together.',
+    fields: [
+      { key: 'name', label: 'Name', required: true },
+      { key: 'email', label: 'Email', type: 'email' },
+      { key: 'phone', label: 'Phone' },
+      {
+        key: 'roles',
+        label: 'Roles',
+        type: 'roles',
+        options: ['MakeupArtist', 'SecondShooter', 'Assistant'],
+      },
+    ],
+  },
+  {
+    key: 'promotions',
+    title: 'Package promotions',
+    singular: 'promotion',
+    description: 'Thoughtful offers, refined through consultation.',
+    fields: [
+      { key: 'title', label: 'Title', required: true },
+      { key: 'description', label: 'Description', type: 'textarea', required: true },
+      {
+        key: 'indicativePrice',
+        label: 'Indicative price (CAD)',
+        type: 'number',
+        min: 0,
+        step: '0.01',
+        required: true,
+      },
+      { key: 'published', label: 'Published', type: 'checkbox' },
+    ],
+  },
+  {
+    key: 'print-options',
+    title: 'Print pricing',
+    singular: 'print option',
+    description: 'One print catalog for your website and clients.',
+    fields: [
+      { key: 'name', label: 'Name', required: true },
+      { key: 'dimensions', label: 'Dimensions', required: true },
+      { key: 'finish', label: 'Finish', required: true },
+      {
+        key: 'unitPrice',
+        label: 'Unit price (CAD)',
+        type: 'number',
+        min: 0,
+        step: '0.01',
+        required: true,
+      },
+      { key: 'enabled', label: 'Enabled', type: 'checkbox' },
+    ],
+  },
+  {
+    key: 'photographers',
+    title: 'Photographers',
+    singular: 'photographer',
+    description: 'Your team and their availability.',
+    fields: [
+      { key: 'name', label: 'Name', required: true },
+      { key: 'active', label: 'Active', type: 'checkbox' },
+    ],
+  },
+  {
+    key: 'sessions',
+    title: 'Sessions',
+    singular: 'session',
+    description: 'Every session, from the first plan to the final photograph.',
+    fields: [
+      { key: 'name', label: 'Name', required: true },
+      {
+        key: 'service',
+        label: 'Photography service',
+        type: 'select',
+        options: ['Wedding', 'Event', 'Headshot', 'FamilyPortrait'],
+      },
+      { key: 'startsAt', label: 'Start time with Toronto offset', required: true },
+      { key: 'endsAt', label: 'End time with Toronto offset', required: true },
+      { key: 'photographerId', label: 'Photographer', type: 'select' },
+    ],
+  },
+  {
+    key: 'public-galleries',
+    title: 'Public galleries',
+    singular: 'gallery',
+    description: 'Select the work you want to share.',
+    fields: [
+      { key: 'title', label: 'Title', required: true },
+      { key: 'slug', label: 'Gallery URL name', required: true },
+      { key: 'published', label: 'Published', type: 'checkbox' },
+    ],
+  },
+];

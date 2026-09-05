@@ -1,0 +1,15 @@
+.login {
+  max-width: 440px;
+  margin: 48px auto 100px;
+}
+.login__form {
+  display: grid;
+  gap: 24px;
+  margin: 32px 0;
+}
+.login > a {
+  display: block;
+  margin-top: 14px;
+  font-size: 12px;
+  text-decoration: underline;
+}

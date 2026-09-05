@@ -10,6 +10,8 @@ import shutil
 import struct
 import subprocess
 import sys
+import hashlib
+import json
 
 BASE = Path(__file__).resolve().parent
 DOCS = BASE.parent
@@ -82,7 +84,12 @@ for rid, pages in coverage.items():
 register = (BASE / "acceptance.md").read_text(encoding="utf-8")
 registered = re.findall(r"^\| `(AC-L2-\d+-\d+)` \|", register, re.M)
 check(sorted(registered) == sorted(acceptance_ids), "Acceptance register differs from specification")
-check(all("Not implemented" in line and "| — |" in line for line in register.splitlines() if line.startswith("| `AC-")), "Documentation claims production test evidence")
+for line in register.splitlines():
+    if line.startswith("| `AC-"):
+        cells = [cell.strip() for cell in line.split("|")[1:-1]]
+        check(cells[2] in {"Not implemented", "Partial", "Complete"}, f"Unknown acceptance status: {line}")
+        if cells[2] != "Not implemented":
+            check("[" in cells[3], f"Implementation needs linked evidence or a stated gap: {line}")
 
 for markdown in list(BASE.rglob("*.md")) + list((DOCS / "specs").glob("*.md")):
     content = markdown.read_text(encoding="utf-8")
@@ -99,6 +106,8 @@ for markdown in list(BASE.rglob("*.md")) + list((DOCS / "specs").glob("*.md")):
             check(fragment in {anchor(h) for h in headings}, f"Broken anchor {target} in {markdown}")
 
 sources = sorted(BASE.rglob("*.puml"))
+manifest_file = BASE / "diagram-manifest.json"
+manifest = json.loads(manifest_file.read_text(encoding="utf-8")) if manifest_file.exists() else {}
 for source in sources:
     content = source.read_text(encoding="utf-8")
     image = source.with_suffix(".png")
@@ -110,7 +119,12 @@ for source in sources:
             width, height = struct.unpack(">II", data[16:24])
             check(width > 20 and height > 20, f"Empty image: {image}")
             check(width < 4096 and height < 4096, f"Possible renderer clipping ({width}x{height}): {image}")
-        check(image.stat().st_mtime >= source.stat().st_mtime, f"Stale rendered image: {image}")
+        # Checkout timestamps do not indicate whether a committed render is current.
+        # Compare the tracked source/render pair to the reviewed content baseline.
+        key = source.relative_to(BASE).as_posix()
+        expected = manifest.get(key, {})
+        check(expected.get("sourceSha256") == hashlib.sha256(content.encode("utf-8")).hexdigest(), f"Changed diagram source needs a reviewed render: {source}")
+        check(expected.get("imageSha256") == hashlib.sha256(data).hexdigest(), f"Changed diagram PNG needs a reviewed baseline: {image}")
     check(content.count("@startuml") == 1 and content.count("@enduml") == 1, f"Diagram delimiters: {source}")
     if source.name.startswith("c4-"):
         check(bool(re.search(r"!include <C4/C4_(Context|Container|Component)>", content)), f"Missing C4 include: {source}")

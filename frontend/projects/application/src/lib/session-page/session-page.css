@@ -1,0 +1,32 @@
+.session__files {
+  margin-top: 24px;
+}
+.session__upload {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 160px 100px;
+  gap: 16px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+}
+.session__upload > span {
+  overflow-wrap: anywhere;
+}
+.session__client {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+}
+.session__client input {
+  width: 18px;
+  height: 18px;
+}
+@media (max-width: 600px) {
+  .session__upload {
+    grid-template-columns: 1fr 80px;
+  }
+  .session__upload progress {
+    width: 100%;
+  }
+}

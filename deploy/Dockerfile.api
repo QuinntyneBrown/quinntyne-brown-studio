@@ -1,0 +1,11 @@
+FROM mcr.microsoft.com/dotnet/sdk:10.0.303 AS build
+WORKDIR /src
+COPY Directory.Build.props global.json ./
+COPY backend ./backend
+RUN dotnet publish backend/Qbs.Api -c Release -p:RestoreLockedMode=true -o /out
+FROM mcr.microsoft.com/dotnet/aspnet:10.0
+WORKDIR /app
+COPY --from=build /out .
+USER $APP_UID
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "Qbs.Api.dll"]

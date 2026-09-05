@@ -1,0 +1,21 @@
+services:
+  sql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${QBS_SQL_PASSWORD:?Set a local SQL password}
+    ports:
+      - "127.0.0.1:14333:1433"
+    volumes:
+      - sql:/var/opt/mssql
+  storage:
+    image: mcr.microsoft.com/azure-storage/azurite:latest
+    command: azurite --blobHost 0.0.0.0 --queueHost 0.0.0.0 --tableHost 0.0.0.0
+    ports:
+      - "127.0.0.1:10000:10000"
+      - "127.0.0.1:10001:10001"
+    volumes:
+      - storage:/data
+volumes:
+  sql:
+  storage:

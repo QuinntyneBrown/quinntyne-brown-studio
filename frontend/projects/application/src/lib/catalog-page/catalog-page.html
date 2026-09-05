@@ -1,0 +1,127 @@
+<header class="page__header">
+  <div>
+    <p class="page__eyebrow">Studio administration</p>
+    <h1>{{ definition().title }}</h1>
+    <p class="page__description">{{ definition().description }}</p>
+  </div>
+  @if (!editing()) {
+    <button class="button" (click)="edit()">Add {{ definition().singular }}</button>
+  }
+</header>
+@if (message()) {
+  <qbs-notice [message]="message()" [error]="error()" />
+}
+@if (editing()) {
+  <form class="form" (ngSubmit)="save()">
+    <h2>{{ draft['id'] ? 'Edit' : 'New' }} {{ definition().singular }}</h2>
+    <div class="form__grid">
+      @for (field of definition().fields; track field.key) {
+        <label class="field"
+          ><span>{{ field.label }}</span>
+          @switch (field.type) {
+            @case ('textarea') {
+              <textarea
+                [(ngModel)]="draft[field.key]"
+                [name]="field.key"
+                [required]="field.required ?? false"
+              ></textarea>
+            }
+            @case ('checkbox') {
+              <input type="checkbox" [(ngModel)]="draft[field.key]" [name]="field.key" />
+            }
+            @case ('roles') {
+              <div class="field__choices">
+                @for (role of field.options; track role) {
+                  <label
+                    ><input
+                      type="checkbox"
+                      [checked]="draft['roles'].includes(role)"
+                      (change)="toggleRole(role)"
+                    />{{ role }}</label
+                  >
+                }
+              </div>
+            }
+            @case ('select') {
+              <select [(ngModel)]="draft[field.key]" [name]="field.key">
+                @if (field.key === 'photographerId') {
+                  <option [ngValue]="null">Unassigned</option>
+                  @for (person of people(); track person.id) {
+                    <option [value]="person.id">{{ person['name'] }}</option>
+                  }
+                } @else {
+                  @for (option of field.options; track option) {
+                    <option [value]="option">{{ option }}</option>
+                  }
+                }
+              </select>
+            }
+            @default {
+              <input
+                [type]="field.type ?? 'text'"
+                [(ngModel)]="draft[field.key]"
+                [name]="field.key"
+                [required]="field.required ?? false"
+                [min]="field.min ?? null"
+                [step]="field.step ?? '1'"
+              />
+            }
+          }
+          @if (errors[field.key]) {
+            <small class="field__error">{{ errors[field.key].join(' ') }}</small>
+          }
+        </label>
+      }
+    </div>
+    @if (definition().key === 'public-galleries') {
+      <h3>Select photographs in display order</h3>
+      <qbs-photos
+        [photos]="photos()"
+        [selected]="selected()"
+        [selectable]="true"
+        (selection)="select($event)"
+      />
+    }
+    <div class="form__actions">
+      <button class="button" type="submit" [disabled]="busy()">
+        {{ busy() ? 'Saving…' : 'Save' }}</button
+      ><button class="button button--secondary" type="button" (click)="editing.set(false)">
+        Cancel
+      </button>
+    </div>
+  </form>
+} @else if (loading()) {
+  <p role="status">Loading…</p>
+} @else if (!records().length) {
+  <qbs-empty [message]="'No ' + definition().title.toLowerCase() + ' yet.'" />
+} @else {
+  <div class="records">
+    @for (record of records(); track record.id) {
+      <article class="records__row">
+        <div>
+          <h3>{{ name(record) }}</h3>
+          <p class="records__detail">
+            @if (record['description']) {
+              {{ record['description'] }}
+            }
+            @if (record['quantity'] !== undefined) {
+              Quantity: {{ record['quantity'] }}
+            }
+            @if (record['email']) {
+              {{ record['email'] }}
+            }
+          </p>
+        </div>
+        <div class="records__actions">
+          @if (definition().key === 'sessions') {
+            <a [routerLink]="['/sessions', record.id]">Open session →</a>
+          }
+          @if (definition().key === 'photographers') {
+            <a [routerLink]="['/schedule', record.id]">Schedule →</a>
+          }
+          <button class="button button--secondary" (click)="edit(record)">Edit</button>
+        </div>
+      </article>
+    }
+  </div>
+}

@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/tests/">
+    <Project Path="tests/Qbs.AcceptanceTests/Qbs.AcceptanceTests.csproj" />
+  </Folder>
+  <Project Path="Qbs.Api/Qbs.Api.csproj" />
+  <Project Path="Qbs.Application/Qbs.Application.csproj" />
+  <Project Path="Qbs.Domain/Qbs.Domain.csproj" />
+  <Project Path="Qbs.Infrastructure/Qbs.Infrastructure.csproj" />
+  <Project Path="Qbs.Worker/Qbs.Worker.csproj" />
+</Solution>

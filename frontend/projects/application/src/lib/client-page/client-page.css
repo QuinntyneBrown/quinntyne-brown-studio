@@ -1,0 +1,25 @@
+.client-card {
+  display: block;
+}
+.client-card__cover {
+  height: 260px;
+  background: var(--soft);
+  display: grid;
+  place-items: center;
+  font: 60px Georgia;
+  color: #a1a88f;
+}
+.client-card h2 {
+  margin: 20px 0 8px;
+}
+.client__section {
+  margin: 32px 0 20px;
+}
+.client__print {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 24px;
+}
+.client__print h3 {
+  margin-bottom: 18px;
+}

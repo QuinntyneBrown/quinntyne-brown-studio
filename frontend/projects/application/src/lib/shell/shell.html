@@ -1,0 +1,80 @@
+<a class="shell__skip" href="#main">Skip to content</a>
+@if (site === 'marketing' || site === 'design-system') {
+  <header class="shell__public">
+    <a routerLink="/" class="shell__brand">Quinntyne Brown<span>Studio · Photography</span></a
+    ><button
+      class="button button--secondary shell__toggle"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="menu()"
+      aria-controls="public-navigation"
+    >
+      Menu
+    </button>
+    <nav
+      id="public-navigation"
+      class="shell__public-nav"
+      [class.shell__public-nav--open]="menu()"
+      aria-label="Main navigation"
+    >
+      @if (site === 'marketing') {
+        @for (link of publicLinks; track link[1]) {
+          <a
+            [routerLink]="link[1]"
+            routerLinkActive="shell__link--active"
+            (click)="menu.set(false)"
+            >{{ link[0] }}</a
+          >
+        }
+        <a routerLink="/quote" class="button">Plan a session ↗</a>
+      } @else {
+        <span>Components & patterns</span>
+      }
+    </nav>
+  </header>
+  <main id="main" class="shell__public-main" tabindex="-1"><router-outlet /></main>
+  <footer class="shell__footer">
+    <span>Quinntyne Brown Studio</span><span>Thoughtfully photographed.</span>
+  </footer>
+} @else {
+  <div class="shell__workspace">
+    <aside class="shell__sidebar">
+      <a routerLink="/" class="shell__brand"
+        >Quinntyne Brown<span>{{
+          site === 'admin' ? 'Studio administration' : 'Your private collection'
+        }}</span></a
+      ><button
+        class="button button--secondary shell__toggle"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="menu()"
+      >
+        Menu
+      </button>
+      <nav
+        class="shell__side-nav"
+        [class.shell__side-nav--open]="menu()"
+        aria-label="Workspace navigation"
+      >
+        @for (link of site === 'admin' ? adminLinks : clientLinks; track link[1]) {
+          <a
+            [routerLink]="link[1]"
+            routerLinkActive="shell__link--active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="menu.set(false)"
+            >{{ link[0] }}</a
+          >
+        }
+      </nav>
+    </aside>
+    <div class="shell__workspace-main">
+      <header class="shell__topbar">
+        <span>{{ site === 'admin' ? 'Studio workspace' : 'Client collection' }}</span>
+        @if (auth.account().authenticated) {
+          <button (click)="logout()">Sign out</button>
+        } @else {
+          <a routerLink="/login">Sign in</a>
+        }
+      </header>
+      <main id="main" class="shell__main" tabindex="-1"><router-outlet /></main>
+    </div>
+  </div>
+}
