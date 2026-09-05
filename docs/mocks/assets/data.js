@@ -21,11 +21,11 @@ window.MockSeed = {
 };
 window.MockPhotos = [
   {file:'wedding.jpg',alt:'A couple celebrating their wedding outdoors',label:'The beginning'},
-  {file:'couple.jpg',alt:'A couple sharing a quiet moment',label:'Just us'},
-  {file:'flowers.jpg',alt:'A softly lit wedding celebration',label:'Small details'},
-  {file:'ceremony.jpg',alt:'A wedding day captured in natural light',label:'All the feeling'},
+  {file:'couple.jpg',alt:'A garden wedding gazebo decorated with flowers and white chairs',label:'Just us'},
+  {file:'flowers.jpg',alt:'Pastel flowers arranged along a wedding reception table',label:'Small details'},
+  {file:'ceremony.jpg',alt:'A newly married couple embracing beside the water',label:'All the feeling'},
   {file:'family.jpg',alt:'A family spending time together outdoors',label:'Ordinary magic'},
   {file:'portrait.jpg',alt:'A portrait in soft natural light',label:'A little pause'},
-  {file:'gathering.jpg',alt:'A gathering of friends at a celebration',label:'In good company'},
+  {file:'gathering.jpg',alt:'A celebration table set with colourful flowers and glassware',label:'In good company'},
   {file:'landscape.jpg',alt:'A quiet landscape in warm light',label:'Room to breathe'}
 ];

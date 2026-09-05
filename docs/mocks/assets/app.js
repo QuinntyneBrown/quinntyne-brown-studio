@@ -100,11 +100,11 @@
     const code=String(data.code||'').trim().toUpperCase();
     const eligible=db.discounts.filter(d=>d.active && (d.type==='Advance booking'&&advance>=Number(d.days) || d.type==='Slow day'&&weekday===d.weekday || d.type==='Promo code'&&code&&d.code.toUpperCase()===code));
     const discount=eligible.sort((a,b)=>b.percent-a.percent)[0];
-    const subtotal=costs.reduce((sum,[,v])=>sum+v,0), savings=subtotal*(discount?.percent||0)/100;
+    const subtotal=Math.round(costs.reduce((sum,[,v])=>sum+v,0)*100)/100, savings=Math.round(subtotal*(discount?.percent||0))/100;
     const photographers=db.photographers.filter(p=>p.status==='Active'&&(data.photographer==='any'||p.id===data.photographer));
     const available=photographers.some(p=>!db.schedules.some(s=>s.date===data.date && s.kind==='Unavailable' && (s.photographer==='All photographers'||s.photographer===p.name)) && !db.sessions.some(s=>s.date===data.date&&s.photographer===p.name));
     const unavailable=state==='unavailable'||!available||advance<0;
-    return {inputs:{...data,locations:[...form.querySelectorAll('[name=location]')].map(i=>i.value)},costs,subtotal,discount:discount?{name:discount.name,percent:discount.percent}:null,savings,total:subtotal-savings,unavailable,code};
+    return {inputs:{...data,locations:[...form.querySelectorAll('[name=location]')].map(i=>i.value)},costs,subtotal,discount:discount?{name:discount.name,percent:discount.percent}:null,savings,total:Math.round((subtotal-savings)*100)/100,unavailable,code};
   }
   function quoteBreakdown(q) { return `${q.costs.filter(([,v])=>v>0).map(([label,value])=>`<div class="cost-row"><span>${label}</span><span>${money(value)}</span></div>`).join('')}${q.discount?`<div class="cost-row discount"><span>${esc(q.discount.name)} · ${q.discount.percent}%</span><span>−${money(q.savings)}</span></div>`:''}<div class="cost-row total"><span>Estimated total <span class="muted small">CAD</span></span><span class="serif">${money(q.total)}</span></div>`; }
   function updateQuote() {
@@ -279,10 +279,10 @@
     if(action==='menu'){const menu=document.getElementById(site==='admin'&&!['login','forgot-password','reset-password'].includes(page)?'sidebar':'public-nav');menu?.classList.toggle('open');trigger.setAttribute('aria-expanded',menu?.classList.contains('open')?'true':'false');}
     if(action==='close-dialog')closeDialog();
     if(action==='confirm-delete'){if(pendingAction?.key){db[pendingAction.key]=db[pendingAction.key].filter(r=>r.id!==pendingAction.id);save();}closeDialog();render();toast('Removed from the demo.');}
-    if(action==='confirm-discard'){closeDialog();if(pendingAction?.href)navigate(pendingAction.href);else {dirty=false;render();toast('Changes discarded.');}}
+    if(action==='confirm-discard'){closeDialog();if(pendingAction?.href)navigate(pendingAction.href);else {dirty=false;state='default';render();toast('Changes discarded.');}}
     if(action==='confirm-signout')navigate(url(site==='marketing'?'client':site,'login'));
     if(action==='confirm-reset'){db=clone(MockSeed);save();dirty=false;selected.clear();uploadFiles=[];state='default';closeDialog();render();toast('Original sample data restored.');}
-    if(action==='dismiss-state'){state='default';render();}
+    if(action==='dismiss-state'){const wasLoading=state==='loading';state='default';if(wasLoading)render();else{trigger.closest('.notice')?.remove();const control=document.getElementById('state-select');if(control)control.value='default';}}
     if(action==='retry-service'){toast('The demo service is available again.');setTimeout(()=>navigate(url(site,site==='marketing'?'home':site==='admin'?'dashboard':'galleries')),400);}
     if(action==='gallery-filter'){const cat=trigger.dataset.category;document.querySelectorAll('[data-gallery-tabs] button').forEach(e=>e.classList.toggle('active',e.dataset.category===cat));let visible=0;document.querySelectorAll('#gallery-list>[data-category]').forEach(e=>{e.hidden=cat!=='All'&&e.dataset.category!==cat;if(!e.hidden)visible++;});document.getElementById('gallery-empty').hidden=!!visible;if(!visible&&state!=='default'){state='default';render();}}
     if(action==='clear-search'){if(state==='no-results'){state='default';render();}else{document.querySelectorAll('[data-table-search],[data-card-search]').forEach(e=>{e.value='';e.dispatchEvent(new Event('input',{bubbles:true}));});}}
@@ -320,7 +320,6 @@
     if(el.matches('[data-photo-select]')){const n=Number(el.dataset.photoSelect);el.checked?selected.add(n):selected.delete(n);syncSelection();if(page==='album-editor'||page==='gallery-editor')dirty=true;}
     if(el.id==='photo-files')addFiles(el.files);
     if(el.matches('[data-cart-size]')){db.cart[Number(el.dataset.cartSize)].size=el.value;if(state==='unavailable-print')state='default';save();render();}
-    if(el.closest('#quote-form'))updateQuote();
     if(el.closest('#entity-form,#rates-form,#print-prices-form'))dirty=true;
   });
   document.addEventListener('dragover',event=>{if(event.target.closest('#dropzone')){event.preventDefault();document.getElementById('dropzone').classList.add('drag');}});
