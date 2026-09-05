@@ -59,7 +59,7 @@ The component view separates the catalog or acceptance host from the controlled 
 
 ![c4 component for browse the component catalog](diagrams/c4-component.png)
 
-The class view shows typed fields and relationships for `ComponentExample`. A referenced photo retains its independent lifetime even when a gallery or album owns the reference entry.
+The class view shows typed fields and relationships for `ComponentExample`. `ComponentContract` describes the related structure used by the feature.
 
 ![class structure for browse the component catalog](diagrams/class-structure.png)
 

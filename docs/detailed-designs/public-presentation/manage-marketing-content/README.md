@@ -14,7 +14,7 @@ Draft edits remain separate from the published revision. Publishing atomically r
 
 Acceptance covers save, draft isolation, subsequent public refresh, field errors, and concurrent publication conflict.
 
-`IMarketingContentApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `MarketingContentController`. The controller dispatches the operations below to the corresponding named handlers.
+`IMarketingContentApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `MarketingContentController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
@@ -61,7 +61,7 @@ The component view assigns the feature responsibilities to their architectural h
 
 ![c4 component for manage marketing content](diagrams/c4-component.png)
 
-The class view shows the fields and behavior of `MarketingContent` with the application boundaries used by this slice.
+The class view shows typed fields and relationships for `MarketingContent`. Application ports separate the model from provider implementations.
 
 ![class structure for manage marketing content](diagrams/class-structure.png)
 

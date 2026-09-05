@@ -37,7 +37,7 @@ interface IUnitOfWork {
 IStudioStore ..> IUnitOfWork : opens
 IStudioStore o-- SessionPhoto : persists or supplies inputs
 interface IPhotoStorage
-class GetSessionPhotosHandler
-GetSessionPhotosHandler ..> IPhotoStorage : uses
-GetSessionPhotosHandler ..> SessionPhoto : orchestrates
+class GetPhotoPreviewHandler
+GetPhotoPreviewHandler ..> IPhotoStorage : uses
+GetPhotoPreviewHandler ..> SessionPhoto : orchestrates
 @enduml

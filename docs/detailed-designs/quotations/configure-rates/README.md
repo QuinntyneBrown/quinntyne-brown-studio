@@ -14,7 +14,7 @@ Status: proposed production slice. The repository contains standalone HTML mocks
 
 Acceptance covers every service/cost rate, zero values, negative and overflow rejection, unchanged last-valid configuration after failure, and subsequent quote refresh.
 
-`IRatesApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `RatesController`. The controller dispatches the operations below to the corresponding named handlers.
+`IRatesApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `RatesController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
@@ -61,7 +61,7 @@ The component view assigns the feature responsibilities to their architectural h
 
 ![c4 component for configure rates](diagrams/c4-component.png)
 
-The class view shows typed fields and relationships for `RateConfiguration`. A referenced photo retains its independent lifetime even when a gallery or album owns the reference entry.
+The class view shows typed fields and relationships for `RateConfiguration`. `ConfiguredRate` describes the related structure used by the feature.
 
 ![class structure for configure rates](diagrams/class-structure.png)
 

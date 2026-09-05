@@ -14,7 +14,7 @@ Prices follow the shared CAD representation. Public queries omit drafts. A promo
 
 Acceptance covers create/edit, public refresh, invalid negative prices, draft exclusion, and qualification visibility at every viewport.
 
-`IPromotionsApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PromotionsController`. The controller dispatches the operations below to the corresponding named handlers.
+`IPromotionsApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PromotionsController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
@@ -61,7 +61,7 @@ The component view assigns the feature responsibilities to their architectural h
 
 ![c4 component for publish promotions](diagrams/c4-component.png)
 
-The class view shows the fields and behavior of `Promotion` with the application boundaries used by this slice.
+The class view shows typed fields and relationships for `Promotion`. Application ports separate the model from provider implementations.
 
 ![class structure for publish promotions](diagrams/class-structure.png)
 

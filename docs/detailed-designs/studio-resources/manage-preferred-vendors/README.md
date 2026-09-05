@@ -14,7 +14,7 @@ Status: proposed production slice. The repository contains standalone HTML mocks
 
 Acceptance covers every required role, multi-role records, contact updates retaining identity, malformed contact values, and rejected client access.
 
-`IVendorsApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `VendorsController`. The controller dispatches the operations below to the corresponding named handlers.
+`IVendorsApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `VendorsController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
@@ -61,7 +61,7 @@ The component view assigns the feature responsibilities to their architectural h
 
 ![c4 component for manage preferred vendors](diagrams/c4-component.png)
 
-The class view shows the fields and behavior of `PreferredVendor` with the application boundaries used by this slice.
+The class view shows typed fields and relationships for `PreferredVendor`. Application ports separate the model from provider implementations.
 
 ![class structure for manage preferred vendors](diagrams/class-structure.png)
 

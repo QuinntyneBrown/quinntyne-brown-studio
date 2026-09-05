@@ -14,7 +14,7 @@ Status: proposed production slice. The repository contains standalone HTML mocks
 
 Acceptance covers saved-window retrieval, inactive photographers, adjacent buffered commitments, rejected overlaps, concurrent saves, and both daylight-saving transitions.
 
-`ISchedulesApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `SchedulesController`. The controller dispatches the operations below to the corresponding named handlers.
+`ISchedulesApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `SchedulesController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
@@ -62,7 +62,7 @@ The component view assigns the feature responsibilities to their architectural h
 
 ![c4 component for manage photographer schedules](diagrams/c4-component.png)
 
-The class view shows typed fields and relationships for `PhotographerSchedule`. A referenced photo retains its independent lifetime even when a gallery or album owns the reference entry.
+The class view shows typed fields and relationships for `PhotographerSchedule`. `ScheduleWindow` describes the related structure used by the feature.
 
 ![class structure for manage photographer schedules](diagrams/class-structure.png)
 

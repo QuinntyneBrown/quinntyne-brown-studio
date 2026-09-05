@@ -14,7 +14,7 @@ Status: proposed production slice. The repository contains standalone HTML mocks
 
 Acceptance covers adding a selectable studio, fee changes in subsequent quotes, disabling a studio, base changes, and unresolved-address rejection.
 
-`IStudiosApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `StudiosController`. The controller dispatches the operations below to the corresponding named handlers.
+`IStudiosApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `StudiosController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
@@ -63,7 +63,7 @@ The component view assigns the feature responsibilities to their architectural h
 
 ![c4 component for configure studios](diagrams/c4-component.png)
 
-The class view shows the fields and behavior of `Studio` with the application boundaries used by this slice.
+The class view shows typed fields and relationships for `Studio`. Application ports separate the model from provider implementations.
 
 ![class structure for configure studios](diagrams/class-structure.png)
 

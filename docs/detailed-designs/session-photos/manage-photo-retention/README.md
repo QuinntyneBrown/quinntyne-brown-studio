@@ -16,7 +16,7 @@ Client authorization checks the current expiry on every request; access does not
 
 Acceptance covers month-end expiry, notice deduplication, scheduler outage at expiry, extension, stale impact confirmation, blocked references, partial deletion, and inaccessible album images.
 
-`IRetentionApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `RetentionController`. The controller dispatches the operations below to the corresponding named handlers.
+`IRetentionApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `RetentionController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
@@ -66,7 +66,7 @@ The component view assigns the feature responsibilities to their architectural h
 
 ![c4 component for manage photo retention](diagrams/c4-component.png)
 
-The class view shows typed fields and relationships for `SessionRetention`. A referenced photo retains its independent lifetime even when a gallery or album owns the reference entry.
+The class view shows typed fields and relationships for `SessionRetention`. `PhotoReferenceImpact` describes the related structure used by the feature.
 
 ![class structure for manage photo retention](diagrams/class-structure.png)
 

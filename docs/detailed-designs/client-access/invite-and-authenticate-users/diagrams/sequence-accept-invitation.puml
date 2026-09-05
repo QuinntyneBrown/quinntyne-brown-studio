@@ -51,6 +51,8 @@ handler --> controller : Typed failure
 controller --> client : ProblemDetails or field-level result
 client --> page : Expired or replayed token: 400; no session
 else Operation succeeds
+handler -> db : Persist Identity account and token-consumption state
+db --> handler : Commit acknowledgement
 handler --> controller : Typed feature result
 controller --> client : HTTP success
 client --> page : Deliver response with request revision

@@ -16,7 +16,7 @@ Successful authentication creates a host-only HttpOnly Secure cookie. State-chan
 
 Acceptance covers invitation/recovery expiry and replay, neutral responses, role denial, failed credentials, cookie settings, antiforgery, and protected-resource access before and after sign-in.
 
-`IAuthApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `AuthController`. The controller dispatches the operations below to the corresponding named handlers.
+`IAuthApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `AuthController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
@@ -71,7 +71,7 @@ The component view assigns the feature responsibilities to their architectural h
 
 ![c4 component for invite and authenticate users](diagrams/c4-component.png)
 
-The class view shows typed fields and relationships for `StudioAccount`. A referenced photo retains its independent lifetime even when a gallery or album owns the reference entry.
+The class view shows typed fields and relationships for `StudioAccount`. `Invitation` describes the related structure used by the feature.
 
 ![class structure for invite and authenticate users](diagrams/class-structure.png)
 

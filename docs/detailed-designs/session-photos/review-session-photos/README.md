@@ -14,7 +14,7 @@ Status: proposed production slice. The repository contains standalone HTML mocks
 
 Acceptance covers two sessions with disjoint photos, keyboard selection, empty and processing states, one missing derivative among ready photos, and inspection during an AI outage.
 
-`IPhotosApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PhotosController`. The controller dispatches the operations below to the corresponding named handlers.
+`IPhotosApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PhotosController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
@@ -61,7 +61,7 @@ The component view assigns the feature responsibilities to their architectural h
 
 ![c4 component for review session photos](diagrams/c4-component.png)
 
-The class view shows the fields and behavior of `SessionPhoto` with the application boundaries used by this slice.
+The class view shows typed fields and relationships for `SessionPhoto`. Application ports separate the model from provider implementations.
 
 ![class structure for review session photos](diagrams/class-structure.png)
 

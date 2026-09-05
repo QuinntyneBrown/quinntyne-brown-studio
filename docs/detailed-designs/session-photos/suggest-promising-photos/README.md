@@ -16,7 +16,7 @@ Analysis state is `Queued`, `Running`, `Succeeded`, or `Failed`. No handler in t
 
 Acceptance includes mixed analysis results, incorrect-photo responses, timeouts, malformed output, retry, and the studio's approved evaluation corpus. Model accuracy is not inferred from successful API calls.
 
-`IPhotoAnalysisApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PhotoAnalysisController`. The controller dispatches the operations below to the corresponding named handlers.
+`IPhotoAnalysisApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PhotoAnalysisController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
@@ -65,7 +65,7 @@ The component view assigns the feature responsibilities to their architectural h
 
 ![c4 component for suggest promising photos](diagrams/c4-component.png)
 
-The class view shows typed fields and relationships for `PhotoAnalysis`. A referenced photo retains its independent lifetime even when a gallery or album owns the reference entry.
+The class view shows typed fields and relationships for `PhotoAnalysis`. `QualityFinding` describes the related structure used by the feature.
 
 ![class structure for suggest promising photos](diagrams/class-structure.png)
 

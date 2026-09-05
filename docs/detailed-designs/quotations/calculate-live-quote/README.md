@@ -16,7 +16,7 @@ Status: proposed production slice. The repository contains standalone HTML mocks
 
 Acceptance uses independently calculated amounts, out-of-order responses, optional-cost removal, four service types, multi-stop route legs, missing configuration, and provider failure.
 
-`IQuotesApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `QuotesController`. The controller dispatches the operations below to the corresponding named handlers.
+`IQuotesApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `QuotesController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
@@ -68,7 +68,7 @@ The component view assigns the feature responsibilities to their architectural h
 
 ![c4 component for calculate a live quote](diagrams/c4-component.png)
 
-The class view shows typed fields and relationships for `QuoteCalculation`. A referenced photo retains its independent lifetime even when a gallery or album owns the reference entry.
+The class view shows typed fields and relationships for `QuoteCalculation`. `QuoteLine` describes the related structure used by the feature.
 
 ![class structure for calculate a live quote](diagrams/class-structure.png)
 

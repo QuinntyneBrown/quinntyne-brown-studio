@@ -16,7 +16,7 @@ The gallery list returns an empty collection when no sessions qualify. Inaccessi
 
 Acceptance covers two clients, direct identifier substitution, unauthenticated byte access, revocation between list and image fetch, expiry, and a client with no galleries.
 
-`IClientGalleriesApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `ClientGalleriesController`. The controller dispatches the operations below to the corresponding named handlers.
+`IClientGalleriesApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `ClientGalleriesController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
@@ -68,7 +68,7 @@ The component view assigns the feature responsibilities to their architectural h
 
 ![c4 component for assign and view session galleries](diagrams/c4-component.png)
 
-The class view shows the fields and behavior of `GalleryAssignment` with the application boundaries used by this slice.
+The class view shows typed fields and relationships for `GalleryAssignment`. Application ports separate the model from provider implementations.
 
 ![class structure for assign and view session galleries](diagrams/class-structure.png)
 

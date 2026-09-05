@@ -22,6 +22,5 @@ Rel(ctrl, handler1, "Dispatches request")
 Rel(handler1, entity, "Uses state and policy")
 Rel(handler1, store, "Loads or saves authorized state")
 Component(ext, "IPhotoStorage", "Application port", "Read oriented JPEG review derivatives")
-Rel(handler0, ext, "Uses when operation requires external data")
-Rel(handler1, ext, "Uses when operation requires external data")
+Rel(handler1, ext, "Calls provider adapter")
 @enduml

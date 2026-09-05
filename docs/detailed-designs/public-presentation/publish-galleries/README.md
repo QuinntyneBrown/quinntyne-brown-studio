@@ -14,7 +14,7 @@ The handler checks that every selected photo is ready and not pending deletion. 
 
 Acceptance covers anonymous display, draft exclusion, direct access to deselected photos, conflicting edits, and deletion-reference races.
 
-`IPublicGalleriesApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PublicGalleriesController`. The controller dispatches the operations below to the corresponding named handlers.
+`IPublicGalleriesApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PublicGalleriesController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
@@ -64,7 +64,7 @@ The component view assigns the feature responsibilities to their architectural h
 
 ![c4 component for publish galleries](diagrams/c4-component.png)
 
-The class view shows typed fields and relationships for `PublicGallery`. A referenced photo retains its independent lifetime even when a gallery or album owns the reference entry.
+The class view shows typed fields and relationships for `PublicGallery`. `PublicGalleryPhoto` describes the related structure used by the feature.
 
 ![class structure for publish galleries](diagrams/class-structure.png)
 

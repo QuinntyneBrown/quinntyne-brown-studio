@@ -44,9 +44,9 @@ interface IUnitOfWork {
 IStudioStore ..> IUnitOfWork : opens
 IStudioStore o-- UploadBatch : persists or supplies inputs
 interface IPhotoStorage
-class SaveSessionHandler
-SaveSessionHandler ..> IPhotoStorage : uses
-SaveSessionHandler ..> UploadBatch : orchestrates
+class CreateUploadBatchHandler
+CreateUploadBatchHandler ..> IPhotoStorage : uses
+CreateUploadBatchHandler ..> UploadBatch : orchestrates
 class Session {
  +Guid Id
  +string Name
@@ -66,6 +66,6 @@ class SessionPhoto {
  +MarkReady(previewKey: string): void
 }
 Session "1" o-- "0..*" UploadBatch : receives uploads
-UploadFile "1" --> "1" SessionPhoto : tracks photo
+UploadFile "1" --> "0..1" SessionPhoto : tracks accepted photo
 Session "1" o-- "0..*" SessionPhoto : associates originals
 @enduml

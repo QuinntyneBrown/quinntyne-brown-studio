@@ -60,7 +60,7 @@ The component view separates the catalog or acceptance host from the controlled 
 
 ![c4 component for publish the static catalog](diagrams/c4-component.png)
 
-The class view shows the fields and behavior of `CatalogArtifact` with the application boundaries used by this slice.
+The class view shows typed fields and relationships for `CatalogArtifact`. Application ports separate the model from provider implementations.
 
 ![class structure for publish the static catalog](diagrams/class-structure.png)
 

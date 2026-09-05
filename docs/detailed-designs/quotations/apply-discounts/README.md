@@ -14,7 +14,7 @@ Rules start disabled with zero percentages. Valid percentages lie between 0 and 
 
 Acceptance covers N-1/N/N+1 days, Toronto midnight, disabled and expired codes, case normalization, equal-percentage ties, and eligibility removal after date changes.
 
-`IDiscountsApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `DiscountsController`. The controller dispatches the operations below to the corresponding named handlers.
+`IDiscountsApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `DiscountsController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
@@ -65,7 +65,7 @@ The component view assigns the feature responsibilities to their architectural h
 
 ![c4 component for apply discounts](diagrams/c4-component.png)
 
-The class view shows typed fields and relationships for `DiscountPolicy`. A referenced photo retains its independent lifetime even when a gallery or album owns the reference entry.
+The class view shows typed fields and relationships for `DiscountPolicy`. `DiscountRule` describes the related structure used by the feature.
 
 ![class structure for apply discounts](diagrams/class-structure.png)
 

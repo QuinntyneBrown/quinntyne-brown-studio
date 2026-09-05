@@ -14,7 +14,7 @@ Each option exposes its revision with the public price. Client selections carry 
 
 Acceptance covers one price edit appearing on both sites, disabled options, empty catalog, invalid prices, and authorization before a client selects a private photo.
 
-`IPrintOptionsApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PrintOptionsController`. The controller dispatches the operations below to the corresponding named handlers.
+`IPrintOptionsApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PrintOptionsController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
@@ -64,7 +64,7 @@ The component view assigns the feature responsibilities to their architectural h
 
 ![c4 component for configure and display print prices](diagrams/c4-component.png)
 
-The class view shows the fields and behavior of `PrintOption` with the application boundaries used by this slice.
+The class view shows typed fields and relationships for `PrintOption`. Application ports separate the model from provider implementations.
 
 ![class structure for configure and display print prices](diagrams/class-structure.png)
 

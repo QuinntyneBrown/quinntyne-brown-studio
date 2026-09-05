@@ -36,4 +36,6 @@ Rel(job0, converter, "Creates oriented derivatives")
 Rel(job0, store, "Checks durable job and saves result")
 Component(ext, "IPhotoStorage", "Application port", "Transfer originals and retain derived previews")
 Rel(job0, ext, "Calls provider adapter")
+Rel(handler1, ext, "Calls provider adapter")
+Rel(handler2, ext, "Calls provider adapter")
 @enduml

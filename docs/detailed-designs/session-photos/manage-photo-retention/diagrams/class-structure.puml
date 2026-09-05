@@ -44,7 +44,7 @@ interface IUnitOfWork {
 IStudioStore ..> IUnitOfWork : opens
 IStudioStore o-- SessionRetention : persists or supplies inputs
 interface IPhotoStorage
-class ExtendSessionRetentionHandler
-ExtendSessionRetentionHandler ..> IPhotoStorage : uses
-ExtendSessionRetentionHandler ..> SessionRetention : orchestrates
+class DeleteSessionPhotosHandler
+DeleteSessionPhotosHandler ..> IPhotoStorage : uses
+DeleteSessionPhotosHandler ..> SessionRetention : orchestrates
 @enduml

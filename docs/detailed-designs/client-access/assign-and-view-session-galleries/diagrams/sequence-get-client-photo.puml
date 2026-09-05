@@ -17,10 +17,10 @@ title Behavior - GetClientPhoto
 actor "Authenticated client" as actor
 box "Frontend - Client application" #E0F2FE
  participant "ClientGalleriesPage" as page
- participant "IClientGalleriesApi" as client
+ participant "IPhotosApi" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
- participant "ClientGalleriesController" as controller
+ participant "PhotosController" as controller
 end box
 box "Backend - Qbs.Application and Domain" #ECFDF3
  participant "GetClientPhotoHandler" as handler

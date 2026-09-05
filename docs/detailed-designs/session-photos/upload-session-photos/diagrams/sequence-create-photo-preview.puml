@@ -24,6 +24,7 @@ box "Backend - Qbs.Api application" #D1FADF
 end box
 box "Backend - Qbs.Worker and Domain" #ECFDF3
  participant "CreatePhotoPreviewHandler" as handler
+ participant "GetOperationStatusHandler" as status
  participant "SessionPhoto" as entity
 end box
 box "Backend - Qbs.Infrastructure" #FFF4E5
@@ -54,8 +55,10 @@ handler --> queue : Acknowledge completed job
 actor -> page : Refresh operation status
 page -> client : Read status
 client -> controller : Authorized status request
-controller -> db : Read scoped job result
-db --> controller : Current outcome
+controller -> status : Read authorized operation status
+status -> db : Read scoped job result
+db --> status : Current outcome
+status --> controller : Status projection
 controller --> client : Status projection
 client --> page : Show independent outcome
 page --> actor : Present confirmed result

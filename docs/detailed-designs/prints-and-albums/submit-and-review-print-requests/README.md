@@ -16,7 +16,7 @@ The handler stores immutable option descriptions, quantities, unit prices, and r
 
 Acceptance covers inaccessible photos, disabled options, quantity validation, stale prices, response loss, duplicate concurrent submission, save failure, inbox access, and review persistence.
 
-`IPrintRequestsApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PrintRequestsController`. The controller dispatches the operations below to the corresponding named handlers.
+`IPrintRequestsApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PrintRequestsController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
@@ -67,7 +67,7 @@ The component view assigns the feature responsibilities to their architectural h
 
 ![c4 component for submit and review print requests](diagrams/c4-component.png)
 
-The class view shows typed fields and relationships for `PrintRequest`. A referenced photo retains its independent lifetime even when a gallery or album owns the reference entry.
+The class view shows typed fields and relationships for `PrintRequest`. `PrintRequestLine` describes the related structure used by the feature.
 
 ![class structure for submit and review print requests](diagrams/class-structure.png)
 

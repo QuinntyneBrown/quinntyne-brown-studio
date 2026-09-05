@@ -14,7 +14,7 @@ Status: proposed production slice. The repository contains standalone HTML mocks
 
 Acceptance covers create, reload, edit, negative quantity rejection, stale updates, access denial, and independence from configured quotation rates.
 
-`IEquipmentApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `EquipmentController`. The controller dispatches the operations below to the corresponding named handlers.
+`IEquipmentApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `EquipmentController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
@@ -60,7 +60,7 @@ The component view assigns the feature responsibilities to their architectural h
 
 ![c4 component for manage equipment](diagrams/c4-component.png)
 
-The class view shows the fields and behavior of `Equipment` with the application boundaries used by this slice.
+The class view shows typed fields and relationships for `Equipment`. Application ports separate the model from provider implementations.
 
 ![class structure for manage equipment](diagrams/class-structure.png)
 

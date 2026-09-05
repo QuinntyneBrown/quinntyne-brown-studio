@@ -34,7 +34,7 @@ interface IUnitOfWork {
 IStudioStore ..> IUnitOfWork : opens
 IStudioStore o-- GalleryAssignment : persists or supplies inputs
 interface IPhotoStorage
-class SetGalleryAssignmentsHandler
-SetGalleryAssignmentsHandler ..> IPhotoStorage : uses
-SetGalleryAssignmentsHandler ..> GalleryAssignment : orchestrates
+class GetClientPhotoHandler
+GetClientPhotoHandler ..> IPhotoStorage : uses
+GetClientPhotoHandler ..> GalleryAssignment : orchestrates
 @enduml

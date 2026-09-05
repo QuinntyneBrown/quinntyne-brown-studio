@@ -30,6 +30,5 @@ Rel(job0, store, "Checks durable job and saves result")
 Rel(job1, entity, "Applies background transition")
 Rel(job1, store, "Checks durable job and saves result")
 Component(ext, "IPhotoStorage", "Application port", "Delete eligible original and derivative keys")
-Rel(job0, ext, "Calls provider adapter")
 Rel(job1, ext, "Calls provider adapter")
 @enduml

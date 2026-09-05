@@ -14,7 +14,7 @@ Status: proposed production slice. The repository contains standalone HTML mocks
 
 Acceptance covers one eligible photographer among several, a specific unavailable selection, no active photographers, adjacency, DST, and zero mutations after repeated availability checks.
 
-`IAvailabilityApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `AvailabilityController`. The controller dispatches the operations below to the corresponding named handlers.
+`IAvailabilityApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `AvailabilityController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
@@ -58,7 +58,7 @@ The component view assigns the feature responsibilities to their architectural h
 
 ![c4 component for check session availability](diagrams/c4-component.png)
 
-The class view shows typed fields and relationships for `AvailabilityPolicy`. A referenced photo retains its independent lifetime even when a gallery or album owns the reference entry.
+The class view shows typed fields and relationships for `AvailabilityPolicy`. `AvailabilityResult` describes the related structure used by the feature.
 
 ![class structure for check session availability](diagrams/class-structure.png)
 

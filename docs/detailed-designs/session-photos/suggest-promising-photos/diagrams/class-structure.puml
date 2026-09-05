@@ -43,7 +43,7 @@ interface IUnitOfWork {
 IStudioStore ..> IUnitOfWork : opens
 IStudioStore o-- PhotoAnalysis : persists or supplies inputs
 interface IPhotoAnalysisService
-class RequestPhotoAnalysisHandler
-RequestPhotoAnalysisHandler ..> IPhotoAnalysisService : uses
-RequestPhotoAnalysisHandler ..> PhotoAnalysis : orchestrates
+class AnalyzePhotoHandler
+AnalyzePhotoHandler ..> IPhotoAnalysisService : uses
+AnalyzePhotoHandler ..> PhotoAnalysis : orchestrates
 @enduml

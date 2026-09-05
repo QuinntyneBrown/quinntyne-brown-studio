@@ -25,7 +25,7 @@ class QuoteCalculation {
  +Money Discount
  +Money Total
  +long ConfigurationRevision
- +Calculate(input: QuoteInput, metres: decimal): QuoteResult
+ +CalculateLines(input: QuoteInput, metres: decimal): QuoteLine[]
 }
 class QuoteLine {
  +string Kind
@@ -73,6 +73,6 @@ class QuoteResult {
  +AvailabilityResult Availability
 }
 QuoteCalculation ..> QuoteInput : evaluates
-QuoteCalculation ..> QuoteResult : produces
+CalculateQuoteHandler ..> QuoteResult : assembles policy results
 QuoteResult "1" *-- "1..*" QuoteLine : contains
 @enduml
