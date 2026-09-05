@@ -1,0 +1,35 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Behavior - BrowseComponentExample
+actor "Design contributor" as actor
+box "Frontend - Design-system application" #E0F2FE
+ participant "ComponentCatalogPage" as page
+ participant "ComponentCatalog / mock providers" as client
+end box
+box "Delivery - Static catalog" #FFF4E5
+ participant "CatalogBuild" as build
+ participant "StaticArtifactPublisher" as host
+end box
+actor -> page : Open component and state
+page -> client : Resolve typed example
+client --> page : Manifest entry and mock state
+page --> actor : Render actual component
+note over page, host
+Resolve manifest entry and render real component with mock providers
+L2-001, L2-002, L2-046, L2-047, L2-066
+No studio backend participates.
+end note
+@enduml

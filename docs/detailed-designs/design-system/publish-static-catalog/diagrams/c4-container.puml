@@ -1,0 +1,12 @@
+@startuml
+!include <C4/C4_Container>
+LAYOUT_WITH_LEGEND()
+title Containers - Publish the static catalog
+Person(actor, "Design contributor", "Browses component examples")
+System_Boundary(system, "Design-system product") {
+ Container(catalog, "Design-system application", "Angular static build", "Catalog and mock-backed examples")
+ Container(host, "Static catalog host", "Azure Static Web Apps", "Versioned HTML and bundled assets")
+}
+Rel(actor, catalog, "Browses", "HTTPS")
+Rel(host, catalog, "Serves entry point and assets")
+@enduml

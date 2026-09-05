@@ -1,0 +1,40 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Behavior - PublishCatalog
+actor "Design contributor" as actor
+box "Frontend - Design-system application" #E0F2FE
+ participant "ComponentCatalogPage" as page
+ participant "ComponentCatalog / mock providers" as client
+end box
+box "Delivery - Static catalog" #FFF4E5
+ participant "CatalogBuild" as build
+ participant "StaticArtifactPublisher" as host
+end box
+actor -> build : Request validated catalog artifact
+build -> build : Compile and run backend-blocked smoke tests
+alt Validated artifact
+build -> host : Publish complete versioned assets
+host --> build : Deployment result
+build --> actor : Revision and deep-link check
+else Build or smoke failure
+build --> actor : Failure; retain or restore prior artifact
+end
+note over page, host
+Publish validated versioned artifact and check deep links
+L2-046, L2-048
+No studio backend participates.
+end note
+@enduml

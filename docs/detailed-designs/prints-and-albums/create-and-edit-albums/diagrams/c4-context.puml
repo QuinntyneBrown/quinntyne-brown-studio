@@ -1,0 +1,8 @@
+@startuml
+!include <C4/C4_Context>
+LAYOUT_WITH_LEGEND()
+title System context - Create and edit albums
+Person(actor0, "Authenticated client", "Uses the Client application")
+System(studio, "Quinntyne Brown Studio", "Photography studio platform")
+Rel(actor0, studio, "Create and edit albums")
+@enduml

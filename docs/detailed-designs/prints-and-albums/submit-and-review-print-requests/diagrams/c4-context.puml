@@ -1,0 +1,10 @@
+@startuml
+!include <C4/C4_Context>
+LAYOUT_WITH_LEGEND()
+title System context - Submit and review print requests
+Person(actor0, "Authenticated client", "Uses the Client application")
+Person(actor1, "Studio administrator", "Uses the Admin application")
+System(studio, "Quinntyne Brown Studio", "Photography studio platform")
+Rel(actor0, studio, "Submit and review print requests")
+Rel(actor1, studio, "Submit and review print requests")
+@enduml

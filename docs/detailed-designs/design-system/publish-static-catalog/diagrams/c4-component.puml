@@ -1,0 +1,16 @@
+@startuml
+!include <C4/C4_Component>
+LAYOUT_WITH_LEGEND()
+title Components - Publish the static catalog
+Container_Boundary(catalog, "Frontend - Design-system application") {
+ Component(page, "ComponentCatalogPage", "Angular", "Lists and opens named examples")
+ Component(manifest, "ComponentCatalog", "Typed manifest", "Maps every component to example states")
+ Component(example, "ComponentExample", "Angular host", "Renders actual component contract")
+ Component(mock, "Mock service providers", "Injection tokens", "Supplies deterministic state")
+ Component(library, "Components library", "Angular", "Production components and BEM styles")
+}
+Rel(page, manifest, "Reads navigation entries")
+Rel(page, example, "Opens selected state")
+Rel(example, mock, "Consumes replaceable service contracts")
+Rel(example, library, "Renders actual components")
+@enduml

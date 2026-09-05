@@ -1,0 +1,71 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Class structure - Upload session photos
+skinparam class {
+ BorderColor #344054
+ FontColor #101828
+ BackgroundColor #F9FAFB
+}
+class UploadBatch {
+ +Guid Id
+ +Guid SessionId
+ +int FileCount
+ +BatchState State
+ +long Version
+ +FinalizeFile(photoId: Guid, length: long): void
+}
+class UploadFile {
+ +Guid PhotoId
+ +string OriginalName
+ +long Size
+ +PhotoState State
+ +string? FailureCode
+}
+UploadBatch "1" *-- "0..*" UploadFile : Owned manifest entry
+interface IStudioStore {
+ +BeginTransaction(): IUnitOfWork
+}
+interface IUnitOfWork {
+ +Commit(): Task
+}
+IStudioStore ..> IUnitOfWork : opens
+IStudioStore o-- UploadBatch : persists or supplies inputs
+interface IPhotoStorage
+class SaveSessionHandler
+SaveSessionHandler ..> IPhotoStorage : uses
+SaveSessionHandler ..> UploadBatch : orchestrates
+class Session {
+ +Guid Id
+ +string Name
+ +ServiceKind Service
+ +DateTimeOffset StartsAt
+ +DateTimeOffset EndsAt
+ +Guid? PhotographerId
+ +long Version
+ +UpdateTiming(start: DateTimeOffset, end: DateTimeOffset): void
+}
+class SessionPhoto {
+ +Guid Id
+ +Guid SessionId
+ +PhotoState State
+ +string OriginalKey
+ +string? PreviewKey
+ +MarkReady(previewKey: string): void
+}
+Session "1" o-- "0..*" UploadBatch : receives uploads
+UploadFile "1" --> "1" SessionPhoto : tracks photo
+Session "1" o-- "0..*" SessionPhoto : associates originals
+@enduml

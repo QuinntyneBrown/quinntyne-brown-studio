@@ -1,0 +1,20 @@
+@startuml
+!include <C4/C4_Container>
+LAYOUT_WITH_LEGEND()
+title Containers - Suggest promising photos
+Person(actor0, "Studio administrator", "Uses the Admin application")
+System_Boundary(studio, "Quinntyne Brown Studio") {
+ Container(app0, "Admin application", "Angular", "Suggest promising photos")
+ Container(api, "Qbs.Api", ".NET controllers", "Authorization and feature dispatch")
+ ContainerDb(db, "Studio database", "Azure SQL", "Metadata and transactional state")
+ Container(worker, "Qbs.Worker", ".NET on Container Apps", "Durable background processing")
+ ContainerQueue(queue, "Processing queue", "Azure Storage Queues", "At-least-once work delivery")
+}
+Rel(actor0, app0, "Uses", "HTTPS")
+Rel(app0, api, "Calls through shared-origin gateway", "JSON/HTTPS")
+Rel(api, db, "Reads and commits metadata", "EF Core")
+Rel(worker, db, "Relays SQL outbox and updates job state")
+Rel(worker, queue, "Enqueues outbox work and consumes jobs")
+System_Ext(ext, "Azure AI deployment", "Assess technical quality using a versioned rubric")
+Rel(worker, ext, "Assess technical quality using a versioned rubric", "HTTPS")
+@enduml

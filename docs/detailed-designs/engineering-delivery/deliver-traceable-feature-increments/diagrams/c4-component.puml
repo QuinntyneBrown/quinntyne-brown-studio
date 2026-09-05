@@ -1,0 +1,18 @@
+@startuml
+!include <C4/C4_Component>
+LAYOUT_WITH_LEGEND()
+title Components - Deliver traceable feature increments
+Container_Boundary(host, "Acceptance test hosts") {
+ Component(pom, "FeaturePageObject", "Playwright", "Exercises actual UI")
+ Component(mock, "MockApiRoutes", "HTTP interception", "Controls frontend responses")
+ Component(controller, "Product controller", ".NET controller", "Actual endpoint policy and dispatch")
+ Component(handler, "Product handler", "MediatR", "Actual application behavior")
+ ComponentDb(fake, "IStudioStore fake", "Test double", "Controlled persistence boundary")
+ Component(record, "CoverageRecord", "Evidence record", "Links criteria to real tests")
+}
+Rel(pom, mock, "Exercises UI with controlled backend")
+Rel(controller, handler, "Dispatches actual request")
+Rel(handler, fake, "Reads and saves state")
+Rel(pom, record, "Produces frontend evidence")
+Rel(controller, record, "Produces backend evidence")
+@enduml

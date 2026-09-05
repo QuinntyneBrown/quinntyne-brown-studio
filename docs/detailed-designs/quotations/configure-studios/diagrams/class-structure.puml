@@ -1,0 +1,48 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Class structure - Configure studios
+skinparam class {
+ BorderColor #344054
+ FontColor #101828
+ BackgroundColor #F9FAFB
+}
+class Studio {
+ +Guid Id
+ +string Name
+ +string Address
+ +decimal Latitude
+ +decimal Longitude
+ +Money HourlyFee
+ +bool Enabled
+ +bool IsBase
+ +long Version
+ +UpdateFee(fee: Money): void
+}
+class Money <<value object>> {
+ +decimal Amount
+ +string Currency
+ +RoundToCents(): Money
+}
+Studio ..> Money : uses CAD arithmetic
+interface IStudioStore {
+ +BeginTransaction(): IUnitOfWork
+}
+interface IUnitOfWork {
+ +Commit(): Task
+}
+IStudioStore ..> IUnitOfWork : opens
+IStudioStore o-- Studio : persists or supplies inputs
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+!include <C4/C4_Container>
+LAYOUT_WITH_LEGEND()
+title Containers - Apply discounts
+Person(actor0, "Studio administrator", "Uses the Admin application")
+Person(actor1, "Public visitor", "Uses the Marketing application")
+System_Boundary(studio, "Quinntyne Brown Studio") {
+ Container(app0, "Admin application", "Angular", "Apply discounts")
+ Container(app1, "Marketing application", "Angular", "Apply discounts")
+ Container(api, "Qbs.Api", ".NET controllers", "Authorization and feature dispatch")
+ ContainerDb(db, "Studio database", "Azure SQL", "Metadata and transactional state")
+}
+Rel(actor0, app0, "Uses", "HTTPS")
+Rel(app0, api, "Calls through shared-origin gateway", "JSON/HTTPS")
+Rel(actor1, app1, "Uses", "HTTPS")
+Rel(app1, api, "Calls through shared-origin gateway", "JSON/HTTPS")
+Rel(api, db, "Reads and commits metadata", "EF Core")
+@enduml

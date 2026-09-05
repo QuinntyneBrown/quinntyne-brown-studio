@@ -1,0 +1,18 @@
+@startuml
+!include <C4/C4_Container>
+LAYOUT_WITH_LEGEND()
+title Containers - Submit and review print requests
+Person(actor0, "Authenticated client", "Uses the Client application")
+Person(actor1, "Studio administrator", "Uses the Admin application")
+System_Boundary(studio, "Quinntyne Brown Studio") {
+ Container(app0, "Client application", "Angular", "Submit and review print requests")
+ Container(app1, "Admin application", "Angular", "Submit and review print requests")
+ Container(api, "Qbs.Api", ".NET controllers", "Authorization and feature dispatch")
+ ContainerDb(db, "Studio database", "Azure SQL", "Metadata and transactional state")
+}
+Rel(actor0, app0, "Uses", "HTTPS")
+Rel(app0, api, "Calls through shared-origin gateway", "JSON/HTTPS")
+Rel(actor1, app1, "Uses", "HTTPS")
+Rel(app1, api, "Calls through shared-origin gateway", "JSON/HTTPS")
+Rel(api, db, "Reads and commits metadata", "EF Core")
+@enduml

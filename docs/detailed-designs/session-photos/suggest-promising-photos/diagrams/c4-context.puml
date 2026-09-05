@@ -1,0 +1,10 @@
+@startuml
+!include <C4/C4_Context>
+LAYOUT_WITH_LEGEND()
+title System context - Suggest promising photos
+Person(actor0, "Studio administrator", "Uses the Admin application")
+System(studio, "Quinntyne Brown Studio", "Photography studio platform")
+Rel(actor0, studio, "Suggest promising photos")
+System_Ext(ext, "Azure AI deployment", "Assess technical quality using a versioned rubric")
+Rel(studio, ext, "Assess technical quality using a versioned rubric")
+@enduml

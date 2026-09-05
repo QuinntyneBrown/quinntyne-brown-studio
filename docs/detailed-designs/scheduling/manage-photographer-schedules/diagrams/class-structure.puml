@@ -1,0 +1,45 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Class structure - Manage photographer schedules
+skinparam class {
+ BorderColor #344054
+ FontColor #101828
+ BackgroundColor #F9FAFB
+}
+class PhotographerSchedule {
+ +Guid PhotographerId
+ +bool Active
+ +int BufferBeforeMinutes = 30
+ +int BufferAfterMinutes = 30
+ +long Version
+ +AddWindow(window: ScheduleWindow): void
+}
+class ScheduleWindow {
+ +DateTimeOffset StartsAt
+ +DateTimeOffset EndsAt
+ +WindowKind Kind
+ +Guid? SessionId
+}
+PhotographerSchedule "1" *-- "0..*" ScheduleWindow : Owned dated interval
+interface IStudioStore {
+ +BeginTransaction(): IUnitOfWork
+}
+interface IUnitOfWork {
+ +Commit(): Task
+}
+IStudioStore ..> IUnitOfWork : opens
+IStudioStore o-- PhotographerSchedule : persists or supplies inputs
+@enduml

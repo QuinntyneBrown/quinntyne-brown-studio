@@ -1,0 +1,62 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Behavior - ConfirmPhotoDeletion
+actor "Studio administrator" as actor
+box "Frontend - Admin application" #E0F2FE
+ participant "SessionRetentionPanel" as page
+ participant "IRetentionApi" as client
+end box
+box "Backend - Qbs.Api application" #D1FADF
+ participant "RetentionController" as controller
+end box
+box "Backend - Qbs.Application and Domain" #ECFDF3
+ participant "ConfirmPhotoDeletionHandler" as handler
+ participant "SessionRetention" as entity
+end box
+box "Backend - Qbs.Infrastructure" #FFF4E5
+ database "Studio database via IStudioStore" as db
+end box
+actor -> page : Start ConfirmPhotoDeletion
+page -> client : Build typed request
+client -> controller : POST /api/admin/sessions/{sessionId}/photo-deletion
+controller -> controller : Authenticate; enforce role and resource policy
+alt Access or request rejected
+controller --> client : ProblemDetails; no protected result
+client --> page : Correction or access state
+else Request admitted
+controller -> handler : Dispatch ConfirmPhotoDeletion
+handler -> db : Load scoped state and configuration
+db --> handler : Current snapshot
+handler -> entity : Recheck publication and unreviewed requests\nmark deletion pending and enqueue cleanup (L2-061)
+note right of entity
+L2-061, L2-034
+end note
+entity --> handler : Validated result or policy failure
+alt Operation fails
+note right of handler : Failure leaves stored state unchanged
+handler --> controller : Typed failure
+controller --> client : ProblemDetails or field-level result
+client --> page : Live references or stale impact: 409; retain all referenced photos
+else Operation succeeds
+handler -> db : Commit revision and any outbox jobs atomically
+db --> handler : Commit acknowledgement
+handler --> controller : Typed feature result
+controller --> client : HTTP success
+client --> page : Deliver response with request revision
+page --> actor : Present confirmed result
+end
+end
+@enduml

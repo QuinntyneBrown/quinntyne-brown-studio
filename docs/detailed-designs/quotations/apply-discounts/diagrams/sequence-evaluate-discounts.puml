@@ -1,0 +1,61 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Behavior - EvaluateDiscounts
+actor "Public visitor" as actor
+box "Frontend - Marketing application" #E0F2FE
+ participant "QuoteCalculatorPage" as page
+ participant "IQuotesApi" as client
+end box
+box "Backend - Qbs.Api application" #D1FADF
+ participant "QuotesController" as controller
+end box
+box "Backend - Qbs.Application and Domain" #ECFDF3
+ participant "CalculateQuoteHandler" as handler
+ participant "DiscountPolicy" as entity
+end box
+box "Backend - Qbs.Infrastructure" #FFF4E5
+ database "Studio database via IStudioStore" as db
+end box
+actor -> page : Start EvaluateDiscounts
+page -> client : Build typed request
+client -> controller : POST /api/public/quotes/calculate
+controller -> controller : Apply anonymous input policy
+alt Access or request rejected
+controller --> client : ProblemDetails; no protected result
+client --> page : Correction or access state
+else Request admitted
+controller -> handler : Dispatch CalculateQuote
+handler -> db : Load scoped state and configuration
+db --> handler : Current snapshot
+handler -> entity : Evaluate Toronto eligibility\nchoose maximum percentage and fixed tie order (L2-014)
+note right of entity
+L2-014, L2-015, L2-016, L2-017
+L2-057
+end note
+entity --> handler : Validated result or policy failure
+alt Operation fails
+note right of handler : Failure leaves stored state unchanged
+handler --> controller : Typed failure
+controller --> client : ProblemDetails or field-level result
+client --> page : Unknown or ineligible code: expose code error; retain only eligible automatic discount
+else Operation succeeds
+handler --> controller : Typed feature result
+controller --> client : HTTP success
+client --> page : Deliver response with request revision
+page --> actor : Present confirmed result
+end
+end
+@enduml

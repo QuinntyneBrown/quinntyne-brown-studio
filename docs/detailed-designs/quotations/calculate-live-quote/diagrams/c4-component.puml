@@ -1,0 +1,31 @@
+@startuml
+!include <C4/C4_Component>
+LAYOUT_WITH_LEGEND()
+title Components - Calculate a live quote
+Container_Boundary(frontend, "Frontend - Marketing applications") {
+ Component(page, "QuoteCalculatorPage", "Angular", "Feature inputs, status, and results")
+ Component(client, "IQuotesApi", "Interface and injection token", "Typed feature service boundary")
+}
+Container_Boundary(api, "Backend - Qbs.Api and Application") {
+ Component(ctrl, "QuotesController", ".NET controller", "Endpoint authorization and dispatch")
+ Component(handler0, "CalculateQuoteHandler", "MediatR", "CalculateQuote")
+ Component(handler1, "ResolveQuoteLocationHandler", "MediatR", "ResolveQuoteLocation")
+ Component(entity, "QuoteCalculation", "Domain model", "Feature state and policy")
+ Component(store, "IStudioStore", "Application port", "Transactional persistence boundary")
+}
+Rel(page, client, "Consumes token contract")
+Rel(client, ctrl, "Calls typed controller API", "HTTPS")
+Rel(ctrl, handler0, "Dispatches request")
+Rel(handler0, entity, "Uses state and policy")
+Rel(handler0, store, "Loads or saves authorized state")
+Rel(ctrl, handler1, "Dispatches request")
+Rel(handler1, entity, "Uses state and policy")
+Rel(handler1, store, "Loads or saves authorized state")
+Component(ext, "IRouteDistanceService", "Application port", "Resolve addresses and calculate ordered driving route")
+Rel(handler0, ext, "Uses when operation requires external data")
+Rel(handler1, ext, "Uses when operation requires external data")
+Component(discount, "DiscountPolicy", "Domain policy", "Deterministic eligible percentage")
+Component(availability, "AvailabilityPolicy", "Domain policy", "Buffered interval availability")
+Rel(handler0, discount, "Evaluates configured rules")
+Rel(handler0, availability, "Checks indicative availability")
+@enduml

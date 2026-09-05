@@ -1,0 +1,28 @@
+@startuml
+!include <C4/C4_Component>
+LAYOUT_WITH_LEGEND()
+title Components - Submit and review print requests
+Container_Boundary(frontend, "Frontend - Client and Admin applications") {
+ Component(page, "PrintRequestPage", "Angular", "Feature inputs, status, and results")
+ Component(client, "IPrintRequestsApi", "Interface and injection token", "Typed feature service boundary")
+}
+Container_Boundary(api, "Backend - Qbs.Api and Application") {
+ Component(ctrl, "PrintRequestsController", ".NET controller", "Endpoint authorization and dispatch")
+ Component(handler0, "SubmitPrintRequestHandler", "MediatR", "SubmitPrintRequest")
+ Component(handler1, "GetPrintRequestInboxHandler", "MediatR", "GetPrintRequestInbox")
+ Component(handler2, "ReviewPrintRequestHandler", "MediatR", "ReviewPrintRequest")
+ Component(entity, "PrintRequest", "Domain model", "Feature state and policy")
+ Component(store, "IStudioStore", "Application port", "Transactional persistence boundary")
+}
+Rel(page, client, "Consumes token contract")
+Rel(client, ctrl, "Calls typed controller API", "HTTPS")
+Rel(ctrl, handler0, "Dispatches request")
+Rel(handler0, entity, "Uses state and policy")
+Rel(handler0, store, "Loads or saves authorized state")
+Rel(ctrl, handler1, "Dispatches request")
+Rel(handler1, entity, "Uses state and policy")
+Rel(handler1, store, "Loads or saves authorized state")
+Rel(ctrl, handler2, "Dispatches request")
+Rel(handler2, entity, "Uses state and policy")
+Rel(handler2, store, "Loads or saves authorized state")
+@enduml

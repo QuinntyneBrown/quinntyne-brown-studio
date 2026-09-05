@@ -1,0 +1,24 @@
+@startuml
+!include <C4/C4_Component>
+LAYOUT_WITH_LEGEND()
+title Components - Manage photographer schedules
+Container_Boundary(frontend, "Frontend - Admin applications") {
+ Component(page, "PhotographerSchedulePage", "Angular", "Feature inputs, status, and results")
+ Component(client, "ISchedulesApi", "Interface and injection token", "Typed feature service boundary")
+}
+Container_Boundary(api, "Backend - Qbs.Api and Application") {
+ Component(ctrl, "SchedulesController", ".NET controller", "Endpoint authorization and dispatch")
+ Component(handler0, "GetPhotographerScheduleHandler", "MediatR", "GetPhotographerSchedule")
+ Component(handler1, "SavePhotographerScheduleHandler", "MediatR", "SavePhotographerSchedule")
+ Component(entity, "PhotographerSchedule", "Domain model", "Feature state and policy")
+ Component(store, "IStudioStore", "Application port", "Transactional persistence boundary")
+}
+Rel(page, client, "Consumes token contract")
+Rel(client, ctrl, "Calls typed controller API", "HTTPS")
+Rel(ctrl, handler0, "Dispatches request")
+Rel(handler0, entity, "Uses state and policy")
+Rel(handler0, store, "Loads or saves authorized state")
+Rel(ctrl, handler1, "Dispatches request")
+Rel(handler1, entity, "Uses state and policy")
+Rel(handler1, store, "Loads or saves authorized state")
+@enduml

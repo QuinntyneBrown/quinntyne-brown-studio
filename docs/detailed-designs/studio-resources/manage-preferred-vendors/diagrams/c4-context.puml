@@ -1,0 +1,8 @@
+@startuml
+!include <C4/C4_Context>
+LAYOUT_WITH_LEGEND()
+title System context - Manage preferred vendors
+Person(actor0, "Studio administrator", "Uses the Admin application")
+System(studio, "Quinntyne Brown Studio", "Photography studio platform")
+Rel(actor0, studio, "Manage preferred vendors")
+@enduml

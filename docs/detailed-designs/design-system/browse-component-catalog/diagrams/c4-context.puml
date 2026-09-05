@@ -1,0 +1,8 @@
+@startuml
+!include <C4/C4_Context>
+LAYOUT_WITH_LEGEND()
+title System context - Browse the component catalog
+Person(actor, "Design contributor", "Reviews and verifies platform behavior")
+System(studio, "Component catalog", "Browse the component catalog")
+Rel(actor, studio, "Uses")
+@enduml

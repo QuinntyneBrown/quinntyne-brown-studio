@@ -1,0 +1,43 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Class structure - Review session photos
+skinparam class {
+ BorderColor #344054
+ FontColor #101828
+ BackgroundColor #F9FAFB
+}
+class SessionPhoto {
+ +Guid Id
+ +Guid SessionId
+ +PhotoState State
+ +string? PreviewKey
+ +int Width
+ +int Height
+ +CanReview(): bool
+}
+interface IStudioStore {
+ +BeginTransaction(): IUnitOfWork
+}
+interface IUnitOfWork {
+ +Commit(): Task
+}
+IStudioStore ..> IUnitOfWork : opens
+IStudioStore o-- SessionPhoto : persists or supplies inputs
+interface IPhotoStorage
+class GetSessionPhotosHandler
+GetSessionPhotosHandler ..> IPhotoStorage : uses
+GetSessionPhotosHandler ..> SessionPhoto : orchestrates
+@enduml

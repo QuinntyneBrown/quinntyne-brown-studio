@@ -1,0 +1,62 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Behavior - SaveStudio
+actor "Studio administrator" as actor
+box "Frontend - Admin application" #E0F2FE
+ participant "StudiosPage" as page
+ participant "IStudiosApi" as client
+end box
+box "Backend - Qbs.Api application" #D1FADF
+ participant "StudiosController" as controller
+end box
+box "Backend - Qbs.Application and Domain" #ECFDF3
+ participant "SaveStudioHandler" as handler
+ participant "Studio" as entity
+end box
+box "Backend - Qbs.Infrastructure" #FFF4E5
+ database "Studio database via IStudioStore" as db
+end box
+actor -> page : Start SaveStudio
+page -> client : Build typed request
+client -> controller : PUT /api/admin/studios/{id}
+controller -> controller : Authenticate; enforce role and resource policy
+alt Access or request rejected
+controller --> client : ProblemDetails; no protected result
+client --> page : Correction or access state
+else Request admitted
+controller -> handler : Dispatch SaveStudio
+handler -> db : Load scoped state and configuration
+db --> handler : Current snapshot
+handler -> entity : Validate location and fee\natomically enforce one selected base (L2-019)
+note right of entity
+L2-019, L2-055, L2-056
+end note
+entity --> handler : Validated result or policy failure
+alt Operation fails
+note right of handler : Failure leaves stored state unchanged
+handler --> controller : Typed failure
+controller --> client : ProblemDetails or field-level result
+client --> page : Invalid coordinate/fee or conflicting version: reject save
+else Operation succeeds
+handler -> db : Commit revision and any outbox jobs atomically
+db --> handler : Commit acknowledgement
+handler --> controller : Typed feature result
+controller --> client : HTTP success
+client --> page : Deliver response with request revision
+page --> actor : Present confirmed result
+end
+end
+@enduml

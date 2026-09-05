@@ -1,0 +1,78 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Class structure - Calculate a live quote
+skinparam class {
+ BorderColor #344054
+ FontColor #101828
+ BackgroundColor #F9FAFB
+}
+class QuoteCalculation {
+ +ServiceKind Service
+ +Money Subtotal
+ +Money Discount
+ +Money Total
+ +long ConfigurationRevision
+ +Calculate(input: QuoteInput, metres: decimal): QuoteResult
+}
+class QuoteLine {
+ +string Kind
+ +decimal Quantity
+ +Money UnitPrice
+ +Money Amount
+}
+QuoteCalculation "1" *-- "0..*" QuoteLine : Owned rounded line item
+class Money <<value object>> {
+ +decimal Amount
+ +string Currency
+ +RoundToCents(): Money
+}
+QuoteCalculation ..> Money : uses CAD arithmetic
+interface IStudioStore {
+ +BeginTransaction(): IUnitOfWork
+}
+interface IUnitOfWork {
+ +Commit(): Task
+}
+IStudioStore ..> IUnitOfWork : opens
+IStudioStore o-- QuoteCalculation : persists or supplies inputs
+interface IRouteDistanceService
+class CalculateQuoteHandler
+CalculateQuoteHandler ..> IRouteDistanceService : uses
+CalculateQuoteHandler ..> QuoteCalculation : orchestrates
+class QuoteInput {
+ +ServiceKind Service
+ +DateTimeOffset StartsAt
+ +DateTimeOffset EndsAt
+ +QuoteLocation[] Locations
+ +int AssistantCount
+ +int EquipmentUnits
+ +int LunchCount
+ +string? Code
+ +long InputRevision
+}
+class QuoteResult {
+ +long InputRevision
+ +long ConfigurationRevision
+ +QuoteLine[] Lines
+ +Money Subtotal
+ +AppliedDiscount Discount
+ +Money Total
+ +AvailabilityResult Availability
+}
+QuoteCalculation ..> QuoteInput : evaluates
+QuoteCalculation ..> QuoteResult : produces
+QuoteResult "1" *-- "1..*" QuoteLine : contains
+@enduml

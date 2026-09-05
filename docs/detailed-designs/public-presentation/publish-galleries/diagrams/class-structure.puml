@@ -1,0 +1,43 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Class structure - Publish galleries
+skinparam class {
+ BorderColor #344054
+ FontColor #101828
+ BackgroundColor #F9FAFB
+}
+class PublicGallery {
+ +Guid Id
+ +string Slug
+ +string Title
+ +bool Published
+ +long Version
+ +Publish(photoIds: Guid[]): void
+}
+class PublicGalleryPhoto {
+ +Guid PhotoId
+ +int Position
+}
+PublicGallery "1" o-- "0..*" PublicGalleryPhoto : References a ready session photo
+interface IStudioStore {
+ +BeginTransaction(): IUnitOfWork
+}
+interface IUnitOfWork {
+ +Commit(): Task
+}
+IStudioStore ..> IUnitOfWork : opens
+IStudioStore o-- PublicGallery : persists or supplies inputs
+@enduml

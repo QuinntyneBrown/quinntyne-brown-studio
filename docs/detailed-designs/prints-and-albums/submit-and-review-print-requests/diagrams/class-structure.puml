@@ -1,0 +1,54 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Class structure - Submit and review print requests
+skinparam class {
+ BorderColor #344054
+ FontColor #101828
+ BackgroundColor #F9FAFB
+}
+class PrintRequest {
+ +Guid Id
+ +Guid ClientId
+ +string IdempotencyKey
+ +string PayloadHash
+ +PrintRequestState State
+ +DateTimeOffset SubmittedAt
+ +MarkReviewed(administratorId: Guid): void
+}
+class PrintRequestLine {
+ +Guid PhotoId
+ +Guid OptionId
+ +string OptionDescription
+ +int Quantity
+ +Money UnitPrice
+ +Money LineTotal
+}
+PrintRequest "1" *-- "0..*" PrintRequestLine : Owned immutable submission snapshot
+class Money <<value object>> {
+ +decimal Amount
+ +string Currency
+ +RoundToCents(): Money
+}
+PrintRequest ..> Money : uses CAD arithmetic
+interface IStudioStore {
+ +BeginTransaction(): IUnitOfWork
+}
+interface IUnitOfWork {
+ +Commit(): Task
+}
+IStudioStore ..> IUnitOfWork : opens
+IStudioStore o-- PrintRequest : persists or supplies inputs
+@enduml

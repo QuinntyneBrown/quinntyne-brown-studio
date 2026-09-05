@@ -1,0 +1,27 @@
+@startuml
+!include <C4/C4_Component>
+LAYOUT_WITH_LEGEND()
+title Components - Review session photos
+Container_Boundary(frontend, "Frontend - Admin applications") {
+ Component(page, "SessionPhotoReviewPage", "Angular", "Feature inputs, status, and results")
+ Component(client, "IPhotosApi", "Interface and injection token", "Typed feature service boundary")
+}
+Container_Boundary(api, "Backend - Qbs.Api and Application") {
+ Component(ctrl, "PhotosController", ".NET controller", "Endpoint authorization and dispatch")
+ Component(handler0, "GetSessionPhotosHandler", "MediatR", "GetSessionPhotos")
+ Component(handler1, "GetPhotoPreviewHandler", "MediatR", "GetPhotoPreview")
+ Component(entity, "SessionPhoto", "Domain model", "Feature state and policy")
+ Component(store, "IStudioStore", "Application port", "Transactional persistence boundary")
+}
+Rel(page, client, "Consumes token contract")
+Rel(client, ctrl, "Calls typed controller API", "HTTPS")
+Rel(ctrl, handler0, "Dispatches request")
+Rel(handler0, entity, "Uses state and policy")
+Rel(handler0, store, "Loads or saves authorized state")
+Rel(ctrl, handler1, "Dispatches request")
+Rel(handler1, entity, "Uses state and policy")
+Rel(handler1, store, "Loads or saves authorized state")
+Component(ext, "IPhotoStorage", "Application port", "Read oriented JPEG review derivatives")
+Rel(handler0, ext, "Uses when operation requires external data")
+Rel(handler1, ext, "Uses when operation requires external data")
+@enduml

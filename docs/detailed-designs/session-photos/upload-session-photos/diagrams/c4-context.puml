@@ -1,0 +1,10 @@
+@startuml
+!include <C4/C4_Context>
+LAYOUT_WITH_LEGEND()
+title System context - Upload session photos
+Person(actor0, "Studio administrator", "Uses the Admin application")
+System(studio, "Quinntyne Brown Studio", "Photography studio platform")
+Rel(actor0, studio, "Upload session photos")
+System_Ext(ext, "Private photo storage", "Transfer originals and retain derived previews")
+Rel(studio, ext, "Transfer originals and retain derived previews")
+@enduml

@@ -1,0 +1,46 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Class structure - Apply discounts
+skinparam class {
+ BorderColor #344054
+ FontColor #101828
+ BackgroundColor #F9FAFB
+}
+class DiscountPolicy {
+ +int AdvanceDays = 90
+ +decimal AdvancePercent
+ +bool AdvanceEnabled
+ +long Revision
+ +Evaluate(input: DiscountInput, today: DateOnly): AppliedDiscount
+}
+class DiscountRule {
+ +Guid Id
+ +DiscountKind Kind
+ +decimal Percentage
+ +bool Enabled
+ +DateOnly? ValidFrom
+ +DateOnly? ValidThrough
+}
+DiscountPolicy "1" *-- "0..*" DiscountRule : Configured eligibility rule
+interface IStudioStore {
+ +BeginTransaction(): IUnitOfWork
+}
+interface IUnitOfWork {
+ +Commit(): Task
+}
+IStudioStore ..> IUnitOfWork : opens
+IStudioStore o-- DiscountPolicy : persists or supplies inputs
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+!include <C4/C4_Container>
+LAYOUT_WITH_LEGEND()
+title Containers - Upload session photos
+Person(actor0, "Studio administrator", "Uses the Admin application")
+System_Boundary(studio, "Quinntyne Brown Studio") {
+ Container(app0, "Admin application", "Angular", "Upload session photos")
+ Container(api, "Qbs.Api", ".NET controllers", "Authorization and feature dispatch")
+ ContainerDb(db, "Studio database", "Azure SQL", "Metadata and transactional state")
+ Container(worker, "Qbs.Worker", ".NET on Container Apps", "Durable background processing")
+ ContainerQueue(queue, "Processing queue", "Azure Storage Queues", "At-least-once work delivery")
+}
+Rel(actor0, app0, "Uses", "HTTPS")
+Rel(app0, api, "Calls through shared-origin gateway", "JSON/HTTPS")
+Rel(api, db, "Reads and commits metadata", "EF Core")
+Rel(worker, db, "Relays SQL outbox and updates job state")
+Rel(worker, queue, "Enqueues outbox work and consumes jobs")
+System_Ext(ext, "Private photo storage", "Transfer originals and retain derived previews")
+Rel(worker, ext, "Transfer originals and retain derived previews", "HTTPS")
+Rel(app0, ext, "Uploads blocks using scoped write grants", "HTTPS")
+Rel(api, ext, "Issues grants and checks uploaded blobs", "HTTPS")
+@enduml

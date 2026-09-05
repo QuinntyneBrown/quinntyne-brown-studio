@@ -1,0 +1,77 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Behavior - CalculateQuote
+actor "Public visitor" as actor
+box "Frontend - Marketing application" #E0F2FE
+ participant "QuoteCalculatorPage" as page
+ participant "IQuotesApi" as client
+end box
+box "Backend - Qbs.Api application" #D1FADF
+ participant "QuotesController" as controller
+end box
+box "Backend - Qbs.Application and Domain" #ECFDF3
+ participant "CalculateQuoteHandler" as handler
+ participant "QuoteCalculation" as entity
+ participant "DiscountPolicy" as discount
+ participant "AvailabilityPolicy" as availability
+end box
+box "Backend - Qbs.Infrastructure" #FFF4E5
+ database "Studio database via IStudioStore" as db
+ participant "IRouteDistanceService adapter" as ext
+end box
+actor -> page : Start CalculateQuote
+page -> page : Increment revision and invalidate prior result (L2-012)
+page -> client : Send valid inputs after 300 ms quiet interval
+client -> controller : POST /api/public/quotes/calculate
+controller -> controller : Apply anonymous input policy
+alt Access or request rejected
+controller --> client : ProblemDetails; no protected result
+client --> page : Correction or access state
+else Request admitted
+controller -> handler : Dispatch CalculateQuote
+handler -> db : Load scoped state and configuration
+db --> handler : Current snapshot
+handler -> ext : Resolve addresses and calculate ordered driving route
+ext --> handler : Typed provider result or failure
+handler -> entity : Calculate rounded line amounts using route metres (L2-055)
+note right of entity
+L2-008, L2-009, L2-010, L2-011
+L2-012, L2-013, L2-055, L2-056
+end note
+entity --> handler : Rounded quote lines and subtotal (L2-055)
+handler -> discount : Evaluate eligible percentage with Toronto date (L2-057)
+discount --> handler : Applied rule and rounded discount
+handler -> availability : Evaluate requested interval against schedules (L2-022)
+availability --> handler : Indicative availability
+handler -> handler : Assemble result and input revision (L2-013)
+alt Operation fails
+note right of handler : Failure leaves stored state unchanged
+handler --> controller : Typed failure
+controller --> client : ProblemDetails or field-level result
+client --> page : Invalid input: 400; routing or configuration unavailable: 503; prior quote stays invalid
+else Operation succeeds
+handler --> controller : Typed feature result
+controller --> client : HTTP success
+client --> page : Deliver response with request revision
+alt Response revision equals current input revision
+page -> page : Store current result (L2-011)
+page --> actor : Present current estimate
+else Older response
+page -> page : Discard stale result (L2-011)
+end
+end
+end
+@enduml

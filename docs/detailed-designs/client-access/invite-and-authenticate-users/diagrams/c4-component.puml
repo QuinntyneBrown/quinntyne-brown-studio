@@ -1,0 +1,47 @@
+@startuml
+!include <C4/C4_Component>
+LAYOUT_WITH_LEGEND()
+title Components - Invite and authenticate users
+Container_Boundary(frontend, "Frontend - Admin and Client applications") {
+ Component(page, "AccountAccessPage", "Angular", "Feature inputs, status, and results")
+ Component(client, "IAuthApi", "Interface and injection token", "Typed feature service boundary")
+}
+Container_Boundary(api, "Backend - Qbs.Api and Application") {
+ Component(ctrl, "AuthController", ".NET controller", "Endpoint authorization and dispatch")
+ Component(handler0, "InviteClientHandler", "MediatR", "InviteClient")
+ Component(handler1, "AuthenticateAccountHandler", "MediatR", "AuthenticateAccount")
+ Component(handler2, "AcceptInvitationHandler", "MediatR", "AcceptInvitation")
+ Component(handler3, "RecoverAccountHandler", "MediatR", "RecoverAccount")
+ Component(handler4, "ResetAccountPasswordHandler", "MediatR", "ResetAccountPassword")
+ Component(handler5, "SignOutHandler", "MediatR", "SignOut")
+ Component(entity, "StudioAccount", "Domain model", "Feature state and policy")
+ Component(store, "IStudioStore", "Application port", "Transactional persistence boundary")
+}
+Rel(page, client, "Consumes token contract")
+Rel(client, ctrl, "Calls typed controller API", "HTTPS")
+Rel(ctrl, handler0, "Dispatches request")
+Rel(handler0, entity, "Uses state and policy")
+Rel(handler0, store, "Loads or saves authorized state")
+Rel(ctrl, handler1, "Dispatches request")
+Rel(handler1, entity, "Uses state and policy")
+Rel(handler1, store, "Loads or saves authorized state")
+Rel(ctrl, handler2, "Dispatches request")
+Rel(handler2, entity, "Uses state and policy")
+Rel(handler2, store, "Loads or saves authorized state")
+Rel(ctrl, handler3, "Dispatches request")
+Rel(handler3, entity, "Uses state and policy")
+Rel(handler3, store, "Loads or saves authorized state")
+Rel(ctrl, handler4, "Dispatches request")
+Rel(handler4, entity, "Uses state and policy")
+Rel(handler4, store, "Loads or saves authorized state")
+Rel(ctrl, handler5, "Dispatches request")
+Rel(handler5, entity, "Uses state and policy")
+Rel(handler5, store, "Loads or saves authorized state")
+Component(ext, "IEmailSender", "Application port", "Deliver invitation and recovery token links")
+Rel(handler0, ext, "Uses when operation requires external data")
+Rel(handler1, ext, "Uses when operation requires external data")
+Rel(handler2, ext, "Uses when operation requires external data")
+Rel(handler3, ext, "Uses when operation requires external data")
+Rel(handler4, ext, "Uses when operation requires external data")
+Rel(handler5, ext, "Uses when operation requires external data")
+@enduml

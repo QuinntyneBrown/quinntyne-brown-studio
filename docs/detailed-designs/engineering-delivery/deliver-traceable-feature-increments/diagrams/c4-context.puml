@@ -1,0 +1,8 @@
+@startuml
+!include <C4/C4_Context>
+LAYOUT_WITH_LEGEND()
+title System context - Deliver traceable feature increments
+Person(actor, "Engineering contributor", "Reviews and verifies platform behavior")
+System(studio, "Acceptance delivery", "Deliver traceable feature increments")
+Rel(actor, studio, "Uses")
+@enduml

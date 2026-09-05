@@ -1,0 +1,10 @@
+@startuml
+!include <C4/C4_Context>
+LAYOUT_WITH_LEGEND()
+title System context - Calculate a live quote
+Person(actor0, "Public visitor", "Uses the Marketing application")
+System(studio, "Quinntyne Brown Studio", "Photography studio platform")
+Rel(actor0, studio, "Calculate a live quote")
+System_Ext(ext, "Azure Maps", "Resolve addresses and calculate ordered driving route")
+Rel(studio, ext, "Resolve addresses and calculate ordered driving route")
+@enduml

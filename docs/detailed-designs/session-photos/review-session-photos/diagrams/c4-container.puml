@@ -1,0 +1,16 @@
+@startuml
+!include <C4/C4_Container>
+LAYOUT_WITH_LEGEND()
+title Containers - Review session photos
+Person(actor0, "Studio administrator", "Uses the Admin application")
+System_Boundary(studio, "Quinntyne Brown Studio") {
+ Container(app0, "Admin application", "Angular", "Review session photos")
+ Container(api, "Qbs.Api", ".NET controllers", "Authorization and feature dispatch")
+ ContainerDb(db, "Studio database", "Azure SQL", "Metadata and transactional state")
+}
+Rel(actor0, app0, "Uses", "HTTPS")
+Rel(app0, api, "Calls through shared-origin gateway", "JSON/HTTPS")
+Rel(api, db, "Reads and commits metadata", "EF Core")
+System_Ext(ext, "Private photo storage", "Read oriented JPEG review derivatives")
+Rel(api, ext, "Read oriented JPEG review derivatives", "HTTPS")
+@enduml

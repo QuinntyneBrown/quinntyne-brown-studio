@@ -1,0 +1,10 @@
+@startuml
+!include <C4/C4_Context>
+LAYOUT_WITH_LEGEND()
+title System context - Manage photo retention
+Person(actor0, "Studio administrator", "Uses the Admin application")
+System(studio, "Quinntyne Brown Studio", "Photography studio platform")
+Rel(actor0, studio, "Manage photo retention")
+System_Ext(ext, "Private photo storage", "Delete eligible original and derivative keys")
+Rel(studio, ext, "Delete eligible original and derivative keys")
+@enduml

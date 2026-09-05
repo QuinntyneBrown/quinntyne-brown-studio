@@ -1,0 +1,47 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Behavior - VerifyBackendIncrement
+actor "Engineering contributor" as actor
+box "Frontend - Acceptance application" #E0F2FE
+ participant "FeaturePageObject" as page
+ participant "MockApiRoutes" as mock
+end box
+box "Backend - Acceptance test host" #D1FADF
+ participant "Product controller" as controller
+end box
+box "Backend - Application and Domain" #ECFDF3
+ participant "Product handler" as handler
+end box
+box "Backend - Test infrastructure" #FFF4E5
+ database "IStudioStore fake" as db
+ participant "CoverageRecord" as coverage
+end box
+actor -> controller : Run AC test with missing behavior
+controller -> handler : Dispatch actual request
+handler -> db : Read controlled fixture
+db --> handler : Fake state
+handler --> controller : Behavior result
+controller --> actor : Failing assertion (red)
+actor -> actor : Implement smallest missing behavior
+actor -> controller : Repeat same AC test
+controller --> actor : Passing result (green)
+actor -> coverage : Record backend evidence and existing test link
+coverage --> actor : Coverage status and remaining gap
+note over page, coverage
+L2-038, L2-039, L2-040, L2-041, L2-042, L2-043, L2-044, L2-045, L2-049, L2-050, L2-051, L2-052, L2-053, L2-054, L2-068
+Missing red evidence, live dependency, or failing assertion: criterion remains unaccepted
+end note
+@enduml

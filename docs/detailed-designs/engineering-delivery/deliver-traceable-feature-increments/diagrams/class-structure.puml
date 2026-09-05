@@ -1,0 +1,38 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Class structure - Deliver traceable feature increments
+skinparam class {
+ BorderColor #344054
+ FontColor #101828
+ BackgroundColor #F9FAFB
+}
+class CoverageRecord {
+ +string AcceptanceId
+ +string Layer
+ +CoverageStatus Status
+ +string? TestPath
+ +string? TestName
+ +string? RemainingGap
+ +RecordEvidence(redRun: string, greenRun: string): void
+}
+class AcceptanceCriterion {
+ +string Id
+ +string Give
+ +string When
+ +string Then
+}
+CoverageRecord "1" o-- "0..*" AcceptanceCriterion : Referenced specification scenario
+@enduml

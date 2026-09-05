@@ -1,0 +1,25 @@
+@startuml
+!include <C4/C4_Component>
+LAYOUT_WITH_LEGEND()
+title Components - Apply discounts
+Container_Boundary(frontend, "Frontend - Admin and Marketing applications") {
+ Component(page, "DiscountRulesPage", "Angular", "Feature inputs, status, and results")
+ Component(client, "IDiscountsApi", "Interface and injection token", "Typed feature service boundary")
+}
+Container_Boundary(api, "Backend - Qbs.Api and Application") {
+ Component(ctrl, "DiscountsController", ".NET controller", "Endpoint authorization and dispatch")
+ Component(handler0, "SaveDiscountConfigurationHandler", "MediatR", "SaveDiscountConfiguration")
+ Component(handler1, "CalculateQuoteHandler", "MediatR", "Calls DiscountPolicy during quote calculation")
+ Component(entity, "DiscountPolicy", "Domain model", "Feature state and policy")
+ Component(store, "IStudioStore", "Application port", "Transactional persistence boundary")
+}
+Rel(page, client, "Consumes token contract")
+Rel(client, ctrl, "Calls typed controller API", "HTTPS")
+Rel(ctrl, handler0, "Dispatches request")
+Rel(handler0, entity, "Uses state and policy")
+Rel(handler0, store, "Loads or saves authorized state")
+Component(quoteCtrl, "QuotesController", ".NET controller", "Owns the public quote route")
+Rel(quoteCtrl, handler1, "Dispatches CalculateQuote")
+Rel(handler1, entity, "Uses state and policy")
+Rel(handler1, store, "Loads or saves authorized state")
+@enduml

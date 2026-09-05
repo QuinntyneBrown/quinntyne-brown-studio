@@ -1,0 +1,17 @@
+@startuml
+!include <C4/C4_Container>
+LAYOUT_WITH_LEGEND()
+title Containers - Deliver traceable feature increments
+Person(actor, "Engineering contributor", "Implements acceptance increments")
+System_Boundary(system, "Acceptance delivery") {
+ Container(browser, "Frontend acceptance host", "Playwright and Angular", "Page Objects and mocked HTTP responses")
+ Container(host, "Backend acceptance host", ".NET WebApplicationFactory", "Real controllers and handlers")
+ ContainerDb(fake, "Controlled store fake", "In-memory test fixture", "Deterministic isolated state")
+ Container(evidence, "Coverage evidence", "Repository files", "Acceptance IDs and red/green results")
+}
+Rel(actor, browser, "Runs frontend scenario")
+Rel(actor, host, "Runs backend scenario")
+Rel(host, fake, "Reads and writes controlled data")
+Rel(browser, evidence, "Records frontend results")
+Rel(host, evidence, "Records backend results")
+@enduml

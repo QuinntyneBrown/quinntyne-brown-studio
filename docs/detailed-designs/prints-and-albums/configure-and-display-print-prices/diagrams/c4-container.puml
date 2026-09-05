@@ -1,0 +1,22 @@
+@startuml
+!include <C4/C4_Container>
+LAYOUT_WITH_LEGEND()
+title Containers - Configure and display print prices
+Person(actor0, "Studio administrator", "Uses the Admin application")
+Person(actor1, "Public visitor", "Uses the Marketing application")
+Person(actor2, "Authenticated client", "Uses the Client application")
+System_Boundary(studio, "Quinntyne Brown Studio") {
+ Container(app0, "Admin application", "Angular", "Configure and display print prices")
+ Container(app1, "Marketing application", "Angular", "Configure and display print prices")
+ Container(app2, "Client application", "Angular", "Configure and display print prices")
+ Container(api, "Qbs.Api", ".NET controllers", "Authorization and feature dispatch")
+ ContainerDb(db, "Studio database", "Azure SQL", "Metadata and transactional state")
+}
+Rel(actor0, app0, "Uses", "HTTPS")
+Rel(app0, api, "Calls through shared-origin gateway", "JSON/HTTPS")
+Rel(actor1, app1, "Uses", "HTTPS")
+Rel(app1, api, "Calls through shared-origin gateway", "JSON/HTTPS")
+Rel(actor2, app2, "Uses", "HTTPS")
+Rel(app2, api, "Calls through shared-origin gateway", "JSON/HTTPS")
+Rel(api, db, "Reads and commits metadata", "EF Core")
+@enduml

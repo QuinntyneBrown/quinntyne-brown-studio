@@ -1,0 +1,62 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Behavior - DeleteSessionPhotos
+actor "Studio administrator" as actor
+box "Frontend - Admin application" #E0F2FE
+ participant "SessionRetentionPanel" as page
+ participant "IRetentionApi" as client
+end box
+box "Backend - Qbs.Api application" #D1FADF
+ participant "RetentionController" as controller
+end box
+box "Backend - Qbs.Worker and Domain" #ECFDF3
+ participant "DeleteSessionPhotosHandler" as handler
+ participant "SessionRetention" as entity
+end box
+box "Backend - Qbs.Infrastructure" #FFF4E5
+ database "Studio database via IStudioStore" as db
+ queue "Durable job / schedule trigger" as queue
+ participant "IPhotoStorage adapter" as ext
+end box
+queue -> handler : Deliver stable job ID and expected revision
+handler -> db : Load job and current authorized state
+db --> handler : State or already-completed marker
+handler -> ext : Delete eligible original and derivative keys
+ext --> handler : Typed provider result or failure
+handler -> entity : Remove original and derivative keys\nmark tombstones after cleanup (L2-061)
+note right of entity
+L2-061, L2-034
+end note
+entity --> handler : Validated result or policy failure
+alt Operation fails
+handler -> db : Record durable failure for retry
+note right of handler
+Partial storage failure: retain deletion job and retry remaining keys
+end note
+else Operation succeeds
+handler -> db : Commit revision and any outbox jobs atomically
+db --> handler : Commit acknowledgement
+handler --> queue : Acknowledge completed job
+actor -> page : Refresh operation status
+page -> client : Read status
+client -> controller : Authorized status request
+controller -> db : Read scoped job result
+db --> controller : Current outcome
+controller --> client : Status projection
+client --> page : Show independent outcome
+page --> actor : Present confirmed result
+end
+@enduml

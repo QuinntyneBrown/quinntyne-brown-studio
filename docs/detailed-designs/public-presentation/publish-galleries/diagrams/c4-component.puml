@@ -1,0 +1,24 @@
+@startuml
+!include <C4/C4_Component>
+LAYOUT_WITH_LEGEND()
+title Components - Publish galleries
+Container_Boundary(frontend, "Frontend - Admin and Marketing applications") {
+ Component(page, "PublicGalleryEditor", "Angular", "Feature inputs, status, and results")
+ Component(client, "IPublicGalleriesApi", "Interface and injection token", "Typed feature service boundary")
+}
+Container_Boundary(api, "Backend - Qbs.Api and Application") {
+ Component(ctrl, "PublicGalleriesController", ".NET controller", "Endpoint authorization and dispatch")
+ Component(handler0, "SavePublicGalleryHandler", "MediatR", "SavePublicGallery")
+ Component(handler1, "GetPublicGalleryHandler", "MediatR", "GetPublicGallery")
+ Component(entity, "PublicGallery", "Domain model", "Feature state and policy")
+ Component(store, "IStudioStore", "Application port", "Transactional persistence boundary")
+}
+Rel(page, client, "Consumes token contract")
+Rel(client, ctrl, "Calls typed controller API", "HTTPS")
+Rel(ctrl, handler0, "Dispatches request")
+Rel(handler0, entity, "Uses state and policy")
+Rel(handler0, store, "Loads or saves authorized state")
+Rel(ctrl, handler1, "Dispatches request")
+Rel(handler1, entity, "Uses state and policy")
+Rel(handler1, store, "Loads or saves authorized state")
+@enduml

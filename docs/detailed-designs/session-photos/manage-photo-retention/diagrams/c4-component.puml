@@ -1,0 +1,35 @@
+@startuml
+!include <C4/C4_Component>
+LAYOUT_WITH_LEGEND()
+title Components - Manage photo retention
+Container_Boundary(frontend, "Frontend - Admin applications") {
+ Component(page, "SessionRetentionPanel", "Angular", "Feature inputs, status, and results")
+ Component(client, "IRetentionApi", "Interface and injection token", "Typed feature service boundary")
+}
+Container_Boundary(api, "Backend - Qbs.Api and Application") {
+ Component(ctrl, "RetentionController", ".NET controller", "Endpoint authorization and dispatch")
+ Component(handler0, "ExtendSessionRetentionHandler", "MediatR", "ExtendSessionRetention")
+ Component(handler1, "ConfirmPhotoDeletionHandler", "MediatR", "ConfirmPhotoDeletion")
+ Component(entity, "SessionRetention", "Domain model", "Feature state and policy")
+ Component(store, "IStudioStore", "Application port", "Transactional persistence boundary")
+}
+Container_Boundary(worker, "Backend - Qbs.Worker") {
+ Component(job0, "ProcessRetentionHandler", "Background handler", "ProcessRetention")
+ Component(job1, "DeleteSessionPhotosHandler", "Background handler", "DeleteSessionPhotos")
+}
+Rel(page, client, "Consumes token contract")
+Rel(client, ctrl, "Calls typed controller API", "HTTPS")
+Rel(ctrl, handler0, "Dispatches request")
+Rel(handler0, entity, "Uses state and policy")
+Rel(handler0, store, "Loads or saves authorized state")
+Rel(ctrl, handler1, "Dispatches request")
+Rel(handler1, entity, "Uses state and policy")
+Rel(handler1, store, "Loads or saves authorized state")
+Rel(job0, entity, "Applies background transition")
+Rel(job0, store, "Checks durable job and saves result")
+Rel(job1, entity, "Applies background transition")
+Rel(job1, store, "Checks durable job and saves result")
+Component(ext, "IPhotoStorage", "Application port", "Delete eligible original and derivative keys")
+Rel(job0, ext, "Calls provider adapter")
+Rel(job1, ext, "Calls provider adapter")
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+!include <C4/C4_Container>
+LAYOUT_WITH_LEGEND()
+title Containers - Calculate a live quote
+Person(actor0, "Public visitor", "Uses the Marketing application")
+System_Boundary(studio, "Quinntyne Brown Studio") {
+ Container(app0, "Marketing application", "Angular", "Calculate a live quote")
+ Container(api, "Qbs.Api", ".NET controllers", "Authorization and feature dispatch")
+ ContainerDb(db, "Studio database", "Azure SQL", "Metadata and transactional state")
+}
+Rel(actor0, app0, "Uses", "HTTPS")
+Rel(app0, api, "Calls through shared-origin gateway", "JSON/HTTPS")
+Rel(api, db, "Reads and commits metadata", "EF Core")
+System_Ext(ext, "Azure Maps", "Resolve addresses and calculate ordered driving route")
+Rel(api, ext, "Resolve addresses and calculate ordered driving route", "HTTPS")
+@enduml

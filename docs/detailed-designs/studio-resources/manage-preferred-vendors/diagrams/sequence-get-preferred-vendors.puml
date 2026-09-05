@@ -1,0 +1,60 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Behavior - GetPreferredVendors
+actor "Studio administrator" as actor
+box "Frontend - Admin application" #E0F2FE
+ participant "PreferredVendorsPage" as page
+ participant "IVendorsApi" as client
+end box
+box "Backend - Qbs.Api application" #D1FADF
+ participant "VendorsController" as controller
+end box
+box "Backend - Qbs.Application and Domain" #ECFDF3
+ participant "GetPreferredVendorsHandler" as handler
+ participant "PreferredVendor" as entity
+end box
+box "Backend - Qbs.Infrastructure" #FFF4E5
+ database "Studio database via IStudioStore" as db
+end box
+actor -> page : Start GetPreferredVendors
+page -> client : Build typed request
+client -> controller : GET /api/admin/vendors
+controller -> controller : Authenticate; enforce role and resource policy
+alt Access or request rejected
+controller --> client : ProblemDetails; no protected result
+client --> page : Correction or access state
+else Request admitted
+controller -> handler : Dispatch GetPreferredVendors
+handler -> db : Load scoped state and configuration
+db --> handler : Current snapshot
+handler -> entity : Return identifying details, contacts, and roles (L2-024)
+note right of entity
+L2-024, L2-025
+end note
+entity --> handler : Validated result or policy failure
+alt Operation fails
+note right of handler : Failure leaves stored state unchanged
+handler --> controller : Typed failure
+controller --> client : ProblemDetails or field-level result
+client --> page : Empty directory: empty list; no sample vendor fallback
+else Operation succeeds
+handler --> controller : Typed feature result
+controller --> client : HTTP success
+client --> page : Deliver response with request revision
+page --> actor : Present confirmed result
+end
+end
+@enduml

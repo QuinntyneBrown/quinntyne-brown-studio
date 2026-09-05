@@ -1,0 +1,10 @@
+@startuml
+!include <C4/C4_Context>
+LAYOUT_WITH_LEGEND()
+title System context - Review session photos
+Person(actor0, "Studio administrator", "Uses the Admin application")
+System(studio, "Quinntyne Brown Studio", "Photography studio platform")
+Rel(actor0, studio, "Review session photos")
+System_Ext(ext, "Private photo storage", "Read oriented JPEG review derivatives")
+Rel(studio, ext, "Read oriented JPEG review derivatives")
+@enduml

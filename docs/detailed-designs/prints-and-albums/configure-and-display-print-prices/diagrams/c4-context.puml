@@ -1,0 +1,12 @@
+@startuml
+!include <C4/C4_Context>
+LAYOUT_WITH_LEGEND()
+title System context - Configure and display print prices
+Person(actor0, "Studio administrator", "Uses the Admin application")
+Person(actor1, "Public visitor", "Uses the Marketing application")
+Person(actor2, "Authenticated client", "Uses the Client application")
+System(studio, "Quinntyne Brown Studio", "Photography studio platform")
+Rel(actor0, studio, "Configure and display print prices")
+Rel(actor1, studio, "Configure and display print prices")
+Rel(actor2, studio, "Configure and display print prices")
+@enduml
