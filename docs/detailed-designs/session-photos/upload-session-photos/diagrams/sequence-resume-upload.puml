@@ -43,7 +43,7 @@ handler --> controller : Completed and incomplete file outcomes
 controller --> client : UploadBatchStatus
 client --> page : Preserve completed entries (L2-059)
 loop Each incomplete file; at most four active transfers
- page -> page : Match reselected file identity to original manifest
+ page -> page : Match full-file SHA-256 to original manifest (L2-059)
  alt File does not match
   page --> actor : Request original file; do not append mismatched bytes
  else Matching file

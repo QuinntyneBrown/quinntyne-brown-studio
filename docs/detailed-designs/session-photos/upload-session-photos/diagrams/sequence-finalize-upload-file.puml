@@ -41,7 +41,7 @@ else Request admitted
 controller -> handler : Dispatch FinalizeUploadFile
 handler -> db : Load scoped state and configuration
 db --> handler : Current snapshot
-handler -> ext : Transfer originals and retain derived previews
+handler -> ext : Inspect staging revision and promote to server-owned original (L2-060)
 ext --> handler : Typed provider result or failure
 handler -> entity : Verify staged blob\nsave photo association and preview job in one transaction (L2-026)
 note right of entity

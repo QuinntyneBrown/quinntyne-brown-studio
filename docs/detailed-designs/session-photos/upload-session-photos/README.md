@@ -23,7 +23,7 @@ Acceptance covers session identity, mixed batches, interrupted blocks, repeat fi
 **Interfaces**
 
 - `GET /api/admin/sessions; POST /api/admin/sessions; PUT /api/admin/sessions/{id} ← name, service, startsAt, endsAt, photographerId?, expectedVersion → Session`
-- `POST /api/admin/sessions/{sessionId}/uploads ← files[{clientFileId,name,size}] → UploadBatch with per-file grants/rejections`
+- `POST /api/admin/sessions/{sessionId}/uploads ← files[{clientFileId,name,size,sha256}] → UploadBatch with per-file grants/rejections`
 - `GET /api/admin/uploads/{batchId} → UploadBatchStatus`
 - `POST /api/admin/uploads/{batchId}/files/{photoId}/renew → write grant; POST .../complete → processing status`
 - `POST /api/admin/photos/{photoId}/retry-preview → processing status`
@@ -41,7 +41,9 @@ The [shared architecture](../../architecture.md) defines authorization, wire con
 
 **Acceptance mapping**
 
-`ResumeUploadFileHandler` reads server-confirmed block state and renews the write grant for an existing incomplete photo. The browser matches reselected files using size, name, last-modified value, and a saved first-block hash before resuming. An expired uncommitted block restarts the affected file under the same photo identifier. A completed or finalized original receives no further write grant.
+`ResumeUploadFileHandler` reads server-confirmed block state and renews the write grant for an existing incomplete photo. Before transfer, the browser computes each original's SHA-256 incrementally in a worker and records it in the file manifest. Reselection verifies the full digest without loading the complete file into memory. An expired uncommitted block restarts the affected file under the same photo identifier. A completed or finalized original receives no further write grant.
+
+Finalization promotes the validated staging object to a server-owned original key using the inspected storage revision. The processing worker verifies the original digest before marking its preview ready. Existing browser write grants can affect staging only; they cannot overwrite an accepted original. A mismatched digest rejects the file and prevents review success.
 
 The [acceptance register](../../acceptance.md) lists each applicable scenario with its implementing layer and current status. Feature tests exercise the success and failure behaviors described here. No production acceptance test exists merely because its scenario is designed.
 
