@@ -1,0 +1,84 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+ BorderColor #344054
+ FontColor #101828
+}
+skinparam package {
+ BorderColor #667085
+ FontColor #101828
+ BackgroundColor #F9FAFB
+}
+title Behavior - Resume an interrupted upload
+actor "Studio administrator" as actor
+box "Frontend - Admin application" #E0F2FE
+ participant "SessionUploadPage" as page
+ participant "IUploadsApi" as client
+ database "Browser batch manifest" as local
+end box
+box "Backend - Qbs.Api application" #D1FADF
+ participant "UploadsController" as controller
+end box
+box "Backend - Qbs.Application and Domain" #ECFDF3
+ participant "ResumeUploadFileHandler" as handler
+ participant "UploadBatch" as batch
+end box
+box "Backend - Qbs.Infrastructure" #FFF4E5
+ database "Studio database via IStudioStore" as db
+ participant "IPhotoStorage / private block blob" as storage
+end box
+actor -> page : Reopen interrupted batch and reselect local files
+page -> local : Read batch ID and acknowledged block IDs
+local --> page : Persisted manifest without file contents
+page -> client : Read current batch status (L2-028)
+client -> controller : GET /api/admin/uploads/{batchId}
+controller -> handler : Read authorized resumable batch
+handler -> db : Load batch, photo IDs, and file states
+db --> handler : Current server state
+handler --> controller : Completed and incomplete file outcomes
+controller --> client : UploadBatchStatus
+client --> page : Preserve completed entries (L2-059)
+loop Each incomplete file; at most four active transfers
+ page -> page : Match reselected file identity to original manifest
+ alt File does not match
+  page --> actor : Request original file; do not append mismatched bytes
+ else Matching file
+  page -> client : Renew grant for existing photo ID
+  client -> controller : POST /api/admin/uploads/{batchId}/files/{photoId}/renew
+  controller -> handler : Authorize renewal against batch ownership
+  handler -> batch : Verify unchanged session and incomplete file (L2-027)
+  batch --> handler : Resume allowed or current completed state
+  handler -> storage : Inspect acknowledged blocks and issue scoped write grant
+  storage --> handler : Current block IDs and expiring grant
+  handler --> controller : Existing photo ID, block state, and grant
+  controller --> client : Resume instructions
+  client --> page : Server-confirmed remaining blocks
+  loop Missing 8 MiB blocks
+   page -> storage : Stage block with stable block ID (L2-059)
+   alt Transfer acknowledged
+    storage --> page : Block acknowledgement
+    page -> local : Save acknowledged progress
+    local --> page : Manifest saved
+   else Transfer interrupted again
+    storage --> page : Failure
+    page --> actor : File remains incomplete; completed files stay complete
+   end
+  end
+  opt Every block is acknowledged
+   page -> client : Complete existing photo ID
+   client -> controller : POST /api/admin/uploads/{batchId}/files/{photoId}/complete
+   controller --> client : Idempotent finalization result (L2-059)
+   client --> page : Processing or failure state, not whole-batch success
+  end
+ end
+end
+note over page, storage
+Finalization and preview processing follow their dedicated sequences.
+Uncommitted-block expiry restarts only the affected file using its existing photo ID.
+The session association never changes during resume.
+end note
+@enduml

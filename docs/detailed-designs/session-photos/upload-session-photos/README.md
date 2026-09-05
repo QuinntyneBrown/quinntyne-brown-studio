@@ -41,6 +41,8 @@ The [shared architecture](../../architecture.md) defines authorization, wire con
 
 **Acceptance mapping**
 
+`ResumeUploadFileHandler` reads server-confirmed block state and renews the write grant for an existing incomplete photo. The browser matches reselected files using size, name, last-modified value, and a saved first-block hash before resuming. An expired uncommitted block restarts the affected file under the same photo identifier. A completed or finalized original receives no further write grant.
+
 The [acceptance register](../../acceptance.md) lists each applicable scenario with its implementing layer and current status. Feature tests exercise the success and failure behaviors described here. No production acceptance test exists merely because its scenario is designed.
 
 ## Requirements
@@ -93,4 +95,8 @@ The class view shows typed fields and relationships for `UploadBatch`. `UploadFi
 `CreatePhotoPreview`: Decode supported original; save oriented derivatives and Ready status. Conversion failure: mark Failed; retain original and allow manual retry.
 
 ![sequence create photo preview for upload session photos](diagrams/sequence-create-photo-preview.png)
+
+An interrupted batch resumes from server-confirmed block acknowledgements after local-file reselection. Completed files remain complete, and repeat finalization retains the same photo identifier.
+
+![Sequence for resuming an interrupted upload](diagrams/sequence-resume-upload.png)
 
