@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/tests/">
+    <Project Path="tests/QuinntyneBrownStudio.AcceptanceTests/QuinntyneBrownStudio.AcceptanceTests.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/QuinntyneBrownStudio.Api/QuinntyneBrownStudio.Api.csproj" />
+    <Project Path="src/QuinntyneBrownStudio.Application/QuinntyneBrownStudio.Application.csproj" />
+    <Project Path="src/QuinntyneBrownStudio.Domain/QuinntyneBrownStudio.Domain.csproj" />
+    <Project Path="src/QuinntyneBrownStudio.Infrastructure/QuinntyneBrownStudio.Infrastructure.csproj" />
+    <Project Path="src/QuinntyneBrownStudio.Worker/QuinntyneBrownStudio.Worker.csproj" />
+    <Project Path="src/QuinntyneBrownStudio.Qualification/QuinntyneBrownStudio.Qualification.csproj" />
+  </Folder>
+</Solution>

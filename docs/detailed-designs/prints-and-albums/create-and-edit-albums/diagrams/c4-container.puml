@@ -5,7 +5,7 @@ title Containers - Create and edit albums
 Person(actor0, "Authenticated client", "Uses the Client application")
 System_Boundary(studio, "Quinntyne Brown Studio") {
  Container(app0, "Client application", "Angular", "Create and edit albums")
- Container(api, "Qbs.Api", ".NET controllers", "Authorization and feature dispatch")
+ Container(api, "QuinntyneBrownStudio.Api", ".NET controllers", "Authorization and feature dispatch")
  ContainerDb(db, "Studio database", "Azure SQL", "Metadata and transactional state")
 }
 Rel(actor0, app0, "Uses", "HTTPS")

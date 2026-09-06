@@ -53,9 +53,12 @@ say what it cost rather than quietly narrowing scope.
 - Commands, queries, handlers, and validators live in `Application`.
 - One file per type. Every class, interface, record, and enum gets its own file,
   named for the type it holds.
-- Folders and namespaces agree under the existing `Qbs.*` project roots. Controllers
-  live in `Controllers` and use `Qbs.Api.Controllers`; request models live in `Models`
-  and use `Qbs.Api.Models`.
+- Folders and namespaces agree under the existing `QuinntyneBrownStudio.*` project roots. Controllers
+  live in `Controllers` and use `QuinntyneBrownStudio.Api.Controllers`; request models live in `Models`
+  and use `QuinntyneBrownStudio.Api.Models`.
+- The backend solution, projects, namespaces and assemblies use the
+  `QuinntyneBrownStudio` prefix. Database names, cookie/protection identifiers and
+  existing user-secrets store IDs are stable runtime configuration identifiers.
 - Group Domain types into `Entities`, `Enums`, `ValueObjects`, `Models`, `Policies`,
   and `Exceptions`. Keep Application commands and handlers together by feature;
   catalog operations live in `Catalog/<EntityOrConfiguration>/`.
@@ -206,14 +209,14 @@ quinntyne-brown-studio/
 |-- .github/
 |   `-- workflows/                    # Verification, packaging, and design-system deployment
 |-- backend/
-|   |-- Qbs.slnx                      # API, worker, libraries, and acceptance-test solution
+|   |-- QuinntyneBrownStudio.slnx                      # API, worker, libraries, and acceptance-test solution
 |   |-- src/
-|   |   |-- Qbs.Api/                  # Controllers and API composition
+|   |   |-- QuinntyneBrownStudio.Api/                  # Controllers and API composition
 |   |   |   |-- Controllers/
 |   |   |   |-- Filters/
 |   |   |   |-- Models/
 |   |   |   `-- Persistence/          # EF design-time context factory
-|   |   |-- Qbs.Application/          # Use cases, MediatR handlers, and ports
+|   |   |-- QuinntyneBrownStudio.Application/          # Use cases, MediatR handlers, and ports
 |   |   |   |-- Catalog/              # Commands and handlers grouped by entity or configuration
 |   |   |   |-- Clients/
 |   |   |   |-- Photos/
@@ -221,14 +224,14 @@ quinntyne-brown-studio/
 |   |   |   |-- Presentation/
 |   |   |   |-- Quotations/
 |   |   |   `-- Scheduling/
-|   |   |-- Qbs.Domain/               # Domain types and business rules
+|   |   |-- QuinntyneBrownStudio.Domain/               # Domain types and business rules
 |   |   |   |-- Entities/             # Identity-bearing types and the Entity base class
 |   |   |   |-- Enums/
 |   |   |   |-- Exceptions/
 |   |   |   |-- Models/               # Inputs, results, and supporting data types
 |   |   |   |-- Policies/
 |   |   |   `-- ValueObjects/
-|   |   |-- Qbs.Infrastructure/       # Persistence, identity, storage, and external adapters
+|   |   |-- QuinntyneBrownStudio.Infrastructure/       # Persistence, identity, storage, and external adapters
 |   |   |   |-- Adapters/
 |   |   |   |-- DependencyInjection/
 |   |   |   |-- Identity/
@@ -237,10 +240,10 @@ quinntyne-brown-studio/
 |   |   |   |-- Processing/
 |   |   |   |-- Serialization/
 |   |   |   `-- Storage/
-|   |   |-- Qbs.Worker/               # Background processing host
-|   |   `-- Qbs.Qualification/        # Camera, upload, AI, and environment evidence commands
+|   |   |-- QuinntyneBrownStudio.Worker/               # Background processing host
+|   |   `-- QuinntyneBrownStudio.Qualification/        # Camera, upload, AI, and environment evidence commands
 |   `-- tests/
-|       `-- Qbs.AcceptanceTests/      # API integration and infrastructure acceptance tests
+|       `-- QuinntyneBrownStudio.AcceptanceTests/      # API integration and infrastructure acceptance tests
 |-- frontend/
 |   |-- angular.json                  # Angular workspace and build targets
 |   |-- component-catalog.json        # Application component inventory and contracts

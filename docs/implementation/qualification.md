@@ -1,15 +1,15 @@
 # Qualification commands
 
-`backend/src/Qbs.Qualification` produces evidence for G-RAW, G-UPLOAD, G-AI and G-ENV. It runs real conversion, browser transfers, configured Azure analysis, or read-only environment checks. Missing inputs produce a **Blocked** report with exit code 2. Failed measurements return 1; completed measurements return 0. Every report retains `gateClosed: false`: the studio reviews the measured evidence and records approval in [the evidence register](../specs/decisions.md#evidence-register).
+`backend/src/QuinntyneBrownStudio.Qualification` produces evidence for G-RAW, G-UPLOAD, G-AI and G-ENV. It runs real conversion, browser transfers, configured Azure analysis, or read-only environment checks. Missing inputs produce a **Blocked** report with exit code 2. Failed measurements return 1; completed measurements return 0. Every report retains `gateClosed: false`: the studio reviews the measured evidence and records approval in [the evidence register](../specs/decisions.md#evidence-register).
 
 Build and invoke from the repository root with the Windows .NET 10 SDK:
 
 ```powershell
-dotnet publish backend/src/Qbs.Qualification -c Release -o .artifacts/qualification
-dotnet .artifacts/qualification/Qbs.Qualification.dll raw --manifest camera-fixtures.json --report .artifacts/raw-report.json
-dotnet .artifacts/qualification/Qbs.Qualification.dll upload --manifest upload-fixtures.json --report .artifacts/upload-report.json
-dotnet .artifacts/qualification/Qbs.Qualification.dll ai --manifest ai-fixtures.json --report .artifacts/ai-report.json
-dotnet .artifacts/qualification/Qbs.Qualification.dll environment --manifest environment-evidence.json --report .artifacts/environment-report.json
+dotnet publish backend/src/QuinntyneBrownStudio.Qualification -c Release -o .artifacts/qualification
+dotnet .artifacts/qualification/QuinntyneBrownStudio.Qualification.dll raw --manifest camera-fixtures.json --report .artifacts/raw-report.json
+dotnet .artifacts/qualification/QuinntyneBrownStudio.Qualification.dll upload --manifest upload-fixtures.json --report .artifacts/upload-report.json
+dotnet .artifacts/qualification/QuinntyneBrownStudio.Qualification.dll ai --manifest ai-fixtures.json --report .artifacts/ai-report.json
+dotnet .artifacts/qualification/QuinntyneBrownStudio.Qualification.dll environment --manifest environment-evidence.json --report .artifacts/environment-report.json
 ```
 
 Paths in a manifest resolve relative to that manifest. Reports must use a different path from their inputs. Fixture SHA-256 digests pin the exact evidence bytes. Do not commit client photographs, credentials, generated tokens or private qualification reports.
@@ -50,6 +50,6 @@ The command verifies the existing LocalDB connection, database identity, applied
 
 ## Local implementation evidence
 
-[Qualification acceptance tests](../../backend/tests/Qbs.AcceptanceTests/QualificationAcceptanceTests.cs) were captured failing before command dispatch was implemented, then passed for real JPEG measurement, changed-fixture rejection and blocked reports for all four missing-input modes. Reports from local synthetic checks leave all four external gates open.
+[Qualification acceptance tests](../../backend/tests/QuinntyneBrownStudio.AcceptanceTests/QualificationAcceptanceTests.cs) were captured failing before command dispatch was implemented, then passed for real JPEG measurement, changed-fixture rejection and blocked reports for all four missing-input modes. Reports from local synthetic checks leave all four external gates open.
 
 A local diagnostic can set `allowLocalCertificate: true` only with the `diagnostic` profile and a loopback origin. The report records that certificate verification was bypassed; capacity and environment qualification always require valid TLS. A one-JPEG diagnostic through the packaged browser/API/LocalDB worker measured readiness in 8.25 seconds locally. Its short-lived hash worker was not captured by the memory sampler, so `memoryMeasured` is false and the run supplies no capacity acceptance evidence.

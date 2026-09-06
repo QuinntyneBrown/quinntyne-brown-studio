@@ -23,9 +23,9 @@ $env:PublicOrigin = 'https://localhost:7443'
 $env:Development__PhotoDirectory = Join-Path $studioRoot '.artifacts/photos'
 $apiLog = Join-Path $studioRoot '.artifacts/api.log'
 $apiError = Join-Path $studioRoot '.artifacts/api-error.log'
-dotnet build (Join-Path $studioRoot 'backend/src/Qbs.Api')
+dotnet build (Join-Path $studioRoot 'backend/src/QuinntyneBrownStudio.Api')
 if ($LASTEXITCODE -ne 0) { throw 'API build failed.' }
-$apiDll = Join-Path $studioRoot 'backend/src/Qbs.Api/bin/Debug/net10.0/Qbs.Api.dll'
+$apiDll = Join-Path $studioRoot 'backend/src/QuinntyneBrownStudio.Api/bin/Debug/net10.0/QuinntyneBrownStudio.Api.dll'
 dotnet $apiDll --migrate
 if ($LASTEXITCODE -ne 0) { throw 'LocalDB migration failed. Check the LocalDB installation and the current Windows account.' }
 if ($env:Bootstrap__Email) {

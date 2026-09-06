@@ -11,10 +11,10 @@ Run `SqlLocalDB info` and `SqlLocalDB start MSSQLLocalDB` under the account that
 From the repository root:
 
 ```powershell
-dotnet restore backend/Qbs.slnx --locked-mode
-dotnet publish backend/src/Qbs.Api -c Release --no-restore -p:UseAppHost=false -o .artifacts/windows/api
-dotnet publish backend/src/Qbs.Worker -c Release --no-restore -p:UseAppHost=false -o .artifacts/windows/worker
-dotnet publish backend/src/Qbs.Qualification -c Release --no-restore -p:UseAppHost=false -o .artifacts/windows/qualification
+dotnet restore backend/QuinntyneBrownStudio.slnx --locked-mode
+dotnet publish backend/src/QuinntyneBrownStudio.Api -c Release --no-restore -p:UseAppHost=false -o .artifacts/windows/api
+dotnet publish backend/src/QuinntyneBrownStudio.Worker -c Release --no-restore -p:UseAppHost=false -o .artifacts/windows/worker
+dotnet publish backend/src/QuinntyneBrownStudio.Qualification -c Release --no-restore -p:UseAppHost=false -o .artifacts/windows/qualification
 npm ci --prefix frontend
 npm run build:libs --prefix frontend
 npm run build:apps --prefix frontend
@@ -32,7 +32,7 @@ $env:DOTNET_ENVIRONMENT = 'Production'
 $env:ConnectionStrings__Studio = 'Server=(localdb)\MSSQLLocalDB;Database=QbsProduction;Integrated Security=true;Encrypt=true;TrustServerCertificate=true'
 $env:PublicOrigin = 'https://studio.example.com'
 $env:ASPNETCORE_URLS = 'http://127.0.0.1:7444'
-dotnet .artifacts/windows/api/Qbs.Api.dll --migrate
+dotnet .artifacts/windows/api/QuinntyneBrownStudio.Api.dll --migrate
 if ($LASTEXITCODE -ne 0) { throw 'Migration failed; do not start the application.' }
 ```
 
@@ -47,7 +47,7 @@ $env:Bootstrap__Email = Read-Host 'Administrator email'
 $studioCredential = Get-Credential -UserName $env:Bootstrap__Email -Message 'Initial administrator credentials'
 $env:Bootstrap__Password = $studioCredential.GetNetworkCredential().Password
 try {
-    dotnet .artifacts/windows/api/Qbs.Api.dll --provision-admin
+    dotnet .artifacts/windows/api/QuinntyneBrownStudio.Api.dll --provision-admin
     if ($LASTEXITCODE -ne 0) { throw 'Administrator provisioning failed.' }
 } finally {
     Remove-Item Env:Bootstrap__Email, Env:Bootstrap__Password -ErrorAction SilentlyContinue
@@ -58,7 +58,7 @@ Provisioning is repeatable for an existing administrator and does not reset its 
 
 ## Start and supervise
 
-Run `dotnet .artifacts/windows/api/Qbs.Api.dll` and `dotnet .artifacts/windows/worker/Qbs.Worker.dll` in separate terminals under the owning account, with the same database and data-protection settings. Supervise processes through the host's operating procedures; service installation and automatic restart configuration are outside this change. Stop with Ctrl+C.
+Run `dotnet .artifacts/windows/api/QuinntyneBrownStudio.Api.dll` and `dotnet .artifacts/windows/worker/QuinntyneBrownStudio.Worker.dll` in separate terminals under the owning account, with the same database and data-protection settings. Supervise processes through the host's operating procedures; service installation and automatic restart configuration are outside this change. Stop with Ctrl+C.
 
 Both processes verify database access and migrations before serving or processing work. `/api/health` remains process liveness; use an authenticated read to verify continued database access. Capture process output and worker failures in the host's logging system.
 

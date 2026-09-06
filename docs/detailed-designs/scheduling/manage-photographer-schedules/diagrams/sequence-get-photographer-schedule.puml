@@ -19,14 +19,14 @@ box "Frontend - Admin application" #E0F2FE
  participant "PhotographerSchedulePage" as page
  participant "IScheduleService" as client
 end box
-box "Backend - Qbs.Api application" #D1FADF
+box "Backend - QuinntyneBrownStudio.Api application" #D1FADF
  participant "SchedulesController" as controller
 end box
-box "Backend - Qbs.Application and Domain" #ECFDF3
+box "Backend - QuinntyneBrownStudio.Application and Domain" #ECFDF3
  participant "GetPhotographerScheduleHandler" as handler
  participant "PhotographerSchedule" as entity
 end box
-box "Backend - Qbs.Infrastructure" #FFF4E5
+box "Backend - QuinntyneBrownStudio.Infrastructure" #FFF4E5
  database "Studio database via IStudioStore" as db
 end box
 actor -> page : Start GetPhotographerSchedule

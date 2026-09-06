@@ -6,7 +6,7 @@ Container_Boundary(frontend, "Frontend - Marketing applications") {
  Component(page, "QuoteCalculatorPage", "Angular", "Feature inputs, status, and results")
  Component(client, "IQuoteService", "Interface and injection token", "Typed feature service boundary")
 }
-Container_Boundary(api, "Backend - Qbs.Api and Application") {
+Container_Boundary(api, "Backend - QuinntyneBrownStudio.Api and Application") {
  Component(ctrl, "QuotesController", ".NET controller", "Endpoint authorization and dispatch")
  Component(handler0, "CalculateQuoteHandler", "MediatR", "CalculateQuote")
  Component(handler1, "ResolveQuoteLocationHandler", "MediatR", "ResolveQuoteLocation")

@@ -6,7 +6,7 @@ Container_Boundary(frontend, "Frontend - Admin applications") {
  Component(page, "PreferredVendorsPage", "Angular", "Feature inputs, status, and results")
  Component(client, "IVendorService", "Interface and injection token", "Typed feature service boundary")
 }
-Container_Boundary(api, "Backend - Qbs.Api and Application") {
+Container_Boundary(api, "Backend - QuinntyneBrownStudio.Api and Application") {
  Component(ctrl, "PreferredVendorController", ".NET controller", "Endpoint authorization and dispatch")
  Component(handler0, "GetPreferredVendorsHandler", "MediatR", "GetPreferredVendors")
  Component(handler1, "SavePreferredVendorHandler", "MediatR", "SavePreferredVendor")

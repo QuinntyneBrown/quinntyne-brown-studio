@@ -10,11 +10,11 @@ def check(condition, message):
     if not condition: errors.append(message)
 
 for name, allowed in [('Domain', []), ('Application', ['Domain'])]:
-    text = (ROOT / f'backend/src/Qbs.{name}/Qbs.{name}.csproj').read_text(encoding='utf-8-sig')
-    refs = re.findall(r'ProjectReference Include="[^"]*Qbs\.(\w+)', text)
+    text = (ROOT / f'backend/src/QuinntyneBrownStudio.{name}/QuinntyneBrownStudio.{name}.csproj').read_text(encoding='utf-8-sig')
+    refs = re.findall(r'ProjectReference Include="[^"]*QuinntyneBrownStudio\.(\w+)', text)
     check(all(r in allowed for r in refs), f'Clean Architecture dependency violation in {name}')
-check('12.5.0' in (ROOT / 'backend/src/Qbs.Application/Qbs.Application.csproj').read_text(), 'MediatR license baseline changed')
-for source in (ROOT / 'backend/src/Qbs.Api').rglob('*.cs'):
+check('12.5.0' in (ROOT / 'backend/src/QuinntyneBrownStudio.Application/QuinntyneBrownStudio.Application.csproj').read_text(), 'MediatR license baseline changed')
+for source in (ROOT / 'backend/src/QuinntyneBrownStudio.Api').rglob('*.cs'):
     if 'obj' in source.parts: continue
     check(not re.search(r'\.Map(?:Get|Post|Put|Delete|Patch)\(', source.read_text()), f'Minimal API product handler: {source}')
 manifest = json.loads((ROOT / 'frontend/component-catalog.json').read_text())

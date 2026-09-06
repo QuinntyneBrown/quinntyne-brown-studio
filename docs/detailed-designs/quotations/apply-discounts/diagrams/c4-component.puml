@@ -6,7 +6,7 @@ Container_Boundary(frontend, "Frontend - Admin and Marketing applications") {
  Component(page, "DiscountRulesPage", "Angular", "Feature inputs, status, and results")
  Component(client, "IDiscountService", "Interface and injection token", "Typed feature service boundary")
 }
-Container_Boundary(api, "Backend - Qbs.Api and Application") {
+Container_Boundary(api, "Backend - QuinntyneBrownStudio.Api and Application") {
  Component(ctrl, "DiscountConfigurationController", ".NET controller", "Endpoint authorization and dispatch")
  Component(handler0, "SaveDiscountConfigurationHandler", "MediatR", "SaveDiscountConfiguration")
  Component(handler1, "CalculateQuoteHandler", "MediatR", "Calls DiscountPolicy during quote calculation")

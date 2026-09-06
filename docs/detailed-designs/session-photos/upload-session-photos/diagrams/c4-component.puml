@@ -6,7 +6,7 @@ Container_Boundary(frontend, "Frontend - Admin applications") {
  Component(page, "SessionUploadPage", "Angular", "Feature inputs, status, and results")
  Component(client, "IUploadService", "Interface and injection token", "Typed feature service boundary")
 }
-Container_Boundary(api, "Backend - Qbs.Api and Application") {
+Container_Boundary(api, "Backend - QuinntyneBrownStudio.Api and Application") {
  Component(ctrl, "UploadsController", ".NET controller", "Endpoint authorization and dispatch")
  Component(handler0, "SaveSessionHandler", "MediatR", "SaveSession")
  Component(handler1, "CreateUploadBatchHandler", "MediatR", "CreateUploadBatch")
@@ -14,7 +14,7 @@ Container_Boundary(api, "Backend - Qbs.Api and Application") {
  Component(entity, "UploadBatch", "Domain model", "Feature state and policy")
  Component(store, "IStudioStore", "Application port", "Transactional persistence boundary")
 }
-Container_Boundary(worker, "Backend - Qbs.Worker") {
+Container_Boundary(worker, "Backend - QuinntyneBrownStudio.Worker") {
  Component(job0, "CreatePhotoPreviewHandler", "Background handler", "CreatePhotoPreview")
 }
 Rel(page, client, "Consumes token contract")

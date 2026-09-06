@@ -6,7 +6,7 @@ Container_Boundary(frontend, "Frontend - Admin applications") {
  Component(page, "QuoteRatesPage", "Angular", "Feature inputs, status, and results")
  Component(client, "IRateService", "Interface and injection token", "Typed feature service boundary")
 }
-Container_Boundary(api, "Backend - Qbs.Api and Application") {
+Container_Boundary(api, "Backend - QuinntyneBrownStudio.Api and Application") {
  Component(ctrl, "RateConfigurationController", ".NET controller", "Endpoint authorization and dispatch")
  Component(handler0, "GetRateConfigurationHandler", "MediatR", "GetRateConfiguration")
  Component(handler1, "SaveRateConfigurationHandler", "MediatR", "SaveRateConfiguration")

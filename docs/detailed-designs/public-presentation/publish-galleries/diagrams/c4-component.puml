@@ -6,7 +6,7 @@ Container_Boundary(frontend, "Frontend - Admin and Marketing applications") {
  Component(page, "PublicGalleryEditor", "Angular", "Feature inputs, status, and results")
  Component(client, "IPublicGalleryService", "Interface and injection token", "Typed feature service boundary")
 }
-Container_Boundary(api, "Backend - Qbs.Api and Application") {
+Container_Boundary(api, "Backend - QuinntyneBrownStudio.Api and Application") {
  Component(ctrl, "PublicGalleryController", ".NET controller", "Administrative authorization and dispatch")
  Component(publicCtrl, "PresentationController", ".NET controller", "Anonymous projection endpoint")
  Component(handler0, "SavePublicGalleryHandler", "MediatR", "SavePublicGallery")

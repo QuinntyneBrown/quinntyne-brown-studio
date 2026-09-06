@@ -6,7 +6,7 @@ Container_Boundary(frontend, "Frontend - Admin applications") {
  Component(page, "EquipmentPage", "Angular", "Feature inputs, status, and results")
  Component(client, "IEquipmentService", "Interface and injection token", "Typed feature service boundary")
 }
-Container_Boundary(api, "Backend - Qbs.Api and Application") {
+Container_Boundary(api, "Backend - QuinntyneBrownStudio.Api and Application") {
  Component(ctrl, "EquipmentController", ".NET controller", "Endpoint authorization and dispatch")
  Component(handler0, "GetEquipmentHandler", "MediatR", "GetEquipment")
  Component(handler1, "SaveEquipmentHandler", "MediatR", "SaveEquipment")

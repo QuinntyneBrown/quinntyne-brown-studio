@@ -6,7 +6,7 @@ Container_Boundary(frontend, "Frontend - Client and Admin applications") {
  Component(page, "PrintRequestPage", "Angular", "Feature inputs, status, and results")
  Component(client, "IPrintRequestService", "Interface and injection token", "Typed feature service boundary")
 }
-Container_Boundary(api, "Backend - Qbs.Api and Application") {
+Container_Boundary(api, "Backend - QuinntyneBrownStudio.Api and Application") {
  Component(ctrl, "PrintRequestsController", ".NET controller", "Endpoint authorization and dispatch")
  Component(handler0, "SubmitPrintRequestHandler", "MediatR", "SubmitPrintRequest")
  Component(handler1, "GetPrintRequestInboxHandler", "MediatR", "GetPrintRequestInbox")

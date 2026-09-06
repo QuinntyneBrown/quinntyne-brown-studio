@@ -20,13 +20,13 @@ Development startup migrates before serving and optionally provisions an adminis
 
 ## Acceptance evidence
 
-[LocalDbAcceptanceTests](../../backend/tests/Qbs.AcceptanceTests/LocalDbAcceptanceTests.cs) covers DB-01 through DB-06. [RuntimeStudioFactory](../../backend/tests/Qbs.AcceptanceTests/RuntimeStudioFactory.cs) controls only external dependencies and uses normal persistence and Identity registrations. [ApiCommand](../../backend/tests/Qbs.AcceptanceTests/ApiCommand.cs) invokes the real API executable for migration and provisioning. Existing acceptance cases use explicitly injected [fake persistence](../../backend/tests/Qbs.AcceptanceTests/FakePersistenceRegistration.cs), covering DB-07; existing SQL transaction and quote cases remain regression coverage.
+[LocalDbAcceptanceTests](../../backend/tests/QuinntyneBrownStudio.AcceptanceTests/LocalDbAcceptanceTests.cs) covers DB-01 through DB-06. [RuntimeStudioFactory](../../backend/tests/QuinntyneBrownStudio.AcceptanceTests/RuntimeStudioFactory.cs) controls only external dependencies and uses normal persistence and Identity registrations. [ApiCommand](../../backend/tests/QuinntyneBrownStudio.AcceptanceTests/ApiCommand.cs) invokes the real API executable for migration and provisioning. Existing acceptance cases use explicitly injected [fake persistence](../../backend/tests/QuinntyneBrownStudio.AcceptanceTests/FakePersistenceRegistration.cs), covering DB-07; existing SQL transaction and quote cases remain regression coverage.
 
 The captured red run had **10 failures and 1 pass**: development lost authentication after restart, development jobs were absent from a fresh SQL worker composition, unsupported connections were accepted or lacked the required diagnostic, and startup accepted missing databases or unapplied migrations. Production restart persistence already passed. The additional migration/provisioning case verified existing behavior; no historical failing run is claimed for it. Earlier compile and fixture corrections are not counted as product failures.
 
 | Verification | Result |
 | --- | --- |
-| Final backend Release acceptance | **97 passed, 0 failed, 0 skipped**; 12 new executions, including six real LocalDB cases, plus the 85 existing cases. `dotnet test backend/Qbs.slnx -c Release --no-restore`. |
+| Final backend Release acceptance | **97 passed, 0 failed, 0 skipped**; 12 new executions, including six real LocalDB cases, plus the 85 existing cases. `dotnet test backend/QuinntyneBrownStudio.slnx -c Release --no-restore`. |
 | Migration and provisioning | Fresh database migration, repeated administrator provisioning, login, saved studio creation, repeated migration, and login/data after restart all passed through the real command/HTTP boundaries. |
 | Release build and dependencies | Solution build passed with **0 warnings and 0 errors**; locked restore passed. MediatR remains 12.5.0. |
 | Windows publishing | API and worker publish successfully with `-p:UseAppHost=false`; neither published directory includes EF InMemory. |

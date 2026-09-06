@@ -28,9 +28,9 @@ $env:Bootstrap__Password = 'Qbs!' + [Convert]::ToHexString([System.Security.Cryp
 $protectedPassword = ConvertTo-SecureString $env:Bootstrap__Password -AsPlainText -Force | ConvertFrom-SecureString
 [ordered]@{ email = $env:Bootstrap__Email; protectedPassword = $protectedPassword; database = $databaseName; origin = $env:PublicOrigin } | ConvertTo-Json | Set-Content (Join-Path $runDirectory 'operator.json') -Encoding utf8
 $apiDirectory = Join-Path $runDirectory 'api'
-& $Dotnet publish (Join-Path $studioRoot 'backend/src/Qbs.Api') -c Release -p:UseAppHost=false -o $apiDirectory *> (Join-Path $runDirectory 'publish.log')
+& $Dotnet publish (Join-Path $studioRoot 'backend/src/QuinntyneBrownStudio.Api') -c Release -p:UseAppHost=false -o $apiDirectory *> (Join-Path $runDirectory 'publish.log')
 if ($LASTEXITCODE -ne 0) { throw 'API publishing failed. See the isolated run log.' }
-$apiDll = Join-Path $apiDirectory 'Qbs.Api.dll'
+$apiDll = Join-Path $apiDirectory 'QuinntyneBrownStudio.Api.dll'
 & $Dotnet $apiDll --migrate *> (Join-Path $runDirectory 'migrate.log')
 if ($LASTEXITCODE -ne 0) { throw 'Isolated LocalDB migration failed.' }
 & $Dotnet $apiDll --provision-admin *> (Join-Path $runDirectory 'provision.log')

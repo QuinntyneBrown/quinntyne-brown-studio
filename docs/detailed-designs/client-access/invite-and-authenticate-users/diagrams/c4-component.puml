@@ -6,7 +6,7 @@ Container_Boundary(frontend, "Frontend - Admin and Client applications") {
  Component(page, "AccountAccessPage", "Angular", "Feature inputs, status, and results")
  Component(client, "IAuthService", "Interface and injection token", "Typed feature service boundary")
 }
-Container_Boundary(api, "Backend - Qbs.Api and Application") {
+Container_Boundary(api, "Backend - QuinntyneBrownStudio.Api and Application") {
  Component(ctrl, "AuthController", ".NET controller", "Endpoint authorization and dispatch")
  Component(handler0, "InviteClientHandler", "MediatR", "InviteClient")
  Component(handler1, "AuthenticateAccountHandler", "MediatR", "AuthenticateAccount")

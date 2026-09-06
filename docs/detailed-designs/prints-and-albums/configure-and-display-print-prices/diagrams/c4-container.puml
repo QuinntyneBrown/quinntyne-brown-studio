@@ -9,7 +9,7 @@ System_Boundary(studio, "Quinntyne Brown Studio") {
  Container(app0, "Admin application", "Angular", "Configure and display print prices")
  Container(app1, "Marketing application", "Angular", "Configure and display print prices")
  Container(app2, "Client application", "Angular", "Configure and display print prices")
- Container(api, "Qbs.Api", ".NET controllers", "Authorization and feature dispatch")
+ Container(api, "QuinntyneBrownStudio.Api", ".NET controllers", "Authorization and feature dispatch")
  ContainerDb(db, "Studio database", "Azure SQL", "Metadata and transactional state")
 }
 Rel(actor0, app0, "Uses", "HTTPS")

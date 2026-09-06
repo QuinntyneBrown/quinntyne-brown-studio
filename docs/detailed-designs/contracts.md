@@ -51,15 +51,15 @@ Feature diagrams name one handler per behavior. The delivered application layer 
 
 | Designed handlers | Delivered implementation |
 | --- | --- |
-| `SaveEquipmentHandler`, `SavePreferredVendorHandler`, `SavePhotographerHandler`, `SaveSessionHandler`, `SavePromotionHandler`, `SavePublicGalleryHandler`, `SavePrintOptionHandler`, `SaveStudioHandler`, `SaveRateConfigurationHandler`, `SaveDiscountConfigurationHandler` | MediatR `Save*` commands and handlers in `Qbs.Application/Catalog` |
+| `SaveEquipmentHandler`, `SavePreferredVendorHandler`, `SavePhotographerHandler`, `SaveSessionHandler`, `SavePromotionHandler`, `SavePublicGalleryHandler`, `SavePrintOptionHandler`, `SaveStudioHandler`, `SaveRateConfigurationHandler`, `SaveDiscountConfigurationHandler` | MediatR `Save*` commands and handlers in `QuinntyneBrownStudio.Application/Catalog` |
 | `GetEquipmentHandler`, `GetPreferredVendorsHandler`, `GetRateConfigurationHandler`, and the other administrative reads | `AdminCatalog.List`, `AdminCatalog.Get` |
 | `GetPublishedContentHandler`, `SaveMarketingContentHandler`, `GetPromotionsHandler`, `GetPublicGalleryHandler`, `GetStudioOptionsHandler`, `GetPrintOptionsHandler` | `Presentation.Public`, `Presentation.Save` |
-| `CalculateQuoteHandler`, `ResolveQuoteLocationHandler` | `CalculateQuoteHandler` in `Qbs.Application/Quotations`, with addresses and distances through `IRouteDistanceService` |
+| `CalculateQuoteHandler`, `ResolveQuoteLocationHandler` | `CalculateQuoteHandler` in `QuinntyneBrownStudio.Application/Quotations`, with addresses and distances through `IRouteDistanceService` |
 | `GetPhotographerScheduleHandler`, `SavePhotographerScheduleHandler`, `GetAvailabilityHandler` | `Scheduling.Save`, `Scheduling.Check` |
 | `CreateUploadBatchHandler`, `ResumeUploadFileHandler`, `FinalizeUploadFileHandler`, `GetOperationStatusHandler`, `CreatePhotoPreviewHandler`, `GetSessionPhotosHandler`, `GetPhotoPreviewHandler`, `GetClientPhotoHandler` | `PhotoWorkflows`, with authorization in `PhotoAccess` |
 | `RequestPhotoAnalysisHandler`, `AnalyzePhotoHandler` | `AnalysisWorkflows` |
 | `GetClientGalleriesHandler`, `SetGalleryAssignmentsHandler`, `GetAlbumHandler`, `SaveAlbumHandler`, `SubmitPrintRequestHandler`, `ReviewPrintRequestHandler`, `GetPrintRequestInboxHandler` | `ClientWorkflows` |
-| `ExtendSessionRetentionHandler`, `ProcessRetentionHandler`, `DeleteSessionPhotosHandler`, `ConfirmPhotoDeletionHandler` | `RetentionWorkflows`, with scheduled runs in `Qbs.Worker` |
+| `ExtendSessionRetentionHandler`, `ProcessRetentionHandler`, `DeleteSessionPhotosHandler`, `ConfirmPhotoDeletionHandler` | `RetentionWorkflows`, with scheduled runs in `QuinntyneBrownStudio.Worker` |
 | `AuthenticateAccountHandler`, `SignOutHandler`, `InviteClientHandler`, `AcceptInvitationHandler`, `RecoverAccountHandler`, `ResetAccountPasswordHandler` | `AuthController` over ASP.NET Identity through `IIdentityAccounts` |
 
 Consolidation does not change the described behavior, its authorization, or its failure outcomes. Each row keeps the transaction and version rules stated in [architecture](architecture.md).
@@ -98,7 +98,7 @@ Quote input revisions are client correlation values, not database versions. Rate
 | `PrintRequestState` | `Submitted` → `Reviewed`; review stores administrator and time without changing submitted lines |
 | `CoverageStatus` | `NotImplemented`, `Partial`, `Complete`; displayed as Not implemented, Partial, Complete in evidence tables |
 
-`ServiceKind`, `VendorRole`, `PhotoState`, `AnalysisState`, and `FindingOutcome` are declared enumerations in `Qbs.Domain`. The other rows fix a value vocabulary rather than a declared type: `DiscountKind`, `RetentionState`, `PrintRequestState`, `BatchState`, and `AccountRole` travel and store as those exact strings; `WindowKind` is carried by the working, unavailable, and commitment interval sets; `BillingUnit` names the unit a configured rate is charged in; and `CoverageStatus` belongs to the acceptance register rather than to any API response.
+`ServiceKind`, `VendorRole`, `PhotoState`, `AnalysisState`, and `FindingOutcome` are declared enumerations in `QuinntyneBrownStudio.Domain`. The other rows fix a value vocabulary rather than a declared type: `DiscountKind`, `RetentionState`, `PrintRequestState`, `BatchState`, and `AccountRole` travel and store as those exact strings; `WindowKind` is carried by the working, unavailable, and commitment interval sets; `BillingUnit` names the unit a configured rate is charged in; and `CoverageStatus` belongs to the acceptance register rather than to any API response.
 
 Stored aggregate `Version` fields are optimistic concurrency tokens. `expectedVersion` is required for updates. `Revision` identifies configuration, impact, or evidence versions where named explicitly; it is not interchangeable with an unrelated aggregate version.
 

@@ -5,9 +5,9 @@ title Containers - Upload session photos
 Person(actor0, "Studio administrator", "Uses the Admin application")
 System_Boundary(studio, "Quinntyne Brown Studio") {
  Container(app0, "Admin application", "Angular", "Upload session photos")
- Container(api, "Qbs.Api", ".NET controllers", "Authorization and feature dispatch")
+ Container(api, "QuinntyneBrownStudio.Api", ".NET controllers", "Authorization and feature dispatch")
  ContainerDb(db, "Studio database", "Azure SQL", "Metadata and transactional state")
- Container(worker, "Qbs.Worker", ".NET on Container Apps", "Durable background processing")
+ Container(worker, "QuinntyneBrownStudio.Worker", ".NET on Container Apps", "Durable background processing")
  ContainerQueue(queue, "Processing queue", "Azure Storage Queues", "At-least-once work delivery")
 }
 Rel(actor0, app0, "Uses", "HTTPS")

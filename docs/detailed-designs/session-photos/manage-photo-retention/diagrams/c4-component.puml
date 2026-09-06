@@ -6,14 +6,14 @@ Container_Boundary(frontend, "Frontend - Admin applications") {
  Component(page, "SessionRetentionPanel", "Angular", "Feature inputs, status, and results")
  Component(client, "IRetentionService", "Interface and injection token", "Typed feature service boundary")
 }
-Container_Boundary(api, "Backend - Qbs.Api and Application") {
+Container_Boundary(api, "Backend - QuinntyneBrownStudio.Api and Application") {
  Component(ctrl, "RetentionController", ".NET controller", "Endpoint authorization and dispatch")
  Component(handler0, "ExtendSessionRetentionHandler", "MediatR", "ExtendSessionRetention")
  Component(handler1, "ConfirmPhotoDeletionHandler", "MediatR", "ConfirmPhotoDeletion")
  Component(entity, "SessionRetention", "Domain model", "Feature state and policy")
  Component(store, "IStudioStore", "Application port", "Transactional persistence boundary")
 }
-Container_Boundary(worker, "Backend - Qbs.Worker") {
+Container_Boundary(worker, "Backend - QuinntyneBrownStudio.Worker") {
  Component(job0, "ProcessRetentionHandler", "Background handler", "ProcessRetention")
  Component(job1, "DeleteSessionPhotosHandler", "Background handler", "DeleteSessionPhotos")
 }

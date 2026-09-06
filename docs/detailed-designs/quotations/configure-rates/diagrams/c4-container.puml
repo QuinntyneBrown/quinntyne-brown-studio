@@ -5,7 +5,7 @@ title Containers - Configure rates
 Person(actor0, "Studio administrator", "Uses the Admin application")
 System_Boundary(studio, "Quinntyne Brown Studio") {
  Container(app0, "Admin application", "Angular", "Configure rates")
- Container(api, "Qbs.Api", ".NET controllers", "Authorization and feature dispatch")
+ Container(api, "QuinntyneBrownStudio.Api", ".NET controllers", "Authorization and feature dispatch")
  ContainerDb(db, "Studio database", "Azure SQL", "Metadata and transactional state")
 }
 Rel(actor0, app0, "Uses", "HTTPS")

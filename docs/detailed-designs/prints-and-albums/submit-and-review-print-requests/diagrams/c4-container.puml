@@ -7,7 +7,7 @@ Person(actor1, "Studio administrator", "Uses the Admin application")
 System_Boundary(studio, "Quinntyne Brown Studio") {
  Container(app0, "Client application", "Angular", "Submit and review print requests")
  Container(app1, "Admin application", "Angular", "Submit and review print requests")
- Container(api, "Qbs.Api", ".NET controllers", "Authorization and feature dispatch")
+ Container(api, "QuinntyneBrownStudio.Api", ".NET controllers", "Authorization and feature dispatch")
  ContainerDb(db, "Studio database", "Azure SQL", "Metadata and transactional state")
 }
 Rel(actor0, app0, "Uses", "HTTPS")

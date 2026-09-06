@@ -19,15 +19,15 @@ box "Frontend - Admin application" #E0F2FE
  participant "SessionUploadPage" as page
  participant "IUploadService" as client
 end box
-box "Backend - Qbs.Api application" #D1FADF
+box "Backend - QuinntyneBrownStudio.Api application" #D1FADF
  participant "UploadsController" as controller
 end box
-box "Backend - Qbs.Worker and Domain" #ECFDF3
+box "Backend - QuinntyneBrownStudio.Worker and Domain" #ECFDF3
  participant "CreatePhotoPreviewHandler" as handler
  participant "GetOperationStatusHandler" as status
  participant "SessionPhoto" as entity
 end box
-box "Backend - Qbs.Infrastructure" #FFF4E5
+box "Backend - QuinntyneBrownStudio.Infrastructure" #FFF4E5
  database "Studio database via IStudioStore" as db
  queue "Durable job / schedule trigger" as queue
  participant "IRawPreviewConverter / IPhotoStorage" as ext

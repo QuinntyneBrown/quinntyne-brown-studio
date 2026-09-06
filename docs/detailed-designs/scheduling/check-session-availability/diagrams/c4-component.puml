@@ -6,7 +6,7 @@ Container_Boundary(frontend, "Frontend - Marketing applications") {
  Component(page, "SessionTimingFields", "Angular", "Feature inputs, status, and results")
  Component(client, "IAvailabilityService", "Interface and injection token", "Typed feature service boundary")
 }
-Container_Boundary(api, "Backend - Qbs.Api and Application") {
+Container_Boundary(api, "Backend - QuinntyneBrownStudio.Api and Application") {
  Component(ctrl, "AvailabilityController", ".NET controller", "Endpoint authorization and dispatch")
  Component(handler0, "GetAvailabilityHandler", "MediatR", "GetAvailability")
  Component(entity, "AvailabilityPolicy", "Domain model", "Feature state and policy")

@@ -1,0 +1,87 @@
+{
+  "date": "2026-09-06",
+  "scope": "Rename backend solution, projects, namespaces and assemblies from Qbs to QuinntyneBrownStudio; retain product behavior and persisted runtime identifiers.",
+  "solution": "backend/QuinntyneBrownStudio.slnx",
+  "projects": [
+    "QuinntyneBrownStudio.Api",
+    "QuinntyneBrownStudio.Application",
+    "QuinntyneBrownStudio.Domain",
+    "QuinntyneBrownStudio.Infrastructure",
+    "QuinntyneBrownStudio.Worker",
+    "QuinntyneBrownStudio.Qualification",
+    "QuinntyneBrownStudio.AcceptanceTests"
+  ],
+  "evidenceDirectory": ".artifacts/backend-rename",
+  "restore": {
+    "lockedMode": true,
+    "result": "passed",
+    "log": "restore.log"
+  },
+  "releaseBuild": {
+    "result": "passed",
+    "warnings": 0,
+    "errors": 0,
+    "log": "build.log"
+  },
+  "acceptance": {
+    "approach": "Run the existing behavioral acceptance suite for this mechanical refactor; no naming or architecture tests added.",
+    "passed": 118,
+    "failed": 0,
+    "skipped": 0,
+    "report": "backend-rename-final.trx",
+    "initialRun": {
+      "passed": 114,
+      "failed": 4,
+      "report": "backend-rename.trx",
+      "cause": "LocalDB connection and pre-login timeouts during concurrent startup. The complete suite passed on rerun after the database became responsive and owned idle build nodes were stopped. No test or product changes were made between runs."
+    }
+  },
+  "publication": {
+    "result": "passed",
+    "assemblies": [
+      "package/api/QuinntyneBrownStudio.Api.dll",
+      "package/worker/QuinntyneBrownStudio.Worker.dll",
+      "package/qualification/QuinntyneBrownStudio.Qualification.dll"
+    ],
+    "oldQbsAssembliesInFreshPackages": 0
+  },
+  "runtime": {
+    "apiHealthStatus": 200,
+    "existingPublishedGalleries": 3,
+    "previewOrigin": "https://localhost:7453",
+    "database": "Existing LocalDB preview database retained without schema changes",
+    "worker": "Published renamed worker verified the database and started successfully; smoke process then stopped.",
+    "qualification": "Published renamed command returned help with exit code 0.",
+    "evidence": "runtime.json"
+  },
+  "sourceReview": {
+    "baselineFiles": 1174,
+    "missingOriginalFiles": 0,
+    "unrelatedFrontendImplementationChanges": 0,
+    "missingProjectReferences": 0,
+    "oldProjectDirectories": 0,
+    "evidence": "source-audit.json",
+    "maintainedReferences": "Updated scripts, CI, deployment instructions, AGENTS.md, documentation and diagram labels. Historical verification JSON retains original run identities."
+  },
+  "documentation": {
+    "result": "passed",
+    "renamedDiagramsRenderedAndVisuallyReviewed": 90,
+    "verifiedDiagramPairs": 147,
+    "verifiedFeatures": 23,
+    "verifiedL2Requirements": 69,
+    "verifiedAcceptanceCriteria": 82,
+    "log": "documentation.log"
+  },
+  "repositoryChecks": {
+    "existingArchitectureReview": "passed; 26 catalog entries",
+    "gitDiffCheck": "passed"
+  },
+  "preservedIdentifiers": [
+    "Existing LocalDB database names",
+    "Authentication and antiforgery cookie names",
+    "Encryption purposes",
+    "Environment-variable contracts",
+    "Worker UserSecretsId",
+    "Frontend @qbs package names and selectors"
+  ]
+}

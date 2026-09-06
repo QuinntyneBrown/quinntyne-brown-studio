@@ -1,5 +1,9 @@
 # Implementation and acceptance evidence
 
+The subsequent [backend rename](backend-rename.md) changes .NET identities to
+`QuinntyneBrownStudio` and records a fresh backend regression run. Earlier reports
+retain their historical assembly names.
+
 The repository now contains the public website, administration and client applications, the standalone design system, the controller API, a background worker, LocalDB migrations, automated checks, and Windows backend publishing. The former cloud/container deployment assets are a superseded archive. Product functionality includes saved quote configuration, server pricing and discounts, photographer scheduling, private photo processing and access, invitations, albums, immutable print requests, and retention controls.
 
 The [platform completion brief](platform-completion.md) and [current machine-readable evidence](platform-verification.json) record the subsequent full-platform delivery and remaining external qualification gates.
