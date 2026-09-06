@@ -236,6 +236,30 @@ public sealed class LiveQuoteAcceptanceTests
         Assert.Equal(HttpStatusCode.BadRequest, (await admin.PostAsJsonAsync("/api/public/quotes/calculate", input)).StatusCode);
     }
 
+    // Given saved advance rules, when the threshold changes across this session's
+    // lead time, then the next HTTP quote uses the newly saved threshold.
+    [Fact]
+    public async Task AC_L2_015_03_Changed_saved_threshold_controls_the_next_quote()
+    {
+        using var root = new StudioFactory();
+        using var factory = root.WithWebHostBuilder(b => b.ConfigureServices(s => s.AddSingleton<IClock>(new QuoteClock())));
+        using var admin = await Actor(factory);
+        await Configure(admin);
+        foreach (var (threshold, version, expectedKind) in new[] { (91, 0, (string?)null), (89, 1, "Advance"), (91, 2, (string?)null) })
+        {
+            (await admin.PutAsJsonAsync("/api/admin/discounts", new
+            {
+                advanceRule = new { enabled = true, percentage = 10, threshold },
+                weekdayRule = new { enabled = false, percentage = 0, weekdays = Array.Empty<string>() },
+                codeRules = Array.Empty<object>(), expectedVersion = version,
+            })).EnsureSuccessStatusCode();
+            var response = await admin.PostAsJsonAsync("/api/public/quotes/calculate", Input());
+            response.EnsureSuccessStatusCode();
+            var quote = await response.Content.ReadFromJsonAsync<JsonElement>();
+            Assert.Equal(expectedKind, quote.GetProperty("discount").GetProperty("kind").GetString());
+        }
+    }
+
     internal static async Task<HttpClient> Actor(Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactory<Program> factory)
     {
         var client = factory.CreateClient(new() { BaseAddress = new Uri("https://localhost") });

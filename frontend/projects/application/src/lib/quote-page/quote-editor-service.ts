@@ -9,7 +9,6 @@ import {
   QuoteStudioOption,
   ResolvedLocation,
 } from '@qbs/domain';
-
 @Injectable()
 export class QuoteEditorService implements IQuoteEditorService, OnDestroy {
   private readonly api = inject(QUOTE_SERVICE);
@@ -66,7 +65,6 @@ export class QuoteEditorService implements IQuoteEditorService, OnDestroy {
   readonly endAmbiguous = computed(
     () => this.offsets(this.draft().endDate, this.draft().end).length > 1,
   );
-
   private offsets(date: string, time: string): string[] {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !/^\d{2}:\d{2}$/.test(time)) return [];
     return ['-04:00', '-05:00'].filter((offset) => {

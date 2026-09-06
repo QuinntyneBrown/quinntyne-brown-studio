@@ -1,186 +1,110 @@
 <header class="page__header">
   <div>
     <p class="page__eyebrow">Your private collection</p>
-    <h1>{{ heading() }}</h1>
+    <h1>{{ state.heading() }}</h1>
     <p class="page__description">Photographs to return to, again and again.</p>
   </div>
-  @if (kind() === 'albums') {
-    <button class="button" (click)="editAlbum(true)">Create album</button>
+  @if (state.kind() === 'albums') {
+    <button
+      class="button"
+      [disabled]="state.loading() || state.loadFailed() || state.busy()"
+      (click)="state.editAlbum(true)"
+    >
+      Create album
+    </button>
   }
-  @if (kind() === 'album' && !editing()) {
-    <button class="button button--secondary" (click)="editAlbum()">Edit album</button>
+  @if (state.kind() === 'album' && !state.editing()) {
+    <button
+      class="button button--secondary"
+      [disabled]="state.loading() || state.loadFailed() || state.busy()"
+      (click)="state.editAlbum()"
+    >
+      Edit album
+    </button>
   }
 </header>
-@if (message()) {
-  <qbs-notice [message]="message()" [error]="error()" />
+@if (state.message()) {
+  <qbs-notice [message]="state.message()" [error]="state.error()" />
 }
-@if (editing()) {
-  <section class="panel">
-    <h2>Shape your collection</h2>
-    <label class="field"
-      ><span>Album name</span><input [(ngModel)]="album.name" maxlength="200" required
-    /></label>
-    <h3 class="client__section">Select photographs</h3>
-    <qbs-photos
-      [photos]="photos()"
-      [selected]="selected()"
-      [selectable]="true"
-      (selection)="toggle($event)"
-      (opened)="opened.set($event)"
-    />
-    <h3 class="client__section">Album order</h3>
-    @for (id of selected(); track id; let i = $index) {
-      <div class="records__row">
-        <span>{{ i + 1 }}. {{ photoName(id) }}</span>
-        <div class="records__actions">
-          <button
-            class="button button--secondary"
-            [disabled]="i === 0"
-            (click)="move(id, -1)"
-            [attr.aria-label]="'Move ' + photoName(id) + ' earlier'"
-          >
-            ↑</button
-          ><button
-            class="button button--secondary"
-            [disabled]="i === selected().length - 1"
-            (click)="move(id, 1)"
-            [attr.aria-label]="'Move ' + photoName(id) + ' later'"
-          >
-            ↓</button
-          ><button class="button button--secondary" (click)="toggle(id)">Remove</button>
-        </div>
-      </div>
-    }
-    <div class="form__actions">
-      <button
-        class="button"
-        [disabled]="busy() || !album.name.trim() || (!album.id && !selected().length)"
-        (click)="saveAlbum()"
-      >
-        Save album</button
-      ><button class="button button--secondary" (click)="editing.set(false)">Cancel</button>
-    </div>
-  </section>
-} @else if (kind() === 'galleries' || kind() === 'albums') {
-  @if (!items().length) {
+@if (state.loading()) {
+  <p role="status">Loading…</p>
+} @else if (state.loadFailed()) {
+  <button class="button button--secondary" (click)="state.load()">Retry loading</button>
+} @else if (state.editing()) {
+  <qbs-album-editor />
+} @else if (state.kind() === 'galleries' || state.kind() === 'albums') {
+  @if (!state.items().length) {
     <qbs-empty
       [message]="
-        kind() === 'galleries'
+        state.kind() === 'galleries'
           ? 'No galleries available yet.'
           : 'Create an album to bring your favourite photographs together.'
       "
     />
   }
   <div class="layout__grid">
-    @for (item of items(); track item.id) {
+    @for (item of state.items(); track item.id) {
       <a
         class="client-card"
-        [routerLink]="[kind() === 'galleries' ? '/galleries' : '/albums', item.id]"
-        ><div class="client-card__cover">{{ kind() === 'galleries' ? '◇' : '▤' }}</div>
+        [routerLink]="[state.kind() === 'galleries' ? '/galleries' : '/albums', item.id]"
+        ><div class="client-card__cover">{{ state.kind() === 'galleries' ? '◇' : '▤' }}</div>
         <h2>{{ item.name }}</h2>
         <p class="text--muted">
-          {{ kind() === 'galleries' ? 'View your session' : 'Open collection' }} →
+          {{ state.kind() === 'galleries' ? 'View your session' : 'Open collection' }} →
         </p></a
       >
     }
   </div>
-} @else if (kind() === 'gallery' || kind() === 'album') {
-  <qbs-photos [photos]="photos()" (opened)="opened.set($event)" />
-  @if (!photos().length) {
+} @else if (state.kind() === 'gallery' || state.kind() === 'album') {
+  <qbs-photos [photos]="state.photos()" (opened)="state.opened.set($event)" />
+  @if (!state.photos().length) {
     <qbs-empty message="No photographs are available in this collection." />
   }
   <div class="form__actions">
     <a class="button button--secondary" routerLink="/prints">Request prints</a
     ><a class="button button--secondary" routerLink="/albums">Your albums</a>
   </div>
-} @else if (kind() === 'prints') {
-  @if (confirmation()) {
+} @else if (state.kind() === 'prints') {
+  @if (state.confirmation()) {
     <section class="panel">
       <h2>A beautiful thing to look forward to.</h2>
       <p>Your request has been sent to the studio for review.</p>
-      <p class="page__description">Request reference: {{ confirmation() }}</p>
+      <p class="page__description">Request reference: {{ state.confirmation() }}</p>
       <a class="button button--secondary" routerLink="/galleries">Back to your sessions</a>
     </section>
-  } @else if (reviewing()) {
-    <section class="panel">
-      <h2>Review your print request</h2>
-      @for (line of printLines; track line.photoId; let i = $index) {
-        <div class="client__print">
-          <h3>{{ photoName(line.photoId) }}</h3>
-          <div class="form__grid">
-            <label class="field"
-              ><span>Print option</span
-              ><select [(ngModel)]="line.optionId" [name]="'option' + i">
-                @for (option of printOptions(); track option.id) {
-                  <option [value]="option.id">
-                    {{ option.name }} · {{ option.dimensions }} · {{ option.unitPrice }} CAD
-                  </option>
-                }
-              </select></label
-            ><label class="field"
-              ><span>Quantity</span
-              ><input
-                type="number"
-                min="1"
-                step="1"
-                [(ngModel)]="line.quantity"
-                [name]="'quantity' + i"
-            /></label>
-          </div>
-        </div>
-      }
-      <label class="field"
-        ><span>Notes (optional)</span><textarea [(ngModel)]="notes" maxlength="5000"></textarea>
-      </label>
-      <p class="quote__total" aria-live="polite">
-        Current total: {{ printTotal() ?? 'Check quantities' }} CAD
-      </p>
-      <p class="page__description">
-        The studio will review your request. No payment or fulfilment is initiated.
-      </p>
-      <div class="form__actions">
-        <button
-          class="button"
-          [disabled]="busy() || printTotal() === null"
-          (click)="submitPrints()"
-        >
-          Submit print request</button
-        ><button class="button button--secondary" (click)="reviewing.set(false)">
-          Back to photographs
-        </button>
-      </div>
-    </section>
+  } @else if (state.reviewing()) {
+    <qbs-print-request-editor />
   } @else {
     <h2>Select photographs for print</h2>
     <p class="page__description">
       Choose your photographs, then review print sizes, finishes, and current prices.
     </p>
     <qbs-photos
-      [photos]="photos()"
-      [selected]="selected()"
+      [photos]="state.photos()"
+      [selected]="state.selected()"
       [selectable]="true"
-      (selection)="toggle($event)"
-      (opened)="opened.set($event)"
+      (selection)="state.toggle($event)"
+      (opened)="state.opened.set($event)"
     />
-    @if (!photos().length) {
+    @if (!state.photos().length) {
       <qbs-empty message="No photographs are currently available for print." />
     }
-    @if (!printOptions().length) {
+    @if (!state.printOptions().length) {
       <qbs-notice message="Print options are not available yet." />
     }
     <div class="form__actions">
       <button
         class="button"
-        [disabled]="!selected().length || !printOptions().length"
-        (click)="preparePrints()"
+        [disabled]="!state.selected().length || !state.printOptions().length"
+        (click)="state.preparePrints()"
       >
         Review print options
       </button>
     </div>
   }
 }
-@if (opened(); as photo) {
-  <qbs-dialog [title]="photo.name" (closed)="opened.set(null)"
+@if (state.opened(); as photo) {
+  <qbs-dialog [title]="photo.name" (closed)="state.opened.set(null)"
     ><img class="image__preview" [src]="photo.url" [alt]="photo.name"
   /></qbs-dialog>
 }

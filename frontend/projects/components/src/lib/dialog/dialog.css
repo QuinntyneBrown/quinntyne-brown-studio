@@ -1,31 +1,33 @@
 .dialog {
-  border: 1px solid #e4e5de;
+  border: 1px solid var(--line);
   padding: 0;
   max-width: min(900px, 94vw);
   max-height: 92vh;
 }
 .dialog::backdrop {
-  background: #242620b0;
+  background: color-mix(in srgb, var(--ink) 70%, transparent);
 }
 .dialog__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 26px;
-  gap: 24px;
-  border-bottom: 1px solid #e4e5de;
+  padding: var(--space-3) var(--space-3);
+  gap: var(--space-3);
+  border-bottom: 1px solid var(--line);
 }
 .dialog__header h2 {
-  font: 28px Georgia;
+  font: var(--title-xl) var(--serif);
   margin: 0;
 }
 .dialog__header button {
+  min-height: var(--tap-target);
+  min-width: var(--tap-target);
   border: 0;
   background: none;
-  font-size: 26px;
+  font-size: var(--title-large);
 }
 .dialog__body {
-  padding: 24px;
+  padding: var(--space-3);
 }
 .dialog__body img {
   max-width: 100%;

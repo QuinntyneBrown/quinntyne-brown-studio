@@ -1,4 +1,4 @@
-import { AccountSession } from '@qbs/domain';
+import { AccountSession } from '@qbs/domain/models';
 export interface IStudioClient {
   get<T>(path: string): Promise<T>;
   send<T>(method: 'POST' | 'PUT', path: string, body: unknown): Promise<T>;

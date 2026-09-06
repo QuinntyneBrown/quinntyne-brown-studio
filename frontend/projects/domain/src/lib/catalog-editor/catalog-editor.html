@@ -1,0 +1,128 @@
+<form class="form" (ngSubmit)="state.save()">
+  <h2>{{ state.draft()['id'] ? 'Edit' : 'New' }} {{ state.definition().singular }}</h2>
+  <div class="form__grid">
+    @for (field of state.definition().fields; track field.key) {
+      <div class="field">
+        @if (field.type !== 'datetime-local') {
+          <span>{{ field.label }}</span>
+        }
+        @switch (field.type) {
+          @case ('datetime-local') {
+            <qbs-date-time-field
+              [fieldId]="field.key"
+              [label]="field.label"
+              zone="Toronto"
+              [step]="900"
+              [value]="state.time.local(state.draft()[field.key])"
+              [offset]="state.time.offset(state.draft()[field.key])"
+              [offsets]="state.time.offsets(state.draft()[field.key])"
+              [error]="state.time.problem(state.draft()[field.key])"
+              [disabled]="state.busy()"
+              (valueChanged)="state.draft()[field.key] = $event"
+              (offsetChanged)="
+                state.draft()[field.key] = state.time.choose(state.draft()[field.key], $event)
+              "
+            />
+          }
+          @case ('textarea') {
+            <textarea
+              [(ngModel)]="state.draft()[field.key]"
+              [name]="field.key"
+              [attr.aria-label]="field.label"
+              [attr.aria-invalid]="!!state.errors()[field.key]"
+              [attr.aria-describedby]="field.key + '-error'"
+              [required]="field.required ?? false"
+            ></textarea>
+          }
+          @case ('checkbox') {
+            <input
+              type="checkbox"
+              [(ngModel)]="state.draft()[field.key]"
+              [name]="field.key"
+              [attr.aria-label]="field.label"
+              [attr.aria-invalid]="!!state.errors()[field.key]"
+              [attr.aria-describedby]="field.key + '-error'"
+            />
+          }
+          @case ('roles') {
+            <div class="field__choices">
+              @for (role of field.options; track role) {
+                <label
+                  ><input
+                    type="checkbox"
+                    [checked]="state.hasRole(role)"
+                    (change)="state.toggleRole(role)"
+                  />{{ role }}</label
+                >
+              }
+            </div>
+          }
+          @case ('select') {
+            <select
+              [(ngModel)]="state.draft()[field.key]"
+              [name]="field.key"
+              [attr.aria-label]="field.label"
+              [attr.aria-invalid]="!!state.errors()[field.key]"
+              [attr.aria-describedby]="field.key + '-error'"
+            >
+              @if (field.key === 'photographerId') {
+                <option [ngValue]="null">Unassigned</option>
+                @for (person of state.people(); track person.id) {
+                  <option [value]="person.id">{{ person['name'] }}</option>
+                }
+              } @else {
+                @for (option of field.options; track option) {
+                  <option [value]="option">{{ option }}</option>
+                }
+              }
+            </select>
+          }
+          @default {
+            <input
+              [type]="field.type ?? 'text'"
+              [(ngModel)]="state.draft()[field.key]"
+              [name]="field.key"
+              [attr.aria-label]="field.label"
+              [attr.aria-invalid]="!!state.errors()[field.key]"
+              [attr.aria-describedby]="field.key + '-error'"
+              [required]="field.required ?? false"
+              [min]="field.min ?? null"
+              [step]="field.step ?? '1'"
+            />
+          }
+        }
+        @if (state.errors()[field.key]) {
+          <small class="field__error" [id]="field.key + '-error'">{{
+            state.errors()[field.key].join(' ')
+          }}</small>
+        }
+      </div>
+    }
+  </div>
+  @if (state.definition().key === 'public-galleries') {
+    <h3>Select photographs</h3>
+    <qbs-photos
+      [photos]="state.photos()"
+      [selected]="state.selected()"
+      [selectable]="true"
+      (selection)="state.select($event)"
+    />
+    <h3>Display order and cover</h3>
+    <qbs-photo-order
+      [photos]="state.photos()"
+      [selected]="state.selected()"
+      [showCover]="true"
+      [disabled]="state.busy()"
+      (moved)="state.move($event.id, $event.delta)"
+      (featured)="state.cover($event)"
+      (removed)="state.select($event)"
+    />
+  }
+  <div class="form__actions">
+    <button class="button" type="submit" [disabled]="state.busy()">
+      {{ state.busy() ? 'Saving…' : 'Save' }}</button
+    ><button class="button button--secondary" type="button" (click)="state.editing.set(false)">
+      Cancel
+    </button>
+  </div>
+</form>

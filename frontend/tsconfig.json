@@ -5,7 +5,8 @@
       "@qbs/domain": ["./projects/domain/src/public-api.ts"],
       "@qbs/api": ["./projects/api/src/public-api.ts"],
       "@qbs/components": ["./projects/components/src/public-api.ts"],
-      "@qbs/application": ["./projects/application/src/public-api.ts"]
+      "@qbs/application": ["./projects/application/src/public-api.ts"],
+      "@qbs/domain/models": ["./projects/domain/src/models-api.ts"]
     },
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": false,

@@ -1,15 +1,15 @@
 .login {
   max-width: 440px;
-  margin: 48px auto 100px;
+  margin: var(--space-5) auto var(--space-6);
 }
 .login__form {
   display: grid;
-  gap: 24px;
-  margin: 32px 0;
+  gap: var(--space-3);
+  margin: var(--space-4) 0;
 }
 .login > a {
   display: block;
-  margin-top: 14px;
-  font-size: 12px;
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
   text-decoration: underline;
 }

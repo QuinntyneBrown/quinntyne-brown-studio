@@ -10,7 +10,7 @@
   --paper: #ffffff;
   --accent: #5b654c;
   --danger: #a1372e;
-  --serif: Georgia, 'Times New Roman', serif;
+  --serif: Georgia, "Times New Roman", serif;
   --sans: Arial, Helvetica, sans-serif;
   --space-1: 6px;
   --space-2: 12px;
@@ -20,6 +20,35 @@
   --space-6: 72px;
   --radius: 2px;
   --tap-target: 44px;
+  --text-tiny: 10px;
+  --text-body: 16px;
+  --title-heading: 30px;
+  --title-display: 36px;
+  --title-hero: 40px;
+  --title-feature: 42px;
+  --display-compact: 48px;
+  --display-mobile: 50px;
+  --display-medium: 56px;
+  --display-xl: 64px;
+  --display-2xl: 70px;
+  --display-3xl: 72px;
+  --display-4xl: 90px;
+  --text-micro: 9px;
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-compact: 13px;
+  --text-base: 14px;
+  --text-large: 18px;
+  --title-xs: 20px;
+  --title-small: 22px;
+  --title-medium: 24px;
+  --title-large: 26px;
+  --title-xl: 28px;
+  --title-2xl: 32px;
+  --hero-min: 46px;
+  --display-small: 60px;
+  --hero-max: 76px;
+  --display-large: 80px;
 }
 
 * {

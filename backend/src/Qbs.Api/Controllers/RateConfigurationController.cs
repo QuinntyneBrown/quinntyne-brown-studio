@@ -8,15 +8,12 @@ using Qbs.Domain.Entities;
 namespace Qbs.Api.Controllers;
 
 [ApiController, Authorize(Roles = "Administrator"), Route("api/admin/rates")]
-public sealed class RateConfigurationController(ISender sender, AdminCatalog catalog)
+public sealed class RateConfigurationController(ISender sender)
     : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> Get() =>
-        Ok(
-            await catalog.Get<RateConfiguration>(AdminCatalog.ConfigurationId)
-                ?? new RateConfiguration() { Id = AdminCatalog.ConfigurationId }
-        );
+        Ok(await sender.Send(new GetRateConfiguration()));
 
     [HttpPut]
     public async Task<IActionResult> Save(RateConfiguration value) =>

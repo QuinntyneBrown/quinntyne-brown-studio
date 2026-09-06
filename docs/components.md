@@ -1,26 +1,51 @@
-# Angular presentation components
+# Angular components
 
-## Overview
+The maintained inventory is [component-catalog.json](../frontend/component-catalog.json): 26 Angular components, each linked to its independently rendered design-system example. The [catalog manifest](../design-system/component-manifest.json) covers the shared visual primitives, complete screen patterns and dialog states. The applications implement the approved behavior with reusable regions and native HTML controls; the older prototype vocabulary below explains visual references rather than requiring a separate Angular wrapper for each HTML element.
 
-This document identifies the Angular presentation components required to implement the marketing, admin, and client applications defined by the approved HTML prototype in [`docs/mocks`](mocks/). A presentation component owns markup, styles, and presentation logic only. It renders from typed inputs, reports intent through outputs, and holds no HTTP calls, routing decisions, or domain state.
+## Placement and contracts
 
-The inventory is derived from the prototype's shared stylesheet [`assets/styles.css`](mocks/assets/styles.css) and the render functions in [`assets/app.js`](mocks/assets/app.js), which together define every visual block used by the 63 prototype pages. It supports requirements `L2-001`, `L2-002`, `L2-046`, `L2-047`, and `L2-066`, and the design-system slice at [`detailed-designs/design-system/browse-component-catalog`](detailed-designs/design-system/browse-component-catalog/README.md).
+`components` contains studio-independent primitives with literal inputs and intent outputs. `domain` contains studio-aware regions and flat shared models. `application` contains pages, routing, shells and route-owned behavior services. The three application projects contain bootstrap files only. [AGENTS.md](../AGENTS.md#frontend) specifies the dependency direction.
 
-Status: this inventory is the presentation target, not a record of shipped code. The `@qbs/components` library in [`frontend/projects/components`](../frontend/projects/components/src/public-api.ts) currently exports four of these components — `NoticeComponent`, `EmptyStateComponent`, `PhotoGridComponent`, and `DialogComponent` — and the `application` library composes the remaining screens directly from the shared classes. The standalone [design system](../design-system/README.md) publishes every class the applications ship — the shared stylesheet, the four library components, and the application chrome — as its catalogued entries, screen patterns, and dialog scenarios. `L2-047` therefore remains partially satisfied; the [acceptance register](detailed-designs/acceptance.md) records the current evidence.
+Each consumed service has a separate interface and injection token in `api`; application composition binds production adapters or controlled acceptance implementations. HTTP details stay inside API adapters. Editor drafts, loading, errors and selections live in signals. Route subscriptions use `takeUntilDestroyed` because Angular Router exposes navigation as an observable event stream; HTTP adapters use `firstValueFrom` to finish HTTP requests. Primitive and read-only regions use OnPush. Forms use default change detection for nested draft fields bound through Angular forms.
 
-The [live quote slice](implementation/live-quote-slice.md) now composes `QuoteInputForm` and `QuoteSummary` from `@qbs/domain`. Both use OnPush change detection and consume `IQuoteEditorService` through its token; the route supplies that service and owns its lifetime. Studio-aware forms and summaries belong in `domain`, while the page remains in `application`. The independent catalog includes all quote states.
+Template, class and stylesheet remain separate. BEM classes reference the authoritative [design tokens](../design-system/assets/tokens.css), mirrored once in [frontend/styles.css](../frontend/styles.css). The design system has its own build, static hosting instructions and browser acceptance suite. New ordered-selection, Toronto date/time and image-retry examples were rendered and reviewed before consumption.
 
-## Conventions
+## Implemented inventory
 
-- Components live in the `components` library of the Angular workspace described in [`detailed-designs/architecture.md`](detailed-designs/architecture.md) and are reused by the `marketing`, `admin`, and `client` applications and rendered as examples by the root-level `design-system` catalog.
-- Selector prefix is `qbs-`. Directory and file names are kebab-case. TypeScript, HTML, and CSS stay in separate files.
-- Components are standalone, use `ChangeDetectionStrategy.OnPush`, signal-based `input()` / `model()`, and `output()` emitters. Application screens keep default change detection while holding their state in signals, because their editing surfaces bind mutable form drafts.
-- BEM class names belong to this library. Application screens reuse the block names rather than redefining styles. The prototype's flat class names (`.btn`, `.photo-card`, `.cost-row`) become BEM blocks (`qbs-button`, `qbs-photo-card`, `qbs-cost-row`) with element and modifier suffixes.
-- Design tokens from `:root` in the prototype stylesheet (`--ink`, `--muted`, `--line`, `--paper`, `--soft`, `--accent`, `--danger`, `--serif`, `--sans`) become the [published token stylesheet](../design-system/assets/tokens.css), which adds the spacing, radius, and tap-target tokens the layouts need. The prototype's `--success` is not carried: the default notice tone states a confirmation, and the error variant states a failure.
-- Presentation components accept view models, not domain entities. Container components in each application map API contracts to these view models and handle navigation, persistence, and error recovery.
-- Every component listed here needs a catalogued example in the standalone design system before `L2-047` is complete. Entries reaching the platform arrive there first, and an application consumes a component only after its example is reviewed.
+| Component | Library | Contract / catalog example |
+| --- | --- | --- |
+| [CatalogPage](../frontend/projects/application/src/lib/catalog-page/catalog-page.ts) | `application` | `pattern:admin-records` · [catalog](../design-system/README.md) |
+| [ClientPage](../frontend/projects/application/src/lib/client-page/client-page.ts) | `application` | `pattern:client-gallery` · [catalog](../design-system/README.md) |
+| [LoginPage](../frontend/projects/application/src/lib/login-page/login-page.ts) | `application` | `component:login` · [catalog](../design-system/README.md) |
+| [PrintInbox](../frontend/projects/application/src/lib/print-inbox/print-inbox.ts) | `application` | `pattern:print-review` · [catalog](../design-system/README.md) |
+| [PublicPage](../frontend/projects/application/src/lib/public-page/public-page.ts) | `application` | `pattern:marketing-home` · [catalog](../design-system/README.md) |
+| [QuotePage](../frontend/projects/application/src/lib/quote-page/quote-page.ts) | `application` | `pattern:quote-calculator` · [catalog](../design-system/README.md) |
+| [SessionPage](../frontend/projects/application/src/lib/session-page/session-page.ts) | `application` | `pattern:session-review` · [catalog](../design-system/README.md) |
+| [SettingsPage](../frontend/projects/application/src/lib/settings-page/settings-page.ts) | `application` | `pattern:admin-settings` · [catalog](../design-system/README.md) |
+| [Shell](../frontend/projects/application/src/lib/shell/shell.ts) | `application` | `component:shell` · [catalog](../design-system/README.md) |
+| [Dialog](../frontend/projects/components/src/lib/dialog/dialog.ts) | `components` | `component:dialog` · [catalog](../design-system/README.md) |
+| [EmptyState](../frontend/projects/components/src/lib/empty-state/empty-state.ts) | `components` | `component:empty-state` · [catalog](../design-system/README.md) |
+| [Notice](../frontend/projects/components/src/lib/notice/notice.ts) | `components` | `component:notice` · [catalog](../design-system/README.md) |
+| [PhotoGrid](../frontend/projects/domain/src/lib/photo-grid/photo-grid.ts) | `domain` | `component:photo-grid` · [catalog](../design-system/README.md) |
+| [QuoteInputForm](../frontend/projects/domain/src/lib/quote-input-form/quote-input-form.ts) | `domain` | `pattern:quote-calculator` · [catalog](../design-system/README.md) |
+| [QuoteSummary](../frontend/projects/domain/src/lib/quote-summary/quote-summary.ts) | `domain` | `pattern:quote-calculator` · [catalog](../design-system/README.md) |
+| [DateTimeField](../frontend/projects/components/src/lib/date-time-field/date-time-field.ts) | `components` | `component:date-time-field` · [catalog](../design-system/README.md) |
+| [OrderedSelection](../frontend/projects/components/src/lib/ordered-selection/ordered-selection.ts) | `components` | `component:ordered-selection` · [catalog](../design-system/README.md) |
+| [PhotoOrder](../frontend/projects/domain/src/lib/photo-order/photo-order.ts) | `domain` | `component:ordered-selection` · [catalog](../design-system/README.md) |
+| [CatalogEditor](../frontend/projects/domain/src/lib/catalog-editor/catalog-editor.ts) | `domain` | `pattern:admin-records` · [catalog](../design-system/README.md) |
+| [SettingsEditor](../frontend/projects/domain/src/lib/settings-editor/settings-editor.ts) | `domain` | `pattern:admin-settings` · [catalog](../design-system/README.md) |
+| [AlbumEditor](../frontend/projects/domain/src/lib/album-editor/album-editor.ts) | `domain` | `pattern:client-gallery` · [catalog](../design-system/README.md) |
+| [PrintRequestEditor](../frontend/projects/domain/src/lib/print-request-editor/print-request-editor.ts) | `domain` | `pattern:client-gallery` · [catalog](../design-system/README.md) |
+| [SessionUpload](../frontend/projects/domain/src/lib/session-upload/session-upload.ts) | `domain` | `pattern:session-review` · [catalog](../design-system/README.md) |
+| [SessionPhotoReview](../frontend/projects/domain/src/lib/session-photo-review/session-photo-review.ts) | `domain` | `pattern:session-review` · [catalog](../design-system/README.md) |
+| [SessionDelivery](../frontend/projects/domain/src/lib/session-delivery/session-delivery.ts) | `domain` | `pattern:session-review` · [catalog](../design-system/README.md) |
+| [PrintRequestDetails](../frontend/projects/domain/src/lib/print-request-details/print-request-details.ts) | `domain` | `pattern:print-review` · [catalog](../design-system/README.md) |
 
-Application column key: **M** marketing, **A** admin, **C** client, **D** design-system catalog.
+PhotoGrid preserves unavailable placeholders, prevents new selection of processing/failed photos, supports retry after a temporary image failure and emits manual inspection intent. OrderedSelection handles keyboard-accessible ordering; PhotoOrder maps studio photographs to that literal contract. DateTimeField requires an explicit occurrence for ambiguous Toronto times. The catalog, settings, album, print, session-upload, session-review, session-delivery and inbox-details regions consume their typed route service token. Pages compose those regions with navigation and shared feedback.
+
+## Prototype vocabulary reference
+
+The following original inventory records visual concepts from the [63 HTML prototypes](mocks/README.md). Names and selectors in these tables are conceptual references; the maintained implementation names, library placement and catalog bindings are the table above. Prototype-only dashboard, payment/fulfilment and booking concepts do not expand the accepted L1/L2 functionality. Routing and persistence belong to application services, never a presentation primitive.
 
 ## Primitives
 
@@ -181,11 +206,3 @@ Application column key: **M** marketing, **A** admin, **C** client, **D** design
 | Authentication | `login`, `forgot-password`, `reset-password` | 40, 41–44, 47, 52, 1, 3 |
 | System states | `not-found`, `access-denied`, `session-expired`, `service-error` | 56, 29, 1, 3 |
 | Component catalog | design-system entry point | 94, 95, 96, 97 |
-
-## Notes on scope
-
-- Components 1–97 cover presentation only. Data loading, routing, form submission, optimistic concurrency, and error recovery belong to container components in each application and to the services described in [`detailed-designs/contracts.md`](detailed-designs/contracts.md).
-- Prototype behavior that simulates a backend — seeded records, local storage persistence, simulated uploads, and simulated AI suggestions — does not become a presentation concern. The corresponding components accept the resulting view model as an input.
-- Responsive behavior at 390, 768, and 1440 CSS pixels stays inside each component's stylesheet, matching the prototype breakpoints at 480, 780, 1100, and 1500 pixels, per `L2-066`.
-- Keyboard operability, focus-visible outlines, `aria-live` regions, and reduced-motion handling are component-level obligations carried over from the prototype stylesheet and markup.
-- Adding a component to this library requires a matching entry in [`design-system/component-manifest.json`](../design-system/component-manifest.json), a rendered example, and an update to this document, per `L2-047`.

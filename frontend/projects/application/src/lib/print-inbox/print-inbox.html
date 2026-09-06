@@ -5,39 +5,42 @@
     <p class="page__description">Review what your clients would like to hold on to.</p>
   </div>
 </header>
-@if (message()) {
-  <qbs-notice [message]="message()" [error]="error()" />
+<label class="field"
+  ><span>Request status</span
+  ><select
+    aria-label="Request status"
+    [ngModel]="state.filter()"
+    (ngModelChange)="state.filter.set($event); state.load()"
+    [disabled]="state.loading() || state.busy()"
+  >
+    <option value="">All requests</option>
+    <option value="Submitted">Submitted</option>
+    <option value="Reviewed">Reviewed</option>
+  </select></label
+>
+@if (state.message()) {
+  <qbs-notice [message]="state.message()" [error]="state.error()" />
 }
-@if (!requests().length) {
+@if (state.loading()) {
+  <p role="status">Loading…</p>
+} @else if (state.loadFailed()) {
+  <button class="button button--secondary" (click)="state.load()">Retry loading</button>
+} @else if (!state.requests().length) {
   <qbs-empty message="No print requests yet." />
 }
 <div class="records">
-  @for (request of requests(); track request.id) {
+  @for (request of state.requests(); track request.id) {
     <article class="records__row">
       <div>
         <h3>{{ request.lines.length }} print selections · {{ request.total }} CAD</h3>
         <p class="records__detail">{{ request.id }} · {{ request.state }}</p>
       </div>
-      <button class="button button--secondary" (click)="selected.set(request)">Open request</button>
+      <button class="button button--secondary" (click)="state.selected.set(request)">
+        Open request
+      </button>
     </article>
   }
 </div>
-@if (selected(); as request) {
-  <section class="panel section">
-    <h2>Submitted request</h2>
-    @for (line of request.lines; track $index) {
-      <div class="price__line">
-        <span
-          >{{ line.name }} · {{ line.dimensions }} · {{ line.finish }} × {{ line.quantity }}</span
-        ><span>{{ line.amount }} CAD</span>
-      </div>
-    }
-    <p class="price__total">{{ request.total }} CAD</p>
-    <p>{{ request.notes }}</p>
-    <div class="form__actions">
-      <button class="button" [disabled]="request.state === 'Reviewed'" (click)="review()">
-        Mark reviewed</button
-      ><button class="button button--secondary" (click)="selected.set(null)">Close</button>
-    </div>
-  </section>
+@if (state.selected(); as request) {
+  <qbs-print-request-details />
 }

@@ -1,4 +1,4 @@
-import { chromium, expect } from '../frontend/node_modules/@playwright/test/index.mjs';
+import { chromium, expect } from '../e2e/node_modules/@playwright/test/index.mjs';
 import { mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 

@@ -16,6 +16,8 @@ public sealed class ControlledAnalysis : IPhotoAnalysisService
                         FindingOutcome.Uncertain,
                         "Controlled example; photographic quality is not evaluated."
                     ),
+                    new("exposure", FindingOutcome.Uncertain, "Controlled example; review manually."),
+                    new("closed-eyes", FindingOutcome.NotApplicable, "Controlled example; review manually."),
                 ],
                 "Review manually.",
                 "controlled-example",

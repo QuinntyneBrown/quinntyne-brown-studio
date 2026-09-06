@@ -5,12 +5,49 @@ using Qbs.Application.Ports;
 using Qbs.Domain.Entities;
 using Qbs.Domain.Enums;
 using Qbs.Domain.Exceptions;
+using Qbs.Domain.Models;
 using Qbs.Domain.Policies;
 
 namespace Qbs.Application.Clients;
 
 public sealed class ClientWorkflows(IStudioStore store, IClock clock)
 {
+    public Task<PrintPreview> Preview(Guid client, PrintPreviewInput input) =>
+        store.Run("media", async tx =>
+        {
+            Rules.Require(input.InputRevision >= 0, "Invalid input revision.", "inputRevision");
+            var lines = await PriceLines(tx, client, input.Lines, false);
+            return new PrintPreview(input.InputRevision, lines, lines.Sum(x => x.Amount));
+        });
+
+    private async Task<PrintLine[]> PriceLines(IStudioTransaction tx, Guid client, PrintLine[] selections, bool requireRevision)
+    {
+        Rules.Require(selections is { Length: > 0 and <= 1000 }, "Select between 1 and 1,000 print lines.", "lines");
+        var lines = new List<PrintLine>();
+        foreach (var selection in selections)
+        {
+            if (selection == null) throw new StudioException(400, "Select a print option and photo.");
+            await PhotoAccess.Require(tx, selection.PhotoId, client, clock.UtcNow);
+            Rules.Require(selection.Quantity > 0, "Quantity must be positive.", "quantity");
+            var option = await tx.Get<PrintOption>(selection.OptionId);
+            if (option == null || !option.Enabled || (requireRevision && option.Version != selection.OptionRevision))
+                throw new StudioException(409, "Print pricing changed. Review the refreshed summary before submitting.");
+            lines.Add(new PrintLine
+            {
+                PhotoId = selection.PhotoId,
+                OptionId = option.Id,
+                OptionRevision = option.Version,
+                Quantity = selection.Quantity,
+                Name = option.Name,
+                Dimensions = option.Dimensions,
+                Finish = option.Finish,
+                UnitPrice = option.UnitPrice,
+                Amount = Rules.Round(checked(option.UnitPrice * selection.Quantity))
+            });
+        }
+        return lines.ToArray();
+    }
+
     public Task<PrintRequest> PrintRequest(Guid client, Guid id) =>
         store.Run(
             "client:" + client,
@@ -213,22 +250,7 @@ public sealed class ClientWorkflows(IStudioStore store, IClock clock)
                         );
                     return previous;
                 }
-                foreach (var line in input.Lines)
-                {
-                    await PhotoAccess.Require(tx, line.PhotoId, client, clock.UtcNow);
-                    Rules.Require(line.Quantity > 0, "Quantity must be positive.", "quantity");
-                    var option = await tx.Get<PrintOption>(line.OptionId);
-                    if (option == null || !option.Enabled || option.Version != line.OptionRevision)
-                        throw new StudioException(
-                            409,
-                            "Print pricing changed. Review the refreshed summary before submitting."
-                        );
-                    line.Name = option.Name;
-                    line.Dimensions = option.Dimensions;
-                    line.Finish = option.Finish;
-                    line.UnitPrice = option.UnitPrice;
-                    line.Amount = Rules.Round(checked(option.UnitPrice * line.Quantity));
-                }
+                input.Lines = await PriceLines(tx, client, input.Lines, true);
                 input.Id = Guid.NewGuid();
                 input.ClientId = client;
                 input.PayloadHash = hash;

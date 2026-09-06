@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Routes, CanActivateFn, Router } from '@angular/router';
-import { AuthState } from './auth-state';
+import { ACCOUNT_SERVICE } from './account.token';
 import { PublicPage } from './public-page/public-page';
 import { QuotePage } from './quote-page/quote-page';
 import { CatalogPage } from './catalog-page/catalog-page';
@@ -11,7 +11,7 @@ import { LoginPage } from './login-page/login-page';
 import { PrintInbox } from './print-inbox/print-inbox';
 import { RESOURCES } from './resource-definitions';
 const access: CanActivateFn = async (route) => {
-  const auth = inject(AuthState),
+  const auth = inject(ACCOUNT_SERVICE),
     router = inject(Router);
   try {
     const account = await auth.load();

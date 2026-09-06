@@ -1,0 +1,37 @@
+<div class="stack">
+  <label class="field">
+    <span>{{ label() }}{{ zone() ? ' · ' + zone() : '' }}</span>
+    <input
+      type="datetime-local"
+      [attr.aria-label]="label()"
+      [step]="step()"
+      [ngModel]="value()"
+      [ngModelOptions]="{ standalone: true }"
+      (ngModelChange)="valueChanged.emit($event)"
+      [disabled]="disabled()"
+      [attr.aria-invalid]="!!error()"
+      [attr.aria-describedby]="fieldId() + '-error'"
+    />
+  </label>
+  @if (offsets().length > 1) {
+    <label class="field">
+      <span>{{ label() }} occurrence</span>
+      <select
+        [attr.aria-label]="label() + ' occurrence'"
+        [ngModel]="offset()"
+        [ngModelOptions]="{ standalone: true }"
+        (ngModelChange)="offsetChanged.emit($event)"
+        [disabled]="disabled()"
+        [attr.aria-describedby]="fieldId() + '-error'"
+      >
+        <option value="">Choose occurrence</option>
+        @for (choice of offsets(); track choice; let index = $index) {
+          <option [value]="choice">
+            {{ index === 0 ? 'First' : 'Second' }} occurrence (UTC{{ choice }})
+          </option>
+        }
+      </select>
+    </label>
+  }
+  <small class="field__error" [id]="fieldId() + '-error'">{{ error() }}</small>
+</div>

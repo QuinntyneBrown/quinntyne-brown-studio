@@ -1,2 +1,6 @@
-import { IStudioClient } from './studio-client.contract';
-export interface IContentService extends IStudioClient {}
+import { Editable, MarketingContent } from '@qbs/domain/models';
+export interface IContentService {
+  list(): Promise<MarketingContent[]>;
+  published(key: string): Promise<MarketingContent>;
+  save(key: string, value: Editable<MarketingContent>): Promise<MarketingContent>;
+}

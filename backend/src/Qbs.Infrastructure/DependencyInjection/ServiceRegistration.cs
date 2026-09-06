@@ -97,6 +97,10 @@ public static class ServiceRegistration
                 return Task.CompletedTask;
             };
         });
+        services.AddHttpContextAccessor();
+        services.AddAntiforgery();
+        services.AddScoped<IAccountContext, AccountContext>();
+        services.AddScoped<IDevelopmentDiagnostics, DevelopmentDiagnostics>();
         services.AddScoped<IdentityAccounts>();
         services.AddScoped<IIdentityAccounts>(sp => sp.GetRequiredService<IdentityAccounts>());
         services.AddScoped<AdminCatalog>();

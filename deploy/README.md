@@ -14,6 +14,7 @@ From the repository root:
 dotnet restore backend/Qbs.slnx --locked-mode
 dotnet publish backend/src/Qbs.Api -c Release --no-restore -p:UseAppHost=false -o .artifacts/windows/api
 dotnet publish backend/src/Qbs.Worker -c Release --no-restore -p:UseAppHost=false -o .artifacts/windows/worker
+dotnet publish backend/src/Qbs.Qualification -c Release --no-restore -p:UseAppHost=false -o .artifacts/windows/qualification
 npm ci --prefix frontend
 npm run build:libs --prefix frontend
 npm run build:apps --prefix frontend

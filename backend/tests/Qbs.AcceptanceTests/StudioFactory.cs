@@ -13,10 +13,14 @@ namespace Qbs.AcceptanceTests;
 
 public sealed class StudioFactory : WebApplicationFactory<Program>
 {
+    public Qbs.Application.Ports.IPhotoAnalysisService? PhotoAnalysis { get; init; }
+    public Action<IServiceCollection>? ConfigurePersistence { get; init; }
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Testing");
         builder.ConfigureServices(services => services.AddFakePersistence());
+        builder.ConfigureServices(services => ConfigurePersistence?.Invoke(services));
+        builder.ConfigureServices(services => { if (PhotoAnalysis != null) services.AddSingleton(PhotoAnalysis); });
         builder.ConfigureServices(services =>
             services
                 .AddAuthentication(o =>

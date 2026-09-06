@@ -45,12 +45,8 @@
       "name": "Typography",
       "category": "foundations",
       "description": "Serif headings over a plain sans body, with a muted variant for supporting copy.",
-      "classes": [
-        "text--muted"
-      ],
-      "states": [
-        "default"
-      ],
+      "classes": ["text--muted"],
+      "states": ["default"],
       "examples": [
         {
           "id": "scale",
@@ -65,15 +61,8 @@
       "name": "Button",
       "category": "controls",
       "description": "The single action control. Primary carries the page's main action, secondary sits beside it, and danger confirms a destructive step.",
-      "classes": [
-        "button",
-        "button--secondary",
-        "button--danger"
-      ],
-      "states": [
-        "default",
-        "disabled"
-      ],
+      "classes": ["button", "button--secondary", "button--danger"],
+      "states": ["default", "disabled"],
       "examples": [
         {
           "id": "variants",
@@ -88,12 +77,8 @@
       "name": "Badge",
       "category": "data",
       "description": "A quiet status marker for a record or photograph.",
-      "classes": [
-        "badge"
-      ],
-      "states": [
-        "default"
-      ],
+      "classes": ["badge"],
+      "states": ["default"],
       "examples": [
         {
           "id": "states",
@@ -108,15 +93,8 @@
       "name": "Page header",
       "category": "layout",
       "description": "The eyebrow, title, description, and optional primary action that open every screen.",
-      "classes": [
-        "page__header",
-        "page__eyebrow",
-        "page__description"
-      ],
-      "states": [
-        "default",
-        "with-action"
-      ],
+      "classes": ["page__header", "page__eyebrow", "page__description"],
+      "states": ["default", "with-action"],
       "examples": [
         {
           "id": "with-action",
@@ -131,15 +109,8 @@
       "name": "Field",
       "category": "forms",
       "description": "A labelled control with optional choices and a validation message.",
-      "classes": [
-        "field",
-        "field__choices",
-        "field__error"
-      ],
-      "states": [
-        "default",
-        "validation"
-      ],
+      "classes": ["field", "field__choices", "field__error"],
+      "states": ["default", "validation"],
       "examples": [
         {
           "id": "controls",
@@ -160,15 +131,8 @@
       "name": "Form",
       "category": "forms",
       "description": "The bordered editing surface: heading, two-column grid, and an action row separated by a rule.",
-      "classes": [
-        "form",
-        "form__grid",
-        "form__actions"
-      ],
-      "states": [
-        "default",
-        "busy"
-      ],
+      "classes": ["form", "form__grid", "form__actions"],
+      "states": ["default", "busy"],
       "examples": [
         {
           "id": "editor",
@@ -189,9 +153,7 @@
         "records__detail",
         "records__actions"
       ],
-      "states": [
-        "default"
-      ],
+      "states": ["default"],
       "examples": [
         {
           "id": "rows",
@@ -206,14 +168,8 @@
       "name": "Panel",
       "category": "layout",
       "description": "A bordered container for a single subject, with a soft filled variant for supporting information.",
-      "classes": [
-        "panel",
-        "panel--soft"
-      ],
-      "states": [
-        "default",
-        "soft"
-      ],
+      "classes": ["panel", "panel--soft"],
+      "states": ["default", "soft"],
       "examples": [
         {
           "id": "variants",
@@ -228,12 +184,8 @@
       "name": "Split layout",
       "category": "layout",
       "description": "A wide main column beside a narrower supporting column that collapses to one column below 850 pixels.",
-      "classes": [
-        "layout__split"
-      ],
-      "states": [
-        "default"
-      ],
+      "classes": ["layout__split"],
+      "states": ["default"],
       "examples": [
         {
           "id": "main-aside",
@@ -248,12 +200,8 @@
       "name": "Grid",
       "category": "layout",
       "description": "A three-column grid that steps to two columns below 850 pixels and one column below 600 pixels.",
-      "classes": [
-        "layout__grid"
-      ],
-      "states": [
-        "default"
-      ],
+      "classes": ["layout__grid"],
+      "states": ["default"],
       "examples": [
         {
           "id": "three-up",
@@ -268,13 +216,8 @@
       "name": "Section",
       "category": "layout",
       "description": "A titled band of content with an optional trailing link.",
-      "classes": [
-        "section",
-        "section__header"
-      ],
-      "states": [
-        "default"
-      ],
+      "classes": ["section", "section__header"],
+      "states": ["default"],
       "examples": [
         {
           "id": "with-link",
@@ -289,14 +232,8 @@
       "name": "Price summary",
       "category": "data",
       "description": "Itemised money lines and the emphasised total used by quotes and print estimates.",
-      "classes": [
-        "price__line",
-        "price__total"
-      ],
-      "states": [
-        "default",
-        "with-discount"
-      ],
+      "classes": ["price__line", "price__total"],
+      "states": ["default", "with-discount"],
       "examples": [
         {
           "id": "quote",
@@ -311,14 +248,8 @@
       "name": "Notice",
       "category": "feedback",
       "description": "A polite live region for the result of an action. The error tone carries failures without moving focus.",
-      "classes": [
-        "notice",
-        "notice--error"
-      ],
-      "states": [
-        "success",
-        "error"
-      ],
+      "classes": ["notice", "notice--error"],
+      "states": ["success", "error"],
       "examples": [
         {
           "id": "success",
@@ -339,18 +270,14 @@
       "name": "Empty state",
       "category": "feedback",
       "description": "The considered blank slate shown when a list has nothing in it yet.",
-      "classes": [
-        "empty-state"
-      ],
-      "states": [
-        "default"
-      ],
+      "classes": ["empty-state"],
+      "states": ["default"],
       "examples": [
         {
           "id": "no-records",
           "title": "Nothing yet",
           "description": "A symbol, a sentence, and no invented data.",
-          "markup": "<div class='empty-state'><span aria-hidden='true'>◇</span><p>No galleries available yet.</p></div>"
+          "markup": "<div class='empty-state'><span aria-hidden='true'>â—‡</span><p>No galleries available yet.</p></div>"
         }
       ]
     },
@@ -366,11 +293,7 @@
         "photo-grid__caption",
         "photo-grid__selection"
       ],
-      "states": [
-        "ready",
-        "selectable",
-        "unavailable"
-      ],
+      "states": ["ready", "selectable", "unavailable", "failed"],
       "examples": [
         {
           "id": "ready",
@@ -389,6 +312,12 @@
           "title": "Unavailable photograph",
           "description": "A revoked or still-processing photograph keeps its place and says why it cannot be opened.",
           "markup": "<div class='photo-grid'><figure class='photo-grid__tile'><button class='photo-grid__open' type='button' disabled aria-label='View Album 004'><span>Photo unavailable</span></button><figcaption class='photo-grid__caption'>Album 004</figcaption></figure><figure class='photo-grid__tile'><button class='photo-grid__open' type='button' disabled aria-label='View Album 005'><span>Processing</span></button><figcaption class='photo-grid__caption'>Album 005</figcaption></figure></div>"
+        },
+        {
+          "id": "failed",
+          "title": "Retry an image",
+          "description": "A temporary image failure offers an explicit retry while preserving the photograph and its selection.",
+          "markup": "<div class='photo-grid'><figure class='photo-grid__tile'><button class='photo-grid__open' type='button' aria-label='View Portrait'><span>Photo unavailable</span></button><figcaption class='photo-grid__caption'>Portrait</figcaption><button class='button button--secondary' type='button' aria-label='Retry image · Portrait'>Retry image</button></figure></div>"
         }
       ]
     },
@@ -397,12 +326,8 @@
       "name": "Image preview",
       "category": "media",
       "description": "A single contained photograph that never exceeds the viewport height.",
-      "classes": [
-        "image__preview"
-      ],
-      "states": [
-        "default"
-      ],
+      "classes": ["image__preview"],
+      "states": ["default"],
       "examples": [
         {
           "id": "contained",
@@ -417,15 +342,8 @@
       "name": "Dialog",
       "category": "overlays",
       "description": "A native modal dialog with a titled header, a close control, Escape support, and focus returned to the trigger.",
-      "classes": [
-        "dialog",
-        "dialog__header",
-        "dialog__body"
-      ],
-      "states": [
-        "closed",
-        "open"
-      ],
+      "classes": ["dialog", "dialog__header", "dialog__body"],
+      "states": ["closed", "open"],
       "examples": [
         {
           "id": "confirm",
@@ -440,12 +358,8 @@
       "name": "Stack",
       "category": "layout",
       "description": "Consistent vertical rhythm between sibling blocks.",
-      "classes": [
-        "stack"
-      ],
-      "states": [
-        "default"
-      ],
+      "classes": ["stack"],
+      "states": ["default"],
       "examples": [
         {
           "id": "rhythm",
@@ -478,11 +392,7 @@
         "shell__side-nav--open",
         "shell__public-nav--open"
       ],
-      "states": [
-        "public",
-        "workspace",
-        "narrow"
-      ],
+      "states": ["public", "workspace", "narrow"],
       "examples": [
         {
           "id": "public",
@@ -517,10 +427,7 @@
         "hero__meta",
         "hero__invitation"
       ],
-      "states": [
-        "photograph",
-        "placeholder"
-      ],
+      "states": ["photograph", "placeholder"],
       "examples": [
         {
           "id": "placeholder",
@@ -535,13 +442,8 @@
       "name": "Gallery card",
       "category": "media",
       "description": "A published collection: its cover frame, title, and photograph count.",
-      "classes": [
-        "gallery-card",
-        "gallery-card__image"
-      ],
-      "states": [
-        "default"
-      ],
+      "classes": ["gallery-card", "gallery-card__image"],
+      "states": ["default"],
       "examples": [
         {
           "id": "cover",
@@ -556,14 +458,8 @@
       "name": "Client session card",
       "category": "media",
       "description": "A client's private session: a cover panel, the session name, and its availability line.",
-      "classes": [
-        "client-card",
-        "client-card__cover"
-      ],
-      "states": [
-        "available",
-        "expiring"
-      ],
+      "classes": ["client-card", "client-card__cover"],
+      "states": ["available", "expiring"],
       "examples": [
         {
           "id": "available",
@@ -578,20 +474,69 @@
       "name": "Authentication column",
       "category": "forms",
       "description": "The centred column used by sign in, recovery, password reset, and invitation acceptance.",
-      "classes": [
-        "login",
-        "login__form"
-      ],
-      "states": [
-        "default",
-        "validation"
-      ],
+      "classes": ["login", "login__form"],
+      "states": ["default", "validation"],
       "examples": [
         {
           "id": "sign-in",
           "title": "Sign in",
           "description": "One column, one task, and a single recovery link beneath the action.",
           "markup": "<section class='login'><p class='page__eyebrow'>Quinntyne Brown Studio</p><h1>Sign in</h1><form class='login__form'><label class='field'><span>Email</span><input type='email' name='email' autocomplete='username' /></label><label class='field'><span>Password</span><input type='password' name='password' autocomplete='current-password' /></label><button class='button' type='button'>Sign in</button></form><a href='#'>Forgot your password?</a></section>"
+        }
+      ]
+    },
+    {
+      "id": "ordered-selection",
+      "name": "Ordered selection",
+      "category": "controls",
+      "description": "A named sequence with explicit earlier, later, remove, and optional cover actions.",
+      "classes": [
+        "records__row",
+        "records__actions",
+        "button",
+        "button--secondary"
+      ],
+      "states": ["default", "disabled"],
+      "examples": [
+        {
+          "id": "reorder",
+          "title": "Reorder and feature selected items",
+          "description": "The first item is the cover. Boundary actions are disabled and every action has a descriptive accessible name.",
+          "markup": "<div class='records'><div class='records__row'><span>1. First selection · Cover</span><div class='records__actions'><button class='button button--secondary' aria-label='Move First selection earlier' disabled>↑</button><button class='button button--secondary' aria-label='Move First selection later'>↓</button><button class='button button--secondary' aria-label='Remove First selection'>Remove</button></div></div><div class='records__row'><span>2. Second selection</span><div class='records__actions'><button class='button button--secondary' aria-label='Move Second selection earlier'>↑</button><button class='button button--secondary' aria-label='Move Second selection later' disabled>↓</button><button class='button button--secondary' aria-label='Use Second selection as cover'>Use as cover</button><button class='button button--secondary' aria-label='Remove Second selection'>Remove</button></div></div></div>"
+        }
+      ]
+    },
+    {
+      "id": "date-time-field",
+      "name": "Date and time field",
+      "category": "forms",
+      "description": "A local date and time control with an optional repeated-time occurrence choice. The containing feature supplies timezone rules and validation.",
+      "classes": ["field", "field__error", "stack"],
+      "states": ["default", "invalid", "ambiguous", "disabled"],
+      "examples": [
+        {
+          "id": "default",
+          "title": "Local date and time",
+          "description": "A native keyboard-operable date and time input with a named timezone.",
+          "markup": "<label class='field'><span>Start date and time · Toronto</span><input type='datetime-local' aria-label='Start date and time' step='900' value='2027-06-01T10:00'></label>"
+        },
+        {
+          "id": "ambiguous",
+          "title": "Repeated time",
+          "description": "The feature supplies valid occurrences rather than assuming a timezone offset.",
+          "markup": "<div class='stack'><label class='field'><span>Start date and time · Toronto</span><input type='datetime-local' aria-label='Start date and time' step='900' value='2027-11-07T01:30' aria-describedby='occurrence-error'></label><label class='field'><span>Start date and time occurrence</span><select aria-label='Start date and time occurrence'><option value=''>Choose occurrence</option><option value='-04:00'>First occurrence (UTC−04:00)</option><option value='-05:00'>Second occurrence (UTC−05:00)</option></select></label><small id='occurrence-error' class='field__error'>Choose an occurrence for the repeated time.</small></div>"
+        },
+        {
+          "id": "invalid",
+          "title": "Invalid local time",
+          "description": "An associated error keeps correction close to the input.",
+          "markup": "<label class='field'><span>Start date and time · Toronto</span><input type='datetime-local' aria-label='Start date and time' value='2027-03-14T02:15' aria-invalid='true' aria-describedby='time-error'><small id='time-error' class='field__error'>This time does not exist in Toronto.</small></label>"
+        },
+        {
+          "id": "disabled",
+          "title": "Saving",
+          "description": "Keep the accepted selection visible while its operation is pending.",
+          "markup": "<label class='field'><span>Start date and time · Toronto</span><input type='datetime-local' aria-label='Start date and time' value='2027-06-01T10:00' disabled></label>"
         }
       ]
     }

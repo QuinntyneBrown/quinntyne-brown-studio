@@ -8,14 +8,14 @@ using Qbs.Domain.Entities;
 namespace Qbs.Api.Controllers;
 
 [ApiController, Authorize(Roles = "Administrator"), Route("api/admin/public-galleries")]
-public sealed class PublicGalleryController(ISender sender, AdminCatalog catalog) : ControllerBase
+public sealed class PublicGalleryController(ISender sender) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> List() => Ok(await catalog.List<PublicGallery>());
+    public async Task<IActionResult> List() => Ok(await sender.Send(new ListPublicGallery()));
 
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> Get(Guid id) =>
-        await catalog.Get<PublicGallery>(id) is { } value ? Ok(value) : NotFound();
+        Ok(await sender.Send(new GetPublicGallery(id)));
 
     [HttpPost]
     public async Task<IActionResult> Create(PublicGallery value)

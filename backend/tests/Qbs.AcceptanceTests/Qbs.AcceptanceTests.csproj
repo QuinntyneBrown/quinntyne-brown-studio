@@ -21,5 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Qbs.Api\Qbs.Api.csproj" />
+    <ProjectReference Include="..\..\src\Qbs.Qualification\Qbs.Qualification.csproj" />
   </ItemGroup>
 </Project>

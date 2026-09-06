@@ -1,12 +1,12 @@
 .empty-state {
-  padding: 70px 24px;
-  border: 1px dashed #dce0d5;
+  padding: var(--space-6) var(--space-3);
+  border: 1px dashed var(--line);
   text-align: center;
-  color: #74766e;
-  background: #fafbf8;
+  color: var(--muted);
+  background: var(--soft);
 }
 .empty-state span {
-  font-size: 32px;
+  font-size: var(--title-2xl);
   display: block;
-  margin-bottom: 16px;
+  margin-bottom: var(--space-2);
 }

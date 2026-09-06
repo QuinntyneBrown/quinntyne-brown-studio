@@ -46,7 +46,7 @@ npm test
 Pop-Location
 Push-Location design-system
 npm ci
-npx playwright install chromium
+npx playwright install
 npm test
 npm run build
 Pop-Location
@@ -56,7 +56,7 @@ dotnet publish backend/src/Qbs.Api -c Release -p:UseAppHost=false -o .artifacts/
 dotnet publish backend/src/Qbs.Worker -c Release -p:UseAppHost=false -o .artifacts/windows/worker
 ```
 
-The design system validates its manifest, styles, and fixtures, then exercises its catalog in the browser at the three viewport widths with every product API request blocked. Backend acceptance tests explicitly supply a transaction-capable fake and controlled dependencies. Separate persistence tests use disposable LocalDB databases on Windows and verify the normal runtime registrations, restart behavior, migrations, and identity. Cleanup checks the fixture's unique `QbsTest_`, `QbsQuoteTest_`, or `QbsPersistenceTest_` prefix before deleting its database. The older SQL boundary tests retain the optional test-only `QBS_SQL` override; it is not runtime configuration. The acceptance suite in [`e2e/`](e2e/README.md) uses page objects and mocked responses across three browsers and three viewport sizes. A real HTTPS smoke script is also available at [scripts/smoke-local.mjs](scripts/smoke-local.mjs).
+The design system validates its manifest, styles, and fixtures, then exercises its catalog in the browser across Chromium, Firefox and WebKit at the three viewport widths with every product API request blocked. Backend acceptance tests explicitly supply a transaction-capable fake and controlled dependencies. Separate persistence tests use disposable LocalDB databases on Windows and verify the normal runtime registrations, restart behavior, migrations, and identity. Cleanup checks the fixture's unique `QbsTest_`, `QbsQuoteTest_`, `QbsWorkflowTest_`, or `QbsPersistenceTest_` prefix before deleting its database. The older SQL boundary tests retain the optional test-only `QBS_SQL` override; it is not runtime configuration. The acceptance suite in [`e2e/`](e2e/README.md) uses page objects and mocked responses across three browsers and three viewport sizes. Run `./scripts/smoke-platform.ps1` for the packaged HTTPS/LocalDB workflow with a uniquely named database and captured development email. `-KeepRunning` leaves that isolated preview available; credentials are generated and stored with Windows user encryption under ignored `.artifacts/platform/live`. The [completion report](docs/implementation/platform-completion.md) records acceptance evidence, and [qualification commands](docs/implementation/qualification.md) collect the remaining external evidence.
 
 ## Repository map
 
@@ -67,11 +67,12 @@ The design system validates its manifest, styles, and fixtures, then exercises i
 | `backend/src/Qbs.Infrastructure` | EF Core/Identity, SQL transactions and outbox, Azure adapters, image processing |
 | `backend/src/Qbs.Api` | Controller endpoints, authorization, antiforgery, provisioning and migrations |
 | `backend/src/Qbs.Worker` | Durable preview, AI, email, retention and deletion processing |
+| `backend/src/Qbs.Qualification` | Executable camera, browser upload, AI and environment evidence checks |
 | `frontend/projects` | Three Angular applications and four reusable libraries |
 | `e2e` | Playwright acceptance suite: page objects and specs for the three applications |
 | `design-system` | Standalone design system: tokens, component catalog, screen patterns, static deployment |
 | `frontend/component-catalog.json` | Inventory and contracts for every application component |
-| `deploy` | Container images, gateway, Azure Bicep and database setup |
+| `deploy` | Supported Windows/LocalDB runbook and superseded deployment archive |
 | `docs/specs` | L1 and L2 requirements with acceptance criteria, and the decision baseline |
 | `docs/detailed-designs` | Feature designs, shared architecture and contracts, rendered diagrams, acceptance register |
 | `docs/mocks` | The approved HTML prototype and its browser checks |

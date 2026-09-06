@@ -1,0 +1,66 @@
+<section class="section layout__split">
+  <div class="panel">
+    <h2>Client access</h2>
+    <p class="text--muted">
+      Only assigned clients can view this session while its photos remain available.
+    </p>
+    @for (client of state.people(); track client.id) {
+      <label class="session__client"
+        ><input
+          type="checkbox"
+          [checked]="state.assignments().includes(client.id)"
+          (change)="state.toggleClient(client.id)"
+        />{{ client.email }}</label
+      >
+    }
+    <button class="button" [disabled]="state.busy()" (click)="state.saveAssignments()">
+      Save gallery access
+    </button>
+  </div>
+  @if (state.retention(); as r) {
+    <div class="panel">
+      <h2>Photo retention</h2>
+      <p>Expires: {{ r.expiresAt || 'No photos uploaded' }}</p>
+      <p>{{ r.photoCount }} photos · {{ r.state }}</p>
+      <div class="stack">
+        <label class="field"
+          ><span>Retention months for new uploads</span
+          ><input
+            type="number"
+            min="1"
+            max="120"
+            [ngModel]="state.months()"
+            (ngModelChange)="state.months.set($event)"
+        /></label>
+        <qbs-date-time-field
+          fieldId="expiry"
+          label="Extend expiry date and time"
+          zone="Toronto"
+          [step]="900"
+          [value]="state.time.local(state.extension())"
+          [offset]="state.time.offset(state.extension())"
+          [offsets]="state.time.offsets(state.extension())"
+          [error]="state.time.problem(state.extension())"
+          (valueChanged)="state.extension.set($event)"
+          (offsetChanged)="state.extension.set(state.time.choose(state.extension(), $event))"
+        />
+        <button class="button button--secondary" [disabled]="state.busy()" (click)="state.extend()">
+          Update retention
+        </button>
+      </div>
+      <div class="form__actions">
+        <p>
+          {{ r.publishedReferences }} published galleries and {{ r.unreviewedRequests }} unreviewed
+          print requests reference these photos.
+        </p>
+        <button
+          class="button button--danger"
+          [disabled]="state.busy() || r.publishedReferences > 0 || r.unreviewedRequests > 0"
+          (click)="state.confirming.set(true)"
+        >
+          Delete session photos
+        </button>
+      </div>
+    </div>
+  }
+</section>

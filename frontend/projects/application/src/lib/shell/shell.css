@@ -2,7 +2,7 @@
   display: block;
 }
 .shell__brand {
-  font-size: 12px;
+  font-size: var(--text-sm);
   line-height: 1.35;
   letter-spacing: 0.19em;
   font-weight: 700;
@@ -10,10 +10,10 @@
 }
 .shell__brand span {
   display: block;
-  font-size: 9px;
+  font-size: var(--text-micro);
   font-weight: 400;
   letter-spacing: 0.2em;
-  margin-top: 7px;
+  margin-top: var(--space-1);
 }
 .shell__public {
   height: 106px;
@@ -22,28 +22,28 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--line);
-  gap: 24px;
+  gap: var(--space-3);
 }
 .shell__public-nav {
   display: flex;
   align-items: center;
-  gap: 26px;
-  font-size: 12px;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
 }
 .shell__public-main {
   max-width: 1440px;
   margin: auto;
-  padding: 52px 6% 90px;
+  padding: var(--space-5) 6% var(--space-6);
 }
 .shell__footer {
   border-top: 1px solid var(--line);
   margin: 0 6%;
-  padding: 36px 0 55px;
+  padding: var(--space-4) 0 var(--space-5);
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  gap: var(--space-3);
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--text-xs);
 }
 .shell__workspace {
   display: grid;
@@ -51,9 +51,9 @@
   min-height: 100vh;
 }
 .shell__sidebar {
-  background: #fafaf7;
+  background: var(--soft);
   border-right: 1px solid var(--line);
-  padding: 34px 24px;
+  padding: var(--space-4) var(--space-3);
   position: sticky;
   top: 0;
   height: 100vh;
@@ -62,16 +62,16 @@
 .shell__side-nav {
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  margin-top: 36px;
-  font-size: 12px;
+  gap: var(--space-1);
+  margin-top: var(--space-4);
+  font-size: var(--text-sm);
 }
 .shell__side-nav a {
-  padding: 9px 12px;
-  border-radius: 2px;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius);
 }
 .shell__link--active {
-  background: #e9ebe2;
+  background: var(--soft);
 }
 .shell__workspace-main {
   min-width: 0;
@@ -79,11 +79,11 @@
 .shell__topbar {
   height: 72px;
   border-bottom: 1px solid var(--line);
-  padding: 0 44px;
+  padding: 0 var(--space-5);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 11px;
+  font-size: var(--text-xs);
   color: var(--muted);
 }
 .shell__topbar button {
@@ -94,7 +94,7 @@
 .shell__main {
   max-width: 1440px;
   margin: auto;
-  padding: 44px 46px 100px;
+  padding: var(--space-5) var(--space-5) var(--space-6);
 }
 .shell__toggle {
   display: none;
@@ -103,8 +103,8 @@
   position: fixed;
   left: 12px;
   top: -100px;
-  background: white;
-  padding: 12px;
+  background: var(--paper);
+  padding: var(--space-2);
   z-index: 100;
 }
 .shell__skip:focus {
@@ -115,10 +115,10 @@
     grid-template-columns: 190px minmax(0, 1fr);
   }
   .shell__sidebar {
-    padding: 30px 16px;
+    padding: var(--space-4) var(--space-2);
   }
   .shell__main {
-    padding: 36px 28px;
+    padding: var(--space-4) var(--space-4);
   }
 }
 @media (max-width: 750px) {
@@ -128,7 +128,7 @@
   .shell__sidebar {
     height: auto;
     position: relative;
-    padding: 22px;
+    padding: var(--space-3);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -141,7 +141,7 @@
   .shell__side-nav {
     display: none;
     width: 100%;
-    margin-top: 20px;
+    margin-top: var(--space-3);
   }
   .shell__side-nav--open {
     display: flex;
@@ -151,25 +151,25 @@
     min-height: 90px;
     flex-wrap: wrap;
     margin: 0 5%;
-    padding: 20px 0;
+    padding: var(--space-3) 0;
   }
   .shell__public-nav {
     display: none;
     width: 100%;
     flex-wrap: wrap;
-    padding: 20px 0 0;
+    padding: var(--space-3) 0 0;
   }
   .shell__public-nav--open {
     display: flex;
   }
   .shell__public-main {
-    padding: 36px 5% 70px;
+    padding: var(--space-4) 5% var(--space-6);
   }
   .shell__main {
-    padding: 32px 20px 70px;
+    padding: var(--space-4) var(--space-3) var(--space-6);
   }
   .shell__topbar {
-    padding: 0 22px;
+    padding: 0 var(--space-3);
   }
   .shell__footer {
     margin: 0 5%;

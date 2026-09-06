@@ -939,6 +939,12 @@
           "SkiaSharp": "[4.151.2, )",
           "SkiaSharp.NativeAssets.Linux.NoDependencies": "[4.151.2, )"
         }
+      },
+      "qbs.qualification": {
+        "type": "Project",
+        "dependencies": {
+          "Qbs.Infrastructure": "[1.0.0, )"
+        }
       }
     }
   }

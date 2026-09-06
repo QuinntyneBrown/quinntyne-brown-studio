@@ -8,14 +8,14 @@ using Qbs.Domain.Entities;
 namespace Qbs.Api.Controllers;
 
 [ApiController, Authorize(Roles = "Administrator"), Route("api/admin/sessions")]
-public sealed class SessionController(ISender sender, AdminCatalog catalog) : ControllerBase
+public sealed class SessionController(ISender sender) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> List() => Ok(await catalog.List<Session>());
+    public async Task<IActionResult> List() => Ok(await sender.Send(new ListSession()));
 
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> Get(Guid id) =>
-        await catalog.Get<Session>(id) is { } value ? Ok(value) : NotFound();
+        Ok(await sender.Send(new GetSession(id)));
 
     [HttpPost]
     public async Task<IActionResult> Create(Session value)

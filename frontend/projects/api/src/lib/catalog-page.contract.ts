@@ -1,0 +1,30 @@
+import { WritableSignal } from '@angular/core';
+import { ITorontoTimeService } from './toronto-time.contract';
+import { Photographer, StudioRecord, ResourceDefinition, PhotoView } from '@qbs/domain/models';
+export interface ICatalogPageService {
+  readonly loadFailed: import('@angular/core').Signal<boolean>;
+  readonly time: ITorontoTimeService;
+  definition: import('@angular/core').WritableSignal<ResourceDefinition>;
+  records: import('@angular/core').WritableSignal<StudioRecord[]>;
+  editing: import('@angular/core').WritableSignal<boolean>;
+  loading: import('@angular/core').WritableSignal<boolean>;
+  message: import('@angular/core').WritableSignal<string>;
+  error: import('@angular/core').WritableSignal<boolean>;
+  busy: import('@angular/core').WritableSignal<boolean>;
+  draft: WritableSignal<Record<string, unknown>>;
+  people: import('@angular/core').WritableSignal<Photographer[]>;
+  photos: import('@angular/core').WritableSignal<PhotoView[]>;
+  selected: import('@angular/core').WritableSignal<string[]>;
+  errors: WritableSignal<Record<string, string[]>>;
+  initialize(): void;
+  load(): Promise<void>;
+  edit(record?: StudioRecord): Promise<void>;
+  move(id: string, delta: number): void;
+  cover(id: string): void;
+  hasRole(role: string): boolean;
+  toggleRole(role: string): void;
+  select(id: string): void;
+  save(): Promise<void>;
+  fail(e: unknown): void;
+  name(record: StudioRecord): string;
+}

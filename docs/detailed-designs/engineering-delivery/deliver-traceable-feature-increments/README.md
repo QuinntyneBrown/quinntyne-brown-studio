@@ -57,7 +57,7 @@ Source: [L2 requirements](../../../specs/L2.md). Shared interface and delivery o
 | `L2-052` | `L1-016` | Each frontend behavior increment shall begin with a failing Playwright end-to-end acceptance test, followed by the simplest implementation that makes the test pass. |
 | `L2-053` | `L1-016` | Frontend Playwright acceptance tests shall use the Page Object Model and a mocked backend to exercise frontend behavior under controlled responses and failures. |
 | `L2-054` | `L1-016` | Every acceptance criterion whose behavior is implemented fully or partially in the frontend shall link to its corresponding frontend acceptance test coverage and identify any remaining gap. |
-| `L2-068` | `L1-012` | The platform shall separate development, staging, and production Azure resources, including application hosts, metadata storage, private photo storage, queues, identity data, and secrets. |
+| `L2-068` | `L1-012` | The platform shall separate development, staging, and production Windows application hosts, LocalDB metadata and Identity databases, private photo storage, outbox processing, external Azure resources, and secrets, following OD-10. |
 
 ## Diagrams
 

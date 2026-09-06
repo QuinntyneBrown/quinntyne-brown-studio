@@ -6,10 +6,9 @@ import {
   QuoteResult,
   QuoteStudioOption,
   ResolvedLocation,
-} from '@qbs/domain';
+} from '@qbs/domain/models';
 import { IQuoteService } from './quote.contract';
 import { STUDIO_CLIENT } from './studio-client.token';
-
 @Injectable()
 export class QuoteService implements IQuoteService {
   private readonly transport = inject(STUDIO_CLIENT);
@@ -25,7 +24,7 @@ export class QuoteService implements IQuoteService {
     } catch (error) {
       if (error instanceof ApiError)
         throw new QuoteFailure(
-          error.status === 400 ? 'invalid' : 'unavailable',
+          error.kind === 'invalid' ? 'invalid' : 'unavailable',
           error.message,
           error.errors,
         );

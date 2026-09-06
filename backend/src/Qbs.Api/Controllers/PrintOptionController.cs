@@ -8,14 +8,14 @@ using Qbs.Domain.Entities;
 namespace Qbs.Api.Controllers;
 
 [ApiController, Authorize(Roles = "Administrator"), Route("api/admin/print-options")]
-public sealed class PrintOptionController(ISender sender, AdminCatalog catalog) : ControllerBase
+public sealed class PrintOptionController(ISender sender) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> List() => Ok(await catalog.List<PrintOption>());
+    public async Task<IActionResult> List() => Ok(await sender.Send(new ListPrintOption()));
 
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> Get(Guid id) =>
-        await catalog.Get<PrintOption>(id) is { } value ? Ok(value) : NotFound();
+        Ok(await sender.Send(new GetPrintOption(id)));
 
     [HttpPost]
     public async Task<IActionResult> Create(PrintOption value)

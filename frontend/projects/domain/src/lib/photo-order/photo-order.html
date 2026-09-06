@@ -1,0 +1,8 @@
+<qbs-ordered-selection
+  [items]="items()"
+  [showCover]="showCover()"
+  [disabled]="disabled()"
+  (moved)="moved.emit($event)"
+  (featured)="featured.emit($event)"
+  (removed)="removed.emit($event)"
+/>

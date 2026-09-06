@@ -1,0 +1,78 @@
+<section class="panel">
+  <h2>Review your print request</h2>
+  @for (line of state.printLines(); track line.photoId; let i = $index) {
+    <div class="client__print">
+      <h3>{{ state.photoName(line.photoId) }}</h3>
+      <div class="form__grid">
+        <label class="field"
+          ><span>Print option</span
+          ><select
+            [(ngModel)]="line.optionId"
+            (ngModelChange)="state.priceChanged()"
+            [disabled]="state.busy()"
+            [name]="'option' + i"
+          >
+            @for (option of state.printOptions(); track option.id) {
+              <option [value]="option.id">
+                {{ option.name }} · {{ option.dimensions }} · {{ option.unitPrice }} CAD
+              </option>
+            }
+          </select></label
+        ><label class="field"
+          ><span>Quantity</span
+          ><input
+            type="number"
+            min="1"
+            step="1"
+            [(ngModel)]="line.quantity"
+            (ngModelChange)="state.priceChanged()"
+            [disabled]="state.busy()"
+            [name]="'quantity' + i"
+        /></label>
+      </div>
+      @if (state.preview()?.lines?.[i]; as priced) {
+        <p>
+          {{ priced.name }} · {{ priced.dimensions }} · {{ priced.finish }} ·
+          {{ priced.unitPrice }} CAD each · {{ priced.amount }} CAD
+        </p>
+      }
+    </div>
+  }
+  <label class="field"
+    ><span>Notes (optional)</span
+    ><textarea
+      [ngModel]="state.notes()"
+      (ngModelChange)="state.notes.set($event)"
+      (ngModelChange)="state.notesChanged()"
+      [disabled]="state.busy()"
+      maxlength="5000"
+    ></textarea>
+  </label>
+  <p class="quote__total" aria-live="polite">
+    Current total:
+    {{
+      state.printTotal() ??
+        (state.pricing() === 'invalid' ? 'Check quantities' : 'Awaiting price review')
+    }}
+    CAD
+  </p>
+  <p class="page__description">
+    The studio will review your request. No payment or fulfilment is initiated.
+  </p>
+  @if (state.pricing() === 'failed') {
+    <button class="button button--secondary" (click)="state.refreshPrice()">
+      Retry price review
+    </button>
+  }
+  <div class="form__actions">
+    <button
+      class="button"
+      [disabled]="state.busy() || state.pricing() !== 'current' || state.printTotal() === null"
+      (click)="state.submitPrints()"
+    >
+      Submit print request</button
+    ><button class="button button--secondary" (click)="state.reviewing.set(false)">
+      Back to photographs
+    </button>
+  </div>
+</section>

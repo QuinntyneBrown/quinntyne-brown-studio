@@ -8,14 +8,14 @@ using Qbs.Domain.Entities;
 namespace Qbs.Api.Controllers;
 
 [ApiController, Authorize(Roles = "Administrator"), Route("api/admin/promotions")]
-public sealed class PromotionController(ISender sender, AdminCatalog catalog) : ControllerBase
+public sealed class PromotionController(ISender sender) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> List() => Ok(await catalog.List<Promotion>());
+    public async Task<IActionResult> List() => Ok(await sender.Send(new ListPromotion()));
 
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> Get(Guid id) =>
-        await catalog.Get<Promotion>(id) is { } value ? Ok(value) : NotFound();
+        Ok(await sender.Send(new GetPromotion(id)));
 
     [HttpPost]
     public async Task<IActionResult> Create(Promotion value)

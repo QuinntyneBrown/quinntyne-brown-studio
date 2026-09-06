@@ -11,8 +11,9 @@
     "start:marketing": "ng serve marketing --port 4320",
     "start:admin": "ng serve admin --port 4321",
     "start:client": "ng serve client --port 4322",
-    "build:libs": "ng build components && ng build domain && ng build api && ng build application",
-    "format": "prettier --write \"projects/**/*.{ts,html,css}\" \"e2e/**/*.ts\" \"*.{json,ts}\""
+    "build:libs": "npm run build:models && ng build components && ng build api && ng build domain && ng build application",
+    "format": "prettier --write \"projects/**/*.{ts,html,css}\" \"e2e/**/*.ts\" \"*.{json,ts}\"",
+    "build:models": "ng-packagr -p projects/domain/models/ng-package.bootstrap.json -c projects/domain/tsconfig.models.json"
   },
   "private": true,
   "packageManager": "npm@11.16.0",

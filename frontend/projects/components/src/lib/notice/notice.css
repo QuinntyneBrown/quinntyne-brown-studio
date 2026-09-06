@@ -2,14 +2,14 @@
   display: block;
 }
 .notice {
-  padding: 16px 20px;
-  background: #f0f4ed;
-  border: 1px solid #d8e2d0;
-  margin: 20px 0;
-  font-size: 13px;
+  padding: var(--space-2) var(--space-3);
+  background: var(--soft);
+  border: 1px solid var(--line);
+  margin: var(--space-3) 0;
+  font-size: var(--text-compact);
 }
 .notice--error {
-  background: #fdf3f1;
-  border-color: #efd4ce;
-  color: #a1372e;
+  background: var(--soft);
+  border-color: var(--line);
+  color: var(--danger);
 }

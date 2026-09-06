@@ -1,3 +1,4 @@
+using MediatR;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,24 +10,23 @@ using Qbs.Domain.Entities;
 namespace Qbs.Api.Controllers;
 
 [ApiController]
-public sealed class ClientGalleriesController(ClientWorkflows clients, IIdentityAccounts accounts)
+public sealed class ClientGalleriesController(ISender sender)
     : ControllerBase
 {
     private Guid UserId => Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
     [Authorize(Roles = "Client"), HttpGet("api/client/galleries")]
-    public Task<object> Galleries() => clients.Galleries(UserId);
+    public Task<object> Galleries() => sender.Send(new GetClientGalleries(UserId));
 
     [Authorize(Roles = "Client"), HttpGet("api/client/galleries/{id:guid}")]
-    public Task<object> Gallery(Guid id) => clients.Galleries(UserId, id);
+    public Task<object> Gallery(Guid id) => sender.Send(new GetClientGalleries(UserId, id));
 
     [Authorize(Roles = "Administrator"), HttpPut("api/admin/sessions/{id:guid}/clients")]
     public async Task<Session> Assign(Guid id, AssignmentInput input)
     {
-        await accounts.RequireClients(input.ClientIds);
-        return await clients.Assign(id, input.ClientIds, input.ExpectedVersion);
+        return await sender.Send(new AssignClientGallery(id, input.ClientIds, input.ExpectedVersion));
     }
 
     [Authorize(Roles = "Administrator"), HttpGet("api/admin/clients")]
-    public Task<object> Clients() => accounts.Clients();
+    public Task<object> Clients() => sender.Send(new ListClientAccounts());
 }

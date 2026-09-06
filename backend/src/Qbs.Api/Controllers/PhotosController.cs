@@ -1,3 +1,4 @@
+using MediatR;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -6,10 +7,10 @@ using Qbs.Application.Photos;
 namespace Qbs.Api.Controllers;
 
 [ApiController]
-public sealed class PhotosController(PhotoWorkflows photos) : ControllerBase
+public sealed class PhotosController(ISender sender) : ControllerBase
 {
     [Authorize(Roles = "Administrator"), HttpGet("api/admin/sessions/{id:guid}/photos")]
-    public Task<object> List(Guid id, string? cursor) => photos.Photos(id, cursor);
+    public Task<object> List(Guid id, string? cursor) => sender.Send(new ListSessionPhotos(id, cursor));
 
     [Authorize(Roles = "Administrator"), HttpGet("api/admin/photos/{id:guid}/preview")]
     public Task<IActionResult> Admin(Guid id, bool thumbnail, CancellationToken ct) =>
@@ -31,7 +32,7 @@ public sealed class PhotosController(PhotoWorkflows photos) : ControllerBase
         bool thumbnail
     )
     {
-        var file = await photos.Preview(id, client, slug, ct, thumbnail);
+        var file = await sender.Send(new GetPhotoPreview(id, client, slug, thumbnail), ct);
         Response.Headers.CacheControl = "private, no-store";
         return File(file.Content, file.ContentType);
     }

@@ -1,6 +1,7 @@
 export class ApiError extends Error {
   constructor(
-    public status: number,
+    public kind:
+      'invalid' | 'conflict' | 'unavailable' | 'forbidden' | 'unauthenticated' | 'not-found',
     message: string,
     public errors: Record<string, string[]> = {},
   ) {

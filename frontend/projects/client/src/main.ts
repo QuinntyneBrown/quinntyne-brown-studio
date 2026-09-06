@@ -7,6 +7,6 @@ bootstrapApplication(Shell, {
     provideBrowserGlobalErrorListeners(),
     provideRouter(studioRoutes('client')),
     { provide: SITE, useValue: 'client' },
-    ...studioProviders(false),
+    ...studioProviders(),
   ],
 }).catch(console.error);

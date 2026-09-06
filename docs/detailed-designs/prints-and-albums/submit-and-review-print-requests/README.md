@@ -20,6 +20,7 @@ Acceptance covers inaccessible photos, disabled options, quantity validation, st
 
 **Interfaces**
 
+- `POST /api/client/print-requests/preview ← inputRevision, lines[{photoId,optionId,quantity}] → inputRevision, authoritative descriptions/prices/revisions and total; creates no request`
 - `POST /api/client/print-requests ← idempotencyKey, lines[{photoId,optionId,quantity,optionRevision}], notes? → requestId, price snapshot`
 - `GET /api/admin/print-requests?state=... → request summaries; GET /api/admin/print-requests/{id} → request snapshot`
 - `GET /api/client/print-requests/{id} → the requesting client's own snapshot`
@@ -29,6 +30,7 @@ Acceptance covers inaccessible photos, disabled options, quantity validation, st
 
 | Operation | Owner | Responsibility |
 | --- | --- | --- |
+| `PreviewPrintRequest` | `PreviewPrintRequestHandler` | Authorize selections and return current server-priced review; echo the input revision without creating a request. |
 | `SubmitPrintRequest` | `SubmitPrintRequestHandler` | Authorize each photo; verify prices; deduplicate and commit immutable request snapshot. |
 | `GetPrintRequestInbox` | `GetPrintRequestInboxHandler` | Read stored request snapshots for administrator review. |
 | `ReviewPrintRequest` | `ReviewPrintRequestHandler` | Record review actor and time; preserve submitted prices. |

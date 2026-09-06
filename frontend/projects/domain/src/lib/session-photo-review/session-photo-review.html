@@ -1,0 +1,74 @@
+<section class="section">
+  <div class="section__header">
+    <h2>Session photographs</h2>
+    <button
+      class="button button--secondary"
+      [disabled]="!state.selected().length || state.busy()"
+      (click)="state.analyze()"
+    >
+      Suggest promising photos
+    </button>
+  </div>
+  @if (state.photoLoadFailed()) {
+    <button class="button button--secondary" (click)="state.refresh()">
+      Retry loading photographs
+    </button>
+  }
+  @if (!state.photos().length && !state.photoLoadFailed()) {
+    <qbs-empty message="Photos will appear here after upload." />
+  }
+  <qbs-photos
+    [photos]="state.photos()"
+    [selectable]="true"
+    [selected]="state.selected()"
+    (selection)="state.toggle($event)"
+    (opened)="state.opened.set($event)"
+  />
+  @if (state.nextCursor()) {
+    <button class="button button--secondary" [disabled]="state.moreBusy()" (click)="state.more()">
+      Load more photographs
+    </button>
+  }
+  @for (photo of state.photos(); track photo.id) {
+    @if (photo.state === 'Failed') {
+      <button class="button button--secondary" (click)="state.retryPhoto(photo.id)">
+        Retry preview · {{ photo.name }}
+      </button>
+    }
+  }
+  @if (state.analysis(); as batch) {
+    <aside class="panel">
+      <h2>AI-generated guidance</h2>
+      <p class="text--muted">
+        Suggestions support your review. They do not publish or select photographs.
+      </p>
+      @for (item of batch.photos; track item.photoId) {
+        <div class="records__row">
+          <div>
+            <h3>{{ state.photoName(item.photoId) }}</h3>
+            <span class="badge">{{ item.state }}</span>
+            @if (item.result) {
+              <p>{{ item.result.recommendation }}</p>
+              <p class="text--muted">
+                Model {{ item.result.modelVersion }} · Prompt {{ item.result.promptVersion }}
+              </p>
+              @for (finding of item.result.findings; track $index) {
+                <p>{{ finding.criterion }} · {{ finding.outcome }} — {{ finding.explanation }}</p>
+              }
+            }
+            @if (item.error) {
+              <p class="field__error">{{ item.error }}</p>
+            }
+          </div>
+        </div>
+      }
+      <button
+        class="button button--secondary"
+        [disabled]="state.busy() || !state.hasFailedAnalysis()"
+        (click)="state.retryAnalysis()"
+      >
+        Retry failed analysis
+      </button>
+    </aside>
+  }
+</section>

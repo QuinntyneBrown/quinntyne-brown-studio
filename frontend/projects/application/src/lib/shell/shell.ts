@@ -1,18 +1,17 @@
 import { Component, inject, signal } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { SITE } from '../site.token';
-import { AuthState } from '../auth-state';
+import { ACCOUNT_SERVICE } from '../account.token';
+import { Notice } from '@qbs/components';
 @Component({
   selector: 'qbs-shell',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [Notice, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './shell.html',
   styleUrl: './shell.css',
 })
 export class Shell {
   site = inject(SITE);
-  auth = inject(AuthState);
-  private router = inject(Router);
-  menu = signal(false);
+  auth = inject(ACCOUNT_SERVICE);
   publicLinks = [
     ['Portfolio', '/portfolio'],
     ['Services', '/services'],
@@ -20,7 +19,6 @@ export class Shell {
     ['Packages', '/promotions'],
   ];
   adminLinks = [
-    ['Studio overview', '/'],
     ['Sessions', '/sessions'],
     ['Photographers', '/photographers'],
     ['Equipment', '/equipment'],
@@ -40,11 +38,4 @@ export class Shell {
     ['Your albums', '/albums'],
     ['Request prints', '/prints'],
   ];
-  toggleMenu() {
-    this.menu.update((value) => !value);
-  }
-  async logout() {
-    await this.auth.logout();
-    await this.router.navigateByUrl('/login');
-  }
 }

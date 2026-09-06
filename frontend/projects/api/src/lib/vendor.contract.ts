@@ -1,2 +1,6 @@
-import { IStudioClient } from './studio-client.contract';
-export interface IVendorService extends IStudioClient {}
+import { Editable, Vendor } from '@qbs/domain/models';
+export interface IVendorService {
+  list(): Promise<Vendor[]>;
+  get(id: string): Promise<Vendor>;
+  save(value: Editable<Vendor>): Promise<Vendor>;
+}

@@ -49,9 +49,7 @@
                 "input": "projects/marketing/public"
               }
             ],
-            "styles": [
-              "projects/marketing/src/styles.css"
-            ]
+            "styles": ["projects/marketing/src/styles.css"]
           },
           "configurations": {
             "production": {
@@ -81,6 +79,10 @@
                 {
                   "replace": "projects/application/src/lib/quote-provider.ts",
                   "with": "projects/application/src/lib/quote-provider.acceptance.ts"
+                },
+                {
+                  "replace": "projects/application/src/lib/studio-providers.ts",
+                  "with": "projects/application/src/lib/studio-providers.acceptance.ts"
                 }
               ]
             }
@@ -147,9 +149,7 @@
                 "input": "projects/admin/public"
               }
             ],
-            "styles": [
-              "projects/admin/src/styles.css"
-            ]
+            "styles": ["projects/admin/src/styles.css"]
           },
           "configurations": {
             "production": {
@@ -171,6 +171,20 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "acceptance": {
+              "optimization": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "projects/application/src/lib/quote-provider.ts",
+                  "with": "projects/application/src/lib/quote-provider.acceptance.ts"
+                },
+                {
+                  "replace": "projects/application/src/lib/studio-providers.ts",
+                  "with": "projects/application/src/lib/studio-providers.acceptance.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -183,6 +197,9 @@
             },
             "development": {
               "buildTarget": "admin:build:development"
+            },
+            "acceptance": {
+              "buildTarget": "admin:build:acceptance"
             }
           },
           "defaultConfiguration": "development"
@@ -232,9 +249,7 @@
                 "input": "projects/client/public"
               }
             ],
-            "styles": [
-              "projects/client/src/styles.css"
-            ]
+            "styles": ["projects/client/src/styles.css"]
           },
           "configurations": {
             "production": {
@@ -256,6 +271,20 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "acceptance": {
+              "optimization": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "projects/application/src/lib/quote-provider.ts",
+                  "with": "projects/application/src/lib/quote-provider.acceptance.ts"
+                },
+                {
+                  "replace": "projects/application/src/lib/studio-providers.ts",
+                  "with": "projects/application/src/lib/studio-providers.acceptance.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -268,6 +297,9 @@
             },
             "development": {
               "buildTarget": "client:build:development"
+            },
+            "acceptance": {
+              "buildTarget": "client:build:acceptance"
             }
           },
           "defaultConfiguration": "development"

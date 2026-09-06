@@ -42,9 +42,9 @@ jobs:
       - run: dotnet test backend/Qbs.slnx -c Release --no-build --logger trx --results-directory .artifacts/acceptance
       - run: npm ci
         working-directory: frontend
-      - run: npm run build:apps
-        working-directory: frontend
       - run: npm run build:libs
+        working-directory: frontend
+      - run: npm run build:apps
         working-directory: frontend
       - run: npm ci
         working-directory: e2e
@@ -54,6 +54,9 @@ jobs:
         working-directory: e2e
       - run: npm test
         working-directory: e2e
+      - name: Exercise packaged applications against isolated LocalDB
+        shell: pwsh
+        run: ./scripts/smoke-platform.ps1
       - run: python scripts/verify-architecture.py
       - run: python docs/detailed-designs/verify.py
       - uses: actions/upload-artifact@v4
@@ -63,6 +66,8 @@ jobs:
           path: |
             .artifacts/acceptance
             e2e/test-results
+            .artifacts/platform/fullstack-results.json
+            .artifacts/platform/fullstack-browser
       - uses: actions/upload-artifact@v4
         with:
           name: static-applications
@@ -79,7 +84,7 @@ jobs:
           cache-dependency-path: design-system/package-lock.json
       - run: npm ci
         working-directory: design-system
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps
         working-directory: design-system
       - run: npm test
         working-directory: design-system
@@ -107,6 +112,7 @@ jobs:
       - run: dotnet restore backend/Qbs.slnx --locked-mode
       - run: dotnet publish backend/src/Qbs.Api -c Release --no-restore -p:UseAppHost=false -o .artifacts/windows/api
       - run: dotnet publish backend/src/Qbs.Worker -c Release --no-restore -p:UseAppHost=false -o .artifacts/windows/worker
+      - run: dotnet publish backend/src/Qbs.Qualification -c Release --no-restore -p:UseAppHost=false -o .artifacts/windows/qualification
       - uses: actions/upload-artifact@v4
         with:
           name: windows-backend

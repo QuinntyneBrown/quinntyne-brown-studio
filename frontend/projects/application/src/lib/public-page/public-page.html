@@ -1,17 +1,17 @@
-@if (kind() === 'home') {
+@if (state.kind() === 'home') {
   <section class="hero">
     <div class="hero__copy">
       <p class="page__eyebrow">Quinntyne Brown Studio · Photography</p>
-      <h1>{{ heading() }}</h1>
-      <p>{{ body() }}</p>
+      <h1>{{ state.heading() }}</h1>
+      <p>{{ state.body() }}</p>
       <a class="button" routerLink="/quote"
         >Calculate your quote <span aria-hidden="true">↗</span></a
       >
       <div class="hero__meta"><span>Weddings & events</span><span>People & portraits</span></div>
     </div>
     <div class="hero__image">
-      @if (items()[0]?.photos?.[0]?.url) {
-        <img [src]="items()[0].photos[0].url" [alt]="items()[0].title" />
+      @if (state.items()[0]?.photos?.[0]?.url) {
+        <img [src]="state.items()[0].photos![0].url" [alt]="state.items()[0].title" />
       } @else {
         <div class="hero__placeholder">
           <span>Q B</span>
@@ -26,10 +26,10 @@
       <a routerLink="/portfolio">Explore the portfolio →</a>
     </div>
     <div class="layout__grid">
-      @for (item of items(); track item.id) {
+      @for (item of state.items(); track item.id) {
         <a class="gallery-card" [routerLink]="['/galleries', item.slug]">
           @if (item.photos?.[0]?.url) {
-            <img [src]="item.photos[0].url" [alt]="item.title" />
+            <img [src]="item.photos![0].url" [alt]="item.title" />
           }
           <h3>{{ item.title }} <span>↗</span></h3></a
         >
@@ -44,13 +44,13 @@
   <header class="page__header">
     <div>
       <p class="page__eyebrow">Quinntyne Brown Studio</p>
-      <h1>{{ heading() }}</h1>
-      @if (kind() === 'services' || kind() === 'contact') {
-        <p class="page__description">{{ body() }}</p>
+      <h1>{{ state.heading() }}</h1>
+      @if (state.kind() === 'services' || state.kind() === 'contact') {
+        <p class="page__description">{{ state.body() }}</p>
       }
     </div>
   </header>
-  @if (kind() === 'services') {
+  @if (state.kind() === 'services') {
     <div class="layout__grid">
       @for (service of ['Weddings', 'Events', 'Headshots', 'Family portraits']; track service) {
         <article class="panel">
@@ -60,26 +60,26 @@
         </article>
       }
     </div>
-  } @else if (kind() === 'contact') {
+  } @else if (state.kind() === 'contact') {
     <a class="button" routerLink="/quote">Start with a quote</a>
-  } @else if (loading()) {
+  } @else if (state.loading()) {
     <p role="status">Loading…</p>
-  } @else if (!items().length && !message()) {
+  } @else if (!state.items().length && !state.message()) {
     <qbs-empty message="New work and details will be shared here soon." />
-  } @else if (kind() === 'gallery') {
-    <qbs-photos [photos]="items()" (opened)="opened.set($event)" />
+  } @else if (state.kind() === 'gallery') {
+    <qbs-photos [photos]="state.galleryPhotos()" (opened)="state.opened.set($event)" />
   } @else {
     <div class="layout__grid">
-      @for (item of items(); track item.id) {
+      @for (item of state.items(); track item.id) {
         <article class="panel">
-          @if (kind() === 'portfolio') {
+          @if (state.kind() === 'portfolio') {
             <a [routerLink]="['/galleries', item.slug]">
               @if (item.photos?.[0]?.url) {
-                <img class="gallery-card__image" [src]="item.photos[0].url" [alt]="item.title" />
+                <img class="gallery-card__image" [src]="item.photos![0].url" [alt]="item.title" />
               }
               <h2>{{ item.title }}</h2></a
             >
-          } @else if (kind() === 'prints') {
+          } @else if (state.kind() === 'prints') {
             <h2>{{ item.name }}</h2>
             <p>{{ item.dimensions }} · {{ item.finish }}</p>
             <p class="price__total">{{ item.unitPrice }} CAD</p>
@@ -94,14 +94,17 @@
     </div>
   }
 }
-@if (message()) {
-  <qbs-notice [message]="message()" [error]="true" />
+@if (state.message()) {
+  <qbs-notice [message]="state.message()" [error]="true" />
+  <button class="button button--secondary" (click)="state.load()" [disabled]="state.loading()">
+    Retry loading
+  </button>
 }
 <p class="page__description">
   Prices are estimates in CAD before tax. Final details are confirmed through consultation.
 </p>
-@if (opened(); as photo) {
-  <qbs-dialog [title]="photo.name" (closed)="opened.set(null)"
+@if (state.opened(); as photo) {
+  <qbs-dialog [title]="photo.name" (closed)="state.opened.set(null)"
     ><img class="image__preview" [src]="photo.url" [alt]="photo.name"
   /></qbs-dialog>
 }

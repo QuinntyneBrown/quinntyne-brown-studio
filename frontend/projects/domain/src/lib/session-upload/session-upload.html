@@ -1,0 +1,30 @@
+<section class="panel">
+  <h2>Add photographs</h2>
+  <p class="text--muted">
+    JPEG and supported camera RAW files. Up to 1,000 files, 250 MB each. Reselect the same files to
+    resume an interrupted batch.
+  </p>
+  <label class="field session__files"
+    ><span>Select photos</span
+    ><input
+      type="file"
+      multiple
+      accept=".jpg,.jpeg,.cr2,.cr3,.nef,.arw,.dng"
+      [disabled]="state.upload.busy() || state.busy()"
+      (change)="state.files($event)"
+  /></label>
+  @for (row of state.upload.rows(); track $index) {
+    <div class="session__upload">
+      <span>{{ row.name }}</span
+      ><progress
+        max="100"
+        [value]="row.progress"
+        [attr.aria-label]="row.name + ' upload progress'"
+      ></progress
+      ><span>{{ row.state }}</span>
+      @if (row.error) {
+        <small class="field__error">{{ row.error }}</small>
+      }
+    </div>
+  }
+</section>

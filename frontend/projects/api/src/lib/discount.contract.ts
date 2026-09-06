@@ -1,2 +1,5 @@
-import { IStudioClient } from './studio-client.contract';
-export interface IDiscountService extends IStudioClient {}
+import { DiscountConfiguration } from '@qbs/domain/models';
+export interface IDiscountService {
+  get(): Promise<DiscountConfiguration>;
+  save(value: DiscountConfiguration): Promise<DiscountConfiguration>;
+}

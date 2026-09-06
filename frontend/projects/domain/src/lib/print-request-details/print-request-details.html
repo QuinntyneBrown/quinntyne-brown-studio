@@ -1,0 +1,23 @@
+@if (state.selected(); as request) {
+  <section class="panel section">
+    <h2>Submitted request</h2>
+    @for (line of request.lines; track $index) {
+      <div class="price__line">
+        <span
+          >{{ line.name }} · {{ line.dimensions }} · {{ line.finish }} × {{ line.quantity }}</span
+        ><span>{{ line.amount }} CAD</span>
+      </div>
+    }
+    <p class="price__total">{{ request.total }} CAD</p>
+    <p>{{ request.notes }}</p>
+    <div class="form__actions">
+      <button
+        class="button"
+        [disabled]="state.busy() || request.state === 'Reviewed'"
+        (click)="state.review()"
+      >
+        Mark reviewed</button
+      ><button class="button button--secondary" (click)="state.selected.set(null)">Close</button>
+    </div>
+  </section>
+}

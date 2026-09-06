@@ -5,6 +5,7 @@ using Qbs.Application.Ports;
 using Qbs.Domain.Entities;
 using Qbs.Domain.Enums;
 using Qbs.Domain.Exceptions;
+using Qbs.Domain.Policies;
 using Qbs.Infrastructure.Adapters;
 using Qbs.Infrastructure.Serialization;
 using Qbs.Infrastructure.Storage;
@@ -157,7 +158,7 @@ public sealed class JobProcessor(
                         throw new StudioException(409, "Photo preview is not ready.");
                     await using var preview = await storage.Read(p.PreviewKey, ct);
                     result = JsonSerializer.Serialize(
-                        await analysis.Analyze(p.Id, preview, ct),
+                        PhotoAnalysisPolicy.Validate(p.Id, await analysis.Analyze(p.Id, preview, ct)),
                         StudioJson.Options
                     );
                 }

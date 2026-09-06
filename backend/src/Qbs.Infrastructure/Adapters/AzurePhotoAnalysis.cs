@@ -6,11 +6,12 @@ using Microsoft.Extensions.Configuration;
 using Qbs.Application.Ports;
 using Qbs.Domain.Exceptions;
 using Qbs.Domain.Models;
+using Qbs.Domain.Policies;
 using Qbs.Infrastructure.Serialization;
 
 namespace Qbs.Infrastructure.Adapters;
 
-public sealed class AzurePhotoAnalysis(HttpClient http, IConfiguration config)
+public sealed class AzurePhotoAnalysis(HttpClient http, IConfiguration config, TokenCredential tokenCredential)
     : IPhotoAnalysisService
 {
     public async Task<PhotoAnalysis> Analyze(Guid id, Stream preview, CancellationToken ct)
@@ -24,7 +25,7 @@ public sealed class AzurePhotoAnalysis(HttpClient http, IConfiguration config)
         var version =
             config["Azure:AiModelVersion"]
             ?? throw new StudioException(503, "AI model provenance is not configured.");
-        var credential = await new DefaultAzureCredential().GetTokenAsync(
+        var credential = await tokenCredential.GetTokenAsync(
             new TokenRequestContext(["https://cognitiveservices.azure.com/.default"]),
             ct
         );
@@ -75,17 +76,6 @@ public sealed class AzurePhotoAnalysis(HttpClient http, IConfiguration config)
         var result =
             JsonSerializer.Deserialize<PhotoAnalysis>(text, StudioJson.Options)
             ?? throw new StudioException(503, "AI returned malformed findings.");
-        if (
-            result.PhotoId != id
-            || result.Findings == null
-            || result.Findings.Length == 0
-            || result.Findings.Any(x =>
-                !Enum.IsDefined(x.Outcome)
-                || string.IsNullOrWhiteSpace(x.Explanation)
-                || !new[] { "sharpness", "exposure", "closed-eyes" }.Contains(x.Criterion)
-            )
-        )
-            throw new StudioException(503, "AI findings could not be validated.");
-        return result with { ModelVersion = version, PromptVersion = "rubric-v1" };
+        return PhotoAnalysisPolicy.Validate(id, result with { ModelVersion = version, PromptVersion = "rubric-v1" });
     }
 }

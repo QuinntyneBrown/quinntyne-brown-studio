@@ -8,5 +8,6 @@
     <Project Path="src/Qbs.Domain/Qbs.Domain.csproj" />
     <Project Path="src/Qbs.Infrastructure/Qbs.Infrastructure.csproj" />
     <Project Path="src/Qbs.Worker/Qbs.Worker.csproj" />
+    <Project Path="src/Qbs.Qualification/Qbs.Qualification.csproj" />
   </Folder>
 </Solution>

@@ -1,0 +1,35 @@
+<section class="panel">
+  <h2>Shape your collection</h2>
+  <label class="field"
+    ><span>Album name</span><input [(ngModel)]="state.album().name" maxlength="200" required
+  /></label>
+  <h3 class="client__section">Select photographs</h3>
+  <qbs-photos
+    [photos]="state.photos()"
+    [selected]="state.selected()"
+    [selectable]="true"
+    (selection)="state.toggle($event)"
+    (opened)="state.opened.set($event)"
+  />
+  <h3 class="client__section">Album order</h3>
+  <qbs-photo-order
+    [photos]="state.photos()"
+    [selected]="state.selected()"
+    [disabled]="state.busy()"
+    (moved)="state.move($event.id, $event.delta)"
+    (removed)="state.toggle($event)"
+  />
+  <div class="form__actions">
+    <button
+      class="button"
+      [disabled]="
+        state.busy() ||
+        !state.album().name.trim() ||
+        (!state.album().id && !state.selected().length)
+      "
+      (click)="state.saveAlbum()"
+    >
+      Save album</button
+    ><button class="button button--secondary" (click)="state.editing.set(false)">Cancel</button>
+  </div>
+</section>

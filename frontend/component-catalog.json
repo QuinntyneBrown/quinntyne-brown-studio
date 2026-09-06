@@ -2,299 +2,235 @@
   {
     "name": "CatalogPage",
     "source": "frontend/projects/application/src/lib/catalog-page/catalog-page.ts",
-    "inputs": [
-      "Route data and parameters",
-      "Service contracts via injection tokens"
-    ],
-    "outputs": [
-      "User actions through the documented service contract"
-    ],
-    "states": [
-      "success",
-      "loading",
-      "empty",
-      "validation",
-      "dependency-failure"
-    ],
+    "inputs": ["Route data and parameters", "Service contracts via injection tokens"],
+    "outputs": ["User actions through the documented service contract"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
     "catalogEntry": "pattern:admin-records",
     "catalogUrl": "/patterns/admin-records"
   },
   {
     "name": "ClientPage",
     "source": "frontend/projects/application/src/lib/client-page/client-page.ts",
-    "inputs": [
-      "Route data and parameters",
-      "Service contracts via injection tokens"
-    ],
-    "outputs": [
-      "User actions through the documented service contract"
-    ],
-    "states": [
-      "success",
-      "loading",
-      "empty",
-      "validation",
-      "dependency-failure"
-    ],
+    "inputs": ["Route data and parameters", "Service contracts via injection tokens"],
+    "outputs": ["User actions through the documented service contract"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
     "catalogEntry": "pattern:client-gallery",
     "catalogUrl": "/patterns/client-gallery"
   },
   {
     "name": "LoginPage",
     "source": "frontend/projects/application/src/lib/login-page/login-page.ts",
-    "inputs": [
-      "Route data and parameters",
-      "Service contracts via injection tokens"
-    ],
-    "outputs": [
-      "User actions through the documented service contract"
-    ],
-    "states": [
-      "success",
-      "loading",
-      "empty",
-      "validation",
-      "dependency-failure"
-    ],
+    "inputs": ["Route data and parameters", "Service contracts via injection tokens"],
+    "outputs": ["User actions through the documented service contract"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
     "catalogEntry": "component:login",
     "catalogUrl": "/components/login"
   },
   {
     "name": "PrintInbox",
     "source": "frontend/projects/application/src/lib/print-inbox/print-inbox.ts",
-    "inputs": [
-      "Route data and parameters",
-      "Service contracts via injection tokens"
-    ],
-    "outputs": [
-      "User actions through the documented service contract"
-    ],
-    "states": [
-      "success",
-      "loading",
-      "empty",
-      "validation",
-      "dependency-failure"
-    ],
+    "inputs": ["Route data and parameters", "Service contracts via injection tokens"],
+    "outputs": ["User actions through the documented service contract"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
     "catalogEntry": "pattern:print-review",
     "catalogUrl": "/patterns/print-review"
   },
   {
     "name": "PublicPage",
     "source": "frontend/projects/application/src/lib/public-page/public-page.ts",
-    "inputs": [
-      "Route data and parameters",
-      "Service contracts via injection tokens"
-    ],
-    "outputs": [
-      "User actions through the documented service contract"
-    ],
-    "states": [
-      "success",
-      "loading",
-      "empty",
-      "validation",
-      "dependency-failure"
-    ],
+    "inputs": ["Route data and parameters", "Service contracts via injection tokens"],
+    "outputs": ["User actions through the documented service contract"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
     "catalogEntry": "pattern:marketing-home",
     "catalogUrl": "/patterns/marketing-home"
   },
   {
     "name": "QuotePage",
     "source": "frontend/projects/application/src/lib/quote-page/quote-page.ts",
-    "inputs": [
-      "Route data and parameters",
-      "Service contracts via injection tokens"
-    ],
-    "outputs": [
-      "User actions through the documented service contract"
-    ],
-    "states": [
-      "success",
-      "loading",
-      "empty",
-      "validation",
-      "dependency-failure"
-    ],
+    "inputs": ["Route data and parameters", "Service contracts via injection tokens"],
+    "outputs": ["User actions through the documented service contract"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
     "catalogEntry": "pattern:quote-calculator",
     "catalogUrl": "/patterns/quote-calculator"
   },
   {
     "name": "SessionPage",
     "source": "frontend/projects/application/src/lib/session-page/session-page.ts",
-    "inputs": [
-      "Route data and parameters",
-      "Service contracts via injection tokens"
-    ],
-    "outputs": [
-      "User actions through the documented service contract"
-    ],
-    "states": [
-      "success",
-      "loading",
-      "empty",
-      "validation",
-      "dependency-failure"
-    ],
+    "inputs": ["Route data and parameters", "Service contracts via injection tokens"],
+    "outputs": ["User actions through the documented service contract"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
     "catalogEntry": "pattern:session-review",
     "catalogUrl": "/patterns/session-review"
   },
   {
     "name": "SettingsPage",
     "source": "frontend/projects/application/src/lib/settings-page/settings-page.ts",
-    "inputs": [
-      "Route data and parameters",
-      "Service contracts via injection tokens"
-    ],
-    "outputs": [
-      "User actions through the documented service contract"
-    ],
-    "states": [
-      "success",
-      "loading",
-      "empty",
-      "validation",
-      "dependency-failure"
-    ],
+    "inputs": ["Route data and parameters", "Service contracts via injection tokens"],
+    "outputs": ["User actions through the documented service contract"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
     "catalogEntry": "pattern:admin-settings",
     "catalogUrl": "/patterns/admin-settings"
   },
   {
     "name": "Shell",
     "source": "frontend/projects/application/src/lib/shell/shell.ts",
-    "inputs": [
-      "Route data and parameters",
-      "Service contracts via injection tokens"
-    ],
-    "outputs": [
-      "User actions through the documented service contract"
-    ],
-    "states": [
-      "success",
-      "loading",
-      "empty",
-      "validation",
-      "dependency-failure"
-    ],
+    "inputs": ["Route data and parameters", "Service contracts via injection tokens"],
+    "outputs": ["User actions through the documented service contract"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
     "catalogEntry": "component:shell",
     "catalogUrl": "/components/shell"
   },
   {
     "name": "Dialog",
     "source": "frontend/projects/components/src/lib/dialog/dialog.ts",
-    "inputs": [
-      "title: string"
-    ],
-    "outputs": [
-      "closed: void"
-    ],
-    "states": [
-      "success",
-      "loading",
-      "empty",
-      "validation",
-      "dependency-failure"
-    ],
+    "inputs": ["title: string"],
+    "outputs": ["closed: void"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
     "catalogEntry": "component:dialog",
     "catalogUrl": "/components/dialog"
   },
   {
     "name": "EmptyState",
     "source": "frontend/projects/components/src/lib/empty-state/empty-state.ts",
-    "inputs": [
-      "message: string"
-    ],
-    "outputs": [
-      "Empty-state presentation"
-    ],
-    "states": [
-      "success",
-      "loading",
-      "empty",
-      "validation",
-      "dependency-failure"
-    ],
+    "inputs": ["message: string"],
+    "outputs": ["Empty-state presentation"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
     "catalogEntry": "component:empty-state",
     "catalogUrl": "/components/empty-state"
   },
   {
     "name": "Notice",
     "source": "frontend/projects/components/src/lib/notice/notice.ts",
-    "inputs": [
-      "message: string",
-      "error: boolean"
-    ],
-    "outputs": [
-      "Live status announcement"
-    ],
-    "states": [
-      "success",
-      "loading",
-      "empty",
-      "validation",
-      "dependency-failure"
-    ],
+    "inputs": ["message: string", "error: boolean"],
+    "outputs": ["Live status announcement"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
     "catalogEntry": "component:notice",
     "catalogUrl": "/components/notice"
   },
   {
     "name": "PhotoGrid",
-    "source": "frontend/projects/components/src/lib/photo-grid/photo-grid.ts",
-    "inputs": [
-      "photos: PhotoView[]",
-      "selected: string[]",
-      "selectable: boolean"
-    ],
-    "outputs": [
-      "selection: photo identifier",
-      "opened: PhotoView"
-    ],
-    "states": [
-      "success",
-      "loading",
-      "empty",
-      "validation",
-      "dependency-failure"
-    ],
+    "source": "frontend/projects/domain/src/lib/photo-grid/photo-grid.ts",
+    "inputs": ["photos: PhotoView[]", "selected: string[]", "selectable: boolean"],
+    "outputs": ["selection: photo identifier", "opened: PhotoView"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
     "catalogEntry": "component:photo-grid",
     "catalogUrl": "/components/photo-grid"
   },
   {
     "name": "QuoteInputForm",
     "source": "frontend/projects/domain/src/lib/quote-input-form/quote-input-form.ts",
-    "inputs": [
-      "IQuoteEditorService through QUOTE_EDITOR_SERVICE"
-    ],
-    "outputs": [
-      "Typed editing actions through IQuoteEditorService"
-    ],
-    "states": [
-      "current",
-      "incomplete",
-      "invalid",
-      "updating",
-      "unavailable"
-    ],
+    "inputs": ["IQuoteEditorService through QUOTE_EDITOR_SERVICE"],
+    "outputs": ["Typed editing actions through IQuoteEditorService"],
+    "states": ["current", "incomplete", "invalid", "updating", "unavailable"],
     "catalogEntry": "pattern:quote-calculator",
     "catalogUrl": "/patterns/quote-calculator"
   },
   {
     "name": "QuoteSummary",
     "source": "frontend/projects/domain/src/lib/quote-summary/quote-summary.ts",
-    "inputs": [
-      "IQuoteEditorService through QUOTE_EDITOR_SERVICE"
-    ],
-    "outputs": [
-      "Typed editing actions through IQuoteEditorService"
-    ],
-    "states": [
-      "current",
-      "incomplete",
-      "invalid",
-      "updating",
-      "unavailable"
-    ],
+    "inputs": ["IQuoteEditorService through QUOTE_EDITOR_SERVICE"],
+    "outputs": ["Typed editing actions through IQuoteEditorService"],
+    "states": ["current", "incomplete", "invalid", "updating", "unavailable"],
     "catalogEntry": "pattern:quote-calculator",
     "catalogUrl": "/patterns/quote-calculator"
+  },
+  {
+    "name": "DateTimeField",
+    "source": "frontend/projects/components/src/lib/date-time-field/date-time-field.ts",
+    "inputs": ["label, value, offset, offsets, zone, error, disabled, step"],
+    "outputs": ["valueChanged, offsetChanged"],
+    "states": ["default", "ambiguous", "invalid", "disabled"],
+    "catalogEntry": "component:date-time-field",
+    "catalogUrl": "/components/date-time-field"
+  },
+  {
+    "name": "OrderedSelection",
+    "source": "frontend/projects/components/src/lib/ordered-selection/ordered-selection.ts",
+    "inputs": ["items, disabled, showCover"],
+    "outputs": ["moved, removed, featured"],
+    "states": ["default", "disabled"],
+    "catalogEntry": "component:ordered-selection",
+    "catalogUrl": "/components/ordered-selection"
+  },
+  {
+    "name": "PhotoOrder",
+    "source": "frontend/projects/domain/src/lib/photo-order/photo-order.ts",
+    "inputs": ["photos, selected, disabled, showCover"],
+    "outputs": ["moved, removed, featured"],
+    "states": ["default", "unavailable", "disabled"],
+    "catalogEntry": "component:ordered-selection",
+    "catalogUrl": "/components/ordered-selection"
+  },
+  {
+    "name": "CatalogEditor",
+    "source": "frontend/projects/domain/src/lib/catalog-editor/catalog-editor.ts",
+    "inputs": ["Route-owned feature state through CATALOG_PAGE_SERVICE"],
+    "outputs": ["User intent through the feature service contract"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
+    "catalogEntry": "pattern:admin-records",
+    "catalogUrl": "/patterns/admin-records"
+  },
+  {
+    "name": "SettingsEditor",
+    "source": "frontend/projects/domain/src/lib/settings-editor/settings-editor.ts",
+    "inputs": ["Route-owned feature state through SETTINGS_PAGE_SERVICE"],
+    "outputs": ["User intent through the feature service contract"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
+    "catalogEntry": "pattern:admin-settings",
+    "catalogUrl": "/patterns/admin-settings"
+  },
+  {
+    "name": "AlbumEditor",
+    "source": "frontend/projects/domain/src/lib/album-editor/album-editor.ts",
+    "inputs": ["Route-owned feature state through CLIENT_PAGE_SERVICE"],
+    "outputs": ["User intent through the feature service contract"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
+    "catalogEntry": "pattern:client-gallery",
+    "catalogUrl": "/patterns/client-gallery"
+  },
+  {
+    "name": "PrintRequestEditor",
+    "source": "frontend/projects/domain/src/lib/print-request-editor/print-request-editor.ts",
+    "inputs": ["Route-owned feature state through CLIENT_PAGE_SERVICE"],
+    "outputs": ["User intent through the feature service contract"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
+    "catalogEntry": "pattern:client-gallery",
+    "catalogUrl": "/patterns/client-gallery"
+  },
+  {
+    "name": "SessionUpload",
+    "source": "frontend/projects/domain/src/lib/session-upload/session-upload.ts",
+    "inputs": ["Route-owned feature state through SESSION_PAGE_SERVICE"],
+    "outputs": ["User intent through the feature service contract"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
+    "catalogEntry": "pattern:session-review",
+    "catalogUrl": "/patterns/session-review"
+  },
+  {
+    "name": "SessionPhotoReview",
+    "source": "frontend/projects/domain/src/lib/session-photo-review/session-photo-review.ts",
+    "inputs": ["Route-owned feature state through SESSION_PAGE_SERVICE"],
+    "outputs": ["User intent through the feature service contract"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
+    "catalogEntry": "pattern:session-review",
+    "catalogUrl": "/patterns/session-review"
+  },
+  {
+    "name": "SessionDelivery",
+    "source": "frontend/projects/domain/src/lib/session-delivery/session-delivery.ts",
+    "inputs": ["Route-owned feature state through SESSION_PAGE_SERVICE"],
+    "outputs": ["User intent through the feature service contract"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
+    "catalogEntry": "pattern:session-review",
+    "catalogUrl": "/patterns/session-review"
+  },
+  {
+    "name": "PrintRequestDetails",
+    "source": "frontend/projects/domain/src/lib/print-request-details/print-request-details.ts",
+    "inputs": ["Route-owned feature state through PRINT_INBOX_SERVICE"],
+    "outputs": ["User intent through the feature service contract"],
+    "states": ["success", "loading", "empty", "validation", "dependency-failure"],
+    "catalogEntry": "pattern:print-review",
+    "catalogUrl": "/patterns/print-review"
   }
 ]

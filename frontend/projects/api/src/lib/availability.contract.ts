@@ -1,2 +1,4 @@
-import { IStudioClient } from './studio-client.contract';
-export interface IAvailabilityService extends IStudioClient {}
+import { QuoteInput, AvailabilityResult } from '@qbs/domain/models';
+export interface IAvailabilityService {
+  check(input: QuoteInput): Promise<AvailabilityResult>;
+}

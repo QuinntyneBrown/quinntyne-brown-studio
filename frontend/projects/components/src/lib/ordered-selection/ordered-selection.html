@@ -1,0 +1,45 @@
+@for (item of items(); track item.id; let index = $index) {
+  <div class="records__row">
+    <span>{{ index + 1 }}. {{ item.label }}{{ showCover() && index === 0 ? ' · Cover' : '' }}</span>
+    <div class="records__actions">
+      <button
+        class="button button--secondary"
+        type="button"
+        [disabled]="disabled() || index === 0"
+        [attr.aria-label]="'Move ' + item.label + ' earlier'"
+        (click)="moved.emit({ id: item.id, delta: -1 })"
+      >
+        ↑
+      </button>
+      <button
+        class="button button--secondary"
+        type="button"
+        [disabled]="disabled() || index === items().length - 1"
+        [attr.aria-label]="'Move ' + item.label + ' later'"
+        (click)="moved.emit({ id: item.id, delta: 1 })"
+      >
+        ↓
+      </button>
+      @if (showCover() && index !== 0) {
+        <button
+          class="button button--secondary"
+          type="button"
+          [disabled]="disabled()"
+          [attr.aria-label]="'Use ' + item.label + ' as cover'"
+          (click)="featured.emit(item.id)"
+        >
+          Use as cover
+        </button>
+      }
+      <button
+        class="button button--secondary"
+        type="button"
+        [disabled]="disabled()"
+        [attr.aria-label]="'Remove ' + item.label"
+        (click)="removed.emit(item.id)"
+      >
+        Remove
+      </button>
+    </div>
+  </div>
+}

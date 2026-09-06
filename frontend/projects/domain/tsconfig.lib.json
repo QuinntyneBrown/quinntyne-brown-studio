@@ -6,21 +6,12 @@
     "declarationMap": true,
     "types": [],
     "paths": {
-      "@qbs/api": [
-        "../../dist/api"
-      ],
-      "@qbs/components": [
-        "../../dist/components"
-      ],
-      "@qbs/application": [
-        "../../dist/application"
-      ]
+      "@qbs/api": ["../../dist/api"],
+      "@qbs/components": ["../../dist/components"],
+      "@qbs/application": ["../../dist/application"],
+      "@qbs/domain/models": ["../../dist/domain/models"]
     }
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "**/*.spec.ts"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["**/*.spec.ts"]
 }

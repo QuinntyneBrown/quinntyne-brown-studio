@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Qbs.Api.Models;
@@ -6,16 +7,16 @@ using Qbs.Application.Photos;
 namespace Qbs.Api.Controllers;
 
 [ApiController, Authorize(Roles = "Administrator")]
-public sealed class AnalysisController(AnalysisWorkflows analysis) : ControllerBase
+public sealed class AnalysisController(ISender sender) : ControllerBase
 {
     [HttpPost("api/admin/sessions/{id:guid}/analysis")]
     public async Task<IActionResult> Analyze(Guid id, AnalysisInput input) =>
-        Accepted(await analysis.Request(id, input.PhotoIds));
+        Accepted(await sender.Send(new StartPhotoAnalysis(id, input.PhotoIds)));
 
     [HttpGet("api/admin/analysis/{id:guid}")]
-    public Task<object> Status(Guid id) => analysis.Status(id);
+    public Task<object> Status(Guid id) => sender.Send(new GetPhotoAnalysis(id));
 
     [HttpPost("api/admin/analysis/{id:guid}/retry")]
     public async Task<IActionResult> Retry(Guid id, RetryAnalysisInput input) =>
-        Accepted(await analysis.Retry(id, input.FailedPhotoIds));
+        Accepted(await sender.Send(new RetryPhotoAnalysis(id, input.FailedPhotoIds)));
 }

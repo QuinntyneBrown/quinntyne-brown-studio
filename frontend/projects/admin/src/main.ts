@@ -7,6 +7,6 @@ bootstrapApplication(Shell, {
     provideBrowserGlobalErrorListeners(),
     provideRouter(studioRoutes('admin')),
     { provide: SITE, useValue: 'admin' },
-    ...studioProviders(false),
+    ...studioProviders(),
   ],
 }).catch(console.error);

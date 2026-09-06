@@ -1,42 +1,49 @@
 <section class="login">
   <p class="page__eyebrow">{{ site === 'admin' ? 'Studio team' : 'Your private collection' }}</p>
-  <h1>{{ title }}</h1>
+  <h1>{{ form.title }}</h1>
   <p class="page__description">
     {{
-      mode === 'login'
+      form.mode === 'login'
         ? 'Sign in to your Quinntyne Brown Studio account.'
         : 'Continue securely with your studio account.'
     }}
   </p>
-  @if (message()) {
-    <qbs-notice [message]="message()" [error]="error()" />
+  @if (form.message()) {
+    <qbs-notice [message]="form.message()" [error]="form.error()" />
   }
-  <form class="login__form" (ngSubmit)="submit()">
-    @if (mode === 'login' || mode === 'recovery') {
+  <form class="login__form" (ngSubmit)="form.submit()">
+    @if (form.mode === 'login' || form.mode === 'recovery') {
       <label class="field"
         ><span>Email</span
-        ><input type="email" name="email" [(ngModel)]="email" autocomplete="username" required
+        ><input
+          type="email"
+          name="email"
+          [ngModel]="form.email()"
+          (ngModelChange)="form.email.set($event)"
+          autocomplete="username"
+          required
       /></label>
     }
-    @if (mode !== 'recovery') {
+    @if (form.mode !== 'recovery') {
       <label class="field"
         ><span>Password</span
         ><input
           type="password"
           name="password"
-          [(ngModel)]="password"
-          [autocomplete]="mode === 'login' ? 'current-password' : 'new-password'"
+          [ngModel]="form.password()"
+          (ngModelChange)="form.password.set($event)"
+          [autocomplete]="form.mode === 'login' ? 'current-password' : 'new-password'"
           minlength="8"
           required
       /></label>
     }
-    <button class="button" [disabled]="busy()">
+    <button class="button" [disabled]="form.busy()">
       {{
-        busy()
+        form.busy()
           ? 'Please wait…'
-          : mode === 'login'
+          : form.mode === 'login'
             ? 'Sign in'
-            : mode === 'recovery'
+            : form.mode === 'recovery'
               ? 'Send recovery instructions'
               : 'Save password'
       }}

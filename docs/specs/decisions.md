@@ -64,6 +64,8 @@ Administrators configure print-option names, dimensions, descriptive finish, ena
 
 Requests are stored for an administrator inbox with `Submitted` and `Reviewed` states. A retried submission uses a client-scoped idempotency key and the same canonical payload. A different payload using that key is rejected. Client confirmation includes the stable request identifier. Review records administrator and timestamp; it does not mean printing or payment occurred.
 
+The client obtains its current review through `POST /api/client/print-requests/preview`. The server returns authoritative option descriptions, unit prices, revisions, quantities and rounded totals, echoing the input revision without storing a request. Edits invalidate the displayed result immediately; obsolete successes and failures cannot replace a current review. Submission uses precisely the reviewed revisions. An unchanged retry retains its idempotency key; changing notes or selections creates a new key.
+
 Albums contain a required name and an ordered unique selection of accessible photos. Clients can create, view, rename, add, reorder, and remove photos from their own albums. Creation requires at least one photo; removing the last photo later leaves an empty album. Every added photo is authorized at write time, and every displayed photo is authorized at read time. Stale version updates return a conflict without silently overwriting another edit.
 
 ## OD-08 — Presentation
@@ -92,6 +94,16 @@ Controlled external-service adapters remain available in development independent
 
 This decision includes code, Windows publishing, startup tooling, and the [operating runbook](../../deploy/README.md). It does not install Windows services, provision cloud resources, migrate external production data, or establish unmeasured capacity or recovery guarantees. Backups, a restore exercise, Windows account configuration, and external adapter qualification remain operational evidence under `G-ENV`. See the [acceptance evidence](../implementation/localdb-persistence.md).
 
+## OD-11 — Models entry point and feature contracts
+
+Status: **Accepted**, 2026-09-06. Authority: the approved completion plan and the existing component-placement and interface-consumption rules.
+
+`@qbs/domain/models` contains only the flat studio types. The API library imports that secondary entry point; domain components may then consume API tokens without creating a package build cycle. Build order is models, components, API, domain, application. The three product applications remain bootstrap projects.
+
+Feature contracts declare named operations and finished data rather than inheriting generic HTTP transport methods. Route-owned editor contracts and tokens also live in the API library so domain editor regions can consume them; application services own their signal state, behavior, navigation and lifetime. Provider composition in the application library selects HTTP adapters in normal builds and explicit controlled implementations in acceptance builds. Acceptance fixtures block accidental product HTTP calls. A separate packaged integration suite deliberately exercises production adapters against an isolated LocalDB database.
+
+This decision refines packaging and composition; it does not change OD-10's LocalDB runtime or introduce another database provider. The [completion report](../implementation/platform-completion.md) records implementation and verification.
+
 ## Evidence register
 
 | Gate | Acceptance prerequisite | Status |
@@ -103,3 +115,5 @@ This decision includes code, Windows publishing, startup tooling, and the [opera
 | G-ENV | Windows account/host/TLS, LocalDB backup/restore, external service credentials, environment identifiers, email sender and isolation evidence (OD-10) | `<TO SUPPLY>` |
 
 These gates prevent acceptance claims for unverified product behavior. They do not prevent the requirements and proposed designs from being reviewed.
+
+The [qualification commands](../implementation/qualification.md) now emit measured, failed or blocked evidence reports. Command success alone never changes this register.

@@ -1,2 +1,6 @@
-import { IStudioClient } from './studio-client.contract';
-export interface ISessionService extends IStudioClient {}
+import { Editable, StudioSession } from '@qbs/domain/models';
+export interface ISessionService {
+  list(): Promise<StudioSession[]>;
+  get(id: string): Promise<StudioSession>;
+  save(value: Editable<StudioSession>): Promise<StudioSession>;
+}

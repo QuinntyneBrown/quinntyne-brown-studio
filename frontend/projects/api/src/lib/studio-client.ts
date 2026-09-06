@@ -1,5 +1,6 @@
+import { serviceError } from './service-error';
 import { Injectable } from '@angular/core';
-import { AccountSession, ApiError } from '@qbs/domain';
+import { AccountSession } from '@qbs/domain/models';
 import { IStudioClient } from './studio-client.contract';
 @Injectable()
 export class StudioClient implements IStudioClient {
@@ -7,7 +8,7 @@ export class StudioClient implements IStudioClient {
   private async result<T>(response: Response): Promise<T> {
     if (!response.ok) {
       const error = await response.json().catch(() => ({}));
-      throw new ApiError(
+      throw serviceError(
         response.status,
         error.title || 'The service is unavailable. Please try again.',
         error.errors || {},
@@ -20,7 +21,11 @@ export class StudioClient implements IStudioClient {
   }
   private async csrf() {
     if (!this.token)
-      this.token = (await this.get<{ requestToken: string }>('auth/antiforgery')).requestToken;
+      this.token = (
+        await this.get<{
+          requestToken: string;
+        }>('auth/antiforgery')
+      ).requestToken;
     return this.token;
   }
   async send<T>(method: 'POST' | 'PUT', path: string, body: unknown): Promise<T> {
@@ -55,6 +60,6 @@ export class StudioClient implements IStudioClient {
       credentials: target.origin === location.origin ? 'same-origin' : 'omit',
     });
     if (!r.ok)
-      throw new ApiError(r.status, 'Upload interrupted. Reselect the same files to resume.');
+      throw serviceError(r.status, 'Upload interrupted. Reselect the same files to resume.');
   }
 }

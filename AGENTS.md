@@ -64,6 +64,11 @@ say what it cost rather than quietly narrowing scope.
 
 - The Angular workspace contains `api`, `application`, `components`, and `domain`
   libraries, consumed by the `marketing`, `admin`, and `client` applications.
+- `@qbs/domain/models` is the types-only secondary entry point. API contracts and
+  adapters import it, so the API library never depends on domain components.
+  Build models first, then components, API, domain, and application. Route-owned
+  editor contracts and tokens live in `api`; their behavior and provider bindings
+  live in `application`, and reusable studio editor regions live in `domain`.
 - Prefer signals over RxJS. Reach for RxJS only for genuine streams and events.
 - No single-file components. Template, styles, and class each live in their own file.
 - Consume services through an interface, never a concrete class.
@@ -232,7 +237,8 @@ quinntyne-brown-studio/
 |   |   |   |-- Processing/
 |   |   |   |-- Serialization/
 |   |   |   `-- Storage/
-|   |   `-- Qbs.Worker/               # Background processing host
+|   |   |-- Qbs.Worker/               # Background processing host
+|   |   `-- Qbs.Qualification/        # Camera, upload, AI, and environment evidence commands
 |   `-- tests/
 |       `-- Qbs.AcceptanceTests/      # API integration and infrastructure acceptance tests
 |-- frontend/
@@ -265,7 +271,8 @@ quinntyne-brown-studio/
 |-- e2e/
 |   |-- package.json                  # Independent application acceptance-test project
 |   |-- page-objects/                 # Screen selectors, interactions, and API mocks
-|   `-- specs/                        # Application Playwright acceptance scenarios
+|   |-- specs/                        # Application Playwright acceptance scenarios
+|   `-- integration/                  # Packaged HTTP + LocalDB workflows; separate configuration
 |-- deploy/                           # Windows/LocalDB runbook, emulators, and legacy deployment archive
 |-- scripts/                          # Development startup, smoke checks, and documentation tooling
 `-- docs/

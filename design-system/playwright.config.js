@@ -1,24 +1,34 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
-  testDir: './tests',
+  testDir: "./tests",
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
-  reporter: [['list'], ['json', { outputFile: 'test-results/results.json' }]],
+  reporter: [["list"], ["json", { outputFile: "test-results/results.json" }]],
   webServer: {
-    command: 'npm run serve:test',
-    url: 'http://127.0.0.1:4181/',
+    command: "npm run serve:test",
+    url: "http://127.0.0.1:4181/",
     reuseExistingServer: !process.env.CI,
     timeout: 60_000,
   },
   use: {
-    baseURL: 'http://127.0.0.1:4181/',
-    trace: 'retain-on-failure',
-    screenshot: 'only-on-failure',
+    baseURL: "http://127.0.0.1:4181/",
+    trace: "retain-on-failure",
+    screenshot: "only-on-failure",
   },
-  projects: [
-    { name: 'mobile', use: { ...devices['Desktop Chrome'], viewport: { width: 390, height: 844 } } },
-    { name: 'tablet', use: { ...devices['Desktop Chrome'], viewport: { width: 768, height: 1024 } } },
-    { name: 'desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
-  ],
+  workers: 1,
+  projects: ["chromium", "firefox", "webkit"].flatMap((browserName) => [
+    {
+      name: `${browserName}-mobile`,
+      use: { browserName, viewport: { width: 390, height: 844 } },
+    },
+    {
+      name: `${browserName}-tablet`,
+      use: { browserName, viewport: { width: 768, height: 1024 } },
+    },
+    {
+      name: `${browserName}-desktop`,
+      use: { browserName, viewport: { width: 1440, height: 900 } },
+    },
+  ]),
 });
