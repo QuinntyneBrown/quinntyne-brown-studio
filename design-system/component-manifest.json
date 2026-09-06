@@ -1,0 +1,795 @@
+{
+  "schemaVersion": 1,
+  "product": {
+    "name": "Quinntyne Brown Studio Design System",
+    "version": "1.0.0",
+    "description": "Foundations, components, screen patterns, and dialog scenarios for the marketing, administration, and client applications."
+  },
+  "categories": [
+    {
+      "id": "foundations",
+      "name": "Foundations"
+    },
+    {
+      "id": "controls",
+      "name": "Controls"
+    },
+    {
+      "id": "forms",
+      "name": "Forms"
+    },
+    {
+      "id": "layout",
+      "name": "Layout"
+    },
+    {
+      "id": "data",
+      "name": "Data display"
+    },
+    {
+      "id": "feedback",
+      "name": "Feedback"
+    },
+    {
+      "id": "media",
+      "name": "Photography"
+    },
+    {
+      "id": "overlays",
+      "name": "Overlays"
+    }
+  ],
+  "components": [
+    {
+      "id": "typography",
+      "name": "Typography",
+      "category": "foundations",
+      "description": "Serif headings over a plain sans body, with a muted variant for supporting copy.",
+      "classes": [
+        "text--muted"
+      ],
+      "states": [
+        "default"
+      ],
+      "examples": [
+        {
+          "id": "scale",
+          "title": "Type scale",
+          "description": "Display heading, section heading, label heading, and muted body copy.",
+          "markup": "<div class='stack'><h1>Photography with feeling.</h1><h2>Made to be remembered.</h2><h3>Session details</h3><p class='text--muted'>Generous space. A clear hierarchy. Familiar words.</p></div>"
+        }
+      ]
+    },
+    {
+      "id": "button",
+      "name": "Button",
+      "category": "controls",
+      "description": "The single action control. Primary carries the page's main action, secondary sits beside it, and danger confirms a destructive step.",
+      "classes": [
+        "button",
+        "button--secondary",
+        "button--danger"
+      ],
+      "states": [
+        "default",
+        "disabled"
+      ],
+      "examples": [
+        {
+          "id": "variants",
+          "title": "Variants and disabled state",
+          "description": "Every variant keeps the 44 pixel minimum target and the shared focus outline.",
+          "markup": "<div class='form__actions'><button class='button' type='button'>Primary action</button><button class='button button--secondary' type='button'>Secondary action</button><button class='button button--danger' type='button'>Delete session</button><button class='button' type='button' disabled>Saving\u2026</button></div>"
+        }
+      ]
+    },
+    {
+      "id": "badge",
+      "name": "Badge",
+      "category": "data",
+      "description": "A quiet status marker for a record or photograph.",
+      "classes": [
+        "badge"
+      ],
+      "states": [
+        "default"
+      ],
+      "examples": [
+        {
+          "id": "states",
+          "title": "Processing and ready",
+          "description": "Badges label a state; they never carry an action.",
+          "markup": "<p><span class='badge'>Processing</span> <span class='badge'>Ready</span> <span class='badge'>Suggested</span></p>"
+        }
+      ]
+    },
+    {
+      "id": "page-header",
+      "name": "Page header",
+      "category": "layout",
+      "description": "The eyebrow, title, description, and optional primary action that open every screen.",
+      "classes": [
+        "page__header",
+        "page__eyebrow",
+        "page__description"
+      ],
+      "states": [
+        "default",
+        "with-action"
+      ],
+      "examples": [
+        {
+          "id": "with-action",
+          "title": "Header with a primary action",
+          "description": "The action stays on the trailing edge and stacks below the title on narrow viewports.",
+          "markup": "<header class='page__header'><div><p class='page__eyebrow'>Studio administration</p><h1>Equipment</h1><p class='page__description'>Lenses, bodies, lighting, and rental units available to quote against.</p></div><button class='button' type='button'>Add equipment</button></header>"
+        }
+      ]
+    },
+    {
+      "id": "field",
+      "name": "Field",
+      "category": "forms",
+      "description": "A labelled control with optional choices and a validation message.",
+      "classes": [
+        "field",
+        "field__choices",
+        "field__error"
+      ],
+      "states": [
+        "default",
+        "validation"
+      ],
+      "examples": [
+        {
+          "id": "controls",
+          "title": "Text, select, and multi-choice",
+          "description": "Labels wrap their control so the whole label remains a hit target.",
+          "markup": "<div class='form__grid'><label class='field'><span>Session name</span><input name='name' placeholder='A meaningful occasion' /></label><label class='field'><span>Service</span><select name='service'><option>Wedding</option><option>Event</option><option>Headshots</option><option>Family portraits</option></select></label><fieldset class='field' style='border:0;padding:0;margin:0'><span>Roles</span><div class='field__choices'><label><input type='checkbox' checked />Second shooter</label><label><input type='checkbox' />Makeup artist</label></div></fieldset><label class='field'><span>Notes</span><textarea name='notes'></textarea></label></div>"
+        },
+        {
+          "id": "validation",
+          "title": "Validation message",
+          "description": "Field errors read beneath the control in the danger tone and stay in the tab order.",
+          "markup": "<label class='field'><span>Quantity</span><input name='quantity' type='number' value='-1' aria-describedby='quantity-error' /><small class='field__error' id='quantity-error'>Enter a quantity of one or more.</small></label>"
+        }
+      ]
+    },
+    {
+      "id": "form",
+      "name": "Form",
+      "category": "forms",
+      "description": "The bordered editing surface: heading, two-column grid, and an action row separated by a rule.",
+      "classes": [
+        "form",
+        "form__grid",
+        "form__actions"
+      ],
+      "states": [
+        "default",
+        "busy"
+      ],
+      "examples": [
+        {
+          "id": "editor",
+          "title": "Record editor",
+          "description": "The grid collapses to one column below 600 pixels; actions wrap rather than overflow.",
+          "markup": "<form class='form'><h2>New equipment</h2><div class='form__grid'><label class='field'><span>Name</span><input name='name' value='Camera body' /></label><label class='field'><span>Quantity</span><input name='quantity' type='number' value='2' /></label></div><div class='form__actions'><button class='button' type='button'>Save</button><button class='button button--secondary' type='button'>Cancel</button></div></form>"
+        }
+      ]
+    },
+    {
+      "id": "records",
+      "name": "Record list",
+      "category": "data",
+      "description": "The administrative list: one row per record with a supporting detail line and row actions.",
+      "classes": [
+        "records",
+        "records__row",
+        "records__detail",
+        "records__actions"
+      ],
+      "states": [
+        "default"
+      ],
+      "examples": [
+        {
+          "id": "rows",
+          "title": "Rows with actions",
+          "description": "Rows stack their actions under the name on narrow viewports.",
+          "markup": "<div class='records'><article class='records__row'><div><h3>Riverside ceremony</h3><p class='records__detail'>Saturday 14 June \u00b7 Wedding \u00b7 Amara Bell</p></div><div class='records__actions'><a href='#'>Open session \u2192</a><button class='button button--secondary' type='button'>Edit</button></div></article><article class='records__row'><div><h3>Harbour headshots</h3><p class='records__detail'>Tuesday 17 June \u00b7 Headshots \u00b7 Unassigned</p></div><div class='records__actions'><a href='#'>Open session \u2192</a><button class='button button--secondary' type='button'>Edit</button></div></article></div>"
+        }
+      ]
+    },
+    {
+      "id": "panel",
+      "name": "Panel",
+      "category": "layout",
+      "description": "A bordered container for a single subject, with a soft filled variant for supporting information.",
+      "classes": [
+        "panel",
+        "panel--soft"
+      ],
+      "states": [
+        "default",
+        "soft"
+      ],
+      "examples": [
+        {
+          "id": "variants",
+          "title": "Bordered and soft",
+          "description": "The soft variant drops the border and carries the filled background instead.",
+          "markup": "<div class='layout__grid'><section class='panel'><h2>Your quote</h2><p class='text--muted'>Live totals update as you change the session.</p></section><section class='panel panel--soft'><h2>Consultation</h2><p class='text--muted'>Package prices are confirmed after a detailed consultation.</p></section></div>"
+        }
+      ]
+    },
+    {
+      "id": "layout-split",
+      "name": "Split layout",
+      "category": "layout",
+      "description": "A wide main column beside a narrower supporting column that collapses to one column below 850 pixels.",
+      "classes": [
+        "layout__split"
+      ],
+      "states": [
+        "default"
+      ],
+      "examples": [
+        {
+          "id": "main-aside",
+          "title": "Main content and summary",
+          "description": "Used by the quote calculator and the print request screens.",
+          "markup": "<div class='layout__split'><section class='panel'><h2>Session</h2><p class='text--muted'>Service, date, location, equipment, and assistants.</p></section><aside class='panel panel--soft'><h2>Total</h2><p class='price__total'>$2,480.00 CAD</p></aside></div>"
+        }
+      ]
+    },
+    {
+      "id": "layout-grid",
+      "name": "Grid",
+      "category": "layout",
+      "description": "A three-column grid that steps to two columns below 850 pixels and one column below 600 pixels.",
+      "classes": [
+        "layout__grid"
+      ],
+      "states": [
+        "default"
+      ],
+      "examples": [
+        {
+          "id": "three-up",
+          "title": "Three-up cards",
+          "description": "Used for services, promotions, and print sizes.",
+          "markup": "<div class='layout__grid'><section class='panel'><h3>Weddings</h3><p class='text--muted'>Full day coverage.</p></section><section class='panel'><h3>Events</h3><p class='text--muted'>Hourly coverage.</p></section><section class='panel'><h3>Headshots</h3><p class='text--muted'>Studio sessions.</p></section></div>"
+        }
+      ]
+    },
+    {
+      "id": "section",
+      "name": "Section",
+      "category": "layout",
+      "description": "A titled band of content with an optional trailing link.",
+      "classes": [
+        "section",
+        "section__header"
+      ],
+      "states": [
+        "default"
+      ],
+      "examples": [
+        {
+          "id": "with-link",
+          "title": "Section with a trailing link",
+          "description": "The header keeps the title and link on one line until the viewport forces a wrap.",
+          "markup": "<section class='section'><div class='section__header'><h2>Recent galleries</h2><a href='#'>View all \u2192</a></div><p class='text--muted'>Published work from the last three months.</p></section>"
+        }
+      ]
+    },
+    {
+      "id": "price-summary",
+      "name": "Price summary",
+      "category": "data",
+      "description": "Itemised money lines and the emphasised total used by quotes and print estimates.",
+      "classes": [
+        "price__line",
+        "price__total"
+      ],
+      "states": [
+        "default",
+        "with-discount"
+      ],
+      "examples": [
+        {
+          "id": "quote",
+          "title": "Quote breakdown",
+          "description": "Amounts are server-calculated decimal values in Canadian dollars.",
+          "markup": "<section class='panel'><p class='price__line'><span>Wedding coverage \u00b7 8 hours</span><span>$2,200.00</span></p><p class='price__line'><span>Equipment rental \u00b7 2 units</span><span>$240.00</span></p><p class='price__line'><span>Advance booking discount</span><span>\u2212$120.00</span></p><p class='price__total'>$2,320.00 CAD</p></section>"
+        }
+      ]
+    },
+    {
+      "id": "notice",
+      "name": "Notice",
+      "category": "feedback",
+      "description": "A polite live region for the result of an action. The error tone carries failures without moving focus.",
+      "classes": [
+        "notice",
+        "notice--error"
+      ],
+      "states": [
+        "success",
+        "error"
+      ],
+      "examples": [
+        {
+          "id": "success",
+          "title": "Confirmation",
+          "description": "Announced through aria-live so assistive technology hears the result.",
+          "markup": "<div class='notice' role='status' aria-live='polite'>Saved successfully.</div>"
+        },
+        {
+          "id": "error",
+          "title": "Failure",
+          "description": "Failures state what happened and what to do next; they never show a fabricated result.",
+          "markup": "<div class='notice notice--error' role='status' aria-live='polite'>This record changed. Reload before saving.</div>"
+        }
+      ]
+    },
+    {
+      "id": "empty-state",
+      "name": "Empty state",
+      "category": "feedback",
+      "description": "The considered blank slate shown when a list has nothing in it yet.",
+      "classes": [
+        "empty-state"
+      ],
+      "states": [
+        "default"
+      ],
+      "examples": [
+        {
+          "id": "no-records",
+          "title": "Nothing yet",
+          "description": "A symbol, a sentence, and no invented data.",
+          "markup": "<div class='empty-state'><span aria-hidden='true'>\u25c7</span><p>No galleries available yet.</p></div>"
+        }
+      ]
+    },
+    {
+      "id": "photo-grid",
+      "name": "Photo grid",
+      "category": "media",
+      "description": "The session and gallery grid. Tiles open a photograph, carry an optional selection control, and degrade to a readable label when bytes are unavailable.",
+      "classes": [
+        "photo-grid",
+        "photo-grid__tile",
+        "photo-grid__open",
+        "photo-grid__caption",
+        "photo-grid__selection"
+      ],
+      "states": [
+        "ready",
+        "selectable",
+        "unavailable"
+      ],
+      "examples": [
+        {
+          "id": "ready",
+          "title": "Ready photographs",
+          "description": "Tiles keep a 4:5 frame and lazy-load their preview.",
+          "markup": "<div class='photo-grid'><figure class='photo-grid__tile'><button class='photo-grid__open' type='button' aria-label='View Ceremony 014'><span>Ready</span></button><figcaption class='photo-grid__caption'>Ceremony 014</figcaption></figure><figure class='photo-grid__tile'><button class='photo-grid__open' type='button' aria-label='View Ceremony 015'><span>Ready</span></button><figcaption class='photo-grid__caption'>Ceremony 015</figcaption></figure><figure class='photo-grid__tile'><button class='photo-grid__open' type='button' aria-label='View Ceremony 016'><span>Ready</span></button><figcaption class='photo-grid__caption'>Ceremony 016</figcaption></figure></div>"
+        },
+        {
+          "id": "selectable",
+          "title": "Selection",
+          "description": "Selection is a labelled checkbox on the tile, reachable by keyboard.",
+          "markup": "<div class='photo-grid'><figure class='photo-grid__tile'><button class='photo-grid__open' type='button' aria-label='View Portrait 002'><span>Ready</span></button><figcaption class='photo-grid__caption'>Portrait 002</figcaption><label class='photo-grid__selection'><input type='checkbox' checked aria-label='Select Portrait 002' />Select</label></figure><figure class='photo-grid__tile'><button class='photo-grid__open' type='button' aria-label='View Portrait 003'><span>Ready</span></button><figcaption class='photo-grid__caption'>Portrait 003</figcaption><label class='photo-grid__selection'><input type='checkbox' aria-label='Select Portrait 003' />Select</label></figure></div>"
+        },
+        {
+          "id": "unavailable",
+          "title": "Unavailable photograph",
+          "description": "A revoked or still-processing photograph keeps its place and says why it cannot be opened.",
+          "markup": "<div class='photo-grid'><figure class='photo-grid__tile'><button class='photo-grid__open' type='button' disabled aria-label='View Album 004'><span>Photo unavailable</span></button><figcaption class='photo-grid__caption'>Album 004</figcaption></figure><figure class='photo-grid__tile'><button class='photo-grid__open' type='button' disabled aria-label='View Album 005'><span>Processing</span></button><figcaption class='photo-grid__caption'>Album 005</figcaption></figure></div>"
+        }
+      ]
+    },
+    {
+      "id": "image-preview",
+      "name": "Image preview",
+      "category": "media",
+      "description": "A single contained photograph that never exceeds the viewport height.",
+      "classes": [
+        "image__preview"
+      ],
+      "states": [
+        "default"
+      ],
+      "examples": [
+        {
+          "id": "contained",
+          "title": "Contained preview",
+          "description": "Object-fit keeps the whole frame visible on every viewport.",
+          "markup": "<figure class='panel panel--soft'><div class='image__preview' style='aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;background:#e9eae2;color:#74766e'>Preview</div><figcaption class='records__detail'>Ceremony 014 \u00b7 6016 \u00d7 4016</figcaption></figure>"
+        }
+      ]
+    },
+    {
+      "id": "dialog",
+      "name": "Dialog",
+      "category": "overlays",
+      "description": "A native modal dialog with a titled header, a close control, Escape support, and focus returned to the trigger.",
+      "classes": [
+        "dialog",
+        "dialog__header",
+        "dialog__body"
+      ],
+      "states": [
+        "closed",
+        "open"
+      ],
+      "examples": [
+        {
+          "id": "confirm",
+          "title": "Confirm an action",
+          "description": "Escape closes the dialog and focus returns to the control that opened it.",
+          "markup": "<div><button class='button' type='button' data-dialog-open='catalog-dialog'>Open dialog</button><dialog class='dialog' id='catalog-dialog' aria-labelledby='catalog-dialog-title'><header class='dialog__header'><h2 id='catalog-dialog-title'>Confirm your selection</h2><button type='button' aria-label='Close dialog' data-dialog-close>\u00d7</button></header><div class='dialog__body'><p>Focus remains inside this dialog. Escape closes it and returns focus to the trigger.</p><div class='form__actions'><button class='button' type='button' data-dialog-close>Done</button></div></div></dialog></div>"
+        }
+      ]
+    },
+    {
+      "id": "stack",
+      "name": "Stack",
+      "category": "layout",
+      "description": "Consistent vertical rhythm between sibling blocks.",
+      "classes": [
+        "stack"
+      ],
+      "states": [
+        "default"
+      ],
+      "examples": [
+        {
+          "id": "rhythm",
+          "title": "Stacked blocks",
+          "description": "Only the space between siblings is set, so the first and last blocks stay flush.",
+          "markup": "<div class='stack'><div class='notice' role='status'>Upload finished.</div><div class='panel'><h3>Next</h3><p class='text--muted'>Review the session and publish a gallery.</p></div></div>"
+        }
+      ]
+    },
+    {
+      "id": "shell",
+      "name": "Application shell",
+      "category": "layout",
+      "description": "The chrome around every screen: the public header, navigation and footer, and the administrative sidebar, top bar, and content column.",
+      "classes": [
+        "shell__brand",
+        "shell__public",
+        "shell__public-nav",
+        "shell__public-main",
+        "shell__footer",
+        "shell__workspace",
+        "shell__sidebar",
+        "shell__side-nav",
+        "shell__link--active",
+        "shell__topbar",
+        "shell__main",
+        "shell__skip",
+        "shell__workspace-main",
+        "shell__toggle",
+        "shell__side-nav--open",
+        "shell__public-nav--open"
+      ],
+      "states": [
+        "public",
+        "workspace",
+        "narrow"
+      ],
+      "examples": [
+        {
+          "id": "public",
+          "title": "Public chrome",
+          "description": "The marketing header, navigation, and footer. The skip link is the first focusable control.",
+          "markup": "<div><a class='shell__skip button' href='#example-main'>Skip to content</a><header class='shell__public'><a class='shell__brand' href='#'>Quinntyne Brown<span>Studio \u00b7 Photography</span></a><nav class='shell__public-nav' aria-label='Main navigation'><a href='#'>Portfolio</a><a href='#'>Services</a><a href='#'>Prints</a><a class='button' href='#'>Plan a session \u2197</a></nav></header><main class='shell__public-main' id='example-main'><p class='text--muted'>Page content sits in this column.</p></main><footer class='shell__footer'><span>Quinntyne Brown Studio</span><span>Thoughtfully photographed.</span></footer></div>"
+        },
+        {
+          "id": "workspace",
+          "title": "Workspace chrome",
+          "description": "The administrative sidebar with its active entry, the top bar, and the content column. The height is constrained for this example; in the product the workspace fills the viewport.",
+          "markup": "<div class='shell__workspace' style='min-height:360px'><aside class='shell__sidebar'><a class='shell__brand' href='#'>Quinntyne Brown<span>Studio administration</span></a><nav class='shell__side-nav' aria-label='Workspace navigation'><a href='#' class='shell__link--active'>Sessions</a><a href='#'>Photographers</a><a href='#'>Equipment</a><a href='#'>Quote rates</a></nav></aside><div><header class='shell__topbar'><span>Studio workspace</span><button type='button'>Sign out</button></header><main class='shell__main'><p class='text--muted'>Screen content sits in this column.</p></main></div></div>"
+        },
+        {
+          "id": "narrow",
+          "title": "Narrow-viewport navigation",
+          "description": "Below 750 pixels the navigation collapses behind a toggle that reports its expanded state.",
+          "markup": "<div><header class='shell__public'><a class='shell__brand' href='#'>Quinntyne Brown<span>Studio \u00b7 Photography</span></a><button class='button button--secondary shell__toggle' type='button' aria-expanded='true' aria-controls='narrow-navigation' style='display:inline-flex'>Menu</button><nav class='shell__public-nav shell__public-nav--open' id='narrow-navigation' aria-label='Main navigation' style='display:flex'><a href='#'>Portfolio</a><a href='#'>Services</a><a href='#'>Prints</a></nav></header><div class='shell__workspace-main'><p class='text--muted'>The open navigation keeps the toggle, and the content column keeps its minimum width.</p></div></div>"
+        }
+      ]
+    },
+    {
+      "id": "hero",
+      "name": "Hero",
+      "category": "layout",
+      "description": "The marketing opening: an eyebrow, a display heading, supporting copy, a photograph frame, and the session invitation band.",
+      "classes": [
+        "hero",
+        "hero__copy",
+        "hero__image",
+        "hero__placeholder",
+        "hero__meta",
+        "hero__invitation"
+      ],
+      "states": [
+        "photograph",
+        "placeholder"
+      ],
+      "examples": [
+        {
+          "id": "placeholder",
+          "title": "Opening without published work",
+          "description": "An unconfigured studio keeps the frame and its branded placeholder rather than an empty area.",
+          "markup": "<div class='stack'><section class='hero'><div class='hero__copy'><p class='page__eyebrow'>Quinntyne Brown Studio</p><h1>Photography with feeling.</h1><p>Honest moments, thoughtfully captured.</p><a class='button' href='#'>Calculate your quote</a><div class='hero__meta'><span>Weddings</span><span>Events</span><span>Headshots</span><span>Family portraits</span></div></div><div class='hero__image'><div class='hero__placeholder'><span>QB</span><p>Selected work arrives here</p></div></div></section><section class='hero__invitation'><div><h2>Plan a session</h2><p class='text--muted'>A quote takes about a minute.</p></div><a class='button' href='#'>Start a quote</a></section></div>"
+        }
+      ]
+    },
+    {
+      "id": "gallery-card",
+      "name": "Gallery card",
+      "category": "media",
+      "description": "A published collection: its cover frame, title, and photograph count.",
+      "classes": [
+        "gallery-card",
+        "gallery-card__image"
+      ],
+      "states": [
+        "default"
+      ],
+      "examples": [
+        {
+          "id": "cover",
+          "title": "Published collection",
+          "description": "The cover keeps a fixed height so a row of cards aligns.",
+          "markup": "<div class='layout__grid'><article class='gallery-card'><div class='gallery-card__image' style='background:#e9eae2;display:flex;align-items:center;justify-content:center;color:#74766e'>Cover</div><h3>Riverside ceremony<span>24</span></h3></article><article class='gallery-card'><div class='gallery-card__image' style='background:#e9eae2;display:flex;align-items:center;justify-content:center;color:#74766e'>Cover</div><h3>Harbour portraits<span>18</span></h3></article></div>"
+        }
+      ]
+    },
+    {
+      "id": "client-card",
+      "name": "Client session card",
+      "category": "media",
+      "description": "A client's private session: a cover panel, the session name, and its availability line.",
+      "classes": [
+        "client-card",
+        "client-card__cover"
+      ],
+      "states": [
+        "available",
+        "expiring"
+      ],
+      "examples": [
+        {
+          "id": "available",
+          "title": "Available session",
+          "description": "The cover uses an initial rather than a private photograph until one is authorized.",
+          "markup": "<div class='layout__grid'><article class='client-card'><div class='client-card__cover'>R</div><h2>Riverside ceremony</h2><p class='records__detail'>Available until 14 December 2026</p></article><article class='client-card'><div class='client-card__cover'>H</div><h2>Harbour headshots</h2><p class='records__detail'>Available until 3 March 2027</p></article></div>"
+        }
+      ]
+    },
+    {
+      "id": "login",
+      "name": "Authentication column",
+      "category": "forms",
+      "description": "The centred column used by sign in, recovery, password reset, and invitation acceptance.",
+      "classes": [
+        "login",
+        "login__form"
+      ],
+      "states": [
+        "default",
+        "validation"
+      ],
+      "examples": [
+        {
+          "id": "sign-in",
+          "title": "Sign in",
+          "description": "One column, one task, and a single recovery link beneath the action.",
+          "markup": "<section class='login'><p class='page__eyebrow'>Quinntyne Brown Studio</p><h1>Sign in</h1><form class='login__form'><label class='field'><span>Email</span><input type='email' name='email' autocomplete='username' /></label><label class='field'><span>Password</span><input type='password' name='password' autocomplete='current-password' /></label><button class='button' type='button'>Sign in</button></form><a href='#'>Forgot your password?</a></section>"
+        }
+      ]
+    }
+  ],
+  "patterns": [
+    {
+      "id": "marketing-home",
+      "name": "Marketing home",
+      "description": "The public entry screen: hero copy, portfolio grid, and the quote invitation.",
+      "scenarios": [
+        {
+          "id": "published",
+          "name": "Published content"
+        },
+        {
+          "id": "unavailable",
+          "name": "Content service unavailable"
+        }
+      ]
+    },
+    {
+      "id": "quote-calculator",
+      "name": "Quote calculator",
+      "description": "The live quote screen: session inputs beside a recalculating total.",
+      "scenarios": [
+        {
+          "id": "calculated",
+          "name": "Calculated total"
+        },
+        {
+          "id": "validation",
+          "name": "Invalid input"
+        },
+        {
+          "id": "unconfigured",
+          "name": "Rates not configured"
+        }
+      ]
+    },
+    {
+      "id": "admin-records",
+      "name": "Administration list",
+      "description": "The administrative resource screen with its list, empty state, and loading state.",
+      "scenarios": [
+        {
+          "id": "populated",
+          "name": "Records"
+        },
+        {
+          "id": "empty",
+          "name": "No records"
+        },
+        {
+          "id": "loading",
+          "name": "Loading"
+        }
+      ]
+    },
+    {
+      "id": "session-review",
+      "name": "Session review",
+      "description": "Uploaded session photographs with processing states and advisory suggestions.",
+      "scenarios": [
+        {
+          "id": "ready",
+          "name": "Ready for review"
+        },
+        {
+          "id": "processing",
+          "name": "Still processing"
+        }
+      ]
+    },
+    {
+      "id": "client-gallery",
+      "name": "Client gallery",
+      "description": "An assigned private gallery, including the revoked-access outcome.",
+      "scenarios": [
+        {
+          "id": "assigned",
+          "name": "Assigned gallery"
+        },
+        {
+          "id": "revoked",
+          "name": "Access revoked"
+        }
+      ]
+    },
+    {
+      "id": "client-prints",
+      "name": "Print request",
+      "description": "Print selection with a priced estimate and the submitted confirmation.",
+      "scenarios": [
+        {
+          "id": "estimate",
+          "name": "Priced estimate"
+        },
+        {
+          "id": "submitted",
+          "name": "Submitted request"
+        }
+      ]
+    },
+    {
+      "id": "authentication",
+      "name": "Authentication",
+      "description": "Sign in, recovery, and invitation acceptance on the shared authentication layout.",
+      "scenarios": [
+        {
+          "id": "sign-in",
+          "name": "Sign in"
+        },
+        {
+          "id": "invalid",
+          "name": "Rejected credentials"
+        }
+      ]
+    },
+    {
+      "id": "print-review",
+      "name": "Print request review",
+      "description": "The administrative inbox of submitted print requests and one reviewed request with its held prices.",
+      "scenarios": [
+        {
+          "id": "inbox",
+          "name": "Submitted requests"
+        },
+        {
+          "id": "reviewed",
+          "name": "Reviewed request"
+        }
+      ]
+    },
+    {
+      "id": "admin-settings",
+      "name": "Configuration editor",
+      "description": "The administrative configuration screens: quote rates and discount rules.",
+      "scenarios": [
+        {
+          "id": "rates",
+          "name": "Quote rates"
+        },
+        {
+          "id": "discounts",
+          "name": "Discount rules"
+        }
+      ]
+    },
+    {
+      "id": "system-states",
+      "name": "System states",
+      "description": "Not found, access denied, expired session, and service failure screens.",
+      "scenarios": [
+        {
+          "id": "not-found",
+          "name": "Not found"
+        },
+        {
+          "id": "access-denied",
+          "name": "Access denied"
+        },
+        {
+          "id": "service-error",
+          "name": "Service unavailable"
+        }
+      ]
+    }
+  ],
+  "dialogs": [
+    {
+      "id": "confirm",
+      "name": "Confirmation",
+      "description": "Destructive and publishing confirmations built on the shared dialog.",
+      "scenarios": [
+        {
+          "id": "destructive",
+          "name": "Delete photographs"
+        },
+        {
+          "id": "publish",
+          "name": "Publish gallery"
+        }
+      ]
+    },
+    {
+      "id": "lightbox",
+      "name": "Photograph lightbox",
+      "description": "A single photograph opened from a grid, with its caption and close control.",
+      "scenarios": [
+        {
+          "id": "photo",
+          "name": "Photograph"
+        },
+        {
+          "id": "unavailable",
+          "name": "Unavailable photograph"
+        }
+      ]
+    }
+  ]
+}

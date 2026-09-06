@@ -1,8 +1,0 @@
-{
-  "navigationFallback": { "rewrite": "/index.html", "exclude": ["/*.{js,css,png,jpg,ico,json}"] },
-  "routes": [
-    { "route": "/index.html", "headers": { "Cache-Control": "no-cache" } },
-    { "route": "/*.js", "headers": { "Cache-Control": "public, max-age=31536000, immutable" } },
-    { "route": "/*.css", "headers": { "Cache-Control": "public, max-age=31536000, immutable" } }
-  ]
-}

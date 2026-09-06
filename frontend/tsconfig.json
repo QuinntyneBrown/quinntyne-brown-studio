@@ -37,9 +37,6 @@
       "path": "./projects/client/tsconfig.app.json"
     },
     {
-      "path": "./projects/design-system/tsconfig.app.json"
-    },
-    {
       "path": "./projects/components/tsconfig.lib.json"
     },
     {

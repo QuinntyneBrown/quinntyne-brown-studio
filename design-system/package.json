@@ -1,0 +1,21 @@
+{
+  "name": "@qbs/design-system",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Standalone Quinntyne Brown Studio design system: foundations, component catalog, and responsive screen patterns.",
+  "scripts": {
+    "start": "vite --host 127.0.0.1 --port 5183",
+    "build": "vite build",
+    "check:artifact": "node scripts/check-artifact.mjs",
+    "preview": "vite preview --host 127.0.0.1 --port 5183",
+    "serve:test": "npm run build && vite preview --host 127.0.0.1 --port 4181",
+    "validate": "node scripts/validate.mjs",
+    "test:browser": "playwright test",
+    "test": "npm run validate && npm run test:browser"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "vite": "^7.1.3"
+  }
+}

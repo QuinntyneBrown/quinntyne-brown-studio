@@ -9,7 +9,6 @@ import { SessionPage } from './session-page/session-page';
 import { ClientPage } from './client-page/client-page';
 import { LoginPage } from './login-page/login-page';
 import { PrintInbox } from './print-inbox/print-inbox';
-import { DesignSystemPage } from './design-system-page/design-system-page';
 import { RESOURCES } from './resource-definitions';
 const access: CanActivateFn = async (route) => {
   const auth = inject(AuthState),
@@ -30,26 +29,6 @@ const accountRoutes: Routes = [
   { path: 'accept-invitation', component: LoginPage, data: { mode: 'accept-invitation' } },
 ];
 export function studioRoutes(site: string): Routes {
-  if (site === 'design-system')
-    return [
-      { path: '', component: DesignSystemPage, data: { resource: 'equipment', kind: 'rates' } },
-      {
-        path: 'components/:example',
-        component: DesignSystemPage,
-        data: { resource: 'equipment' },
-        resolve: {
-          kind: (route: any) =>
-            (
-              ({
-                'public-page': 'home',
-                'client-page': 'galleries',
-                'settings-page': 'rates',
-              }) as Record<string, string>
-            )[route.paramMap.get('example')] ?? 'rates',
-        },
-      },
-      { path: '**', redirectTo: '' },
-    ];
   if (site === 'marketing')
     return [
       { path: '', component: PublicPage, data: { kind: 'home' } },

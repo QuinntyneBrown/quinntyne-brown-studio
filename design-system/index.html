@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quinntyne Brown Studio Design System</title>
+    <meta
+      name="description"
+      content="Foundations, components, screen patterns, and dialog scenarios for Quinntyne Brown Studio."
+    />
+    <link rel="stylesheet" href="/assets/tokens.css" />
+    <link rel="stylesheet" href="/assets/components.css" />
+    <link rel="stylesheet" href="/assets/docs.css" />
+  </head>
+  <body>
+    <a class="skip button" href="#catalog">Skip to the catalog</a>
+    <div class="docs">
+      <div class="docs__sidebar">
+        <header class="docs__brand">
+          <p>Quinntyne Brown Studio</p>
+          <h2>Design system</h2>
+        </header>
+        <details id="catalog-navigation" class="docs__disclosure">
+          <summary>Catalog</summary>
+          <nav id="navigation" class="nav" aria-label="Catalog"></nav>
+        </details>
+      </div>
+      <main id="catalog" class="docs__main" tabindex="-1"></main>
+    </div>
+    <script type="module" src="/assets/docs.js"></script>
+  </body>
+</html>

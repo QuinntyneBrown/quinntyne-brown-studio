@@ -1,5 +1,5 @@
 <a class="shell__skip" href="#main">Skip to content</a>
-@if (site === 'marketing' || site === 'design-system') {
+@if (site === 'marketing') {
   <header class="shell__public">
     <a routerLink="/" class="shell__brand">Quinntyne Brown<span>Studio · Photography</span></a
     ><button
@@ -16,19 +16,15 @@
       [class.shell__public-nav--open]="menu()"
       aria-label="Main navigation"
     >
-      @if (site === 'marketing') {
-        @for (link of publicLinks; track link[1]) {
-          <a
-            [routerLink]="link[1]"
-            routerLinkActive="shell__link--active"
-            (click)="menu.set(false)"
-            >{{ link[0] }}</a
-          >
-        }
-        <a routerLink="/quote" class="button">Plan a session ↗</a>
-      } @else {
-        <span>Components & patterns</span>
+      @for (link of publicLinks; track link[1]) {
+        <a
+          [routerLink]="link[1]"
+          routerLinkActive="shell__link--active"
+          (click)="menu.set(false)"
+          >{{ link[0] }}</a
+        >
       }
+      <a routerLink="/quote" class="button">Plan a session ↗</a>
     </nav>
   </header>
   <main id="main" class="shell__public-main" tabindex="-1"><router-outlet /></main>
