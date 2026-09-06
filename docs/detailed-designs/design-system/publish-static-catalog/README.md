@@ -2,31 +2,31 @@
 
 ## Overview
 
-Quinntyne Brown Studio supports photography discovery, studio administration, and client deliverables. A catalog artifact is the built static HTML, JavaScript, CSS, and assets for the root-level `design-system` product. Contributors can publish it independently from the studio backend. A static host serves its navigation and component examples.
+Quinntyne Brown Studio supports photography discovery, studio administration, and client deliverables. A catalog artifact is the built static HTML, JavaScript, CSS, and contracts for the root-level `design-system` product. Contributors publish it independently from the studio backend, and a static host serves its navigation and component examples.
 
 ## Description
 
-Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
+Status: implemented as the standalone `design-system` product beside `backend/` and `frontend/`. The names below identify its build, its artifact, and the delivery steps around them.
 
-`CatalogBuild` compiles the standalone `design-system` product against the built `components` library artifact, with deterministic mock providers. `CatalogArtifact` identifies the source revision and asset manifest. The build excludes product secrets and private-photo URLs. An offline-backend smoke test opens deep links and representative component states with all product API requests blocked.
+`CatalogBuild` runs inside `design-system` alone. It validates the manifest against the stylesheet and the fixtures, runs the browser checks with product API requests blocked, and then compiles the static entry point, the isolated preview page, and the hashed assets. `CatalogArtifact` identifies the revision, the entry point, the asset manifest, and the navigation configuration. The build carries no studio secret, no private-photo URL, and no product API call.
 
-The proposed build command is `npm run build` inside `design-system`. The artifact directory is `design-system/dist`; deployment copies that complete directory to Azure Static Web Apps with navigation fallback to `index.html`. Hash-named assets use immutable caching; the entry point and navigation configuration use revalidation.
+The build command is `npm run build` inside `design-system`, and the artifact directory is `design-system/dist`. `npm run check:artifact` then serves that directory under the checked-in navigation configuration and exercises the deep links, the published manifest, the isolated preview, and the missing-asset response, so a routing mistake stops the pipeline before deployment. Deployment copies the complete directory to Azure Static Web Apps. The copied `staticwebapp.config.json` supplies the navigation fallback that keeps component, pattern, and dialog links resolvable, the response override for an unknown path, and the security headers. Hash-named assets use immutable caching; the entry point and the published manifest use revalidation.
 
-`PublishCatalog` in the delivery pipeline validates links and browser checks before publishing the artifact. A failed build or smoke check does not replace the deployed revision. Rollback selects the prior artifact. Hosting identifiers remain G-ENV evidence.
+`PublishCatalog` runs in the delivery pipeline defined by `deploy-design-system.yml`, which validates, tests, and builds before uploading. A failed contract check, browser check, or compile step leaves the deployed revision unchanged. A failed deployment smoke check restores the prior artifact. Hosting identifiers remain `G-ENV` evidence, so no environment claim follows from the pipeline definition alone.
 
-Acceptance covers documented build prerequisites, direct deep-link navigation, missing asset failure, backend isolation, and returning to the prior artifact.
+Acceptance covers documented build prerequisites, direct deep-link navigation, a missing asset, backend isolation, and returning to the prior artifact.
 
 **Interfaces**
 
-- `CLI npm run build in design-system → design-system/dist`
+- `CLI npm run build in design-system → design-system/dist with its navigation configuration and manifest`
 - `Static HTTP GET / and /components/... → catalog entry point and bundled assets`
 
 **Behavior ownership**
 
 | Operation | Owner | Responsibility |
 | --- | --- | --- |
-| `BuildCatalog` | `BuildCatalog` | Build catalog and verify all asset links with backend network blocked. |
-| `PublishCatalog` | `PublishCatalog` | Publish validated versioned artifact and check deep links. |
+| `BuildCatalog` | `CatalogBuild` | Validate contracts, run browser checks with the backend blocked, and compile the artifact. |
+| `PublishCatalog` | `StaticArtifactPublisher` | Publish the validated versioned artifact and check deep links. |
 
 The [shared architecture](../../architecture.md) defines authorization, wire conventions, persistence, environment boundaries, and delivery constraints. The [decision baseline](../../../specs/decisions.md) supplies exact policies and remaining evidence gates. Shared architecture requirements `L2-038` through `L2-045` and delivery requirements `L2-049` through `L2-054` apply to the implemented layers of this slice.
 
@@ -52,23 +52,22 @@ The context identifies the people and systems involved in this capability. Exter
 
 ![c4 context for publish the static catalog](diagrams/c4-context.png)
 
-The container view locates the participating applications and their deployed dependencies. It preserves the separation between browser interaction and persisted or background work.
+The container view locates the catalog, its checks, and its static host, and keeps them separate from the studio applications.
 
 ![c4 container for publish the static catalog](diagrams/c4-container.png)
 
-The component view separates the catalog or acceptance host from the controlled providers used to exercise it.
+The component view separates the catalog application from the manifest, the fixtures, and the authoritative stylesheet that the build compiles.
 
 ![c4 component for publish the static catalog](diagrams/c4-component.png)
 
-The class view shows typed fields and relationships for `CatalogArtifact`. Application ports separate the model from provider implementations.
+The class view shows `CatalogArtifact` and the build and publisher roles that produce and place it.
 
 ![class structure for publish the static catalog](diagrams/class-structure.png)
 
-`BuildCatalog`: Build catalog and verify all asset links with backend network blocked. Compile or isolated smoke-test failure: stop publication. This behavior has no studio backend participant; delivery tooling is shown separately.
+`BuildCatalog`: Validate contracts, run browser checks with the backend blocked, and compile the artifact. Contract, browser, or compile failure: the deployed revision is unchanged. This behavior has no studio backend participant; delivery tooling is shown separately.
 
 ![sequence build catalog for publish the static catalog](diagrams/sequence-build-catalog.png)
 
-`PublishCatalog`: Publish validated versioned artifact and check deep links. Deployment smoke failure: restore prior artifact. This behavior has no studio backend participant; delivery tooling is shown separately.
+`PublishCatalog`: Publish the validated versioned artifact and check deep links. Deployment smoke failure: restore the prior artifact. This behavior has no studio backend participant; delivery tooling is shown separately.
 
 ![sequence publish catalog for publish the static catalog](diagrams/sequence-publish-catalog.png)
-

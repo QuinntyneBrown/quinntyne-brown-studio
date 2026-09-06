@@ -6,13 +6,13 @@ Quinntyne Brown Studio supports photography discovery, studio administration, an
 
 ## Description
 
-Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
+Status: designed for production and implemented in this repository. Delivered handler and service names consolidate some participants shown below; the [implementation report](../../../implementation/README.md) and the [acceptance register](../../acceptance.md) record the delivered structure and the evidence that remains open.
 
 `AcceptanceScenario` retains the specification's GIVE, WHEN, and THEN wording and acceptance ID. `BackendAcceptanceHost` uses WebApplicationFactory to exercise real controllers, authentication policies, handlers, and domain behavior with a controlled `IStudioStore` fake. External routing, storage, email, time, and AI ports use deterministic fakes. Production credentials and live databases are absent from these tests.
 
 `FrontendAcceptanceHost` runs Playwright through feature Page Objects. Network routing provides controlled API responses, including response delays and failures. A separate provider-substitution check verifies that unchanged consumers work with mock implementations bound to the same injection tokens. Every implemented criterion records layer status, real relative test path, test name, remaining gap, and red/green execution evidence.
 
-Architecture checks inspect project references, controller route registration, BEM names, file separation, signal state, and component catalog coverage. Framework lockfiles follow OD-09. RxJS use includes an API-boundary justification. The MediatR package is selected only after G-MEDIATR evidence; no assumption about license eligibility substitutes for that check.
+Architecture checks inspect project references, controller route registration, BEM names, file separation, signal state, and component catalog coverage. They also compare the applications with the design system: every class the shared frontend uses is published there, and every delivered component names the catalog entry that shows it. Framework lockfiles follow OD-09. RxJS use includes an API-boundary justification. The MediatR package is selected only after G-MEDIATR evidence; no assumption about license eligibility substitutes for that check.
 
 `CoverageRecord` begins as Not implemented. Documentation does not assert production test coverage. SQL transaction and Azure integration checks supplement acceptance fakes before rollout; fakes alone do not prove database locks, blob grants, or camera conversion. The shared architecture describes environment isolation and rollout.
 

@@ -4,7 +4,7 @@ LAYOUT_WITH_LEGEND()
 title Components - Assign and view session galleries
 Container_Boundary(frontend, "Frontend - Admin and Client applications") {
  Component(page, "ClientGalleriesPage", "Angular", "Feature inputs, status, and results")
- Component(client, "IClientGalleriesApi", "Interface and injection token", "Typed feature service boundary")
+ Component(client, "IClientGalleryService", "Interface and injection token", "Typed feature service boundary")
 }
 Container_Boundary(api, "Backend - Qbs.Api and Application") {
  Component(ctrl, "ClientGalleriesController", ".NET controller", "Endpoint authorization and dispatch")
@@ -23,7 +23,7 @@ Rel(ctrl, handler1, "Dispatches request")
 Rel(handler1, entity, "Uses state and policy")
 Rel(handler1, store, "Loads or saves authorized state")
 Component(photoCtrl, "PhotosController", ".NET controller", "Owns private photo delivery")
-Component(photoClient, "IPhotosApi", "Consumer contract", "Private image retrieval")
+Component(photoClient, "IPhotoService", "Consumer contract", "Private image retrieval")
 Rel(client, photoClient, "Delegates image request")
 Rel(photoClient, photoCtrl, "Calls private preview route")
 Rel(photoCtrl, handler2, "Dispatches GetClientPhoto")

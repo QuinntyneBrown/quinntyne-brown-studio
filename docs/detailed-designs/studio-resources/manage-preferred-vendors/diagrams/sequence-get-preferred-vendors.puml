@@ -17,10 +17,10 @@ title Behavior - GetPreferredVendors
 actor "Studio administrator" as actor
 box "Frontend - Admin application" #E0F2FE
  participant "PreferredVendorsPage" as page
- participant "IVendorsApi" as client
+ participant "IVendorService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
- participant "VendorsController" as controller
+ participant "PreferredVendorController" as controller
 end box
 box "Backend - Qbs.Application and Domain" #ECFDF3
  participant "GetPreferredVendorsHandler" as handler

@@ -27,7 +27,17 @@ Uploads accept common photos and camera RAW formats, with a 250 MB per-file demo
 
 Session photographs are representative fixed sample collections. Admin session records and marketing galleries are editable, while the client gallery is a fictional signed-in client’s prepared example. New session records do not ingest actual photographs. Password resets, contact requests, and print requests never send email. System error pages do not enforce access control.
 
-The implementation section of `docs/prompt.md` refers to a future Angular application and design system. This deliverable is the approved standalone HTML prototype; it does not scaffold the production application.
+This deliverable is the approved standalone HTML prototype and remains the visual reference for `L2-066`. The production Angular applications now live in [`frontend/`](../../frontend/README.md) and the design system is the separate product in [`design-system/`](../../design-system/README.md); this folder is not built, imported, or deployed by either.
+
+## Relationship to the requirements
+
+The prototype predates parts of the approved requirement set, so three screens differ from the platform:
+
+- `admin/dashboard.html` ("Studio overview") has no requirement or feature design behind it. The delivered administration opens the session list instead, and the navigation entry points there.
+- Administrative print-request review (`L2-036`, `L2-064`) has no prototype screen. The delivered inbox reuses the record-list and detail patterns shown throughout this catalog.
+- Client invitation management (`L2-032`, `L2-062`) has no prototype screen. The delivered screen reuses the form patterns shown here.
+
+Every other catalogued screen maps to a requirement and a feature design. The visual language in this folder stays the reference for `L2-066` in all three cases, and the [design system](../../design-system/README.md) publishes the classes the platform ships.
 
 ## Organization
 

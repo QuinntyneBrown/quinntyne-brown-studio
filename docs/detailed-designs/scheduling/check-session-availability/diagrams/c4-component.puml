@@ -4,7 +4,7 @@ LAYOUT_WITH_LEGEND()
 title Components - Check session availability
 Container_Boundary(frontend, "Frontend - Marketing applications") {
  Component(page, "SessionTimingFields", "Angular", "Feature inputs, status, and results")
- Component(client, "IAvailabilityApi", "Interface and injection token", "Typed feature service boundary")
+ Component(client, "IAvailabilityService", "Interface and injection token", "Typed feature service boundary")
 }
 Container_Boundary(api, "Backend - Qbs.Api and Application") {
  Component(ctrl, "AvailabilityController", ".NET controller", "Endpoint authorization and dispatch")

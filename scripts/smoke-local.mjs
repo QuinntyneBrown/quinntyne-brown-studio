@@ -79,10 +79,8 @@ try {
   await clientPage.goto(origin + '/galleries/local-selected-work');
   await expect(clientPage.getByRole('heading', { name: 'Local selected work', exact: true })).toBeVisible();
   await expect(clientPage.locator('.photo-grid img')).toHaveCount(1);
-  const catalogRequest = page.waitForRequest('http://127.0.0.1:7445/components/session-page');
-  await page.goto('http://127.0.0.1:7445/components/session-page');
-  expect((await catalogRequest).headers()['cookie'] ?? '').not.toContain('__Host-qbs');
-  await expect(page.getByRole('heading', { name: 'Design system', exact: true })).toBeVisible();
   expect(errors).toEqual([]);
-  console.log('PASS: packaged HTTPS apps, real login, JPEG upload/preview, captured invitation, assigned gallery, album creation, priced print submission/review, public publication, independent catalog.');
+  console.log('PASS: packaged HTTPS apps, real login, JPEG upload/preview, captured invitation, assigned gallery, album creation, priced print submission/review, public publication.');
+  // The catalog is a separate static product on its own origin, so it cannot receive
+  // the host-only product cookie. Its own suite in design-system/ proves that isolation.
 } finally { await browser.close(); }

@@ -6,7 +6,7 @@ Quinntyne Brown Studio supports photography discovery, studio administration, an
 
 ## Description
 
-Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
+Status: designed for production and implemented in this repository. Delivered handler and service names consolidate some participants shown below; the [implementation report](../../../implementation/README.md) and the [acceptance register](../../acceptance.md) record the delivered structure and the evidence that remains open.
 
 `PrintPricesPage` maintains option names, dimensions, finish descriptions, prices, and enabled state. `PublicPrintPricesPage` and `ClientPrintSelectionPage` read the same enabled projection. `SavePrintOptionHandler` validates nonnegative decimal prices and required descriptions. Initial production configuration contains no fictional print prices.
 
@@ -14,11 +14,12 @@ Each option exposes its revision with the public price. Client selections carry 
 
 Acceptance covers one price edit appearing on both sites, disabled options, empty catalog, invalid prices, and authorization before a client selects a private photo.
 
-`IPrintOptionsApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PrintOptionsController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
+`IPrintOptionService` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PrintOptionController` for administration and `PresentationController` for the public price list. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
 - `GET /api/admin/print-options → PrintOption[]`
+- `GET /api/admin/print-options/{id} → PrintOption for its editor`
 - `POST /api/admin/print-options; PUT /api/admin/print-options/{id} ← name, dimensions, finish, unitPrice, enabled, expectedVersion → PrintOption`
 - `GET /api/public/print-options → enabled PrintOptionView[]; client pricing uses this same route`
 

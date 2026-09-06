@@ -17,7 +17,7 @@ title Behavior - CreateUploadBatch
 actor "Studio administrator" as actor
 box "Frontend - Admin application" #E0F2FE
  participant "SessionUploadPage" as page
- participant "IUploadsApi" as client
+ participant "IUploadService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
  participant "UploadsController" as controller
@@ -41,7 +41,7 @@ else Request admitted
 controller -> handler : Dispatch CreateUploadBatch
 handler -> db : Load scoped state and configuration
 db --> handler : Current snapshot
-handler -> ext : Transfer originals and retain derived previews
+handler -> ext : Issue one scoped staging write grant per accepted file (L2-059)
 ext --> handler : Typed provider result or failure
 handler -> entity : Validate manifest\nsave batch and issue per-file scoped write grants (L2-026)
 note right of entity

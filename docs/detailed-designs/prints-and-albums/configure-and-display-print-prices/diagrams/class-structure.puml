@@ -36,11 +36,13 @@ class Money <<value object>> {
 }
 PrintOption ..> Money : uses CAD arithmetic
 interface IStudioStore {
- +BeginTransaction(): IUnitOfWork
+ +Run<T>(lockKey, action): Task<T>
 }
-interface IUnitOfWork {
- +Commit(): Task
+interface IStudioTransaction {
+ +Get<T>(id): Task<T?>
+ +List<T>(): Task<T[]>
+ +Save<T>(value, expectedVersion): Task
 }
-IStudioStore ..> IUnitOfWork : opens
+IStudioStore ..> IStudioTransaction : scopes one committed unit of work
 IStudioStore o-- PrintOption : persists or supplies inputs
 @enduml

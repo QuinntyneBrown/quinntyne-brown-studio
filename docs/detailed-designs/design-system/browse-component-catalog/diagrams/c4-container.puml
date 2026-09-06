@@ -4,9 +4,11 @@ LAYOUT_WITH_LEGEND()
 title Containers - Browse the component catalog
 Person(actor, "Design contributor", "Browses component examples")
 System_Boundary(system, "Design-system product") {
- Container(catalog, "Design-system application", "Angular static build", "Catalog and mock-backed examples")
- Container(host, "Static catalog host", "Azure Static Web Apps", "Versioned HTML and bundled assets")
+ Container(catalog, "Design-system catalog", "Static site", "Manifest-driven components, patterns, and dialogs")
+ Container(checks, "Catalog checks", "Node and Playwright", "Manifest contract validation and browser checks")
+ Container(host, "Static catalog host", "Azure Static Web Apps", "Versioned HTML, CSS, and JavaScript")
 }
 Rel(actor, catalog, "Browses", "HTTPS")
+Rel(checks, catalog, "Validates manifest, styles, and rendered examples")
 Rel(host, catalog, "Serves entry point and assets")
 @enduml

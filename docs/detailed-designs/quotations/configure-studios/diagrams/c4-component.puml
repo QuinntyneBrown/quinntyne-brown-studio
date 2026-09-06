@@ -4,21 +4,23 @@ LAYOUT_WITH_LEGEND()
 title Components - Configure studios
 Container_Boundary(frontend, "Frontend - Admin and Marketing applications") {
  Component(page, "StudiosPage", "Angular", "Feature inputs, status, and results")
- Component(client, "IStudiosApi", "Interface and injection token", "Typed feature service boundary")
+ Component(client, "IStudioService", "Interface and injection token", "Typed feature service boundary")
 }
 Container_Boundary(api, "Backend - Qbs.Api and Application") {
- Component(ctrl, "StudiosController", ".NET controller", "Endpoint authorization and dispatch")
+ Component(ctrl, "StudioController", ".NET controller", "Administrative authorization and dispatch")
+ Component(publicCtrl, "PresentationController", ".NET controller", "Anonymous projection endpoint")
  Component(handler0, "SaveStudioHandler", "MediatR", "SaveStudio")
  Component(handler1, "GetStudioOptionsHandler", "MediatR", "GetStudioOptions")
  Component(entity, "Studio", "Domain model", "Feature state and policy")
  Component(store, "IStudioStore", "Application port", "Transactional persistence boundary")
 }
 Rel(page, client, "Consumes token contract")
-Rel(client, ctrl, "Calls typed controller API", "HTTPS")
+Rel(client, ctrl, "Calls the administrative controller API", "HTTPS")
+Rel(client, publicCtrl, "Reads the anonymous projection", "HTTPS")
 Rel(ctrl, handler0, "Dispatches request")
 Rel(handler0, entity, "Uses state and policy")
 Rel(handler0, store, "Loads or saves authorized state")
-Rel(ctrl, handler1, "Dispatches request")
+Rel(publicCtrl, handler1, "Dispatches request")
 Rel(handler1, entity, "Uses state and policy")
 Rel(handler1, store, "Loads or saves authorized state")
 @enduml

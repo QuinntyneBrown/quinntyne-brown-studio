@@ -17,7 +17,7 @@ title Behavior - CreatePhotoPreview
 actor "Studio administrator" as actor
 box "Frontend - Admin application" #E0F2FE
  participant "SessionUploadPage" as page
- participant "IUploadsApi" as client
+ participant "IUploadService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
  participant "UploadsController" as controller

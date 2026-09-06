@@ -4,10 +4,10 @@ LAYOUT_WITH_LEGEND()
 title Components - Suggest promising photos
 Container_Boundary(frontend, "Frontend - Admin applications") {
  Component(page, "PhotoSuggestionsPanel", "Angular", "Feature inputs, status, and results")
- Component(client, "IPhotoAnalysisApi", "Interface and injection token", "Typed feature service boundary")
+ Component(client, "IAnalysisService", "Interface and injection token", "Typed feature service boundary")
 }
 Container_Boundary(api, "Backend - Qbs.Api and Application") {
- Component(ctrl, "PhotoAnalysisController", ".NET controller", "Endpoint authorization and dispatch")
+ Component(ctrl, "AnalysisController", ".NET controller", "Endpoint authorization and dispatch")
  Component(handler0, "RequestPhotoAnalysisHandler", "MediatR", "RequestPhotoAnalysis")
  Component(entity, "PhotoAnalysis", "Domain model", "Feature state and policy")
  Component(store, "IStudioStore", "Application port", "Transactional persistence boundary")

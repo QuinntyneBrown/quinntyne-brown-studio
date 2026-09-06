@@ -4,7 +4,7 @@ LAYOUT_WITH_LEGEND()
 title Components - Upload session photos
 Container_Boundary(frontend, "Frontend - Admin applications") {
  Component(page, "SessionUploadPage", "Angular", "Feature inputs, status, and results")
- Component(client, "IUploadsApi", "Interface and injection token", "Typed feature service boundary")
+ Component(client, "IUploadService", "Interface and injection token", "Typed feature service boundary")
 }
 Container_Boundary(api, "Backend - Qbs.Api and Application") {
  Component(ctrl, "UploadsController", ".NET controller", "Endpoint authorization and dispatch")

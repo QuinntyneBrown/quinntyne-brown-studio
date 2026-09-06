@@ -32,11 +32,13 @@ class AlbumPhoto {
 }
 Album "1" *-- "0..*" AlbumPhoto : Owned reference; original photo lifetime remains independent
 interface IStudioStore {
- +BeginTransaction(): IUnitOfWork
+ +Run<T>(lockKey, action): Task<T>
 }
-interface IUnitOfWork {
- +Commit(): Task
+interface IStudioTransaction {
+ +Get<T>(id): Task<T?>
+ +List<T>(): Task<T[]>
+ +Save<T>(value, expectedVersion): Task
 }
-IStudioStore ..> IUnitOfWork : opens
+IStudioStore ..> IStudioTransaction : scopes one committed unit of work
 IStudioStore o-- Album : persists or supplies inputs
 @enduml

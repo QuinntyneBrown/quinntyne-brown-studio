@@ -1,21 +1,23 @@
 # Implementation and acceptance evidence
 
-The repository now contains the public website, administration and client applications, independent component catalog, controller API, background worker, SQL migration, automated checks, and Azure packaging assets. Product functionality includes saved quote configuration, server pricing and discounts, photographer scheduling, private photo processing and access, invitations, albums, immutable print requests, and retention controls.
+The repository now contains the public website, administration and client applications, the standalone design system, the controller API, a background worker, SQL migration, automated checks, and Azure packaging assets. Product functionality includes saved quote configuration, server pricing and discounts, photographer scheduling, private photo processing and access, invitations, albums, immutable print requests, and retention controls.
 
 ## Verification recorded on 2026-09-05
 
 | Check | Recorded result |
 | --- | --- |
 | Backend tests | 44 passed, including three real SQL LocalDB tests |
-| Browser matrix | Eight scenarios, 72 passing executions across Chromium/Firefox/WebKit and three viewport sizes |
-| Packaged HTTPS smoke | Real administrator login, browser SHA-256 and block upload, worker JPEG preview, captured invitation, assigned gallery, album creation, print submission/review, public publication and standalone catalog passed |
+| Browser matrix | Five scenarios, 45 passing executions across Chromium/Firefox/WebKit and three viewport sizes, run from the root `e2e` project against the built applications |
+| Packaged HTTPS smoke | Real administrator login, browser SHA-256 and block upload, worker JPEG preview, captured invitation, assigned gallery, album creation, print submission/review and public publication passed; the catalog moved to its own origin and carries its own checks |
 | Backend release build | Passed with no warnings or errors |
-| Angular packaging | Four applications and four libraries built |
-| Architecture checker | Passed; every one of 14 components is inventoried |
+| Angular packaging | Four libraries and three applications built with Node 24.18.0 after the workspace changes |
+| Architecture checker | Passed; every one of 13 application components is inventoried |
+| Design system | Contract check passed; 33 passing browser executions at three viewport widths; `design-system/dist` built and checked against the host navigation configuration |
+| Layout change | After moving the projects under `backend/src` and the suite to `e2e/`: Release build clean, 41 of 44 backend acceptance tests passing, the three SQL LocalDB tests unrunnable on that machine, and the whole browser matrix passing |
 | Azure Bicep | Template compiled locally; no resources deployed |
 | Container execution | Not verified: the local Linux Docker engine returned HTTP 500 |
 
-The [machine-readable results](verification.json) identify backend scenarios. Reproducible commands are in the [root README](../../README.md). Full local TRX, browser JSON and screenshots are under ignored `.artifacts/` and `frontend/test-results/`; CI retains fresh artifacts for its own source revision. The local record describes an uncommitted implementation run, not a previously published commit or CI success.
+The [machine-readable results](verification.json) identify backend scenarios. Reproducible commands are in the [root README](../../README.md). Full local TRX, browser JSON and screenshots are under ignored `.artifacts/`, `frontend/test-results/` and `design-system/test-results/`; CI retains fresh artifacts for its own source revision. The local record describes an uncommitted implementation run, not a previously published commit or CI success.
 
 ## Implementation decisions
 
@@ -25,7 +27,7 @@ EF Core maps Identity tables and a versioned `Records` table containing typed ag
 
 Original files use immutable server-owned keys after manifest/content/hash validation. The worker verifies the original again and produces metadata-free JPEG previews up to 2,400 pixels and thumbnails up to 480 pixels. Processing and transfer states remain separate. Expiry checks run on every client read, independent of scheduler availability. Publication and unreviewed print references prevent deletion. Retried jobs use attempt leases and revision checks; email operation identifiers remain stable across retries.
 
-Angular components use separate TypeScript, HTML and CSS files, signals for state, and injected API contracts. The four apps share four buildable libraries. The static catalog imports actual product components with controlled service providers; the manifest supplies its displayed component contracts. Responsive screenshots were visually reviewed at desktop and mobile sizes. The unconfigured home page intentionally has a branded empty image area until actual work is published.
+Angular components use separate TypeScript, HTML and CSS files, signals for state, and injected service contracts. The four library components run on `OnPush`; the application screens keep default change detection because their editors bind mutable form drafts. Each feature contract is `I<Entity>Service` with an `<ENTITY>_SERVICE` token in its own file, as the architecture requires. Those contracts currently extend one shared `IStudioClient` transport rather than declaring per-entity operations, and every token binds to `StudioClient` or `MockStudioClient`, so a consumer still passes route paths; per-entity operations and implementations remain open work. The three apps share four buildable libraries. The design system moved out of the Angular workspace to the root-level `design-system` product: it owns the authoritative tokens and component classes, publishes them through a versioned manifest with rendered examples, and validates and tests itself without the studio backend. The Angular applications reuse those class names; `component-catalog.json` still inventories every application component and its contract. Responsive screenshots were visually reviewed at desktop and mobile sizes. The unconfigured home page intentionally has a branded empty image area until actual work is published.
 
 ## Acceptance gaps
 

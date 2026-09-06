@@ -17,10 +17,10 @@ title Behavior - SavePromotion
 actor "Studio administrator" as actor
 box "Frontend - Admin application" #E0F2FE
  participant "PromotionEditor" as page
- participant "IPromotionsApi" as client
+ participant "IPromotionService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
- participant "PromotionsController" as controller
+ participant "PromotionController" as controller
 end box
 box "Backend - Qbs.Application and Domain" #ECFDF3
  participant "SavePromotionHandler" as handler

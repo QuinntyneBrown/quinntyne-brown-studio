@@ -17,7 +17,7 @@ title Behavior - SubmitPrintRequest
 actor "Authenticated client" as actor
 box "Frontend - Client application" #E0F2FE
  participant "PrintRequestPage" as page
- participant "IPrintRequestsApi" as client
+ participant "IPrintRequestService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
  participant "PrintRequestsController" as controller

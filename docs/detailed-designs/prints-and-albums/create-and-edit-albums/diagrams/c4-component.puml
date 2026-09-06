@@ -4,7 +4,7 @@ LAYOUT_WITH_LEGEND()
 title Components - Create and edit albums
 Container_Boundary(frontend, "Frontend - Client applications") {
  Component(page, "AlbumEditorPage", "Angular", "Feature inputs, status, and results")
- Component(client, "IAlbumsApi", "Interface and injection token", "Typed feature service boundary")
+ Component(client, "IAlbumService", "Interface and injection token", "Typed feature service boundary")
 }
 Container_Boundary(api, "Backend - Qbs.Api and Application") {
  Component(ctrl, "AlbumsController", ".NET controller", "Endpoint authorization and dispatch")

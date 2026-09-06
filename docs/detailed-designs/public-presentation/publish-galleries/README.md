@@ -6,7 +6,7 @@ Quinntyne Brown Studio supports photography discovery, studio administration, an
 
 ## Description
 
-Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
+Status: designed for production and implemented in this repository. Delivered handler and service names consolidate some participants shown below; the [implementation report](../../../implementation/README.md) and the [acceptance register](../../acceptance.md) record the delivered structure and the evidence that remains open.
 
 `PublicGalleryEditor` saves the ordered selection and publication state. `PublicGalleryPage` in Marketing displays the resulting projection. `PublicGallery` references existing ready session photos; it owns no originals. The first selected photo supplies the cover. A stable unique slug identifies the public page.
 
@@ -14,11 +14,12 @@ The handler checks that every selected photo is ready and not pending deletion. 
 
 Acceptance covers anonymous display, draft exclusion, direct access to deselected photos, conflicting edits, and deletion-reference races.
 
-`IPublicGalleriesApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PublicGalleriesController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
+`IPublicGalleryService` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PublicGalleryController` for administration, `PresentationController` for published gallery reads, and `PhotosController` for public derivative bytes. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
 - `GET /api/admin/public-galleries → PublicGallery[]`
+- `GET /api/admin/public-galleries/{id} → PublicGallery for its editor`
 - `POST /api/admin/public-galleries; PUT /api/admin/public-galleries/{id} ← title, slug, photoIds[], published, expectedVersion → PublicGallery`
 - `GET /api/public/galleries; GET /api/public/galleries/{slug} → PublicGalleryView`
 - `GET /api/public/galleries/{slug}/photos/{photoId} → authorized JPEG stream`

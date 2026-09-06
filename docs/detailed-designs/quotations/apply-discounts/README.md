@@ -6,7 +6,7 @@ Quinntyne Brown Studio supports photography discovery, studio administration, an
 
 ## Description
 
-Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
+Status: designed for production and implemented in this repository. Delivered handler and service names consolidate some participants shown below; the [implementation report](../../../implementation/README.md) and the [acceptance register](../../acceptance.md) record the delivered structure and the evidence that remains open.
 
 `DiscountRulesPage` manages code rules, advance threshold, and weekday eligibility. `DiscountPolicy` is a domain service shared by quote calculation and rule preview. `DiscountInput` contains subtotal, normalized code, and Toronto session date. `IClock` supplies the current Toronto calculation date through an explicit conversion.
 
@@ -14,7 +14,7 @@ Rules start disabled with zero percentages. Valid percentages lie between 0 and 
 
 Acceptance covers N-1/N/N+1 days, Toronto midnight, disabled and expired codes, case normalization, equal-percentage ties, and eligibility removal after date changes.
 
-`IDiscountsApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `DiscountsController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
+`IDiscountService` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `DiscountConfigurationController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 

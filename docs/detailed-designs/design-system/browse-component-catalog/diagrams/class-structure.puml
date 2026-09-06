@@ -19,18 +19,25 @@ skinparam class {
  FontColor #101828
  BackgroundColor #F9FAFB
 }
+class CatalogEntry {
+ +string Id
+ +string Name
+ +string Category
+ +string[] Classes
+ +string[] States
+}
 class ComponentExample {
- +string ComponentName
- +string ExampleName
- +string State
- +string Route
+ +string Id
+ +string Title
+ +string Description
+ +string Markup
  +Render(): void
 }
-class ComponentContract {
- +string InputName
- +string InputType
- +string OutputName
- +string OutputType
+class ScenarioFamily {
+ +string Id
+ +string Name
+ +string Description
 }
-ComponentExample "1" *-- "0..*" ComponentContract : Catalogued component interface
+CatalogEntry "1" *-- "1..*" ComponentExample : Catalogued example
+ScenarioFamily "1" *-- "1..*" ComponentExample : Pattern or dialog scenario
 @enduml

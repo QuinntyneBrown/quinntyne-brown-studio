@@ -186,7 +186,8 @@
     "trxSha256": "3feb6a899f54df925023b9626cb718642cb23574979f18d4d4e59d1c6ce6fdb2"
   },
   "frontend": {
-    "passed": 72,
+    "recordedAt": "2026-09-06T05:24:05.263803+00:00",
+    "passed": 45,
     "unexpected": 0,
     "flaky": 0,
     "browsers": [
@@ -208,7 +209,38 @@
         900
       ]
     ],
-    "reportSha256": "ccf7ec071a5de09a681a489764bc1bb23567756ffa1c28ef45cc3363c7c23ba4"
+    "suite": "e2e/specs against the built Angular workspace with mocked API responses",
+    "build": "Four libraries and three applications built with Node 24.18.0",
+    "note": "Recorded after the acceptance suite moved to the root e2e project, the service contracts were renamed, and the catalog moved to the design-system product. An earlier run of eight scenarios predates those changes.",
+    "sourceState": "Local working tree; not a CI result."
+  },
+  "designSystem": {
+    "recordedAt": "2026-09-06T05:20:12.640177+00:00",
+    "contractCheck": "passed: 23 components, 23 screen-pattern states, 4 dialog scenarios, local-only assets",
+    "passed": 33,
+    "unexpected": 0,
+    "flaky": 0,
+    "browsers": [
+      "Chromium"
+    ],
+    "viewports": [
+      [
+        390,
+        844
+      ],
+      [
+        768,
+        1024
+      ],
+      [
+        1440,
+        900
+      ]
+    ],
+    "build": "design-system/dist produced by vite build, including component-manifest.json and staticwebapp.config.json",
+    "sourceState": "Local working tree; not a CI result.",
+    "coverage": "Publishes every class in the shared application stylesheet and the application chrome; feature-local layout classes stay with their feature and appear in the screen patterns.",
+    "artifactCheck": "passed: 8 host routes under the checked-in navigation configuration"
   },
   "externalGates": [
     "G-RAW",
@@ -216,5 +248,19 @@
     "G-AI",
     "G-ENV"
   ],
-  "evidenceScope": "Local controlled tests plus three real SQL LocalDB tests. No live Azure qualification."
+  "evidenceScope": "Local controlled tests plus three real SQL LocalDB tests. No live Azure qualification.",
+  "relocation": {
+    "recordedAt": "2026-09-06T04:44:54.561742+00:00",
+    "change": "Backend projects moved under backend/src; the acceptance suite moved to the root e2e project; frontend service contracts renamed to I<Entity>Service with <ENTITY>_SERVICE tokens.",
+    "backendBuild": "dotnet build backend/Qbs.slnx -c Release succeeded with 0 warnings and 0 errors",
+    "backendTests": {
+      "total": 44,
+      "passed": 41,
+      "failed": 3,
+      "note": "The three SqlStoreTests need SQL LocalDB, which the machine used here does not provide; every other acceptance test passed against the relocated projects."
+    },
+    "frontend": "The Angular workspace type-checks with the Angular compiler; a full ng build needs Node 22.22.3 or newer than the machine used here.",
+    "e2e": "45 tests discovered from e2e/specs across three browsers and three viewport widths; the project type-checks.",
+    "sourceState": "Local working tree; not a CI result."
+  }
 }

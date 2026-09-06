@@ -6,7 +6,7 @@ Quinntyne Brown Studio supports photography discovery, studio administration, an
 
 ## Description
 
-Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
+Status: designed for production and implemented in this repository. Delivered handler and service names consolidate some participants shown below; the [implementation report](../../../implementation/README.md) and the [acceptance register](../../acceptance.md) record the delivered structure and the evidence that remains open.
 
 `QuoteRatesPage` presents photography hourly rates for all four service kinds and travel, equipment-unit, lunch, and assistant rates. `RateConfiguration` stores decimal CAD values with explicit billing units. A field distinguishes unset from a configured zero; required unset rates prevent quoting.
 
@@ -14,7 +14,7 @@ Status: proposed production slice. The repository contains standalone HTML mocks
 
 Acceptance covers every service/cost rate, zero values, negative and overflow rejection, unchanged last-valid configuration after failure, and subsequent quote refresh.
 
-`IRatesApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `RatesController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
+`IRateService` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `RateConfigurationController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 

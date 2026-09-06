@@ -6,7 +6,7 @@ Quinntyne Brown Studio supports photography discovery, studio administration, an
 
 ## Description
 
-Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
+Status: designed for production and implemented in this repository. Delivered handler and service names consolidate some participants shown below; the [implementation report](../../../implementation/README.md) and the [acceptance register](../../acceptance.md) record the delivered structure and the evidence that remains open.
 
 `PromotionEditor` controls title, description, indicative price, and publication. `PromotionsPage` renders published entries with the fixed consultation qualification adjacent to every offer. The qualification is application-owned text and cannot be removed through content editing.
 
@@ -14,11 +14,12 @@ Prices follow the shared CAD representation. Public queries omit drafts. A promo
 
 Acceptance covers create/edit, public refresh, invalid negative prices, draft exclusion, and qualification visibility at every viewport.
 
-`IPromotionsApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PromotionsController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
+`IPromotionService` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PromotionController` for administration and `PresentationController` for the published projection. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
 - `GET /api/admin/promotions → Promotion[]`
+- `GET /api/admin/promotions/{id} → Promotion for its editor`
 - `POST /api/admin/promotions; PUT /api/admin/promotions/{id} ← title, description, indicativePrice, published, expectedVersion → Promotion`
 - `GET /api/public/promotions → PromotionView[] with consultationNotice`
 

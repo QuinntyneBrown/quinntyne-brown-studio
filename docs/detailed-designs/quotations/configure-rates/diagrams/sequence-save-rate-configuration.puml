@@ -17,10 +17,10 @@ title Behavior - SaveRateConfiguration
 actor "Studio administrator" as actor
 box "Frontend - Admin application" #E0F2FE
  participant "QuoteRatesPage" as page
- participant "IRatesApi" as client
+ participant "IRateService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
- participant "RatesController" as controller
+ participant "RateConfigurationController" as controller
 end box
 box "Backend - Qbs.Application and Domain" #ECFDF3
  participant "SaveRateConfigurationHandler" as handler

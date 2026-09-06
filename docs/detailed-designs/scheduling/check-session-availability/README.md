@@ -6,7 +6,7 @@ Quinntyne Brown Studio supports photography discovery, studio administration, an
 
 ## Description
 
-Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
+Status: designed for production and implemented in this repository. Delivered handler and service names consolidate some participants shown below; the [implementation report](../../../implementation/README.md) and the [acceptance register](../../acceptance.md) record the delivered structure and the evidence that remains open.
 
 `SessionTimingFields` accepts start/end instants and an optional photographer choice. `GetAvailabilityHandler` loads active schedules and invokes `AvailabilityPolicy`. The requested occupied interval includes the configured before/after buffers and lies within a working window. It overlaps neither unavailable intervals nor occupied commitments.
 
@@ -14,7 +14,7 @@ Status: proposed production slice. The repository contains standalone HTML mocks
 
 Acceptance covers one eligible photographer among several, a specific unavailable selection, no active photographers, adjacency, DST, and zero mutations after repeated availability checks.
 
-`IAvailabilityApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `AvailabilityController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
+`IAvailabilityService` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `AvailabilityController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 

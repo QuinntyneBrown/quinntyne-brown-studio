@@ -6,7 +6,7 @@ Quinntyne Brown Studio supports photography discovery, studio administration, an
 
 ## Description
 
-Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
+Status: designed for production and implemented in this repository. Delivered handler and service names consolidate some participants shown below; the [implementation report](../../../implementation/README.md) and the [acceptance register](../../acceptance.md) record the delivered structure and the evidence that remains open.
 
 `PrintRequestPage` displays an authorized photo selection and server-priced summary. `SubmitPrintRequestHandler` validates every photo against current client assignment and expiry. It loads enabled print options and checks the displayed revisions. A price change produces 409 with a refresh instruction; the client reviews the revised summary before resubmission.
 
@@ -16,12 +16,13 @@ The handler stores immutable option descriptions, quantities, unit prices, and r
 
 Acceptance covers inaccessible photos, disabled options, quantity validation, stale prices, response loss, duplicate concurrent submission, save failure, inbox access, and review persistence.
 
-`IPrintRequestsApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PrintRequestsController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
+`IPrintRequestService` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PrintRequestsController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
 - `POST /api/client/print-requests ← idempotencyKey, lines[{photoId,optionId,quantity,optionRevision}], notes? → requestId, price snapshot`
 - `GET /api/admin/print-requests?state=... → request summaries; GET /api/admin/print-requests/{id} → request snapshot`
+- `GET /api/client/print-requests/{id} → the requesting client's own snapshot`
 - `POST /api/admin/print-requests/{id}/review ← expectedVersion → Reviewed request`
 
 **Behavior ownership**

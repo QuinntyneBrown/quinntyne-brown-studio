@@ -17,10 +17,10 @@ title Behavior - SavePrintOption
 actor "Studio administrator" as actor
 box "Frontend - Admin application" #E0F2FE
  participant "PrintPricesPage" as page
- participant "IPrintOptionsApi" as client
+ participant "IPrintOptionService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
- participant "PrintOptionsController" as controller
+ participant "PrintOptionController" as controller
 end box
 box "Backend - Qbs.Application and Domain" #ECFDF3
  participant "SavePrintOptionHandler" as handler

@@ -6,7 +6,7 @@ Quinntyne Brown Studio supports photography discovery, studio administration, an
 
 ## Description
 
-Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
+Status: designed for production and implemented in this repository. Delivered handler and service names consolidate some participants shown below; the [implementation report](../../../implementation/README.md) and the [acceptance register](../../acceptance.md) record the delivered structure and the evidence that remains open.
 
 `PreferredVendorsPage` edits names, contact information, and a set of supported roles. A vendor can hold more than one role. `VendorRole` contains `MakeupArtist`, `SecondShooter`, and `Assistant`. The handler requires a name, at least one contact method, and at least one valid role.
 
@@ -14,11 +14,12 @@ Status: proposed production slice. The repository contains standalone HTML mocks
 
 Acceptance covers every required role, multi-role records, contact updates retaining identity, malformed contact values, and rejected client access.
 
-`IVendorsApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `VendorsController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
+`IVendorService` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PreferredVendorController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
 - `GET /api/admin/vendors → PreferredVendor[]`
+- `GET /api/admin/vendors/{id} → PreferredVendor for its editor`
 - `POST /api/admin/vendors; PUT /api/admin/vendors/{id} ← name, email?, phone?, roles[], expectedVersion → PreferredVendor`
 
 **Behavior ownership**

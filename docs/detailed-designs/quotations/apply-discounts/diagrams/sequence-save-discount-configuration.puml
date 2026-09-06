@@ -17,10 +17,10 @@ title Behavior - SaveDiscountConfiguration
 actor "Studio administrator" as actor
 box "Frontend - Admin application" #E0F2FE
  participant "DiscountRulesPage" as page
- participant "IDiscountsApi" as client
+ participant "IDiscountService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
- participant "DiscountsController" as controller
+ participant "DiscountConfigurationController" as controller
 end box
 box "Backend - Qbs.Application and Domain" #ECFDF3
  participant "SaveDiscountConfigurationHandler" as handler

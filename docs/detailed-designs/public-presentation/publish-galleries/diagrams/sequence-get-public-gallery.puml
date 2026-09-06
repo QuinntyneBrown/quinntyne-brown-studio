@@ -17,10 +17,10 @@ title Behavior - GetPublicGallery
 actor "Public visitor" as actor
 box "Frontend - Marketing application" #E0F2FE
  participant "PublicGalleryPage" as page
- participant "IPublicGalleriesApi" as client
+ participant "IPublicGalleryService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
- participant "PublicGalleriesController" as controller
+ participant "PresentationController" as controller
 end box
 box "Backend - Qbs.Application and Domain" #ECFDF3
  participant "GetPublicGalleryHandler" as handler

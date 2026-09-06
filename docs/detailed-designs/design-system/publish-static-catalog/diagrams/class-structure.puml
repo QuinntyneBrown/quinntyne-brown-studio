@@ -23,10 +23,11 @@ class CatalogArtifact {
  +string Revision
  +string EntryPoint
  +string AssetManifest
+ +string NavigationConfiguration
  +ValidateLinks(): bool
 }
 interface StaticArtifactPublisher
-class BuildCatalogHandler
-BuildCatalogHandler ..> StaticArtifactPublisher : uses
-BuildCatalogHandler ..> CatalogArtifact : orchestrates
+class CatalogBuild
+CatalogBuild ..> StaticArtifactPublisher : uses
+CatalogBuild ..> CatalogArtifact : orchestrates
 @enduml

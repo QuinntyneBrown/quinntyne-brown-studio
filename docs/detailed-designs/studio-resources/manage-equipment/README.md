@@ -6,7 +6,7 @@ Quinntyne Brown Studio supports photography discovery, studio administration, an
 
 ## Description
 
-Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
+Status: designed for production and implemented in this repository. Delivered handler and service names consolidate some participants shown below; the [implementation report](../../../implementation/README.md) and the [acceptance register](../../acceptance.md) record the delivered structure and the evidence that remains open.
 
 `EquipmentPage` provides list, create, and edit states. `Equipment` stores a required name, optional description, nonnegative integer quantity, and optional reference rental rate. The record identifies a maintained inventory entry, not a procurement or availability reservation.
 
@@ -14,11 +14,12 @@ Status: proposed production slice. The repository contains standalone HTML mocks
 
 Acceptance covers create, reload, edit, negative quantity rejection, stale updates, access denial, and independence from configured quotation rates.
 
-`IEquipmentApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `EquipmentController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
+`IEquipmentService` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `EquipmentController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
 - `GET /api/admin/equipment → Equipment[]`
+- `GET /api/admin/equipment/{id} → Equipment for its editor`
 - `POST /api/admin/equipment; PUT /api/admin/equipment/{id} ← name, description, quantity, referenceRentalRate?, expectedVersion → Equipment`
 
 **Behavior ownership**

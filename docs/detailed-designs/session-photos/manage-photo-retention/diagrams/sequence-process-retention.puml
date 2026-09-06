@@ -17,7 +17,7 @@ title Behavior - ProcessRetention
 actor "Studio administrator" as actor
 box "Frontend - Admin application" #E0F2FE
  participant "SessionRetentionPanel" as page
- participant "IRetentionApi" as client
+ participant "IRetentionService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
  participant "RetentionController" as controller

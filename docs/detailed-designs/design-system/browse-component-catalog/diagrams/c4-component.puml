@@ -2,15 +2,16 @@
 !include <C4/C4_Component>
 LAYOUT_WITH_LEGEND()
 title Components - Browse the component catalog
-Container_Boundary(catalog, "Frontend - Design-system application") {
- Component(page, "ComponentCatalogPage", "Angular", "Lists and opens named examples")
- Component(manifest, "ComponentCatalog", "Typed manifest", "Maps every component to example states")
- Component(example, "ComponentExample", "Angular host", "Renders actual component contract")
- Component(mock, "Mock service providers", "Injection tokens", "Supplies deterministic state")
- Component(library, "Components library", "Angular", "Production components and BEM styles")
+Container_Boundary(catalog, "Frontend - Design-system catalog") {
+ Component(docs, "CatalogApplication", "Static ES module", "Renders manifest entries as navigable examples")
+ Component(manifest, "ComponentManifest", "Versioned JSON", "Every component with its classes, states, and examples")
+ Component(fixtures, "CatalogFixtures", "Static ES module", "Screen-pattern and dialog markup")
+ Component(styles, "Tokens and component styles", "CSS", "Authoritative tokens and BEM classes")
+ Component(preview, "IsolatedPreview", "Static page", "One example without catalog chrome")
 }
-Rel(page, manifest, "Reads navigation entries")
-Rel(page, example, "Opens selected state")
-Rel(example, mock, "Consumes replaceable service contracts")
-Rel(example, library, "Renders actual components")
+Rel(docs, manifest, "Reads entries, states, and examples")
+Rel(docs, fixtures, "Renders pattern and dialog scenarios")
+Rel(docs, styles, "Applies the authoritative classes")
+Rel(preview, manifest, "Renders one selected example")
+Rel(preview, fixtures, "Renders one selected scenario")
 @enduml

@@ -17,10 +17,10 @@ title Behavior - GetPublishedContent
 actor "Public visitor" as actor
 box "Frontend - Marketing application" #E0F2FE
  participant "MarketingPage" as page
- participant "IMarketingContentApi" as client
+ participant "IContentService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
- participant "MarketingContentController" as controller
+ participant "PresentationController" as controller
 end box
 box "Backend - Qbs.Application and Domain" #ECFDF3
  participant "GetPublishedContentHandler" as handler

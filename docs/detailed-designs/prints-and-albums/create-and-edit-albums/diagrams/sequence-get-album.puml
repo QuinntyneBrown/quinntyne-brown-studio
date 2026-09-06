@@ -17,7 +17,7 @@ title Behavior - GetAlbum
 actor "Authenticated client" as actor
 box "Frontend - Client application" #E0F2FE
  participant "AlbumEditorPage" as page
- participant "IAlbumsApi" as client
+ participant "IAlbumService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
  participant "AlbumsController" as controller

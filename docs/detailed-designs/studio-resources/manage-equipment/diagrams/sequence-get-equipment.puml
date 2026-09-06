@@ -17,7 +17,7 @@ title Behavior - GetEquipment
 actor "Studio administrator" as actor
 box "Frontend - Admin application" #E0F2FE
  participant "EquipmentPage" as page
- participant "IEquipmentApi" as client
+ participant "IEquipmentService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
  participant "EquipmentController" as controller

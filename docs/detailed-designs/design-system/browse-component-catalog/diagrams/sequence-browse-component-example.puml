@@ -15,20 +15,25 @@ skinparam package {
 }
 title Behavior - BrowseComponentExample
 actor "Design contributor" as actor
-box "Frontend - Design-system application" #E0F2FE
- participant "ComponentCatalogPage" as page
- participant "ComponentCatalog / mock providers" as client
+box "Frontend - Design-system catalog" #E0F2FE
+ participant "CatalogApplication" as page
+ participant "ComponentManifest and fixtures" as client
 end box
 box "Delivery - Static catalog" #FFF4E5
  participant "CatalogBuild" as build
  participant "StaticArtifactPublisher" as host
 end box
-actor -> page : Open component and state
-page -> client : Resolve typed example
-client --> page : Manifest entry and mock state
-page --> actor : Render actual component
+actor -> page : Open a component, pattern, or dialog scenario
+page -> client : Resolve the catalogued entry and example
+alt Catalogued entry
+client --> page : Entry metadata and example markup
+page --> actor : Rendered example, classes, and states
+else Entry absent from the manifest
+client --> page : No entry
+page --> actor : Catalog not-found view
+end
 note over page, host
-Resolve manifest entry and render real component with mock providers
+Resolve a manifest entry and render its example with local fixtures
 L2-001, L2-002, L2-046, L2-047, L2-066
 No studio backend participates.
 end note

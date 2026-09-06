@@ -6,7 +6,7 @@ Quinntyne Brown Studio supports photography discovery, studio administration, an
 
 ## Description
 
-Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
+Status: designed for production and implemented in this repository. Delivered handler and service names consolidate some participants shown below; the [implementation report](../../../implementation/README.md) and the [acceptance register](../../acceptance.md) record the delivered structure and the evidence that remains open.
 
 `SessionPhotoReviewPage` queries a cursor-paged session photo list with 50 items per page. It keeps selected-photo state in signals and loads full previews on demand. `GetSessionPhotosHandler` scopes every result to the selected session. Processing and failure records remain visible with their status instead of broken-image success placeholders.
 
@@ -14,7 +14,7 @@ Status: proposed production slice. The repository contains standalone HTML mocks
 
 Acceptance covers two sessions with disjoint photos, keyboard selection, empty and processing states, one missing derivative among ready photos, and inspection during an AI outage.
 
-`IPhotosApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PhotosController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
+`IPhotoService` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PhotosController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 

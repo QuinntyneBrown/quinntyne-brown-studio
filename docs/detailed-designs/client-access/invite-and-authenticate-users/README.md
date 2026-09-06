@@ -6,7 +6,7 @@ Quinntyne Brown Studio supports photography discovery, studio administration, an
 
 ## Description
 
-Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
+Status: designed for production and implemented in this repository. Delivered handler and service names consolidate some participants shown below; the [implementation report](../../../implementation/README.md) and the [acceptance register](../../acceptance.md) record the delivered structure and the evidence that remains open.
 
 `AccountAccessPage` supplies login, invitation acceptance, and recovery screens in the appropriate application. `AdminInvitationsPage` requests client invitations. `AuthController` dispatches handlers through an `IIdentityAccounts` application port implemented using ASP.NET Core Identity. Credentials are hashed by Identity and never stored in domain records or logs as plaintext.
 
@@ -16,7 +16,7 @@ Successful authentication creates a host-only HttpOnly Secure cookie. State-chan
 
 Acceptance covers invitation/recovery expiry and replay, neutral responses, role denial, failed credentials, cookie settings, antiforgery, and protected-resource access before and after sign-in.
 
-`IAuthApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `AuthController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
+`IAuthService` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `AuthController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 

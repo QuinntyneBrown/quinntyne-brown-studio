@@ -17,10 +17,10 @@ title Behavior - SaveMarketingContent
 actor "Studio administrator" as actor
 box "Frontend - Admin application" #E0F2FE
  participant "MarketingContentEditor" as page
- participant "IMarketingContentApi" as client
+ participant "IContentService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
- participant "MarketingContentController" as controller
+ participant "PresentationController" as controller
 end box
 box "Backend - Qbs.Application and Domain" #ECFDF3
  participant "SaveMarketingContentHandler" as handler

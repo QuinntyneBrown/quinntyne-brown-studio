@@ -6,7 +6,7 @@ Quinntyne Brown Studio supports photography discovery, studio administration, an
 
 ## Description
 
-Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
+Status: designed for production and implemented in this repository. Delivered handler and service names consolidate some participants shown below; the [implementation report](../../../implementation/README.md) and the [acceptance register](../../acceptance.md) record the delivered structure and the evidence that remains open.
 
 `PhotographerSchedulePage` maintains minimal photographer identity and active state alongside explicit dated working and unavailable windows. Recurring-rule expansion is outside the initial design. `ScheduleWindow` stores UTC boundaries and the Toronto zone. Local input carries its selected offset when time is ambiguous.
 
@@ -14,11 +14,12 @@ Status: proposed production slice. The repository contains standalone HTML mocks
 
 Acceptance covers saved-window retrieval, inactive photographers, adjacent buffered commitments, rejected overlaps, concurrent saves, and both daylight-saving transitions.
 
-`ISchedulesApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `SchedulesController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
+`IScheduleService` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `SchedulesController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
 - `GET /api/admin/photographers; POST /api/admin/photographers ← name, active → Photographer`
+- `GET /api/admin/photographers/{id} → Photographer; PUT /api/admin/photographers/{id} ← name, active, expectedVersion → Photographer`
 - `GET /api/admin/photographers/{id}/schedule → PhotographerSchedule`
 - `PUT /api/admin/photographers/{id}/schedule ← workingWindows[], unavailableWindows[], buffers, expectedVersion → PhotographerSchedule`
 

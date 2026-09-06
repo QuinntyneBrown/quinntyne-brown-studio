@@ -4,7 +4,7 @@ LAYOUT_WITH_LEGEND()
 title Components - Submit and review print requests
 Container_Boundary(frontend, "Frontend - Client and Admin applications") {
  Component(page, "PrintRequestPage", "Angular", "Feature inputs, status, and results")
- Component(client, "IPrintRequestsApi", "Interface and injection token", "Typed feature service boundary")
+ Component(client, "IPrintRequestService", "Interface and injection token", "Typed feature service boundary")
 }
 Container_Boundary(api, "Backend - Qbs.Api and Application") {
  Component(ctrl, "PrintRequestsController", ".NET controller", "Endpoint authorization and dispatch")

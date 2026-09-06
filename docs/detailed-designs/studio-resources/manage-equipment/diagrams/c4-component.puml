@@ -4,7 +4,7 @@ LAYOUT_WITH_LEGEND()
 title Components - Manage equipment
 Container_Boundary(frontend, "Frontend - Admin applications") {
  Component(page, "EquipmentPage", "Angular", "Feature inputs, status, and results")
- Component(client, "IEquipmentApi", "Interface and injection token", "Typed feature service boundary")
+ Component(client, "IEquipmentService", "Interface and injection token", "Typed feature service boundary")
 }
 Container_Boundary(api, "Backend - Qbs.Api and Application") {
  Component(ctrl, "EquipmentController", ".NET controller", "Endpoint authorization and dispatch")

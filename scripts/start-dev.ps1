@@ -19,9 +19,9 @@ $env:PublicOrigin = 'https://localhost:7443'
 $env:Development__PhotoDirectory = Join-Path $studioRoot '.artifacts/photos'
 $apiLog = Join-Path $studioRoot '.artifacts/api.log'
 $apiError = Join-Path $studioRoot '.artifacts/api-error.log'
-dotnet build (Join-Path $studioRoot 'backend/Qbs.Api')
+dotnet build (Join-Path $studioRoot 'backend/src/Qbs.Api')
 if ($LASTEXITCODE -ne 0) { throw 'API build failed.' }
-$apiDll = Join-Path $studioRoot 'backend/Qbs.Api/bin/Debug/net10.0/Qbs.Api.dll'
+$apiDll = Join-Path $studioRoot 'backend/src/Qbs.Api/bin/Debug/net10.0/Qbs.Api.dll'
 $api = Start-Process dotnet -ArgumentList @($apiDll) -WorkingDirectory $studioRoot -WindowStyle Hidden -PassThru -RedirectStandardOutput $apiLog -RedirectStandardError $apiError
 try { node (Join-Path $PSScriptRoot 'dev-gateway.mjs') }
 finally { if (-not $api.HasExited) { Stop-Process -Id $api.Id } }

@@ -6,7 +6,7 @@ Quinntyne Brown Studio supports photography discovery, studio administration, an
 
 ## Description
 
-Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
+Status: designed for production and implemented in this repository. Delivered handler and service names consolidate some participants shown below; the [implementation report](../../../implementation/README.md) and the [acceptance register](../../acceptance.md) record the delivered structure and the evidence that remains open.
 
 `QuoteCalculatorPage` owns input and result signals. `QuoteInput` carries service, start/end instants, ordered resolved locations, assistant count, equipment units, lunch count, parking amounts, studio selections, and an optional code. `QuoteInputRevision` increases on every change. A 300 ms quiet interval limits requests; a changed revision immediately invalidates the displayed result.
 
@@ -16,7 +16,7 @@ Status: proposed production slice. The repository contains standalone HTML mocks
 
 Acceptance uses independently calculated amounts, out-of-order responses, optional-cost removal, four service types, multi-stop route legs, missing configuration, and provider failure.
 
-`IQuotesApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `QuotesController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
+`IQuoteService` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `QuotesController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 

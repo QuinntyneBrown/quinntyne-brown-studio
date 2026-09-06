@@ -6,17 +6,17 @@ This document identifies the Angular presentation components required to impleme
 
 The inventory is derived from the prototype's shared stylesheet [`assets/styles.css`](mocks/assets/styles.css) and the render functions in [`assets/app.js`](mocks/assets/app.js), which together define every visual block used by the 63 prototype pages. It supports requirements `L2-001`, `L2-002`, `L2-046`, `L2-047`, and `L2-066`, and the design-system slice at [`detailed-designs/design-system/browse-component-catalog`](detailed-designs/design-system/browse-component-catalog/README.md).
 
-Status: implemented as the `@qbs/components` Angular library in `frontend/projects/components`. All 97 entries below have public exports and internal browser examples. The standalone design-system application and deployment remain deferred. See the [library README](../frontend/projects/components/README.md) for API details and [acceptance evidence](../frontend/projects/components/testing/ACCEPTANCE.md) for validation scope.
+Status: this inventory is the presentation target, not a record of shipped code. The `@qbs/components` library in [`frontend/projects/components`](../frontend/projects/components/src/public-api.ts) currently exports four of these components — `NoticeComponent`, `EmptyStateComponent`, `PhotoGridComponent`, and `DialogComponent` — and the `application` library composes the remaining screens directly from the shared classes. The standalone [design system](../design-system/README.md) publishes every class the applications ship — the shared stylesheet, the four library components, and the application chrome — as its catalogued entries, screen patterns, and dialog scenarios. `L2-047` therefore remains partially satisfied; the [acceptance register](detailed-designs/acceptance.md) records the current evidence.
 
 ## Conventions
 
 - Components live in the `components` library of the Angular workspace described in [`detailed-designs/architecture.md`](detailed-designs/architecture.md) and are reused by the `marketing`, `admin`, and `client` applications and rendered as examples by the root-level `design-system` catalog.
 - Selector prefix is `qbs-`. Directory and file names are kebab-case. TypeScript, HTML, and CSS stay in separate files.
-- Components are standalone, use `ChangeDetectionStrategy.OnPush`, signal-based `input()` / `model()`, and `output()` emitters.
+- Components are standalone, use `ChangeDetectionStrategy.OnPush`, signal-based `input()` / `model()`, and `output()` emitters. Application screens keep default change detection while holding their state in signals, because their editing surfaces bind mutable form drafts.
 - BEM class names belong to this library. Application screens reuse the block names rather than redefining styles. The prototype's flat class names (`.btn`, `.photo-card`, `.cost-row`) become BEM blocks (`qbs-button`, `qbs-photo-card`, `qbs-cost-row`) with element and modifier suffixes.
-- Design tokens from `:root` in the prototype stylesheet (`--ink`, `--muted`, `--line`, `--paper`, `--soft`, `--accent`, `--danger`, `--success`, `--serif`, `--sans`) become the shared token stylesheet consumed by every component.
+- Design tokens from `:root` in the prototype stylesheet (`--ink`, `--muted`, `--line`, `--paper`, `--soft`, `--accent`, `--danger`, `--serif`, `--sans`) become the [published token stylesheet](../design-system/assets/tokens.css), which adds the spacing, radius, and tap-target tokens the layouts need. The prototype's `--success` is not carried: the default notice tone states a confirmation, and the error variant states a failure.
 - Presentation components accept view models, not domain entities. Container components in each application map API contracts to these view models and handle navigation, persistence, and error recovery.
-- Every component listed here has a named internal acceptance example. Publishing those examples through the standalone catalog remains required by `L2-047` and is deferred from this library-only increment.
+- Every component listed here needs a catalogued example in the standalone design system before `L2-047` is complete. Entries reaching the platform arrive there first, and an application consumes a component only after its example is reviewed.
 
 Application column key: **M** marketing, **A** admin, **C** client, **D** design-system catalog.
 
@@ -186,4 +186,4 @@ Application column key: **M** marketing, **A** admin, **C** client, **D** design
 - Prototype behavior that simulates a backend — seeded records, local storage persistence, simulated uploads, and simulated AI suggestions — does not become a presentation concern. The corresponding components accept the resulting view model as an input.
 - Responsive behavior at 390, 768, and 1440 CSS pixels stays inside each component's stylesheet, matching the prototype breakpoints at 480, 780, 1100, and 1500 pixels, per `L2-066`.
 - Keyboard operability, focus-visible outlines, `aria-live` regions, and reduced-motion handling are component-level obligations carried over from the prototype stylesheet and markup.
-- Adding a component to this library requires a matching catalog example and an update to this document, per `L2-047`.
+- Adding a component to this library requires a matching entry in [`design-system/component-manifest.json`](../design-system/component-manifest.json), a rendered example, and an update to this document, per `L2-047`.

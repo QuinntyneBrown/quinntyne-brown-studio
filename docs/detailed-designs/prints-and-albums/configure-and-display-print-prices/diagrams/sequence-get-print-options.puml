@@ -17,10 +17,10 @@ title Behavior - GetPrintOptions
 actor "Public visitor" as actor
 box "Frontend - Marketing application" #E0F2FE
  participant "PublicPrintPricesPage / ClientPrintSelectionPage" as page
- participant "IPrintOptionsApi" as client
+ participant "IPrintOptionService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
- participant "PrintOptionsController" as controller
+ participant "PresentationController" as controller
 end box
 box "Backend - Qbs.Application and Domain" #ECFDF3
  participant "GetPrintOptionsHandler" as handler

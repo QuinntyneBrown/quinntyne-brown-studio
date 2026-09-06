@@ -17,7 +17,7 @@ title Behavior - ReviewPrintRequest
 actor "Studio administrator" as actor
 box "Frontend - Admin application" #E0F2FE
  participant "PrintRequestInboxPage" as page
- participant "IPrintRequestsApi" as client
+ participant "IPrintRequestService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
  participant "PrintRequestsController" as controller

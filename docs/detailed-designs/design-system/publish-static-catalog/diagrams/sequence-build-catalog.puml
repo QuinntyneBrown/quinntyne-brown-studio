@@ -15,25 +15,26 @@ skinparam package {
 }
 title Behavior - BuildCatalog
 actor "Design contributor" as actor
-box "Frontend - Design-system application" #E0F2FE
- participant "ComponentCatalogPage" as page
- participant "ComponentCatalog / mock providers" as client
+box "Frontend - Design-system catalog" #E0F2FE
+ participant "CatalogApplication" as page
+ participant "ComponentManifest and fixtures" as client
 end box
 box "Delivery - Static catalog" #FFF4E5
  participant "CatalogBuild" as build
  participant "StaticArtifactPublisher" as host
 end box
-actor -> build : Request validated catalog artifact
-build -> build : Compile and run backend-blocked smoke tests
+actor -> build : Request a validated catalog artifact
+build -> client : Validate the manifest against styles and fixtures
+client --> build : Contract result
+build -> page : Run browser checks with product requests blocked
+page --> build : Rendered examples and scenarios
 alt Validated artifact
-build -> host : Publish complete versioned assets
-host --> build : Deployment result
-build --> actor : Revision and deep-link check
-else Build or smoke failure
-build --> actor : Failure; retain or restore prior artifact
+build --> actor : Artifact directory and revision
+else Contract, browser, or compile failure
+build --> actor : Failure; the deployed revision is unchanged
 end
 note over page, host
-Build catalog and verify all asset links with backend network blocked
+Build the catalog and verify every asset with the studio backend blocked
 L2-046, L2-048
 No studio backend participates.
 end note

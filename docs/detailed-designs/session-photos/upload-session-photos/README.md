@@ -6,7 +6,7 @@ Quinntyne Brown Studio supports photography discovery, studio administration, an
 
 ## Description
 
-Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
+Status: designed for production and implemented in this repository. Delivered handler and service names consolidate some participants shown below; the [implementation report](../../../implementation/README.md) and the [acceptance register](../../acceptance.md) record the delivered structure and the evidence that remains open.
 
 `SessionEditorPage` creates and edits session name, service, planned timing, and optional photographer assignment. `SaveSessionHandler` applies the scheduling conflict policy when a photographer is assigned. `SessionUploadPage` selects one existing session before constructing a file manifest.
 
@@ -18,11 +18,11 @@ Status: proposed production slice. The repository contains standalone HTML mocks
 
 Acceptance covers session identity, mixed batches, interrupted blocks, repeat finalization, content validation, conversion failure, and the OD-04 capacity profile.
 
-`IUploadsApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `UploadsController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
+`IUploadService` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `UploadsController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
-- `GET /api/admin/sessions; POST /api/admin/sessions; PUT /api/admin/sessions/{id} ← name, service, startsAt, endsAt, photographerId?, expectedVersion → Session`
+- `GET /api/admin/sessions; GET /api/admin/sessions/{id}; POST /api/admin/sessions; PUT /api/admin/sessions/{id} ← name, service, startsAt, endsAt, photographerId?, expectedVersion → Session`
 - `POST /api/admin/sessions/{sessionId}/uploads ← files[{clientFileId,name,size,sha256}] → UploadBatch with per-file grants/rejections`
 - `GET /api/admin/uploads/{batchId} → UploadBatchStatus`
 - `POST /api/admin/uploads/{batchId}/files/{photoId}/renew → write grant; POST .../complete → processing status`

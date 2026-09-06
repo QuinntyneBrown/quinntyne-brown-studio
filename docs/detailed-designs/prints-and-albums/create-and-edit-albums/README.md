@@ -6,7 +6,7 @@ Quinntyne Brown Studio supports photography discovery, studio administration, an
 
 ## Description
 
-Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
+Status: designed for production and implemented in this repository. Delivered handler and service names consolidate some participants shown below; the [implementation report](../../../implementation/README.md) and the [acceptance register](../../acceptance.md) record the delivered structure and the evidence that remains open.
 
 `AlbumEditorPage` keeps draft name and ordered photo identifiers in signals. `SaveAlbumHandler` derives ownership from authentication, verifies the existing album owner, and authorizes every newly added photo. It rejects duplicate photo IDs and stale versions. Creation requires a nonempty name and at least one photo; later removal of all photos leaves an empty album.
 
@@ -14,7 +14,7 @@ Status: proposed production slice. The repository contains standalone HTML mocks
 
 Selection order is stored as unique sequential positions in the album transaction. Save failures retain the draft and never show a false success. Acceptance covers reopening, rename, add/remove/reorder, cross-client reads and writes, revoked photo access, empty-after-edit, and concurrent editing.
 
-`IAlbumsApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `AlbumsController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
+`IAlbumService` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `AlbumsController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 

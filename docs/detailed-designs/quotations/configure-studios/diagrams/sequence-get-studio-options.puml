@@ -17,10 +17,10 @@ title Behavior - GetStudioOptions
 actor "Public visitor" as actor
 box "Frontend - Marketing application" #E0F2FE
  participant "QuoteCalculatorPage" as page
- participant "IStudiosApi" as client
+ participant "IStudioService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
- participant "StudiosController" as controller
+ participant "PresentationController" as controller
 end box
 box "Backend - Qbs.Application and Domain" #ECFDF3
  participant "GetStudioOptionsHandler" as handler

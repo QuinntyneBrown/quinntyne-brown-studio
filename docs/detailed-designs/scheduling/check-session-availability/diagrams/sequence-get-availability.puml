@@ -17,7 +17,7 @@ title Behavior - GetAvailability
 actor "Public visitor" as actor
 box "Frontend - Marketing application" #E0F2FE
  participant "SessionTimingFields" as page
- participant "IAvailabilityApi" as client
+ participant "IAvailabilityService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
  participant "AvailabilityController" as controller

@@ -17,7 +17,7 @@ title Behavior - SetGalleryAssignments
 actor "Studio administrator" as actor
 box "Frontend - Admin application" #E0F2FE
  participant "SessionAccessEditor" as page
- participant "IClientGalleriesApi" as client
+ participant "IClientGalleryService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
  participant "ClientGalleriesController" as controller

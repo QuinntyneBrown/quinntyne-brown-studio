@@ -1,6 +1,6 @@
 # Quinntyne Brown Studio — detailed designs
 
-This design set describes the proposed production platform against the approved 2026-09-05 requirements baseline. The existing HTML prototype is the visual reference. The implementation is now available in the repository. The [implementation report](../implementation/README.md) records the delivered structure, verification results, and remaining acceptance evidence.
+This design set is the approved baseline for the platform, written against the 2026-09-05 requirements. The [HTML prototype](../mocks/README.md) remains the visual reference, and the implementation is in the repository. Three screens differ between the prototype and the requirement set, and the prototype README names them. The [implementation report](../implementation/README.md) records the delivered structure, verification results, and remaining acceptance evidence.
 
 The feature pages contain their background, concrete components and interfaces, exact L2 requirements with L1 parents, and inline rendered diagrams. The [shared architecture](architecture.md), [decision baseline](../specs/decisions.md), and [acceptance register](acceptance.md) establish common contracts and evidence gates.
 
@@ -108,10 +108,14 @@ Every L2 has at least one linked feature. Shared UX and access obligations recur
 | `L2-068` | `L1-012` | [deliver-traceable-feature-increments](engineering-delivery/deliver-traceable-feature-increments/README.md) |
 | `L2-069` | `L1-008` | [upload-session-photos](session-photos/upload-session-photos/README.md) |
 
+## Diagram conventions
+
+Each feature carries a context, container, component, and class view, plus one sequence per behavior. Container views show the deployable units a feature touches. They omit the shared-origin gateway, the container registry, and the monitoring workspace, which serve every feature without carrying feature behavior; the [shared architecture](architecture.md) describes those. Screen and handler names identify tasks and operations rather than delivered classes, and the [screen ownership](contracts.md#screen-ownership) and [behavior ownership](contracts.md#behavior-ownership) tables give the delivered mapping.
+
 ## Verification
 
 `python docs/detailed-designs/verify.py` checks requirement identity and wording, acceptance coverage, local links, feature heading order, C4 macros, sequence trace references, and source/image pairing. It also invokes PlantUML syntax checking when the local renderer is available.
 
-Render sources with `python C:/Users/quinn/.codex/skills/software-design-document/scripts/render_puml.py docs/detailed-designs`. An equivalent direct PlantUML render is valid on another machine. The PNG files are committed alongside their sources so GitHub displays them without a local renderer.
+Render changed sources with `python scripts/render-diagrams.py`, which renders every diagram whose source or image no longer matches its reviewed baseline and records the new pair in `diagram-manifest.json`. It finds PlantUML through `PLANTUML_JAR`, `C:/tools/plantuml.jar`, `~/plantuml.jar`, or `plantuml` on PATH. The PNG files are committed alongside their sources so GitHub displays them without a local renderer.
 
 `G-RAW`, `G-UPLOAD`, `G-AI`, `G-MEDIATR`, and `G-ENV` retain explicit evidence prerequisites in the decision baseline. They do not represent completed product tests. No payments, confirmed booking, shipping, automated fulfilment, or procurement workflow is introduced.

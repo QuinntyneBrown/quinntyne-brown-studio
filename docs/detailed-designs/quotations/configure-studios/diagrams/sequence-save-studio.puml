@@ -17,10 +17,10 @@ title Behavior - SaveStudio
 actor "Studio administrator" as actor
 box "Frontend - Admin application" #E0F2FE
  participant "StudiosPage" as page
- participant "IStudiosApi" as client
+ participant "IStudioService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
- participant "StudiosController" as controller
+ participant "StudioController" as controller
 end box
 box "Backend - Qbs.Application and Domain" #ECFDF3
  participant "SaveStudioHandler" as handler

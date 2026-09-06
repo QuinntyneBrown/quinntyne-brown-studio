@@ -17,10 +17,10 @@ title Behavior - SavePublicGallery
 actor "Studio administrator" as actor
 box "Frontend - Admin application" #E0F2FE
  participant "PublicGalleryEditor" as page
- participant "IPublicGalleriesApi" as client
+ participant "IPublicGalleryService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
- participant "PublicGalleriesController" as controller
+ participant "PublicGalleryController" as controller
 end box
 box "Backend - Qbs.Application and Domain" #ECFDF3
  participant "SavePublicGalleryHandler" as handler

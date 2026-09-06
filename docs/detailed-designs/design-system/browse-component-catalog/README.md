@@ -2,30 +2,32 @@
 
 ## Overview
 
-Quinntyne Brown Studio supports photography discovery, studio administration, and client deliverables. The component catalog is a contributor-facing application showing the platform UI inventory. Each entry demonstrates an actual reusable component or composed page. Examples make the approved visual language and task states reviewable without studio data.
+Quinntyne Brown Studio supports photography discovery, studio administration, and client deliverables. The component catalog is a contributor-facing product showing the platform's visual inventory. Each entry demonstrates a component the platform ships, with its classes, its states, and rendered examples. Examples make the approved visual language and task states reviewable without studio data.
 
 ## Description
 
-Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
+Status: implemented as the standalone `design-system` product beside `backend/` and `frontend/`. The names below identify its published entries and its files.
 
-`ComponentCatalogPage` lists named entries from `ComponentCatalog`. `ComponentExample` identifies a component, example state, and navigation route. The manifest covers all production UI components, including composed feature pages, through isolated host examples. A coverage check compares exported component metadata and the manifest; adding a component without an example fails the catalog build check.
+`ComponentManifest` (`design-system/component-manifest.json`) is the versioned inventory. Each `CatalogEntry` carries an identifier, a category, the classes it owns, its states, and at least one `ComponentExample` with rendered markup. `CatalogApplication` reads that manifest and renders the navigation, the entry pages, the token foundations, and the deep-linkable routes. `CatalogFixtures` supplies the screen-pattern and dialog scenarios that compose those classes into whole screens. `IsolatedPreview` renders a single example without catalog chrome for focused review.
 
-Examples use the same components library as the product and bind service tokens to deterministic mocks. States include loading, empty, validation, dependency failure, success, and dialogs when relevant. Names and state inventory follow `MockCatalog` in the existing HTML prototype, but demo authentication and business defaults do not become production contracts.
+The catalog holds its own tokens, component styles, fixtures, and checks, and has no build, test, or runtime dependency on the Angular workspace, the studio API, or a database. `design-system/scripts/validate.mjs` compares the manifest with the stylesheet and the fixtures: a documented class without a definition, an example that renders none of its own classes, a scenario without markup, an unbalanced package script, or a reference outside the folder fails the catalog check before any browser starts.
 
-The catalog applies OD-08 viewport and keyboard checks. It documents component inputs, outputs, and BEM names beside rendered examples. The catalog is the `design-system` product at the repository root, versioned and built separately from the Angular workspace and the studio backend. The source-referenced Saturdaze design-system directory provides organizational guidance; unrelated product features are excluded.
+Examples cover the states each entry declares, including validation, dependency failure, empty, processing, and revoked outcomes. Dialog scenarios keep native modal behavior, so Escape closes a dialog and focus returns to the control that opened it. The catalog's Playwright suite, written with page objects, opens every manifest entry and scenario at 390, 768, and 1440 CSS pixels with product API requests blocked, and asserts that no such request is attempted.
 
-Acceptance covers complete component inventory, recognizable examples, mock-service substitution, keyboard dialogs, error readability, and the nine browser/viewport combinations.
+The Angular `components` library re-implements these classes for the product, and application screens reuse the block names rather than redefining them. The catalog stays the reference a contributor reviews before an application consumes a component. The catalog publishes every class the applications ship, including the application chrome, and each delivered component names the catalog entry that shows it, so a component added without an example fails the repository check. The [presentation inventory](../../../components.md) records the wider component target that is not built yet, and the screen patterns mirror delivered screens with local fixtures, so `L2-047` stays partially satisfied rather than claiming complete coverage.
+
+Acceptance covers manifest completeness, recognizable examples, local-only fixtures, keyboard dialogs, error readability, and the supported viewport widths.
 
 **Interfaces**
 
-- `Local catalog manifest ← componentName, exampleName, state, route → navigable rendered example`
-- `Angular component interfaces ← typed inputs and outputs; no production HTTP API`
+- `Component manifest ← entryId, exampleId → navigable rendered example with classes and states`
+- `Isolated preview ← type, id, example → one rendered example without catalog chrome`
 
 **Behavior ownership**
 
 | Operation | Owner | Responsibility |
 | --- | --- | --- |
-| `BrowseComponentExample` | `BrowseComponentExample` | Resolve manifest entry and render real component with mock providers. |
+| `BrowseComponentExample` | `CatalogApplication` | Resolve a manifest entry and render its example from local fixtures. |
 
 The [shared architecture](../../architecture.md) defines authorization, wire conventions, persistence, environment boundaries, and delivery constraints. The [decision baseline](../../../specs/decisions.md) supplies exact policies and remaining evidence gates. Shared architecture requirements `L2-038` through `L2-045` and delivery requirements `L2-049` through `L2-054` apply to the implemented layers of this slice.
 
@@ -51,19 +53,18 @@ The context identifies the people and systems involved in this capability. Exter
 
 ![c4 context for browse the component catalog](diagrams/c4-context.png)
 
-The container view locates the participating applications and their deployed dependencies. It preserves the separation between browser interaction and persisted or background work.
+The container view locates the catalog, its checks, and its static host, and keeps them separate from the studio applications.
 
 ![c4 container for browse the component catalog](diagrams/c4-container.png)
 
-The component view separates the catalog or acceptance host from the controlled providers used to exercise it.
+The component view separates the catalog application from the manifest, the fixtures, and the authoritative stylesheet it renders.
 
 ![c4 component for browse the component catalog](diagrams/c4-component.png)
 
-The class view shows typed fields and relationships for `ComponentExample`. `ComponentContract` describes the related structure used by the feature.
+The class view shows the manifest structure: a `CatalogEntry` and its `ComponentExample` values, and the pattern and dialog families that reuse them.
 
 ![class structure for browse the component catalog](diagrams/class-structure.png)
 
-`BrowseComponentExample`: Resolve manifest entry and render real component with mock providers. Unknown example: catalog not-found view; mock failure: controlled component state. This behavior has no studio backend participant; delivery tooling is shown separately.
+`BrowseComponentExample`: Resolve a manifest entry and render its example from local fixtures. Unknown entry: catalog not-found view; declared failure state: the fixture for that state. This behavior has no studio backend participant; delivery tooling is shown separately.
 
 ![sequence browse component example for browse the component catalog](diagrams/sequence-browse-component-example.png)
-

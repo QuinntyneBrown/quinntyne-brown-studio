@@ -17,10 +17,10 @@ title Behavior - AnalyzePhoto
 actor "Studio administrator" as actor
 box "Frontend - Admin application" #E0F2FE
  participant "PhotoSuggestionsPanel" as page
- participant "IPhotoAnalysisApi" as client
+ participant "IAnalysisService" as client
 end box
 box "Backend - Qbs.Api application" #D1FADF
- participant "PhotoAnalysisController" as controller
+ participant "AnalysisController" as controller
 end box
 box "Backend - Qbs.Worker and Domain" #ECFDF3
  participant "AnalyzePhotoHandler" as handler

@@ -6,7 +6,7 @@ Quinntyne Brown Studio supports photography discovery, studio administration, an
 
 ## Description
 
-Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
+Status: designed for production and implemented in this repository. Delivered handler and service names consolidate some participants shown below; the [implementation report](../../../implementation/README.md) and the [acceptance register](../../acceptance.md) record the delivered structure and the evidence that remains open.
 
 `PhotoSuggestionsPanel` requests analysis of ready photos and polls a batch status resource while review remains interactive. `RequestPhotoAnalysisHandler` authorizes the session, validates photo membership, and records durable per-photo jobs. `AnalyzePhotoHandler` sends a derived JPEG preview and the versioned technical-quality rubric through `IPhotoAnalysisService`.
 
@@ -16,7 +16,7 @@ Analysis state is `Queued`, `Running`, `Succeeded`, or `Failed`. No handler in t
 
 Acceptance includes mixed analysis results, incorrect-photo responses, timeouts, malformed output, retry, and the studio's approved evaluation corpus. Model accuracy is not inferred from successful API calls.
 
-`IPhotoAnalysisApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `PhotoAnalysisController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
+`IAnalysisService` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `AnalysisController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 

@@ -6,7 +6,7 @@ Quinntyne Brown Studio supports photography discovery, studio administration, an
 
 ## Description
 
-Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
+Status: designed for production and implemented in this repository. Delivered handler and service names consolidate some participants shown below; the [implementation report](../../../implementation/README.md) and the [acceptance register](../../acceptance.md) record the delivered structure and the evidence that remains open.
 
 `SessionRetentionPanel` shows the session expiry, extension action, and a deletion-impact report. `SessionRetention` uses the latest photo expiry derived from upload dates and the configurable duration. A session with no photos has no photo expiry. `ProcessRetentionHandler` performs daily notice checks and records one notice per expiry revision.
 
@@ -16,7 +16,7 @@ Client authorization checks the current expiry on every request; access does not
 
 Acceptance covers month-end expiry, notice deduplication, scheduler outage at expiry, extension, stale impact confirmation, blocked references, partial deletion, and inaccessible album images.
 
-`IRetentionApi` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `RetentionController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
+`IRetentionService` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `RetentionController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**
 
