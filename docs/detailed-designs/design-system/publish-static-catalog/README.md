@@ -2,15 +2,15 @@
 
 ## Overview
 
-Quinntyne Brown Studio supports photography discovery, studio administration, and client deliverables. A catalog artifact is the built static HTML, JavaScript, CSS, and assets for the design-system application. Contributors can publish it independently from the studio backend. A static host serves its navigation and component examples.
+Quinntyne Brown Studio supports photography discovery, studio administration, and client deliverables. A catalog artifact is the built static HTML, JavaScript, CSS, and assets for the root-level `design-system` product. Contributors can publish it independently from the studio backend. A static host serves its navigation and component examples.
 
 ## Description
 
 Status: proposed production slice. The repository contains standalone HTML mocks; the Angular and .NET names below identify the components introduced by this design.
 
-`CatalogBuild` compiles the Angular design-system application with deterministic mock providers. `CatalogArtifact` identifies the source revision and asset manifest. The build excludes product secrets and private-photo URLs. An offline-backend smoke test opens deep links and representative component states with all product API requests blocked.
+`CatalogBuild` compiles the standalone `design-system` product against the built `components` library artifact, with deterministic mock providers. `CatalogArtifact` identifies the source revision and asset manifest. The build excludes product secrets and private-photo URLs. An offline-backend smoke test opens deep links and representative component states with all product API requests blocked.
 
-The proposed build command is `ng build design-system --configuration production`. The artifact directory is `dist/design-system/browser`; deployment copies that complete directory to Azure Static Web Apps with navigation fallback to `index.html`. Hash-named assets use immutable caching; the entry point and navigation configuration use revalidation.
+The proposed build command is `npm run build` inside `design-system`. The artifact directory is `design-system/dist`; deployment copies that complete directory to Azure Static Web Apps with navigation fallback to `index.html`. Hash-named assets use immutable caching; the entry point and navigation configuration use revalidation.
 
 `PublishCatalog` in the delivery pipeline validates links and browser checks before publishing the artifact. A failed build or smoke check does not replace the deployed revision. Rollback selects the prior artifact. Hosting identifiers remain G-ENV evidence.
 
@@ -18,7 +18,7 @@ Acceptance covers documented build prerequisites, direct deep-link navigation, m
 
 **Interfaces**
 
-- `CLI ng build design-system --configuration production → dist/design-system/browser`
+- `CLI npm run build in design-system → design-system/dist`
 - `Static HTTP GET / and /components/... → catalog entry point and bundled assets`
 
 **Behavior ownership**

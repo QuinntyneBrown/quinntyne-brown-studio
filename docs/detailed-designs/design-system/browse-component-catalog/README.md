@@ -12,7 +12,7 @@ Status: proposed production slice. The repository contains standalone HTML mocks
 
 Examples use the same components library as the product and bind service tokens to deterministic mocks. States include loading, empty, validation, dependency failure, success, and dialogs when relevant. Names and state inventory follow `MockCatalog` in the existing HTML prototype, but demo authentication and business defaults do not become production contracts.
 
-The catalog applies OD-08 viewport and keyboard checks. It documents component inputs, outputs, and BEM names beside rendered examples. The source-referenced Saturdaze design-system directory provides organizational guidance; unrelated product features are excluded.
+The catalog applies OD-08 viewport and keyboard checks. It documents component inputs, outputs, and BEM names beside rendered examples. The catalog is the `design-system` product at the repository root, versioned and built separately from the Angular workspace and the studio backend. The source-referenced Saturdaze design-system directory provides organizational guidance; unrelated product features are excluded.
 
 Acceptance covers complete component inventory, recognizable examples, mock-service substitution, keyboard dialogs, error readability, and the nine browser/viewport combinations.
 

@@ -4,13 +4,13 @@ Status: proposed production design, 2026-09-05. Existing implementation consists
 
 ## Application boundaries
 
-The Angular workspace contains `components`, `domain`, and `api` libraries and `marketing`, `admin`, `client`, and `design-system` applications. A separate `application` library owns feature state and orchestration. Domain types contain no HTTP dependencies. Components receive data and emit intent. Feature state uses writable and computed signals. HTTP observable conversion stays inside API implementations; no consumer imports an implementation class.
+The Angular workspace contains `components`, `domain`, and `api` libraries and `marketing`, `admin`, and `client` applications. The design-system catalog is a separate first-class product at the repository root with its own entry point, build, and deployment. A separate `application` library owns feature state and orchestration. Domain types contain no HTTP dependencies. Components receive data and emit intent. Feature state uses writable and computed signals. HTTP observable conversion stays inside API implementations; no consumer imports an implementation class.
 
 Each contract has an Angular `InjectionToken`; application composition binds it to a production HTTP adapter or a controlled mock. This follows the [interface-driven service consumption reference](https://github.com/QuinntyneBrown/interface-driven-service-consumption). A token and its interface use separate files. Component TypeScript, HTML, and CSS remain separate. BEM names belong to the components library and are reused by application screens.
 
 The .NET solution contains `Qbs.Domain`, `Qbs.Application`, `Qbs.Infrastructure`, `Qbs.Api`, and `Qbs.Worker`. Domain depends on no outer project. Application references Domain and declares ports. Infrastructure implements ports using EF Core, Azure SDKs, Identity, and RAW conversion. API and Worker compose dependencies. All product HTTP operations, including authentication and image delivery, use controllers. Handlers use MediatR selected under `G-MEDIATR`.
 
-The gateway serves built Angular product applications at `/`, `/admin`, and `/client`, forwarding `/api` to the API. Route fallback respects application boundaries. It serves static marketing shells; initial content is retrieved through public APIs. The design-system catalog is independently hosted with mocks. No product database or API is needed to browse its examples.
+The gateway serves built Angular product applications at `/`, `/admin`, and `/client`, forwarding `/api` to the API. Route fallback respects application boundaries. It serves static marketing shells; initial content is retrieved through public APIs. The design-system catalog builds and deploys from its own root-level directory and is independently hosted with mocks. No product database or API is needed to browse its examples.
 
 ## Contracts and persistence
 
