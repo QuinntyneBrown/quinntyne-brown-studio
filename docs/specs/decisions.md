@@ -78,7 +78,19 @@ The design baseline selects .NET 10 LTS, EF Core 10, Angular/CLI 22, Node.js 24.
 
 MediatR remains mandatory. The dependency-selection review compares current official releases and their license terms against the project's actual eligibility. The [official license conditions](https://mediatr.io/) and [release history](https://github.com/LuckyPennySoftware/MediatR/releases) are the evidence sources. The implementation selects MediatR **12.5.0**, the final pre-v13 release, under the user-approved open-source selection on **2026-09-05**. The [tagged Apache-2.0 license](https://github.com/LuckyPennySoftware/MediatR/blob/v12.5.0/LICENSE) and [12.5.0 package record](https://www.nuget.org/packages/MediatR/12.5.0) establish freely usable terms without commercial/community eligibility assumptions. The project and package lock pin that exact release. G-MEDIATR is closed for this selection; changing the major version requires a new dependency review.
 
-Azure Container Apps hosts the API, gateway, and background worker. Azure SQL stores application and identity records. Blob Storage stores private originals and derivatives. Storage Queues transports processing work. Azure Communication Services Email delivers invitations and recovery messages. The component catalog deploys to Azure Static Web Apps and operates without the API. Development, staging, and production use distinct identities, secrets, databases, storage accounts, and queues. Subscription, region, DNS names, verified sender, capacity configuration, and model deployment identifiers: `<TO SUPPLY>` under `G-ENV`.
+The original Azure SQL and Container Apps hosting selection is superseded by [OD-10](#od-10--localdb-persistence-and-windows-hosting). Blob Storage stores private originals and derivatives. Storage Queues transports processing work. Azure Communication Services Email delivers invitations and recovery messages. The component catalog deploys to Azure Static Web Apps and operates without the API. Development, staging, and production use distinct identities, secrets, databases, storage accounts, and queues. Subscription, region, DNS names, verified sender, capacity configuration, and model deployment identifiers remain environment evidence under `G-ENV`.
+
+## OD-10 — LocalDB persistence and Windows hosting
+
+Status: **Accepted**, 2026-09-06. Authority: the user's LocalDB-only selection and approved implementation plan. Supersedes OD-09's Azure SQL, Container Apps, and Linux backend deployment choices; other decisions remain in effect.
+
+All normal development and production application, Identity, and outbox records use SQL Server Express LocalDB through EF Core's SQL Server provider. The API and worker run on one Windows host under the same owning Windows account. [Microsoft's LocalDB documentation](https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/sql-server-express-localdb) describes its local, per-user instance model. Linux backend containers, remote SQL Server, SQL Server service instances, and Azure SQL are outside this supported target. The prior deployment assets are retained only as a superseded historical archive.
+
+`ConnectionStrings:Studio` is shared by API, worker, EF tooling, migration, and administrator provisioning. Development defaults to `(localdb)\MSSQLLocalDB`, database `QbsDevelopment`. Production requires an explicit connection with a named LocalDB instance, an explicit database, and Windows integrated authentication; the runbook uses `QbsProduction`. Environment databases remain separate. Normal startup verifies access and applied migrations without creating or modifying schema. The explicit `--migrate` command owns schema changes. Unavailable databases and invalid configuration fail startup with an actionable message and never select memory storage.
+
+Controlled external-service adapters remain available in development independently of persistence. Database fakes and EF InMemory live only in the acceptance-test project and are supplied explicitly by test composition, preserving L2-050. Persistence acceptance cases exercise real LocalDB with disposable databases and the normal runtime registrations. Existing schema, decimal pricing, transactions, version conflicts, and outbox semantics remain unchanged.
+
+This decision includes code, Windows publishing, startup tooling, and the [operating runbook](../../deploy/README.md). It does not install Windows services, provision cloud resources, migrate external production data, or establish unmeasured capacity or recovery guarantees. Backups, a restore exercise, Windows account configuration, and external adapter qualification remain operational evidence under `G-ENV`. See the [acceptance evidence](../implementation/localdb-persistence.md).
 
 ## Evidence register
 
@@ -88,6 +100,6 @@ Azure Container Apps hosts the API, gateway, and background worker. Azure SQL st
 | G-UPLOAD | Boundary files and measured interruption/resume report on OD-04 profile | `<TO SUPPLY>` |
 | G-AI | Studio-approved rubric, evaluation set, threshold, Azure model/version/region qualification | `<TO SUPPLY>` |
 | G-MEDIATR | User-selected latest pre-v13 release and dated official licensing evidence | Closed: MediatR 12.5.0, Apache-2.0, 2026-09-05 |
-| G-ENV | Environment identifiers, email sender, deployable configurations and isolation evidence | `<TO SUPPLY>` |
+| G-ENV | Windows account/host/TLS, LocalDB backup/restore, external service credentials, environment identifiers, email sender and isolation evidence (OD-10) | `<TO SUPPLY>` |
 
 These gates prevent acceptance claims for unverified product behavior. They do not prevent the requirements and proposed designs from being reviewed.

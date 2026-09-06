@@ -1,59 +1,95 @@
-# Deployment and operations
+# Windows and LocalDB operation
 
-The Bicep template provisions one isolated environment per resource group. Container image builds and template compilation are safe local verification steps; deploying resources, publishing images, assigning external-service roles, and changing DNS are operator release actions. No live deployment has been performed for this implementation.
+The supported backend target is one Windows host. The API, worker, migration command, and provisioning command run under the **same Windows account**, which owns the LocalDB instance. This implements [OD-10](../docs/specs/decisions.md#od-10--localdb-persistence-and-windows-hosting). No Windows services or cloud resources are installed by this runbook. The [legacy archive](legacy/README.md) is superseded.
 
-## Package
+## Prerequisites and packaging
 
-From the repository root with a working Linux container engine:
+Install .NET 10 (SDK 10.0.303 to build), SQL Server Express LocalDB, PowerShell 7, and Node.js 24.18 or a compatible later 24.x patch. Install the matching Windows LibRaw `dcraw_emu` executable for RAW processing and set `Raw__Executable` if it is not on PATH. Camera qualification remains subject to its existing evidence gate.
+
+Run `SqlLocalDB info` and `SqlLocalDB start MSSQLLocalDB` under the account that will run the application. If needed, locate the utility under `C:\Program Files\Microsoft SQL Server\<version>\Tools\Binn\SqlLocalDB.exe`. Do not substitute another Windows account, LocalSystem, a SQL Server service instance, or a remote server. [Microsoft's LocalDB documentation](https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/sql-server-express-localdb) describes instance ownership and file access.
+
+From the repository root:
 
 ```powershell
-docker build -f deploy/Dockerfile.api -t qbs-api:local .
-docker build -f deploy/Dockerfile.worker -t qbs-worker:local .
-docker build -f deploy/Dockerfile.gateway -t qbs-gateway:local .
-az bicep build --file deploy/main.bicep --outfile .artifacts/azure-template.json
+dotnet restore backend/Qbs.slnx --locked-mode
+dotnet publish backend/src/Qbs.Api -c Release --no-restore -p:UseAppHost=false -o .artifacts/windows/api
+dotnet publish backend/src/Qbs.Worker -c Release --no-restore -p:UseAppHost=false -o .artifacts/windows/worker
+npm ci --prefix frontend
+npm run build:libs --prefix frontend
+npm run build:apps --prefix frontend
 ```
 
-The worker image installs LibRaw and the Linux image-decoding dependencies. The gateway serves marketing, `/admin/`, and `/client/` with the API behind `/api/`. The design system is built separately with `npm run build` in [`design-system/`](../design-system/README.md); its output is `design-system/dist` and is published to Azure Static Web Apps by [its own workflow](../.github/workflows/deploy-design-system.yml). The artifact carries `staticwebapp.config.json`, so direct component, pattern and dialog URLs resolve, and it makes no product API request.
+The published DLLs use the installed .NET runtime, which must support the installed LocalDB driver. CI publishes these backend directories on Windows. Angular and independent design-system artifacts remain separate.
 
-## Environment rollout
+## Configure, migrate, and provision
 
-1. Record the target subscription, resource group, region, domain, Entra SQL administrator group, verified email sender, Maps account and approved AI deployment under G-ENV/G-AI. Use separate groups and service resources for development, staging and production.
-2. Deploy `main.bicep` with `deployApplications=false`. Required parameters are `environment`, `imageTag`, `publicOrigin`, `sqlAdministratorObjectId`, and `sqlAdministratorName`. This creates ACR, SQL, private storage, queue, Key Vault, identities, monitoring, Container Apps environment and the independent catalog host.
-3. Build the three images, publish them to the returned `registryServer`, and record their immutable digests. Use the same release tag for the second template invocation.
-4. As the SQL Entra administrator, migrate the database and execute [database-access.sql](database-access.sql) using the identity names returned by the template. Runtime API and worker accounts have data access; schema migration uses a separate operator account. The operator's connection uses encrypted Entra authentication. Run `dotnet Qbs.Api.dll --migrate` with `ConnectionStrings__Studio` set to that operator connection.
-5. Grant the API identity **Azure Maps Data Reader** on the selected Maps account. Grant the worker identity **Cognitive Services OpenAI User** on the selected AI resource and the Email send action on the selected Communication Services resource. These existing service scopes are intentionally not guessed by the template. Validate each identity with a real call in staging; assign no product storage or SQL roles to the gateway identity.
-6. Deploy again with `deployApplications=true` and the configured service parameters. The same-origin HTTPS domain must match `publicOrigin` and Blob CORS. The API ingress is internal; only the gateway accepts public traffic. Bind the domain and certificate to the gateway, then publish the standalone catalog files to its separate host.
-7. Provision the first administrator using `dotnet Qbs.Api.dll --provision-admin`, supplying `Bootstrap__Email` and `Bootstrap__Password` through the operator environment. Remove those variables afterward. No HTTP registration endpoint or built-in production credential exists.
-8. Execute staging smoke checks for authentication, upload/SAS isolation, RAW conversion, queues, email, AI, SQL conflicts, retention and recovery. Record results and complete the external evidence gates before production release.
+Set these variables in each process's environment. Deployment settings belong outside source control:
 
-`main.bicep` uses a Basic SQL database and one 2 GiB worker as an initial deployable configuration. These values are not a validated capacity commitment. The measured G-UPLOAD exercise determines production capacity. The SQL firewall permits Azure-hosted connections; Entra authorization remains required. Organizations requiring private endpoints should supply their approved network topology before release.
+```powershell
+$env:ASPNETCORE_ENVIRONMENT = 'Production'
+$env:DOTNET_ENVIRONMENT = 'Production'
+$env:ConnectionStrings__Studio = 'Server=(localdb)\MSSQLLocalDB;Database=QbsProduction;Integrated Security=true;Encrypt=true;TrustServerCertificate=true'
+$env:PublicOrigin = 'https://studio.example.com'
+$env:ASPNETCORE_URLS = 'http://127.0.0.1:7444'
+dotnet .artifacts/windows/api/Qbs.Api.dll --migrate
+if ($LASTEXITCODE -ne 0) { throw 'Migration failed; do not start the application.' }
+```
 
-## Configuration
+Production requires an explicit connection. Its database differs from development's `QbsDevelopment`; staging uses its own target. Integrated authentication needs no SQL password. SQL credentials, attached filenames, system databases, and non-LocalDB connections are rejected. `TrustServerCertificate` applies to this local instance example only.
 
-Environment variables use `__` in place of `:`.
+`--migrate` applies the existing EF migrations and is repeatable. Back up existing data before upgrading. Normal startup never uses `EnsureCreated`, creates a replacement database, or applies migrations. A database created outside migrations requires operator reconciliation; do not delete it to resolve a schema error. EF tooling uses the same environment variables and validation; set the environment explicitly before `dotnet ef` commands. The former design-time `QBS_SQL` override is replaced by `ConnectionStrings__Studio`.
+
+Provision the first administrator with credentials supplied only to that process:
+
+```powershell
+$env:Bootstrap__Email = Read-Host 'Administrator email'
+$studioCredential = Get-Credential -UserName $env:Bootstrap__Email -Message 'Initial administrator credentials'
+$env:Bootstrap__Password = $studioCredential.GetNetworkCredential().Password
+try {
+    dotnet .artifacts/windows/api/Qbs.Api.dll --provision-admin
+    if ($LASTEXITCODE -ne 0) { throw 'Administrator provisioning failed.' }
+} finally {
+    Remove-Item Env:Bootstrap__Email, Env:Bootstrap__Password -ErrorAction SilentlyContinue
+}
+```
+
+Provisioning is repeatable for an existing administrator and does not reset its password.
+
+## Start and supervise
+
+Run `dotnet .artifacts/windows/api/Qbs.Api.dll` and `dotnet .artifacts/windows/worker/Qbs.Worker.dll` in separate terminals under the owning account, with the same database and data-protection settings. Supervise processes through the host's operating procedures; service installation and automatic restart configuration are outside this change. Stop with Ctrl+C.
+
+Both processes verify database access and migrations before serving or processing work. `/api/health` remains process liveness; use an authenticated read to verify continued database access. Capture process output and worker failures in the host's logging system.
+
+Serve the built marketing, admin, and client files through the host's HTTPS reverse proxy at `/`, `/admin/`, and `/client/`, forwarding `/api/` to the loopback API. Preserve the original HTTPS scheme and host-only cookies, apply each app's SPA fallback, and keep the API bound to loopback. Supply the host's approved TLS certificate and DNS settings. The design system remains a separate static site; its Azure Static Web Apps deployment is unchanged.
+
+For repository development, `scripts/start-dev.ps1` migrates, optionally provisions credentials supplied in the environment, and starts the existing local HTTPS gateway. Rates, studios, accounts, and outbox records persist after restart. Controlled Maps/AI/email/storage/queue adapters remain development boundaries. The integrated development processor handles the persistent outbox, so that quick start does not need a separate worker. Captured email and queue buffers remain ephemeral.
+
+## External services
+
+Production retains its Azure adapters. Configure credentials for the Windows processes through the Azure SDK's supported credential chain. Managed identity is available only on an appropriately configured Azure host; do not assume the archived Container Apps identities exist. Required resource roles and release qualification remain unchanged.
 
 | Setting | Use |
 | --- | --- |
-| `ConnectionStrings__Studio` | EF Core and Identity SQL connection |
-| `PublicOrigin` | Absolute product HTTPS origin used in account links |
-| `AZURE_CLIENT_ID` | API or worker managed identity selected by Azure SDKs |
-| `Azure__BlobEndpoint` | Storage account Blob endpoint; private `photos` container |
-| `Azure__QueueEndpoint` | Full processing queue URL |
+| `Azure__BlobEndpoint` | Private originals and derivatives |
+| `Azure__QueueEndpoint` | Processing queue URI |
 | `Azure__MapsClientId` | Maps account client identifier |
-| `Azure__EmailEndpoint`, `Azure__EmailSender` | Verified Communication Services Email configuration |
-| `Azure__AiEndpoint`, `Azure__AiDeployment`, `Azure__AiModelVersion` | Qualified vision deployment and provenance |
-| `Retention__AdministratorEmail` | Recipient of one notice per session-expiry revision |
-| `DataProtection__BlobUri`, `DataProtection__KeyUri` | Shared key ring and Key Vault wrapping key for API and worker |
-| `Gateway__TrustForwardedHeaders` | Enable only behind the template's private API ingress |
-| `APPLICATIONINSIGHTS_CONNECTION_STRING` | API OpenTelemetry export to Application Insights |
-| `Raw__Executable` | Optional LibRaw executable override; default `dcraw_emu` |
+| `Azure__EmailEndpoint`, `Azure__EmailSender` | Invitation and recovery delivery |
+| `Azure__AiEndpoint`, `Azure__AiDeployment`, `Azure__AiModelVersion` | Qualified vision deployment |
+| `Retention__AdministratorEmail` | Retention notices |
+| `DataProtection__Directory` | Stable shared Windows key directory, protected by Windows DPAPI |
+| `DataProtection__BlobUri`, `DataProtection__KeyUri` | Optional existing external key storage/wrapping |
+| `APPLICATIONINSIGHTS_CONNECTION_STRING` | Optional API telemetry |
+| `Raw__Executable` | Windows LibRaw converter path |
 
-The API registers the [Azure Monitor OpenTelemetry distribution](https://learn.microsoft.com/en-us/azure/azure-monitor/app/opentelemetry-enable) only when configured outside controlled development. Container console logs flow to the environment's Log Analytics workspace. Job rows hold attempt count, lease, state and sanitized failure text. Queue messages contain job identifiers; account-link email payloads are encrypted with the shared data-protection key ring.
+Keep data-protection keys outside temporary build output. Credential, TLS, camera, AI, capacity, and external-resource qualification remain release evidence; this change does not deploy or certify them.
 
-## Recovery and release verification
+## Backup, restore, and troubleshooting
 
-Use `/api/health` for process liveness, then an authenticated read for database readiness. Inspect failed `BackgroundJob` records and container logs when processing stops; preview and analysis retries are available in session administration. Reconfirm the retention impact to retry a failed deletion. Never remove failed job rows to hide an incident. Queue delivery is at least once; consumers lease jobs and use immutable originals, revision checks, and idempotent email operation identifiers.
+Take a SQL full backup using `BACKUP DATABASE [QbsProduction] TO DISK = N'C:\StudioBackups\QbsProduction.bak' WITH COPY_ONLY, CHECKSUM;` through SSMS or `sqlcmd` connected to `(localdb)\MSSQLLocalDB` with Windows authentication. Use a unique filename for each backup and a directory writable by the owning account. Retain backups separately from database files and preserve data-protection keys needed for encrypted job payloads. Copying live MDF/LDF files is not a backup.
 
-Take a database backup before migration. Retain the previous container image digests for an application rollback compatible with the current schema; do not automatically roll a schema backward. Configure and test Azure SQL point-in-time recovery and storage backup policies for the agreed recovery objectives. A confirmed physical photo deletion cannot be undone through the retention editor.
+Verify with `RESTORE VERIFYONLY ... WITH CHECKSUM`, then exercise restoration to a **new database name** and separate files using `RESTORE FILELISTONLY` and `RESTORE DATABASE ... WITH MOVE`. Verify schema, account login, saved studio configuration, and outbox records. For actual recovery, stop API and worker, restore to a new target, and change both connection strings together. Never overwrite the original database by default. Retain the previous publish directory for rollback compatible with the restored schema. Photo deletion has no application rollback.
 
-The local Docker engine returned an internal-server error during this run, so container execution remains unverified here. The CI container job builds all three images on Linux and exports them as reviewable artifacts; it does not push or deploy them. Actual Azure identity, DNS, sender, telemetry and restore exercises remain G-ENV evidence.
+For an inaccessible database, check installation, instance state, Windows identity, file access, and the database name. Run migration only when intentionally creating or upgrading that target. For pending migrations, back up and run `--migrate` before restarting both processes. For rejected configuration, select a named LocalDB instance with integrated authentication and a non-system database. Failures never select memory storage.
+
+The active Compose file contains only storage emulation. Removing its SQL service does not delete any existing Docker volume. [Acceptance evidence](../docs/implementation/localdb-persistence.md) records runtime verification; production restoration and environment qualification remain explicit operational work.

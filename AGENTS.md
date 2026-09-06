@@ -19,6 +19,11 @@ say what it cost rather than quietly narrowing scope.
 - Use Microsoft.Extensions libraries and patterns: dependency injection, Options,
   and Configuration.
 - Use Angular for the web client.
+- Use SQL Server Express **LocalDB** through EF Core's SQL Server provider for all
+  normal development and production persistence, including Identity and the outbox.
+  API and worker run on the same Windows host under the same Windows account.
+  SQL Server service instances, Azure SQL, and Linux backend containers are not
+  supported runtime targets. See [OD-10](docs/specs/decisions.md#od-10--localdb-persistence-and-windows-hosting).
 
 ## Architecture and Design
 
@@ -33,6 +38,15 @@ say what it cost rather than quietly narrowing scope.
 
 ## Backend
 
+- Database fakes and EF InMemory belong only in `backend/tests/` and are explicitly
+  supplied by test factories. Normal hosts never switch to memory, including when
+  development external-service adapters are enabled or a database is unavailable.
+- API, worker, migrations, and administrator provisioning share
+  `ConnectionStrings:Studio`. Development defaults to LocalDB `QbsDevelopment`;
+  production requires an explicit named LocalDB database with Windows integrated
+  authentication. Fail startup on invalid configuration, inaccessible databases,
+  or unapplied migrations. Apply migrations explicitly; never use `EnsureCreated`
+  for runtime databases or silently replace a database.
 - Use Clean Architecture. Dependencies point inward. `Domain` references nothing.
 - Keep controllers thin: bind, dispatch through MediatR, return. No logic in a
   controller.
@@ -252,7 +266,7 @@ quinntyne-brown-studio/
 |   |-- package.json                  # Independent application acceptance-test project
 |   |-- page-objects/                 # Screen selectors, interactions, and API mocks
 |   `-- specs/                        # Application Playwright acceptance scenarios
-|-- deploy/                           # Docker images, gateway, Azure Bicep, and database setup
+|-- deploy/                           # Windows/LocalDB runbook, emulators, and legacy deployment archive
 |-- scripts/                          # Development startup, smoke checks, and documentation tooling
 `-- docs/
     |-- components.md                 # Angular presentation-component documentation

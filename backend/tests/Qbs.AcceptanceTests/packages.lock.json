@@ -19,6 +19,17 @@
           "Microsoft.Extensions.Hosting": "10.0.8"
         }
       },
+      "Microsoft.EntityFrameworkCore.InMemory": {
+        "type": "Direct",
+        "requested": "[10.0.8, )",
+        "resolved": "10.0.8",
+        "contentHash": "C3T9khx1oiLPrS6ehoSnZptiEuTOIaX60it9SGvCkWTeF5i6+IceK6p7mtx+mkFwWB5qx+v3IhgG51iUEtLq9w==",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "10.0.8",
+          "Microsoft.Extensions.Caching.Memory": "10.0.8",
+          "Microsoft.Extensions.Logging": "10.0.8"
+        }
+      },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
         "requested": "[17.14.1, )",
@@ -270,16 +281,6 @@
         "type": "Transitive",
         "resolved": "10.0.8",
         "contentHash": "M3BZ8JH8rB6BE7dO2g9iVbrHLnEz9wMXT6q+tDR6Nq3gyP3KmBj5OTiZGxyF3vesjOQNKanYoPGSNBR4kR2llg=="
-      },
-      "Microsoft.EntityFrameworkCore.InMemory": {
-        "type": "Transitive",
-        "resolved": "10.0.8",
-        "contentHash": "C3T9khx1oiLPrS6ehoSnZptiEuTOIaX60it9SGvCkWTeF5i6+IceK6p7mtx+mkFwWB5qx+v3IhgG51iUEtLq9w==",
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore": "10.0.8",
-          "Microsoft.Extensions.Caching.Memory": "10.0.8",
-          "Microsoft.Extensions.Logging": "10.0.8"
-        }
       },
       "Microsoft.EntityFrameworkCore.Relational": {
         "type": "Transitive",
@@ -933,7 +934,6 @@
           "Azure.Storage.Blobs": "[12.29.2, )",
           "Azure.Storage.Queues": "[12.27.1, )",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "[10.0.8, )",
-          "Microsoft.EntityFrameworkCore.InMemory": "[10.0.8, )",
           "Microsoft.EntityFrameworkCore.SqlServer": "[10.0.8, )",
           "Qbs.Application": "[1.0.0, )",
           "SkiaSharp": "[4.151.2, )",

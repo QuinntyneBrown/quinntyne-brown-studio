@@ -4,7 +4,7 @@ using Qbs.Domain.Entities;
 using Qbs.Domain.Exceptions;
 using Qbs.Infrastructure.Serialization;
 
-namespace Qbs.Infrastructure.Persistence;
+namespace Qbs.AcceptanceTests;
 
 public sealed class MemoryStudioTransaction(Dictionary<(Type, Guid), string> data)
     : IStudioTransaction

@@ -14,7 +14,6 @@
       Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore"
       Version="10.0.8"
     />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="10.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.8" />
     <PackageReference Include="SkiaSharp" Version="4.151.2" />
     <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="4.151.2" />

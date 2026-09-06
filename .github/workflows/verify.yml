@@ -22,6 +22,23 @@ jobs:
           python-version: '3.11'
       - run: dotnet restore backend/Qbs.slnx --locked-mode
       - run: dotnet build backend/Qbs.slnx -c Release --no-restore
+      - name: Verify LocalDB prerequisite
+        shell: pwsh
+        run: |
+          $qbsLocalDb = (Get-Command SqlLocalDB -ErrorAction SilentlyContinue).Source
+          if (-not $qbsLocalDb) {
+            $qbsLocalDb = Get-ChildItem (Join-Path $env:ProgramFiles 'Microsoft SQL Server/*/Tools/Binn/SqlLocalDB.exe') |
+              Sort-Object FullName -Descending | Select-Object -First 1 -ExpandProperty FullName
+          }
+          if (-not $qbsLocalDb) { throw 'Install LocalDB before running persistence acceptance.' }
+          $qbsInstances = & $qbsLocalDb info
+          if ($LASTEXITCODE -ne 0) { throw 'Cannot inspect LocalDB instances.' }
+          if ($qbsInstances -notcontains 'MSSQLLocalDB') {
+            & $qbsLocalDb create MSSQLLocalDB
+            if ($LASTEXITCODE -ne 0) { throw 'Cannot create the acceptance LocalDB instance.' }
+          }
+          & $qbsLocalDb start MSSQLLocalDB
+          if ($LASTEXITCODE -ne 0) { throw 'LocalDB is required for persistence acceptance.' }
       - run: dotnet test backend/Qbs.slnx -c Release --no-build --logger trx --results-directory .artifacts/acceptance
       - run: npm ci
         working-directory: frontend
@@ -80,15 +97,17 @@ jobs:
           name: design-system-evidence
           path: design-system/test-results
 
-  containers:
-    runs-on: ubuntu-latest
+  windows-backend:
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - run: docker build -f deploy/Dockerfile.api -t qbs-api:${{ github.sha }} .
-      - run: docker build -f deploy/Dockerfile.worker -t qbs-worker:${{ github.sha }} .
-      - run: docker build -f deploy/Dockerfile.gateway -t qbs-gateway:${{ github.sha }} .
-      - run: docker save qbs-api:${{ github.sha }} qbs-worker:${{ github.sha }} qbs-gateway:${{ github.sha }} | gzip > qbs-images.tar.gz
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - run: dotnet restore backend/Qbs.slnx --locked-mode
+      - run: dotnet publish backend/src/Qbs.Api -c Release --no-restore -p:UseAppHost=false -o .artifacts/windows/api
+      - run: dotnet publish backend/src/Qbs.Worker -c Release --no-restore -p:UseAppHost=false -o .artifacts/windows/worker
       - uses: actions/upload-artifact@v4
         with:
-          name: container-images
-          path: qbs-images.tar.gz
+          name: windows-backend
+          path: .artifacts/windows

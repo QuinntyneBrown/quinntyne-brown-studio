@@ -15,12 +15,6 @@ namespace Qbs.AcceptanceTests;
 
 public sealed class IdentityAcceptanceTests
 {
-    private sealed class CookieFactory : WebApplicationFactory<Program>
-    {
-        protected override void ConfigureWebHost(IWebHostBuilder builder) =>
-            builder.UseEnvironment("Testing");
-    }
-
     private static async Task Antiforgery(HttpClient client)
     {
         var token = await client.GetFromJsonAsync<JsonElement>("/api/auth/antiforgery");

@@ -1,8 +1,10 @@
 # Implementation and acceptance evidence
 
-The repository now contains the public website, administration and client applications, the standalone design system, the controller API, a background worker, SQL migration, automated checks, and Azure packaging assets. Product functionality includes saved quote configuration, server pricing and discounts, photographer scheduling, private photo processing and access, invitations, albums, immutable print requests, and retention controls.
+The repository now contains the public website, administration and client applications, the standalone design system, the controller API, a background worker, LocalDB migrations, automated checks, and Windows backend publishing. The former cloud/container deployment assets are a superseded archive. Product functionality includes saved quote configuration, server pricing and discounts, photographer scheduling, private photo processing and access, invitations, albums, immutable print requests, and retention controls.
 
 See the [live quote slice brief](live-quote-slice.md) for the subsequent calculator implementation and its separate acceptance evidence. The historical results below describe the earlier platform baseline.
+
+The subsequent [LocalDB persistence change](localdb-persistence.md) implements OD-10: normal development and production use persistent LocalDB; database fakes are test-only. Its verification supersedes the earlier runtime/deployment descriptions without rewriting historical test results.
 
 ## Verification recorded on 2026-09-05
 
@@ -40,7 +42,7 @@ The remaining evidence includes the following:
 - Studio-supplied valid and corrupt camera RAW files, orientation and encoding coverage, and actual LibRaw results (**G-RAW**).
 - The 1,000-file/250 MB boundary dataset, interruption/resume run and measured browser/worker memory and duration on the approved network profile (**G-UPLOAD**).
 - Representative photographic annotations, a usefulness threshold, and the approved Azure vision deployment/model/prompt evaluation (**G-AI**).
-- Azure subscription/region/DNS, verified email sender, service-role grants, managed-identity calls, environment isolation, container execution, monitoring and backup/restore verification (**G-ENV**).
+- Windows host/account/TLS setup, LocalDB backup/restore, monitoring, environment isolation, and external Azure service credentials/roles, verified email sender and resource qualification (**G-ENV**, revised by OD-10).
 - Full browser workflows and adverse-state coverage for every remaining requirement, including all pricing editors, private-resource substitution at each route, concurrent schedule/reference races and all catalog states. Existing representative checks and source implementations are linked without claiming those broader scenarios passed.
 
 MediatR **12.5.0** is pinned under the approved Apache-2.0 selection; **G-MEDIATR** is closed. See the [decision record](../specs/decisions.md#od-09--implementation-and-deployment) for the dated license sources.

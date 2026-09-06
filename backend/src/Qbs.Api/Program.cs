@@ -16,7 +16,7 @@ var controlled =
         builder.Environment.IsDevelopment()
         && builder.Configuration.GetValue<bool>("Development:Controlled")
     );
-builder.Services.AddStudio(builder.Configuration, controlled);
+builder.Services.AddStudio(builder.Configuration, controlled, builder.Environment.EnvironmentName);
 if (
     !controlled
     && !string.IsNullOrWhiteSpace(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"])
@@ -113,14 +113,13 @@ app.UseAuthorization();
 app.MapControllers();
 await using (var scope = app.Services.CreateAsyncScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<StudioDbContext>();
-    if (controlled)
-        await db.Database.EnsureCreatedAsync();
+    var database = scope.ServiceProvider.GetRequiredService<IStudioDatabase>();
     if (args.Contains("--migrate"))
     {
-        await db.Database.MigrateAsync();
+        await database.Migrate();
         return;
     }
+    await database.Verify();
     if (controlled || args.Contains("--provision-admin"))
     {
         var roles = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();

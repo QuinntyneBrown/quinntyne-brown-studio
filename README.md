@@ -4,16 +4,20 @@ A photography studio platform with public galleries and quotations, studio admin
 
 ## Run locally
 
-Prerequisites: .NET SDK 10.0.303, Node.js 24.18 or a compatible later 24.x patch, npm, and PowerShell 7. The quick start uses explicit development adapters: records and accounts are held in memory, photos are written under `.artifacts/photos`, routing and AI return illustrative responses, and email is captured locally. Restarting clears records and accounts. Production does not fall back to these adapters.
+Prerequisites: Windows, SQL Server Express LocalDB, .NET SDK 10.0.303, Node.js 24.18 or a compatible later 24.x patch, npm, and PowerShell 7. Normal development and production persist records, accounts, and the outbox in LocalDB. API and worker use the same Windows account on one host. The quick start defaults to database `QbsDevelopment` and applies migrations before startup. Restarting preserves data.
+
+Development uses explicit external-service adapters: photos are written under `.artifacts/photos`, routing and AI return illustrative responses, and email is captured locally. These adapters do not change database persistence. Database fakes are supplied only by acceptance tests. Production requires an explicit `ConnectionStrings__Studio`; see the [Windows operating runbook](deploy/README.md).
 
 ```powershell
 dotnet restore backend/Qbs.slnx --locked-mode
 Push-Location frontend
 npm ci
+npm run build:libs
 npm run build:apps
 Pop-Location
 
-# Supply your own local credentials; do not commit them.
+# First run: supply your own local credentials; do not commit them.
+# Later runs may omit both Bootstrap variables and reuse existing accounts.
 $env:Bootstrap__Email = Read-Host 'Local administrator email'
 $credential = Get-Credential -UserName $env:Bootstrap__Email -Message 'Local administrator password'
 $env:Bootstrap__Password = $credential.GetNetworkCredential().Password
@@ -48,10 +52,11 @@ npm run build
 Pop-Location
 python scripts/verify-architecture.py
 python docs/detailed-designs/verify.py
-az bicep build --file deploy/main.bicep --outfile .artifacts/azure-template.json
+dotnet publish backend/src/Qbs.Api -c Release -p:UseAppHost=false -o .artifacts/windows/api
+dotnet publish backend/src/Qbs.Worker -c Release -p:UseAppHost=false -o .artifacts/windows/worker
 ```
 
-The design system validates its manifest, styles, and fixtures, then exercises its catalog in the browser at the three viewport widths with every product API request blocked. Backend acceptance tests use a transaction-capable fake and controlled dependencies. Separate tests use a real disposable SQL LocalDB database on Windows; elsewhere set `QBS_SQL` to a SQL Server connection with permission to create test databases. Only databases named `QbsTest_<guid>` are deleted by the SQL fixture. The acceptance suite in [`e2e/`](e2e/README.md) uses page objects and mocked HTTP responses across three browsers and three viewport sizes. A real HTTPS smoke script is also available at [scripts/smoke-local.mjs](scripts/smoke-local.mjs).
+The design system validates its manifest, styles, and fixtures, then exercises its catalog in the browser at the three viewport widths with every product API request blocked. Backend acceptance tests explicitly supply a transaction-capable fake and controlled dependencies. Separate persistence tests use disposable LocalDB databases on Windows and verify the normal runtime registrations, restart behavior, migrations, and identity. Cleanup checks the fixture's unique `QbsTest_`, `QbsQuoteTest_`, or `QbsPersistenceTest_` prefix before deleting its database. The older SQL boundary tests retain the optional test-only `QBS_SQL` override; it is not runtime configuration. The acceptance suite in [`e2e/`](e2e/README.md) uses page objects and mocked responses across three browsers and three viewport sizes. A real HTTPS smoke script is also available at [scripts/smoke-local.mjs](scripts/smoke-local.mjs).
 
 ## Repository map
 
@@ -73,4 +78,4 @@ The design system validates its manifest, styles, and fixtures, then exercises i
 | `docs/implementation` | Verification results, acceptance gaps and implementation decisions |
 | `scripts` | Architecture and diagram checks, the development gateway, and the packaged smoke run |
 
-Deployment instructions and environment configuration are in [deploy/README.md](deploy/README.md). No Azure resources are deployed by local verification or CI. Release requires the camera fixtures, measured upload-capacity run, approved AI evaluation, and configured Azure environment recorded in the [evidence register](docs/specs/decisions.md#evidence-register). See [implementation status](docs/implementation/README.md) for the precise limits of current acceptance evidence.
+Windows deployment instructions and LocalDB configuration are in [deploy/README.md](deploy/README.md). The old Azure SQL and Linux backend deployment is archived under `deploy/legacy/` and is unsupported. No Azure resources are deployed by local verification or CI. Release still requires camera fixtures, measured upload capacity, approved AI evaluation, Windows backup/restore evidence, and external-service qualification recorded in the [evidence register](docs/specs/decisions.md#evidence-register). See [implementation status](docs/implementation/README.md) for the precise limits of current acceptance evidence.

@@ -16,6 +16,7 @@ public sealed class StudioFactory : WebApplicationFactory<Program>
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Testing");
+        builder.ConfigureServices(services => services.AddFakePersistence());
         builder.ConfigureServices(services =>
             services
                 .AddAuthentication(o =>

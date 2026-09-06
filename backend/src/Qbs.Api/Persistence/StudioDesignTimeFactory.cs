@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 using Qbs.Infrastructure.Persistence;
 
 namespace Qbs.Api.Persistence;
@@ -10,8 +11,10 @@ public sealed class StudioDesignTimeFactory : IDesignTimeDbContextFactory<Studio
         new(
             new DbContextOptionsBuilder<StudioDbContext>()
                 .UseSqlServer(
-                    Environment.GetEnvironmentVariable("QBS_SQL")
-                        ?? "Server=(localdb)\\MSSQLLocalDB;Database=QbsDesign;Integrated Security=true;TrustServerCertificate=true"
+                    LocalDbConnection.Resolve(
+                        new ConfigurationBuilder().AddEnvironmentVariables().AddCommandLine(args).Build(),
+                        Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")
+                            ?? Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") ?? "Production")
                 )
                 .Options
         );

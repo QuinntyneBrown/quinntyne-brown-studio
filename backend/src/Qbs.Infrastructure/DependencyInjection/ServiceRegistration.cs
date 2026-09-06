@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Qbs.Application.Catalog;
 using Qbs.Application.Clients;
 using Qbs.Application.Photos;
@@ -22,25 +23,17 @@ public static class ServiceRegistration
     public static IServiceCollection AddStudio(
         this IServiceCollection services,
         IConfiguration config,
-        bool controlled
+        bool controlled,
+        string environment = "Production"
     )
     {
-        var identityDatabase = "qbs-" + Guid.NewGuid();
-        services.AddDbContext<StudioDbContext>(o =>
-        {
-            if (controlled)
-                o.UseInMemoryDatabase(identityDatabase);
-            else
-                o.UseSqlServer(
-                    config.GetConnectionString("Studio")
-                        ?? throw new InvalidOperationException(
-                            "ConnectionStrings:Studio is required."
-                        )
-                );
-        });
+        services.Configure<StudioDatabaseOptions>(o => o.ConnectionString = LocalDbConnection.Resolve(config, environment));
+        services.AddDbContext<StudioDbContext>((sp, o) =>
+            o.UseSqlServer(sp.GetRequiredService<IOptions<StudioDatabaseOptions>>().Value.ConnectionString));
+        services.AddScoped<IStudioStore, SqlStudioStore>();
+        services.AddScoped<IStudioDatabase, StudioDatabase>();
         if (controlled)
         {
-            services.AddSingleton<IStudioStore, MemoryStudioStore>();
             services.AddSingleton<IPhotoStorage, FilePhotoStorage>();
             services.AddSingleton<IRouteDistanceService, ControlledRoutes>();
             services.AddSingleton<IPhotoAnalysisService, ControlledAnalysis>();
@@ -49,7 +42,6 @@ public static class ServiceRegistration
         }
         else
         {
-            services.AddScoped<IStudioStore, SqlStudioStore>();
             services.AddSingleton<IPhotoStorage, AzurePhotoStorage>();
             services.Configure<AzureMapsOptions>(config.GetSection("Azure"));
             services.AddSingleton<Azure.Core.TokenCredential, Azure.Identity.DefaultAzureCredential>();
