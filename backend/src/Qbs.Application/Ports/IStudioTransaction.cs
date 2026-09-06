@@ -1,6 +1,6 @@
-using Qbs.Domain;
+using Qbs.Domain.Entities;
 
-namespace Qbs.Application;
+namespace Qbs.Application.Ports;
 
 public interface IStudioTransaction
 {

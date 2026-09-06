@@ -1,7 +1,7 @@
-using Qbs.Domain;
+using Qbs.Domain.Exceptions;
 using SkiaSharp;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Adapters;
 
 public static class Thumbnail
 {

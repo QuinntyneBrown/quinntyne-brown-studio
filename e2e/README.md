@@ -18,3 +18,7 @@ The configuration starts `ng serve` for each application from [`../frontend`](..
 - `specs/` — tests state intent and name the acceptance criteria they cover. No selector belongs in a spec.
 
 API responses are mocked inside the page object, so a run never reaches a real service implementation. The design system has its own suite in [`../design-system`](../design-system/README.md); the HTML prototype has its own checks in [`../docs/mocks`](../docs/mocks/README.md).
+
+The marketing server uses Angular's `acceptance` configuration. Its file replacement binds `QUOTE_SERVICE` to `MockQuoteService`; the quote page object supplies typed operations through a browser fixture. Production builds bind `QuoteService` and contain no runtime switch to activate the fixture. Other existing scenarios retain their HTTP mocks.
+
+The live quote scenarios reference the Given–When–Then criteria in [the slice brief](../docs/implementation/live-quote-slice.md). Runner timeouts allow browser startup and teardown on the Windows browser matrix; they are not application latency requirements.

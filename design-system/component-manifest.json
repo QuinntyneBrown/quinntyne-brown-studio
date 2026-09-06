@@ -79,7 +79,7 @@
           "id": "variants",
           "title": "Variants and disabled state",
           "description": "Every variant keeps the 44 pixel minimum target and the shared focus outline.",
-          "markup": "<div class='form__actions'><button class='button' type='button'>Primary action</button><button class='button button--secondary' type='button'>Secondary action</button><button class='button button--danger' type='button'>Delete session</button><button class='button' type='button' disabled>Saving\u2026</button></div>"
+          "markup": "<div class='form__actions'><button class='button' type='button'>Primary action</button><button class='button button--secondary' type='button'>Secondary action</button><button class='button button--danger' type='button'>Delete session</button><button class='button' type='button' disabled>Saving…</button></div>"
         }
       ]
     },
@@ -197,7 +197,7 @@
           "id": "rows",
           "title": "Rows with actions",
           "description": "Rows stack their actions under the name on narrow viewports.",
-          "markup": "<div class='records'><article class='records__row'><div><h3>Riverside ceremony</h3><p class='records__detail'>Saturday 14 June \u00b7 Wedding \u00b7 Amara Bell</p></div><div class='records__actions'><a href='#'>Open session \u2192</a><button class='button button--secondary' type='button'>Edit</button></div></article><article class='records__row'><div><h3>Harbour headshots</h3><p class='records__detail'>Tuesday 17 June \u00b7 Headshots \u00b7 Unassigned</p></div><div class='records__actions'><a href='#'>Open session \u2192</a><button class='button button--secondary' type='button'>Edit</button></div></article></div>"
+          "markup": "<div class='records'><article class='records__row'><div><h3>Riverside ceremony</h3><p class='records__detail'>Saturday 14 June · Wedding · Amara Bell</p></div><div class='records__actions'><a href='#'>Open session →</a><button class='button button--secondary' type='button'>Edit</button></div></article><article class='records__row'><div><h3>Harbour headshots</h3><p class='records__detail'>Tuesday 17 June · Headshots · Unassigned</p></div><div class='records__actions'><a href='#'>Open session →</a><button class='button button--secondary' type='button'>Edit</button></div></article></div>"
         }
       ]
     },
@@ -280,7 +280,7 @@
           "id": "with-link",
           "title": "Section with a trailing link",
           "description": "The header keeps the title and link on one line until the viewport forces a wrap.",
-          "markup": "<section class='section'><div class='section__header'><h2>Recent galleries</h2><a href='#'>View all \u2192</a></div><p class='text--muted'>Published work from the last three months.</p></section>"
+          "markup": "<section class='section'><div class='section__header'><h2>Recent galleries</h2><a href='#'>View all →</a></div><p class='text--muted'>Published work from the last three months.</p></section>"
         }
       ]
     },
@@ -302,7 +302,7 @@
           "id": "quote",
           "title": "Quote breakdown",
           "description": "Amounts are server-calculated decimal values in Canadian dollars.",
-          "markup": "<section class='panel'><p class='price__line'><span>Wedding coverage \u00b7 8 hours</span><span>$2,200.00</span></p><p class='price__line'><span>Equipment rental \u00b7 2 units</span><span>$240.00</span></p><p class='price__line'><span>Advance booking discount</span><span>\u2212$120.00</span></p><p class='price__total'>$2,320.00 CAD</p></section>"
+          "markup": "<section class='panel'><p class='price__line'><span>Wedding coverage · 8 hours</span><span>$2,200.00</span></p><p class='price__line'><span>Equipment rental · 2 units</span><span>$240.00</span></p><p class='price__line'><span>Advance booking discount</span><span>−$120.00</span></p><p class='price__total'>$2,320.00 CAD</p></section>"
         }
       ]
     },
@@ -350,7 +350,7 @@
           "id": "no-records",
           "title": "Nothing yet",
           "description": "A symbol, a sentence, and no invented data.",
-          "markup": "<div class='empty-state'><span aria-hidden='true'>\u25c7</span><p>No galleries available yet.</p></div>"
+          "markup": "<div class='empty-state'><span aria-hidden='true'>◇</span><p>No galleries available yet.</p></div>"
         }
       ]
     },
@@ -408,7 +408,7 @@
           "id": "contained",
           "title": "Contained preview",
           "description": "Object-fit keeps the whole frame visible on every viewport.",
-          "markup": "<figure class='panel panel--soft'><div class='image__preview' style='aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;background:#e9eae2;color:#74766e'>Preview</div><figcaption class='records__detail'>Ceremony 014 \u00b7 6016 \u00d7 4016</figcaption></figure>"
+          "markup": "<figure class='panel panel--soft'><div class='image__preview' style='aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;background:#e9eae2;color:#74766e'>Preview</div><figcaption class='records__detail'>Ceremony 014 · 6016 × 4016</figcaption></figure>"
         }
       ]
     },
@@ -431,7 +431,7 @@
           "id": "confirm",
           "title": "Confirm an action",
           "description": "Escape closes the dialog and focus returns to the control that opened it.",
-          "markup": "<div><button class='button' type='button' data-dialog-open='catalog-dialog'>Open dialog</button><dialog class='dialog' id='catalog-dialog' aria-labelledby='catalog-dialog-title'><header class='dialog__header'><h2 id='catalog-dialog-title'>Confirm your selection</h2><button type='button' aria-label='Close dialog' data-dialog-close>\u00d7</button></header><div class='dialog__body'><p>Focus remains inside this dialog. Escape closes it and returns focus to the trigger.</p><div class='form__actions'><button class='button' type='button' data-dialog-close>Done</button></div></div></dialog></div>"
+          "markup": "<div><button class='button' type='button' data-dialog-open='catalog-dialog'>Open dialog</button><dialog class='dialog' id='catalog-dialog' aria-labelledby='catalog-dialog-title'><header class='dialog__header'><h2 id='catalog-dialog-title'>Confirm your selection</h2><button type='button' aria-label='Close dialog' data-dialog-close>×</button></header><div class='dialog__body'><p>Focus remains inside this dialog. Escape closes it and returns focus to the trigger.</p><div class='form__actions'><button class='button' type='button' data-dialog-close>Done</button></div></div></dialog></div>"
         }
       ]
     },
@@ -488,7 +488,7 @@
           "id": "public",
           "title": "Public chrome",
           "description": "The marketing header, navigation, and footer. The skip link is the first focusable control.",
-          "markup": "<div><a class='shell__skip button' href='#example-main'>Skip to content</a><header class='shell__public'><a class='shell__brand' href='#'>Quinntyne Brown<span>Studio \u00b7 Photography</span></a><nav class='shell__public-nav' aria-label='Main navigation'><a href='#'>Portfolio</a><a href='#'>Services</a><a href='#'>Prints</a><a class='button' href='#'>Plan a session \u2197</a></nav></header><main class='shell__public-main' id='example-main'><p class='text--muted'>Page content sits in this column.</p></main><footer class='shell__footer'><span>Quinntyne Brown Studio</span><span>Thoughtfully photographed.</span></footer></div>"
+          "markup": "<div><a class='shell__skip button' href='#example-main'>Skip to content</a><header class='shell__public'><a class='shell__brand' href='#'>Quinntyne Brown<span>Studio · Photography</span></a><nav class='shell__public-nav' aria-label='Main navigation'><a href='#'>Portfolio</a><a href='#'>Services</a><a href='#'>Prints</a><a class='button' href='#'>Plan a session ↗</a></nav></header><main class='shell__public-main' id='example-main'><p class='text--muted'>Page content sits in this column.</p></main><footer class='shell__footer'><span>Quinntyne Brown Studio</span><span>Thoughtfully photographed.</span></footer></div>"
         },
         {
           "id": "workspace",
@@ -500,7 +500,7 @@
           "id": "narrow",
           "title": "Narrow-viewport navigation",
           "description": "Below 750 pixels the navigation collapses behind a toggle that reports its expanded state.",
-          "markup": "<div><header class='shell__public'><a class='shell__brand' href='#'>Quinntyne Brown<span>Studio \u00b7 Photography</span></a><button class='button button--secondary shell__toggle' type='button' aria-expanded='true' aria-controls='narrow-navigation' style='display:inline-flex'>Menu</button><nav class='shell__public-nav shell__public-nav--open' id='narrow-navigation' aria-label='Main navigation' style='display:flex'><a href='#'>Portfolio</a><a href='#'>Services</a><a href='#'>Prints</a></nav></header><div class='shell__workspace-main'><p class='text--muted'>The open navigation keeps the toggle, and the content column keeps its minimum width.</p></div></div>"
+          "markup": "<div><header class='shell__public'><a class='shell__brand' href='#'>Quinntyne Brown<span>Studio · Photography</span></a><button class='button button--secondary shell__toggle' type='button' aria-expanded='true' aria-controls='narrow-navigation' style='display:inline-flex'>Menu</button><nav class='shell__public-nav shell__public-nav--open' id='narrow-navigation' aria-label='Main navigation' style='display:flex'><a href='#'>Portfolio</a><a href='#'>Services</a><a href='#'>Prints</a></nav></header><div class='shell__workspace-main'><p class='text--muted'>The open navigation keeps the toggle, and the content column keeps its minimum width.</p></div></div>"
         }
       ]
     },
@@ -619,15 +619,31 @@
       "scenarios": [
         {
           "id": "calculated",
-          "name": "Calculated total"
+          "name": "Current CAD estimate"
         },
         {
           "id": "validation",
-          "name": "Invalid input"
+          "name": "Invalid time"
         },
         {
-          "id": "unconfigured",
+          "id": "unavailable",
           "name": "Rates not configured"
+        },
+        {
+          "id": "incomplete",
+          "name": "Incomplete input"
+        },
+        {
+          "id": "loading",
+          "name": "Updating estimate"
+        },
+        {
+          "id": "lookup",
+          "name": "Ambiguous address selection"
+        },
+        {
+          "id": "failure",
+          "name": "Provider failure with retry"
         }
       ]
     },

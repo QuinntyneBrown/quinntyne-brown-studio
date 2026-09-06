@@ -1,6 +1,6 @@
-using Qbs.Domain;
+using Qbs.Domain.ValueObjects;
 
-namespace Qbs.Application;
+namespace Qbs.Application.Ports;
 
 public interface IRouteDistanceService
 {

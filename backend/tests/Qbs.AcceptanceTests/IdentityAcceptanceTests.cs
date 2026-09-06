@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
-using Qbs.Application;
-using Qbs.Domain;
+using Qbs.Application.Ports;
+using Qbs.Domain.Entities;
+using Qbs.Infrastructure.Identity;
 
 namespace Qbs.AcceptanceTests;
 
@@ -99,7 +100,7 @@ public sealed class IdentityAcceptanceTests
         );
         await using var scope = factory.Services.CreateAsyncScope();
         var accounts =
-            scope.ServiceProvider.GetRequiredService<Qbs.Infrastructure.IdentityAccounts>();
+            scope.ServiceProvider.GetRequiredService<Qbs.Infrastructure.Identity.IdentityAccounts>();
         var store = scope.ServiceProvider.GetRequiredService<IStudioStore>();
         var protector = scope
             .ServiceProvider.GetRequiredService<IDataProtectionProvider>()

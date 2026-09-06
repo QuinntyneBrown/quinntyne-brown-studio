@@ -3,10 +3,12 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.Identity;
 using Microsoft.Extensions.Configuration;
-using Qbs.Application;
-using Qbs.Domain;
+using Qbs.Application.Ports;
+using Qbs.Domain.Exceptions;
+using Qbs.Domain.Models;
+using Qbs.Infrastructure.Serialization;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Adapters;
 
 public sealed class AzurePhotoAnalysis(HttpClient http, IConfiguration config)
     : IPhotoAnalysisService

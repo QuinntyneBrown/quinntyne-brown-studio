@@ -1,7 +1,7 @@
-using Qbs.Application;
-using Qbs.Domain;
+using Qbs.Application.Ports;
+using Qbs.Domain.ValueObjects;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Adapters;
 
 public sealed class ControlledRoutes : IRouteDistanceService
 {

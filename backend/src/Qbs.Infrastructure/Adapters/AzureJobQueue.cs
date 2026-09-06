@@ -1,10 +1,10 @@
 using Azure.Identity;
 using Azure.Storage.Queues;
 using Microsoft.Extensions.Configuration;
-using Qbs.Application;
-using Qbs.Domain;
+using Qbs.Application.Ports;
+using Qbs.Domain.Exceptions;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Adapters;
 
 public sealed class AzureJobQueue(IConfiguration config) : IJobQueue
 {

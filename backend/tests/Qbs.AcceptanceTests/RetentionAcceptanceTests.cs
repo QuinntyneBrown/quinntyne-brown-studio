@@ -1,9 +1,10 @@
 using System.Net;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Qbs.Application;
-using Qbs.Domain;
-using Qbs.Infrastructure;
+using Qbs.Application.Photos;
+using Qbs.Application.Ports;
+using Qbs.Domain.Entities;
+using Qbs.Infrastructure.Processing;
 
 namespace Qbs.AcceptanceTests;
 

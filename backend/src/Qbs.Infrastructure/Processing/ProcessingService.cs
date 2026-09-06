@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Processing;
 
 public sealed class ProcessingService(
     IServiceScopeFactory scopes,

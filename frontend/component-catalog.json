@@ -258,5 +258,43 @@
     ],
     "catalogEntry": "component:photo-grid",
     "catalogUrl": "/components/photo-grid"
+  },
+  {
+    "name": "QuoteInputForm",
+    "source": "frontend/projects/domain/src/lib/quote-input-form/quote-input-form.ts",
+    "inputs": [
+      "IQuoteEditorService through QUOTE_EDITOR_SERVICE"
+    ],
+    "outputs": [
+      "Typed editing actions through IQuoteEditorService"
+    ],
+    "states": [
+      "current",
+      "incomplete",
+      "invalid",
+      "updating",
+      "unavailable"
+    ],
+    "catalogEntry": "pattern:quote-calculator",
+    "catalogUrl": "/patterns/quote-calculator"
+  },
+  {
+    "name": "QuoteSummary",
+    "source": "frontend/projects/domain/src/lib/quote-summary/quote-summary.ts",
+    "inputs": [
+      "IQuoteEditorService through QUOTE_EDITOR_SERVICE"
+    ],
+    "outputs": [
+      "Typed editing actions through IQuoteEditorService"
+    ],
+    "states": [
+      "current",
+      "incomplete",
+      "invalid",
+      "updating",
+      "unavailable"
+    ],
+    "catalogEntry": "pattern:quote-calculator",
+    "catalogUrl": "/patterns/quote-calculator"
   }
 ]

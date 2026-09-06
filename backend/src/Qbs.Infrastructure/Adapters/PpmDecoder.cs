@@ -1,7 +1,7 @@
-using Qbs.Domain;
+using Qbs.Domain.Policies;
 using SkiaSharp;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Adapters;
 
 /// <summary>Reads LibRaw's binary RGB output; it is converted to a metadata-free PNG for Skia.</summary>
 public static class PpmDecoder

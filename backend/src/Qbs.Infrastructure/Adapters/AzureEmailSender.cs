@@ -2,10 +2,10 @@ using Azure;
 using Azure.Communication.Email;
 using Azure.Identity;
 using Microsoft.Extensions.Configuration;
-using Qbs.Application;
-using Qbs.Domain;
+using Qbs.Application.Ports;
+using Qbs.Domain.Exceptions;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Adapters;
 
 public sealed class AzureEmailSender(IConfiguration config) : IEmailSender
 {

@@ -1,4 +1,5 @@
-using Qbs.Infrastructure;
+using Qbs.Infrastructure.DependencyInjection;
+using Qbs.Infrastructure.Processing;
 
 var builder = Host.CreateApplicationBuilder(args);
 builder.Services.AddStudio(builder.Configuration, false);

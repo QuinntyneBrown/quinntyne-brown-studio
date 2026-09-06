@@ -1,21 +1,23 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Qbs.Application;
-using Qbs.Domain;
+using Qbs.Api.Models;
+using Qbs.Application.Quotations;
+using Qbs.Domain.Models;
+using Qbs.Domain.ValueObjects;
 
 namespace Qbs.Api.Controllers;
 
 [ApiController, Route("api/public")]
-public sealed class QuotesController(ISender sender, IRouteDistanceService routes) : ControllerBase
+public sealed class QuotesController(ISender sender) : ControllerBase
 {
     [HttpPost("quotes/calculate")]
     public async Task<QuoteResult> Calculate(QuoteInput input, CancellationToken ct) =>
         await sender.Send(new CalculateQuote(input), ct);
 
     [HttpPost("locations/resolve")]
-    public async Task<ResolvedLocation[]> Resolve(AddressInput input, CancellationToken ct)
-    {
-        Rules.Text(input.Address, "address");
-        return await routes.Resolve(input.Address, ct);
-    }
+    public Task<ResolvedLocation[]> Resolve(AddressInput input, CancellationToken ct) =>
+        sender.Send(new ResolveQuoteLocation(input.Address), ct);
+
+    [HttpGet("studios")]
+    public Task<QuoteStudioOption[]> Studios(CancellationToken ct) => sender.Send(new GetQuoteStudios(), ct);
 }

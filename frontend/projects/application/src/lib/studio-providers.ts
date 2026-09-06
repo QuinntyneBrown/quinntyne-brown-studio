@@ -1,3 +1,4 @@
+import { quoteProvider } from './quote-provider';
 import { Provider } from '@angular/core';
 import {
   STUDIO_CLIENT,
@@ -29,11 +30,12 @@ import {
 export function studioProviders(mock = false): Provider[] {
   return [
     { provide: STUDIO_CLIENT, useClass: mock ? MockStudioClient : StudioClient },
+    quoteProvider(),
     ...[
       ALBUM_SERVICE,
       ANALYSIS_SERVICE,
       AVAILABILITY_SERVICE,
-  AVAILABILITY_SERVICE,
+      AVAILABILITY_SERVICE,
       AUTH_SERVICE,
       CLIENT_GALLERY_SERVICE,
       CONTENT_SERVICE,
@@ -45,12 +47,11 @@ export function studioProviders(mock = false): Provider[] {
       PRINT_REQUEST_SERVICE,
       PROMOTION_SERVICE,
       PUBLIC_GALLERY_SERVICE,
-      QUOTE_SERVICE,
       RATE_SERVICE,
       RETENTION_SERVICE,
       SCHEDULE_SERVICE,
-  RETENTION_SERVICE,
-  SCHEDULE_SERVICE,
+      RETENTION_SERVICE,
+      SCHEDULE_SERVICE,
       SESSION_SERVICE,
       STUDIO_SERVICE,
       UPLOAD_SERVICE,

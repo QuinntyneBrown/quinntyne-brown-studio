@@ -1,9 +1,12 @@
 using System.Security.Cryptography;
 using Microsoft.Extensions.Configuration;
-using Qbs.Application;
-using Qbs.Domain;
+using Qbs.Application.Ports;
+using Qbs.Domain.Entities;
+using Qbs.Domain.Exceptions;
+using Qbs.Domain.Models;
+using Qbs.Domain.Policies;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Storage;
 
 public sealed class FilePhotoStorage(IConfiguration config) : IPhotoStorage
 {

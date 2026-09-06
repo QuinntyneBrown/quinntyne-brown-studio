@@ -8,6 +8,8 @@ The inventory is derived from the prototype's shared stylesheet [`assets/styles.
 
 Status: this inventory is the presentation target, not a record of shipped code. The `@qbs/components` library in [`frontend/projects/components`](../frontend/projects/components/src/public-api.ts) currently exports four of these components — `NoticeComponent`, `EmptyStateComponent`, `PhotoGridComponent`, and `DialogComponent` — and the `application` library composes the remaining screens directly from the shared classes. The standalone [design system](../design-system/README.md) publishes every class the applications ship — the shared stylesheet, the four library components, and the application chrome — as its catalogued entries, screen patterns, and dialog scenarios. `L2-047` therefore remains partially satisfied; the [acceptance register](detailed-designs/acceptance.md) records the current evidence.
 
+The [live quote slice](implementation/live-quote-slice.md) now composes `QuoteInputForm` and `QuoteSummary` from `@qbs/domain`. Both use OnPush change detection and consume `IQuoteEditorService` through its token; the route supplies that service and owns its lifetime. Studio-aware forms and summaries belong in `domain`, while the page remains in `application`. The independent catalog includes all quote states.
+
 ## Conventions
 
 - Components live in the `components` library of the Angular workspace described in [`detailed-designs/architecture.md`](detailed-designs/architecture.md) and are reused by the `marketing`, `admin`, and `client` applications and rendered as examples by the root-level `design-system` catalog.

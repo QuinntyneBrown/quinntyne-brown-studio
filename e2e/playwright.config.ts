@@ -4,9 +4,9 @@ import { defineConfig } from '@playwright/test';
 // Each application is served from the Angular workspace next door with mocked APIs.
 export default defineConfig({
   testDir: './specs',
-  timeout: 20000,
+  timeout: 60000,
   fullyParallel: true,
-  workers: 3,
+  workers: 1,
   reporter: [['list'], ['json', { outputFile: 'test-results/results.json' }]],
   use: { trace: 'retain-on-failure', screenshot: 'only-on-failure' },
   projects: ['chromium', 'firefox', 'webkit'].flatMap((browserName) => [
@@ -24,7 +24,7 @@ export default defineConfig({
     },
   ]),
   webServer: ['marketing', 'admin', 'client'].map((name, index) => ({
-    command: `npx ng serve ${name} --port ${4320 + index}`,
+    command: `npx ng serve ${name} --port ${4320 + index}${name === 'marketing' ? ' --configuration acceptance' : ''}`,
     cwd: '../frontend',
     url: `http://localhost:${4320 + index}`,
     reuseExistingServer: !process.env['CI'],

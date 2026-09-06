@@ -1,7 +1,8 @@
-using Qbs.Application;
-using Qbs.Domain;
+using Qbs.Application.Ports;
+using Qbs.Domain.Enums;
+using Qbs.Domain.Models;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Adapters;
 
 public sealed class ControlledAnalysis : IPhotoAnalysisService
 {

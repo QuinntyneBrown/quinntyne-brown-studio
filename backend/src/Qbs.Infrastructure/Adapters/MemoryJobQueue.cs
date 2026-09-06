@@ -1,7 +1,7 @@
 using System.Collections.Concurrent;
-using Qbs.Application;
+using Qbs.Application.Ports;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Adapters;
 
 public sealed class MemoryJobQueue : IJobQueue
 {

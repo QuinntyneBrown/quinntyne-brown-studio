@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Qbs.Application;
+using Qbs.Api.Models;
+using Qbs.Application.Photos;
 
 namespace Qbs.Api.Controllers;
 

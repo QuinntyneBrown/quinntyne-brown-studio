@@ -1,0 +1,257 @@
+@let d = editor.draft();
+@let errors = editor.errors();
+<div class="stack">
+  <section class="panel" aria-labelledby="occasion-heading">
+    <h2 id="occasion-heading">The occasion</h2>
+    <div class="form__grid">
+      <label class="field"
+        ><span>Photography service</span
+        ><select
+          aria-label="Photography service"
+          [ngModel]="d.service"
+          (ngModelChange)="editor.set('service', $event)"
+        >
+          <option value="Wedding">Wedding</option>
+          <option value="Event">Event</option>
+          <option value="Headshot">Headshots</option>
+          <option value="FamilyPortrait">Family portraits</option>
+        </select></label
+      >
+      <label class="field"
+        ><span>Session date</span
+        ><input
+          aria-label="Session date"
+          type="date"
+          [ngModel]="d.date"
+          (ngModelChange)="editor.set('date', $event)"
+          [attr.aria-invalid]="!!errors['date']"
+          aria-describedby="date-error"
+        />
+        <small id="date-error" class="field__error">{{ errors['date'] }}</small></label
+      >
+      <label class="field"
+        ><span>Start time</span
+        ><input
+          aria-label="Start time"
+          type="time"
+          step="900"
+          [ngModel]="d.start"
+          (ngModelChange)="editor.set('start', $event)"
+          [attr.aria-invalid]="!!errors['start']"
+          aria-describedby="start-error"
+        />
+        <small id="start-error" class="field__error">{{ errors['start'] }}</small></label
+      >
+      @if (editor.startAmbiguous()) {
+        <label class="field"
+          ><span>Start time offset</span
+          ><select
+            aria-label="Start time offset"
+            [ngModel]="d.startOffset"
+            (ngModelChange)="editor.set('startOffset', $event)"
+          >
+            <option value="">Choose offset</option>
+            <option value="-04:00">First occurrence (UTC−04:00)</option>
+            <option value="-05:00">Second occurrence (UTC−05:00)</option>
+          </select></label
+        >
+      }
+      <label class="field"
+        ><span>End date</span
+        ><input
+          aria-label="End date"
+          type="date"
+          [ngModel]="d.endDate"
+          (ngModelChange)="editor.set('endDate', $event)"
+          [attr.aria-invalid]="!!errors['endDate']"
+          aria-describedby="end-date-error"
+        /><small id="end-date-error" class="field__error">{{ errors['endDate'] }}</small></label
+      >
+      <label class="field"
+        ><span>End time</span
+        ><input
+          aria-label="End time"
+          type="time"
+          step="900"
+          [ngModel]="d.end"
+          (ngModelChange)="editor.set('end', $event)"
+          [attr.aria-invalid]="!!errors['end']"
+          aria-describedby="end-error"
+        />
+        <small id="end-error" class="field__error">{{ errors['end'] }}</small></label
+      >
+      @if (editor.endAmbiguous()) {
+        <label class="field"
+          ><span>End time offset</span
+          ><select
+            aria-label="End time offset"
+            [ngModel]="d.endOffset"
+            (ngModelChange)="editor.set('endOffset', $event)"
+          >
+            <option value="">Choose offset</option>
+            <option value="-04:00">First occurrence (UTC−04:00)</option>
+            <option value="-05:00">Second occurrence (UTC−05:00)</option>
+          </select></label
+        >
+      }
+    </div>
+    <p class="text--muted">All times are in Toronto. Use 15-minute increments.</p>
+  </section>
+  <section class="panel" aria-labelledby="places-heading">
+    <h2 id="places-heading">The places</h2>
+    <p class="text--muted">
+      Locations are visited in the order you add them, returning to the studio base.
+    </p>
+    @if (editor.studiosBusy()) {
+      <p role="status">Loading studio options…</p>
+    }
+    @if (editor.studiosMessage()) {
+      <qbs-notice [message]="editor.studiosMessage()" [error]="true" /><button
+        class="button button--secondary"
+        (click)="editor.loadStudios()"
+      >
+        Retry studio options
+      </button>
+    }
+    <div class="quote__address">
+      <label class="field"
+        ><span>Address</span
+        ><input
+          aria-label="Address"
+          #addressInput
+          [ngModel]="editor.address()"
+          (ngModelChange)="editor.setAddress($event)"
+          (keydown.enter)="editor.resolve()"
+          aria-describedby="lookup-status"
+      /></label>
+      <button
+        class="button button--secondary"
+        (click)="editor.resolve()"
+        [disabled]="!editor.address().trim() || editor.resolving()"
+      >
+        Find address
+      </button>
+    </div>
+    <p id="lookup-status" role="status">
+      {{ editor.resolving() ? 'Finding addresses…' : editor.lookupMessage() }}
+    </p>
+    @for (candidate of editor.candidates(); track $index) {
+      <button class="quote__candidate" (click)="editor.add(candidate); addressInput.focus()">
+        {{ candidate.label }} · Select
+      </button>
+    }
+    @for (stop of d.locations; track $index) {
+      <section class="quote__location" [attr.aria-label]="'Location ' + ($index + 1)">
+        <h3>{{ $index + 1 }}. {{ stop.location.label }}</h3>
+        <div class="form__grid">
+          <label class="field"
+            ><span>Parking (CAD)</span
+            ><input
+              aria-label="Parking (CAD)"
+              inputmode="decimal"
+              [ngModel]="stop.parkingAmount"
+              (ngModelChange)="editor.setLocation($index, 'parkingAmount', $event)"
+              [attr.aria-invalid]="!!errors['parking-' + $index]"
+              [attr.aria-describedby]="'parking-error-' + $index"
+            />
+            <small [id]="'parking-error-' + $index" class="field__error">{{
+              errors['parking-' + $index]
+            }}</small></label
+          >
+          <label class="field"
+            ><span>Studio</span
+            ><select
+              aria-label="Studio"
+              [ngModel]="stop.studioId || ''"
+              (ngModelChange)="editor.setLocation($index, 'studioId', $event || null)"
+              [disabled]="editor.studiosBusy() || !!editor.studiosMessage()"
+            >
+              <option value="">No studio</option>
+              @for (studio of editor.studios(); track studio.id) {
+                <option [value]="studio.id">{{ studio.name }}</option>
+              }
+            </select></label
+          >
+          @if (stop.studioId) {
+            <label class="field"
+              ><span>Studio hours</span
+              ><input
+                aria-label="Studio hours"
+                inputmode="decimal"
+                [ngModel]="stop.studioHours"
+                (ngModelChange)="editor.setLocation($index, 'studioHours', $event)"
+                [attr.aria-invalid]="!!errors['studio-' + $index]"
+                [attr.aria-describedby]="'studio-error-' + $index"
+              />
+              <small [id]="'studio-error-' + $index" class="field__error">{{
+                errors['studio-' + $index]
+              }}</small></label
+            >
+          }
+        </div>
+        <button
+          class="button button--secondary"
+          [attr.aria-label]="'Remove location ' + ($index + 1)"
+          (click)="editor.remove($index); addressInput.focus()"
+        >
+          Remove location
+        </button>
+      </section>
+    }
+  </section>
+  <section class="panel" aria-labelledby="details-heading">
+    <h2 id="details-heading">The details</h2>
+    <div class="form__grid">
+      <label class="field"
+        ><span>Assistants</span
+        ><input
+          aria-label="Assistants"
+          type="number"
+          min="0"
+          step="1"
+          [ngModel]="d.assistantCount"
+          (ngModelChange)="editor.set('assistantCount', $event)"
+          [attr.aria-invalid]="!!errors['assistantCount']"
+          aria-describedby="assistant-error"
+        /><small id="assistant-error" class="field__error">{{
+          errors['assistantCount']
+        }}</small></label
+      >
+      <label class="field"
+        ><span>Equipment rental units</span
+        ><input
+          aria-label="Equipment rental units"
+          type="number"
+          min="0"
+          step="1"
+          [ngModel]="d.equipmentUnits"
+          (ngModelChange)="editor.set('equipmentUnits', $event)"
+          [attr.aria-invalid]="!!errors['equipmentUnits']"
+          aria-describedby="equipment-error"
+        /><small id="equipment-error" class="field__error">{{
+          errors['equipmentUnits']
+        }}</small></label
+      >
+      <label class="field"
+        ><span>Lunches</span
+        ><input
+          aria-label="Lunches"
+          type="number"
+          min="0"
+          step="1"
+          [ngModel]="d.lunchCount"
+          (ngModelChange)="editor.set('lunchCount', $event)"
+          [attr.aria-invalid]="!!errors['lunchCount']"
+          aria-describedby="lunch-error"
+        /><small id="lunch-error" class="field__error">{{ errors['lunchCount'] }}</small></label
+      >
+      <label class="field"
+        ><span>Discount code</span
+        ><input
+          aria-label="Discount code"
+          [ngModel]="d.code"
+          (ngModelChange)="editor.set('code', $event)"
+      /></label>
+    </div>
+  </section>
+</div>

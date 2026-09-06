@@ -1,7 +1,8 @@
 using System.Security.Cryptography;
-using Qbs.Domain;
+using Qbs.Domain.Entities;
+using Qbs.Domain.Policies;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Storage;
 
 public static class PhotoIntegrity
 {

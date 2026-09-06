@@ -1,6 +1,6 @@
 using MediatR;
-using Qbs.Domain;
+using Qbs.Domain.Models;
 
-namespace Qbs.Application;
+namespace Qbs.Application.Quotations;
 
 public sealed record CalculateQuote(QuoteInput Input) : IRequest<QuoteResult>;

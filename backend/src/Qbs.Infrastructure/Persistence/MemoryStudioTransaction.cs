@@ -1,8 +1,10 @@
 using System.Text.Json;
-using Qbs.Application;
-using Qbs.Domain;
+using Qbs.Application.Ports;
+using Qbs.Domain.Entities;
+using Qbs.Domain.Exceptions;
+using Qbs.Infrastructure.Serialization;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Persistence;
 
 public sealed class MemoryStudioTransaction(Dictionary<(Type, Guid), string> data)
     : IStudioTransaction

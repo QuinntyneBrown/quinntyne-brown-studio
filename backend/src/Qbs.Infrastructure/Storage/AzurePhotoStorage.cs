@@ -4,10 +4,12 @@ using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Azure.Storage.Sas;
 using Microsoft.Extensions.Configuration;
-using Qbs.Application;
-using Qbs.Domain;
+using Qbs.Application.Ports;
+using Qbs.Domain.Entities;
+using Qbs.Domain.Exceptions;
+using Qbs.Domain.Models;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Storage;
 
 public sealed class AzurePhotoStorage(IConfiguration config) : IPhotoStorage
 {

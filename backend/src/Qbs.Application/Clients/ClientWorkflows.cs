@@ -1,9 +1,13 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
-using Qbs.Domain;
+using Qbs.Application.Ports;
+using Qbs.Domain.Entities;
+using Qbs.Domain.Enums;
+using Qbs.Domain.Exceptions;
+using Qbs.Domain.Policies;
 
-namespace Qbs.Application;
+namespace Qbs.Application.Clients;
 
 public sealed class ClientWorkflows(IStudioStore store, IClock clock)
 {

@@ -1,8 +1,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Qbs.Application;
-using Qbs.Domain;
+using Qbs.Application.Catalog;
+using Qbs.Application.Catalog.DiscountConfiguration;
+using Qbs.Domain.Entities;
 
 namespace Qbs.Api.Controllers;
 

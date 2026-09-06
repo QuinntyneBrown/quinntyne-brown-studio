@@ -1,9 +1,11 @@
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
-using Qbs.Application;
-using Qbs.Domain;
+using Qbs.Application.Ports;
+using Qbs.Domain.Entities;
+using Qbs.Domain.Exceptions;
+using Qbs.Infrastructure.Serialization;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Persistence;
 
 public sealed class SqlStudioTransaction(StudioDbContext db) : IStudioTransaction
 {

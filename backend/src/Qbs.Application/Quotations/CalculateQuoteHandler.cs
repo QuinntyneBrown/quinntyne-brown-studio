@@ -1,7 +1,13 @@
 using MediatR;
-using Qbs.Domain;
+using Qbs.Application.Catalog;
+using Qbs.Application.Ports;
+using Qbs.Domain.Entities;
+using Qbs.Domain.Exceptions;
+using Qbs.Domain.Models;
+using Qbs.Domain.Policies;
+using SchedulingService = Qbs.Application.Scheduling.Scheduling;
 
-namespace Qbs.Application;
+namespace Qbs.Application.Quotations;
 
 public sealed class CalculateQuoteHandler(
     IStudioStore store,
@@ -15,30 +21,7 @@ public sealed class CalculateQuoteHandler(
             async tx =>
             {
                 var q = request.Input;
-                Rules.Interval(q.StartsAt, q.EndsAt);
-                Rules.Require(Enum.IsDefined(q.Service), "Select a supported service.");
-                Rules.Require(
-                    Rules.Local(q.StartsAt).Date >= Rules.Local(clock.UtcNow).Date,
-                    "Session date cannot be in the past.",
-                    "startsAt"
-                );
-                Rules.Require(
-                    q.Locations.Length > 0 && q.Locations.Length <= 100,
-                    "Provide between 1 and 100 locations.",
-                    "locations"
-                );
-                Rules.Require(
-                    q.AssistantCount >= 0 && q.EquipmentUnits >= 0 && q.LunchCount >= 0,
-                    "Counts must be nonnegative."
-                );
-                foreach (var l in q.Locations)
-                {
-                    AdminCatalog.ValidateLocation(l.Location);
-                    Rules.Require(
-                        l.ParkingAmount >= 0 && l.StudioHours >= 0 && l.StudioHours % 0.25m == 0,
-                        "Location costs must be nonnegative and studio hours use quarter hours."
-                    );
-                }
+                QuoteInputValidator.Validate(q, clock.UtcNow);
                 var rates = await tx.Get<RateConfiguration>(AdminCatalog.ConfigurationId);
                 var studios = await tx.List<Studio>();
                 var baseStudio = studios.SingleOrDefault(x => x.IsBase);
@@ -53,16 +36,22 @@ public sealed class CalculateQuoteHandler(
                 var serviceRate =
                     rates.ServiceRates.GetValueOrDefault(q.Service)
                     ?? throw new StudioException(503, "The photography rate is not configured.");
-                var km =
+                var metres =
                     await routes.Metres(
                         new[] { baseStudio.ResolvedAddress }
                             .Concat(q.Locations.Select(x => x.Location))
                             .Append(baseStudio.ResolvedAddress)
                             .ToArray(),
                         ct
-                    ) / 1000m;
+                    );
+                if (metres < 0)
+                    throw new StudioException(503, "Driving distance could not be calculated.");
+                var km = metres / 1000m;
                 var lines = new List<QuoteLine>();
-                void Add(string kind, decimal count, decimal rate, int? location = null) =>
+                void Add(string kind, decimal count, decimal rate, int? location = null)
+                {
+                    if (kind is not ("photography" or "travel") && (count == 0 || kind == "parking" && rate == 0))
+                        return;
                     lines.Add(
                         new(
                             kind,
@@ -72,6 +61,7 @@ public sealed class CalculateQuoteHandler(
                             new(Rules.Round(checked(count * rate)))
                         )
                     );
+                }
                 var hours = (decimal)(q.EndsAt - q.StartsAt).TotalMinutes / 60;
                 Add("photography", hours, serviceRate);
                 Add("travel", km, Rate("travel"));
@@ -112,7 +102,7 @@ public sealed class CalculateQuoteHandler(
                     new(subtotal),
                     discount,
                     new(subtotal - discount.Amount.Amount),
-                    await Scheduling.Availability(tx, q.StartsAt, q.EndsAt, q.PhotographerId)
+                    await SchedulingService.Availability(tx, q.StartsAt, q.EndsAt, q.PhotographerId)
                 );
             },
             ct

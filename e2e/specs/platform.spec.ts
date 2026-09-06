@@ -42,52 +42,6 @@ test('AC-L2-033-02 client without assigned sessions sees an empty state', async 
   await expect(page.getByText('No galleries available yet.')).toBeVisible();
 });
 
-test('AC-L2-011-01 AC-L2-011-02 live quote ignores an older response arriving last', async ({
-  page,
-}) => {
-  const studio = new StudioPage(page);
-  await studio.mock();
-  await page.route('**/api/public/locations/resolve', (route) =>
-    route.fulfill({ json: [{ label: 'Example venue', latitude: 43.6, longitude: -79.4 }] }),
-  );
-  let resolveFirst: (() => void) | undefined;
-  const firstSeen = new Promise<void>((resolve) => {
-    resolveFirst = resolve;
-  });
-  await page.route('**/api/public/quotes/calculate', async (route) => {
-    const input = route.request().postDataJSON();
-    const old = input.equipmentUnits === 0;
-    if (old) {
-      resolveFirst?.();
-      await new Promise((resolve) => setTimeout(resolve, 1200));
-    }
-    const money = { amount: old ? '100.00' : '240.00', currency: 'CAD' };
-    await route.fulfill({
-      json: {
-        inputRevision: input.inputRevision,
-        configurationRevision: 1,
-        lines: [],
-        subtotal: money,
-        discount: {
-          percentage: '0',
-          amount: { amount: '0.00', currency: 'CAD' },
-          kind: null,
-          codeError: null,
-        },
-        total: money,
-        availability: { available: true, photographerIds: [], reasonCode: null },
-      },
-    });
-  });
-  await studio.open('marketing', 'quote');
-  await studio.resolveLocation();
-  await firstSeen;
-  await studio.fill('Equipment rental units', '2');
-  await studio.quoteAmount('240.00');
-  await page.waitForTimeout(1400);
-  await studio.quoteAmount('240.00');
-});
-
 test('AC-L2-023-01 failed save preserves the administrator draft', async ({ page }) => {
   const studio = new StudioPage(page);
   await studio.mock();

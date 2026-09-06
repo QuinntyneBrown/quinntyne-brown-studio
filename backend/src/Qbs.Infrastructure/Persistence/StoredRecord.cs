@@ -1,4 +1,4 @@
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Persistence;
 
 public sealed class StoredRecord
 {

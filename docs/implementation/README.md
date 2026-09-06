@@ -2,6 +2,8 @@
 
 The repository now contains the public website, administration and client applications, the standalone design system, the controller API, a background worker, SQL migration, automated checks, and Azure packaging assets. Product functionality includes saved quote configuration, server pricing and discounts, photographer scheduling, private photo processing and access, invitations, albums, immutable print requests, and retention controls.
 
+See the [live quote slice brief](live-quote-slice.md) for the subsequent calculator implementation and its separate acceptance evidence. The historical results below describe the earlier platform baseline.
+
 ## Verification recorded on 2026-09-05
 
 | Check | Recorded result |

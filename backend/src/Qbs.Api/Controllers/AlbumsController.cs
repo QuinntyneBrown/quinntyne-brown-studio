@@ -1,8 +1,8 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Qbs.Application;
-using Qbs.Domain;
+using Qbs.Application.Clients;
+using Qbs.Domain.Entities;
 
 namespace Qbs.Api.Controllers;
 

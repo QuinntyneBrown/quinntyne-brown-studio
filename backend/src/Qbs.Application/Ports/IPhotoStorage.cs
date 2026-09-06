@@ -1,6 +1,7 @@
-using Qbs.Domain;
+using Qbs.Domain.Entities;
+using Qbs.Domain.Models;
 
-namespace Qbs.Application;
+namespace Qbs.Application.Ports;
 
 public interface IPhotoStorage
 {

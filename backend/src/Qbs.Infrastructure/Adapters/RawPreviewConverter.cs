@@ -1,10 +1,11 @@
 using System.Diagnostics;
 using Microsoft.Extensions.Configuration;
-using Qbs.Application;
-using Qbs.Domain;
+using Qbs.Application.Ports;
+using Qbs.Domain.Exceptions;
+using Qbs.Domain.Policies;
 using SkiaSharp;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Adapters;
 
 public sealed class RawPreviewConverter(IConfiguration config) : IRawPreviewConverter
 {

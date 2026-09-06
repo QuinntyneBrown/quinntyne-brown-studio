@@ -73,6 +73,16 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "acceptance": {
+              "optimization": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "projects/application/src/lib/quote-provider.ts",
+                  "with": "projects/application/src/lib/quote-provider.acceptance.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -85,6 +95,9 @@
             },
             "development": {
               "buildTarget": "marketing:build:development"
+            },
+            "acceptance": {
+              "buildTarget": "marketing:build:acceptance"
             }
           },
           "defaultConfiguration": "development"

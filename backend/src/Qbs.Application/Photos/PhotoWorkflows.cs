@@ -1,6 +1,12 @@
-using Qbs.Domain;
+using Qbs.Application.Clients;
+using Qbs.Application.Ports;
+using Qbs.Domain.Entities;
+using Qbs.Domain.Enums;
+using Qbs.Domain.Exceptions;
+using Qbs.Domain.Models;
+using Qbs.Domain.Policies;
 
-namespace Qbs.Application;
+namespace Qbs.Application.Photos;
 
 public sealed class PhotoWorkflows(IStudioStore store, IPhotoStorage storage, IClock clock)
 {

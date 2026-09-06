@@ -1,8 +1,15 @@
 using System.Net.Mail;
 using System.Text.RegularExpressions;
-using Qbs.Domain;
+using Qbs.Application.Ports;
+using Qbs.Domain.Entities;
+using Qbs.Domain.Enums;
+using Qbs.Domain.Exceptions;
+using Qbs.Domain.Policies;
+using Qbs.Domain.ValueObjects;
+using DomainEntities = Qbs.Domain.Entities;
+using SchedulingService = Qbs.Application.Scheduling.Scheduling;
 
-namespace Qbs.Application;
+namespace Qbs.Application.Catalog;
 
 public sealed class AdminCatalog(IStudioStore store)
 {
@@ -27,14 +34,14 @@ public sealed class AdminCatalog(IStudioStore store)
                 if (
                     id != null
                     && old == null
-                    && typeof(T) != typeof(RateConfiguration)
-                    && typeof(T) != typeof(DiscountConfiguration)
+                    && typeof(T) != typeof(DomainEntities.RateConfiguration)
+                    && typeof(T) != typeof(DomainEntities.DiscountConfiguration)
                 )
                     throw new StudioException(404, "Record not found.");
                 var expected = id == null ? 0 : value.ExpectedVersion;
                 await Validate(tx, value, old);
                 await tx.Save(value, expected);
-                if (value is RateConfiguration or DiscountConfiguration or Studio)
+                if (value is DomainEntities.RateConfiguration or DomainEntities.DiscountConfiguration or DomainEntities.Studio)
                 {
                     var revision =
                         await tx.Get<ConfigurationRevision>(ConfigurationId)
@@ -49,9 +56,9 @@ public sealed class AdminCatalog(IStudioStore store)
     private static string Key(Entity e) =>
         e switch
         {
-            RateConfiguration or DiscountConfiguration or Studio => "pricing",
-            Session s => "photographer:" + s.PhotographerId,
-            PublicGallery => "media",
+            DomainEntities.RateConfiguration or DomainEntities.DiscountConfiguration or DomainEntities.Studio => "pricing",
+            DomainEntities.Session s => "photographer:" + s.PhotographerId,
+            DomainEntities.PublicGallery => "media",
             _ => e.GetType().Name,
         };
 
@@ -63,12 +70,12 @@ public sealed class AdminCatalog(IStudioStore store)
     {
         switch (value)
         {
-            case Equipment e:
+            case DomainEntities.Equipment e:
                 Rules.Text(e.Name, "name");
                 Rules.Require(e.Quantity >= 0, "Quantity must be nonnegative.", "quantity");
                 Nonnegative(e.ReferenceRentalRate, "referenceRentalRate");
                 break;
-            case PreferredVendor v:
+            case DomainEntities.PreferredVendor v:
                 Rules.Text(v.Name, "name");
                 Rules.Require(
                     v.Roles.Length > 0 && v.Roles.All(Enum.IsDefined),
@@ -94,28 +101,28 @@ public sealed class AdminCatalog(IStudioStore store)
                     );
                 v.Roles = v.Roles.Distinct().ToArray();
                 break;
-            case Promotion p:
+            case DomainEntities.Promotion p:
                 Rules.Text(p.Title, "title");
                 Rules.Text(p.Description, "description", 10000);
                 Nonnegative(p.IndicativePrice, "indicativePrice");
                 break;
-            case PrintOption p:
+            case DomainEntities.PrintOption p:
                 Rules.Text(p.Name, "name");
                 Rules.Text(p.Dimensions, "dimensions");
                 Rules.Text(p.Finish, "finish");
                 Nonnegative(p.UnitPrice, "unitPrice");
                 p.UnitPrice = Rules.Round(p.UnitPrice);
                 break;
-            case Photographer p:
+            case DomainEntities.Photographer p:
                 Rules.Text(p.Name, "name");
                 break;
-            case Studio s:
+            case DomainEntities.Studio s:
                 Rules.Text(s.Name, "name");
                 ValidateLocation(s.ResolvedAddress);
                 Nonnegative(s.HourlyFee, "hourlyFee");
                 if (s.IsBase)
                     foreach (
-                        var previous in (await tx.List<Studio>()).Where(x =>
+                        var previous in (await tx.List<DomainEntities.Studio>()).Where(x =>
                             x.IsBase && x.Id != s.Id
                         )
                     )
@@ -124,7 +131,7 @@ public sealed class AdminCatalog(IStudioStore store)
                         await tx.Save(previous, previous.Version);
                     }
                 break;
-            case RateConfiguration r:
+            case DomainEntities.RateConfiguration r:
                 Rules.Require(r.ServiceRates.Keys.All(Enum.IsDefined), "Unknown service.");
                 Rules.Require(
                     r.CostRates.Keys.All(x =>
@@ -135,7 +142,7 @@ public sealed class AdminCatalog(IStudioStore store)
                 foreach (var rate in r.ServiceRates.Values.Concat(r.CostRates.Values))
                     Nonnegative(rate, "rates");
                 break;
-            case DiscountConfiguration d:
+            case DomainEntities.DiscountConfiguration d:
                 var codes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
                 foreach (var rule in d.CodeRules.Append(d.AdvanceRule).Append(d.WeekdayRule))
                 {
@@ -164,11 +171,11 @@ public sealed class AdminCatalog(IStudioStore store)
                     Rules.Require(codes.Add(code.Code!), "Codes must be unique.", "code");
                 }
                 break;
-            case Session s:
+            case DomainEntities.Session s:
                 Rules.Text(s.Name, "name");
                 Rules.Require(Enum.IsDefined(s.Service), "Select a valid service.");
                 Rules.Interval(s.StartsAt, s.EndsAt);
-                var prior = old as Session;
+                var prior = old as DomainEntities.Session;
                 s.ClientIds = prior?.ClientIds ?? [];
                 s.ExpiresAt = prior?.ExpiresAt;
                 s.RetentionMonths = prior?.RetentionMonths ?? 12;
@@ -177,7 +184,7 @@ public sealed class AdminCatalog(IStudioStore store)
                 s.RetentionState = prior?.RetentionState ?? "Active";
                 if (s.PhotographerId is Guid photographer)
                 {
-                    var available = await Scheduling.Availability(
+                    var available = await SchedulingService.Availability(
                         tx,
                         s.StartsAt,
                         s.EndsAt,
@@ -192,7 +199,7 @@ public sealed class AdminCatalog(IStudioStore store)
                         );
                 }
                 break;
-            case PublicGallery g:
+            case DomainEntities.PublicGallery g:
                 Rules.Text(g.Title, "title");
                 Rules.Require(
                     Regex.IsMatch(g.Slug, @"^[a-z0-9]+(?:-[a-z0-9]+)*$"),
@@ -203,7 +210,7 @@ public sealed class AdminCatalog(IStudioStore store)
                     g.PhotoIds.Distinct().Count() == g.PhotoIds.Length,
                     "Photos must be unique."
                 );
-                if ((await tx.List<PublicGallery>()).Any(x => x.Id != g.Id && x.Slug == g.Slug))
+                if ((await tx.List<DomainEntities.PublicGallery>()).Any(x => x.Id != g.Id && x.Slug == g.Slug))
                     throw new StudioException(409, "Slug already exists.");
                 foreach (var photoId in g.PhotoIds)
                 {
@@ -212,7 +219,7 @@ public sealed class AdminCatalog(IStudioStore store)
                         photo?.State == PhotoState.Ready,
                         "Only ready photos can be published."
                     );
-                    var session = await tx.Get<Session>(photo!.SessionId);
+                    var session = await tx.Get<DomainEntities.Session>(photo!.SessionId);
                     Rules.Require(
                         session?.RetentionState != "DeletionPending"
                             && session?.RetentionState != "Deleted",

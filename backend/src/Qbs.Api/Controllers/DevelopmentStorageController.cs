@@ -1,8 +1,8 @@
 using System.Xml.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Qbs.Application;
-using Qbs.Infrastructure;
+using Qbs.Application.Ports;
+using Qbs.Infrastructure.Storage;
 
 namespace Qbs.Api.Controllers;
 

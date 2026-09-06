@@ -1,6 +1,6 @@
-using Qbs.Application;
+using Qbs.Application.Ports;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Adapters;
 
 public sealed class SystemClock : IClock
 {

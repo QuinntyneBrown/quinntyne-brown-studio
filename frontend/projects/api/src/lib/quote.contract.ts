@@ -1,2 +1,6 @@
-import { IStudioClient } from './studio-client.contract';
-export interface IQuoteService extends IStudioClient {}
+import { QuoteInput, QuoteResult, QuoteStudioOption, ResolvedLocation } from '@qbs/domain';
+export interface IQuoteService {
+  getStudios(): Promise<QuoteStudioOption[]>;
+  resolveLocation(address: string): Promise<ResolvedLocation[]>;
+  calculate(input: QuoteInput): Promise<QuoteResult>;
+}

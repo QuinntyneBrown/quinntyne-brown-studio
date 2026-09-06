@@ -1,9 +1,10 @@
 using System.Text.Json;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.DependencyInjection;
-using Qbs.Application;
-using Qbs.Domain;
-using Qbs.Infrastructure;
+using Qbs.Application.Ports;
+using Qbs.Domain.Entities;
+using Qbs.Infrastructure.Adapters;
+using Qbs.Infrastructure.Processing;
 
 namespace Qbs.AcceptanceTests;
 

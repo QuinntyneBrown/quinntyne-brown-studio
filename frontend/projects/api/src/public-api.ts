@@ -46,3 +46,5 @@ export * from './lib/upload.token';
 export * from './lib/upload.contract';
 export * from './lib/vendor.token';
 export * from './lib/vendor.contract';
+export * from './lib/quote-service';
+export * from './lib/mock-quote-service';

@@ -1,10 +1,10 @@
 using System.Data;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
-using Qbs.Application;
-using Qbs.Domain;
+using Qbs.Application.Ports;
+using Qbs.Domain.Exceptions;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Persistence;
 
 public sealed class SqlStudioStore(StudioDbContext db) : IStudioStore
 {

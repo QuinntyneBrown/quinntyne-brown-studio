@@ -4,10 +4,12 @@ using System.Text.Json;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
-using Qbs.Application;
-using Qbs.Domain;
+using Qbs.Application.Ports;
+using Qbs.Domain.Entities;
+using Qbs.Domain.Exceptions;
+using Qbs.Domain.Policies;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Identity;
 
 public sealed class IdentityAccounts(
     UserManager<IdentityUser<Guid>> users,

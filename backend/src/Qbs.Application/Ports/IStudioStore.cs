@@ -1,6 +1,4 @@
-using Qbs.Domain;
-
-namespace Qbs.Application;
+namespace Qbs.Application.Ports;
 
 public interface IStudioStore
 {

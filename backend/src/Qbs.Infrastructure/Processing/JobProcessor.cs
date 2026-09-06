@@ -1,10 +1,15 @@
 using System.Text.Json;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Configuration;
-using Qbs.Application;
-using Qbs.Domain;
+using Qbs.Application.Ports;
+using Qbs.Domain.Entities;
+using Qbs.Domain.Enums;
+using Qbs.Domain.Exceptions;
+using Qbs.Infrastructure.Adapters;
+using Qbs.Infrastructure.Serialization;
+using Qbs.Infrastructure.Storage;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Processing;
 
 public sealed class JobProcessor(
     IStudioStore store,

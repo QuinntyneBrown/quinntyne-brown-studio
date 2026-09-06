@@ -29,33 +29,25 @@ const patterns = {
        <div class="empty-state"><span aria-hidden="true">◇</span><p>No galleries available yet.</p></div>`,
   },
   'quote-calculator': {
-    calculated: () =>
-      `${header('Quotation', 'Your quote', 'Totals recalculate as you change the session.')}
-       <div class="layout__split"><form class="form"><h2>Session</h2><div class="form__grid">
-       <label class="field"><span>Service</span><select name="service"><option>Wedding</option><option>Event</option></select></label>
-       <label class="field"><span>Hours</span><input name="hours" type="number" value="8" /></label>
-       <label class="field"><span>Equipment rental units</span><input name="equipment" type="number" value="2" /></label>
-       <label class="field"><span>Assistants</span><input name="assistants" type="number" value="1" /></label>
-       </div><div class="form__actions"><button class="button" type="button">Save this quote</button></div></form>
-       <aside class="panel panel--soft"><h2>Estimate</h2>
-       <p class="price__line"><span>Wedding coverage · 8 hours</span><span>$2,200.00</span></p>
-       <p class="price__line"><span>Equipment rental · 2 units</span><span>$240.00</span></p>
-       <p class="price__line"><span>Advance booking discount</span><span>−$120.00</span></p>
-       <p class="price__total">$2,320.00 CAD</p></aside></div>`,
-    validation: () =>
-      `${header('Quotation', 'Your quote', 'Totals recalculate as you change the session.')}
-       <div class="layout__split"><form class="form"><h2>Session</h2><div class="form__grid">
-       <label class="field"><span>Hours</span><input name="hours" type="number" value="0" aria-describedby="hours-error" /><small class="field__error" id="hours-error">Enter one hour or more.</small></label>
-       <label class="field"><span>Address</span><input name="address" value="" aria-describedby="address-error" /><small class="field__error" id="address-error">Choose a resolved address.</small></label>
-       </div><div class="form__actions"><button class="button" type="button">Save this quote</button></div></form>
-       <aside class="panel panel--soft"><h2>Estimate</h2>${notice('Correct the highlighted fields to see a total.', true)}</aside></div>`,
-    unconfigured: () =>
-      `${header('Quotation', 'Your quote', 'Totals recalculate as you change the session.')}
-       <div class="layout__split"><form class="form"><h2>Session</h2><div class="form__grid">
-       <label class="field"><span>Service</span><select name="service"><option>Wedding</option></select></label>
-       <label class="field"><span>Hours</span><input name="hours" type="number" value="8" /></label>
-       </div></form>
-       <aside class="panel panel--soft"><h2>Estimate</h2>${notice('Quoting is unavailable until studio rates are configured.', true)}<p class="text--muted">No total is shown, and no zero amount is implied.</p></aside></div>`,
+    calculated: () => `${header('Your estimate', 'Your session, thoughtfully priced.', 'Explore a live estimate, shaped around your plans.')}
+      <div class="layout__split"><section class="panel"><h2>The occasion</h2><div class="form__grid">
+      <label class="field"><span>Photography service</span><select><option>Wedding</option><option>Event</option><option>Headshots</option><option>Family portraits</option></select></label>
+      <label class="field"><span>Session date</span><input type="date" value="2027-06-01"></label>
+      <label class="field"><span>Start time</span><input type="time" value="10:00" step="900"></label>
+      <label class="field"><span>End time</span><input type="time" value="12:00" step="900"></label></div></section>
+      <aside class="panel panel--soft"><h2>Your estimate</h2><div class="price__line"><span>Photography</span><span>200.00 CAD</span></div>
+      <div class="price__line"><span>Travel</span><span>24.00 CAD</span></div><div class="price__line"><span>Advance booking · 10%</span><span>−22.40 CAD</span></div>
+      <div class="price__line price__total"><span>Estimate</span><span>201.60 CAD</span></div>
+      ${notice('A photographer is currently available.')}
+      <p class="text--muted">CAD before tax. Tax and final consultation adjustments are excluded. Availability is indicative and does not reserve a session.</p></aside></div>`,
+    validation: () => `${header('Quotation', 'Your quote', 'Correct the session details to continue.')}${notice('End time must be after start time.', true)}
+      <label class="field"><span>End time</span><input type="time" value="09:00" aria-invalid="true" aria-describedby="time-error"><small id="time-error">End time must be after start time.</small></label>`,
+    unavailable: () => `${header('Quotation', 'Your quote', 'Your session details are preserved.')}${notice('Quoting is unavailable until rates and a studio base are configured.', true)}` ,
+    failure: () => `${header('Quotation', 'Your quote', 'Your session details are preserved.')}${notice('Driving distance could not be calculated.', true)}<button class="button" type="button">Retry estimate</button>`,
+    incomplete: () => `${header('Quotation', 'Your quote', 'Begin with your session details.')}${notice('Add a resolved location to see an estimate.')}`,
+    loading: () => `${header('Quotation', 'Your quote', 'Your previous estimate is no longer current.')}${notice('Updating your quote…')}`,
+    lookup: () => `${header('Quotation', 'The places', 'Choose the address that matches your plans.')}
+      <div class="stack"><button class="button button--secondary" type="button">Venue A · Select</button><button class="button button--secondary" type="button">Venue B · Select</button></div>`,
   },
   'admin-records': {
     populated: () =>

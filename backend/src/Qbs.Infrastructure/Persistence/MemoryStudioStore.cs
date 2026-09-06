@@ -1,8 +1,7 @@
 using System.Text.Json;
-using Qbs.Application;
-using Qbs.Domain;
+using Qbs.Application.Ports;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Persistence;
 
 public sealed class MemoryStudioStore : IStudioStore
 {

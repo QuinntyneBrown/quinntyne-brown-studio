@@ -1,6 +1,11 @@
-using Qbs.Domain;
+using Qbs.Application.Ports;
+using Qbs.Domain.Entities;
+using Qbs.Domain.Enums;
+using Qbs.Domain.Exceptions;
+using Qbs.Domain.Models;
+using Qbs.Domain.Policies;
 
-namespace Qbs.Application;
+namespace Qbs.Application.Photos;
 
 public sealed class RetentionWorkflows(IStudioStore store, IClock clock, PhotoWorkflows photos)
 {

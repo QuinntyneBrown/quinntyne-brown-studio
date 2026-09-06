@@ -1,7 +1,8 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Qbs.Domain;
-using Qbs.Infrastructure;
+using Qbs.Domain.Entities;
+using Qbs.Domain.Exceptions;
+using Qbs.Infrastructure.Persistence;
 
 namespace Qbs.AcceptanceTests;
 

@@ -2,8 +2,12 @@ using Azure.Monitor.OpenTelemetry.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Qbs.Domain;
-using Qbs.Infrastructure;
+using Qbs.Api.Filters;
+using Qbs.Domain.Exceptions;
+using Qbs.Infrastructure.DependencyInjection;
+using Qbs.Infrastructure.Persistence;
+using Qbs.Infrastructure.Processing;
+using Qbs.Infrastructure.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 var controlled =
@@ -22,7 +26,7 @@ builder.Services.AddScoped<JobProcessor>();
 if (controlled && !builder.Environment.IsEnvironment("Testing"))
     builder.Services.AddHostedService<ProcessingService>();
 builder
-    .Services.AddControllers(o => o.Filters.Add<Qbs.Api.AntiforgeryFilter>())
+    .Services.AddControllers(o => o.Filters.Add<Qbs.Api.Filters.AntiforgeryFilter>())
     .AddJsonOptions(o =>
     {
         foreach (var c in StudioJson.Options.Converters)

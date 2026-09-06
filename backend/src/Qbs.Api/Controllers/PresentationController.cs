@@ -1,19 +1,17 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Qbs.Application;
-using Qbs.Domain;
+using Qbs.Application.Catalog;
+using Qbs.Domain.Entities;
+using PresentationService = Qbs.Application.Presentation.Presentation;
 
 namespace Qbs.Api.Controllers;
 
 [ApiController]
-public sealed class PresentationController(Presentation presentation, AdminCatalog catalog)
+public sealed class PresentationController(PresentationService presentation, AdminCatalog catalog)
     : ControllerBase
 {
     [HttpGet("api/public/promotions")]
     public Task<object> Promotions() => presentation.Public("promotions");
-
-    [HttpGet("api/public/studios")]
-    public Task<object> Studios() => presentation.Public("studios");
 
     [HttpGet("api/public/print-options")]
     public Task<object> Prints() => presentation.Public("print-options");

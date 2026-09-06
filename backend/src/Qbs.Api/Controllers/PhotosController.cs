@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Qbs.Application;
+using Qbs.Application.Photos;
 
 namespace Qbs.Api.Controllers;
 

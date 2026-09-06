@@ -8,7 +8,7 @@ Each route has one controller owner even when more than one feature describes it
 
 | Route family | Controller | Shared behavior |
 | --- | --- | --- |
-| `/api/public/quotes/calculate`, `/api/public/locations/resolve` | `QuotesController` | `CalculateQuoteHandler` invokes `QuoteCalculation`, `DiscountPolicy`, and `AvailabilityPolicy`; `ResolveQuoteLocationHandler` resolves addresses. |
+| `/api/public/quotes/calculate`, `/api/public/locations/resolve`, `/api/public/studios` | `QuotesController` | `CalculateQuoteHandler` invokes `QuoteCalculation`, `DiscountPolicy`, and `AvailabilityPolicy`; `ResolveQuoteLocationHandler` resolves addresses; `GetQuoteStudiosHandler` returns enabled studio options. |
 | `/api/admin/discounts` | `DiscountConfigurationController` | Rule administration; public eligibility remains part of quote calculation. |
 | `/api/admin/rates` | `RateConfigurationController` | Rate configuration and revision. |
 | `/api/admin/studios` | `StudioController` | Private studio configuration. |
@@ -17,7 +17,7 @@ Each route has one controller owner even when more than one feature describes it
 | `/api/admin/sessions`, `/api/admin/sessions/{id}`, upload routes and retry-preview | `UploadsController` | Session association, grants, finalization, and preview job requests. |
 | `/api/admin/sessions/{id}/photos`, `/api/admin/photos/{id}/preview`, `/api/client/photos/{id}/preview` | `PhotosController` | Role-appropriate metadata and byte delivery; client authorization uses the gallery-access service. |
 | `/api/admin/sessions/{id}/clients`, `/api/client/galleries` and individual gallery routes | `ClientGalleriesController` | Assignment administration and scoped client projections. |
-| `/api/public/studios`, `/api/public/promotions`, `/api/public/print-options`, `/api/public/galleries`, `/api/public/content/{key}`, and the administrative content routes | `PresentationController` | One owner for every anonymous projection; each projection omits unpublished fields, storage keys, and client assignments. |
+| `/api/public/promotions`, `/api/public/print-options`, `/api/public/galleries`, `/api/public/content/{key}`, and the administrative content routes | `PresentationController` | One owner for every anonymous projection; each projection omits unpublished fields, storage keys, and client assignments. |
 | `/api/public/galleries/{slug}/photos/{id}` | `PhotosController` | Public derivative bytes after a current publication check. |
 | Administrative gallery, promotion, equipment, vendor, analysis, retention, print-option, print-request, album, and authentication routes | Corresponding controller named in the feature page | Each controller retains its declared feature route family. |
 

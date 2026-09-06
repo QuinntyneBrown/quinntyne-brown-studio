@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Persistence;
 
 public sealed class StudioDbContext(DbContextOptions<StudioDbContext> options)
     : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>(options)

@@ -4,9 +4,11 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
-using Qbs.Application;
-using Qbs.Domain;
-using Qbs.Infrastructure;
+using Qbs.Application.Photos;
+using Qbs.Application.Ports;
+using Qbs.Domain.Entities;
+using Qbs.Domain.Enums;
+using Qbs.Infrastructure.Processing;
 using SkiaSharp;
 
 namespace Qbs.AcceptanceTests;

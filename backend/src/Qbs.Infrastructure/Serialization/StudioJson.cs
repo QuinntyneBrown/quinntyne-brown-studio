@@ -2,7 +2,7 @@ using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Qbs.Infrastructure;
+namespace Qbs.Infrastructure.Serialization;
 
 public static class StudioJson
 {

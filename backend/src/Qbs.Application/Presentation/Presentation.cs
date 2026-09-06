@@ -1,6 +1,9 @@
-using Qbs.Domain;
+using Qbs.Application.Ports;
+using Qbs.Domain.Entities;
+using Qbs.Domain.Exceptions;
+using Qbs.Domain.Policies;
 
-namespace Qbs.Application;
+namespace Qbs.Application.Presentation;
 
 public sealed class Presentation(IStudioStore store)
 {

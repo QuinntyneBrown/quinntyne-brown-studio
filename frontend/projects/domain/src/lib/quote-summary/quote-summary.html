@@ -1,0 +1,62 @@
+<aside
+  class="panel panel--soft"
+  aria-labelledby="estimate-heading"
+  aria-live="polite"
+  aria-atomic="true"
+  [attr.aria-busy]="editor.status() === 'updating'"
+>
+  <p class="page__eyebrow">Your estimate</p>
+  <h2 id="estimate-heading">A little clarity,<br />before we begin.</h2>
+  @if (editor.status() === 'updating') {
+    <p role="status">Updating your quote…</p>
+  }
+  @if (editor.message()) {
+    <qbs-notice [message]="editor.message()" [error]="true" />
+  }
+  @if (editor.status() === 'unavailable') {
+    <button class="button button--secondary" (click)="editor.retry()">Retry estimate</button>
+  }
+  @if (editor.result(); as quote) {
+    @for (line of quote.lines; track $index) {
+      <div class="price__line">
+        <span
+          >{{ labels[line.kind] || line.kind }}
+          @if (line.locationIndex !== null) {
+            · location {{ line.locationIndex + 1 }}
+          }</span
+        ><span>{{ line.amount.amount }} {{ line.amount.currency }}</span>
+      </div>
+    }
+    <div class="price__line">
+      <span>Subtotal</span><span>{{ quote.subtotal.amount }} {{ quote.subtotal.currency }}</span>
+    </div>
+    @if (quote.discount.kind; as kind) {
+      <div class="price__line">
+        <span>{{ discounts[kind] || kind }} · {{ quote.discount.percentage }}%</span
+        ><span>−{{ quote.discount.amount.amount }} {{ quote.discount.amount.currency }}</span>
+      </div>
+    }
+    <div class="price__line price__total">
+      <span>Estimate</span
+      ><span data-testid="quote-total">{{ quote.total.amount }} {{ quote.total.currency }}</span>
+    </div>
+    @if (quote.discount.codeError) {
+      <qbs-notice [message]="quote.discount.codeError" [error]="true" />
+    }
+    <qbs-notice
+      [message]="
+        quote.availability.available
+          ? 'A photographer is currently available.'
+          : 'No photographer is currently available for this time.'
+      "
+    />
+  } @else if (editor.status() === 'incomplete') {
+    <p class="text--muted" role="status">
+      Add your session details and select a resolved location to see an estimate.
+    </p>
+  }
+  <p class="quote__note">
+    CAD before tax. Tax and final consultation adjustments are excluded. Availability is indicative
+    and does not reserve a session.
+  </p>
+</aside>

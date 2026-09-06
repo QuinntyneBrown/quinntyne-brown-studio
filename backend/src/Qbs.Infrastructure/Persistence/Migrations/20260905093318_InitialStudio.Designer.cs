@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Qbs.Infrastructure;
+using Qbs.Infrastructure.Persistence;
 
 #nullable disable
 
@@ -222,7 +222,7 @@ namespace Qbs.Infrastructure.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Qbs.Infrastructure.StoredRecord", b =>
+            modelBuilder.Entity("Qbs.Infrastructure.Persistence.StoredRecord", b =>
                 {
                     b.Property<string>("Kind")
                         .HasMaxLength(100)

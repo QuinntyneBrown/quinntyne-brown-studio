@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Qbs.Application;
-using Qbs.Domain;
+using Qbs.Application.Catalog;
+using Qbs.Domain.Entities;
+using SchedulingService = Qbs.Application.Scheduling.Scheduling;
 
 namespace Qbs.Api.Controllers;
 
@@ -10,7 +11,7 @@ namespace Qbs.Api.Controllers;
     Authorize(Roles = "Administrator"),
     Route("api/admin/photographers/{id:guid}/schedule")
 ]
-public sealed class SchedulesController(Scheduling scheduling, AdminCatalog catalog)
+public sealed class SchedulesController(SchedulingService scheduling, AdminCatalog catalog)
     : ControllerBase
 {
     [HttpGet]

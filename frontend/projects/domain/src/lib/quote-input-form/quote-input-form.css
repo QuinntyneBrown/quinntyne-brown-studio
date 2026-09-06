@@ -1,0 +1,45 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+.quote__address {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-2);
+  margin: var(--space-3) 0;
+}
+.quote__address .field {
+  flex: 1;
+  min-width: 0;
+}
+.quote__candidate {
+  display: block;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  padding: var(--space-2);
+  width: 100%;
+  min-height: var(--tap-target);
+  text-align: left;
+  margin-top: var(--space-1);
+}
+.quote__location {
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-3);
+  margin-top: var(--space-3);
+}
+.quote__location h3 {
+  margin-bottom: var(--space-3);
+}
+.quote__location .button {
+  margin-top: var(--space-2);
+}
+.field__error {
+  color: var(--danger);
+}
+@media (max-width: 850px) {
+  .quote__address {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
