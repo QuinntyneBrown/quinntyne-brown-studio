@@ -1,7 +1,9 @@
 import { defineConfig } from '@playwright/test';
 
+// The suite is its own project: page objects under page-objects/, specs under specs/.
+// Each application is served from the Angular workspace next door with mocked APIs.
 export default defineConfig({
-  testDir: './e2e',
+  testDir: './specs',
   timeout: 20000,
   fullyParallel: true,
   workers: 3,
@@ -21,9 +23,10 @@ export default defineConfig({
       use: { browserName: browserName as 'chromium', viewport: { width: 1440, height: 900 } },
     },
   ]),
-  webServer: ['marketing', 'admin', 'client', 'design-system'].map((name, i) => ({
-    command: `npx ng serve ${name} --port ${4300 + i}`,
-    url: `http://localhost:${4300 + i}`,
+  webServer: ['marketing', 'admin', 'client'].map((name, index) => ({
+    command: `npx ng serve ${name} --port ${4320 + index}`,
+    cwd: '../frontend',
+    url: `http://localhost:${4320 + index}`,
     reuseExistingServer: !process.env['CI'],
     timeout: 120000,
   })),

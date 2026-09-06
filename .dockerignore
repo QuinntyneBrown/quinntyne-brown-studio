@@ -7,3 +7,5 @@
 **/.angular
 **/test-results
 docs/mocks
+e2e
+design-system

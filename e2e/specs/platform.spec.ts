@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { StudioPage } from './pages/studio-page';
+import { StudioPage } from '../page-objects/studio-page';
 
 test('AC-L2-001-01 AC-L2-002-01 public presentation follows the studio visual hierarchy', async ({
   page,
@@ -40,16 +40,6 @@ test('AC-L2-033-02 client without assigned sessions sees an empty state', async 
   await studio.open('client', 'galleries');
   await studio.heading('Your sessions');
   await expect(page.getByText('No galleries available yet.')).toBeVisible();
-});
-
-test('AC-L2-046-01 AC-L2-048-01 catalog is available with product API blocked', async ({
-  page,
-}) => {
-  await page.route('**/api/**', (route) => route.abort());
-  const studio = new StudioPage(page);
-  await studio.open('design-system');
-  await studio.heading('Design system');
-  await expect(page.getByRole('link', { name: 'Buttons', exact: true })).toBeVisible();
 });
 
 test('AC-L2-011-01 AC-L2-011-02 live quote ignores an older response arriving last', async ({
@@ -116,49 +106,4 @@ test('AC-L2-023-01 failed save preserves the administrator draft', async ({ page
   await studio.click('Save');
   await studio.message('This record changed');
   await expect(page.getByLabel('Name', { exact: true })).toHaveValue('My camera');
-});
-
-test('AC-L2-066-01 catalog dialog supports Escape and returns keyboard focus', async ({ page }) => {
-  const studio = new StudioPage(page);
-  await studio.open('design-system', 'components/dialog');
-  await studio.click('Open dialog');
-  await expect(page.getByRole('dialog')).toBeVisible();
-  await page.keyboard.press('Escape');
-  await expect(page.getByRole('dialog')).toHaveCount(0);
-  await expect(page.getByRole('button', { name: 'Open dialog', exact: true })).toBeFocused();
-});
-
-test('AC-L2-041-01 AC-L2-042-01 AC-L2-048-01 every component example renders without a product backend', async ({
-  page,
-}) => {
-  const errors: string[] = [];
-  page.on('pageerror', (error) => errors.push(error.message));
-  let productRequests = 0;
-  await page.route('**/api/**', (route) => {
-    productRequests++;
-    return route.abort();
-  });
-  const studio = new StudioPage(page);
-  for (const example of [
-    'catalog-page',
-    'quote-page',
-    'public-page',
-    'client-page',
-    'login-page',
-    'settings-page',
-    'session-page',
-    'print-inbox',
-    'notice',
-    'empty-state',
-    'photo-grid',
-    'dialog',
-    'shell',
-    'design-system',
-  ]) {
-    await studio.open('design-system', 'components/' + example);
-    await studio.heading('Design system');
-    await expect(page.locator('.design-system__contract')).toBeVisible();
-  }
-  expect(errors).toEqual([]);
-  expect(productRequests).toBe(0);
 });

@@ -2,9 +2,9 @@ import { expect, Page } from '@playwright/test';
 
 export class StudioPage {
   constructor(readonly page: Page) {}
-  async open(site: 'marketing' | 'admin' | 'client' | 'design-system', path = '') {
+  async open(site: 'marketing' | 'admin' | 'client', path = '') {
     await this.page.goto(
-      `http://localhost:${{ marketing: 4300, admin: 4301, client: 4302, 'design-system': 4303 }[site]}/${path}`,
+      `http://localhost:${{ marketing: 4320, admin: 4321, client: 4322 }[site]}/${path}`,
     );
   }
   async mock(role = 'Administrator') {

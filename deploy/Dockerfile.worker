@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0.303 AS build
 WORKDIR /src
 COPY Directory.Build.props global.json ./
 COPY backend ./backend
-RUN dotnet publish backend/Qbs.Worker -c Release -p:RestoreLockedMode=true -o /out
+RUN dotnet publish backend/src/Qbs.Worker -c Release -p:RestoreLockedMode=true -o /out
 FROM mcr.microsoft.com/dotnet/aspnet:10.0
 RUN apt-get update && apt-get install -y --no-install-recommends libraw-bin libfontconfig1 && rm -rf /var/lib/apt/lists/*
 WORKDIR /app

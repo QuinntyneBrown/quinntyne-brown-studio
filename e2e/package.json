@@ -1,0 +1,20 @@
+{
+  "name": "@qbs/e2e",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Playwright acceptance suite for the studio applications. Page objects under page-objects/, specs under specs/.",
+  "scripts": {
+    "test": "playwright test",
+    "test:chromium": "playwright test --project=chromium-mobile --project=chromium-tablet --project=chromium-desktop",
+    "report": "playwright show-report",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "typescript": "6.0.3",
+    "@types/node": "^24.0.0"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+}

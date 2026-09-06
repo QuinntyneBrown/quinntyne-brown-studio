@@ -13,7 +13,7 @@ docker build -f deploy/Dockerfile.gateway -t qbs-gateway:local .
 az bicep build --file deploy/main.bicep --outfile .artifacts/azure-template.json
 ```
 
-The worker image installs LibRaw and the Linux image-decoding dependencies. The gateway serves marketing, `/admin/`, and `/client/` with the API behind `/api/`. The design-system output is `frontend/dist/design-system/browser` and can be published independently to Azure Static Web Apps. Its checked-in navigation fallback supports direct component URLs and uses mock providers without product API access.
+The worker image installs LibRaw and the Linux image-decoding dependencies. The gateway serves marketing, `/admin/`, and `/client/` with the API behind `/api/`. The design system is built separately with `npm run build` in [`design-system/`](../design-system/README.md); its output is `design-system/dist` and is published to Azure Static Web Apps by [its own workflow](../.github/workflows/deploy-design-system.yml). The artifact carries `staticwebapp.config.json`, so direct component, pattern and dialog URLs resolve, and it makes no product API request.
 
 ## Environment rollout
 

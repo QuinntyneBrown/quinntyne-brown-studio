@@ -3,7 +3,6 @@ WORKDIR /src/frontend
 COPY frontend/package*.json ./
 RUN npm ci
 COPY frontend ./
-COPY scripts /src/scripts
 RUN npm run build:apps
 FROM nginx:stable-alpine
 COPY deploy/nginx.conf.template /etc/nginx/templates/default.conf.template
