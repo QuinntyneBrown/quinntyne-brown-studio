@@ -1,5 +1,5 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
-import { PRINT_REQUESTS_API } from '@qbs/api';
+import { PRINT_REQUEST_SERVICE } from '@qbs/api';
 import { Notice, EmptyState } from '@qbs/components';
 @Component({
   selector: 'qbs-print-inbox',
@@ -8,7 +8,7 @@ import { Notice, EmptyState } from '@qbs/components';
   styleUrl: './print-inbox.css',
 })
 export class PrintInbox implements OnInit {
-  private api = inject(PRINT_REQUESTS_API);
+  private api = inject(PRINT_REQUEST_SERVICE);
   requests = signal<any[]>([]);
   selected = signal<any>(null);
   message = signal('');

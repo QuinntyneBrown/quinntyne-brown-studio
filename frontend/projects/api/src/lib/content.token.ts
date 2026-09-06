@@ -1,3 +1,3 @@
 import { InjectionToken } from '@angular/core';
-import { IContentApi } from './content.contract';
-export const CONTENT_API = new InjectionToken<IContentApi>('ContentApi');
+import { IContentService } from './content.contract';
+export const CONTENT_SERVICE = new InjectionToken<IContentService>('CONTENT_SERVICE');

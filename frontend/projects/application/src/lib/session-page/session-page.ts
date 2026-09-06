@@ -1,7 +1,7 @@
 import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { STUDIO_API } from '@qbs/api';
+import { STUDIO_CLIENT } from '@qbs/api';
 import { PhotoView } from '@qbs/domain';
 import { PhotoGrid, Notice, Dialog, EmptyState } from '@qbs/components';
 import { UploadState } from '../upload/upload-state';
@@ -13,7 +13,7 @@ import { UploadState } from '../upload/upload-state';
   styleUrl: './session-page.css',
 })
 export class SessionPage implements OnInit, OnDestroy {
-  private api = inject(STUDIO_API);
+  private api = inject(STUDIO_CLIENT);
   private route = inject(ActivatedRoute);
   id = this.route.snapshot.paramMap.get('id') ?? 'example-session';
   session = signal<any>(null);

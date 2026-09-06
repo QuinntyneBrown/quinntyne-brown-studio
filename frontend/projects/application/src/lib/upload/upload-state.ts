@@ -1,8 +1,8 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { UPLOADS_API } from '@qbs/api';
+import { UPLOAD_SERVICE } from '@qbs/api';
 @Injectable()
 export class UploadState {
-  private api = inject(UPLOADS_API);
+  private api = inject(UPLOAD_SERVICE);
   rows = signal<{ name: string; progress: number; state: string; error?: string }[]>([]);
   busy = signal(false);
   batchId = signal<string | null>(null);

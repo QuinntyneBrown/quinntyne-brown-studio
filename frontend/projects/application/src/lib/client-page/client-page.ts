@@ -1,7 +1,7 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { STUDIO_API } from '@qbs/api';
+import { STUDIO_CLIENT } from '@qbs/api';
 import { PhotoView, ApiError } from '@qbs/domain';
 import { PhotoGrid, Notice, EmptyState, Dialog } from '@qbs/components';
 @Component({
@@ -11,7 +11,7 @@ import { PhotoGrid, Notice, EmptyState, Dialog } from '@qbs/components';
   styleUrl: './client-page.css',
 })
 export class ClientPage implements OnInit {
-  private api = inject(STUDIO_API);
+  private api = inject(STUDIO_CLIENT);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   kind = signal('galleries');

@@ -1,9 +1,9 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { STUDIO_API } from '@qbs/api';
+import { STUDIO_CLIENT } from '@qbs/api';
 import { AccountSession } from '@qbs/domain';
 @Injectable({ providedIn: 'root' })
 export class AuthState {
-  private api = inject(STUDIO_API);
+  private api = inject(STUDIO_CLIENT);
   account = signal<AccountSession>({ authenticated: false, id: null, roles: [] });
   ready = false;
   async load() {

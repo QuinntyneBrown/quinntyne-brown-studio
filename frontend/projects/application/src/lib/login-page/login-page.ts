@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { STUDIO_API } from '@qbs/api';
+import { STUDIO_CLIENT } from '@qbs/api';
 import { Notice } from '@qbs/components';
 import { SITE } from '../site.token';
 import { AuthState } from '../auth-state';
@@ -12,7 +12,7 @@ import { AuthState } from '../auth-state';
   styleUrl: './login-page.css',
 })
 export class LoginPage {
-  private api = inject(STUDIO_API);
+  private api = inject(STUDIO_CLIENT);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private auth = inject(AuthState);

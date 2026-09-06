@@ -14,7 +14,9 @@ jobs:
         with:
           node-version: '24.18.0'
           cache: npm
-          cache-dependency-path: frontend/package-lock.json
+          cache-dependency-path: |
+            frontend/package-lock.json
+            e2e/package-lock.json
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -23,14 +25,18 @@ jobs:
       - run: dotnet test backend/Qbs.slnx -c Release --no-build --logger trx --results-directory .artifacts/acceptance
       - run: npm ci
         working-directory: frontend
-      - run: npx playwright install
-        working-directory: frontend
       - run: npm run build:apps
         working-directory: frontend
       - run: npm run build:libs
         working-directory: frontend
-      - run: npx playwright test
-        working-directory: frontend
+      - run: npm ci
+        working-directory: e2e
+      - run: npm run typecheck
+        working-directory: e2e
+      - run: npx playwright install
+        working-directory: e2e
+      - run: npm test
+        working-directory: e2e
       - run: python scripts/verify-architecture.py
       - run: python docs/detailed-designs/verify.py
       - uses: actions/upload-artifact@v4
@@ -39,11 +45,41 @@ jobs:
           name: acceptance-evidence
           path: |
             .artifacts/acceptance
-            frontend/test-results
+            e2e/test-results
       - uses: actions/upload-artifact@v4
         with:
           name: static-applications
           path: frontend/dist
+  design-system:
+    name: Design system contract and browser tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.18.0'
+          cache: npm
+          cache-dependency-path: design-system/package-lock.json
+      - run: npm ci
+        working-directory: design-system
+      - run: npx playwright install --with-deps chromium
+        working-directory: design-system
+      - run: npm test
+        working-directory: design-system
+      - run: npm run build
+        working-directory: design-system
+      - run: npm run check:artifact
+        working-directory: design-system
+      - uses: actions/upload-artifact@v4
+        with:
+          name: design-system-catalog
+          path: design-system/dist
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: design-system-evidence
+          path: design-system/test-results
+
   containers:
     runs-on: ubuntu-latest
     steps:

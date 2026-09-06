@@ -1,6 +1,6 @@
 import { Component, inject, signal, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { QUOTES_API } from '@qbs/api';
+import { QUOTE_SERVICE } from '@qbs/api';
 import { QuoteInput, QuoteResult, ResolvedLocation } from '@qbs/domain';
 import { Notice } from '@qbs/components';
 @Component({
@@ -10,7 +10,7 @@ import { Notice } from '@qbs/components';
   styleUrl: './quote-page.css',
 })
 export class QuotePage implements OnInit, OnDestroy {
-  private api = inject(QUOTES_API);
+  private api = inject(QUOTE_SERVICE);
   private timer?: ReturnType<typeof setTimeout>;
   result = signal<QuoteResult | null>(null);
   message = signal('');

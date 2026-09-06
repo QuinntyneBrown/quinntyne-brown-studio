@@ -1,7 +1,7 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { STUDIO_API } from '@qbs/api';
+import { STUDIO_CLIENT } from '@qbs/api';
 import { Notice } from '@qbs/components';
 import { ResolvedLocation } from '@qbs/domain';
 @Component({
@@ -11,7 +11,7 @@ import { ResolvedLocation } from '@qbs/domain';
   styleUrl: './settings-page.css',
 })
 export class SettingsPage implements OnInit {
-  private api = inject(STUDIO_API);
+  private api = inject(STUDIO_CLIENT);
   private route = inject(ActivatedRoute);
   kind = signal('rates');
   title = signal('Quote rates');

@@ -1,3 +1,3 @@
 import { InjectionToken } from '@angular/core';
-import { IAnalysisApi } from './analysis.contract';
-export const ANALYSIS_API = new InjectionToken<IAnalysisApi>('AnalysisApi');
+import { IAnalysisService } from './analysis.contract';
+export const ANALYSIS_SERVICE = new InjectionToken<IAnalysisService>('ANALYSIS_SERVICE');

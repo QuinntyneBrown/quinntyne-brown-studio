@@ -1,9 +1,10 @@
-import { Component, input, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output, signal } from '@angular/core';
 import { PhotoView } from '@qbs/domain';
 @Component({
   selector: 'qbs-photos',
   templateUrl: './photo-grid.html',
   styleUrl: './photo-grid.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PhotoGrid {
   photos = input<PhotoView[]>([]);

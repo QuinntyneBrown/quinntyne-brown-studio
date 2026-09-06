@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   viewChild,
@@ -7,7 +8,12 @@ import {
   AfterViewInit,
   OnDestroy,
 } from '@angular/core';
-@Component({ selector: 'qbs-dialog', templateUrl: './dialog.html', styleUrl: './dialog.css' })
+@Component({
+  selector: 'qbs-dialog',
+  templateUrl: './dialog.html',
+  styleUrl: './dialog.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
 export class Dialog implements AfterViewInit, OnDestroy {
   title = input('Photo');
   closed = output<void>();

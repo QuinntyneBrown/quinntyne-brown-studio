@@ -1,3 +1,3 @@
 import { InjectionToken } from '@angular/core';
-import { IEquipmentApi } from './equipment.contract';
-export const EQUIPMENT_API = new InjectionToken<IEquipmentApi>('EquipmentApi');
+import { IEquipmentService } from './equipment.contract';
+export const EQUIPMENT_SERVICE = new InjectionToken<IEquipmentService>('EQUIPMENT_SERVICE');

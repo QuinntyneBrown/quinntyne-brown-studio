@@ -1,6 +1,6 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { STUDIO_API } from '@qbs/api';
+import { STUDIO_CLIENT } from '@qbs/api';
 import { PhotoView } from '@qbs/domain';
 import { PhotoGrid, EmptyState, Notice, Dialog } from '@qbs/components';
 @Component({
@@ -10,7 +10,7 @@ import { PhotoGrid, EmptyState, Notice, Dialog } from '@qbs/components';
   styleUrl: './public-page.css',
 })
 export class PublicPage implements OnInit {
-  private api = inject(STUDIO_API);
+  private api = inject(STUDIO_CLIENT);
   private route = inject(ActivatedRoute);
   kind = signal('home');
   items = signal<any[]>([]);

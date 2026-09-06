@@ -1,7 +1,7 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { STUDIO_API } from '@qbs/api';
+import { STUDIO_CLIENT } from '@qbs/api';
 import { StudioRecord, ResourceDefinition, ApiError, PhotoView } from '@qbs/domain';
 import { Notice, EmptyState, PhotoGrid } from '@qbs/components';
 import { RESOURCES } from '../resource-definitions';
@@ -13,7 +13,7 @@ import { RESOURCES } from '../resource-definitions';
 })
 export class CatalogPage implements OnInit {
   private route = inject(ActivatedRoute);
-  private api = inject(STUDIO_API);
+  private api = inject(STUDIO_CLIENT);
   definition = signal<ResourceDefinition>(RESOURCES[0]);
   records = signal<StudioRecord[]>([]);
   editing = signal(false);

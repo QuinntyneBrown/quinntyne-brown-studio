@@ -1,2 +1,2 @@
-import { IStudioApi } from './studio-api.contract';
-export interface IEquipmentApi extends IStudioApi {}
+import { IStudioClient } from './studio-client.contract';
+export interface IEquipmentService extends IStudioClient {}
