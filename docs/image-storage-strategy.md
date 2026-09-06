@@ -96,6 +96,51 @@ NAS is the primary and Azure is the backup rather than the reverse.
 | Azure only (Cool then Archive) | ~$800 + a fast desktop drive | Slow to work from, expensive to restore |
 | **NAS + Azure (recommended)** | **~$2,000** | Fast locally, automatic off-site, survives a studio loss |
 
+## Starting without cloud
+
+Azure can wait until there is revenue. The off-site copy cannot. Until the
+Azure sync is switched on, replace it with a rotating USB drive:
+
+- Buy two portable USB hard drives (5 TB each is enough for the first two
+  years at lossless).
+- After every session, the NAS backup job (Synology Hyper Backup) copies
+  `photos/` to whichever drive is plugged in.
+- Once a week, swap drives and take the other one home. One drive is always
+  outside the studio.
+- When Azure is turned on later, the nightly sync starts from the NAS; nothing
+  else in the workflow changes.
+
+Local-only cost for year one is about $1,100 CAD for the NAS setup plus
+$350 CAD for the two portable drives.
+
+## Shopping list (Mississauga, CAD)
+
+Prices are September 2026 street prices and move around; check the sale
+flyers before buying. Drives are usually cheapest at Canada Computers or
+Newegg.ca, camera cards at Henry's or Vistek.
+
+| Item | Approx. CAD | Where |
+| --- | --- | --- |
+| Synology DS224+ 2-bay NAS | $330–350 | Canada Computers, Newegg.ca, Amazon.ca |
+| 2 × Seagate IronWolf 12 TB (ST12000VN0008), or WD Red Plus 12 TB | $270–300 each | Canada Computers, Newegg.ca |
+| 2 TB NVMe SSD for the edit machine (Samsung 990 Pro or WD Black SN850X) | $180–220 | Canada Computers |
+| 2 × 5 TB portable USB drive (WD My Passport or Seagate Expansion) | $160–180 each | Canada Computers, Best Buy |
+| CFexpress Type B 325 GB card (Nikon, ProGrade, or Lexar Gold) | $250–330 | Henry's, Vistek |
+| CFexpress Type B USB reader (ProGrade or Sony) | $80–130 | Henry's, Vistek |
+
+Stores:
+
+- Canada Computers, 720 Burnhamthorpe Rd W, Unit 29-30 — NAS, drives, SSDs.
+  <https://www.canadacomputers.com/en/storelocator/show/MI>
+- Henry's Heartland, 5885 Rodeo Dr — CFexpress cards and readers.
+  <https://www.henrys.com/stores/mississauga-heartland>
+- Vistek, 5840 Mavis Rd — CFexpress cards, readers, rentals.
+  <https://www.vistek.ca/about/contact>
+- Best Buy Heartland — portable USB drives when on sale.
+- Newegg.ca and Amazon.ca — usually the lowest drive prices; ship to the door.
+
+Memory Express closed its Mississauga store; the nearest is Etobicoke.
+
 ## Retention
 
 - Keep every frame for 90 days after delivery.
