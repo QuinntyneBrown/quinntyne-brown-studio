@@ -15,7 +15,10 @@ export class QuotePage {
   calculate: (input: any) => Promise<any> = async (input) =>
     QuotePage.result(input);
   getStudios: () => Promise<any[]> = async () => this.studios;
-  constructor(readonly page: Page) {}
+  constructor(
+    readonly page: Page,
+    readonly origin = "http://localhost:4420",
+  ) {}
   static result(
     input: any,
     amount = "297.29",
@@ -79,7 +82,15 @@ export class QuotePage {
           w.__quoteCalculate(input).finally(() => w.__quoteSettled++),
       };
     });
-    await this.page.goto("http://localhost:4420/quote");
+    await this.page.goto(`${this.origin}/quote`);
+    await this.ready();
+  }
+  /** Opens the calculator against whatever service the application binds; no fixture. */
+  async openLive() {
+    await this.page.goto(`${this.origin}/quote`);
+    await this.ready();
+  }
+  private async ready() {
     await expect(
       this.page.getByRole("heading", {
         name: "Your session, thoughtfully priced.",
@@ -165,6 +176,12 @@ export class QuotePage {
       .getByRole("region", { name: `Location ${index}`, exact: true })
       .getByLabel("Studio", { exact: true })
       .selectOption(value);
+  }
+  async chooseStudio(index: number, name: string) {
+    await this.page
+      .getByRole("region", { name: `Location ${index}`, exact: true })
+      .getByLabel("Studio", { exact: true })
+      .selectOption({ label: name });
   }
   async line(label: string, amount: string) {
     await expect(

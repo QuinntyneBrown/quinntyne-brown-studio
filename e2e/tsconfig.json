@@ -8,5 +8,11 @@
     "skipLibCheck": true,
     "types": ["node"]
   },
-  "include": ["page-objects/**/*.ts", "specs/**/*.ts", "playwright.config.ts"]
+  "include": [
+    "page-objects/**/*.ts",
+    "specs/**/*.ts",
+    "demo/**/*.ts",
+    "playwright.config.ts",
+    "demo.playwright.config.ts"
+  ]
 }

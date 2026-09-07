@@ -117,6 +117,18 @@ export class SessionPage {
       buffer: Buffer.from(jpeg, "base64"),
     });
   }
+  async revealGuidance() {
+    await this.page
+      .getByRole("heading", { name: "AI-generated guidance", exact: true })
+      .scrollIntoViewIfNeeded();
+  }
+  async uploadPhotographs(files: { name: string; buffer: Buffer }[]) {
+    await this.page
+      .getByLabel("Select photos", { exact: true })
+      .setInputFiles(
+        files.map((file) => ({ ...file, mimeType: "image/jpeg" })),
+      );
+  }
   async assign(email: string, assigned = true) {
     await this.page.getByLabel(email, { exact: true }).setChecked(assigned);
     await this.click("Save gallery access");

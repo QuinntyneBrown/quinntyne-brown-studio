@@ -7,7 +7,8 @@
     "test": "playwright test",
     "test:chromium": "playwright test --project=chromium-mobile --project=chromium-tablet --project=chromium-desktop",
     "report": "playwright show-report",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "demo": "playwright test --config demo.playwright.config.ts"
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0",

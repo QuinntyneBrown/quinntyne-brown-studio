@@ -23,6 +23,54 @@ export class ClientCollectionPage {
   async quantity(value: string) {
     await this.page.getByLabel("Quantity", { exact: true }).fill(value);
   }
+  async quantityAt(index: number, value: string) {
+    await this.page
+      .getByLabel("Quantity", { exact: true })
+      .nth(index)
+      .fill(value);
+  }
+  /**
+   * Options are labelled "name · dimensions · price", so the option is found by its name. The
+   * select is found by role: a wrapping label's text includes every option, so a label query
+   * cannot match it exactly.
+   */
+  async printOptionAt(index: number, name: string) {
+    const select = this.page
+      .getByRole("combobox", { name: "Print option", exact: true })
+      .nth(index);
+    const value = await select.evaluate(
+      (element: HTMLSelectElement, wanted: string) =>
+        Array.from(element.options).find((option) =>
+          option.label.startsWith(wanted),
+        )?.value ?? "",
+      name,
+    );
+    expect(value).not.toBe("");
+    await select.selectOption(value);
+  }
+  async openGallery(name: string) {
+    await this.page.getByRole("link", { name }).first().click();
+  }
+  async viewPhoto(name: string) {
+    await this.page
+      .getByRole("button", { name: `View ${name}`, exact: true })
+      .click();
+    await expect(
+      this.page.getByRole("dialog", { name, exact: true }),
+    ).toBeVisible();
+  }
+  async closeDialog() {
+    await this.page
+      .getByRole("button", { name: "Close dialog", exact: true })
+      .click();
+  }
+  async unavailablePlaceholders(count: number) {
+    await expect(
+      this.page
+        .locator(".photo-grid__tile")
+        .filter({ hasText: "Unavailable photo" }),
+    ).toHaveCount(count);
+  }
   async notes(value: string) {
     await this.page.getByLabel("Notes (optional)", { exact: true }).fill(value);
   }
@@ -87,6 +135,20 @@ export class ClientCollectionPage {
   }
   async visiblePhotos(count: number) {
     await expect(this.page.locator(".photo-grid img")).toHaveCount(count);
+  }
+  /** At least `count` thumbnails have pixels, not just an `img` element; the grid loads lazily. */
+  async photosLoaded(count: number) {
+    await expect
+      .poll(() =>
+        this.page
+          .locator(".photo-grid img")
+          .evaluateAll(
+            (images: HTMLImageElement[]) =>
+              images.filter((image) => image.complete && image.naturalWidth > 0)
+                .length,
+          ),
+      )
+      .toBeGreaterThanOrEqual(count);
   }
   async capture(path: string) {
     await this.page.screenshot({ path, fullPage: true });

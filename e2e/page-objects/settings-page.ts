@@ -1,12 +1,18 @@
 import { expect, Page } from "@playwright/test";
 
 export class SettingsPage {
-  constructor(readonly page: Page) {}
+  constructor(
+    readonly page: Page,
+    readonly origin = "http://localhost:4421",
+  ) {}
   async open(path: string) {
-    await this.page.goto(`http://localhost:4421/${path}`);
+    await this.page.goto(`${this.origin}/${path}`);
   }
   async fill(label: string, value: string) {
     await this.page.getByLabel(label, { exact: true }).fill(value);
+  }
+  async fillNth(label: string, index: number, value: string) {
+    await this.page.getByLabel(label, { exact: true }).nth(index).fill(value);
   }
   async select(label: string, value: string) {
     await this.page.getByLabel(label, { exact: true }).selectOption(value);

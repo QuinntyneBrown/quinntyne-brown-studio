@@ -21,7 +21,7 @@ The [implementation report](docs/implementation/platform-completion.md) records 
 
 ## Explore the interface
 
-After cloning the repository, open `docs/mocks/index.html` from your local filesystem in a browser to explore the marketing, admin, and client prototypes without installing dependencies. These interactive HTML mocks use fictional data and simulated services. The [prototype guide](docs/mocks/README.md) explains the workflows and their differences from the application.
+Three narrated recordings in [docs/demo](docs/demo/README.md) show the packaged marketing, administration, and client applications driving themselves against the real API and LocalDB. After cloning the repository, open `docs/mocks/index.html` from your local filesystem in a browser to explore the marketing, admin, and client prototypes without installing dependencies. These interactive HTML mocks use fictional data and simulated services. The [prototype guide](docs/mocks/README.md) explains the workflows and their differences from the application.
 
 For the standalone component catalog, run the following from the repository root:
 
@@ -138,7 +138,7 @@ Run `./scripts/smoke-platform.ps1` for the packaged HTTPS/LocalDB workflow with 
 | `docs/detailed-designs`           | Feature designs, shared architecture and contracts, rendered diagrams, acceptance register                                                     |
 | `docs/mocks`                      | The approved HTML prototype and its browser checks                                                                                             |
 | `docs/implementation`             | Verification results, acceptance gaps and implementation decisions                                                                             |
-| `scripts`                         | Architecture and diagram checks, the development gateway, and the packaged smoke run                                                           |
+| `scripts`                         | Architecture and diagram checks, the development gateway, the packaged smoke run, and the demonstration recording                              |
 | `.github`                         | Verification and deployment workflows, issue templates, and pull request guidance                                                              |
 
 The backend follows Clean Architecture with vertical feature slices and inward dependencies. MediatR is pinned to **12.5.0**. Angular separates the `components`, `api`, `domain`, and `application` libraries; the three product applications own their bootstraps. Service consumers use interfaces and injection tokens. [AGENTS.md](AGENTS.md) defines the repository conventions for all contributions.
@@ -152,6 +152,7 @@ The backend follows Clean Architecture with vertical feature slices and inward d
 | [Frontend](frontend/README.md) and [components](docs/components.md)                                              | Angular workspace and presentation contracts                                |
 | [Design system](design-system/README.md) and [HTML mocks](docs/mocks/README.md)                                  | Visual reference, interactive prototypes, and independent catalog           |
 | [Acceptance tests](e2e/README.md)                                                                                | Browser setup, page objects, and packaged integration                       |
+| [Demonstration](docs/demo/README.md)                                                                             | Three narrated recordings of the packaged applications driving themselves   |
 | [Implementation status](docs/implementation/README.md) and [qualification](docs/implementation/qualification.md) | Recorded verification, remaining gaps, and external evidence commands       |
 | [Windows deployment](deploy/README.md)                                                                           | LocalDB configuration, migrations, provisioning, backups, and operations    |
 

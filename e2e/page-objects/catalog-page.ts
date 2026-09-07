@@ -1,9 +1,12 @@
 import { expect, Page } from "@playwright/test";
 
 export class CatalogPage {
-  constructor(readonly page: Page) {}
+  constructor(
+    readonly page: Page,
+    readonly origin = "http://localhost:4421",
+  ) {}
   async open(resource: string) {
-    await this.page.goto(`http://localhost:4421/${resource}`);
+    await this.page.goto(`${this.origin}/${resource}`);
   }
   async add(name: string) {
     await this.page
@@ -16,6 +19,11 @@ export class CatalogPage {
   async select(label: string, value: string) {
     await this.page.getByLabel(label, { exact: true }).selectOption(value);
   }
+  async choose(label: string, optionLabel: string) {
+    await this.page
+      .getByLabel(label, { exact: true })
+      .selectOption({ label: optionLabel });
+  }
   async check(label: string, checked = true) {
     await this.page.getByLabel(label, { exact: true }).setChecked(checked);
   }
@@ -27,6 +35,20 @@ export class CatalogPage {
       .locator(".records__row")
       .filter({ hasText: name })
       .getByRole("button", { name: "Edit", exact: true })
+      .click();
+  }
+  async openSession(name: string) {
+    await this.page
+      .locator(".records__row")
+      .filter({ hasText: name })
+      .getByRole("link", { name: "Open session" })
+      .click();
+  }
+  async openSchedule(name: string) {
+    await this.page
+      .locator(".records__row")
+      .filter({ hasText: name })
+      .getByRole("link", { name: "Schedule" })
       .click();
   }
   async value(label: string, value: string) {

@@ -275,11 +275,13 @@ quinntyne-brown-studio/
 |   |-- package.json                  # Independent application acceptance-test project
 |   |-- page-objects/                 # Screen selectors, interactions, and API mocks
 |   |-- specs/                        # Application Playwright acceptance scenarios
-|   `-- integration/                  # Packaged HTTP + LocalDB workflows; separate configuration
+|   |-- integration/                  # Packaged HTTP + LocalDB workflows; separate configuration
+|   `-- demo/                         # Narrated demonstration recordings; a document, not a suite
 |-- deploy/                           # Windows/LocalDB runbook, emulators, and legacy deployment archive
-|-- scripts/                          # Development startup, smoke checks, and documentation tooling
+|-- scripts/                          # Development startup, smoke checks, demo recording, and documentation tooling
 `-- docs/
     |-- components.md                 # Angular presentation-component documentation
+    |-- demo/                         # Demonstration recordings, posters, and chapter guide
     |-- specs/                        # L1/L2 requirements and decision baseline
     |-- detailed-designs/             # Feature designs, diagrams, contracts, and acceptance register
     |-- implementation/               # Implementation status, gaps, and verification evidence

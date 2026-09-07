@@ -72,6 +72,29 @@ export class FullstackFixture {
     }).toPass({ timeout: 30000 });
     return invitation;
   }
+  /** Runs a UI action that sends one invitation and returns the token it captured. */
+  async invitationSentBy(action: () => Promise<void>) {
+    const prior = new Set(
+      (await this.read("admin/development-mail")).map(
+        (message: any) => message.id,
+      ),
+    );
+    await action();
+    let invitation = "";
+    await expect(async () => {
+      const mail = await this.read("admin/development-mail");
+      invitation =
+        mail
+          .filter((message: any) => !prior.has(message.id))
+          .map(
+            (message: any) =>
+              message.body.match(/accept-invitation\?token=([A-F0-9]+)/)?.[1],
+          )
+          .find(Boolean) ?? "";
+      expect(invitation).not.toBe("");
+    }).toPass({ timeout: 30000 });
+    return invitation;
+  }
   async requests() {
     return this.read("admin/print-requests");
   }
