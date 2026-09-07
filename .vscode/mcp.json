@@ -1,0 +1,163 @@
+{
+	"servers": {
+		"com.microsoft/azure": {
+			"type": "stdio",
+			"command": "dnx",
+			"args": [
+				"Azure.Mcp@3.0.0-beta.41",
+				"--yes",
+				"--",
+				"server",
+				"start"
+			],
+			"gallery": "https://api.mcp.github.com",
+			"version": "3.0.0-beta.41"
+		},
+		"microsoftdocs/mcp": {
+			"type": "http",
+			"url": "https://learn.microsoft.com/api/mcp",
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.0.0"
+		},
+		"azure-ai-foundry/mcp-foundry": {
+			"type": "stdio",
+			"command": "uvx",
+			"args": [
+				"--prerelease=allow",
+				"--from",
+				"git+https://github.com/azure-ai-foundry/mcp-foundry.git",
+				"run-azure-ai-foundry-mcp",
+				"--envFile",
+				"${input:env_file_path}"
+			],
+			"env": {
+				"GITHUB_TOKEN": "${input:github_token}",
+				"AZURE_AI_SEARCH_ENDPOINT": "${input:ai_search_endpoint}",
+				"AZURE_AI_SEARCH_API_VERSION": "${input:ai_search_api_version}",
+				"SEARCH_AUTHENTICATION_METHOD": "${input:search_auth_method}",
+				"AZURE_TENANT_ID": "${input:azure_tenant_id}",
+				"AZURE_CLIENT_ID": "${input:azure_client_id}",
+				"AZURE_CLIENT_SECRET": "${input:azure_client_secret}",
+				"AZURE_AI_SEARCH_API_KEY": "${input:ai_search_api_key}",
+				"EVAL_DATA_DIR": "${input:eval_data_dir}",
+				"AZURE_OPENAI_ENDPOINT": "${input:az_openai_endpoint}",
+				"AZURE_OPENAI_API_KEY": "${input:az_openai_api_key}",
+				"AZURE_OPENAI_DEPLOYMENT": "${input:az_openai_deployment}",
+				"AZURE_OPENAI_API_VERSION": "${input:az_openai_api_version}",
+				"AZURE_AI_PROJECT_ENDPOINT": "${input:ai_project_endpoint}"
+			},
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.0.0"
+		},
+		"huggingface/hf-mcp-server": {
+			"type": "http",
+			"url": "https://huggingface.co/mcp?login",
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.0.0"
+		},
+		"io.github.microsoft/awesome-copilot": {
+			"type": "stdio",
+			"command": "docker",
+			"args": [
+				"run",
+				"-i",
+				"--rm",
+				"ghcr.io/microsoft/mcp-dotnet-samples/awesome-copilot:1.0.2026090304"
+			],
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.0.2026090304"
+		}
+	},
+	"inputs": [
+		{
+			"id": "github_token",
+			"type": "promptString",
+			"description": "Optional: GitHub token for testing models for free with rate limits.",
+			"password": true
+		},
+		{
+			"id": "ai_search_endpoint",
+			"type": "promptString",
+			"description": "Your Azure AI Search endpoint (https://<service>.search.windows.net/). Required for knowledge tools.",
+			"password": false
+		},
+		{
+			"id": "ai_search_api_version",
+			"type": "promptString",
+			"description": "API version (defaults to 2025-03-01-preview).",
+			"password": false
+		},
+		{
+			"id": "search_auth_method",
+			"type": "promptString",
+			"description": "Authentication method: 'service-principal' or 'api-search-key'.",
+			"password": false
+		},
+		{
+			"id": "azure_tenant_id",
+			"type": "promptString",
+			"description": "Required if using service-principal auth.",
+			"password": false
+		},
+		{
+			"id": "azure_client_id",
+			"type": "promptString",
+			"description": "Required if using service-principal auth.",
+			"password": false
+		},
+		{
+			"id": "azure_client_secret",
+			"type": "promptString",
+			"description": "Required if using service-principal auth.",
+			"password": true
+		},
+		{
+			"id": "ai_search_api_key",
+			"type": "promptString",
+			"description": "Required if using api-search-key auth.",
+			"password": true
+		},
+		{
+			"id": "eval_data_dir",
+			"type": "promptString",
+			"description": "Path to JSONL datasets for evaluation tools.",
+			"password": false
+		},
+		{
+			"id": "az_openai_endpoint",
+			"type": "promptString",
+			"description": "Endpoint for text-quality evaluators (optional).",
+			"password": false
+		},
+		{
+			"id": "az_openai_api_key",
+			"type": "promptString",
+			"description": "API key for the above endpoint (optional).",
+			"password": true
+		},
+		{
+			"id": "az_openai_deployment",
+			"type": "promptString",
+			"description": "Deployment name (e.g., gpt-4o) used by evaluators (optional).",
+			"password": false
+		},
+		{
+			"id": "az_openai_api_version",
+			"type": "promptString",
+			"description": "API version for Azure OpenAI (optional).",
+			"password": false
+		},
+		{
+			"id": "ai_project_endpoint",
+			"type": "promptString",
+			"description": "Azure AI Project endpoint for agent tools (optional).",
+			"password": false
+		},
+		{
+			"id": "env_file_path",
+			"type": "promptString",
+			"description": "Path to a .env file to load (e.g., ${workspaceFolder}/.env).",
+			"password": false
+		}
+	]
+}

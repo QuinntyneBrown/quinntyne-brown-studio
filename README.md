@@ -154,7 +154,7 @@ The backend follows Clean Architecture with vertical feature slices and inward d
 | [Acceptance tests](e2e/README.md)                                                                                | Browser setup, page objects, and packaged integration                       |
 | [Demonstration](docs/demo/README.md)                                                                             | Three narrated recordings of the packaged applications driving themselves   |
 | [Implementation status](docs/implementation/README.md) and [qualification](docs/implementation/qualification.md) | Recorded verification, remaining gaps, and external evidence commands       |
-| [Windows deployment](deploy/README.md)                                                                           | LocalDB configuration, migrations, provisioning, backups, and operations    |
+| [Windows deployment](deploy/README.md) and [domain strategy](deploy/domain-strategy.md)                          | LocalDB configuration, migrations, provisioning, backups, operations, and the `quinntynebrown.studio` layout |
 
 ## Deployment and release readiness
 
