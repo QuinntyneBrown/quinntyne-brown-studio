@@ -9,6 +9,8 @@ using QuinntyneBrownStudio.Application.Clients;
 using QuinntyneBrownStudio.Application.Photos;
 using QuinntyneBrownStudio.Application.Ports;
 using QuinntyneBrownStudio.Application.Quotations;
+using QuinntyneBrownStudio.Application.ReckonerAccess;
+using QuinntyneBrownStudio.Infrastructure.Adapters.Reckoner;
 using QuinntyneBrownStudio.Infrastructure.Adapters;
 using QuinntyneBrownStudio.Infrastructure.Identity;
 using QuinntyneBrownStudio.Infrastructure.Persistence;
@@ -27,6 +29,10 @@ public static class ServiceRegistration
         string environment = "Production"
     )
     {
+        services.Configure<ReckonerOptions>(config.GetSection("Reckoner"));
+        services.AddHttpClient("ReckonerAdmin", client => client.Timeout = TimeSpan.FromSeconds(10))
+            .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { AllowAutoRedirect = false, UseCookies = false }).RemoveAllLoggers();
+        services.AddScoped<IReckonerAccess, ReckonerAccess>();
         services.Configure<StudioDatabaseOptions>(o => o.ConnectionString = LocalDbConnection.Resolve(config, environment));
         services.AddDbContext<StudioDbContext>((sp, o) =>
             o.UseSqlServer(sp.GetRequiredService<IOptions<StudioDatabaseOptions>>().Value.ConnectionString));
