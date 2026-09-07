@@ -45,26 +45,21 @@ test("P02 AC-L2-019-01 a studio address edit invalidates an outstanding lookup",
 }) => {
   const fixture = new StudioFixture();
   let finish!: () => void;
-  fixture.operations.set(
-    "quote.resolveLocation",
-    () =>
-      new Promise((resolve) => {
-        finish = () =>
-          resolve([
-            { label: "Old address", latitude: 43.65, longitude: -79.38 },
-          ]);
-      }),
-  );
+  fixture.reckoner.resolve = () =>
+    new Promise((resolve) => {
+      finish = () =>
+        resolve([{ label: "Old address", latitude: 43.65, longitude: -79.38 }]);
+    });
   await fixture.install(context);
   const settings = new SettingsPage(page);
   await settings.open("studios");
-  await settings.fill("Address", "Old address");
-  await settings.click("Find address");
+  await settings.beginAddress("Base address", "Old address");
   await expect.poll(() => typeof finish).toBe("function");
-  await settings.fill("Address", "Corrected address");
+  await settings.fill("Base address", "Corrected address");
   finish();
-  await settings.noCandidate("Old address");
-  await settings.value("Address", "Corrected address");
+  await expect.poll(() => fixture.reckoner.lookupSettled).toBe(1);
+  await settings.noQuoteCandidate("Old address");
+  await settings.value("Base address", "Corrected address");
 });
 
 // Given non-ready photos, when the workspace renders, then they cannot be selected

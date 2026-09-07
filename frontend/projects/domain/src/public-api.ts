@@ -1,7 +1,7 @@
 export * from '@qbs/domain/models';
 export * from './lib/photo-grid/photo-grid';
-export * from './lib/quote-input-form/quote-input-form';
-export * from './lib/quote-summary/quote-summary';
+export * from './lib/studio-quote-calculator/studio-quote-calculator';
+
 export * from './lib/photo-order/photo-order';
 export * from './lib/catalog-editor/catalog-editor';
 export * from './lib/settings-editor/settings-editor';
@@ -11,3 +11,4 @@ export * from './lib/session-upload/session-upload';
 export * from './lib/session-photo-review/session-photo-review';
 export * from './lib/session-delivery/session-delivery';
 export * from './lib/print-request-details/print-request-details';
+export * from './lib/studio-quote-settings/studio-quote-settings';

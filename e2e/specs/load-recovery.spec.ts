@@ -12,18 +12,19 @@ test("P08 AC-L2-018-01 failed configuration loading supports retry", async ({
   context,
 }) => {
   const fixture = new StudioFixture();
-  fixture.failures.set("rate.get", {
+  fixture.reckoner.failures.set("services.GET", {
     status: 503,
     message: "Rates are unavailable.",
   });
   await fixture.install(context);
   const settings = new SettingsPage(page);
   await settings.open("rates");
-  await settings.message("Rates are unavailable.");
-  fixture.failures.delete("rate.get");
+  await settings.message("Could not load settings.");
+  fixture.reckoner.failures.delete("services.GET");
   await settings.click("Retry loading");
-  await settings.fill("Wedding rate (CAD)", "100");
-  await settings.click("Save");
+  for (const service of ["Wedding", "Event", "Headshots", "Family portraits"])
+    await settings.fill(service + " rate (CAD)", "100");
+  await settings.saveQuote("services");
   await settings.message("Saved successfully.");
 });
 test("P08 AC-L2-023-01 failed catalog loading is distinct from an empty catalog", async ({

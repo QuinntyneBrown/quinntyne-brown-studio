@@ -7,6 +7,9 @@
   --paper: #ffffff;
   --accent: #5b654c;
   --danger: #a1372e;
+  --quote-readable-muted: #475467;
+  --quote-control-line: #667085;
+  --quote-focus: 2px solid var(--accent);
   --serif: Georgia, 'Times New Roman', serif;
   --sans: Arial, Helvetica, sans-serif;
   --space-1: 6px;

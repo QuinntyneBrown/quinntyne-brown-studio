@@ -4,6 +4,7 @@
 **/dist/
 **/.angular/
 **/test-results/
+**/TestResults/
 **/playwright-report/
 .artifacts/
 .env

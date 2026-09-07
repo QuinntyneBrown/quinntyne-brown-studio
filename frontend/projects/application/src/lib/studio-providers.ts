@@ -1,3 +1,4 @@
+import { RECKONER_ADMIN_SERVICE, ReckonerAdminService } from '@qbs/api';
 import { AvailabilityService } from '@qbs/api';
 import { TORONTO_TIME_SERVICE } from '@qbs/api';
 import { TorontoTimeService } from './time/toronto-time-service';
@@ -57,6 +58,7 @@ export function studioProviders(): Provider[] {
   return [
     { provide: STUDIO_CLIENT, useClass: StudioClient },
     quoteProvider(),
+    { provide: RECKONER_ADMIN_SERVICE, useClass: ReckonerAdminService },
     { provide: AVAILABILITY_SERVICE, useClass: AvailabilityService },
     { provide: TORONTO_TIME_SERVICE, useClass: TorontoTimeService },
     { provide: CATALOG_SERVICE, useClass: CatalogService },

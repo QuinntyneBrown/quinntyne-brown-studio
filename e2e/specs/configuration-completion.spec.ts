@@ -17,36 +17,39 @@ test("P02 AC-L2-018-01 rates retain all categories and conflicting drafts", asyn
   for (const [index, service] of [
     "Wedding",
     "Event",
-    "Headshot",
-    "FamilyPortrait",
+    "Headshots",
+    "Family portraits",
   ].entries())
     await settings.fill(`${service} rate (CAD)`, String(100 + index));
   for (const label of [
-    "travel · per kilometre",
-    "equipment · per unit/session",
-    "lunch · per person",
-    "assistant · per hour",
+    "Travel rate (CAD)",
+    "Equipment rate (CAD)",
+    "Lunches rate (CAD)",
+    "Assistant rate (CAD)",
   ])
     await settings.fill(label, "12.25");
-  await settings.click("Save");
+  await settings.saveQuote("services");
+  await settings.saveQuote("rates");
   await settings.message("Saved successfully.");
   await settings.open("rates");
-  await settings.value("FamilyPortrait rate (CAD)", "103");
-  expect(fixture.rates.costRates).toEqual({
+  await settings.value("Family portraits rate (CAD)", "103.00");
+  expect(fixture.reckoner.rates.rates).toEqual({
     travel: 12.25,
     equipment: 12.25,
     lunch: 12.25,
     assistant: 12.25,
   });
-  fixture.failures.set("rate.save", {
+  fixture.reckoner.failures.set("services.PUT", {
     status: 409,
     message: "Rates changed. Reload before saving.",
   });
   await settings.fill("Wedding rate (CAD)", "225");
-  await settings.click("Save");
+  await settings.saveQuote("services");
   await settings.message("Rates changed. Reload before saving.");
   await settings.value("Wedding rate (CAD)", "225");
-  expect(fixture.rates.serviceRates).toMatchObject({ Wedding: 100 });
+  expect(fixture.reckoner.services.services).toMatchObject({
+    wedding: { rate: 100 },
+  });
 });
 
 // Given all discount sources, when editable rules are saved, then threshold,
@@ -59,26 +62,26 @@ test("P02 AC-L2-014-01 AC-L2-015-01 AC-L2-016-01 AC-L2-057-01 discount configura
   await fixture.install(context);
   const settings = new SettingsPage(page);
   await settings.open("discounts");
-  await settings.check("Enable advance discount");
-  await settings.fill("Days in advance", "45");
-  await settings.fill("Advance percentage", "15");
-  await settings.check("Enable weekday discount");
-  await settings.fill("Weekday percentage", "10");
+  await settings.check("Enable advance booking");
+  await settings.fill("Minimum days in advance", "45");
+  await settings.fill("Advance booking percentage", "15");
+  await settings.check("Enable slow day");
+  await settings.fill("Slow day percentage", "10");
   await settings.check("Tuesday");
-  await settings.click("Add code");
-  await settings.fill("Code", "PORTRAIT");
-  await settings.fill("Percentage", "20");
-  await settings.fill("Valid from", "2026-10-01");
-  await settings.fill("Valid through", "2026-12-31");
-  await settings.check("Enabled");
-  await settings.click("Save");
+  await settings.click("Add discount code");
+  await settings.fill("Code 1", "PORTRAIT");
+  await settings.fill("Code 1 percentage", "20");
+  await settings.fill("Code 1 valid from", "2026-10-01");
+  await settings.fill("Code 1 valid to", "2026-12-31");
+  await settings.check("Code 1 enabled");
+  await settings.saveQuote("discounts");
   await settings.message("Saved successfully.");
   await settings.open("discounts");
-  await settings.value("Code", "PORTRAIT");
-  expect(fixture.discounts).toMatchObject({
-    advanceRule: { threshold: 45, percentage: 15, enabled: true },
-    weekdayRule: { weekdays: ["Tuesday"], percentage: 10 },
-    codeRules: [
+  await settings.value("Code 1", "PORTRAIT");
+  expect(fixture.reckoner.discounts).toMatchObject({
+    advance: { thresholdDays: 45, percentage: 15, enabled: true },
+    slowDay: { weekdays: ["tuesday"], percentage: 10 },
+    codes: [
       {
         code: "PORTRAIT",
         percentage: 20,
@@ -92,31 +95,42 @@ test("P02 AC-L2-014-01 AC-L2-015-01 AC-L2-016-01 AC-L2-057-01 discount configura
 
 // Given a resolved address, when a studio is saved as the travel base, then the
 // geographic selection, fee, and availability survive reopening.
-test("P02 AC-L2-019-01 studio configuration retains an explicitly resolved travel base", async ({
+test("P02 AC-L2-019-01 studio configuration retains explicitly resolved studio and travel base", async ({
   page,
   context,
 }) => {
   const fixture = new StudioFixture();
-  fixture.operations.set("quote.resolveLocation", () => [
-    { label: "10 Studio Street, Toronto", latitude: 43.65, longitude: -79.38 },
-  ]);
   await fixture.install(context);
   const settings = new SettingsPage(page);
   await settings.open("studios");
-  await settings.fill("Studio name", "Daylight studio");
-  await settings.fill("Hourly fee (CAD)", "65.50");
-  await settings.fill("Address", "10 Studio");
-  await settings.click("Find address");
-  await settings.click("10 Studio Street, Toronto · Select");
-  await settings.check("Use as travel base");
-  await settings.click("Save");
+  await settings.resolveAddress(
+    "Base address",
+    "10 Studio",
+    "10 Studio Street, Toronto",
+  );
+  await settings.click("Add studio");
+  await settings.fill("Studio 1 name", "Daylight studio");
+  await settings.fill("Studio 1 hourly fee (CAD)", "65.50");
+  await settings.resolveAddress(
+    "Studio 1 address",
+    "10 Studio",
+    "10 Studio Street, Toronto",
+  );
+  await settings.check("Studio 1 available in quotes");
+  await settings.saveQuote("locations");
   await settings.message("Saved successfully.");
-  await settings.edit("Daylight studio");
-  await settings.value("Hourly fee (CAD)", "65.5");
-  expect(fixture.records["studios"][0]).toMatchObject({
-    isBase: true,
-    enabled: true,
-    resolvedAddress: { latitude: 43.65, longitude: -79.38 },
+  await settings.open("studios");
+  await settings.value("Studio 1 hourly fee (CAD)", "65.5");
+  expect(fixture.reckoner.locations).toMatchObject({
+    base: { latitude: 43.65, longitude: -79.38 },
+    studios: [
+      {
+        name: "Daylight studio",
+        fee: 65.5,
+        enabled: true,
+        address: { latitude: 43.65, longitude: -79.38 },
+      },
+    ],
   });
 });
 
@@ -230,24 +244,26 @@ test("P04 AC-L2-005-01 AC-L2-006-01 AC-L2-020-01 content and price publication f
   await website.absent("Archival print");
 });
 
-// Given a successful save followed by a failed refresh, when the response arrives,
-// then the reload error stays visible with a retry instead of a success notice.
+// Given a saved revision, when a later load fails, then retry restores the committed values.
 test("P08 AC-L2-018-01 a failed refresh after saving remains recoverable", async ({
   page,
   context,
 }) => {
   const fixture = new StudioFixture();
-  fixture.operations.set("rate.save", (input) => {
-    fixture.failures.set("rate.get", {
-      status: 503,
-      message: "Saved, but reloading rates failed.",
-    });
-    return input;
-  });
   await fixture.install(context);
   const settings = new SettingsPage(page);
   await settings.open("rates");
-  await settings.fill("Wedding rate (CAD)", "125");
-  await settings.click("Save");
-  await settings.message("Saved, but reloading rates failed.");
+  for (const service of ["Wedding", "Event", "Headshots", "Family portraits"])
+    await settings.fill(service + " rate (CAD)", "125");
+  await settings.saveQuote("services");
+  await settings.message("Saved successfully.");
+  fixture.reckoner.failures.set("services.GET", {
+    status: 503,
+    message: "Unavailable",
+  });
+  await settings.open("rates");
+  await settings.message("Could not load settings.");
+  fixture.reckoner.failures.delete("services.GET");
+  await settings.click("Retry loading");
+  await settings.value("Wedding rate (CAD)", "125.00");
 });

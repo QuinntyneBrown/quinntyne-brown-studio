@@ -1,0 +1,51 @@
+@if (state.error()) {
+  <p role="alert">{{ state.error() }}</p>
+  <button class="button button--secondary" (click)="state.refresh()" [disabled]="state.busy()">
+    Retry quote administration
+  </button>
+}
+@if (state.busy()) {
+  <p role="status">Connecting to quote administration…</p>
+}
+@if (state.session(); as session) {
+  <div class="stack" (reckoner-auth-expired)="state.refresh()">
+    @switch (state.kind()) {
+      @case ('rates') {
+        <reckoner-admin-services
+          [apiBaseUrl]="session.apiBaseUrl"
+          [adminToken]="session.adminToken"
+        />
+        <reckoner-admin-rates [apiBaseUrl]="session.apiBaseUrl" [adminToken]="session.adminToken" />
+      }
+      @case ('discounts') {
+        <reckoner-admin-discounts
+          [apiBaseUrl]="session.apiBaseUrl"
+          [adminToken]="session.adminToken"
+        />
+        <reckoner-admin-loyalty
+          [apiBaseUrl]="session.apiBaseUrl"
+          [adminToken]="session.adminToken"
+        />
+      }
+      @case ('studios') {
+        <reckoner-admin-locations
+          [apiBaseUrl]="session.apiBaseUrl"
+          [adminToken]="session.adminToken"
+        />
+      }
+      @case ('quote-availability') {
+        <reckoner-admin-availability
+          [apiBaseUrl]="session.apiBaseUrl"
+          [adminToken]="session.adminToken"
+        />
+      }
+      @case ('quote-appearance') {
+        <reckoner-admin-theme [apiBaseUrl]="session.apiBaseUrl" [adminToken]="session.adminToken" />
+        <reckoner-admin-display
+          [apiBaseUrl]="session.apiBaseUrl"
+          [adminToken]="session.adminToken"
+        />
+      }
+    }
+  </div>
+}

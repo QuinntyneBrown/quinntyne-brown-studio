@@ -28,11 +28,17 @@ export class StudioClient implements IStudioClient {
       ).requestToken;
     return this.token;
   }
-  async send<T>(method: 'POST' | 'PUT', path: string, body: unknown): Promise<T> {
+  async send<T>(
+    method: 'POST' | 'PUT',
+    path: string,
+    body: unknown,
+    signal?: AbortSignal,
+  ): Promise<T> {
     const token = await this.csrf();
     const result = await this.result<T>(
       await fetch('/api/' + path, {
         method,
+        signal,
         credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json', 'X-XSRF-TOKEN': token },
         body: JSON.stringify(body),

@@ -26,6 +26,7 @@
     "@angular/router": "22.1.5",
     "@azure/storage-blob": "^12.33.0",
     "hash-wasm": "^4.12.0",
+    "reckoner": "file:vendor/reckoner-0.1.0.tgz",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },

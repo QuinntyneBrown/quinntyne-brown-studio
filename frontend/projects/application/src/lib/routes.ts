@@ -1,3 +1,4 @@
+import { QuoteSettingsPage } from './quote-settings-page/quote-settings-page';
 import { inject } from '@angular/core';
 import { Routes, CanActivateFn, Router } from '@angular/router';
 import { ACCOUNT_SERVICE } from './account.token';
@@ -52,7 +53,15 @@ export function studioRoutes(site: string): Routes {
             data: { resource: r.key, role },
             canActivate: [access],
           })),
-          ...['rates', 'discounts', 'studios', 'content', 'invitations'].map((kind) => ({
+          ...['rates', 'discounts', 'studios', 'quote-availability', 'quote-appearance'].map(
+            (kind) => ({
+              path: kind,
+              component: QuoteSettingsPage,
+              data: { kind, role },
+              canActivate: [access],
+            }),
+          ),
+          ...['content', 'invitations'].map((kind) => ({
             path: kind,
             component: SettingsPage,
             data: { kind, role },

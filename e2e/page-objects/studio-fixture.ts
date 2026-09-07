@@ -1,9 +1,13 @@
+import { ReckonerFixture } from "./reckoner-fixture";
+import { quoteDefinition, quoteResult } from "../fixtures/quote-fixture";
 import { BrowserContext } from "@playwright/test";
 
 /** Shared by page objects for cross-product scenarios; no production adapter is invoked. */
 export class StudioFixture {
+  readonly reckoner = new ReckonerFixture();
   authenticated = true;
   role = "Administrator";
+  private tokenSequence = 0;
   readonly calls: { service: string; method: string; args: any[] }[] = [];
   readonly records: Record<string, any[]> = Object.fromEntries(
     [
@@ -65,26 +69,26 @@ export class StudioFixture {
     );
     // Reject any accidental fallback to an HTTP adapter during acceptance.
     await context.route("**/api/**", (route) => route.abort("blockedbyclient"));
+    await this.reckoner.install(context);
     await context.addInitScript(() => {
-      const windowFixture = window as any;
-      const invoke = async (method: string, args: unknown[]) => {
-        const result = await windowFixture.__qbsControlled(
-          "quote",
-          method,
-          args,
-        );
-        if (result.error) throw new Error(result.error.message);
-        return result.value;
+      const controlled = globalThis as typeof globalThis & {
+        __qbsControlled: (service: string, method: string, args: unknown[]) => Promise<{ value: unknown; error?: { message: string } }>;
+        __qbsQuoteMock: unknown;
       };
-      windowFixture.__qbsQuoteMock = {
-        getStudios: () => invoke("getStudios", []),
-        resolveLocation: (address: string) =>
-          invoke("resolveLocation", [address]).finally(() => {
-            setTimeout(() => {
-              windowFixture.__qbsLookupSettled = true;
-            }, 0);
-          }),
-        calculate: (input: unknown) => invoke("calculate", [input]),
+      const invoke = (method: string, ...args: unknown[]) => ({
+        promise: controlled.__qbsControlled("quote", method, args).then(result => {
+          if (result.error) throw new Error(result.error.message);
+          return result.value;
+        }),
+        // Deliberately allow late mock completions; production behavior must discard them.
+        cancel() {},
+      });
+      controlled.__qbsQuoteMock = {
+        configured: true,
+        loadDefinition: () => invoke("loadDefinition"),
+        calculate: (input: unknown) => invoke("calculate", input),
+        resolveAddress: (query: string) => invoke("resolveAddress", query),
+        loadAvailability: (month: string) => invoke("loadAvailability", month),
       };
     });
   }
@@ -103,6 +107,18 @@ export class StudioFixture {
   }
 
   private invoke(service: string, method: string, args: any[]): unknown {
+    if (service === "quote") {
+      if (method === "loadDefinition") return { definition: quoteDefinition(), serverDate: "Mon, 07 Sep 2026 16:00:00 GMT" };
+      if (method === "calculate") return quoteResult(args[0]);
+      if (method === "resolveAddress") return this.reckoner.resolve(args[0]);
+      if (method === "loadAvailability") return { month: args[0], configurationRevision: 1, unavailable: [] };
+    }
+    if (service === "reckoner-admin" && method === "mint")
+      return {
+        apiBaseUrl: "https://reckoner.acceptance.example",
+        adminToken: "at_" + String(++this.tokenSequence).padStart(43, "a"),
+        expiresAt: new Date(Date.now() + 60 * 60_000).toISOString(),
+      };
     const key = (
       {
         vendor: "vendors",

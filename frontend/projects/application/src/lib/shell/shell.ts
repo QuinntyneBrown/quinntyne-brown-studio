@@ -26,6 +26,8 @@ export class Shell {
     ['Quote rates', '/rates'],
     ['Studios', '/studios'],
     ['Discount rules', '/discounts'],
+    ['Quote availability', '/quote-availability'],
+    ['Quote appearance', '/quote-appearance'],
     ['Print pricing', '/print-options'],
     ['Public galleries', '/public-galleries'],
     ['Website content', '/content'],

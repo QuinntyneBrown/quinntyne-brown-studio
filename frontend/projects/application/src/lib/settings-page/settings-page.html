@@ -13,7 +13,7 @@
 } @else if (state.loadFailed()) {
   <button class="button button--secondary" (click)="state.load()">Retry loading</button>
 } @else {
-  @if (state.kind() === 'studios' || state.kind() === 'content' || state.kind() === 'invitations') {
+  @if (state.kind() === 'content' || state.kind() === 'invitations') {
     <div class="records">
       @for (item of state.items(); track item.id) {
         <div class="records__row">
@@ -26,7 +26,7 @@
     </div>
     @if (state.kind() !== 'invitations') {
       <button class="button button--secondary settings__new" (click)="state.newRecord()">
-        New {{ state.kind() === 'studios' ? 'studio' : 'content' }}
+        New content
       </button>
     }
   }

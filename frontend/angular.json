@@ -85,6 +85,20 @@
                   "with": "projects/application/src/lib/studio-providers.acceptance.ts"
                 }
               ]
+            },
+            "reckoner-acceptance": {
+              "fileReplacements": [
+                {
+                  "with": "projects/application/src/lib/studio-providers.acceptance.ts",
+                  "replace": "projects/application/src/lib/studio-providers.ts"
+                },
+                {
+                  "with": "projects/marketing/src/environments/reckoner.acceptance.ts",
+                  "replace": "projects/marketing/src/environments/reckoner.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
             }
           },
           "defaultConfiguration": "production"
@@ -100,6 +114,9 @@
             },
             "acceptance": {
               "buildTarget": "marketing:build:acceptance"
+            },
+            "reckoner-acceptance": {
+              "buildTarget": "marketing:build:reckoner-acceptance"
             }
           },
           "defaultConfiguration": "development"

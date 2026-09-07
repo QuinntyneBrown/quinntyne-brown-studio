@@ -1,3 +1,4 @@
+import { RECKONER_ADMIN_SERVICE, IReckonerAdminService } from '@qbs/api';
 import { IAvailabilityService, AVAILABILITY_SERVICE } from '@qbs/api';
 import { TORONTO_TIME_SERVICE } from '@qbs/api';
 import { TorontoTimeService } from './time/toronto-time-service';
@@ -53,6 +54,10 @@ import { quoteProvider } from './quote-provider';
 export function studioProviders(): Provider[] {
   return [
     quoteProvider(),
+    {
+      provide: RECKONER_ADMIN_SERVICE,
+      useFactory: () => controlledService<IReckonerAdminService>('reckoner-admin'),
+    },
     {
       provide: AVAILABILITY_SERVICE,
       useFactory: () => controlledService<IAvailabilityService>('availability'),

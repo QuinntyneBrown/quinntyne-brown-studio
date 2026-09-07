@@ -12,8 +12,9 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0",
-    "typescript": "6.0.3",
-    "@types/node": "^24.0.0"
+    "@types/node": "^24.0.0",
+    "reckoner": "file:../frontend/vendor/reckoner-0.1.0.tgz",
+    "typescript": "6.0.3"
   },
   "engines": {
     "node": "24.x"

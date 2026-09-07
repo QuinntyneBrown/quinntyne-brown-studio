@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  min-width: 0;
+  --reckoner-surface: var(--paper);
+  --reckoner-surface-muted: var(--soft);
+  --reckoner-ink: var(--ink);
+  --reckoner-muted: var(--quote-readable-muted);
+  --reckoner-line: var(--quote-control-line);
+  --reckoner-accent: var(--accent);
+  --reckoner-accent-ink: var(--paper);
+  --reckoner-danger: var(--danger);
+  --reckoner-font-sans: var(--sans);
+  --reckoner-font-serif: var(--serif);
+  --reckoner-radius: var(--radius);
+  --reckoner-space-unit: var(--space-1);
+  --reckoner-focus-ring: var(--quote-focus);
+}
