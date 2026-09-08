@@ -60,7 +60,7 @@ await new Promise((resolve) => server.listen(port, '127.0.0.1', resolve));
 
 const manifest = JSON.parse(await readFile(new URL('../component-manifest.json', import.meta.url), 'utf8'));
 const checks = [
-  ['/', 200, '<title>Quinntyne Brown Studio Design System</title>'],
+  ['/', 200, '<title>Quinntyne Brown Studio | Design System Catalog</title>'],
   [`/components/${manifest.components[0].id}`, 200, 'id="catalog"'],
   [`/patterns/${manifest.patterns[0].id}/${manifest.patterns[0].scenarios[0].id}`, 200, 'id="catalog"'],
   [`/dialogs/${manifest.dialogs[0].id}/${manifest.dialogs[0].scenarios[0].id}`, 200, 'id="catalog"'],
