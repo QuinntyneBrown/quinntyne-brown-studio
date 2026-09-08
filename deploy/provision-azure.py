@@ -24,6 +24,7 @@ args = [shutil.which("az") or "az", "deployment", "group"]
 common = ["--resource-group", os.environ["QBS_RESOURCE_GROUP"], "--template-file", "infra/main.bicep", "--parameters", "@" + str(file), "--only-show-errors"]
 subprocess.run(args + ["what-if", *common], check=True)
 if operation == "apply":
+    # Capture the outputs only. A failed deployment must still print the reason it failed.
     result = subprocess.run(args + ["create", "--name", "qbs-production", *common, "--query", "properties.outputs", "-o", "json"],
-                            check=True, capture_output=True, text=True)
+                            check=True, stdout=subprocess.PIPE, text=True)
     (directory / "outputs.json").write_text(result.stdout)

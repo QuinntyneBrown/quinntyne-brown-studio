@@ -28,4 +28,10 @@ The normal suite starts all products in acceptance configuration on ports 4420â€
 
 `demo/demo.spec.ts` is a demonstration, not a test. With `demo.playwright.config.ts` it records the three narrated walkthroughs in [`../docs/demo`](../docs/demo/README.md) against the packaged applications, a published API and a disposable LocalDB database, using the same page objects as the suites. From the repository root, `scripts/record-demo.ps1` prepares that environment and runs it. It lives outside `specs/` and gates nothing.
 
+`production/deployment.spec.ts` uses its separate `production.playwright.config.ts` and verifies a
+deployed studio exactly as it is served: the certificate its gateway presents, the routes it publishes
+and the live API. Set `QBS_PRODUCTION_ORIGIN` to the deployed HTTPS origin and run `npm run test:production`.
+Nothing is mocked and no server is started, so a run without a reachable deployment fails rather than passes.
+The production deployment workflow runs it against the origin it just activated.
+
 `integration/localdb-platform.spec.ts` uses its separate `fullstack.playwright.config.ts` and deliberately exercises production HTTP adapters through packaged applications. From the repository root, `scripts/smoke-platform.ps1` creates the isolated LocalDB database, provisions generated credentials, starts the HTTPS gateway and runs this workflow. It does not change the normal development database or deploy cloud resources.

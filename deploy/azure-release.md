@@ -67,6 +67,12 @@ API, worker, and all frontend roots together. Successful HTTPS checks and servic
 liveness record `/opt/studio/state.json`. `/api/health` is a liveness endpoint;
 it does not independently prove storage, email, AI, or database readiness after startup.
 
+After activation the workflow runs the browser smoke in `e2e/production` against the origin it just
+served. It checks the presented certificate, the marketing site, the calculator deep link, both
+sign-in screens, published reads answered from Azure SQL, and refusal of administration data without
+an account. A smoke failure fails the deployment job and leaves the activated release in place for
+inspection; treat it as a production incident, not a flaky test.
+
 The managed Run Command is checked for both guest execution state and exit code.
 Evidence is retained as workflow artifacts and on the VM. Service logs may contain
 operational details; restrict artifact access accordingly. Do not place credentials
