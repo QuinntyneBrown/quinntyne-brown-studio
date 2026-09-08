@@ -4,7 +4,7 @@ You can contribute by fixing bugs, improving documentation and accessibility, re
 
 ## Before you start
 
-Read the [project overview and setup](README.md#run-locally), [repository conventions](AGENTS.md), and the relevant [requirements and decisions](docs/specs/decisions.md). The [detailed designs](docs/detailed-designs/README.md) connect features to their contracts and acceptance criteria.
+Read the [project overview and setup](README.md#getting-started), [repository conventions](AGENTS.md), and the relevant [requirements and decisions](docs/specs/decisions.md). The [detailed designs](docs/detailed-designs/README.md) connect features to their contracts and acceptance criteria.
 
 Search [existing issues](https://github.com/QuinntyneBrown/quinntyne-brown-studio/issues) before opening one. For substantial features, dependencies, or architecture changes, describe the problem, proposed behavior, and acceptance criteria in an issue so maintainers can discuss the scope before implementation. Small fixes and documentation corrections can go directly to a pull request.
 
@@ -13,7 +13,7 @@ Use [SUPPORT.md](SUPPORT.md) for usage questions and [SECURITY.md](SECURITY.md) 
 ## Development workflow
 
 1. Fork the repository and create a descriptive branch from the current `main` branch.
-2. Follow the [local setup](README.md#run-locally). The full application and persistence tests require Windows and LocalDB; the HTML mocks and standalone design system can be explored independently.
+2. Follow the [local setup](README.md#getting-started). The full application and persistence tests require LocalDB; the standalone design system can be explored independently.
 3. Make one coherent change, including its documentation and relevant acceptance coverage.
 4. Run the checks for the affected area below and inspect the diff for unrelated edits or generated files.
 5. Open a pull request against `main` using the provided template. Link the issue and acceptance criteria, explain the resulting behavior, and record the exact validation performed.
