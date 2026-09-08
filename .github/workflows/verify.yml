@@ -117,3 +117,73 @@ jobs:
         with:
           name: windows-backend
           path: .artifacts/windows
+
+  linux-backend:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.303'
+      - run: sudo apt-get update && sudo apt-get install -y libfontconfig1 libraw-bin
+      - run: dotnet restore backend/QuinntyneBrownStudio.slnx --locked-mode
+      - run: dotnet test backend/QuinntyneBrownStudio.slnx -c Release --no-restore --logger trx --results-directory .artifacts/linux-tests
+      - name: Publish Linux runtime artifacts
+        run: |
+          dotnet publish backend/src/QuinntyneBrownStudio.Api -c Release --no-restore -p:UseAppHost=false -o .artifacts/linux/api
+          dotnet publish backend/src/QuinntyneBrownStudio.Worker -c Release --no-restore -p:UseAppHost=false -o .artifacts/linux/worker
+          dotnet publish backend/src/QuinntyneBrownStudio.Qualification -c Release --no-restore -p:UseAppHost=false -o .artifacts/linux/qualification
+          ldd .artifacts/linux/api/runtimes/linux-x64/native/libSkiaSharp.so | tee .artifacts/linux-native.txt
+          ! grep -q 'not found' .artifacts/linux-native.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux-backend
+          path: .artifacts/linux
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: linux-acceptance-evidence
+          path: .artifacts/linux-tests
+
+  deployment-checks:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m unittest discover -s backend/tests/deployment
+      - run: bash -n deploy/linux/setup-host.sh
+      - run: shellcheck deploy/linux/setup-host.sh
+      - run: az bicep build --file infra/main.bicep --outfile /tmp/qbs-template.json
+
+  package-release:
+    needs: [verify, design-system, windows-backend, linux-backend, deployment-checks]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: linux-backend
+          path: .artifacts/package
+      - uses: actions/download-artifact@v4
+        with:
+          name: static-applications
+          path: .artifacts/static
+      - name: Assemble verified applications
+        run: |
+          for app in marketing admin client; do
+            cp -a ".artifacts/static/$app/browser" ".artifacts/package/$app"
+          done
+          mkdir -p .artifacts/release
+          python deploy/package-release.py .artifacts/package "$GITHUB_SHA" ".artifacts/release/$GITHUB_SHA.tar.gz"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: studio-release
+          path: .artifacts/release
+          retention-days: 30
+
+  deploy:
+    needs: package-release
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      id-token: write
+    uses: ./.github/workflows/deploy.yml

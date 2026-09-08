@@ -1,0 +1,62 @@
+name: Provision studio infrastructure
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Preview or apply the reviewed Bicep configuration
+        type: choice
+        options: [preview, apply]
+        default: preview
+permissions:
+  contents: read
+jobs:
+  infrastructure:
+    if: github.ref == 'refs/heads/main'
+    runs-on: windows-latest
+    environment: infrastructure
+    concurrency:
+      group: studio-production
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      QBS_INFRA_OPERATION: ${{ inputs.operation }}
+      QBS_RESOURCE_GROUP: ${{ vars.QBS_RESOURCE_GROUP }}
+      QBS_SSH_PUBLIC_KEY: ${{ vars.QBS_SSH_PUBLIC_KEY }}
+      QBS_ADMINISTRATOR_EMAIL: ${{ vars.QBS_ADMINISTRATOR_EMAIL }}
+      QBS_DEPLOY_PRINCIPAL_ID: ${{ vars.QBS_DEPLOY_PRINCIPAL_ID }}
+      QBS_INFRA_PRINCIPAL_ID: ${{ vars.QBS_INFRA_PRINCIPAL_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      - run: python deploy/provision-azure.py
+      - name: Create runtime database identity
+        if: inputs.operation == 'apply'
+        shell: pwsh
+        run: ./deploy/bootstrap-database.ps1 -Outputs .artifacts/infrastructure/outputs.json -ResourceGroup $env:QBS_RESOURCE_GROUP
+      - name: Configure Linux host
+        if: inputs.operation == 'apply'
+        shell: pwsh
+        run: |
+          python deploy/prepare-host.py .artifacts/infrastructure/outputs.json .artifacts/infrastructure/setup.sh
+          if ($LASTEXITCODE) { throw 'Cannot prepare host configuration.' }
+          $qbsHost = (Get-Content .artifacts/infrastructure/outputs.json -Raw | ConvertFrom-Json).host.value
+          python deploy/run-command.py $qbsHost.vmId $qbsHost.location .artifacts/infrastructure/setup.sh .artifacts/infrastructure/host-result.json --name qbs-setup
+          if ($LASTEXITCODE) { throw 'Host setup failed.' }
+          @"
+          Host configured at $($qbsHost.origin).
+          Releases automatically read storage and hostname from the Bicep deployment outputs.
+          "@ | Out-File -Append $env:GITHUB_STEP_SUMMARY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: infrastructure-evidence-${{ github.run_id }}
+          path: .artifacts/infrastructure

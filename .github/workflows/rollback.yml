@@ -1,0 +1,44 @@
+name: Roll back studio release
+on:
+  workflow_dispatch:
+    inputs:
+      sha:
+        description: Full SHA of a retained release
+        required: true
+        type: string
+      schema_compatible:
+        description: I verified this release is compatible with the current database schema
+        required: true
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  rollback:
+    if: github.ref == 'refs/heads/main' && inputs.schema_compatible
+    runs-on: ubuntu-latest
+    environment: production
+    concurrency:
+      group: studio-production
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      - name: Activate retained release without reversing migrations
+        env:
+          QBS_ROLLBACK_SHA: ${{ inputs.sha }}
+          QBS_RESOURCE_GROUP: ${{ vars.QBS_RESOURCE_GROUP }}
+          QBS_VM_NAME: ${{ vars.QBS_VM_NAME }}
+        run: python deploy/deploy-release.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rollback-evidence-${{ github.run_id }}
+          path: .artifacts/deployment

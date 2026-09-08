@@ -6,8 +6,11 @@ cost nothing at idle (App Service Free, Container Apps scale-to-zero, SQL server
 all make the first visitor wait for a cold start. The cheapest thing on Azure that never sleeps is
 a small burstable Linux VM, so that is the host.
 
-Status: **adopted 2026-09-06**. Implementation follows this document: the connection-validator
-change, `infra/`, the two workflows, and OD-12 in `docs/specs/decisions.md`.
+Status: **superseded by the approved implementation plan on 2026-09-08**.
+The maintained instructions are [Azure infrastructure and releases](azure-release.md)
+and OD-12 in `docs/specs/decisions.md`. The historical sizing below is not a current
+price quote. Production now defaults to x64, Pay-As-You-Go, and automatic deployment
+on verified pushes to main, with a temporary Azure hostname and managed email domain.
 
 **This supersedes [OD-10](../docs/specs/decisions.md#od-10--localdb-persistence-and-windows-hosting).**
 LocalDB is Windows-only. On Linux the database becomes Azure SQL Database Basic, which needs one

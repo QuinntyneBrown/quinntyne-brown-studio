@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="d4e98154-0b19-42be-9e54-d263af8b4ace" name="quinn@M5 2026-09-07 17:28:53" runUser="M5\quinn" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-07T17:28:53.5576134-04:00" queuing="2026-09-07T17:28:53.5576134-04:00" start="2026-09-07T17:28:41.9847966-04:00" finish="2026-09-07T17:29:07.2819826-04:00" />
+  <TestSettings name="default" id="179d0fd1-14e7-4c2c-a5c2-cd07ff744941">
+    <Deployment runDeploymentRoot="quinn_M5_2026-09-07_17_28_53" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="67dcb4c7-61fe-494e-a846-248050906221" testId="fb0ceee3-d9b3-6171-56d7-4caf0472b5e2" testName="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests.GivenServerCredentialsWhenExchangingThenOnlyAValidShortLivedTokenReachesTheBrowser(mode: &quot;oversized&quot;, expected: ServiceUnavailable)" computerName="M5" duration="00:00:00.8560014" startTime="2026-09-07T17:28:54.8089149-04:00" endTime="2026-09-07T17:28:55.6663015-04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="67dcb4c7-61fe-494e-a846-248050906221" />
+    <UnitTestResult executionId="df356f67-890a-4f4a-b47f-2a42f8d5d935" testId="9865c434-6ca6-c166-d1f6-c18bcdf0cde6" testName="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests.GivenAnAdministratorWithoutAntiforgeryWhenMintingThenNoTokenIsIssued" computerName="M5" duration="00:00:00.4433658" startTime="2026-09-07T17:28:54.3374052-04:00" endTime="2026-09-07T17:28:54.8083135-04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="df356f67-890a-4f4a-b47f-2a42f8d5d935" />
+    <UnitTestResult executionId="1689a196-2848-41a6-86a3-55878cfab404" testId="31011025-6add-8739-cc9b-247c7f00c11f" testName="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests.GivenServerCredentialsWhenExchangingThenOnlyAValidShortLivedTokenReachesTheBrowser(mode: &quot;malformed&quot;, expected: ServiceUnavailable)" computerName="M5" duration="00:00:00.1345855" startTime="2026-09-07T17:28:56.4969954-04:00" endTime="2026-09-07T17:28:56.6297500-04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1689a196-2848-41a6-86a3-55878cfab404" />
+    <UnitTestResult executionId="c9f27470-6c1c-43b1-a5aa-cc61abb7a1a9" testId="68341765-c503-603b-9b81-43a5016181ba" testName="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests.GivenNoAdministratorWhenMintingThenAccessIsDenied(role: null, expected: Unauthorized)" computerName="M5" duration="00:00:00.2379196" startTime="2026-09-07T17:28:53.5397638-04:00" endTime="2026-09-07T17:28:53.7670454-04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c9f27470-6c1c-43b1-a5aa-cc61abb7a1a9" />
+    <UnitTestResult executionId="b73d32fd-7e44-40b2-b319-5b240da7a5df" testId="71957f47-80a7-6b37-5c75-a4e91a006da8" testName="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests.GivenServerCredentialsWhenExchangingThenOnlyAValidShortLivedTokenReachesTheBrowser(mode: &quot;expired&quot;, expected: ServiceUnavailable)" computerName="M5" duration="00:00:00.1822202" startTime="2026-09-07T17:28:56.3097150-04:00" endTime="2026-09-07T17:28:56.4946084-04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b73d32fd-7e44-40b2-b319-5b240da7a5df" />
+    <UnitTestResult executionId="0559375f-1db0-4def-9a36-6cb308692280" testId="ed8a5187-c300-3811-5bab-3606418bd91a" testName="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests.GivenServerCredentialsWhenExchangingThenOnlyAValidShortLivedTokenReachesTheBrowser(mode: &quot;denied&quot;, expected: ServiceUnavailable)" computerName="M5" duration="00:00:00.2196673" startTime="2026-09-07T17:28:56.0557327-04:00" endTime="2026-09-07T17:28:56.3093245-04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0559375f-1db0-4def-9a36-6cb308692280" />
+    <UnitTestResult executionId="e6c2397a-54c9-4f7e-8b2f-4a693fab6fff" testId="caca6051-8b9b-aed3-b7c6-44859cd72a36" testName="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests.GivenMissingConnectionSettingsWhenMintingThenTheAdministratorGetsAReadableUnavailableResponse" computerName="M5" duration="00:00:00.5466564" startTime="2026-09-07T17:28:53.7690447-04:00" endTime="2026-09-07T17:28:54.3345935-04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e6c2397a-54c9-4f7e-8b2f-4a693fab6fff" />
+    <UnitTestResult executionId="bfdcd02d-a70e-4422-8a27-7d0097e9a8f9" testId="9871b998-41e8-8ec9-3030-a1e8e3e99ead" testName="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests.GivenServerCredentialsWhenExchangingThenOnlyAValidShortLivedTokenReachesTheBrowser(mode: &quot;valid&quot;, expected: Created)" computerName="M5" duration="00:00:00.3827285" startTime="2026-09-07T17:28:55.6665356-04:00" endTime="2026-09-07T17:28:56.0553999-04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bfdcd02d-a70e-4422-8a27-7d0097e9a8f9" />
+    <UnitTestResult executionId="8973dc2e-c817-4326-bfb5-c06ee2fca638" testId="79cb8f3a-bc70-fbe4-3b48-53012f514871" testName="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests.GivenServerCredentialsWhenExchangingThenOnlyAValidShortLivedTokenReachesTheBrowser(mode: &quot;stalled&quot;, expected: ServiceUnavailable)" computerName="M5" duration="00:00:10.2050770" startTime="2026-09-07T17:28:56.6299779-04:00" endTime="2026-09-07T17:29:06.8408183-04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8973dc2e-c817-4326-bfb5-c06ee2fca638" />
+    <UnitTestResult executionId="b3f11718-807f-4184-923e-b79cc133f9de" testId="942d7de8-0c84-6e63-acf1-a72cd9dee8d3" testName="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests.GivenNoAdministratorWhenMintingThenAccessIsDenied(role: &quot;Client&quot;, expected: Forbidden)" computerName="M5" duration="00:00:06.9291564" startTime="2026-09-07T17:28:46.5786279-04:00" endTime="2026-09-07T17:28:53.5246699-04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b3f11718-807f-4184-923e-b79cc133f9de" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests.GivenServerCredentialsWhenExchangingThenOnlyAValidShortLivedTokenReachesTheBrowser(mode: &quot;valid&quot;, expected: Created)" storage="c:\projects\quinntyne-brown-studio\backend\tests\quinntynebrownstudio.acceptancetests\bin\debug\net10.0\quinntynebrownstudio.acceptancetests.dll" id="9871b998-41e8-8ec9-3030-a1e8e3e99ead">
+      <Execution id="bfdcd02d-a70e-4422-8a27-7d0097e9a8f9" />
+      <TestMethod codeBase="C:\projects\quinntyne-brown-studio\backend\tests\QuinntyneBrownStudio.AcceptanceTests\bin\Debug\net10.0\QuinntyneBrownStudio.AcceptanceTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests" name="GivenServerCredentialsWhenExchangingThenOnlyAValidShortLivedTokenReachesTheBrowser" />
+    </UnitTest>
+    <UnitTest name="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests.GivenServerCredentialsWhenExchangingThenOnlyAValidShortLivedTokenReachesTheBrowser(mode: &quot;malformed&quot;, expected: ServiceUnavailable)" storage="c:\projects\quinntyne-brown-studio\backend\tests\quinntynebrownstudio.acceptancetests\bin\debug\net10.0\quinntynebrownstudio.acceptancetests.dll" id="31011025-6add-8739-cc9b-247c7f00c11f">
+      <Execution id="1689a196-2848-41a6-86a3-55878cfab404" />
+      <TestMethod codeBase="C:\projects\quinntyne-brown-studio\backend\tests\QuinntyneBrownStudio.AcceptanceTests\bin\Debug\net10.0\QuinntyneBrownStudio.AcceptanceTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests" name="GivenServerCredentialsWhenExchangingThenOnlyAValidShortLivedTokenReachesTheBrowser" />
+    </UnitTest>
+    <UnitTest name="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests.GivenServerCredentialsWhenExchangingThenOnlyAValidShortLivedTokenReachesTheBrowser(mode: &quot;stalled&quot;, expected: ServiceUnavailable)" storage="c:\projects\quinntyne-brown-studio\backend\tests\quinntynebrownstudio.acceptancetests\bin\debug\net10.0\quinntynebrownstudio.acceptancetests.dll" id="79cb8f3a-bc70-fbe4-3b48-53012f514871">
+      <Execution id="8973dc2e-c817-4326-bfb5-c06ee2fca638" />
+      <TestMethod codeBase="C:\projects\quinntyne-brown-studio\backend\tests\QuinntyneBrownStudio.AcceptanceTests\bin\Debug\net10.0\QuinntyneBrownStudio.AcceptanceTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests" name="GivenServerCredentialsWhenExchangingThenOnlyAValidShortLivedTokenReachesTheBrowser" />
+    </UnitTest>
+    <UnitTest name="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests.GivenServerCredentialsWhenExchangingThenOnlyAValidShortLivedTokenReachesTheBrowser(mode: &quot;denied&quot;, expected: ServiceUnavailable)" storage="c:\projects\quinntyne-brown-studio\backend\tests\quinntynebrownstudio.acceptancetests\bin\debug\net10.0\quinntynebrownstudio.acceptancetests.dll" id="ed8a5187-c300-3811-5bab-3606418bd91a">
+      <Execution id="0559375f-1db0-4def-9a36-6cb308692280" />
+      <TestMethod codeBase="C:\projects\quinntyne-brown-studio\backend\tests\QuinntyneBrownStudio.AcceptanceTests\bin\Debug\net10.0\QuinntyneBrownStudio.AcceptanceTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests" name="GivenServerCredentialsWhenExchangingThenOnlyAValidShortLivedTokenReachesTheBrowser" />
+    </UnitTest>
+    <UnitTest name="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests.GivenServerCredentialsWhenExchangingThenOnlyAValidShortLivedTokenReachesTheBrowser(mode: &quot;oversized&quot;, expected: ServiceUnavailable)" storage="c:\projects\quinntyne-brown-studio\backend\tests\quinntynebrownstudio.acceptancetests\bin\debug\net10.0\quinntynebrownstudio.acceptancetests.dll" id="fb0ceee3-d9b3-6171-56d7-4caf0472b5e2">
+      <Execution id="67dcb4c7-61fe-494e-a846-248050906221" />
+      <TestMethod codeBase="C:\projects\quinntyne-brown-studio\backend\tests\QuinntyneBrownStudio.AcceptanceTests\bin\Debug\net10.0\QuinntyneBrownStudio.AcceptanceTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests" name="GivenServerCredentialsWhenExchangingThenOnlyAValidShortLivedTokenReachesTheBrowser" />
+    </UnitTest>
+    <UnitTest name="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests.GivenAnAdministratorWithoutAntiforgeryWhenMintingThenNoTokenIsIssued" storage="c:\projects\quinntyne-brown-studio\backend\tests\quinntynebrownstudio.acceptancetests\bin\debug\net10.0\quinntynebrownstudio.acceptancetests.dll" id="9865c434-6ca6-c166-d1f6-c18bcdf0cde6">
+      <Execution id="df356f67-890a-4f4a-b47f-2a42f8d5d935" />
+      <TestMethod codeBase="C:\projects\quinntyne-brown-studio\backend\tests\QuinntyneBrownStudio.AcceptanceTests\bin\Debug\net10.0\QuinntyneBrownStudio.AcceptanceTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests" name="GivenAnAdministratorWithoutAntiforgeryWhenMintingThenNoTokenIsIssued" />
+    </UnitTest>
+    <UnitTest name="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests.GivenNoAdministratorWhenMintingThenAccessIsDenied(role: &quot;Client&quot;, expected: Forbidden)" storage="c:\projects\quinntyne-brown-studio\backend\tests\quinntynebrownstudio.acceptancetests\bin\debug\net10.0\quinntynebrownstudio.acceptancetests.dll" id="942d7de8-0c84-6e63-acf1-a72cd9dee8d3">
+      <Execution id="b3f11718-807f-4184-923e-b79cc133f9de" />
+      <TestMethod codeBase="C:\projects\quinntyne-brown-studio\backend\tests\QuinntyneBrownStudio.AcceptanceTests\bin\Debug\net10.0\QuinntyneBrownStudio.AcceptanceTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests" name="GivenNoAdministratorWhenMintingThenAccessIsDenied" />
+    </UnitTest>
+    <UnitTest name="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests.GivenNoAdministratorWhenMintingThenAccessIsDenied(role: null, expected: Unauthorized)" storage="c:\projects\quinntyne-brown-studio\backend\tests\quinntynebrownstudio.acceptancetests\bin\debug\net10.0\quinntynebrownstudio.acceptancetests.dll" id="68341765-c503-603b-9b81-43a5016181ba">
+      <Execution id="c9f27470-6c1c-43b1-a5aa-cc61abb7a1a9" />
+      <TestMethod codeBase="C:\projects\quinntyne-brown-studio\backend\tests\QuinntyneBrownStudio.AcceptanceTests\bin\Debug\net10.0\QuinntyneBrownStudio.AcceptanceTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests" name="GivenNoAdministratorWhenMintingThenAccessIsDenied" />
+    </UnitTest>
+    <UnitTest name="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests.GivenMissingConnectionSettingsWhenMintingThenTheAdministratorGetsAReadableUnavailableResponse" storage="c:\projects\quinntyne-brown-studio\backend\tests\quinntynebrownstudio.acceptancetests\bin\debug\net10.0\quinntynebrownstudio.acceptancetests.dll" id="caca6051-8b9b-aed3-b7c6-44859cd72a36">
+      <Execution id="e6c2397a-54c9-4f7e-8b2f-4a693fab6fff" />
+      <TestMethod codeBase="C:\projects\quinntyne-brown-studio\backend\tests\QuinntyneBrownStudio.AcceptanceTests\bin\Debug\net10.0\QuinntyneBrownStudio.AcceptanceTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests" name="GivenMissingConnectionSettingsWhenMintingThenTheAdministratorGetsAReadableUnavailableResponse" />
+    </UnitTest>
+    <UnitTest name="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests.GivenServerCredentialsWhenExchangingThenOnlyAValidShortLivedTokenReachesTheBrowser(mode: &quot;expired&quot;, expected: ServiceUnavailable)" storage="c:\projects\quinntyne-brown-studio\backend\tests\quinntynebrownstudio.acceptancetests\bin\debug\net10.0\quinntynebrownstudio.acceptancetests.dll" id="71957f47-80a7-6b37-5c75-a4e91a006da8">
+      <Execution id="b73d32fd-7e44-40b2-b319-5b240da7a5df" />
+      <TestMethod codeBase="C:\projects\quinntyne-brown-studio\backend\tests\QuinntyneBrownStudio.AcceptanceTests\bin\Debug\net10.0\QuinntyneBrownStudio.AcceptanceTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="QuinntyneBrownStudio.AcceptanceTests.ReckonerAccessTests" name="GivenServerCredentialsWhenExchangingThenOnlyAValidShortLivedTokenReachesTheBrowser" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="fb0ceee3-d9b3-6171-56d7-4caf0472b5e2" executionId="67dcb4c7-61fe-494e-a846-248050906221" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9865c434-6ca6-c166-d1f6-c18bcdf0cde6" executionId="df356f67-890a-4f4a-b47f-2a42f8d5d935" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="31011025-6add-8739-cc9b-247c7f00c11f" executionId="1689a196-2848-41a6-86a3-55878cfab404" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="68341765-c503-603b-9b81-43a5016181ba" executionId="c9f27470-6c1c-43b1-a5aa-cc61abb7a1a9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="71957f47-80a7-6b37-5c75-a4e91a006da8" executionId="b73d32fd-7e44-40b2-b319-5b240da7a5df" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ed8a5187-c300-3811-5bab-3606418bd91a" executionId="0559375f-1db0-4def-9a36-6cb308692280" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="caca6051-8b9b-aed3-b7c6-44859cd72a36" executionId="e6c2397a-54c9-4f7e-8b2f-4a693fab6fff" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9871b998-41e8-8ec9-3030-a1e8e3e99ead" executionId="bfdcd02d-a70e-4422-8a27-7d0097e9a8f9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="79cb8f3a-bc70-fbe4-3b48-53012f514871" executionId="8973dc2e-c817-4326-bfb5-c06ee2fca638" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="942d7de8-0c84-6e63-acf1-a72cd9dee8d3" executionId="b3f11718-807f-4184-923e-b79cc133f9de" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="10" executed="10" passed="10" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.01] xUnit.net VSTest Adapter v3.1.4+50e68bbb8b (64-bit .NET 10.0.11)&#xD;
+[xUnit.net 00:00:02.35]   Discovering: QuinntyneBrownStudio.AcceptanceTests&#xD;
+[xUnit.net 00:00:02.74]   Discovered:  QuinntyneBrownStudio.AcceptanceTests&#xD;
+[xUnit.net 00:00:02.80]   Starting:    QuinntyneBrownStudio.AcceptanceTests&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\projects\quinntyne-brown-studio\backend\src\QuinntyneBrownStudio.Api&#xD;
+info: QuinntyneBrownStudio.AcceptanceTests.TestAuthenticationHandler[13]&#xD;
+      AuthenticationScheme: Acceptance was forbidden.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\projects\quinntyne-brown-studio\backend\src\QuinntyneBrownStudio.Api&#xD;
+info: QuinntyneBrownStudio.AcceptanceTests.TestAuthenticationHandler[12]&#xD;
+      AuthenticationScheme: Acceptance was challenged.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\projects\quinntyne-brown-studio\backend\src\QuinntyneBrownStudio.Api&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\projects\quinntyne-brown-studio\backend\src\QuinntyneBrownStudio.Api&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\projects\quinntyne-brown-studio\backend\src\QuinntyneBrownStudio.Api&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\projects\quinntyne-brown-studio\backend\src\QuinntyneBrownStudio.Api&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\projects\quinntyne-brown-studio\backend\src\QuinntyneBrownStudio.Api&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\projects\quinntyne-brown-studio\backend\src\QuinntyneBrownStudio.Api&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\projects\quinntyne-brown-studio\backend\src\QuinntyneBrownStudio.Api&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\projects\quinntyne-brown-studio\backend\src\QuinntyneBrownStudio.Api&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+[xUnit.net 00:00:23.14]   Finished:    QuinntyneBrownStudio.AcceptanceTests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>
