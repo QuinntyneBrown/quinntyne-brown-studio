@@ -19,11 +19,10 @@ say what it cost rather than quietly narrowing scope.
 - Use Microsoft.Extensions libraries and patterns: dependency injection, Options,
   and Configuration.
 - Use Angular for the web client.
-- Use SQL Server Express **LocalDB** through EF Core's SQL Server provider for all
-  normal development and production persistence, including Identity and the outbox.
-  API and worker run on the same Windows host under the same Windows account.
-  SQL Server service instances, Azure SQL, and Linux backend containers are not
-  supported runtime targets. See [OD-10](docs/specs/decisions.md#od-10--localdb-persistence-and-windows-hosting).
+- Use EF Core's SQL Server provider, including Identity and the outbox. Windows
+  development uses SQL Server Express **LocalDB** under one Windows account.
+  Azure production uses **Azure SQL with Entra managed identity authentication**
+  and one Ubuntu VM for the API and worker. See [OD-12](docs/specs/decisions.md#od-12--azure-production-and-main-branch-deployment).
 
 ## Architecture and Design
 
@@ -43,8 +42,9 @@ say what it cost rather than quietly narrowing scope.
   development external-service adapters are enabled or a database is unavailable.
 - API, worker, migrations, and administrator provisioning share
   `ConnectionStrings:Studio`. Development defaults to LocalDB `QbsDevelopment`;
-  production requires an explicit named LocalDB database with Windows integrated
-  authentication. Fail startup on invalid configuration, inaccessible databases,
+  production requires an explicit Azure SQL database with encrypted Entra
+  authentication, or named LocalDB with Windows integrated authentication for
+  supported local operation. Fail startup on invalid configuration, inaccessible databases,
   or unapplied migrations. Apply migrations explicitly; never use `EnsureCreated`
   for runtime databases or silently replace a database.
 - Use Clean Architecture. Dependencies point inward. `Domain` references nothing.

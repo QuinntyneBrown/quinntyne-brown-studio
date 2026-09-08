@@ -84,7 +84,7 @@ The original Azure SQL and Container Apps hosting selection is superseded by [OD
 
 ## OD-10 — LocalDB persistence and Windows hosting
 
-Status: **Accepted**, 2026-09-06. Authority: the user's LocalDB-only selection and approved implementation plan. Supersedes OD-09's Azure SQL, Container Apps, and Linux backend deployment choices; other decisions remain in effect.
+Status: **Superseded for Azure production by OD-12**, 2026-09-08; retained for Windows development and local operation. Original authority: the user's LocalDB-only selection and approved implementation plan on 2026-09-06.
 
 All normal development and production application, Identity, and outbox records use SQL Server Express LocalDB through EF Core's SQL Server provider. The API and worker run on one Windows host under the same owning Windows account. [Microsoft's LocalDB documentation](https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/sql-server-express-localdb) describes its local, per-user instance model. Linux backend containers, remote SQL Server, SQL Server service instances, and Azure SQL are outside this supported target. The prior deployment assets are retained only as a superseded historical archive.
 
@@ -117,3 +117,28 @@ This decision refines packaging and composition; it does not change OD-10's Loca
 These gates prevent acceptance claims for unverified product behavior. They do not prevent the requirements and proposed designs from being reviewed.
 
 The [qualification commands](../implementation/qualification.md) now emit measured, failed or blocked evidence reports. Command success alone never changes this register.
+
+
+## OD-12 — Azure production and main-branch deployment
+
+Status: **Accepted**, 2026-09-08. Authority: the user selected Linux VM + Azure SQL,
+provisioning plus deployment, the Pay-As-You-Go subscription, and temporary HTTPS
+and email, then approved implementation of the plan.
+
+This supersedes OD-10 for Azure production. Windows development continues to use
+LocalDB. Azure production uses an Ubuntu 24.04 x64 VM and Azure SQL Basic through
+the same EF SQL Server provider. Entra authentication, encrypted connections,
+explicit migrations and failure on inaccessible databases remain mandatory.
+MediatR stays at 12.5.0. Existing local persistence and test adapters remain supported.
+
+Bicep provisions infrastructure. Separate scoped GitHub OIDC identities manage
+infrastructure and application releases. Verified pushes to main deploy the exact
+commit automatically; infrastructure changes and schema-compatible rollback are
+manual workflows. Custom DNS remains deferred. The initial public origin is the
+VM's Azure hostname with valid TLS; Azure Communication Services supplies a managed
+email domain. Existing records are not automatically migrated from LocalDB.
+
+See [the release runbook](../../deploy/azure-release.md) and
+[acceptance criteria](../implementation/azure-deployment.md). G-ENV now requires
+Azure SQL restore, VM/managed-identity isolation, TLS, monitoring and external
+service evidence. A local passing suite does not close this gate.

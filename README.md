@@ -175,3 +175,5 @@ Use [SUPPORT.md](SUPPORT.md) to find troubleshooting guidance and ask a question
 Copyright (c) 2026 Quinntyne Brown and contributors.
 
 Project code and original documentation are available under the [MIT License](LICENSE). Dependencies and bundled sample photography retain their own licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and the [photo attribution](docs/mocks/assets/photos/ATTRIBUTION.md).
+
+Azure production deployment: [provisioning and automatic main-branch releases](deploy/azure-release.md) (OD-12). Windows development retains LocalDB.

@@ -44,9 +44,9 @@ Each fixture supplies `path`, `sha256`, `service`, and `expectedOutcomes` with a
 
 ## Environment readiness
 
-Configure `ConnectionStrings__Studio` explicitly using the approved named LocalDB connection and integrated authentication. The environment manifest supplies `origin`, `expectedDatabase`, and an `evidence` array with `kind`, `path` and `sha256`. Required kinds are `backup-restore`, `identity-storage-isolation`, `tls`, `monitoring`, `azure-roles` and `email-sender`.
+Configure `ConnectionStrings__Studio` explicitly using the approved LocalDB/integrated or Azure SQL/Entra connection (OD-12). The environment manifest supplies `origin`, `expectedDatabase`, and an `evidence` array with `kind`, `path` and `sha256`. Required kinds are `backup-restore`, `identity-storage-isolation`, `tls`, `monitoring`, `azure-roles` and `email-sender`.
 
-The command verifies the existing LocalDB connection, database identity, applied migrations and absence of pending migrations, then calls the HTTPS health endpoint with certificate validation enabled. It neither migrates nor writes production data. It verifies the supplied operator evidence digests, rather than treating their existence as proof of successful backup/restore or isolation. Review those records against the [Windows runbook](../../deploy/README.md).
+The command verifies the configured SQL connection, database identity, applied migrations and absence of pending migrations, then calls the HTTPS health endpoint with certificate validation enabled. It neither migrates nor writes production data. It verifies the supplied operator evidence digests, rather than treating their existence as proof of successful backup/restore or isolation. Review those records against the [Windows runbook](../../deploy/README.md).
 
 ## Local implementation evidence
 

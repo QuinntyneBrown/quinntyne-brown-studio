@@ -1,0 +1,42 @@
+name: Deploy studio release
+on:
+  workflow_call:
+permissions:
+  contents: read
+jobs:
+  production:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production
+    concurrency:
+      group: studio-production
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reject stale verification runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$(gh api repos/$GITHUB_REPOSITORY/git/ref/heads/main --jq .object.sha)" = "$GITHUB_SHA"
+      - uses: actions/download-artifact@v4
+        with:
+          name: studio-release
+          path: .artifacts/release
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      - name: Upload and activate verified release
+        env:
+          QBS_RESOURCE_GROUP: ${{ vars.QBS_RESOURCE_GROUP }}
+          QBS_VM_NAME: ${{ vars.QBS_VM_NAME }}
+        run: python deploy/deploy-release.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: deployment-evidence-${{ github.run_id }}
+          path: .artifacts/deployment
