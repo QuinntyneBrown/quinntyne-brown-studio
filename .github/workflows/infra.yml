@@ -6,7 +6,7 @@ on:
         description: Environment to provision
         type: choice
         options: [infrastructure, staging]
-        default: staging
+        default: infrastructure
       operation:
         description: Preview or apply the reviewed Bicep configuration
         type: choice
