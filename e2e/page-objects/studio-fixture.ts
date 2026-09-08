@@ -72,14 +72,20 @@ export class StudioFixture {
     await this.reckoner.install(context);
     await context.addInitScript(() => {
       const controlled = globalThis as typeof globalThis & {
-        __qbsControlled: (service: string, method: string, args: unknown[]) => Promise<{ value: unknown; error?: { message: string } }>;
+        __qbsControlled: (
+          service: string,
+          method: string,
+          args: unknown[],
+        ) => Promise<{ value: unknown; error?: { message: string } }>;
         __qbsQuoteMock: unknown;
       };
       const invoke = (method: string, ...args: unknown[]) => ({
-        promise: controlled.__qbsControlled("quote", method, args).then(result => {
-          if (result.error) throw new Error(result.error.message);
-          return result.value;
-        }),
+        promise: controlled
+          .__qbsControlled("quote", method, args)
+          .then((result) => {
+            if (result.error) throw new Error(result.error.message);
+            return result.value;
+          }),
         // Deliberately allow late mock completions; production behavior must discard them.
         cancel() {},
       });
@@ -91,6 +97,18 @@ export class StudioFixture {
         loadAvailability: (month: string) => invoke("loadAvailability", month),
       };
     });
+  }
+
+  /** Keep Studio authentication controlled while administrative widgets use the real Reckoner HTTP boundary. */
+  async installWithReckoner(
+    context: BrowserContext,
+    session: { apiBaseUrl: string; adminToken: string; expiresAt: string },
+  ) {
+    this.operations.set("reckoner-admin.mint", () => session);
+    await this.install(context);
+    await context.route(session.apiBaseUrl + "/api/**", (route) =>
+      route.continue(),
+    );
   }
 
   private save(key: string, value: any) {
@@ -108,10 +126,15 @@ export class StudioFixture {
 
   private invoke(service: string, method: string, args: any[]): unknown {
     if (service === "quote") {
-      if (method === "loadDefinition") return { definition: quoteDefinition(), serverDate: "Mon, 07 Sep 2026 16:00:00 GMT" };
+      if (method === "loadDefinition")
+        return {
+          definition: quoteDefinition(),
+          serverDate: "Mon, 07 Sep 2026 16:00:00 GMT",
+        };
       if (method === "calculate") return quoteResult(args[0]);
       if (method === "resolveAddress") return this.reckoner.resolve(args[0]);
-      if (method === "loadAvailability") return { month: args[0], configurationRevision: 1, unavailable: [] };
+      if (method === "loadAvailability")
+        return { month: args[0], configurationRevision: 1, unavailable: [] };
     }
     if (service === "reckoner-admin" && method === "mint")
       return {

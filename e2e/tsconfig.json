@@ -11,6 +11,9 @@
   "include": [
     "page-objects/**/*.ts",
     "specs/**/*.ts",
+    "reckoner/**/*.ts",
+    "reckoner.playwright.config.ts",
+    "reckoner-global-teardown.ts",
     "demo/**/*.ts",
     "playwright.config.ts",
     "demo.playwright.config.ts"

@@ -1,5 +1,9 @@
 /** Test provisioning stays in the Node runner; admin credentials never enter the visitor page. */
 export async function provisionReckoner() {
+  return (await provisionReckonerWithAdministration()).publicOptions;
+}
+
+export async function provisionReckonerWithAdministration() {
   const provisioned = await fetch("http://127.0.0.1:4390/__test/scenario", {
     method: "POST",
   });
@@ -70,7 +74,14 @@ export async function provisionReckoner() {
       "A live estimate to help you plan. Final details and availability are confirmed together; this does not reserve a session.",
   });
   return {
-    apiBaseUrl: fixture.apiBaseUrl,
-    publishableKey: fixture.publishableKey,
+    publicOptions: {
+      apiBaseUrl: fixture.apiBaseUrl,
+      publishableKey: fixture.publishableKey,
+    },
+    adminSession: {
+      apiBaseUrl: fixture.apiBaseUrl,
+      adminToken: fixture.adminToken,
+      expiresAt: new Date(Date.now() + 60 * 60_000).toISOString(),
+    },
   };
 }

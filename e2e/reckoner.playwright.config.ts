@@ -1,9 +1,9 @@
 import { defineConfig } from "@playwright/test";
-import { randomUUID } from 'node:crypto';
+import { randomUUID } from "node:crypto";
 
 process.env.RECKONER_TEST_RUN_ID ??= randomUUID();
 export default defineConfig({
-  globalTeardown: './reckoner-global-teardown.ts',
+  globalTeardown: "./reckoner-global-teardown.ts",
   testDir: "./reckoner",
   workers: 1,
   timeout: 60000,
@@ -37,6 +37,13 @@ export default defineConfig({
       command: "node scripts/serve-reckoner-marketing.mjs",
       cwd: ".",
       url: "http://localhost:4420",
+      reuseExistingServer: false,
+      timeout: 120000,
+    },
+    {
+      command: "npx ng serve admin --port 4421 --configuration acceptance",
+      cwd: "../frontend",
+      url: "http://localhost:4421",
       reuseExistingServer: false,
       timeout: 120000,
     },
