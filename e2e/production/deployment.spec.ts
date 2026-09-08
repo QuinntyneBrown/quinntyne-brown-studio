@@ -1,0 +1,45 @@
+import { test } from "@playwright/test";
+import { DeployedStudio } from "../page-objects/deployed-studio";
+import { PublicSitePage } from "../page-objects/public-site-page";
+import { QuotePage } from "../page-objects/quote-page";
+import { AccountPage } from "../page-objects/account-page";
+
+const origin = DeployedStudio.origin();
+
+// Given provisioned Azure production resources and the release activated from main,
+// when the deployed origin is visited over the certificate its gateway presents,
+// then the marketing site, calculator, administration and client applications are
+// served, the API answers published reads from Azure SQL, and administration data
+// stays refused without an account.
+test("AC-AZ-09 AC-L2-068-01 the deployed studio serves every application over trusted TLS", async ({
+  page,
+  request,
+}, info) => {
+  const studio = new DeployedStudio(request, origin);
+  await studio.live();
+  await studio.reads("galleries");
+  await studio.reads("studios");
+  await studio.refusesAnonymously("admin/sessions");
+  await studio.redirects("/admin", "/admin/");
+  await studio.redirects("/client", "/client/");
+
+  const publicSite = new PublicSitePage(page, origin);
+  await publicSite.open();
+  await publicSite.heading("Photography with feeling.");
+  await publicSite.loaded();
+  await publicSite.capture(info.outputPath("marketing-home.png"));
+
+  // A deep link proves the gateway falls back to the application shell rather than 404.
+  const quote = new QuotePage(page, origin);
+  await quote.openLive();
+  await quote.capture(info.outputPath("marketing-quote.png"));
+
+  const administrator = new AccountPage(page, origin);
+  await administrator.open("login", "admin");
+  await administrator.heading("Welcome back.");
+  await administrator.capture(info.outputPath("admin-login.png"));
+
+  const client = new AccountPage(page, origin);
+  await client.open("login", "client");
+  await client.heading("Welcome back.");
+});

@@ -13,6 +13,12 @@ export class PublicSitePage {
       this.page.getByText(text, { exact: false }).first(),
     ).toBeVisible();
   }
+  /** The page finished its published reads; a failed load offers the retry affordance instead. */
+  async loaded() {
+    await expect(
+      this.page.getByRole("button", { name: "Retry loading", exact: true }),
+    ).toHaveCount(0);
+  }
   async retry() {
     await this.page
       .getByRole("button", { name: "Retry loading", exact: true })

@@ -79,6 +79,9 @@ export class AccountPage {
       .getByRole("button", { name: "Sign out", exact: true })
       .click();
   }
+  async capture(path: string) {
+    await this.page.screenshot({ path, fullPage: true });
+  }
   async recover(email: string) {
     await this.page.getByLabel("Email", { exact: true }).fill(email);
     await this.page

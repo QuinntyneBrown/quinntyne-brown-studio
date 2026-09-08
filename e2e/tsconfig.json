@@ -12,7 +12,9 @@
     "page-objects/**/*.ts",
     "specs/**/*.ts",
     "demo/**/*.ts",
+    "production/**/*.ts",
     "playwright.config.ts",
-    "demo.playwright.config.ts"
+    "demo.playwright.config.ts",
+    "production.playwright.config.ts"
   ]
 }

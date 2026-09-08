@@ -41,6 +41,8 @@ def main():
         parser.error("Provide an administrator email address")
     azure("account", "set", "--subscription", args.subscription)
     account = azure("account", "show")
+    owner, repository = args.repository.split("/", 1)
+    identifiers = command("gh", "api", f"repos/{args.repository}", "--jq", "{repository: .id, owner: .owner.id}")
     for provider in ["Microsoft.ManagedIdentity", "Microsoft.Compute", "Microsoft.Network", "Microsoft.Storage",
                      "Microsoft.Sql", "Microsoft.KeyVault", "Microsoft.Communication", "Microsoft.Maps",
                      "Microsoft.CognitiveServices", "Microsoft.OperationalInsights", "Microsoft.Insights"]:
@@ -55,9 +57,14 @@ def main():
     for environment, name in [("infrastructure", "id-qbs-infrastructure"), ("production", "id-qbs-github")]:
         identity = azure("identity", "create", "--resource-group", "rg-qbs-shared", "--name", name)
         identities[environment] = identity
-        azure("identity", "federated-credential", "create", "--resource-group", "rg-qbs-shared", "--identity-name", name,
-              "--name", "github", "--issuer", "https://token.actions.githubusercontent.com",
-              "--subject", f"repo:{args.repository}:environment:{environment}", "--audiences", "api://AzureADTokenExchange")
+        # GitHub issues either the plain or the immutable-identifier subject; accept both so
+        # toggling that repository setting never locks the workflows out of Azure.
+        subjects = {"github": f"repo:{args.repository}:environment:{environment}",
+                    "github-immutable": f"repo:{owner}@{identifiers['owner']}/{repository}@{identifiers['repository']}:environment:{environment}"}
+        for credential, subject in subjects.items():
+            azure("identity", "federated-credential", "create", "--resource-group", "rg-qbs-shared", "--identity-name", name,
+                  "--name", credential, "--issuer", "https://token.actions.githubusercontent.com",
+                  "--subject", subject, "--audiences", "api://AzureADTokenExchange")
         route = f"repos/{args.repository}/environments/{environment}"
         github("PUT", route, {"reviewers": [], "wait_timer": 0,
                               "deployment_branch_policy": {"protected_branches": False, "custom_branch_policies": True}})

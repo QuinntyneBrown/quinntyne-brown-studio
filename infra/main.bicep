@@ -243,7 +243,8 @@ resource aiRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 resource mapsRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(maps.id, identity.id, 'maps')
   scope: maps
-  properties: { roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '2ae99050-6b93-4a41-8fbc-f4fbcf12a74c'), principalId: identity.properties.principalId, principalType: 'ServicePrincipal' }
+  // Azure Maps Data Reader. The calculator reads both search and route services.
+  properties: { roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '423170ca-a8f6-4b0f-8487-9e4eb8f49bfa'), principalId: identity.properties.principalId, principalType: 'ServicePrincipal' }
 }
 resource emailRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(communication.id, identity.id, 'email')
