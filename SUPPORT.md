@@ -4,7 +4,7 @@
 
 | Topic                                                      | Documentation                                                                                                             |
 | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Local setup and prerequisites                              | [Getting started](README.md#run-locally)                                                                                  |
+| Local setup and prerequisites                              | [Getting started](README.md#getting-started)                                                                              |
 | LocalDB, migrations, certificates, backups, and deployment | [Windows operating runbook](deploy/README.md)                                                                             |
 | Angular builds and browser tests                           | [Frontend guide](frontend/README.md) and [acceptance suite](e2e/README.md)                                                |
 | Component catalog and visual patterns                      | [Design-system guide](design-system/README.md)                                                                            |
