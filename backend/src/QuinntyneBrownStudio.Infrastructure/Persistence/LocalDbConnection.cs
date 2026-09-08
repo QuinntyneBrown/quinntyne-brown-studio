@@ -8,6 +8,21 @@ public static class LocalDbConnection
 {
     public const string DevelopmentConnection = "Server=(localdb)\\MSSQLLocalDB;Database=QbsDevelopment;Integrated Security=true;Encrypt=true;TrustServerCertificate=true";
 
+    private const string LocalDbPrefix = "(localdb)\\";
+
+    /// <summary>A LocalDB user instance, as opposed to an Azure SQL server reachable from any host.</summary>
+    public static bool IsLocalDb(string? connectionString)
+    {
+        if (string.IsNullOrWhiteSpace(connectionString))
+            return false;
+        try
+        {
+            return new SqlConnectionStringBuilder(connectionString).DataSource
+                .StartsWith(LocalDbPrefix, StringComparison.OrdinalIgnoreCase);
+        }
+        catch (ArgumentException) { return false; }
+    }
+
     public static string Resolve(IConfiguration configuration, string environment)
     {
         var value = configuration.GetConnectionString("Studio");
@@ -21,9 +36,8 @@ public static class LocalDbConnection
         {
             throw new InvalidOperationException("ConnectionStrings:Studio is not a valid LocalDB or Azure SQL connection string.");
         }
-        const string prefix = "(localdb)\\";
-        var local = connection.DataSource.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
-            && !string.IsNullOrWhiteSpace(connection.DataSource[prefix.Length..])
+        var local = connection.DataSource.StartsWith(LocalDbPrefix, StringComparison.OrdinalIgnoreCase)
+            && !string.IsNullOrWhiteSpace(connection.DataSource[LocalDbPrefix.Length..])
             && connection.IntegratedSecurity
             && string.IsNullOrEmpty(connection.UserID)
             && connection.Authentication == SqlAuthenticationMethod.NotSpecified;
