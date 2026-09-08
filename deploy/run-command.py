@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import subprocess
 import shutil
+import sys
 import tempfile
 import time
 import uuid
@@ -49,6 +50,8 @@ def execute(vm_id, location, script, evidence, name="qbs-release"):
             # Azure permits only 25 managed commands per VM. Preserve evidence, then remove the terminal resource.
             az("rest", "--method", "delete", "--url", url)
             print(view.get("output", ""))
+            # The guest reports why it failed on its error stream; a log without it is unreadable.
+            print(view.get("error", ""), file=sys.stderr)
             if state != "Succeeded" or view.get("exitCode") != 0:
                 raise RuntimeError("Remote deployment failed; inspect the uploaded Run Command evidence")
             return result

@@ -1,4 +1,5 @@
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -43,6 +44,22 @@ public sealed class AzureConnectionAcceptanceTests
         var connection = "Server=tcp:qbs.database.windows.net,1433;Database=studio;Authentication=Active Directory Managed Identity;Encrypt=True;" + overrideValue;
         var error = Assert.Throws<InvalidOperationException>(() => LocalDbConnection.Resolve(Configuration(connection), "Production"));
         Assert.DoesNotContain("do-not-print-this", error.ToString());
+    }
+
+    // AC-AZ-01: Given an Azure SQL target and a host that owns no LocalDB instance,
+    // when migration runs, then it reaches the server instead of refusing the host.
+    [Fact]
+    public async Task AC_AZ_01_Azure_SQL_migration_is_never_refused_for_the_host_operating_system()
+    {
+        // A server name that resolves nowhere fails at the network, never at a host check.
+        var connection = $"Server=tcp:qbs-{Guid.NewGuid():N}.database.windows.net,1433;Database=studio;"
+            + "Authentication=Active Directory Managed Identity;Encrypt=True;Connect Timeout=1";
+        await using var db = new StudioDbContext(
+            new DbContextOptionsBuilder<StudioDbContext>().UseSqlServer(connection).Options);
+        var error = await Record.ExceptionAsync(() => new StudioDatabase(db).Migrate(CancellationToken.None));
+        Assert.NotNull(error);
+        Assert.DoesNotContain("requires Windows", error.ToString());
+        Assert.DoesNotContain("LocalDB", error.ToString());
     }
 
     private static IConfiguration Configuration(string connection) => new ConfigurationBuilder()
