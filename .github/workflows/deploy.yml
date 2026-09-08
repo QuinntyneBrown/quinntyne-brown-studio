@@ -49,6 +49,8 @@ jobs:
         working-directory: e2e
         env:
           QBS_PRODUCTION_ORIGIN: ${{ steps.release.outputs.origin }}
+          QBS_PRODUCTION_REDIRECTS: ${{ steps.release.outputs.redirects }}
+          QBS_PRODUCTION_CLIENT_REDIRECT: ${{ steps.release.outputs.client_redirect }}
         run: npm run test:production
       - uses: actions/upload-artifact@v4
         if: always()

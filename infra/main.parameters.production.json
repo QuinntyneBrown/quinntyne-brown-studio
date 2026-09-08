@@ -7,6 +7,9 @@
     "aiLocation": { "value": "canadaeast" },
     "aiModel": { "value": "gpt-4.1-mini" },
     "aiModelVersion": { "value": "2025-04-14" },
-    "aiCapacity": { "value": 1 }
+    "aiCapacity": { "value": 1 },
+    "publicOrigin": { "value": "https://quinntynebrown.studio" },
+    "redirectHosts": { "value": ["www.quinntynebrown.studio"] },
+    "clientHost": { "value": "clients.quinntynebrown.studio" }
   }
 }

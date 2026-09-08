@@ -48,7 +48,10 @@ script += "python3 /opt/studio/bin/release.py " + " ".join(arguments) + "\n"
 remote.execute(vm["id"], vm["location"], script, Path(".artifacts/deployment/run-command.json"))
 Path(".artifacts/deployment/release.json").write_text(json.dumps({"sha": sha, "run": sequence, "rollback": rollback}))
 with open(os.environ.get("GITHUB_OUTPUT", os.devnull), "a") as output:
-    # The browser smoke that follows must address the origin this deployment served.
+    # The browser smoke that follows must address the origin this deployment served, and
+    # check every other name the deployment claims reaches it.
     output.write(f"origin={host['origin']}\n")
+    output.write("redirects=" + ",".join(host.get("redirects", [])) + "\n")
+    output.write("client_redirect=" + host.get("clientRedirect", "") + "\n")
 with open(os.environ.get("GITHUB_STEP_SUMMARY", os.devnull), "a") as summary:
     summary.write(f"Deployed `{sha}` to {host['origin']}\n")

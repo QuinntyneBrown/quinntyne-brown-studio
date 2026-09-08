@@ -64,12 +64,13 @@ tokens issued on one host are readable on the other. Cookie isolation comes free
 | CNAME | `design` | The Static Web Apps hostname it gives you; add the TXT it asks for to validate |
 | A | `staging` | The staging host, or the same host on a second proxy site |
 | TXT, CNAME × 2, TXT | `@`, `selector1`/`selector2`, `_dmarc` | The verification, SPF, DKIM, and DMARC records Azure Communication Services Email lists when the domain is added; DMARC starts at `p=quarantine` |
-| CAA | `@` | Restrict certificate issuance to the CA the proxy uses (Let's Encrypt, or Cloudflare's if proxied) |
+| CAA | `@` | Restrict certificate issuance to Let's Encrypt, the CA used by Caddy |
 
-Buy the domain with auto-renew, registrar lock, and DNSSEC enabled, and keep the registrar account
-behind a hardware key: the whole studio's identity hangs off this name. Host the zone at a provider
-with an API (Cloudflare is the usual choice) so certificate renewal and staging changes can be
-scripted.
+Namecheap DNS is authoritative for this zone. Keep the Namecheap account behind a hardware key,
+with registrar lock and auto-renew enabled: the whole studio's identity hangs off this name. Manage
+the records above in Namecheap; do not create an Azure DNS zone or change the domain's name servers.
+Enable DNSSEC through Namecheap when the selected DNS service supports it, and keep its DS record
+there.
 
 ## TLS and the reverse proxy
 
@@ -135,7 +136,8 @@ so send them only to studio addresses.
 
 ## Go-live, in order
 
-1. Register the domain; enable DNSSEC, lock, auto-renew. Point the zone at the DNS provider.
+1. Keep the domain registered and its DNS hosted at Namecheap; enable registrar lock and auto-renew,
+   and enable DNSSEC there when supported by the selected DNS service.
 2. Verify the domain for Azure Communication Services Email and publish SPF, DKIM, and DMARC. Send
    one recovery email to a studio address and check it lands in the inbox, not spam.
 3. Publish the API and worker, migrate `QbsProduction`, and provision the administrator, per the
@@ -155,6 +157,6 @@ API, the admin, or the client on their own hostnames, for the reasons above. It 
 hosting for the Windows machine itself (a machine in the studio behind a static IP, or a Windows VM
 at a provider both work); whichever it is, only ports 80 and 443 face the internet. The
 [Azure deployment plan](azure-deployment-plan.md) works this layout out on a small Azure Linux VM with
-Azure SQL Basic and Azure DNS, the domain registered at Namecheap; that plan supersedes OD-10. When the domain
-is bought and this layout is adopted, record it as the next decision in
+Azure SQL Basic while Namecheap hosts the DNS zone; that plan supersedes OD-10. When this layout
+is adopted, record it as the next decision in
 [docs/specs/decisions.md](../docs/specs/decisions.md).

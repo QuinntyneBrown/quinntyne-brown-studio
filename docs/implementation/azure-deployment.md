@@ -1,7 +1,8 @@
 # Azure deployment acceptance
 
-Authority: the approved 2026-09-08 Azure deployment plan and OD-12. The custom
-domain remains deferred. These are behavioral criteria, not source-layout tests.
+Authority: the approved 2026-09-08 Azure deployment plan and OD-12. Namecheap DNS is
+authoritative for `quinntynebrown.studio`, which the production parameters declare as the public
+origin. These are behavioral criteria, not source-layout tests.
 
 | Criterion | Given | When | Then | Evidence |
 | --- | --- | --- | --- | --- |

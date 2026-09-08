@@ -2,8 +2,10 @@
 
 Production is one Ubuntu 24.04 x64 VM in Canada Central with Azure SQL Basic.
 Windows development keeps LocalDB. Infrastructure is declared in `infra/main.bicep`
-and `infra/monitoring.bicep`; GitHub Actions uses standard Bicep group deployments.
-Custom-domain setup in `domain-strategy.md` remains a separate follow-up.
+and `infra/monitoring.bicep`; GitHub Actions uses standard Bicep group deployments. Namecheap
+hosts the authoritative DNS zone, and the production parameters declare
+`https://quinntynebrown.studio` as the public origin. Record management remains in
+`domain-strategy.md`.
 
 ## First deployment
 
@@ -100,7 +102,7 @@ releases plus the active and previous releases, deleting only SHA-named director
 with matching installer manifests. Blob archives remain available for recovery;
 manual rollback requires a release still retained on the VM.
 
-## Verification and later domain setup
+## Verification and custom-domain application
 
 Run `python3 -m unittest discover -s backend/tests/deployment` on Linux,
 `bash -n deploy/linux/setup-host.sh`, `shellcheck deploy/linux/setup-host.sh`,
@@ -117,10 +119,12 @@ Monitoring includes Application Insights availability, VM heartbeat through Azur
 Monitor Agent, and an email action group. Availability can alert before the first
 application release; deploy promptly after infrastructure setup.
 
-When DNS is ready, set Bicep `publicOrigin` to the new HTTPS origin, update the email
-domain/sender resources, and reapply configuration. This updates Blob CORS, invitation
-origin and Caddy together. Do not change secure cookie settings or expose the API on
-a separate origin. The independent design-system workflow continues unchanged.
+Before applying the production parameters, create and validate the apex and redirect records in
+Namecheap DNS. The parameters set Bicep `publicOrigin` to `https://quinntynebrown.studio`; applying
+them updates Blob CORS, invitation origin and Caddy together. Update the email domain/sender
+resources in the same release. Do not create an Azure DNS zone or change the domain's name servers.
+Do not change secure cookie settings or expose the API on a separate origin. The independent
+design-system workflow continues unchanged.
 
 References: [GitHub OIDC](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure-openid-connect),
 [Azure SQL Entra authentication](https://learn.microsoft.com/en-us/sql/connect/ado-net/sql/azure-active-directory-authentication),

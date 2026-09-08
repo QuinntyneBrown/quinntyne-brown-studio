@@ -46,6 +46,22 @@ export class DeployedStudio {
     expect(response.status(), path).toBe(308);
     expect(response.headers()["location"], path).toBe(location);
   }
+  /** Every name the studio claims but does not serve; each answers permanently, and only that. */
+  static aliases() {
+    return {
+      redirects: (process.env["QBS_PRODUCTION_REDIRECTS"] ?? "")
+        .split(",")
+        .filter(Boolean),
+      client: process.env["QBS_PRODUCTION_CLIENT_REDIRECT"] ?? "",
+    };
+  }
+  async permanentlyRedirects(alias: string, target: string) {
+    const response = await this.request.get(`https://${alias}/`, {
+      maxRedirects: 0,
+    });
+    expect(response.status(), alias).toBe(301);
+    expect(response.headers()["location"], alias).toBe(this.origin + target);
+  }
   async refusesAnonymously(path: string) {
     expect(
       (await this.request.get(`${this.origin}/api/${path}`)).status(),

@@ -43,3 +43,19 @@ test("AC-AZ-09 AC-L2-068-01 the deployed studio serves every application over tr
   await client.open("login", "client");
   await client.heading("Welcome back.");
 });
+
+// Given hostnames the studio claims but does not serve, when one is visited over its own
+// certificate, then it answers with a permanent redirect to the one origin that does.
+test("AC-AZ-09 every other studio hostname redirects to the origin", async ({
+  request,
+}) => {
+  const aliases = DeployedStudio.aliases();
+  test.skip(
+    !aliases.redirects.length && !aliases.client,
+    "This deployment serves its origin under no other name.",
+  );
+  const studio = new DeployedStudio(request, origin);
+  for (const alias of aliases.redirects)
+    await studio.permanentlyRedirects(alias, "/");
+  if (aliases.client) await studio.permanentlyRedirects(aliases.client, "/client/");
+});

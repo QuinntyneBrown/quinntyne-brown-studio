@@ -10,7 +10,7 @@ Status: **superseded by the approved implementation plan on 2026-09-08**.
 The maintained instructions are [Azure infrastructure and releases](azure-release.md)
 and OD-12 in `docs/specs/decisions.md`. The historical sizing below is not a current
 price quote. Production now defaults to x64, Pay-As-You-Go, and automatic deployment
-on verified pushes to main, with a temporary Azure hostname and managed email domain.
+on verified pushes to main, with a Namecheap-managed public origin and managed email domain.
 
 **This supersedes [OD-10](../docs/specs/decisions.md#od-10--localdb-persistence-and-windows-hosting).**
 LocalDB is Windows-only. On Linux the database becomes Azure SQL Database Basic, which needs one
@@ -24,13 +24,12 @@ Static Web App the workflow deploys to is not in it. Domain registered at Namech
 ## Shape
 
 ```text
-Namecheap (registrar: lock, auto-renew, 2FA, DS record)
-  └─ Azure DNS zone quinntynebrown.studio (DNSSEC)
-       ├─ @ / www / clients ──► static public IP ──► NSG (443, 80; 22 from the studio IP only)
-       │                              └─ vm-qbs  Ubuntu 24.04, Standard_B2pls_v2, Canada Central
-       │                                   caddy ──► api 127.0.0.1:7444 ──► Azure SQL Basic
-       │                                   worker ──► Storage Queue / Blob / OpenAI / Email
-       └─ design ─────────────────────► Static Web App Free (design system)
+Namecheap DNS (registrar and authoritative zone: lock, auto-renew, 2FA, DNSSEC where supported)
+  ├─ @ / www / clients ──► static public IP ──► NSG (443, 80; 22 from the studio IP only)
+  │                              └─ vm-qbs  Ubuntu 24.04, Standard_B2pls_v2, Canada Central
+  │                                   caddy ──► api 127.0.0.1:7444 ──► Azure SQL Basic
+  │                                   worker ──► Storage Queue / Blob / OpenAI / Email
+  └─ design ─────────────────────► Static Web App Free (design system)
 ```
 
 The VM holds no state. Photos and data-protection keys are in Blob, the key-wrapping key in Key
@@ -47,7 +46,7 @@ restoring it, so there is no VM backup to pay for.
 | Azure SQL Database Basic, 5 DTU, 2 GB, 7-day point-in-time restore | 0.2453/day | ≈ 7.5 |
 | OS disk, Standard SSD E4 32 GB (derived from the E10 quote of 14.64) | | ≈ 4 |
 | Standard static public IPv4 | 0.0069/h | ≈ 5 |
-| DNS zone, Key Vault, Log Analytics under the free 5 GB, storage account | | ≈ 3–5 |
+| Key Vault, Log Analytics under the free 5 GB, storage account | | ≈ 3–5 |
 | Blob storage for originals and derivatives | | ≈ 0.03 per GB |
 | Email, Maps, OpenAI | | usage; cents at studio volume |
 | Static Web App Free | | 0 |
@@ -95,10 +94,12 @@ App Insights, Static Web App, and role-assignment blocks from `deploy/legacy/mai
 ACR and Container Apps; keep the SQL server with Entra-only authentication and change the
 database SKU to Basic.
 
+Namecheap DNS is outside Azure and Bicep. The Namecheap account owns the authoritative zone and
+all domain records; no Azure DNS zone is part of either resource group.
+
 | Group | Resource | Notes |
 | --- | --- | --- |
-| `rg-qbs-shared` | DNS zone | DNSSEC on; DS record at Namecheap |
-| | Communication Services + Email service | Custom domain, sender `studio@quinntynebrown.studio` |
+| `rg-qbs-shared` | Communication Services + Email service | Custom domain, sender `studio@quinntynebrown.studio` |
 | | Azure Maps, Azure OpenAI (`canadaeast`) | Entra auth only |
 | | Static Web App Free | `design.quinntynebrown.studio`; new deployment token into `SWA_DESIGN_SYSTEM_DEPLOYMENT_TOKEN` |
 | | Log Analytics | 30-day retention |
@@ -177,9 +178,10 @@ Raw__Executable=/usr/bin/dcraw_emu
 
 ## DNS, TLS, and email
 
-At Namecheap: keep the registration, enable registrar lock, auto-renew, and two-factor
-authentication; set the name servers to the four Azure DNS reports. Sign the zone
-(`az network dns dnssec-config create`) and enter the DS values at Namecheap.
+At Namecheap: keep the registration and authoritative DNS zone together. Enable registrar lock,
+auto-renew, and two-factor authentication. Create and maintain the following records in Namecheap;
+do not create an Azure DNS zone or change the name servers. Enable DNSSEC through Namecheap when
+the selected DNS service supports it, and retain its DS record there.
 
 | Record | Name | Value |
 | --- | --- | --- |
@@ -218,7 +220,8 @@ and Key Vault, a second pair of systemd units on `7445`, and a Caddy site for
 
 ## Go-live, in order
 
-1. Namecheap lock, auto-renew, 2FA; create the Azure DNS zone; switch name servers; sign; DS record.
+1. Namecheap DNS: retain the existing name servers; enable lock, auto-renew, and 2FA; create the
+   required records; enable DNSSEC there when supported.
 2. Merge the connection-validator change with its test.
 3. Deploy `rg-qbs-shared` and `rg-qbs-prod`; create the database user for `id-qbs-prod`;
    deploy the OpenAI model; note identifiers under G-ENV and G-AI.
