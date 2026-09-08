@@ -2,6 +2,11 @@ name: Provision studio infrastructure
 on:
   workflow_dispatch:
     inputs:
+      environment:
+        description: Environment to provision
+        type: choice
+        options: [infrastructure, staging]
+        default: infrastructure
       operation:
         description: Preview or apply the reviewed Bicep configuration
         type: choice
@@ -13,15 +18,17 @@ jobs:
   infrastructure:
     if: github.ref == 'refs/heads/main'
     runs-on: windows-latest
-    environment: infrastructure
+    environment: ${{ inputs.environment }}
     concurrency:
-      group: studio-production
+      group: studio-${{ inputs.environment }}
       cancel-in-progress: false
     permissions:
       contents: read
       id-token: write
     env:
       QBS_INFRA_OPERATION: ${{ inputs.operation }}
+      QBS_PARAMETERS_FILE: ${{ inputs.environment == 'staging' && 'infra/main.parameters.staging.json' || 'infra/main.parameters.production.json' }}
+      QBS_DEPLOYMENT_NAME: ${{ inputs.environment == 'staging' && 'qbs-staging' || 'qbs-production' }}
       QBS_RESOURCE_GROUP: ${{ vars.QBS_RESOURCE_GROUP }}
       QBS_SSH_PUBLIC_KEY: ${{ vars.QBS_SSH_PUBLIC_KEY }}
       QBS_ADMINISTRATOR_EMAIL: ${{ vars.QBS_ADMINISTRATOR_EMAIL }}

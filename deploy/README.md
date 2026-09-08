@@ -4,6 +4,9 @@ For Azure production, use [the Azure release runbook](azure-release.md). OD-12
 supersedes this document's former production-host restriction. This runbook
 continues to describe Windows development and local operation.
 
+For the staging environment and the controlled staging-to-production release
+path, use [the staging and production promotion runbook](staging-promotion.md).
+
 The supported backend target is one Windows host. The API, worker, migration command, and provisioning command run under the **same Windows account**, which owns the LocalDB instance. This implements [OD-10](../docs/specs/decisions.md#od-10--localdb-persistence-and-windows-hosting). No Windows services or cloud resources are installed by this runbook. The [legacy archive](legacy/README.md) is superseded.
 
 ## Prerequisites and packaging

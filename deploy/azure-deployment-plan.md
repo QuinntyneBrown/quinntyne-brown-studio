@@ -214,9 +214,16 @@ not answer. The previous release directory stays for rollback.
 
 ## Staging
 
-Deferred. When wanted: a second Basic database (+ CAD 7.5), a second identity, storage account,
-and Key Vault, a second pair of systemd units on `7445`, and a Caddy site for
-`staging.quinntynebrown.studio` with `basic_auth` and `X-Robots-Tag: noindex`.
+Staging is provisioned as a second copy of the composition in its own
+`rg-qbs-staging` resource group. The maintained parameters, workflows, and
+promotion/rollback procedure are in
+[`infra/main.parameters.staging.json`](../infra/main.parameters.staging.json),
+`.github/workflows/staging.yml`, `.github/workflows/promote.yml`, and the
+[staging and production promotion runbook](staging-promotion.md). It uses its
+own Basic database, managed identity, storage account, Key Vault, VM, and
+`https://staging.quinntynebrown.studio` origin. The host emits
+`X-Robots-Tag: noindex, nofollow`; it never reads production data or
+credentials.
 
 ## Go-live, in order
 

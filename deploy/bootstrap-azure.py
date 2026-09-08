@@ -47,14 +47,15 @@ def main():
                      "Microsoft.Sql", "Microsoft.KeyVault", "Microsoft.Communication", "Microsoft.Maps",
                      "Microsoft.CognitiveServices", "Microsoft.OperationalInsights", "Microsoft.Insights"]:
         azure("provider", "register", "--namespace", provider, "--wait")
-    for group in ["rg-qbs-shared", "rg-qbs-prod"]:
+    for group in ["rg-qbs-shared", "rg-qbs-prod", "rg-qbs-staging"]:
         if azure("group", "exists", "--name", group):
             existing = azure("group", "show", "--name", group)
             if existing.get("tags", {}).get("project") != "quinntyne-brown-studio":
                 raise RuntimeError(f"Refusing to adopt unrelated resource group {group}")
         azure("group", "create", "--name", group, "--location", "canadacentral", "--tags", "project=quinntyne-brown-studio")
     identities = {}
-    for environment, name in [("infrastructure", "id-qbs-infrastructure"), ("production", "id-qbs-github")]:
+    for environment, name in [("infrastructure", "id-qbs-infrastructure"), ("production", "id-qbs-github"),
+                              ("staging", "id-qbs-staging")]:
         identity = azure("identity", "create", "--resource-group", "rg-qbs-shared", "--name", name)
         identities[environment] = identity
         # GitHub issues either the plain or the immutable-identifier subject; accept both so
@@ -74,10 +75,12 @@ def main():
         if not any(policy["name"] == "main" and policy.get("type", "branch") == "branch" for policy in policies):
             github("POST", route + "/deployment-branch-policies", {"name": "main", "type": "branch"})
         values = {"AZURE_CLIENT_ID": identity["clientId"], "AZURE_TENANT_ID": account["tenantId"],
-                  "AZURE_SUBSCRIPTION_ID": args.subscription, "QBS_RESOURCE_GROUP": "rg-qbs-prod", "QBS_VM_NAME": "vm-qbs"}
+                  "AZURE_SUBSCRIPTION_ID": args.subscription,
+                  "QBS_RESOURCE_GROUP": "rg-qbs-staging" if environment == "staging" else "rg-qbs-prod",
+                  "QBS_VM_NAME": "vm-qbs"}
         for variable, value in values.items():
             subprocess.run(["gh", "variable", "set", variable, "--repo", args.repository, "--env", environment, "--body", value], check=True)
-    for group in ["rg-qbs-shared", "rg-qbs-prod"]:
+    for group in ["rg-qbs-shared", "rg-qbs-prod", "rg-qbs-staging"]:
         for role in ["Contributor", "User Access Administrator"]:
             azure("role", "assignment", "create", "--assignee-object-id", identities["infrastructure"]["principalId"],
                   "--assignee-principal-type", "ServicePrincipal", "--role", role,
@@ -87,6 +90,15 @@ def main():
               "QBS_SSH_PUBLIC_KEY": key, "QBS_ADMINISTRATOR_EMAIL": args.administrator_email}
     for variable, value in values.items():
         subprocess.run(["gh", "variable", "set", variable, "--repo", args.repository, "--env", "infrastructure", "--body", value], check=True)
+    staging = identities["staging"]
+    staging_values = {
+        "QBS_SSH_PUBLIC_KEY": key,
+        "QBS_ADMINISTRATOR_EMAIL": args.administrator_email,
+        "QBS_DEPLOY_PRINCIPAL_ID": staging["principalId"],
+        "QBS_INFRA_PRINCIPAL_ID": identities["infrastructure"]["principalId"],
+    }
+    for variable, value in staging_values.items():
+        subprocess.run(["gh", "variable", "set", variable, "--repo", args.repository, "--env", "staging", "--body", value], check=True)
     print("Bootstrap complete. Run Provision studio infrastructure in preview mode, then apply mode.")
 
 

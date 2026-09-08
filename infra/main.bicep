@@ -18,6 +18,8 @@ param publicOrigin string = ''
 param redirectHosts array = []
 @description('A memorable hostname that redirects to the client application. Optional.')
 param clientHost string = ''
+@description('Prevent search indexing for non-production origins.')
+param noIndex bool = false
 
 var suffix = uniqueString(resourceGroup().id)
 var hostname = 'qbs-${suffix}.${location}.cloudapp.azure.com'
@@ -294,6 +296,7 @@ output host object = {
   // older link still arrives and exactly one origin ever serves the applications.
   redirects: empty(publicOrigin) ? [] : union(redirectHosts, [hostname])
   clientRedirect: clientHost
+  noIndex: noIndex
   vmId: vm.id
   location: location
   sqlServer: sql.name

@@ -18,7 +18,8 @@ if not re.fullmatch(r"[0-9a-f]{40}", sha):
     raise ValueError("Expected a full commit SHA")
 sequence = int(os.environ["GITHUB_RUN_ID"])
 group = os.environ["QBS_RESOURCE_GROUP"]
-host = remote.az("deployment", "group", "show", "-g", group, "-n", "qbs-production")["properties"]["outputs"]["host"]["value"]
+deployment_name = os.environ.get("QBS_DEPLOYMENT_NAME", "qbs-production")
+host = remote.az("deployment", "group", "show", "-g", group, "-n", deployment_name)["properties"]["outputs"]["host"]["value"]
 vm = remote.az("vm", "show", "-g", group, "-n", os.environ["QBS_VM_NAME"])
 arguments = [sha, str(sequence)]
 if rollback:

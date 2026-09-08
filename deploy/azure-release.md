@@ -7,6 +7,10 @@ hosts the authoritative DNS zone, and the production parameters declare
 `https://quinntynebrown.studio` as the public origin. Record management remains in
 `domain-strategy.md`.
 
+Staging is provisioned from the same Bicep template into `rg-qbs-staging` with
+`infra/main.parameters.staging.json`; its release and promotion procedure is in
+[the staging and production promotion runbook](staging-promotion.md).
+
 ## First deployment
 
 1. Sign in with `az login` and `gh auth login`. Use subscription
