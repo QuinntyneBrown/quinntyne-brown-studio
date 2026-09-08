@@ -79,6 +79,12 @@ export class AccountPage {
       .getByRole("button", { name: "Sign out", exact: true })
       .click();
   }
+  async navLinkVisible(name: string) {
+    return this.page
+      .getByRole("navigation", { name: "Workspace navigation" })
+      .getByRole("link", { name, exact: true })
+      .isVisible();
+  }
   async capture(path: string) {
     await this.page.screenshot({ path, fullPage: true });
   }

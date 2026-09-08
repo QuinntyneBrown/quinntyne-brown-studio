@@ -18,6 +18,28 @@ for (const site of ["admin", "client"]) {
   });
 }
 
+// Given an anonymous visitor, when the workspace shell renders, then no protected
+// left-navigation links are shown; once signed in the authorized links appear, and
+// signing out returns the navigation to its anonymous state without a page reload.
+for (const site of ["admin", "client"]) {
+  test(`P01 AC-L2-003-01 ${site} left navigation reflects authorization state`, async ({
+    page,
+  }) => {
+    const account = new AccountPage(page);
+    const link = site === "admin" ? "Sessions" : "Your sessions";
+    account.role = site === "admin" ? "Administrator" : "Client";
+    await account.mock();
+    await account.open("login", site);
+    expect(await account.navLinkVisible(link)).toBe(false);
+    await account.login();
+    await account.heading(site === "admin" ? "Sessions" : "Your sessions");
+    expect(await account.navLinkVisible(link)).toBe(true);
+    await account.signOut();
+    await account.heading("Welcome back.");
+    expect(await account.navLinkVisible(link)).toBe(false);
+  });
+}
+
 // Given valid or invalid invitation/recovery links, when credentials are saved,
 // then valid links complete and rejected links preserve the password for correction.
 for (const mode of ["accept-invitation", "reset-password"]) {
