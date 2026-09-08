@@ -34,32 +34,37 @@
 } @else {
   <div class="shell__workspace">
     <aside class="shell__sidebar">
-      <a routerLink="/" class="shell__brand"
+      <a [routerLink]="auth.canAccessWorkspace() ? '/' : '/login'" class="shell__brand"
         >Quinntyne Brown<span>{{
           site === 'admin' ? 'Studio administration' : 'Your private collection'
         }}</span></a
-      ><button
-        class="button button--secondary shell__toggle"
-        (click)="auth.toggleMenu()"
-        [attr.aria-expanded]="auth.menu()"
       >
-        Menu
-      </button>
-      <nav
-        class="shell__side-nav"
-        [class.shell__side-nav--open]="auth.menu()"
-        aria-label="Workspace navigation"
-      >
-        @for (link of site === 'admin' ? adminLinks : clientLinks; track link[1]) {
-          <a
-            [routerLink]="link[1]"
-            routerLinkActive="shell__link--active"
-            [routerLinkActiveOptions]="{ exact: true }"
-            (click)="auth.menu.set(false)"
-            >{{ link[0] }}</a
-          >
-        }
-      </nav>
+      @if (auth.canAccessWorkspace()) {
+        <button
+          class="button button--secondary shell__toggle"
+          (click)="auth.toggleMenu()"
+          [attr.aria-expanded]="auth.menu()"
+          aria-controls="workspace-navigation"
+        >
+          Menu
+        </button>
+        <nav
+          id="workspace-navigation"
+          class="shell__side-nav"
+          [class.shell__side-nav--open]="auth.menu()"
+          aria-label="Workspace navigation"
+        >
+          @for (link of site === 'admin' ? adminLinks : clientLinks; track link[1]) {
+            <a
+              [routerLink]="link[1]"
+              routerLinkActive="shell__link--active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="auth.menu.set(false)"
+              >{{ link[0] }}</a
+            >
+          }
+        </nav>
+      }
     </aside>
     <div class="shell__workspace-main">
       <header class="shell__topbar">

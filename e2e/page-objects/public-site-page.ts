@@ -38,6 +38,51 @@ export class PublicSitePage {
   async planSession() {
     await this.page.getByRole("link", { name: "Plan a session" }).click();
   }
+  async revealSessionInvitation() {
+    // Let the initial route's scheduled scroll finish before the visitor scrolls.
+    await this.page.evaluate(
+      () =>
+        new Promise<void>((resolve) =>
+          requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+        ),
+    );
+    await this.page
+      .getByRole("link", { name: "Plan your session" })
+      .evaluate((link) =>
+        link.scrollIntoView({ block: "center", behavior: "instant" }),
+      );
+    await expect.poll(() => this.scrollPosition()).toBeGreaterThan(0);
+    return this.scrollPosition();
+  }
+  async followSessionInvitation(usingKeyboard = false) {
+    const link = this.page.getByRole("link", { name: "Plan your session" });
+    if (usingKeyboard) await link.press("Enter");
+    else await link.click();
+  }
+  async scrollPosition() {
+    return this.page.evaluate(() => window.scrollY);
+  }
+  async backToHome(position: number) {
+    await this.page.goBack();
+    await expect(this.page).toHaveURL(this.origin + "/");
+    await this.heading("Photography with feeling.");
+    await expect
+      .poll(async () => Math.abs((await this.scrollPosition()) - position))
+      .toBeLessThanOrEqual(1);
+  }
+  async skipToContent() {
+    const skip = this.page.getByRole("link", { name: "Skip to content" });
+    await skip.focus();
+    await skip.press("Enter");
+    await expect(this.page.getByRole("main")).toBeFocused();
+    await expect
+      .poll(() =>
+        this.page
+          .getByRole("main")
+          .evaluate((main) => Math.abs(main.getBoundingClientRect().top)),
+      )
+      .toBeLessThanOrEqual(1);
+  }
   async openGallery(title: string) {
     await this.page.getByRole("link", { name: title }).first().click();
   }

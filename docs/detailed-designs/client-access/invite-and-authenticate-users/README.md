@@ -16,6 +16,8 @@ Successful authentication creates a host-only HttpOnly Secure cookie. State-chan
 
 Acceptance covers invitation/recovery expiry and replay, neutral responses, role denial, failed credentials, cookie settings, antiforgery, and protected-resource access before and after sign-in.
 
+The shared client/admin shell shows workspace navigation and its mobile menu only after the account is confirmed authenticated with the product's required role. Without that access, the brand links to sign-in. Successful sign-out, an expired session, or a failed session check removes protected navigation; a failed sign-out preserves the workspace for retry. Route guards continue to enforce access for direct URLs. `e2e/specs/accounts.spec.ts` records the Given-When-Then acceptance scenarios for these behaviors, including all four account screens.
+
 `IAuthService` is the Angular service interface consumed through its injection token. Its HTTP implementation calls `AuthController`. The controller dispatches its route operations to the corresponding named handlers. Shared-route delegation follows the [interface catalog](../../contracts.md#route-ownership); worker operations execute from durable jobs.
 
 **Interfaces**

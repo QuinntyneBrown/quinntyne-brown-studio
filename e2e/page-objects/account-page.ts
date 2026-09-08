@@ -79,6 +79,69 @@ export class AccountPage {
       .getByRole("button", { name: "Sign out", exact: true })
       .click();
   }
+  async workspaceNavigationHidden() {
+    await expect(
+      this.page.getByRole("navigation", {
+        name: "Workspace navigation",
+        includeHidden: true,
+      }),
+    ).toHaveCount(0);
+    await expect(
+      this.page.getByRole("button", {
+        name: "Menu",
+        exact: true,
+        includeHidden: true,
+      }),
+    ).toHaveCount(0);
+    await expect(
+      this.page.getByRole("link", { name: /Quinntyne Brown/ }),
+    ).toHaveAttribute("href", /\/login$/);
+  }
+  async workspaceNavigationVisible(site: string) {
+    const menu = this.page.getByRole("button", { name: "Menu", exact: true });
+    if (await menu.isVisible()) {
+      if ((await menu.getAttribute("aria-expanded")) !== "true")
+        await menu.click();
+    }
+    const navigation = this.page.getByRole("navigation", {
+      name: "Workspace navigation",
+    });
+    await expect(navigation).toBeVisible();
+    await expect(navigation.getByRole("link")).toHaveText(
+      site === "admin"
+        ? [
+            "Sessions",
+            "Photographers",
+            "Equipment",
+            "Preferred vendors",
+            "Quote rates",
+            "Studios",
+            "Discount rules",
+            "Quote availability",
+            "Quote appearance",
+            "Print pricing",
+            "Public galleries",
+            "Website content",
+            "Package promotions",
+            "Client invitations",
+            "Print requests",
+          ]
+        : ["Your sessions", "Your albums", "Request prints"],
+    );
+    await expect(
+      this.page.getByRole("link", { name: /Quinntyne Brown/ }),
+    ).toHaveAttribute("href", /\/$/);
+  }
+  async navigateWorkspace(label: string) {
+    await this.page
+      .getByRole("navigation", { name: "Workspace navigation" })
+      .getByRole("link", { name: label, exact: true })
+      .click();
+  }
+  async signInRoute() {
+    await expect(this.page).toHaveURL(/\/login$/);
+    await this.heading("Welcome back.");
+  }
   async recover(email: string) {
     await this.page.getByLabel("Email", { exact: true }).fill(email);
     await this.page

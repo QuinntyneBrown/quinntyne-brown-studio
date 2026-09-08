@@ -72,6 +72,38 @@ export class QuotePage {
       this.page.getByRole('status').filter({ hasText: /This calculator is not configured|Quotes are not available yet|Unable to load the calculator/ }),
     )).toBeVisible();
   }
+  async startsAtTop() {
+    await expect(this.page).toHaveURL(this.origin + "/quote");
+    await this.ready();
+    await expect
+      .poll(() => this.page.evaluate(() => [window.scrollX, window.scrollY]))
+      .toEqual([0, 0]);
+    await expect(
+      this.page.getByRole("heading", {
+        name: "Your session, thoughtfully priced.",
+      }),
+    ).toBeInViewport();
+  }
+  async scrollDown() {
+    await this.page.evaluate(() => window.scrollTo(0, 250));
+    await expect.poll(() => this.page.evaluate(() => window.scrollY)).toBe(250);
+    return 250;
+  }
+  async forwardToQuote(position: number) {
+    await this.page.goForward();
+    await expect(this.page).toHaveURL(this.origin + "/quote");
+    await this.ready();
+    // History restoration can round fractional CSS pixels in Firefox.
+    await expect
+      .poll(() =>
+        this.page.evaluate(
+          (saved) => Math.abs(window.scrollY - saved),
+          position,
+        ),
+      )
+      .toBeLessThanOrEqual(1);
+  }
+
   async reckonerRegion() { await expect(this.page.locator('reckoner-angular-quote')).toBeVisible(); await expect(this.page.getByRole('heading', { name: 'A little clarity, before we begin.', exact: true })).toBeVisible(); }
   async completeSession() { await this.choose('Photography service', 'wedding'); await this.fill('Start time', '10:00'); await this.fill('End time', '14:00'); }
   async fill(label: string, value: string) { await this.page.getByLabel(label, { exact: true }).fill(value); }

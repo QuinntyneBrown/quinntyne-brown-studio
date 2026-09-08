@@ -8,7 +8,7 @@ New backend behavior begins with a failing WebApplicationFactory integration tes
 
 Architecture and process criteria use source, configuration, build, and development-history evidence. Browser tests do not establish licensing, provider accuracy, SQL isolation, or RAW compatibility. Staging integration checks supplement the controlled acceptance tests for those boundaries.
 
-Current reconciliation: **74 Complete / 8 Partial**. Partial entries concern external camera/capacity/AI/environment qualification or unavailable historical test-first records. “Complete” applies to the criterion’s recorded local behavior/review evidence; it does not close an external gate.
+Current reconciliation: **77 Complete / 8 Partial**. Partial entries concern external camera/capacity/AI/environment qualification or unavailable historical test-first records. “Complete” applies to the criterion’s recorded local behavior/review evidence; it does not close an external gate.
 
 ## Scenario coverage
 
@@ -96,6 +96,16 @@ Current reconciliation: **74 Complete / 8 Partial**. Partial entries concern ext
 | `AC-L2-067-01` | Frontend + Backend; external qualification evidence | Partial | [AnalysisFailureAcceptanceTests.cs](../../backend/tests/QuinntyneBrownStudio.AcceptanceTests/AnalysisFailureAcceptanceTests.cs) · `AC_L2_030_02_AC_L2_031_01_AC_L2_067_01_Invalid_advice_preserves_manual_review`<br>[QualificationAcceptanceTests.cs](../../backend/tests/QuinntyneBrownStudio.AcceptanceTests/QualificationAcceptanceTests.cs) · `AC_L2_060_01_AC_L2_067_01_AC_L2_068_01_Missing_inputs_produce_blocked_evidence`<br>**Remaining:** G-AI: malformed-result and outage handling passes; studio annotations, threshold approval and live model evaluation are not supplied. [Qualification instructions](../implementation/qualification.md). | [suggest-promising-photos](session-photos/suggest-promising-photos/README.md) |
 | `AC-L2-068-01` | Backend / deployment; source/build/history evidence | Partial | [LocalDB acceptance](../../backend/tests/QuinntyneBrownStudio.AcceptanceTests/LocalDbAcceptanceTests.cs), [Windows runbook](../../deploy/README.md) and [environment qualification command](../implementation/qualification.md).<br>[QualificationAcceptanceTests.cs](../../backend/tests/QuinntyneBrownStudio.AcceptanceTests/QualificationAcceptanceTests.cs) · `AC_L2_060_01_AC_L2_067_01_AC_L2_068_01_Missing_inputs_produce_blocked_evidence`<br>**Remaining:** G-ENV: local host/database isolation passes; live environment roles, TLS, backup/restore and external resources are not qualified. [Qualification instructions](../implementation/qualification.md). | [deliver-traceable-feature-increments](engineering-delivery/deliver-traceable-feature-increments/README.md) |
 | `AC-L2-069-01` | Frontend + Backend | Complete | [Packaged LocalDB workflow](../../e2e/integration/localdb-platform.spec.ts) · complete LocalDB workflow<br>[scheduling-completion.spec.ts](../../e2e/specs/scheduling-completion.spec.ts) · P03 AC-L2-069-01 session timing uses Toronto date and time controls<br>[Packaged LocalDB workflow](../../e2e/integration/localdb-platform.spec.ts) · complete LocalDB workflow (real HTTP, Identity, storage and JPEG worker). | [upload-session-photos](session-photos/upload-session-photos/README.md) |
+
+### Public-page navigation evidence
+
+| Acceptance ID | Planned layer / evidence | Status | Test file and name | Requirement |
+| --- | --- | --- | --- | --- |
+| `AC-L2-070-01` | Frontend | Complete | [public-navigation.spec.ts](../../e2e/specs/public-navigation.spec.ts) · home-to-quote navigation starts at the top using pointer; home-to-quote navigation starts at the top using keyboard | [L2-070](../specs/L2.md#l2-070--public-page-scroll-behavior) |
+| `AC-L2-070-02` | Frontend | Complete | [public-navigation.spec.ts](../../e2e/specs/public-navigation.spec.ts) · browser history restores each public page's scroll position | [L2-070](../specs/L2.md#l2-070--public-page-scroll-behavior) |
+| `AC-L2-070-03` | Frontend | Complete | [public-navigation.spec.ts](../../e2e/specs/public-navigation.spec.ts) · skip to content preserves fragment navigation | [L2-070](../specs/L2.md#l2-070--public-page-scroll-behavior) |
+
+Verified locally on 2026-09-07: the initial desktop acceptance test failed because `/quote` retained the home page's 393-pixel vertical offset. With Angular router scroll restoration and anchor scrolling enabled in the marketing bootstrap, all 36 cases passed across Chromium, Firefox, and WebKit at 390 × 844, 768 × 1024, and 1440 × 900. The production marketing build and acceptance TypeScript check passed. A separate `playwright-cli` check against `https://localhost:7443/` followed the lower home-page invitation from offsets 760, 269, and 393 respectively; `/quote` opened at `(0, 0)` in every case.
 
 ## Cross-feature acceptance scenarios
 
