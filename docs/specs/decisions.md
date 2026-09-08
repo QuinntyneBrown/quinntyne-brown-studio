@@ -134,9 +134,11 @@ MediatR stays at 12.5.0. Existing local persistence and test adapters remain sup
 Bicep provisions infrastructure. Separate scoped GitHub OIDC identities manage
 infrastructure and application releases. Verified pushes to main deploy the exact
 commit automatically; infrastructure changes and schema-compatible rollback are
-manual workflows. Custom DNS remains deferred. The initial public origin is the
-VM's Azure hostname with valid TLS; Azure Communication Services supplies a managed
-email domain. Existing records are not automatically migrated from LocalDB.
+manual workflows. Namecheap DNS is authoritative for `quinntynebrown.studio`; Azure production
+does not provision an Azure DNS zone or change the domain's name servers. The production Bicep
+parameters set `PublicOrigin` to `https://quinntynebrown.studio`; the VM's Azure hostname remains
+available for bootstrapping and redirect compatibility. Azure Communication Services supplies a
+managed email domain. Existing records are not automatically migrated from LocalDB.
 
 See [the release runbook](../../deploy/azure-release.md) and
 [acceptance criteria](../implementation/azure-deployment.md). G-ENV now requires

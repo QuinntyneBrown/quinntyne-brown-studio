@@ -11,6 +11,18 @@ config = json.loads(Path(sys.argv[1]).read_text())
 origin = urllib.parse.urlsplit(config["origin"])
 if origin.scheme != "https" or origin.path or origin.query or origin.fragment or not re.fullmatch(r"[a-z0-9.-]+", origin.netloc):
     raise ValueError("Expected an HTTPS DNS origin")
+
+
+def hostname(value):
+    if not re.fullmatch(r"[a-z0-9][a-z0-9.-]*", value) or value == origin.netloc:
+        raise ValueError("Expected a DNS hostname other than the origin")
+    return value
+
+
+# Names that must reach the studio without serving it. One origin serves the applications,
+# so every other name answers with a permanent redirect and nothing else.
+redirects = [hostname(name) for name in config.get("redirects", [])]
+clientRedirect = hostname(config["clientRedirect"]) if config.get("clientRedirect") else ""
 root = Path("/opt/studio")
 env = []
 for key, value in config["environment"].items():
@@ -24,7 +36,12 @@ environment.write_text("\n".join(env) + "\n")
 subprocess.run(["chown", "root:qbs", str(environment)], check=True)
 os.chmod(environment, 0o640)
 (root / "config/deployment.json").write_text(json.dumps({key: config[key] for key in ["origin", "storage", "clientId"]}))
-Path("/etc/caddy/Caddyfile").write_text('''HOSTNAME {
+sites = []
+if redirects:
+    sites.append(", ".join(redirects) + " {\n    redir " + config["origin"] + "{uri} permanent\n}")
+if clientRedirect:
+    sites.append(clientRedirect + " {\n    redir " + config["origin"] + "/client/ permanent\n}")
+sites.append('''HOSTNAME {
     encode gzip
     header X-Content-Type-Options nosniff
     handle /api/* {
@@ -49,6 +66,7 @@ Path("/etc/caddy/Caddyfile").write_text('''HOSTNAME {
     }
 }
 '''.replace("HOSTNAME", origin.netloc))
+Path("/etc/caddy/Caddyfile").write_text("\n".join(sites))
 subprocess.run(["caddy", "validate", "--config", "/etc/caddy/Caddyfile"], check=True)
 subprocess.run(["systemctl", "restart", "caddy"], check=True)
 if (root / "current").exists():

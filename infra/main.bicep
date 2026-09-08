@@ -14,6 +14,10 @@ param aiModelVersion string = '2025-04-14'
 param aiCapacity int = 1
 @description('Leave empty for the temporary Azure hostname. Set only after custom DNS is ready.')
 param publicOrigin string = ''
+@description('Hostnames that permanently redirect to the origin. Each needs its own DNS record.')
+param redirectHosts array = []
+@description('A memorable hostname that redirects to the client application. Optional.')
+param clientHost string = ''
 
 var suffix = uniqueString(resourceGroup().id)
 var hostname = 'qbs-${suffix}.${location}.cloudapp.azure.com'
@@ -286,6 +290,10 @@ output host object = {
   principalId: identity.properties.principalId
   storage: storage.name
   origin: origin
+  // Once a custom origin serves the studio the temporary Azure name redirects to it, so an
+  // older link still arrives and exactly one origin ever serves the applications.
+  redirects: empty(publicOrigin) ? [] : union(redirectHosts, [hostname])
+  clientRedirect: clientHost
   vmId: vm.id
   location: location
   sqlServer: sql.name
