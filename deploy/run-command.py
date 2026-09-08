@@ -10,8 +10,14 @@ import uuid
 
 
 def az(*args):
-    result = subprocess.run([shutil.which("az") or "az", *args, "--only-show-errors", "-o", "json"], check=True, capture_output=True, text=True)
+    # Capture the response only. A failed call must still print the reason it failed.
+    result = subprocess.run([shutil.which("az") or "az", *args, "--only-show-errors", "-o", "json"], check=True, stdout=subprocess.PIPE, text=True)
     return json.loads(result.stdout) if result.stdout.strip() else None
+
+
+# A Windows runner reaches the CLI through a batch wrapper, where an unquoted '&' ends the
+# command. The instance view is requested as a parameter so no URL carries one.
+INSTANCE_VIEW = ("--uri-parameters", "$expand=instanceView")
 
 
 def execute(vm_id, location, script, evidence, name="qbs-release"):
@@ -27,14 +33,14 @@ def execute(vm_id, location, script, evidence, name="qbs-release"):
             request.write_text(json.dumps(body))
             az("rest", "--method", "put", "--url", url, "--body", "@" + str(request))
     except Exception:
-        result = az("rest", "--method", "get", "--url", url + "&$expand=instanceView")
+        result = az("rest", "--method", "get", "--url", url, *INSTANCE_VIEW)
         evidence.write_text(json.dumps(result, indent=2))
         if result["properties"].get("provisioningState") == "Failed":
             az("rest", "--method", "delete", "--url", url)
         raise
     # Provisioning acceptance is not proof that the guest process succeeded.
     for _ in range(210):
-        result = az("rest", "--method", "get", "--url", url + "&$expand=instanceView")
+        result = az("rest", "--method", "get", "--url", url, *INSTANCE_VIEW)
         evidence.write_text(json.dumps(result, indent=2))
         properties = result["properties"]
         view = properties.get("instanceView", {})
