@@ -44,6 +44,7 @@ if clientRedirect:
 sites.append('''HOSTNAME {
     encode gzip
     header X-Content-Type-Options nosniff
+    INDEX
     handle /api/* {
         reverse_proxy 127.0.0.1:7444
     }
@@ -65,7 +66,7 @@ sites.append('''HOSTNAME {
         file_server
     }
 }
-'''.replace("HOSTNAME", origin.netloc))
+'''.replace("HOSTNAME", origin.netloc).replace("INDEX", '    header X-Robots-Tag "noindex, nofollow"\n' if config.get("noIndex") else ""))
 Path("/etc/caddy/Caddyfile").write_text("\n".join(sites))
 subprocess.run(["caddy", "validate", "--config", "/etc/caddy/Caddyfile"], check=True)
 subprocess.run(["systemctl", "restart", "caddy"], check=True)

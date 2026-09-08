@@ -1,11 +1,21 @@
-name: Deploy studio release
+name: Promote verified release
 on:
-  workflow_call:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Verify workflow run ID whose immutable release was validated on staging
+        required: true
+        type: string
+      sha:
+        description: Full commit SHA deployed to staging
+        required: true
+        type: string
 permissions:
   contents: read
+  actions: read
 jobs:
   production:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: production
     concurrency:
@@ -13,26 +23,31 @@ jobs:
       cancel-in-progress: false
     permissions:
       contents: read
+      actions: read
       id-token: write
     steps:
       - uses: actions/checkout@v4
-      - name: Reject stale verification runs
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          test "$(gh api repos/$GITHUB_REPOSITORY/git/ref/heads/main --jq .object.sha)" = "$GITHUB_SHA"
+        with:
+          ref: ${{ inputs.sha }}
       - uses: actions/download-artifact@v4
         with:
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ github.token }}
           name: studio-release
           path: .artifacts/release
+      - name: Confirm the requested immutable release
+        shell: bash
+        run: test -f ".artifacts/release/${{ inputs.sha }}.tar.gz"
       - uses: azure/login@v2
         with:
           client-id: ${{ vars.AZURE_CLIENT_ID }}
           tenant-id: ${{ vars.AZURE_TENANT_ID }}
           subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
-      - name: Upload and activate verified release
+      - name: Upload and activate the staging-validated release
         id: release
         env:
+          GITHUB_SHA: ${{ inputs.sha }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
           QBS_RESOURCE_GROUP: ${{ vars.QBS_RESOURCE_GROUP }}
           QBS_VM_NAME: ${{ vars.QBS_VM_NAME }}
           QBS_DEPLOYMENT_NAME: qbs-production
@@ -46,20 +61,10 @@ jobs:
         working-directory: e2e
       - run: npx playwright install --with-deps chromium
         working-directory: e2e
-      - name: Verify the served studio in a browser
+      - name: Verify the promoted studio
         working-directory: e2e
         env:
           QBS_PRODUCTION_ORIGIN: ${{ steps.release.outputs.origin }}
           QBS_PRODUCTION_REDIRECTS: ${{ steps.release.outputs.redirects }}
           QBS_PRODUCTION_CLIENT_REDIRECT: ${{ steps.release.outputs.client_redirect }}
         run: npm run test:production
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: production-smoke-${{ github.run_id }}
-          path: .artifacts/production
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: deployment-evidence-${{ github.run_id }}
-          path: .artifacts/deployment

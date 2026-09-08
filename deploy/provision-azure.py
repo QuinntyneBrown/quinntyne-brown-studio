@@ -8,7 +8,8 @@ import subprocess
 operation = os.environ["QBS_INFRA_OPERATION"]
 if operation not in ["preview", "apply"]:
     raise ValueError("Expected preview or apply")
-parameters = json.loads(Path("infra/main.parameters.production.json").read_text())
+parameters_file = os.environ.get("QBS_PARAMETERS_FILE", "infra/main.parameters.production.json")
+parameters = json.loads(Path(parameters_file).read_text())
 for parameter, variable in [("sshPublicKey", "QBS_SSH_PUBLIC_KEY"), ("administratorEmail", "QBS_ADMINISTRATOR_EMAIL"),
                             ("deployPrincipalId", "QBS_DEPLOY_PRINCIPAL_ID"), ("sqlAdministratorObjectId", "QBS_INFRA_PRINCIPAL_ID")]:
     value = os.environ[variable]
@@ -25,6 +26,7 @@ common = ["--resource-group", os.environ["QBS_RESOURCE_GROUP"], "--template-file
 subprocess.run(args + ["what-if", *common], check=True)
 if operation == "apply":
     # Capture the outputs only. A failed deployment must still print the reason it failed.
-    result = subprocess.run(args + ["create", "--name", "qbs-production", *common, "--query", "properties.outputs", "-o", "json"],
+    deployment_name = os.environ.get("QBS_DEPLOYMENT_NAME", "qbs-production")
+    result = subprocess.run(args + ["create", "--name", deployment_name, *common, "--query", "properties.outputs", "-o", "json"],
                             check=True, stdout=subprocess.PIPE, text=True)
     (directory / "outputs.json").write_text(result.stdout)
