@@ -1,0 +1,14 @@
+@page "/blog/Error"
+@model QuinntyneBrownStudio.Api.Pages.ErrorModel
+@inject IConfiguration Configuration
+@{
+    ViewBag.Title = $"Error | {Configuration["Site:SiteName"] ?? "Quinntyne Brown Studio"}";
+    Layout = "_Layout";
+}
+
+<div class="not-found">
+    <div class="not-found-number">@Model.StatusCode</div>
+    <h1 class="not-found-title">Something went wrong</h1>
+    <p class="not-found-desc">An unexpected error occurred. Please try again.</p>
+    <a href="/blog/" class="btn-primary">Back to home</a>
+</div>

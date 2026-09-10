@@ -16,6 +16,7 @@ public sealed class RuntimeStudioFactory(string environment, string? connection)
         {
             ["ConnectionStrings:Studio"] = connection,
             ["Development:Controlled"] = "true",
+            ["Blog:StoragePath"] = Path.Combine(Path.GetTempPath(), "qbs-blog-runtime-tests"),
             ["Bootstrap:Email"] = null,
             ["Bootstrap:Password"] = null,
         }));

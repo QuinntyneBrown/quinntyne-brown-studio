@@ -17,3 +17,29 @@ RAW conversion uses the separately installed LibRaw `dcraw_emu` executable. Reta
 ## Adding third-party material
 
 Identify the original source, version, license, and any attribution or notice requirements in the contribution. Include the required license and notice files with vendored material, update relevant lockfiles for package changes, and add asset-specific attribution beside the asset. Link new bundled-material notices from this document so they can be found by redistributors.
+
+## Blog
+
+Imported article platform from https://github.com/QuinntyneBrown/Blog, commit a432cf54965f1b9eaf1524f315739826ba1a5e07.
+
+MIT License
+
+Copyright (c) 2026 Quinn Brown
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

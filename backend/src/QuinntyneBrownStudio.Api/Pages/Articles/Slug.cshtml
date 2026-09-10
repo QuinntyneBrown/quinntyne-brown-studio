@@ -1,0 +1,94 @@
+@page "/blog/articles/{slug}"
+@model QuinntyneBrownStudio.Api.Pages.Articles.ArticleDetailModel
+@inject IConfiguration Configuration
+@{
+    var siteName = Configuration["Site:SiteName"] ?? "Quinntyne Brown Studio";
+    ViewBag.Title = $"{Model.Article?.Title} | {siteName}";
+    ViewBag.Description = Model.Article?.Abstract;
+    ViewBag.ActiveNav = "";
+    var siteUrl = ((Configuration["PublicOrigin"] ?? "https://localhost:7443").TrimEnd('/') + "/blog")?.TrimEnd('/') ?? "";
+    if (Model.Article != null)
+    {
+        ViewBag.CanonicalUrl = $"{siteUrl}/articles/{Model.Article.Slug}";
+        ViewBag.OgType = "article";
+        if (!string.IsNullOrEmpty(Model.Article.FeaturedImageUrl))
+            ViewBag.OgImage = $"{(Configuration["PublicOrigin"] ?? "https://localhost:7443").TrimEnd('/')}{Model.Article.FeaturedImageUrl}";
+        ViewBag.ArticlePublishedTime = Model.Article.DatePublished?.ToString("O");
+        ViewBag.ArticleModifiedTime = Model.Article.UpdatedAt.ToString("O");
+        ViewBag.ArticleAuthor = Configuration["Site:AuthorName"] ?? "Quinntyne Brown Studio";
+    }
+}
+@if (Model.Article == null)
+{
+    <div class="not-found">
+        <div class="not-found-number">404</div>
+        <h1 class="not-found-title">Article not found</h1>
+        <p class="not-found-desc">This article doesn't exist or has been removed.</p>
+        <a href="/blog/articles" class="btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Back to articles
+        </a>
+    </div>
+}
+else
+{
+    <article class="article-detail">
+    @if (!string.IsNullOrEmpty(Model.Article.FeaturedImageUrl))
+    {
+        <figure class="article-featured-image">
+            <img responsive
+                 src="@Model.Article.FeaturedImageUrl"
+                 alt="@Model.Article.Title"
+                 img-width="@Model.Article.FeaturedImageWidth"
+                 img-height="@Model.Article.FeaturedImageHeight"
+                 breakpoints="320,640,960,1280,1920"
+                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 960px, 1280px"
+                 priority="true" />
+        </figure>
+    }
+    else
+    {
+        <div class="article-featured-image"></div>
+    }
+
+    <div class="article-detail-inner">
+        <div class="article-content-wrapper">
+            <div class="article-meta">
+                <time datetime="@Model.Article.DatePublished?.ToString("yyyy-MM-dd")">
+                    @Model.Article.DatePublished?.ToString("MMMM d, yyyy")
+                </time>
+                <span class="article-meta-dot"></span>
+                <span>@Model.Article.ReadingTimeMinutes min read</span>
+            </div>
+            <h1 class="article-title">@Model.Article.Title</h1>
+            <p class="article-abstract">@Model.Article.Abstract</p>
+            <div class="article-divider"></div>
+            <div class="article-body">
+                @Html.Raw(Model.Article.BodyHtml)
+            </div>
+            <div class="article-divider"></div>
+            <a href="/blog/articles" class="back-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                Back to all articles
+            </a>
+        </div>
+    </div>
+    </article>
+
+}
+@section Head {
+    @if (Model.Article != null)
+    {
+        var metadata = new Dictionary<string, object?>
+        {
+            ["@context"] = "https://schema.org", ["@type"] = "Article",
+            ["headline"] = Model.Article.Title, ["description"] = Model.Article.Abstract,
+            ["datePublished"] = Model.Article.DatePublished, ["dateModified"] = Model.Article.UpdatedAt,
+            ["mainEntityOfPage"] = $"{siteUrl}/articles/{Model.Article.Slug}",
+            ["author"] = new Dictionary<string, object?> { ["@type"] = "Person", ["name"] = Configuration["Site:AuthorName"] ?? "Quinntyne Brown" },
+            ["publisher"] = new Dictionary<string, object?> { ["@type"] = "Organization", ["name"] = siteName }
+        };
+        if (ViewBag.OgImage != null) metadata["image"] = ViewBag.OgImage;
+        <script type="application/ld+json" nonce="@ViewContext.HttpContext.Items["CspNonce"]">@Html.Raw(System.Text.Json.JsonSerializer.Serialize(metadata))</script>
+    }
+}

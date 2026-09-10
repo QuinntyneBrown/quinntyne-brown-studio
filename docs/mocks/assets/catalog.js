@@ -2,6 +2,7 @@
 window.MockCatalog = [
   ['marketing','home','Home','The public studio introduction',['loading','service-error'],[]],
   ['marketing','portfolio','Portfolio','Published photography collections',['empty','no-results'],[]],
+  ['marketing','blog','Blog','Photography stories, guidance and studio notes',[],[]],
   ['marketing','gallery','Gallery','A complete public collection',['missing-photo'],['photo']],
   ['marketing','services','Services','Weddings, events, headshots and family portraits',[],['package']],
   ['marketing','quote','Quote calculator','Live availability, expenses and discounts',['validation','unavailable','invalid-code','expired-code','ineligible-code'],[]],

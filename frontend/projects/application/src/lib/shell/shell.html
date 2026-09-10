@@ -24,6 +24,7 @@
           >{{ link[0] }}</a
         >
       }
+      <a href="/blog/">Blog</a>
       <a routerLink="/quote" class="button">Plan a session ↗</a>
     </nav>
   </header>
@@ -58,6 +59,9 @@
             (click)="auth.menu.set(false)"
             >{{ link[0] }}</a
           >
+        }
+        @if (site === 'admin') {
+          <a href="/blog/admin/articles">Blog articles</a>
         }
       </nav>
     </aside>

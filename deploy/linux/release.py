@@ -56,7 +56,7 @@ def healthy(origin):
         try:
             for service in ["qbs-api", "qbs-worker", "caddy"]:
                 subprocess.run(["systemctl", "is-active", "--quiet", service], check=True)
-            for path in ["/api/health", "/", "/admin/", "/client/"]:
+            for path in ["/api/health", "/", "/admin/", "/client/", "/blog/", "/blog/feed.xml"]:
                 with urllib.request.urlopen(origin + path, timeout=10) as response:
                     if response.status != 200:
                         raise RuntimeError("HTTP health check failed")

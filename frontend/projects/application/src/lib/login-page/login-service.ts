@@ -49,6 +49,16 @@ export class LoginService implements ILoginService {
               : 'This account does not have access to client collections.',
           );
         this.password.set('');
+        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+        if (
+          this.site === 'admin' &&
+          returnUrl &&
+          /^\/blog\/admin(?:\/|$)/.test(returnUrl) &&
+          !/[\\\r\n]/.test(returnUrl)
+        ) {
+          window.location.assign(returnUrl);
+          return;
+        }
         await this.router.navigateByUrl(this.site === 'admin' ? '/sessions' : '/galleries');
       } else {
         this.password.set('');
