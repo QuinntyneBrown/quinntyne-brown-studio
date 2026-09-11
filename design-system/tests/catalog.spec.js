@@ -165,6 +165,19 @@ test("an example can be reviewed in isolation", async ({ page }) => {
 });
 
 /**
+ * AC-L2-070-08, AC-L2-070-10: Given the approved blog pattern, when it is
+ * reviewed at a supported viewport, then its image-first grid uses the intended
+ * column count without horizontal overflow.
+ */
+test("the blog listing pattern follows its responsive grid", async ({ page }) => {
+  const preview = new PreviewPage(page);
+  await preview.openScenario("pattern", "blog-listing", "published");
+  await preview.expectRendered();
+  const width = page.viewportSize().width;
+  await preview.expectBlogListing(width <= 600 ? 1 : width <= 1100 ? 2 : 3);
+});
+
+/**
  * AC-L2-047-01: Given a screen pattern or dialog scenario, when its isolated
  * preview is opened from the catalog, then it renders on its own.
  */

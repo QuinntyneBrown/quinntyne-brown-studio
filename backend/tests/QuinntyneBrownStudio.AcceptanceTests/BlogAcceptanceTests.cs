@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace QuinntyneBrownStudio.AcceptanceTests;
 
-// Acceptance tests: AC-L2-070-01, AC-L2-070-03, AC-L2-070-06.
+// Acceptance tests: AC-L2-070-01, AC-L2-070-03, AC-L2-070-06 through AC-L2-070-10.
 public sealed class BlogAcceptanceTests
 {
     [Fact]
@@ -17,6 +17,10 @@ public sealed class BlogAcceptanceTests
         var html = await response.Content.ReadAsStringAsync();
         Assert.Contains("<html", html);
         Assert.Contains("Quinntyne Brown Studio", html);
+        Assert.Contains("class=\"marketing-blog\"", html);
+        Assert.Contains("From the studio", html);
+        Assert.Contains("No articles yet", html);
+        Assert.Contains("href=\"/blog/search\"", html);
         Assert.Equal(HttpStatusCode.NotFound, (await visitor.GetAsync("/blog/articles/missing")).StatusCode);
     }
 
@@ -46,7 +50,17 @@ public sealed class BlogAcceptanceTests
         publish.Headers.TryAddWithoutValidation("If-Match", create.Headers.ETag!.ToString());
         var published = await admin.SendAsync(publish);
         Assert.True(published.IsSuccessStatusCode, await published.Content.ReadAsStringAsync());
-        Assert.Contains("Wedding light", await visitor.GetStringAsync("/blog"));
+        foreach (var path in new[] { "/blog", "/blog/articles" })
+        {
+            var listing = await visitor.GetStringAsync(path);
+            Assert.Contains("class=\"marketing-blog\"", listing);
+            Assert.Contains("class=\"blog-grid\"", listing);
+            Assert.Contains("class=\"blog-post\"", listing);
+            Assert.Contains($"href=\"/blog/articles/{slug}\"", listing);
+            Assert.Contains("class=\"blog-post-image-placeholder\"", listing);
+            Assert.DoesNotContain("Working with sunset light", listing);
+            Assert.DoesNotContain("min read", listing);
+        }
         Assert.Contains("Golden hour", await visitor.GetStringAsync($"/blog/articles/{slug}"));
         Assert.Contains("/blog/articles/" + slug, await visitor.GetStringAsync("/blog/search?q=Wedding"));
         foreach (var path in new[] { "sitemap.xml", "feed.xml", "atom.xml", "feed/json", "llms.txt" })
@@ -91,6 +105,41 @@ public sealed class BlogAcceptanceTests
         Assert.Equal(HttpStatusCode.BadRequest, (await admin.PostAsJsonAsync("/blog/api/articles", new { title = "Valid", body = "Valid", @abstract = "Valid" })).StatusCode);
     }
 
+    [Fact]
+    public async Task Public_listing_pagination_preserves_each_listing_route()
+    {
+        await using var factory = new StudioFactory();
+        using var admin = await factory.Actor();
+        using var visitor = await factory.Actor(null);
+
+        for (var index = 0; index < 10; index++)
+        {
+            var create = await admin.PostAsJsonAsync("/blog/api/articles", new
+            {
+                title = $"Studio story {index}",
+                body = "A published photography story.",
+                @abstract = "A short studio note."
+            });
+            Assert.Equal(HttpStatusCode.Created, create.StatusCode);
+            var article = await create.Content.ReadFromJsonAsync<JsonElement>();
+            using var publish = new HttpRequestMessage(
+                HttpMethod.Patch,
+                $"/blog/api/articles/{article.GetProperty("articleId").GetGuid()}/publish")
+            {
+                Content = JsonContent.Create(new { published = true })
+            };
+            publish.Headers.TryAddWithoutValidation("If-Match", create.Headers.ETag!.ToString());
+            Assert.True((await admin.SendAsync(publish)).IsSuccessStatusCode);
+        }
+
+        var home = await visitor.GetStringAsync("/blog");
+        Assert.Contains("href=\"/blog?page=2\"", home);
+        var articles = await visitor.GetStringAsync("/blog/articles");
+        Assert.Contains("href=\"/blog/articles?page=2\"", articles);
+        var secondPage = await visitor.GetStringAsync("/blog/articles?page=2");
+        Assert.Contains("href=\"/blog/articles?page=1\"", secondPage);
+    }
+
     [Theory]
     [InlineData("/blog/admin/articles")]
     [InlineData("/blog/admin/articles/create")]
@@ -104,7 +153,7 @@ public sealed class BlogAcceptanceTests
         Assert.Contains("text/html", response.Content.Headers.ContentType!.ToString());
     }
 
-    // AC-L2-070-07: the published blog address is /blog, and it is the one that renders.
+    // AC-L2-070-07, AC-L2-070-08: the published blog address is /blog, and it renders the approved listing.
     [Fact]
     public async Task Blog_list_page_is_served_at_the_published_blog_address()
     {
@@ -113,7 +162,8 @@ public sealed class BlogAcceptanceTests
         var response = await visitor.GetAsync("/blog");
         Assert.True(response.IsSuccessStatusCode, await response.Content.ReadAsStringAsync());
         var html = await response.Content.ReadAsStringAsync();
-        Assert.Contains("Studio Blog", html);
+        Assert.Contains("From the studio", html);
+        Assert.Contains("<h1>Blog</h1>", html);
         // The canonical link every page already advertises must be the address that renders.
         Assert.Contains("<link rel=\"canonical\" href=\"https://localhost:7443/blog\" />", html);
     }

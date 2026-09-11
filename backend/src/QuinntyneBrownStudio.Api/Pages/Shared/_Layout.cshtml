@@ -8,6 +8,7 @@
     var canonicalUrl = ViewBag.CanonicalUrl ?? "";
     var ogImage = (string)(ViewBag.OgImage ?? Configuration["Site:DefaultOgImage"] ?? "");
     var ogType = ViewBag.OgType ?? "website";
+    var isBlogListing = ViewBag.IsBlogListing is true;
 }
 @functions {
     static string TruncateAtWord(string text, int maxLength)
@@ -998,11 +999,199 @@
         .skip-link:focus {
             position: fixed; left: 16px; top: 16px; width: auto; height: auto; overflow: visible;
         }
+
+        /* Public blog listing: approved studio marketing mock. */
+        body.marketing-blog {
+            --ink: #242620;
+            --muted: #74766e;
+            --line: #e4e5de;
+            --soft: #f5f5f0;
+            --paper: #ffffff;
+            --accent: #5b654c;
+            --space-1: 6px;
+            --space-2: 12px;
+            --space-3: 20px;
+            --space-4: 32px;
+            --space-5: 48px;
+            --space-6: 72px;
+            --tap-target: 44px;
+            --serif: Georgia, "Times New Roman", serif;
+            --sans: Arial, Helvetica, sans-serif;
+            color: var(--ink);
+            background: var(--paper);
+            font: 14px/1.6 var(--sans);
+        }
+        .marketing-blog h1,
+        .marketing-blog h2 { font-family: var(--serif); font-weight: 400; letter-spacing: -.04em; }
+        .marketing-blog-header {
+            min-height: 105px;
+            margin: 0 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--line);
+            gap: 25px;
+        }
+        .marketing-blog-brand {
+            font-size: 12px;
+            line-height: 1.35;
+            letter-spacing: .19em;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .marketing-blog-brand span {
+            display: block;
+            margin-top: 5px;
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: .28em;
+        }
+        .marketing-blog-nav { display: flex; align-items: center; gap: 28px; font-size: 12px; }
+        .marketing-blog-nav > a[aria-current="page"] { border-bottom: 1px solid var(--ink); }
+        .marketing-blog-nav .marketing-blog-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 43px;
+            padding: 11px 21px;
+            border: 1px solid var(--ink);
+            border-radius: 2px;
+            background: var(--ink);
+            color: var(--paper);
+        }
+        .marketing-blog-menu {
+            display: none;
+            min-height: var(--tap-target);
+            padding: 6px 12px;
+            border: 1px solid var(--line);
+            border-radius: 2px;
+            background: var(--paper);
+            color: var(--ink);
+            font: 11px var(--sans);
+        }
+        .blog-page { max-width: 1360px; margin: auto; padding: 64px 6% 90px; }
+        .blog-head { max-width: 650px; margin-bottom: 52px; }
+        .blog-eyebrow {
+            margin-bottom: 20px;
+            color: var(--muted);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+        .blog-head h1 { font-size: 46px; line-height: 1.08; }
+        .blog-head > p:last-child { max-width: 520px; margin-top: 14px; color: var(--muted); }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            column-gap: 30px;
+            row-gap: 68px;
+        }
+        .blog-post a { display: block; }
+        .blog-post-image {
+            display: block;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            margin-bottom: 20px;
+            background: var(--soft);
+        }
+        .blog-post-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .blog-post-image-placeholder {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(140deg, var(--line), var(--soft) 45%, var(--line));
+        }
+        .blog-post time {
+            display: block;
+            margin-bottom: 13px;
+            color: var(--muted);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+        .blog-post h2 { font-size: clamp(25px, 2.35vw, 34px); line-height: 1.12; }
+        .blog-post a:hover h2 { color: var(--accent); }
+        .blog-empty { padding: var(--space-6) 0; border-top: 1px solid var(--line); }
+        .blog-empty h2 { font-size: 29px; }
+        .blog-empty p { margin-top: var(--space-2); color: var(--muted); }
+        .blog-pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-2);
+            padding-top: var(--space-6);
+            font-size: 12px;
+        }
+        .blog-pagination a { min-width: var(--tap-target); min-height: var(--tap-target); display: grid; place-items: center; }
+        .blog-pagination a[aria-current="page"] { background: var(--ink); color: var(--paper); }
+        .marketing-blog-footer {
+            margin: 0 6%;
+            padding: 38px 0 85px;
+            border-top: 1px solid var(--line);
+            display: flex;
+            justify-content: space-between;
+            gap: 25px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+        .marketing-blog-footer nav { display: flex; gap: 24px; flex-wrap: wrap; }
+        .marketing-blog-footer-copy { margin-top: 15px; }
+        @@media (max-width: 1100px) {
+            .marketing-blog-nav { gap: 16px; }
+            .blog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @@media (max-width: 780px) {
+            .marketing-blog-header { min-height: 84px; position: relative; z-index: 20; }
+            .marketing-blog-menu { display: inline-flex; align-items: center; }
+            .marketing-blog-nav {
+                display: none;
+                position: absolute;
+                top: 83px;
+                left: -7%;
+                right: -7%;
+                padding: 25px;
+                border-bottom: 1px solid var(--line);
+                background: var(--paper);
+                box-shadow: 0 15px 20px rgb(0 0 0 / 7%);
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .marketing-blog-nav.open { display: flex; }
+            .blog-page { padding-top: 35px; padding-bottom: 85px; }
+            .marketing-blog-footer { flex-direction: column; }
+        }
+        @@media (max-width: 600px) {
+            .blog-head { margin-bottom: 38px; }
+            .blog-head h1 { font-size: 41px; }
+            .blog-grid { grid-template-columns: 1fr; row-gap: 48px; }
+            .blog-post-image { margin-bottom: 16px; }
+            .blog-post h2 { font-size: 29px; }
+        }
     </style>
     @RenderSection("Head", required: false)
 </head>
-<body>
+<body class="@(isBlogListing ? "marketing-blog" : null)">
     <a href="#main-content" class="skip-link">Skip to content</a>
+    @if (isBlogListing)
+    {
+    <header class="marketing-blog-header" role="banner">
+        <a class="marketing-blog-brand" href="/">Quinntyne Brown<span>Photography studio</span></a>
+        <button class="marketing-blog-menu" id="hamburger-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">Menu</button>
+        <nav class="marketing-blog-nav" id="mobile-menu" aria-label="Main navigation">
+            <a href="/portfolio">Portfolio</a>
+            <a href="/services">Services</a>
+            <a href="/blog" aria-current="page">Blog</a>
+            <a href="/prints">Prints</a>
+            <a href="/promotions">Packages</a>
+            <a class="marketing-blog-cta" href="/quote">Find your quote <span aria-hidden="true">↗</span></a>
+            <a href="/client/login">Client login</a>
+        </nav>
+    </header>
+    }
+    else
+    {
     <header role="banner">
     <nav class="nav" id="main-nav" aria-label="Main navigation">
         <a href="/" class="nav-logo">@(Configuration["Site:LogoText"] ?? "Quinntyne Brown Studio")</a>
@@ -1071,9 +1260,26 @@
         <a href="/blog/feed.xml">RSS Feed</a>
     </div>
     </header>
+    }
     <main role="main" id="main-content">
         @RenderBody()
     </main>
+    @if (isBlogListing)
+    {
+    <footer class="marketing-blog-footer" role="contentinfo">
+        <div><a class="marketing-blog-brand" href="/">Quinntyne Brown<span>Photography studio</span></a><p class="marketing-blog-footer-copy">Toronto &amp; wherever your story takes us.</p></div>
+        <nav aria-label="Footer navigation">
+            <a href="/contact">Get in touch</a>
+            <a href="/portfolio">Our work</a>
+            <a href="/blog">Blog</a>
+            <a href="/client/login">Client access</a>
+            <a href="/blog/search">Search articles</a>
+        </nav>
+        <span>© @DateTime.Now.Year Quinntyne Brown Studio</span>
+    </footer>
+    }
+    else
+    {
     <footer class="footer" role="contentinfo">
         <nav aria-label="Footer navigation">
         <div class="footer-links">
@@ -1084,6 +1290,7 @@
         </nav>
         <p class="footer-copyright" data-testid="copyright">© @DateTime.Now.Year @(Configuration["Site:AuthorName"] ?? Configuration["Site:SiteName"] ?? "Quinntyne Brown Studio"). All rights reserved.</p>
     </footer>
+    }
     <script nonce="@cspNonce" defer>
         const btn = document.getElementById('hamburger-btn');
         const menu = document.getElementById('mobile-menu');
@@ -1092,7 +1299,10 @@
             btn.setAttribute('aria-expanded', isOpen.toString());
         });
     </script>
-    <script src="/blog/js/search.js" defer content-hash></script>
+    @if (!isBlogListing)
+    {
+        <script src="/blog/js/search.js" defer content-hash></script>
+    }
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -3,8 +3,9 @@ import { resolve } from 'node:path';
 import { AccountPage } from '../page-objects/account-page';
 import { ArticleEditorPage } from '../page-objects/blog/article-editor.page';
 import { PublicArticleDetailPage } from '../page-objects/blog/article-detail.page';
+import { BlogListPage } from '../page-objects/blog/blog-list.page';
 
-// AC-L2-070-01 through AC-L2-070-06. Imported page objects drive real Razor pages,
+// AC-L2-070-01 through AC-L2-070-10. Page objects drive real Razor pages,
 // studio Identity, persistent media, and the isolated LocalDB database.
 for (const width of [390, 768, 1440]) {
   test(`Blog publishing and media at ${width}px`, async ({ page, browser }, info) => {
@@ -32,6 +33,12 @@ for (const width of [390, 768, 1440]) {
     const visitor = await browser.newContext({ ignoreHTTPSErrors: true, viewport: { width, height: 900 } });
     try {
       const publicPage = await visitor.newPage();
+      const listing = new BlogListPage(publicPage, origin);
+      for (const path of ['/blog', '/blog/articles'] as const) {
+        expect((await listing.open(path))?.status()).toBe(200);
+        await listing.assertMatchesMock(width, title);
+      }
+      await publicPage.screenshot({ path: info.outputPath('article-listing.png'), fullPage: true });
       const article = new PublicArticleDetailPage(publicPage, origin);
       expect((await article.goto(slug))?.status()).toBe(200);
       await expect(article.title).toHaveText(title);

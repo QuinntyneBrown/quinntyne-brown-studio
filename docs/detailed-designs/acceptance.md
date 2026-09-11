@@ -8,7 +8,7 @@ New backend behavior begins with a failing WebApplicationFactory integration tes
 
 Architecture and process criteria use source, configuration, build, and development-history evidence. Browser tests do not establish licensing, provider accuracy, SQL isolation, or RAW compatibility. Staging integration checks supplement the controlled acceptance tests for those boundaries.
 
-Current reconciliation: **80 Complete / 8 Partial**. Partial entries concern external camera/capacity/AI/environment qualification or unavailable historical test-first records. “Complete” applies to the criterion’s recorded local behavior/review evidence; it does not close an external gate.
+Current reconciliation: **84 Complete / 8 Partial**. Partial entries concern external camera/capacity/AI/environment qualification or unavailable historical test-first records. “Complete” applies to the criterion’s recorded local behavior/review evidence; it does not close an external gate.
 
 ## Scenario coverage
 
@@ -124,3 +124,6 @@ The [decision baseline](../specs/decisions.md#evidence-register) owns the remain
 | `AC-L2-070-05` | SQL, storage/release review, and existing startup checks | Complete | [Blog import verification](../implementation/blog-import.md) |
 | `AC-L2-070-06` | API and browser | Complete | [Blog import verification](../implementation/blog-import.md) |
 | `AC-L2-070-07` | API and deployed browser smoke | Complete | [Blog import verification](../implementation/blog-import.md) |
+| `AC-L2-070-08` | API and browser | Complete | [Public listing verification](../implementation/blog-import.md#public-listing-verification) |
+| `AC-L2-070-09` | API, browser, and native-control review | Complete | [Public listing verification](../implementation/blog-import.md#public-listing-verification) |
+| `AC-L2-070-10` | API, browser, and fallback review | Complete | [Public listing verification](../implementation/blog-import.md#public-listing-verification) |

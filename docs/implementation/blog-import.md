@@ -2,7 +2,7 @@
 
 Source: `C:/projects/Blog`, commit `a432cf54965f1b9eaf1524f315739826ba1a5e07` (MIT, Quinntyne Brown). Source files are copied, not linked to the source checkout. Article entities, repositories, commands, queries, validation, Markdown sanitization, image processing, SEO generation, Razor layouts, and editor pages are reused.
 
-User-approved exceptions preserve the imported Razor UI and its existing styles instead of converting it to Angular or recreating it in the design system. These exceptions apply only to the imported blog. Existing studio architecture and conventions continue elsewhere.
+User-approved exceptions preserve Razor for the imported blog. Public listings at `/blog` and `/blog/articles` now follow the approved [studio mock](../mocks/marketing/blog.html), with a corresponding pattern in the standalone design system. Article detail, search, and administration retain the imported interface and styles. These exceptions apply only to the imported blog. Existing studio architecture and conventions continue elsewhere.
 
 Source users, uploaded images, databases, secrets, newsletters, events, subscriptions, and About are not imported. Studio Identity protects the editor. Tables are added to the existing studio database through explicit migrations.
 
@@ -62,3 +62,13 @@ Verified on 2026-09-10:
 Persistence evidence combines an actual LocalDB migration/reopen test and the existing runtime startup checks with review of the upload directory outside release folders. Mobile editor and public article screenshots were visually reviewed after the source layout corrections.
 
 No source data was migrated and no live deployment was performed.
+
+## Public listing verification
+
+AC-L2-070-08 through AC-L2-070-10 cover the studio listing introduced on 2026-09-11. Both public listing routes render the shared `_BlogListing.cshtml` partial and the marketing variant of `_Layout.cshtml`.
+
+- AC-L2-070-08: [API acceptance](../../backend/tests/QuinntyneBrownStudio.AcceptanceTests/BlogAcceptanceTests.cs) checks both rendered listings. [Packaged browser acceptance](../../e2e/integration/blog.spec.ts), through [BlogListPage](../../e2e/page-objects/blog/blog-list.page.ts), checks their heading, introduction, published card, featured image, and three/two/one-column layouts at 1440, 768, and 390 pixels across Chromium, Firefox, and WebKit.
+- AC-L2-070-09: API acceptance checks article destinations and pagination links that preserve `/blog` or `/blog/articles`. Browser acceptance checks article and footer search destinations and mobile menu expansion. Review of the [layout](../../backend/src/QuinntyneBrownStudio.Api/Pages/Shared/_Layout.cshtml) confirms the menu uses a native button with a click handler, supporting Enter and Space activation, and updates `aria-expanded`. Keyboard activation is supported by the native control; the current browser scenario exercises pointer activation.
+- AC-L2-070-10: API acceptance checks the empty-state message and missing-image placeholder. Review of the [listing partial](../../backend/src/QuinntyneBrownStudio.Api/Pages/Shared/_BlogListing.cshtml) confirms missing images render a neutral span instead of an image with an invalid source. Browser acceptance checks absence of horizontal overflow for populated listings; empty and missing-image states are covered by API assertions and template/style review.
+
+The [GitHub verification run for commit 99bedd7](https://github.com/QuinntyneBrown/quinntyne-brown-studio/actions/runs/34591899652) passed backend acceptance, frontend builds, TypeScript checking, application browser acceptance, and the packaged LocalDB workflow. Its design-system job also passed. The run failed at documentation validation because the design requirement text and acceptance register had not been updated; this documentation revision reconciles those records with L2-070.
