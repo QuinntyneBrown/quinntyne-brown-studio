@@ -8,7 +8,19 @@ Source users, uploaded images, databases, secrets, newsletters, events, subscrip
 
 ## Routes and operation
 
-Public routes are `/blog/`, `/blog/articles/{slug}`, and `/blog/search?q=…`. The editor at `/blog/admin/articles` and media library at `/blog/admin/digital-assets` use studio Identity. Anonymous editor requests return through `/admin/login`; client accounts cannot use the editor.
+Public routes are `/blog`, `/blog/articles/{slug}`, and `/blog/search?q=…`. The editor at `/blog/admin/articles` and media library at `/blog/admin/digital-assets` use studio Identity. Anonymous editor requests return through `/admin/login`; client accounts cannot use the editor.
+
+`/blog` is the one address for the list page: it is what the canonical link, the feeds, the
+sitemap, and the studio's own navigation advertise, and `/blog/` redirects to it permanently.
+
+The blog only reaches a visitor if the reverse proxy sends its addresses to the API. The proxy
+also serves the marketing, administration, and client builds, and answers anything it does not
+route with the marketing shell — so an unrouted `/blog` is a 200 with the wrong page, not a 404.
+`deploy/linux/gateway.py` holds that route list and `deploy/linux/services.py` holds the systemd
+units and the media directory; both ship with every release and are applied at activation, because
+host preparation runs once per host and the blog's routes, unit setting, and directory all arrived
+with a release. The release health check reads `/blog` and `/blog/feed.xml` and requires the API's
+own canonical link and an XML feed rather than a status code.
 
 Article and media APIs live under `/blog/api/`. Cookie-authenticated mutations require the existing `X-XSRF-TOKEN` antiforgery header. Article updates retain Blog's ETag/If-Match contract. RSS, Atom, JSON feed, sitemap, and llms.txt live under `/blog`; root `/robots.txt` advertises the sitemap. `PublicOrigin` supplies absolute URLs.
 
@@ -34,6 +46,8 @@ The initial three acceptance tests failed with missing-route responses before im
 - [Media acceptance](../../backend/tests/QuinntyneBrownStudio.AcceptanceTests/BlogMediaAcceptanceTests.cs): upload, WebP, optional AVIF fallback, references, and corrupt-upload cleanup.
 - [LocalDB acceptance](../../backend/tests/QuinntyneBrownStudio.AcceptanceTests/BlogPersistenceAcceptanceTests.cs): migration, reopened persistence, and SQL concurrency.
 - [Browser acceptance](../../e2e/integration/blog.spec.ts): imported page objects drive real login, upload, publication, viewing, unpublication, and deletion at 390, 768, and 1440 pixels. The full-stack configuration includes Chromium, Firefox, and WebKit for the blog.
+- [Deployment acceptance](../../backend/tests/deployment/test_release.py): activation applies the release's own units and gateway routes, refuses a host it cannot configure, and rejects a health check that the marketing shell would otherwise satisfy.
+- [Deployed browser smoke](../../e2e/production/deployment.spec.ts): the served origin returns the blog list page the API renders at `/blog`, redirects `/blog/` to it, and serves an XML feed.
 
 Run `dotnet test backend/QuinntyneBrownStudio.slnx`, frontend library/application builds, e2e type checking, and `scripts/smoke-platform.ps1`. Browser traces and screenshots are generated under `.artifacts/platform/fullstack-browser`. Linux release tests run under Linux or WSL.
 

@@ -3,7 +3,7 @@
 A brief plan for putting the three applications on the `quinntynebrown.studio` domain. It builds on
 the [Windows and LocalDB runbook](README.md) and [OD-10](../docs/specs/decisions.md#od-10--localdb-persistence-and-windows-hosting):
 one Windows host runs the API and worker, and a reverse proxy in front of it serves the three
-Angular builds and forwards `/api/`. Nothing here needs a code change; where a future change would
+Angular builds and forwards `/api/` and `/blog` to it. Nothing here needs a code change; where a future change would
 be needed, it says so.
 
 ## The recommendation in one table
@@ -13,6 +13,7 @@ be needed, it says so.
 | `https://quinntynebrown.studio/` | Marketing site | Apex domain; static `frontend/dist/marketing` |
 | `https://quinntynebrown.studio/admin/` | Studio administration | Same host, path; static `frontend/dist/admin` |
 | `https://quinntynebrown.studio/client/` | Client collections | Same host, path; static `frontend/dist/client` |
+| `https://quinntynebrown.studio/blog` | Studio blog | Reverse proxy to the loopback API; Razor pages, not a static build |
 | `https://quinntynebrown.studio/api/` | API | Reverse proxy to the loopback API; never a separate hostname |
 | `https://www.quinntynebrown.studio` | Nothing | Permanent redirect to the apex |
 | `https://clients.quinntynebrown.studio` | Nothing | Optional permanent redirect to `/client/`, a memorable address for people who lose the email |
@@ -95,7 +96,8 @@ quinntynebrown.studio {
     encode gzip
     header Strict-Transport-Security "max-age=31536000; includeSubDomains"
 
-    handle /api/* {
+    @backend path /api/* /blog /blog/* /robots.txt
+    handle @backend {
         reverse_proxy 127.0.0.1:7444
     }
     handle_path /admin/* {
@@ -115,6 +117,12 @@ quinntynebrown.studio {
     }
 }
 ```
+
+Every address the API serves is named in `@backend`. Anything left out of it falls through to the
+last `handle`, so a missed route answers 200 with the marketing shell rather than a 404 — the
+failure looks like a healthy deployment. On the Azure host this file is generated from
+[`deploy/linux/gateway.py`](linux/gateway.py) and rewritten by every release for that reason;
+a hand-managed proxy has to be edited whenever the API publishes a new address.
 
 Copy `frontend/dist/*/browser` to the paths named there on each release. Turn HSTS on only after the
 first successful HTTPS deployment, and add `preload` only once every subdomain in the table serves
@@ -143,7 +151,7 @@ so send them only to studio addresses.
 3. Publish the API and worker, migrate `QbsProduction`, and provision the administrator, per the
    runbook, with `PublicOrigin` set to the apex.
 4. Install the proxy with the configuration above, obtain the certificate, and check
-   `https://quinntynebrown.studio/api/health`, the three applications, and the `www` redirect.
+   `https://quinntynebrown.studio/api/health`, the three applications, the blog at `/blog`, and the `www` redirect.
 5. Walk the invitation path end to end on the real domain: invite a studio address, follow the link,
    set a password, open the assigned gallery. This is the one flow that depends on the domain being
    right.

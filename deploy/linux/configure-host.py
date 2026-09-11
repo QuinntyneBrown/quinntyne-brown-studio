@@ -5,24 +5,12 @@ from pathlib import Path
 import re
 import subprocess
 import sys
-import urllib.parse
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import gateway
 
 config = json.loads(Path(sys.argv[1]).read_text())
-origin = urllib.parse.urlsplit(config["origin"])
-if origin.scheme != "https" or origin.path or origin.query or origin.fragment or not re.fullmatch(r"[a-z0-9.-]+", origin.netloc):
-    raise ValueError("Expected an HTTPS DNS origin")
-
-
-def hostname(value):
-    if not re.fullmatch(r"[a-z0-9][a-z0-9.-]*", value) or value == origin.netloc:
-        raise ValueError("Expected a DNS hostname other than the origin")
-    return value
-
-
-# Names that must reach the studio without serving it. One origin serves the applications,
-# so every other name answers with a permanent redirect and nothing else.
-redirects = [hostname(name) for name in config.get("redirects", [])]
-clientRedirect = hostname(config["clientRedirect"]) if config.get("clientRedirect") else ""
+gateway.origin_of(config)
 root = Path("/opt/studio")
 env = []
 for key, value in config["environment"].items():
@@ -36,41 +24,7 @@ environment.write_text("\n".join(env) + "\n")
 subprocess.run(["chown", "root:qbs", str(environment)], check=True)
 os.chmod(environment, 0o640)
 (root / "config/deployment.json").write_text(json.dumps({key: config[key] for key in ["origin", "storage", "clientId"]}))
-sites = []
-if redirects:
-    sites.append(", ".join(redirects) + " {\n    redir " + config["origin"] + "{uri} permanent\n}")
-if clientRedirect:
-    sites.append(clientRedirect + " {\n    redir " + config["origin"] + "/client/ permanent\n}")
-sites.append('''HOSTNAME {
-    encode gzip
-    header X-Content-Type-Options nosniff
-    INDEX
-    @backend path /api/* /blog /blog/* /robots.txt
-    handle @backend {
-        reverse_proxy 127.0.0.1:7444
-    }
-    redir /admin /admin/ 308
-    redir /client /client/ 308
-    handle_path /admin/* {
-        root * /opt/studio/current/admin
-        try_files {path} /index.html
-        file_server
-    }
-    handle_path /client/* {
-        root * /opt/studio/current/client
-        try_files {path} /index.html
-        file_server
-    }
-    handle {
-        root * /opt/studio/current/marketing
-        try_files {path} /index.html
-        file_server
-    }
-}
-'''.replace("HOSTNAME", origin.netloc).replace("INDEX", '    header X-Robots-Tag "noindex, nofollow"\n' if config.get("noIndex") else ""))
-Path("/etc/caddy/Caddyfile").write_text("\n".join(sites))
-subprocess.run(["caddy", "validate", "--config", "/etc/caddy/Caddyfile"], check=True)
-subprocess.run(["systemctl", "restart", "caddy"], check=True)
+gateway.apply(config)
 if (root / "current").exists():
     from release import healthy
     subprocess.run(["systemctl", "restart", "qbs-api", "qbs-worker"], check=True)

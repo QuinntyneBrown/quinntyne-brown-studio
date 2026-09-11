@@ -1,7 +1,9 @@
 # Windows and LocalDB operation
 
 For the blog, forward `/blog`, `/blog/*`, and `/robots.txt` to the same API as
-`/api/*`, before the marketing SPA fallback. Set `Blog__StoragePath` to an absolute
+`/api/*`, before the marketing SPA fallback: an address the proxy does not forward is
+answered by that fallback with the marketing shell and a 200, so a missing route looks
+like a working page rather than a 404. Set `Blog__StoragePath` to an absolute
 persistent directory writable by the API account, and back it up with the studio
 database. Apply the article migration before starting API and worker. The editor
 uses studio administrator accounts. See the [blog operating notes](../docs/implementation/blog-import.md).

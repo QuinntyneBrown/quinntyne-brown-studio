@@ -9,11 +9,25 @@ from pathlib import Path
 import re
 import shutil
 import subprocess
+import sys
 import tarfile
 import tempfile
 import time
 import urllib.parse
 import urllib.request
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import gateway
+import services
+
+
+def host_config(root):
+    """The reviewed host description written by host preparation. A release without it cannot
+    know which addresses the gateway must publish, and must not activate blind."""
+    path = root / "host.json"
+    if not path.is_file():
+        raise RuntimeError("Host is not prepared: /opt/studio/host.json is missing")
+    return json.loads(path.read_text())
 
 
 def write_json(path, value):
@@ -50,16 +64,28 @@ def verify_directory(target, sha):
             raise ValueError("Incomplete release: " + required)
 
 
+def fetch(origin, path):
+    with urllib.request.urlopen(origin + path, timeout=10) as response:
+        if response.status != 200:
+            raise RuntimeError("HTTP health check failed: " + path)
+        return response.headers.get("Content-Type", ""), response.read().decode("utf-8", "replace")
+
+
 def healthy(origin):
     consecutive = 0
     for attempt in range(30):
         try:
             for service in ["qbs-api", "qbs-worker", "caddy"]:
                 subprocess.run(["systemctl", "is-active", "--quiet", service], check=True)
-            for path in ["/api/health", "/", "/admin/", "/client/", "/blog/", "/blog/feed.xml"]:
-                with urllib.request.urlopen(origin + path, timeout=10) as response:
-                    if response.status != 200:
-                        raise RuntimeError("HTTP health check failed")
+            for path in ["/api/health", "/", "/admin/", "/client/"]:
+                fetch(origin, path)
+            # A status code alone cannot tell the blog apart from the marketing shell the gateway
+            # falls back to, so check what actually answered: the page the API renders carries its
+            # own canonical link, and the feed is not HTML.
+            if f'<link rel="canonical" href="{origin}/blog" />' not in fetch(origin, "/blog")[1]:
+                raise RuntimeError("The gateway did not serve the blog from the API")
+            if "xml" not in fetch(origin, "/blog/feed.xml")[0]:
+                raise RuntimeError("The gateway did not serve the blog feed from the API")
             consecutive += 1
             if consecutive >= 2:
                 return
@@ -99,6 +125,9 @@ def prune(root, keep=5):
 
 
 def activate(root, sha, sequence, origin, rollback=False):
+    # Read before anything is stopped or switched: a host that cannot be configured must
+    # leave the running release alone.
+    host = host_config(root)
     state_path = root / "state.json"
     state = json.loads(state_path.read_text()) if state_path.exists() else {"sequence": 0, "sha": None}
     if sequence <= state["sequence"]:
@@ -106,6 +135,8 @@ def activate(root, sha, sequence, origin, rollback=False):
             if not (root / "current").exists() or (root / "current").resolve().name != sha:
                 raise RuntimeError("Recorded release is not active; explicit recovery required")
             verify_directory(root / "releases" / sha, sha)
+            services.apply()
+            gateway.apply(host)
             healthy(origin)
             return
         raise RuntimeError("Stale release rejected")
@@ -126,6 +157,10 @@ def activate(root, sha, sequence, origin, rollback=False):
         link.unlink(missing_ok=True)
         link.symlink_to(target, target_is_directory=True)
         os.replace(link, current)
+        # Service definitions and routes travel with the code that needs them: host preparation
+        # is not repeated on release, so both are rewritten here from this release's definitions.
+        services.apply()
+        gateway.apply(host)
         subprocess.run(["systemctl", "restart", "qbs-api", "qbs-worker"], check=True)
         healthy(origin)
         write_json(state_path, {"sha": sha, "sequence": sequence, "previous": previous})

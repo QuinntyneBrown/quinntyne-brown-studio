@@ -7,7 +7,7 @@ import sys
 outputs = json.loads(Path(sys.argv[1]).read_text())
 host = outputs["host"]["value"]
 script = ["#!/bin/bash", "set -euo pipefail", "install -d -m 755 /opt/studio/bin"]
-for name in ["setup-host.sh", "configure-host.py", "release.py"]:
+for name in ["setup-host.sh", "services.py", "gateway.py", "configure-host.py", "release.py"]:
     # The infrastructure runner is Windows; normalize checkout CRLF before running Bash on Linux.
     encoded = base64.b64encode((Path(__file__).parent / "linux" / name).read_text(encoding="utf-8").encode()).decode()
     script.append(f"echo '{encoded}' | base64 --decode > /opt/studio/bin/{name}")

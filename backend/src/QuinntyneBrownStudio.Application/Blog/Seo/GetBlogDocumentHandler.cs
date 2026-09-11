@@ -66,7 +66,7 @@ public sealed class GetBlogDocumentHandler(IMediator mediator, IConfiguration co
         var urls = new List<XElement>
         {
             new XElement(ns + "url",
-                new XElement(ns + "loc", $"{BaseUrl}/"),
+                new XElement(ns + "loc", BaseUrl),
                 new XElement(ns + "changefreq", "daily"),
                 new XElement(ns + "priority", "1.0"))
         };

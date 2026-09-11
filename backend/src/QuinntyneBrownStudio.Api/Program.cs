@@ -115,9 +115,11 @@ app.UseWhen(context => context.Request.Path.StartsWithSegments("/blog"), blog =>
 {
     blog.Use(async (context, next) =>
     {
-        if (context.Request.Path == "/blog")
+        // /blog is the address every canonical link, feed, and sitemap entry advertises,
+        // so it is the one that renders; the trailing-slash form settles on it.
+        if (context.Request.Path == "/blog/")
         {
-            context.Response.Redirect("/blog/" + context.Request.QueryString, permanent: true);
+            context.Response.Redirect("/blog" + context.Request.QueryString, permanent: true);
             return;
         }
         await next();

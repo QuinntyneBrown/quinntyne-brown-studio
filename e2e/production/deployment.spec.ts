@@ -3,15 +3,16 @@ import { DeployedStudio } from "../page-objects/deployed-studio";
 import { PublicSitePage } from "../page-objects/public-site-page";
 import { QuotePage } from "../page-objects/quote-page";
 import { AccountPage } from "../page-objects/account-page";
+import { BlogListPage } from "../page-objects/blog/blog-list.page";
 
 const origin = DeployedStudio.origin();
 
 // Given provisioned Azure production resources and the release activated from main,
 // when the deployed origin is visited over the certificate its gateway presents,
-// then the marketing site, calculator, administration and client applications are
-// served, the API answers published reads from Azure SQL, and administration data
+// then the marketing site, calculator, blog, administration and client applications
+// are served, the API answers published reads from Azure SQL, and administration data
 // stays refused without an account.
-test("AC-AZ-09 AC-L2-068-01 the deployed studio serves every application over trusted TLS", async ({
+test("AC-AZ-09 AC-L2-068-01 AC-L2-070-07 the deployed studio serves every application over trusted TLS", async ({
   page,
   request,
 }, info) => {
@@ -22,6 +23,8 @@ test("AC-AZ-09 AC-L2-068-01 the deployed studio serves every application over tr
   await studio.refusesAnonymously("admin/sessions");
   await studio.redirects("/admin", "/admin/");
   await studio.redirects("/client", "/client/");
+  await studio.servesTheBlog();
+  await studio.redirects("/blog/", "/blog", 301);
 
   const publicSite = new PublicSitePage(page, origin);
   await publicSite.open();
@@ -33,6 +36,13 @@ test("AC-AZ-09 AC-L2-068-01 the deployed studio serves every application over tr
   const quote = new QuotePage(page, origin);
   await quote.openLive();
   await quote.capture(info.outputPath("marketing-quote.png"));
+
+  // The studio blog is a Razor page behind the same gateway; a proxy that has not been given
+  // its route serves the marketing shell here instead, which is not a 404 and not a failure.
+  const blog = new BlogListPage(page, origin);
+  await blog.open();
+  await blog.listed();
+  await blog.capture(info.outputPath("blog-list.png"));
 
   const administrator = new AccountPage(page, origin);
   await administrator.open("login", "admin");
