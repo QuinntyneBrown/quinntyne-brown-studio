@@ -127,3 +127,4 @@ The [decision baseline](../specs/decisions.md#evidence-register) owns the remain
 | `AC-L2-070-08` | API and browser | Complete | [Public listing verification](../implementation/blog-import.md#public-listing-verification) |
 | `AC-L2-070-09` | API, browser, and native-control review | Complete | [Public listing verification](../implementation/blog-import.md#public-listing-verification) |
 | `AC-L2-070-10` | API, browser, and fallback review | Complete | [Public listing verification](../implementation/blog-import.md#public-listing-verification) |
+| `AC-L2-070-11` | API and browser | Complete | [Public listing verification](../implementation/blog-import.md#public-listing-verification) |

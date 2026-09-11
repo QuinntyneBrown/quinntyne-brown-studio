@@ -1061,13 +1061,27 @@
         }
         .marketing-blog-menu {
             display: none;
+            align-items: center;
+            justify-content: center;
+            min-width: var(--tap-target);
             min-height: var(--tap-target);
-            padding: 6px 12px;
+            padding: 0;
             border: 1px solid var(--line);
             border-radius: 2px;
             background: var(--paper);
             color: var(--ink);
-            font: 11px var(--sans);
+            cursor: pointer;
+        }
+        .marketing-blog-menu svg { display: block; }
+        .marketing-blog-menu .marketing-blog-menu-close,
+        .marketing-blog-menu.open .marketing-blog-menu-open { display: none; }
+        .marketing-blog-menu.open .marketing-blog-menu-close { display: block; }
+        .marketing-blog-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 10;
+            background: color-mix(in srgb, var(--ink) 55%, transparent);
         }
         .blog-page { max-width: 1360px; margin: auto; padding: 64px 6% 90px; }
         .blog-head { max-width: 650px; margin-bottom: 52px; }
@@ -1159,6 +1173,8 @@
                 align-items: flex-start;
             }
             .marketing-blog-nav.open { display: flex; }
+            .marketing-blog-backdrop.open { display: block; }
+            body.marketing-blog.menu-open { overflow: hidden; }
             .blog-page { padding-top: 35px; padding-bottom: 85px; }
             .marketing-blog-footer { flex-direction: column; }
         }
@@ -1178,7 +1194,14 @@
     {
     <header class="marketing-blog-header" role="banner">
         <a class="marketing-blog-brand" href="/">Quinntyne Brown<span>Photography studio</span></a>
-        <button class="marketing-blog-menu" id="hamburger-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">Menu</button>
+        <button class="marketing-blog-menu" id="hamburger-btn" type="button" aria-label="Open menu" data-open-label="Open menu" data-close-label="Close menu" aria-expanded="false" aria-controls="mobile-menu">
+            <svg class="marketing-blog-menu-open" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
+            </svg>
+            <svg class="marketing-blog-menu-close" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
         <nav class="marketing-blog-nav" id="mobile-menu" aria-label="Main navigation">
             <a href="/portfolio">Portfolio</a>
             <a href="/services">Services</a>
@@ -1189,6 +1212,7 @@
             <a href="/client/login">Client login</a>
         </nav>
     </header>
+    <div class="marketing-blog-backdrop" id="menu-backdrop"></div>
     }
     else
     {
@@ -1294,9 +1318,20 @@
     <script nonce="@cspNonce" defer>
         const btn = document.getElementById('hamburger-btn');
         const menu = document.getElementById('mobile-menu');
+        const backdrop = document.getElementById('menu-backdrop');
         btn?.addEventListener('click', () => {
             const isOpen = menu.classList.toggle('open');
             btn.setAttribute('aria-expanded', isOpen.toString());
+            btn.classList.toggle('open', isOpen);
+            if (btn.dataset.closeLabel) {
+                btn.setAttribute('aria-label', isOpen ? btn.dataset.closeLabel : btn.dataset.openLabel);
+            }
+            backdrop?.classList.toggle('open', isOpen);
+            document.body.classList.toggle('menu-open', isOpen);
+        });
+        backdrop?.addEventListener('click', () => btn.click());
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && menu?.classList.contains('open')) btn.click();
         });
     </script>
     @if (!isBlogListing)
