@@ -8,7 +8,7 @@ New backend behavior begins with a failing WebApplicationFactory integration tes
 
 Architecture and process criteria use source, configuration, build, and development-history evidence. Browser tests do not establish licensing, provider accuracy, SQL isolation, or RAW compatibility. Staging integration checks supplement the controlled acceptance tests for those boundaries.
 
-Current reconciliation: **74 Complete / 8 Partial**. Partial entries concern external camera/capacity/AI/environment qualification or unavailable historical test-first records. “Complete” applies to the criterion’s recorded local behavior/review evidence; it does not close an external gate.
+Current reconciliation: **80 Complete / 8 Partial**. Partial entries concern external camera/capacity/AI/environment qualification or unavailable historical test-first records. “Complete” applies to the criterion’s recorded local behavior/review evidence; it does not close an external gate.
 
 ## Scenario coverage
 
@@ -112,3 +112,14 @@ Current reconciliation: **74 Complete / 8 Partial**. Partial entries concern ext
 ## Evidence gates
 
 The [decision baseline](../specs/decisions.md#evidence-register) owns the remaining fixture, model, license, and environment evidence. Those fields remain `<TO SUPPLY>` until recorded evidence exists. The [implementation report](../implementation/README.md) distinguishes passing checks from unmeasured provider/capacity gates and incomplete test-first history.
+
+## Blog acceptance
+
+| Acceptance ID | Layer | Status | Evidence |
+| --- | --- | --- | --- |
+| `AC-L2-070-01` | API and browser | Complete | [Blog import verification](../implementation/blog-import.md) |
+| `AC-L2-070-02` | API and browser | Complete | [Blog import verification](../implementation/blog-import.md) |
+| `AC-L2-070-03` | API and browser | Complete | [Blog import verification](../implementation/blog-import.md) |
+| `AC-L2-070-04` | API and browser | Complete | [Blog import verification](../implementation/blog-import.md) |
+| `AC-L2-070-05` | SQL, storage/release review, and existing startup checks | Complete | [Blog import verification](../implementation/blog-import.md) |
+| `AC-L2-070-06` | API and browser | Complete | [Blog import verification](../implementation/blog-import.md) |

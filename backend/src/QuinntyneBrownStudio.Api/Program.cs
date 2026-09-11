@@ -1,3 +1,5 @@
+using QuinntyneBrownStudio.Api.Blog;
+using QuinntyneBrownStudio.Api.Blog.Middleware;
 using Azure.Monitor.OpenTelemetry.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +11,7 @@ using QuinntyneBrownStudio.Infrastructure.Persistence;
 using QuinntyneBrownStudio.Infrastructure.Processing;
 using QuinntyneBrownStudio.Infrastructure.Serialization;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions { Args = args, WebRootPath = Path.Combine(AppContext.BaseDirectory, "wwwroot") });
 var controlled =
     builder.Environment.IsEnvironment("Testing")
     || (
@@ -17,6 +19,7 @@ var controlled =
         && builder.Configuration.GetValue<bool>("Development:Controlled")
     );
 builder.Services.AddStudio(builder.Configuration, controlled, builder.Environment.EnvironmentName);
+builder.Services.AddBlog(builder.Configuration, builder.Environment);
 if (
     !controlled
     && !string.IsNullOrWhiteSpace(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"])
@@ -108,9 +111,30 @@ if (builder.Configuration.GetValue<bool>("Gateway:TrustForwardedHeaders"))
     forwarded.KnownProxies.Clear();
 }
 app.UseForwardedHeaders(forwarded);
+app.UseWhen(context => context.Request.Path.StartsWithSegments("/blog"), blog =>
+{
+    blog.Use(async (context, next) =>
+    {
+        if (context.Request.Path == "/blog")
+        {
+            context.Response.Redirect("/blog/" + context.Request.QueryString, permanent: true);
+            return;
+        }
+        await next();
+    });
+    blog.UseMiddleware<ExceptionHandlingMiddleware>();
+    blog.UseMiddleware<SecurityHeadersMiddleware>();
+    blog.UseMiddleware<ContentHashRewriteMiddleware>();
+});
+app.UseResponseCompression();
+app.UseStaticFiles();
+app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseRateLimiter();
 app.MapControllers();
+app.MapRazorPages();
+
 await using (var scope = app.Services.CreateAsyncScope())
 {
     var database = scope.ServiceProvider.GetRequiredService<IStudioDatabase>();

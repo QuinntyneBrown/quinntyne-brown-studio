@@ -1,0 +1,24 @@
+@page "/404"
+@inject IConfiguration Configuration
+@{
+    ViewBag.Title = $"Page Not Found | {Configuration["Site:SiteName"] ?? "Quinntyne Brown Studio"}";
+    Layout = "_Layout";
+}
+
+@section Head {
+<style nonce="@ViewContext.HttpContext.Items["CspNonce"]">
+.footer { padding-top: 32px; padding-bottom: 32px; }
+@@media (max-width: 767px) { .footer { padding-top: 28px; padding-bottom: 28px; } }
+@@media (max-width: 575px) { .footer { padding-top: 24px; padding-bottom: 24px; } }
+</style>
+}
+
+<div class="not-found">
+    <div class="not-found-number">404</div>
+    <h1 class="not-found-title">Page not found</h1>
+    <p class="not-found-desc">The page you're looking for doesn't exist or has been moved.</p>
+    <a href="/blog/articles" class="btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Back to articles
+    </a>
+</div>

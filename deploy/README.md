@@ -1,5 +1,11 @@
 # Windows and LocalDB operation
 
+For the blog, forward `/blog`, `/blog/*`, and `/robots.txt` to the same API as
+`/api/*`, before the marketing SPA fallback. Set `Blog__StoragePath` to an absolute
+persistent directory writable by the API account, and back it up with the studio
+database. Apply the article migration before starting API and worker. The editor
+uses studio administrator accounts. See the [blog operating notes](../docs/implementation/blog-import.md).
+
 For Azure production, use [the Azure release runbook](azure-release.md). OD-12
 supersedes this document's former production-host restriction. This runbook
 continues to describe Windows development and local operation.

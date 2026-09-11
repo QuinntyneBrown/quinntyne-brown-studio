@@ -219,6 +219,131 @@ namespace QuinntyneBrownStudio.Infrastructure.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("QuinntyneBrownStudio.Domain.Entities.Blog.Article", b =>
+                {
+                    b.Property<Guid>("ArticleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Abstract")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BodyHtml")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DatePublished")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("FeaturedImageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Published")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<int>("ReadingTimeMinutes")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
+
+                    b.HasKey("ArticleId");
+
+                    b.HasIndex("CreatedAt")
+                        .HasDatabaseName("IX_Articles_CreatedAt");
+
+                    b.HasIndex("FeaturedImageId");
+
+                    b.HasIndex("Slug")
+                        .IsUnique()
+                        .HasDatabaseName("IX_Articles_Slug");
+
+                    b.HasIndex("Published", "DatePublished")
+                        .HasDatabaseName("IX_Articles_Published_DatePublished");
+
+                    b.ToTable("Articles");
+                });
+
+            modelBuilder.Entity("QuinntyneBrownStudio.Domain.Entities.Blog.DigitalAsset", b =>
+                {
+                    b.Property<Guid>("DigitalAssetId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<long>("FileSizeBytes")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Height")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OriginalFileName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("StoredFileName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<int>("Width")
+                        .HasColumnType("int");
+
+                    b.HasKey("DigitalAssetId");
+
+                    b.HasIndex("ContentType")
+                        .HasDatabaseName("IX_DigitalAssets_ContentType");
+
+                    b.HasIndex("CreatedBy")
+                        .HasDatabaseName("IX_DigitalAssets_CreatedBy");
+
+                    b.HasIndex("StoredFileName")
+                        .IsUnique()
+                        .HasDatabaseName("IX_DigitalAssets_StoredFileName");
+
+                    b.ToTable("DigitalAssets");
+                });
+
             modelBuilder.Entity("QuinntyneBrownStudio.Infrastructure.Persistence.StoredRecord", b =>
                 {
                     b.Property<string>("Kind")
@@ -297,6 +422,25 @@ namespace QuinntyneBrownStudio.Infrastructure.Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("QuinntyneBrownStudio.Domain.Entities.Blog.Article", b =>
+                {
+                    b.HasOne("QuinntyneBrownStudio.Domain.Entities.Blog.DigitalAsset", "FeaturedImage")
+                        .WithMany()
+                        .HasForeignKey("FeaturedImageId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("FeaturedImage");
+                });
+
+            modelBuilder.Entity("QuinntyneBrownStudio.Domain.Entities.Blog.DigitalAsset", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>", null)
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

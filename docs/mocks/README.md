@@ -1,12 +1,12 @@
 # Quinntyne Brown Studio — interactive HTML mocks
 
-Open **index.html** in a modern browser. No installation, backend, build, or internet connection is required. The index links all 63 pages, create/edit variants, error and empty states, and dialog previews.
+Open **index.html** in a modern browser. No installation, backend, build, or internet connection is required. The index links all 64 pages, create/edit variants, error and empty states, and dialog previews.
 
 For consistent shared browser storage across all pages, you can also serve this directory with a static server, for example `npx --yes http-server docs/mocks`, then open the displayed address. This is optional; direct file opening is supported. Some browsers isolate or disable storage on file URLs.
 
 ## Exploring the prototype
 
-- **Marketing:** Start at `marketing/home.html`. Browse photographs, services, print prices, and packages. The quote calculator itemizes photography, mileage, rental units, parking, meals, assistants, and studio hire.
+- **Marketing:** Start at `marketing/home.html`. Browse photographs, studio blog posts, services, print prices, and packages. The quote calculator itemizes photography, mileage, rental units, parking, meals, assistants, and studio hire.
 - **Admin:** Start at `admin/dashboard.html`. Manage sessions, photographers, schedules, equipment, studios, vendors, pricing, discounts, galleries, content, and packages. Create/edit changes persist in this browser and update the public pages. Uploads and Azure photo suggestions are simulated.
 - **Client:** Start at `client/galleries.html`. Select photographs, create and edit albums, choose print sizes and quantities, and send a simulated print request. Requests appear in the client request history.
 - **Access:** Any syntactically valid email and a password of at least eight characters works. Do not enter real credentials. No credentials are saved or sent anywhere.

@@ -20,6 +20,7 @@ $env:ConnectionStrings__Studio = "Server=(localdb)\MSSQLLocalDB;Database=$databa
 $env:ASPNETCORE_URLS = "http://127.0.0.1:$ApiPort"
 $env:PublicOrigin = "https://localhost:$GatewayPort"
 $env:Development__PhotoDirectory = Join-Path $runDirectory $databaseName
+$env:Blog__StoragePath = Join-Path $runDirectory ("blog-" + $databaseName)
 $env:QBS_SMOKE_ORIGIN = $env:PublicOrigin
 $env:QBS_API_PORT = [string]$ApiPort
 $env:QBS_GATEWAY_PORT = [string]$GatewayPort

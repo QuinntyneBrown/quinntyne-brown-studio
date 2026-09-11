@@ -12,7 +12,7 @@ apt-get update
 apt-get install -y aspnetcore-runtime-10.0 libraw-bin libfontconfig1 caddy unattended-upgrades
 id qbs >/dev/null 2>&1 || useradd --system --user-group --home-dir /var/lib/studio --create-home --shell /usr/sbin/nologin qbs
 install -d -o root -g qbs -m 750 /opt/studio/config
-install -d -o qbs -g qbs -m 750 /var/lib/studio
+install -d -o qbs -g qbs -m 750 /var/lib/studio /var/lib/studio/blog-media
 if [[ ! -f /swapfile ]]; then
   fallocate -l 2G /swapfile
   chmod 600 /swapfile
@@ -31,6 +31,7 @@ Wants=network-online.target
 User=qbs
 Group=qbs
 EnvironmentFile=/opt/studio/config/production.env
+Environment=Blog__StoragePath=/var/lib/studio/blog-media
 WorkingDirectory=/opt/studio/current/${service}
 ExecStart=/usr/bin/dotnet QuinntyneBrownStudio.${assembly}.dll
 Restart=on-failure

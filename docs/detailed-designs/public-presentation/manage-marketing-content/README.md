@@ -35,6 +35,8 @@ The [shared architecture](../../architecture.md) defines authorization, wire con
 
 The [acceptance register](../../acceptance.md) lists each applicable scenario with its implementing layer and current status. Feature tests exercise the success and failure behaviors described here. No production acceptance test exists merely because its scenario is designed.
 
+The imported blog extends public presentation at `/blog/`. Its article editor reuses the Razor interface under `/blog/admin/articles`, protected by studio Identity's Administrator role. Article commands and queries live in Application, persistence uses the shared studio SQL context, and the host serves copied Razor views and media. This approved exception retains Blog's design; existing marketing fields remain bounded plain text. Sanitized Markdown belongs only to blog articles. [Import details and acceptance evidence](../../../implementation/blog-import.md) describe the source and integration.
+
 ## Requirements
 
 Source: [L2 requirements](../../../specs/L2.md). Shared interface and delivery obligations have primary coverage in the engineering-delivery slice.
@@ -46,6 +48,8 @@ Source: [L2 requirements](../../../specs/L2.md). Shared interface and delivery o
 | `L2-003` | `L1-001` | The platform shall restrict administrative content and operations to authorized studio administrators. This is a derived access requirement for the administrative application. |
 | `L2-005` | `L1-002` | Administrators shall be able to update marketing content and configure public galleries through the administrative application without editing application code. |
 | `L2-066` | `L1-001` | Platform interfaces shall follow the approved HTML prototype at 390, 768, and 1440 CSS-pixel widths across Chromium, Firefox, and WebKit, with keyboard-operable controls and readable validation and failure states. |
+
+| `L2-070` | `L1-017` | Reuse the article, search, SEO, editor, and media implementation from `C:/projects/Blog`. The approved exception preserves its Razor UI and styles; studio branding, Identity, SQL persistence, and deployment conventions apply. Newsletters, subscriptions, events, About, source accounts, and source content are excluded. |
 
 ## Diagrams
 

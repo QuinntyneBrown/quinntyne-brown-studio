@@ -1,0 +1,138 @@
+using QuinntyneBrownStudio.Domain.Exceptions.Blog;
+using QuinntyneBrownStudio.Application.Blog.Services;
+using QuinntyneBrownStudio.Domain.Entities.Blog;
+using QuinntyneBrownStudio.Application.Ports.Blog;
+using QuinntyneBrownStudio.Application.Blog.DigitalAssets.Queries;
+using MediatR;
+using SixLabors.ImageSharp;
+
+namespace QuinntyneBrownStudio.Application.Blog.DigitalAssets.Commands;
+
+public class UploadDigitalAssetCommandHandler(
+    IUnitOfWork uow,
+    IAssetStorage assetStorage,
+    IImageVariantGenerator variantGenerator) : IRequestHandler<UploadDigitalAssetCommand, DigitalAssetDto>
+{
+    private const long MaxFileSize = 10 * 1024 * 1024; // 10MB
+    private const int MaxDimension = 8192;
+    private const long MaxPixelCount = 40_000_000; // 40 megapixels
+
+    public async Task<DigitalAssetDto> Handle(UploadDigitalAssetCommand request, CancellationToken cancellationToken)
+    {
+        if (request.File.Length > MaxFileSize)
+            throw new FileTooLargeException("File size exceeds the 10 MB limit.");
+
+        var (contentType, extension) = await DetectContentTypeAsync(request.File);
+        if (contentType == null)
+            throw new BadRequestException("File type not allowed. Supported types: JPEG, PNG, WebP, GIF, AVIF.");
+
+        // Use the same GUID for both the entity ID and the stored filename so that variant
+        // filenames ({assetId}-{width}w.{format}) can be resolved from the entity ID alone.
+        var assetGuid = Guid.NewGuid();
+        var storedFileName = $"{assetGuid}{extension}";
+
+        try
+        {
+        // Persist the original file via the IAssetStorage abstraction (design Section 3.5,
+        // upload flow step 10). This decouples the handler from the filesystem so the backing
+        // store can be swapped to Azure Blob Storage or S3 by registering a different implementation.
+        using (var stream = request.File.OpenReadStream())
+            await assetStorage.SaveAsync(storedFileName, stream, cancellationToken);
+
+        // Resolve the physical path via IAssetStorage so ImageSharp can load the saved file.
+        var filePath = assetStorage.GetFilePath(storedFileName);
+
+        SixLabors.ImageSharp.ImageInfo info;
+        try { info = await Image.IdentifyAsync(filePath, cancellationToken); }
+        catch (Exception ex) when (ex is SixLabors.ImageSharp.InvalidImageContentException or SixLabors.ImageSharp.UnknownImageFormatException)
+        { throw new BadRequestException("The file could not be processed as a valid image."); }
+        if (info.Width > MaxDimension || info.Height > MaxDimension || (long)info.Width * info.Height > MaxPixelCount)
+            throw new BadRequestException("Image dimensions exceed the supported limits.");
+        Image image;
+        try
+        {
+            image = await Image.LoadAsync(filePath, cancellationToken);
+        }
+        catch (Exception)
+        {
+            throw new BadRequestException("The file could not be processed as a valid image.");
+        }
+        using var _ = image;
+        var width = image.Width;
+        var height = image.Height;
+
+        if (width > MaxDimension || height > MaxDimension)
+            throw new BadRequestException($"Image dimensions ({width}x{height}) exceed the maximum of {MaxDimension}x{MaxDimension}.");
+        if ((long)width * height > MaxPixelCount)
+            throw new BadRequestException($"Image pixel count ({(long)width * height:N0}) exceeds the maximum of {MaxPixelCount:N0}.");
+
+        // Eagerly generate WebP and AVIF responsive variants at breakpoints narrower
+        // than the original width (design Section 5.1, step 11).
+        await variantGenerator.GenerateVariantsAsync(filePath, assetGuid, width, cancellationToken);
+
+        var asset = new DigitalAsset
+        {
+            DigitalAssetId = assetGuid,
+            OriginalFileName = request.File.FileName,
+            StoredFileName = storedFileName,
+            ContentType = contentType,
+            FileSizeBytes = request.File.Length,
+            Width = width,
+            Height = height,
+            CreatedAt = DateTime.UtcNow,
+            CreatedBy = request.UserId
+        };
+
+        await uow.DigitalAssets.AddAsync(asset, cancellationToken);
+        await uow.SaveChangesAsync(cancellationToken);
+
+        return new DigitalAssetDto(
+            asset.DigitalAssetId, asset.OriginalFileName,
+            asset.ContentType, asset.FileSizeBytes, asset.Width, asset.Height,
+            assetStorage.GetUrl(asset.StoredFileName), asset.CreatedAt);
+        }
+        catch
+        {
+            await assetStorage.DeleteAsync(storedFileName, CancellationToken.None);
+            foreach (var size in new[] { 320, 640, 960, 1280, 1920 })
+                foreach (var format in new[] { "webp", "avif" })
+                    await assetStorage.DeleteAsync($"{assetGuid}-{size}w.{format}", CancellationToken.None);
+            throw;
+        }
+    }
+
+    private static async Task<(string? ContentType, string Extension)> DetectContentTypeAsync(BlogUploadFile file)
+    {
+        var buffer = new byte[12];
+        using var stream = file.OpenReadStream();
+        var bytesRead = await stream.ReadAsync(buffer);
+        if (bytesRead < 4)
+            return (null, string.Empty);
+
+        // JPEG: FF D8 FF
+        if (buffer[0] == 0xFF && buffer[1] == 0xD8 && buffer[2] == 0xFF)
+            return ("image/jpeg", ".jpg");
+
+        // PNG: 89 50 4E 47
+        if (buffer[0] == 0x89 && buffer[1] == 0x50 && buffer[2] == 0x4E && buffer[3] == 0x47)
+            return ("image/png", ".png");
+
+        // GIF: 47 49 46 38
+        if (buffer[0] == 0x47 && buffer[1] == 0x49 && buffer[2] == 0x46 && buffer[3] == 0x38)
+            return ("image/gif", ".gif");
+
+        // WebP: RIFF....WEBP (bytes 0-3 = RIFF, bytes 8-11 = WEBP)
+        if (bytesRead >= 12
+            && buffer[0] == 0x52 && buffer[1] == 0x49 && buffer[2] == 0x46 && buffer[3] == 0x46
+            && buffer[8] == 0x57 && buffer[9] == 0x45 && buffer[10] == 0x42 && buffer[11] == 0x50)
+            return ("image/webp", ".webp");
+
+        // AVIF: ISOBMFF with 'ftypavif' (ftyp at bytes 4-7, avif at bytes 8-11)
+        if (bytesRead >= 12
+            && buffer[4] == 0x66 && buffer[5] == 0x74 && buffer[6] == 0x79 && buffer[7] == 0x70
+            && buffer[8] == 0x61 && buffer[9] == 0x76 && buffer[10] == 0x69 && buffer[11] == 0x66)
+            return ("image/avif", ".avif");
+
+        return (null, string.Empty);
+    }
+}

@@ -1,5 +1,11 @@
 # Azure infrastructure and releases
 
+The API also serves `/blog/`. Its systemd service sets
+`Blog__StoragePath=/var/lib/studio/blog-media`, owned by `qbs` and retained across
+releases. Back up and restore this directory together with Azure SQL. The existing
+explicit migration step applies the article schema. See the
+[blog operating notes](../docs/implementation/blog-import.md#routes-and-operation).
+
 Production is one Ubuntu 24.04 x64 VM in Canada Central with Azure SQL Basic.
 Windows development keeps LocalDB. Infrastructure is declared in `infra/main.bicep`
 and `infra/monitoring.bicep`; GitHub Actions uses standard Bicep group deployments. Namecheap

@@ -1,0 +1,224 @@
+using QuinntyneBrownStudio.Infrastructure.Persistence;
+using Microsoft.Extensions.Logging;
+using QuinntyneBrownStudio.Domain.Entities.Blog;
+using QuinntyneBrownStudio.Application.Ports.Blog;
+using Microsoft.EntityFrameworkCore;
+
+namespace QuinntyneBrownStudio.Infrastructure.Persistence.Blog;
+
+public class ArticleRepository(StudioDbContext context) : IArticleRepository
+{
+    public async Task<Article?> GetByIdAsync(Guid articleId, CancellationToken cancellationToken = default)
+        => await context.Articles.Include(a => a.FeaturedImage).FirstOrDefaultAsync(a => a.ArticleId == articleId, cancellationToken);
+
+    public async Task<Article?> GetBySlugAsync(string slug, CancellationToken cancellationToken = default)
+        => await context.Articles.Include(a => a.FeaturedImage).FirstOrDefaultAsync(a => a.Slug == slug, cancellationToken);
+
+    public async Task<IReadOnlyList<Article>> GetAllAsync(int page, int pageSize, CancellationToken cancellationToken = default)
+        // Body and BodyHtml are nvarchar(max) columns excluded from list projections per design 02, Section 4.2.
+        // The Select projection omits those columns so the SQL query does not transfer large content for listing queries.
+        // FeaturedImage is included via the navigation property inside Select (EF Core translates it to a LEFT JOIN).
+        => await context.Articles
+            .AsNoTracking()
+            .OrderByDescending(a => a.CreatedAt)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .Select(a => new Article
+            {
+                ArticleId = a.ArticleId,
+                Title = a.Title,
+                Slug = a.Slug,
+                Abstract = a.Abstract,
+                Body = string.Empty,
+                BodyHtml = string.Empty,
+                FeaturedImageId = a.FeaturedImageId,
+                FeaturedImage = a.FeaturedImage,
+                Published = a.Published,
+                DatePublished = a.DatePublished,
+                ReadingTimeMinutes = a.ReadingTimeMinutes,
+                Version = a.Version,
+                CreatedAt = a.CreatedAt,
+                UpdatedAt = a.UpdatedAt
+            })
+            .ToListAsync(cancellationToken);
+
+    public async Task<int> GetAllCountAsync(CancellationToken cancellationToken = default)
+        => await context.Articles.CountAsync(cancellationToken);
+
+    public async Task<IReadOnlyList<Article>> GetPublishedAsync(int page, int pageSize, CancellationToken cancellationToken = default)
+        // Body and BodyHtml are nvarchar(max) columns excluded from list projections per design 02, Section 4.2.
+        => await context.Articles
+            .AsNoTracking()
+            .Where(a => a.Published)
+            .OrderByDescending(a => a.DatePublished)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .Select(a => new Article
+            {
+                ArticleId = a.ArticleId,
+                Title = a.Title,
+                Slug = a.Slug,
+                Abstract = a.Abstract,
+                Body = string.Empty,
+                BodyHtml = string.Empty,
+                FeaturedImageId = a.FeaturedImageId,
+                FeaturedImage = a.FeaturedImage,
+                Published = a.Published,
+                DatePublished = a.DatePublished,
+                ReadingTimeMinutes = a.ReadingTimeMinutes,
+                Version = a.Version,
+                CreatedAt = a.CreatedAt,
+                UpdatedAt = a.UpdatedAt
+            })
+            .ToListAsync(cancellationToken);
+
+    public async Task<int> GetPublishedCountAsync(CancellationToken cancellationToken = default)
+        => await context.Articles.CountAsync(a => a.Published, cancellationToken);
+
+    public async Task<(IReadOnlyList<Article> Articles, int TotalCount)> SearchAsync(
+        string query, int page, int pageSize, CancellationToken cancellationToken = default, string sort = "relevant")
+    {
+        if (sort == "relevant" && await IsFullTextAvailableAsync(cancellationToken))
+            return await SearchFullTextAsync(query, page, pageSize, cancellationToken);
+
+        return await SearchLikeFallbackAsync(query, page, pageSize, cancellationToken, sort);
+    }
+
+    private async Task<(IReadOnlyList<Article> Articles, int TotalCount)> SearchFullTextAsync(
+        string query, int page, int pageSize, CancellationToken cancellationToken)
+    {
+        var ftsQuery = BuildFtsQuery(query);
+        var offset = (page - 1) * pageSize;
+
+        var sql = @"
+            SELECT a.ArticleId, a.Title, a.Slug, a.Abstract,
+                   a.FeaturedImageId, a.Published, a.DatePublished,
+                   a.ReadingTimeMinutes, a.CreatedAt, a.UpdatedAt, a.Version,
+                   a.Body, a.BodyHtml
+            FROM Articles a
+            INNER JOIN CONTAINSTABLE(Articles, (Title, Abstract, Body), {0})
+                AS KEY_TBL ON a.ArticleId = KEY_TBL.[KEY]
+            WHERE a.Published = 1
+            ORDER BY KEY_TBL.RANK DESC, a.DatePublished DESC
+            OFFSET {1} ROWS FETCH NEXT {2} ROWS ONLY";
+
+        var countSql = @"
+            SELECT COUNT(*)
+            FROM Articles a
+            INNER JOIN CONTAINSTABLE(Articles, (Title, Abstract, Body), {0})
+                AS KEY_TBL ON a.ArticleId = KEY_TBL.[KEY]
+            WHERE a.Published = 1";
+
+        var articles = await context.Articles
+            .FromSqlRaw(sql, ftsQuery, offset, pageSize)
+            .Include(a => a.FeaturedImage)
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        var totalResult = await context.Database
+            .SqlQueryRaw<int>(countSql, ftsQuery)
+            .ToListAsync(cancellationToken);
+        var total = totalResult.FirstOrDefault();
+
+        return (articles, total);
+    }
+
+    private async Task<(IReadOnlyList<Article> Articles, int TotalCount)> SearchLikeFallbackAsync(
+        string query, int page, int pageSize, CancellationToken cancellationToken, string sort)
+    {
+        var terms = query.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        var articlesQuery = context.Articles
+            .Where(a => a.Published)
+            .AsQueryable();
+
+        foreach (var term in terms)
+        {
+            var t = term;
+            articlesQuery = articlesQuery.Where(a =>
+                a.Title.Contains(t) || a.Abstract.Contains(t) || a.Body.Contains(t));
+        }
+
+        var total = await articlesQuery.CountAsync(cancellationToken);
+        var sorted = sort == "oldest" ? articlesQuery.OrderBy(a => a.DatePublished) : articlesQuery.OrderByDescending(a => a.DatePublished);
+        var articles = await sorted.ThenBy(a => a.ArticleId)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .Include(a => a.FeaturedImage)
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return (articles, total);
+    }
+
+    public async Task<IReadOnlyList<Article>> GetSuggestionsAsync(
+        string query, CancellationToken cancellationToken = default)
+    {
+        if (await IsFullTextAvailableAsync(cancellationToken))
+        {
+            var ftsQuery = $"\"{query.Trim().Replace("\"", "")}*\"";
+            return await context.Articles
+                .FromSqlRaw(@"
+                    SELECT TOP 8 ArticleId, Title, Slug,
+                           Abstract, FeaturedImageId, Published,
+                           DatePublished, ReadingTimeMinutes,
+                           CreatedAt, UpdatedAt, Version, Body, BodyHtml
+                    FROM Articles
+                    WHERE Published = 1
+                      AND CONTAINS(Title, {0})
+                    ORDER BY DatePublished DESC",
+                    ftsQuery)
+                .AsNoTracking()
+                .ToListAsync(cancellationToken);
+        }
+
+        // LIKE-based fallback for environments without full-text search
+        var term = query.Trim();
+        return await context.Articles
+            .Where(a => a.Published && a.Title.Contains(term))
+            .OrderByDescending(a => a.DatePublished)
+            .Take(8)
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+    }
+
+    private bool? _fullTextAvailable;
+
+    private async Task<bool> IsFullTextAvailableAsync(CancellationToken cancellationToken)
+    {
+        if (_fullTextAvailable.HasValue) return _fullTextAvailable.Value;
+        try
+        {
+            var result = await context.Database
+                .SqlQueryRaw<int>("SELECT CAST(CASE WHEN EXISTS (SELECT 1 FROM sys.fulltext_indexes WHERE object_id = OBJECT_ID('Articles')) THEN 1 ELSE 0 END AS int) AS [Value]")
+                .ToListAsync(cancellationToken);
+            _fullTextAvailable = result.FirstOrDefault() == 1;
+        }
+        catch
+        {
+            _fullTextAvailable = false;
+        }
+        return _fullTextAvailable.Value;
+    }
+
+    private static string BuildFtsQuery(string raw)
+    {
+        var terms = raw.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                       .Select(t => $"\"{t.Replace("\"", "")}*\"");
+        return string.Join(" AND ", terms);
+    }
+
+    public async Task<bool> SlugExistsAsync(string slug, Guid? excludeId = null, CancellationToken cancellationToken = default)
+        => await context.Articles.AnyAsync(a => a.Slug == slug && (excludeId == null || a.ArticleId != excludeId), cancellationToken);
+
+    public async Task<bool> AnyByFeaturedImageIdAsync(Guid digitalAssetId, CancellationToken cancellationToken = default)
+    {
+        var filename = await context.DigitalAssets.Where(a => a.DigitalAssetId == digitalAssetId).Select(a => a.StoredFileName).SingleOrDefaultAsync(cancellationToken);
+        return await context.Articles.AnyAsync(a => a.FeaturedImageId == digitalAssetId || (filename != null && a.BodyHtml.Contains("/blog/assets/" + filename)), cancellationToken);
+    }
+
+    public async Task AddAsync(Article article, CancellationToken cancellationToken = default)
+        => await context.Articles.AddAsync(article, cancellationToken);
+
+    public void Update(Article article) => context.Articles.Update(article);
+    public void Remove(Article article) => context.Articles.Remove(article);
+}

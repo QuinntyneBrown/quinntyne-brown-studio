@@ -21,6 +21,7 @@ if (-not $env:ConnectionStrings__Studio) {
 $env:ASPNETCORE_URLS = 'http://127.0.0.1:7444'
 $env:PublicOrigin = 'https://localhost:7443'
 $env:Development__PhotoDirectory = Join-Path $studioRoot '.artifacts/photos'
+$env:Blog__StoragePath = Join-Path $studioRoot ".artifacts/blog-media"
 $apiLog = Join-Path $studioRoot '.artifacts/api.log'
 $apiError = Join-Path $studioRoot '.artifacts/api-error.log'
 dotnet build (Join-Path $studioRoot 'backend/src/QuinntyneBrownStudio.Api')

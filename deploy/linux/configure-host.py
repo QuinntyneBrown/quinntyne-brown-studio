@@ -45,7 +45,8 @@ sites.append('''HOSTNAME {
     encode gzip
     header X-Content-Type-Options nosniff
     INDEX
-    handle /api/* {
+    @backend path /api/* /blog /blog/* /robots.txt
+    handle @backend {
         reverse_proxy 127.0.0.1:7444
     }
     redir /admin /admin/ 308
