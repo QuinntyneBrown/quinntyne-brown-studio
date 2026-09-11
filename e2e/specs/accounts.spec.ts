@@ -26,17 +26,19 @@ for (const site of ["admin", "client"]) {
     page,
   }) => {
     const account = new AccountPage(page);
-    const link = site === "admin" ? "Sessions" : "Your sessions";
+    const links =
+      site === "admin" ? ["Sessions", "Blog articles"] : ["Your sessions"];
     account.role = site === "admin" ? "Administrator" : "Client";
     await account.mock();
     await account.open("login", site);
-    expect(await account.navLinkVisible(link)).toBe(false);
+    await account.heading("Welcome back.");
+    for (const link of links) await account.navLinkHidden(link);
     await account.login();
     await account.heading(site === "admin" ? "Sessions" : "Your sessions");
-    expect(await account.navLinkVisible(link)).toBe(true);
+    for (const link of links) await account.navLinkShown(link);
     await account.signOut();
     await account.heading("Welcome back.");
-    expect(await account.navLinkVisible(link)).toBe(false);
+    for (const link of links) await account.navLinkHidden(link);
   });
 }
 
@@ -111,6 +113,7 @@ test("P01 AC-L2-003-01 client credentials cannot open administration", async ({
     "This account does not have access to studio administration.",
   );
   await account.passwordRetained();
+  await account.navLinkHidden("Sessions");
 });
 
 test("P01 AC-L2-032-01 failed sign out offers a recoverable error", async ({

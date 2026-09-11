@@ -79,11 +79,26 @@ export class AccountPage {
       .getByRole("button", { name: "Sign out", exact: true })
       .click();
   }
-  async navLinkVisible(name: string) {
+  /** The compact layout folds the workspace navigation behind its Menu toggle. */
+  private async openNavigation() {
+    const toggle = this.page.getByRole("button", { name: "Menu", exact: true });
+    if (!(await toggle.isVisible())) return;
+    if ((await toggle.getAttribute("aria-expanded")) !== "true")
+      await toggle.click();
+    await expect(toggle).toHaveAttribute("aria-expanded", "true");
+  }
+  private navLink(name: string) {
     return this.page
       .getByRole("navigation", { name: "Workspace navigation" })
-      .getByRole("link", { name, exact: true })
-      .isVisible();
+      .getByRole("link", { name, exact: true });
+  }
+  async navLinkShown(name: string) {
+    await this.openNavigation();
+    await expect(this.navLink(name)).toBeVisible();
+  }
+  async navLinkHidden(name: string) {
+    await this.openNavigation();
+    await expect(this.navLink(name)).toBeHidden();
   }
   async capture(path: string) {
     await this.page.screenshot({ path, fullPage: true });
