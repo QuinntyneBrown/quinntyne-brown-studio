@@ -1,6 +1,6 @@
 # Azure infrastructure and releases
 
-The API also serves `/blog/`. Its systemd service sets
+The API also serves `/blog`. Its systemd service sets
 `Blog__StoragePath=/var/lib/studio/blog-media`, owned by `qbs` and retained across
 releases. Back up and restore this directory together with Azure SQL. The existing
 explicit migration step applies the article schema. See the
@@ -79,10 +79,25 @@ API, worker, and all frontend roots together. Successful HTTPS checks and servic
 liveness record `/opt/studio/state.json`. `/api/health` is a liveness endpoint;
 it does not independently prove storage, email, AI, or database readiness after startup.
 
+Host state a release can change travels with that release. `deploy/linux/services.py`
+holds the systemd units and the persistent directories they own, and
+`deploy/linux/gateway.py` holds the Caddy configuration and the list of addresses the
+API serves; both are shipped to `/opt/studio/bin` and re-applied on every activation,
+before the services restart. Host preparation runs once per host, so anything it alone
+applied would otherwise be missing for every later release that needed it — a release
+that adds an address, a unit setting, or a persistent directory would activate onto a
+host that has none of them. Unit files are rewritten from the definition in the
+release, so do not hand-edit them on the VM.
+
+The release health check reads the responses, not only their status codes. The gateway
+answers every unrouted address with the marketing shell, so a missing route looks
+exactly like a healthy page: `/blog` must carry the canonical link the API renders and
+`/blog/feed.xml` must be XML, or activation fails.
+
 After activation the workflow runs the browser smoke in `e2e/production` against the origin it just
-served. It checks the presented certificate, the marketing site, the calculator deep link, both
-sign-in screens, published reads answered from Azure SQL, and refusal of administration data without
-an account. A smoke failure fails the deployment job and leaves the activated release in place for
+served. It checks the presented certificate, the marketing site, the calculator deep link, the blog
+list page the API renders at `/blog`, both sign-in screens, published reads answered from Azure SQL,
+and refusal of administration data without an account. A smoke failure fails the deployment job and leaves the activated release in place for
 inspection; treat it as a production incident, not a flaky test.
 
 The managed Run Command is checked for both guest execution state and exit code.

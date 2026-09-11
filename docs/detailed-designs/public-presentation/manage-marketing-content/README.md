@@ -35,7 +35,7 @@ The [shared architecture](../../architecture.md) defines authorization, wire con
 
 The [acceptance register](../../acceptance.md) lists each applicable scenario with its implementing layer and current status. Feature tests exercise the success and failure behaviors described here. No production acceptance test exists merely because its scenario is designed.
 
-The imported blog extends public presentation at `/blog/`. Its article editor reuses the Razor interface under `/blog/admin/articles`, protected by studio Identity's Administrator role. Article commands and queries live in Application, persistence uses the shared studio SQL context, and the host serves copied Razor views and media. This approved exception retains Blog's design; existing marketing fields remain bounded plain text. Sanitized Markdown belongs only to blog articles. [Import details and acceptance evidence](../../../implementation/blog-import.md) describe the source and integration.
+The imported blog extends public presentation at `/blog`. Its article editor reuses the Razor interface under `/blog/admin/articles`, protected by studio Identity's Administrator role. Article commands and queries live in Application, persistence uses the shared studio SQL context, and the host serves copied Razor views and media. This approved exception retains Blog's design; existing marketing fields remain bounded plain text. Sanitized Markdown belongs only to blog articles. [Import details and acceptance evidence](../../../implementation/blog-import.md) describe the source and integration.
 
 ## Requirements
 

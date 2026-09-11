@@ -14,6 +14,24 @@ from unittest.mock import patch
 SOURCE = Path(__file__).resolve().parents[3] / "deploy/linux/release.py"
 
 
+class Answer:
+    """One served HTTP response, as urlopen hands it to the installer."""
+
+    def __init__(self, body, content_type):
+        self.status = 200
+        self.headers = {"Content-Type": content_type}
+        self.body = body.encode()
+
+    def read(self):
+        return self.body
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *arguments):
+        return False
+
+
 class ReleaseAcceptanceTests(unittest.TestCase):
     def setUp(self):
         spec = importlib.util.spec_from_file_location("release", SOURCE)
@@ -29,6 +47,17 @@ class ReleaseAcceptanceTests(unittest.TestCase):
         self.prepare(self.new)
         (self.root / "current").symlink_to(self.root / "releases" / self.old, target_is_directory=True)
         (self.root / "state.json").write_text(json.dumps({"sha": self.old, "sequence": 10}))
+        self.host = {"origin": "https://studio.example"}
+        (self.root / "host.json").write_text(json.dumps(self.host))
+        # Applying these touches the host itself, so the installer's use of them is observed
+        # rather than performed.
+        self.services = self.replaced(self.release.services, "apply")
+        self.gateway = self.replaced(self.release.gateway, "apply")
+
+    def replaced(self, module, name):
+        patcher = patch.object(module, name)
+        self.addCleanup(patcher.stop)
+        return patcher.start()
 
     def prepare(self, sha):
         folder = self.root / "releases" / sha
@@ -100,6 +129,51 @@ class ReleaseAcceptanceTests(unittest.TestCase):
             self.activate(rollback=True)
         self.assertEqual((self.root / "current").resolve().name, self.new)
         self.assertFalse(any("--migrate" in call.args[0] for call in run.call_args_list))
+
+    # Given a host prepared before this release published its addresses, when the release is
+    # activated, then it applies its own service definitions and gateway routes.
+    @patch("subprocess.run")
+    def test_AC_L2_070_07_activation_applies_this_releases_units_and_routes(self, run):
+        with patch.object(self.release, "healthy"):
+            self.activate()
+        self.services.assert_called_once_with()
+        self.gateway.assert_called_once_with(self.host)
+
+    # Given a release that never reached the host, when the installer runs, then it refuses
+    # rather than activating against an unknown gateway configuration.
+    @patch("subprocess.run")
+    def test_AC_L2_070_07_unprepared_host_is_refused(self, run):
+        (self.root / "host.json").unlink()
+        with patch.object(self.release, "healthy"):
+            with self.assertRaisesRegex(RuntimeError, "not prepared"):
+                self.activate()
+        self.assertEqual((self.root / "current").resolve().name, self.old)
+
+    # Given a gateway that answers the blog address with the marketing shell, when the release
+    # checks its health, then it fails: the status code alone cannot tell the two apart.
+    @patch("subprocess.run")
+    @patch("time.sleep")
+    def test_AC_L2_070_07_application_shell_at_the_blog_address_is_not_healthy(self, sleep, run):
+        shell = Answer("<!doctype html><html><body>marketing</body></html>", "text/html; charset=utf-8")
+        with patch("urllib.request.urlopen", side_effect=lambda url, timeout=10: shell):
+            with self.assertRaisesRegex(RuntimeError, "blog"):
+                self.release.healthy("https://studio.example")
+
+    # Given the blog served by the API, when the release checks its health, then it passes.
+    @patch("subprocess.run")
+    @patch("time.sleep")
+    def test_AC_L2_070_07_blog_rendered_by_the_api_is_healthy(self, sleep, run):
+        origin = "https://studio.example"
+
+        def answer(url, timeout=10):
+            if url == origin + "/blog":
+                return Answer(f'<link rel="canonical" href="{origin}/blog" />', "text/html; charset=utf-8")
+            if url == origin + "/blog/feed.xml":
+                return Answer("<rss version=\"2.0\" />", "application/rss+xml; charset=utf-8")
+            return Answer("<!doctype html>", "text/html; charset=utf-8")
+
+        with patch("urllib.request.urlopen", side_effect=answer):
+            self.release.healthy(origin)
 
     # Given an archive escaping its release directory, when unpacked, then no file escapes.
     def test_AC_AZ_05_archive_traversal_is_rejected(self):

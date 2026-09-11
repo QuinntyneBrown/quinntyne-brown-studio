@@ -39,12 +39,30 @@ export class DeployedStudio {
       "text/html",
     );
   }
-  async redirects(path: string, location: string) {
+  async redirects(path: string, location: string, status = 308) {
     const response = await this.request.get(this.origin + path, {
       maxRedirects: 0,
     });
-    expect(response.status(), path).toBe(308);
+    expect(response.status(), path).toBe(status);
     expect(response.headers()["location"], path).toBe(location);
+  }
+  /**
+   * The blog the API renders, at the address every canonical link, feed and sitemap entry
+   * advertises. A gateway that does not route `/blog` to the API still answers 200 with the
+   * marketing shell, so this asserts what answered: the page's own canonical link, and a feed
+   * that is XML rather than an application shell.
+   */
+  async servesTheBlog() {
+    const page = await this.request.get(this.origin + "/blog");
+    expect(page.status(), "/blog").toBe(200);
+    expect(await page.text(), "/blog").toContain(
+      `<link rel="canonical" href="${this.origin}/blog" />`,
+    );
+    const feed = await this.request.get(this.origin + "/blog/feed.xml");
+    expect(feed.status(), "/blog/feed.xml").toBe(200);
+    expect(feed.headers()["content-type"] ?? "", "/blog/feed.xml").toContain(
+      "xml",
+    );
   }
   /** Every name the studio claims but does not serve; each answers permanently, and only that. */
   static aliases() {

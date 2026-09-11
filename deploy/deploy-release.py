@@ -43,8 +43,12 @@ else:
         remote.az("storage", "blob", "upload", "--account-name", storage, "--auth-mode", "login",
                   "--container-name", "releases", "--name", archive.name, "--file", str(archive), "--overwrite", "false")
     arguments += ["--digest", digest]
-encoded = base64.b64encode((Path(__file__).parent / "linux/release.py").read_bytes()).decode()
-script = "set -eu\n" + f"echo '{encoded}' | base64 --decode > /opt/studio/bin/release.py\n"
+script = "set -eu\n"
+# Host state the release needs travels with it: host preparation runs once per host, releases
+# run every time, and a new address, unit setting or directory is useless without them.
+for name in ["services.py", "gateway.py", "release.py"]:
+    encoded = base64.b64encode((Path(__file__).parent / "linux" / name).read_bytes()).decode()
+    script += f"echo '{encoded}' | base64 --decode > /opt/studio/bin/{name}\n"
 script += "python3 /opt/studio/bin/release.py " + " ".join(arguments) + "\n"
 remote.execute(vm["id"], vm["location"], script, Path(".artifacts/deployment/run-command.json"))
 Path(".artifacts/deployment/release.json").write_text(json.dumps({"sha": sha, "run": sequence, "rollback": rollback}))

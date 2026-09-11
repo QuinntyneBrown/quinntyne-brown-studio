@@ -123,3 +123,4 @@ The [decision baseline](../specs/decisions.md#evidence-register) owns the remain
 | `AC-L2-070-04` | API and browser | Complete | [Blog import verification](../implementation/blog-import.md) |
 | `AC-L2-070-05` | SQL, storage/release review, and existing startup checks | Complete | [Blog import verification](../implementation/blog-import.md) |
 | `AC-L2-070-06` | API and browser | Complete | [Blog import verification](../implementation/blog-import.md) |
+| `AC-L2-070-07` | API and deployed browser smoke | Complete | [Blog import verification](../implementation/blog-import.md) |

@@ -12,7 +12,7 @@ public sealed class BlogAcceptanceTests
     {
         await using var factory = new StudioFactory();
         using var visitor = await factory.Actor(null);
-        var response = await visitor.GetAsync("/blog/");
+        var response = await visitor.GetAsync("/blog");
         Assert.True(response.IsSuccessStatusCode, await response.Content.ReadAsStringAsync());
         var html = await response.Content.ReadAsStringAsync();
         Assert.Contains("<html", html);
@@ -38,7 +38,7 @@ public sealed class BlogAcceptanceTests
         var slug = article.GetProperty("slug").GetString();
         Assert.DoesNotContain("<script", article.GetProperty("bodyHtml").GetString());
         Assert.Equal(HttpStatusCode.NotFound, (await visitor.GetAsync($"/blog/articles/{slug}")).StatusCode);
-        Assert.DoesNotContain("Wedding light", await visitor.GetStringAsync("/blog/"));
+        Assert.DoesNotContain("Wedding light", await visitor.GetStringAsync("/blog"));
         using var publish = new HttpRequestMessage(HttpMethod.Patch, $"/blog/api/articles/{id}/publish")
         {
             Content = JsonContent.Create(new { published = true })
@@ -46,7 +46,7 @@ public sealed class BlogAcceptanceTests
         publish.Headers.TryAddWithoutValidation("If-Match", create.Headers.ETag!.ToString());
         var published = await admin.SendAsync(publish);
         Assert.True(published.IsSuccessStatusCode, await published.Content.ReadAsStringAsync());
-        Assert.Contains("Wedding light", await visitor.GetStringAsync("/blog/"));
+        Assert.Contains("Wedding light", await visitor.GetStringAsync("/blog"));
         Assert.Contains("Golden hour", await visitor.GetStringAsync($"/blog/articles/{slug}"));
         Assert.Contains("/blog/articles/" + slug, await visitor.GetStringAsync("/blog/search?q=Wedding"));
         foreach (var path in new[] { "sitemap.xml", "feed.xml", "atom.xml", "feed/json", "llms.txt" })
@@ -102,6 +102,31 @@ public sealed class BlogAcceptanceTests
         var response = await admin.GetAsync(path);
         Assert.True(response.IsSuccessStatusCode, await response.Content.ReadAsStringAsync());
         Assert.Contains("text/html", response.Content.Headers.ContentType!.ToString());
+    }
+
+    // AC-L2-070-07: the published blog address is /blog, and it is the one that renders.
+    [Fact]
+    public async Task Blog_list_page_is_served_at_the_published_blog_address()
+    {
+        await using var factory = new StudioFactory();
+        using var visitor = await factory.Actor(null);
+        var response = await visitor.GetAsync("/blog");
+        Assert.True(response.IsSuccessStatusCode, await response.Content.ReadAsStringAsync());
+        var html = await response.Content.ReadAsStringAsync();
+        Assert.Contains("Studio Blog", html);
+        // The canonical link every page already advertises must be the address that renders.
+        Assert.Contains("<link rel=\"canonical\" href=\"https://localhost:7443/blog\" />", html);
+    }
+
+    // AC-L2-070-07: the trailing-slash form keeps working and settles on the one address.
+    [Fact]
+    public async Task Trailing_slash_blog_address_redirects_permanently_and_keeps_the_query()
+    {
+        await using var factory = new StudioFactory();
+        using var visitor = await factory.Actor(null);
+        var response = await visitor.GetAsync("/blog/?page=2");
+        Assert.Equal(HttpStatusCode.MovedPermanently, response.StatusCode);
+        Assert.Equal("/blog?page=2", response.Headers.Location?.OriginalString);
     }
 
     [Theory]
