@@ -17,6 +17,9 @@ const header = (eyebrow, title, description, action = '') =>
 const notice = (message, error = false) =>
   `<div class="notice${error ? ' notice--error' : ''}" role="status" aria-live="polite">${message}</div>`;
 
+const blogPost = (isoDate, date, title) =>
+  `<article class="blog-post"><a href="#"><span class="blog-post__image" aria-hidden="true"></span><time datetime="${isoDate}">${date}</time><h2>${title}</h2></a></article>`;
+
 const patterns = {
   'marketing-home': {
     published: () =>
@@ -27,6 +30,19 @@ const patterns = {
       `${header('Quinntyne Brown Studio', 'Photography with feeling.', 'Weddings, events, headshots, and family portraits across the Greater Toronto Area.')}
        ${notice('Published content is temporarily unavailable. Please try again shortly.', true)}
        <div class="empty-state"><span aria-hidden="true">◇</span><p>No galleries available yet.</p></div>`,
+  },
+  'blog-listing': {
+    published: () =>
+      `<section class="blog-page"><header class="blog-head"><p class="page__eyebrow">From the studio</p><h1>Blog</h1><p>Notes on making photographs feel easy, personal, and true to the people in them.</p></header><div class="blog-grid">${[
+        ['2026-08-28', 'August 28, 2026', 'How to make room for the unscripted moments'],
+        ['2026-08-14', 'August 14, 2026', 'What a calm wedding morning looks like in photographs'],
+        ['2026-07-30', 'July 30, 2026', 'A guide to choosing a place for family portraits'],
+        ['2026-07-11', 'July 11, 2026', 'Why the best event photographs happen between the big moments'],
+        ['2026-06-19', 'June 19, 2026', 'Headshots that still feel like you'],
+        ['2026-05-29', 'May 29, 2026', 'From ceremony to last dance: building a wedding timeline'],
+      ].map(([isoDate, date, title]) => blogPost(isoDate, date, title)).join('')}</div></section>`,
+    empty: () =>
+      `<section class="blog-page"><header class="blog-head"><p class="page__eyebrow">From the studio</p><h1>Blog</h1><p>Notes on making photographs feel easy, personal, and true to the people in them.</p></header><div class="blog-empty"><h2>No articles yet</h2><p>Articles will appear here once they are published. Check back soon.</p></div></section>`,
   },
   'quote-calculator': {
     calculated: () => `${header('Your estimate', 'Your session, thoughtfully priced.', 'Explore a live estimate, shaped around your plans.')}

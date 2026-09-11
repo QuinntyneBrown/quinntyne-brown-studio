@@ -558,6 +558,21 @@
       ]
     },
     {
+      "id": "blog-listing",
+      "name": "Blog listing",
+      "description": "The public studio journal: a compact introduction followed by image-first article links.",
+      "scenarios": [
+        {
+          "id": "published",
+          "name": "Published articles"
+        },
+        {
+          "id": "empty",
+          "name": "No published articles"
+        }
+      ]
+    },
+    {
       "id": "quote-calculator",
       "name": "Quote calculator",
       "description": "The live quote screen: session inputs beside a recalculating total.",
