@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace QuinntyneBrownStudio.AcceptanceTests;
 
-// Acceptance tests: AC-L2-070-01, AC-L2-070-03, AC-L2-070-06 through AC-L2-070-10.
+// Acceptance tests: AC-L2-070-01, AC-L2-070-03, AC-L2-070-06 through AC-L2-070-11.
 public sealed class BlogAcceptanceTests
 {
     [Fact]
@@ -21,6 +21,11 @@ public sealed class BlogAcceptanceTests
         Assert.Contains("From the studio", html);
         Assert.Contains("No articles yet", html);
         Assert.Contains("href=\"/blog/search\"", html);
+        // AC-L2-070-11: the overlay menu ships its dimming backdrop and its close icon.
+        Assert.Contains("class=\"marketing-blog-backdrop\"", html);
+        Assert.Contains("class=\"marketing-blog-menu-close\"", html);
+        Assert.Contains("data-close-label=\"Close menu\"", html);
+        Assert.DoesNotContain("aria-controls=\"mobile-menu\">Menu</button>", html);
         Assert.Equal(HttpStatusCode.NotFound, (await visitor.GetAsync("/blog/articles/missing")).StatusCode);
     }
 
