@@ -2,7 +2,7 @@
 
 Source: `C:/projects/Blog`, commit `a432cf54965f1b9eaf1524f315739826ba1a5e07` (MIT, Quinntyne Brown). Source files are copied, not linked to the source checkout. Article entities, repositories, commands, queries, validation, Markdown sanitization, image processing, SEO generation, Razor layouts, and editor pages are reused.
 
-User-approved exceptions preserve Razor for the imported blog. Public listings at `/blog` and `/blog/articles` now follow the approved [studio mock](../mocks/marketing/blog.html), with a corresponding pattern in the standalone design system. Article detail, search, and administration retain the imported interface and styles. These exceptions apply only to the imported blog. Existing studio architecture and conventions continue elsewhere.
+User-approved exceptions preserve Razor for the imported blog. Public listings at `/blog` and `/blog/articles` now follow the approved [studio mock](../mocks/marketing/blog.html), with a corresponding pattern in the standalone design system. Article detail, search, and administration retain the imported interface and styles; studio-styled mocks for those screens exist under [`docs/mocks`](../mocks/blog-layout-plan.md#follow-up-article-search-and-editor-pages) as the visual reference should they be restyled. These exceptions apply only to the imported blog. Existing studio architecture and conventions continue elsewhere.
 
 Source users, uploaded images, databases, secrets, newsletters, events, subscriptions, and About are not imported. Studio Identity protects the editor. Tables are added to the existing studio database through explicit migrations.
 

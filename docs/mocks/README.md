@@ -1,13 +1,13 @@
 # Quinntyne Brown Studio — interactive HTML mocks
 
-Open **index.html** in a modern browser. No installation, backend, build, or internet connection is required. The index links all 64 pages, create/edit variants, error and empty states, and dialog previews.
+Open **index.html** in a modern browser. No installation, backend, build, or internet connection is required. The index links all 69 pages, create/edit variants, error and empty states, and dialog previews.
 
 For consistent shared browser storage across all pages, you can also serve this directory with a static server, for example `npx --yes http-server docs/mocks`, then open the displayed address. This is optional; direct file opening is supported. Some browsers isolate or disable storage on file URLs.
 
 ## Exploring the prototype
 
-- **Marketing:** Start at `marketing/home.html`. Browse photographs, studio blog posts, services, print prices, and packages. The quote calculator itemizes photography, mileage, rental units, parking, meals, assistants, and studio hire.
-- **Admin:** Start at `admin/dashboard.html`. Manage sessions, photographers, schedules, equipment, studios, vendors, pricing, discounts, galleries, content, and packages. Create/edit changes persist in this browser and update the public pages. Uploads and Azure photo suggestions are simulated.
+- **Marketing:** Start at `marketing/home.html`. Browse photographs, services, print prices, and packages. The blog lists published stories, opens each one as a full article with its featured photograph and related stories, and searches published stories by keyword with relevance or date ordering. The quote calculator itemizes photography, mileage, rental units, parking, meals, assistants, and studio hire.
+- **Admin:** Start at `admin/dashboard.html`. Manage sessions, photographers, schedules, equipment, studios, vendors, pricing, discounts, galleries, content, packages, blog articles, and blog media. Create/edit changes persist in this browser and update the public pages. Uploads and Azure photo suggestions are simulated.
 - **Client:** Start at `client/galleries.html`. Select photographs, create and edit albums, choose print sizes and quantities, and send a simulated print request. Requests appear in the client request history.
 - **Access:** Any syntactically valid email and a password of at least eight characters works. Do not enter real credentials. No credentials are saved or sent anywhere.
 - **States:** Use the bottom preview selector or index links. `?state=save-error` and similar links reproduce failures; `?dialog=photo` and other dialog links open the relevant dialog. For recoverable submit/AI failures, the first attempt fails and a retry succeeds. Required-field and real input errors must be corrected.
@@ -24,6 +24,8 @@ Active photographers appear in quoting. In this prototype, a session or unavaila
 Equipment inventory tracks individual rental rates; the quote calculator uses the configurable standard rental-unit rate in **Quote rates**. Studios contribute their own hourly fee. Published gallery/content/package changes appear publicly; draft content does not replace the public copy. The first selected gallery photograph is its cover.
 
 Uploads accept common photos and camera RAW formats, with a 250 MB per-file demo limit. File names and sizes are inspected locally; file contents are not uploaded or persisted. “Try a sample batch” demonstrates four successes and two retryable failures. AI recommendations use fixed sample reasons and require human selection. No Azure service is called.
+
+Blog articles are written in Markdown with a small formatting toolbar; the prototype renders paragraphs, `##`/`###` headings, lists, quotes, bold, italic, and inline code. The web address is created from the title when an article is first saved. Drafts stay private: the public post page answers a draft or unknown article with a 404 view, and search covers published articles only. Featured photographs are chosen from the blog media library, whose uploads accept JPEG, PNG, WebP, and AVIF up to 10 MB; file names and sizes are inspected locally and a bundled photograph stands in for each accepted upload.
 
 Session photographs are representative fixed sample collections. Admin session records and marketing galleries are editable, while the client gallery is a fictional signed-in client’s prepared example. New session records do not ingest actual photographs. Password resets, contact requests, and print requests never send email. System error pages do not enforce access control.
 
@@ -44,7 +46,7 @@ Every other catalogued screen maps to a requirement and a feature design. The vi
 - `index.html`: Complete page, state, and dialog catalog.
 - `marketing/`, `admin/`, `client/`: Individual HTML page entry points.
 - `assets/catalog.js`: Page and state coverage manifest.
-- `assets/data.js`: Shared seed records and photograph metadata.
+- `assets/data.js`: Shared seed records, blog articles and media, and photograph metadata.
 - `assets/app.js`: Shared rendering and interactive behavior; no modules or fetch needed for file URLs.
 - `assets/styles.css`: Shared responsive layouts and visual language, with system fonts.
 - `assets/photos/`: Bundled stock photography and license/source attribution. These images are not the studio’s work.
