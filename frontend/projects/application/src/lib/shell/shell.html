@@ -51,17 +51,19 @@
         [class.shell__side-nav--open]="auth.menu()"
         aria-label="Workspace navigation"
       >
-        @for (link of site === 'admin' ? adminLinks : clientLinks; track link[1]) {
-          <a
-            [routerLink]="link[1]"
-            routerLinkActive="shell__link--active"
-            [routerLinkActiveOptions]="{ exact: true }"
-            (click)="auth.menu.set(false)"
-            >{{ link[0] }}</a
-          >
-        }
-        @if (site === 'admin') {
-          <a href="/blog/admin/articles">Blog articles</a>
+        @if (authorized()) {
+          @for (link of site === 'admin' ? adminLinks : clientLinks; track link[1]) {
+            <a
+              [routerLink]="link[1]"
+              routerLinkActive="shell__link--active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="auth.menu.set(false)"
+              >{{ link[0] }}</a
+            >
+          }
+          @if (site === 'admin') {
+            <a href="/blog/admin/articles">Blog articles</a>
+          }
         }
       </nav>
     </aside>

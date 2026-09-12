@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { SITE } from '../site.token';
 import { ACCOUNT_SERVICE } from '../account.token';
@@ -12,6 +12,10 @@ import { Notice } from '@qbs/components';
 export class Shell {
   site = inject(SITE);
   auth = inject(ACCOUNT_SERVICE);
+  role = this.site === 'admin' ? 'Administrator' : 'Client';
+  authorized = computed(
+    () => this.auth.account().authenticated && this.auth.account().roles.includes(this.role),
+  );
   publicLinks = [
     ['Portfolio', '/portfolio'],
     ['Services', '/services'],
