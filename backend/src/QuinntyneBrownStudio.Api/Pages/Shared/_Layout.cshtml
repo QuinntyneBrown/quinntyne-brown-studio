@@ -1079,7 +1079,7 @@
         .marketing-blog-backdrop {
             display: none;
             position: fixed;
-            inset: 0;
+            inset: var(--marketing-blog-overlay-top, 0) 0 0;
             z-index: 10;
             background: color-mix(in srgb, var(--ink) 55%, transparent);
         }
@@ -1157,12 +1157,15 @@
             .blog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
         @@media (max-width: 780px) {
-            .marketing-blog-header { min-height: 84px; position: relative; z-index: 20; }
+            /* The overlay hangs from the header and the backdrop starts at the same
+               offset, so the light surface runs unbroken to the top of the viewport. */
+            .marketing-blog { --marketing-blog-overlay-top: 83px; }
+            .marketing-blog-header { min-height: 84px; position: relative; z-index: 20; background: var(--paper); }
             .marketing-blog-menu { display: inline-flex; align-items: center; }
             .marketing-blog-nav {
                 display: none;
                 position: absolute;
-                top: 83px;
+                top: var(--marketing-blog-overlay-top);
                 left: -7%;
                 right: -7%;
                 padding: 25px;

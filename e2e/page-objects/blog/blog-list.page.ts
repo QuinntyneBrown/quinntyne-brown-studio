@@ -12,6 +12,7 @@ export class BlogListPage {
   readonly menuOpenIcon: Locator;
   readonly menuCloseIcon: Locator;
   readonly menuBackdrop: Locator;
+  readonly header: Locator;
   readonly navigation: Locator;
   readonly footerSearch: Locator;
 
@@ -32,6 +33,7 @@ export class BlogListPage {
     this.menuOpenIcon = this.menuButton.locator(".marketing-blog-menu-open");
     this.menuCloseIcon = this.menuButton.locator(".marketing-blog-menu-close");
     this.menuBackdrop = page.locator(".marketing-blog-backdrop");
+    this.header = page.locator(".marketing-blog-header");
     this.navigation = page.getByRole("navigation", { name: "Main navigation" });
     this.footerSearch = page.getByRole("contentinfo").getByRole("link", { name: "Search articles" });
   }
@@ -94,6 +96,7 @@ export class BlogListPage {
     await expect(this.menuBackdrop).toBeVisible();
     expect(await this.backdropOpacity()).toBeGreaterThan(0);
     expect(await this.backdropOpacity()).toBeLessThan(1);
+    await this.assertOverlayReachesTop();
 
     const backdrop = await this.menuBackdrop.boundingBox();
     if (!backdrop) throw new Error("The open overlay menu has no backdrop to dismiss.");
@@ -102,6 +105,27 @@ export class BlogListPage {
     await expect(this.menuBackdrop).toBeHidden();
     await expect(this.menuButton).toHaveAttribute("aria-expanded", "false");
     await expect(this.menuOpenIcon).toBeVisible();
+  }
+
+  /**
+   * AC-L2-070-12: the open overlay is one unbroken light surface from the top
+   * edge of the viewport. The brand and close control sit on the same undimmed
+   * surface as the menu links, so the backdrop dims only the listing below.
+   */
+  private async assertOverlayReachesTop() {
+    const header = await this.header.boundingBox();
+    const backdrop = await this.menuBackdrop.boundingBox();
+    if (!header || !backdrop) throw new Error("The open overlay menu has no header or backdrop.");
+    expect(header.y).toBe(0);
+    expect(backdrop.y).toBeGreaterThanOrEqual(header.y + header.height - 1);
+
+    const dimmed = await this.page.evaluate((middle) => {
+      const width = document.documentElement.clientWidth;
+      return [1, width - 1]
+        .map((x) => document.elementFromPoint(x, middle))
+        .map((element) => Boolean(element?.closest(".marketing-blog-backdrop")));
+    }, header.height / 2);
+    expect(dimmed).toEqual([false, false]);
   }
 
   private async backdropOpacity() {
