@@ -1,0 +1,175 @@
+@page "/contact"
+@model ContactModel
+@using System.Text.Json
+@using System.Text.RegularExpressions
+@using QuinntyneBrownStudio.Application.Presentation
+@using QuinntyneBrownStudio.Domain.Enums
+@inject IConfiguration Configuration
+@{
+    var origin = (Configuration["PublicOrigin"] ?? "https://localhost:7443").TrimEnd('/');
+    ViewBag.Title = $"Contact | {Configuration["Site:SiteName"] ?? "Quinntyne Brown Studio"}";
+    ViewBag.Description = Model.View.Introduction;
+    ViewBag.CanonicalUrl = origin + "/contact";
+    ViewBag.OgType = "website";
+    ViewBag.IsMarketingShell = true;
+    ViewBag.ActivePath = "/contact";
+    var details = Model.View.Details;
+    var home = Model.View.Studios.FirstOrDefault();
+    var telephone = details?.Phone == null ? null : Regex.Replace(details.Phone, @"\D", "");
+    var telephoneHref = telephone == null ? null : "tel:" + (details!.Phone!.TrimStart().StartsWith('+') || telephone.Length != 10 ? "+" + telephone : "+1" + telephone);
+    var interests = new[] { (ServiceKind.Wedding, "Wedding"), (ServiceKind.Event, "Event"), (ServiceKind.Headshot, "Headshots"), (ServiceKind.FamilyPortrait, "Family portraits") };
+    var structuredData = JsonSerializer.Serialize(new Dictionary<string, object?>
+    {
+        ["@context"] = "https://schema.org",
+        ["@type"] = "ContactPage",
+        ["name"] = Model.View.Heading,
+        ["description"] = Model.View.Introduction,
+        ["url"] = origin + "/contact",
+        ["about"] = new Dictionary<string, object?>
+        {
+            ["@type"] = "Organization",
+            ["name"] = Configuration["Site:SiteName"] ?? "Quinntyne Brown Studio",
+            ["url"] = origin,
+            ["email"] = details?.Email,
+            ["telephone"] = details?.Phone,
+        },
+    }, new JsonSerializerOptions { WriteIndented = true });
+}
+
+<div class="marketing-page">
+    <header class="marketing-page-head">
+        <p class="blog-eyebrow">Get in touch</p>
+        <h1>@Model.View.Heading</h1>
+        <p>@Model.View.Introduction</p>
+    </header>
+
+    <div class="marketing-split">
+        <form class="marketing-form" method="post" novalidate>
+            @if (Model.Sent != null)
+            {
+                <div class="marketing-notice marketing-notice-success" role="status">
+                    <strong>Reference @Model.Sent</strong> — thank you. Your message was sent, and the studio will follow up. No payment or booking is made.
+                </div>
+            }
+            else
+            {
+                <div class="marketing-notice">@Model.View.ReplyNotice</div>
+            }
+            <div class="marketing-form-grid">
+                <label class="marketing-field"><span>Your name *</span><input name="name" type="text" required maxlength="200" autocomplete="name" /></label>
+                <label class="marketing-field"><span>Email address *</span><input name="email" type="email" required maxlength="254" autocomplete="email" /></label>
+            </div>
+            <div class="marketing-form-grid">
+                <label class="marketing-field"><span>Phone (optional)</span><input name="phone" type="tel" maxlength="50" autocomplete="tel" /><span class="marketing-field-hint">Only if you’d rather talk it through.</span></label>
+                <label class="marketing-field"><span>I’m interested in</span><select name="interest">
+                    @foreach (var (kind, label) in interests)
+                    {
+                        <option value="@kind">@label</option>
+                    }
+                </select></label>
+            </div>
+            <label class="marketing-field"><span>Tell us a little about your plans *</span><textarea name="message" required maxlength="4000"></textarea></label>
+            <label class="marketing-visually-hidden" aria-hidden="true">Website <input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+            <label class="marketing-checkline"><input name="consent" type="checkbox" value="true" required /> I’m happy for the studio to contact me about this request.</label>
+            <div class="marketing-form-actions">
+                <button class="marketing-button" type="submit">Send your message <span aria-hidden="true">↗</span></button>
+                <span class="marketing-muted">No payment or booking is made.</span>
+            </div>
+        </form>
+
+        <aside class="marketing-panel marketing-panel-soft contact-card">
+            <p class="blog-eyebrow">Toronto, Ontario</p>
+            <h2>Come say hello.</h2>
+            <dl class="detail-list">
+                @if (details?.Email != null)
+                {
+                    <div class="detail-list__row"><dt>Email</dt><dd><a href="mailto:@details.Email">@details.Email</a></dd></div>
+                }
+                @if (details?.Phone != null)
+                {
+                    <div class="detail-list__row"><dt>Phone</dt><dd><a href="@Html.Raw(telephoneHref)">@details.Phone</a></dd></div>
+                }
+                <div class="detail-list__row"><dt>Studio</dt><dd>
+                    @if (home != null)
+                    {
+                        @home.Name<br />@home.Address
+                    }
+                    else
+                    {
+                        <text>On location, by appointment</text>
+                    }
+                </dd></div>
+                @if (details?.Hours != null)
+                {
+                    <div class="detail-list__row"><dt>Hours</dt><dd>@details.Hours<br /><span class="marketing-muted">Sessions by appointment</span></dd></div>
+                }
+                @if (details?.ReplyNote != null)
+                {
+                    <div class="detail-list__row"><dt>Replies</dt><dd>@details.ReplyNote</dd></div>
+                }
+            </dl>
+        </aside>
+    </div>
+
+    <section class="marketing-section">
+        <div class="marketing-section-head">
+            <div>
+                <p class="blog-eyebrow">Where to find us</p>
+                <h2>@ContactPageCopy.PlacesHeading(Model.View.Studios.Length)</h2>
+            </div>
+            <a class="marketing-text-link" href="/quote">Plan a location <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="places">
+            <div class="map" role="img" aria-label="Illustrative map showing the @(home?.Name ?? "studio") location">
+                <svg viewBox="0 0 600 450" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><rect width="600" height="450" fill="#f5f5f0"/><rect y="362" width="600" height="88" fill="#e2e6e1"/><rect x="58" y="72" width="152" height="108" rx="4" fill="#e8ece0"/><g stroke="#ffffff" stroke-width="14" stroke-linecap="round"><line x1="0" y1="150" x2="600" y2="140"/><line x1="0" y1="262" x2="600" y2="252"/><line x1="140" x2="150" y2="362"/><line x1="300" x2="310" y2="362"/><line x1="452" x2="462" y2="362"/></g><g stroke="#ffffff" stroke-width="6" stroke-linecap="round"><line x1="0" y1="60" x2="600" y2="52"/><line x1="0" y1="320" x2="600" y2="312"/><line x1="222" x2="230" y2="362"/><line x1="382" x2="390" y2="362"/><line x1="522" x2="530" y2="362"/></g><text x="78" y="132" font-family="Arial,Helvetica,sans-serif" font-size="11" letter-spacing="2" fill="#74766e">PARK</text><text x="372" y="412" font-family="Arial,Helvetica,sans-serif" font-size="11" letter-spacing="2" fill="#74766e">LAKE ONTARIO</text><g transform="translate(305 206)"><ellipse cy="34" rx="16" ry="5" fill="#00000014"/><circle cy="-14" r="18" fill="#242620"/><path d="M-15 -4 L0 30 L15 -4Z" fill="#242620"/><circle cy="-14" r="7" fill="#f5f5f0"/></g></svg>
+                <span class="map__label">@(home?.Name ?? "Studio") · Toronto</span>
+            </div>
+            <div>
+                @if (Model.View.Studios.Length == 0)
+                {
+                    <div class="marketing-empty">
+                        <div class="marketing-empty-symbol" aria-hidden="true">◇</div>
+                        <h2>Studio spaces coming soon</h2>
+                        <p>We photograph on location while our studio spaces are being prepared.</p>
+                    </div>
+                }
+                @foreach (var studio in Model.View.Studios)
+                {
+                    <div class="place">
+                        <div><h3>@studio.Name</h3><p class="marketing-muted">@studio.Address</p></div>
+                        <div class="place__meta">@if (studio.IsBase) { <span class="marketing-badge">Base studio</span> }<span>By appointment</span></div>
+                    </div>
+                }
+                <div class="place">
+                    <div><h3>@ContactPageCopy.OnLocationTitle</h3><p class="marketing-muted">@ContactPageCopy.OnLocationBody</p></div>
+                    <div class="place__meta"><span class="marketing-badge">Anywhere</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="marketing-section">
+        <p class="blog-eyebrow">Before you write</p>
+        <h2 class="marketing-section-title">A few things people ask first.</h2>
+        <div class="steps">
+            @foreach (var question in Model.View.Questions)
+            {
+                <div class="faq"><h3>@question.Question</h3><p>@question.Answer</p></div>
+            }
+        </div>
+    </section>
+
+    <section class="marketing-section quote-strip">
+        <div>
+            <p class="blog-eyebrow">Prefer to start with numbers?</p>
+            <h2>Build an estimate in about a minute.</h2>
+        </div>
+        <a class="marketing-button" href="/quote">Find your quote <span aria-hidden="true">↗</span></a>
+    </section>
+</div>
+
+@section Head {
+    <script type="application/ld+json">
+    @Html.Raw(structuredData)
+    </script>
+}

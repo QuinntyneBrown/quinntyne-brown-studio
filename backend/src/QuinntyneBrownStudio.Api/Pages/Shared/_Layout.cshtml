@@ -1009,6 +1009,7 @@
             --soft: #f5f5f0;
             --paper: #ffffff;
             --accent: #5b654c;
+            --danger: #a1372e;
             --space-1: 6px;
             --space-2: 12px;
             --space-3: 20px;
@@ -1219,6 +1220,64 @@
             .marketing-page h1 { font-size: 40px; }
             .marketing-hero-image { height: 320px; }
             .steps { grid-template-columns: 1fr; }
+        }
+        /* Contact page: form, contact card, studio spaces, map, and questions. */
+        .marketing-page-head { margin-bottom: 36px; }
+        .marketing-page-head h1 { font-size: 46px; }
+        .marketing-page-head p { color: var(--muted); margin-top: 12px; max-width: 660px; }
+        .marketing-section-title { margin-bottom: 36px; }
+        .marketing-split { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr); gap: 40px; align-items: start; }
+        .marketing-panel { border: 1px solid var(--line); padding: 28px; background: var(--paper); border-radius: 3px; }
+        .marketing-panel-soft { background: var(--soft); border: 0; }
+        .marketing-panel h2 { font-size: 29px; margin-bottom: 18px; }
+        .marketing-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; }
+        .marketing-field { display: block; margin-bottom: 19px; }
+        .marketing-field > span { display: block; font-size: 11px; font-weight: 600; letter-spacing: .02em; margin-bottom: 7px; }
+        .marketing-field input, .marketing-field select, .marketing-field textarea { width: 100%; min-height: var(--tap-target); border: 1px solid #d7d9ce; padding: 11px 12px; border-radius: 2px; background: var(--paper); color: var(--ink); font: inherit; }
+        .marketing-field textarea { min-height: 110px; resize: vertical; }
+        .marketing-field-hint { display: block; font-size: 11px; color: var(--muted); margin-top: 5px; font-weight: 400; letter-spacing: 0; }
+        .marketing-field-error { display: block; font-size: 11px; color: var(--danger); margin-top: 5px; font-weight: 400; letter-spacing: 0; }
+        .marketing-field input[aria-invalid="true"], .marketing-field select[aria-invalid="true"], .marketing-field textarea[aria-invalid="true"] { border-color: var(--danger); }
+        .marketing-checkline { display: flex; gap: 10px; align-items: center; font-size: 12px; min-height: var(--tap-target); }
+        .marketing-checkline input { width: 16px; height: 16px; margin: 0; accent-color: var(--ink); }
+        .marketing-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
+        .marketing-form-actions { display: flex; gap: 12px; margin-top: 30px; padding-top: 24px; border-top: 1px solid var(--line); align-items: center; flex-wrap: wrap; }
+        .marketing-notice { border: 1px solid #dcded2; background: #f5f6ef; padding: 15px 18px; font-size: 12px; margin-bottom: 24px; }
+        .marketing-notice-error { background: #fdf3f1; border-color: #efd4ce; color: var(--danger); }
+        .marketing-notice-success { background: #f0f6f0; border-color: #d2e4d2; color: #3b6247; }
+        .marketing-badge { display: inline-block; font-size: 10px; padding: 4px 9px; background: #f0f1ea; color: #626953; border-radius: 3px; white-space: nowrap; }
+        .contact-card h2 { margin-bottom: 8px; }
+        .detail-list { margin: 0; }
+        .detail-list__row { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid #e0e1d8; font-size: 13px; }
+        .detail-list__row:last-child { border-bottom: 0; }
+        .detail-list__row dt { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding-top: 3px; }
+        .detail-list__row dd { margin: 0; overflow-wrap: anywhere; }
+        .detail-list__row a { border-bottom: 1px solid var(--ink); }
+        .places { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: start; }
+        .place { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+        .place:first-child { padding-top: 0; }
+        .place h3 { font-family: var(--serif); font-size: 23px; font-weight: 400; letter-spacing: -.02em; margin-bottom: 6px; }
+        .place__meta { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0; font-size: 12px; color: var(--muted); }
+        .map { aspect-ratio: 4 / 3; background: var(--soft); position: relative; overflow: hidden; }
+        .map svg { width: 100%; height: 100%; display: block; }
+        .map__label { position: absolute; left: 18px; bottom: 18px; background: var(--paper); padding: 9px 13px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 4px 18px rgb(0 0 0 / 6%); }
+        .faq { border-top: 1px solid var(--line); padding-top: 20px; }
+        .faq h3 { font-family: var(--serif); font-size: 21px; font-weight: 400; letter-spacing: -.02em; margin-bottom: 10px; }
+        .faq p { color: var(--muted); font-size: 13px; }
+        @@media (max-width: 1100px) {
+            .marketing-split { gap: 24px; grid-template-columns: minmax(0, 1.35fr) minmax(250px, 1fr); }
+        }
+        @@media (max-width: 780px) {
+            .marketing-page-head h1 { font-size: 36px; }
+            .marketing-split { grid-template-columns: 1fr; }
+            .marketing-form-grid { grid-template-columns: 1fr; }
+            .marketing-panel { padding: 22px; }
+            .places { grid-template-columns: 1fr; }
+        }
+        @@media (max-width: 480px) {
+            .detail-list__row { grid-template-columns: 1fr; gap: 4px; }
+            .place { flex-direction: column; gap: 10px; }
+            .place__meta { flex-direction: row; align-items: center; }
         }
         @@media (max-width: 1100px) {
             .marketing-blog-nav { gap: 16px; }

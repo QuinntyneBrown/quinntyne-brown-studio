@@ -29,9 +29,7 @@ public sealed class AboutPageAcceptanceTests
         var html = await Page(visitor);
         Assert.Contains("Photographs with room to breathe.", html);
         Assert.Contains("Published introduction.", html);
-        // Razor encodes typographic punctuation as entities, so the story heading is checked around the apostrophe.
-        Assert.Contains("A borrowed camera, a friend", html);
-        Assert.Contains("s wedding, and a lot of listening.", html);
+        Assert.Contains("A borrowed camera, a friend’s wedding, and a lot of listening.", html);
         foreach (var fixture in new[]
         {
             "Less posing. More being.", "Planning that feels like a conversation.", "Honest pricing, from the first estimate.",
@@ -41,8 +39,8 @@ public sealed class AboutPageAcceptanceTests
         var founder = html.IndexOf("Quinntyne Brown</h3>", StringComparison.Ordinal);
         var second = html.IndexOf("Mara Adeyemi</h3>", StringComparison.Ordinal);
         Assert.True(founder > 0 && second > founder, "Active photographers render in creation order.");
-        Assert.Equal(1, Count(html, "Founder &amp; lead photographer"));
-        Assert.True(html.IndexOf("Founder &amp; lead photographer", StringComparison.Ordinal) < second);
+        Assert.Equal(1, Count(html, "Founder & lead photographer"));
+        Assert.True(html.IndexOf("Founder & lead photographer", StringComparison.Ordinal) < second);
         Assert.DoesNotContain("Retired Photographer", html);
         Assert.Contains("2 photographers", html);
         foreach (var link in new[] { "href=\"/contact\"", "href=\"/portfolio\"", "href=\"/quote\"" })
@@ -247,7 +245,8 @@ public sealed class AboutPageAcceptanceTests
         var html = await response.Content.ReadAsStringAsync();
         Assert.True(response.StatusCode == HttpStatusCode.OK, $"{response.StatusCode}: {html}");
         Assert.Contains("text/html", response.Content.Headers.ContentType!.ToString());
-        return html;
+        // Razor encodes punctuation such as dashes and apostrophes as entities; assertions read the decoded text.
+        return System.Net.WebUtility.HtmlDecode(html);
     }
 
     private static string Between(string html, string start, string end)
