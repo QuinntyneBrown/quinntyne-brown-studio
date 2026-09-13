@@ -17,20 +17,34 @@
       aria-label="Main navigation"
     >
       @for (link of publicLinks; track link[1]) {
-        <a
-          [routerLink]="link[1]"
-          routerLinkActive="shell__link--active"
-          (click)="auth.menu.set(false)"
-          >{{ link[0] }}</a
-        >
+        @if (link[2]) {
+          <a [href]="link[1]">{{ link[0] }}</a>
+        } @else {
+          <a
+            [routerLink]="link[1]"
+            routerLinkActive="shell__link--active"
+            (click)="auth.menu.set(false)"
+            >{{ link[0] }}</a
+          >
+        }
       }
-      <a href="/blog">Blog</a>
-      <a routerLink="/quote" class="button">Plan a session ↗</a>
+      <a routerLink="/quote" class="button" (click)="auth.menu.set(false)">Plan a session ↗</a>
+      <a href="/client/login">Client login</a>
     </nav>
   </header>
   <main id="main" class="shell__public-main" tabindex="-1"><router-outlet /></main>
   <footer class="shell__footer">
-    <span>Quinntyne Brown Studio</span><span>Thoughtfully photographed.</span>
+    <span>Quinntyne Brown Studio</span>
+    <nav class="shell__footer-nav" aria-label="Footer navigation">
+      @for (link of footerLinks; track link[0]) {
+        @if (link[2]) {
+          <a [href]="link[1]">{{ link[0] }}</a>
+        } @else {
+          <a [routerLink]="link[1]">{{ link[0] }}</a>
+        }
+      }
+    </nav>
+    <span>Thoughtfully photographed.</span>
   </footer>
 } @else {
   <div class="shell__workspace">

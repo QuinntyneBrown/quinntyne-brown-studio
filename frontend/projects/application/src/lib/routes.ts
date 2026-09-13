@@ -33,7 +33,7 @@ export function studioRoutes(site: string): Routes {
   if (site === 'marketing')
     return [
       { path: '', component: PublicPage, data: { kind: 'home' } },
-      ...['portfolio', 'services', 'prints', 'promotions', 'contact'].map((kind) => ({
+      ...['portfolio', 'services', 'prints', 'promotions'].map((kind) => ({
         path: kind,
         component: PublicPage,
         data: { kind },

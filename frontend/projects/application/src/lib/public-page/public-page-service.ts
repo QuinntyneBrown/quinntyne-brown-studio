@@ -36,7 +36,7 @@ export class PublicPageService implements IPublicPageService {
     this.loading.set(true);
     this.message.set('');
     try {
-      if (kind === 'home' || kind === 'services' || kind === 'contact') {
+      if (kind === 'home' || kind === 'services') {
         try {
           const content = await this.content.published(kind);
           this.heading.set(content.heading);
@@ -44,11 +44,7 @@ export class PublicPageService implements IPublicPageService {
         } catch (error) {
           if (!(error instanceof ApiError) || error.kind !== 'not-found') throw error;
           this.heading.set(
-            kind === 'home'
-              ? 'Photography with feeling.'
-              : kind === 'services'
-                ? 'Photography for your life.'
-                : "Let's make something meaningful.",
+            kind === 'home' ? 'Photography with feeling.' : 'Photography for your life.',
           );
           this.body.set(
             'Weddings, events, headshots, and family portraits. Thoughtfully photographed.',

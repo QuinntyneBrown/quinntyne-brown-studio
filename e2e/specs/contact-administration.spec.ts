@@ -196,3 +196,24 @@ test("P10 AC-L2-074-01 failed inbox loading is distinct from no inquiries", asyn
   await inbox.retry();
   await inbox.message("No inquiries yet.");
 });
+
+// Given the website content editor, when an administrator publishes the About page copy under
+// the about page key, then the published heading is stored for the server-rendered page.
+test("P10 AC-L2-071-03 the content editor publishes the about page copy", async ({
+  page,
+  context,
+}) => {
+  const fixture = new StudioFixture();
+  await fixture.install(context);
+  const settings = new SettingsPage(page);
+  await settings.open("content");
+  await settings.choose("Page", "about");
+  await settings.fill("Heading", "Photographs with room to breathe.");
+  await settings.fill("Body", "A published introduction.");
+  await settings.check("Publish this revision");
+  await settings.click("Save");
+  await settings.message("Saved successfully.");
+  expect(
+    fixture.records["content"].find((row) => row.pageKey === "about"),
+  ).toMatchObject({ publishedHeading: "Photographs with room to breathe." });
+});

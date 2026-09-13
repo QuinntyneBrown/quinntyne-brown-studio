@@ -16,11 +16,22 @@ export class Shell {
   authorized = computed(
     () => this.auth.account().authenticated && this.auth.account().roles.includes(this.role),
   );
-  publicLinks = [
-    ['Portfolio', '/portfolio'],
-    ['Services', '/services'],
-    ['Prints', '/prints'],
-    ['Packages', '/promotions'],
+  /** [label, path, server]: a server-rendered page (OD-13) is reached by a full navigation. */
+  publicLinks: [string, string, boolean][] = [
+    ['Portfolio', '/portfolio', false],
+    ['Services', '/services', false],
+    ['About', '/about', true],
+    ['Blog', '/blog', true],
+    ['Prints', '/prints', false],
+    ['Packages', '/promotions', false],
+    ['Contact', '/contact', true],
+  ];
+  footerLinks: [string, string, boolean][] = [
+    ['About the studio', '/about', true],
+    ['Get in touch', '/contact', true],
+    ['Our work', '/portfolio', false],
+    ['Blog', '/blog', true],
+    ['Client access', '/client/login', true],
   ];
   adminLinks = [
     ['Sessions', '/sessions'],
