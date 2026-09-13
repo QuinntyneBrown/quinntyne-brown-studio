@@ -1,6 +1,6 @@
 # Angular components
 
-The maintained inventory is [component-catalog.json](../frontend/component-catalog.json): 26 Angular components, each linked to its independently rendered design-system example. The [catalog manifest](../design-system/component-manifest.json) covers the shared visual primitives, complete screen patterns and dialog states. The applications implement the approved behavior with reusable regions and native HTML controls; the older prototype vocabulary below explains visual references rather than requiring a separate Angular wrapper for each HTML element.
+The maintained inventory is [component-catalog.json](../frontend/component-catalog.json): 28 Angular components, each linked to its independently rendered design-system example. The [catalog manifest](../design-system/component-manifest.json) covers the shared visual primitives, complete screen patterns and dialog states. The applications implement the approved behavior with reusable regions and native HTML controls; the older prototype vocabulary below explains visual references rather than requiring a separate Angular wrapper for each HTML element.
 
 ## Placement and contracts
 
@@ -18,6 +18,7 @@ Template, class and stylesheet remain separate. BEM classes reference the author
 | [ClientPage](../frontend/projects/application/src/lib/client-page/client-page.ts) | `application` | `pattern:client-gallery` · [catalog](../design-system/README.md) |
 | [LoginPage](../frontend/projects/application/src/lib/login-page/login-page.ts) | `application` | `component:login` · [catalog](../design-system/README.md) |
 | [PrintInbox](../frontend/projects/application/src/lib/print-inbox/print-inbox.ts) | `application` | `pattern:print-review` · [catalog](../design-system/README.md) |
+| [InquiryInbox](../frontend/projects/application/src/lib/inquiry-inbox/inquiry-inbox.ts) | `application` | `pattern:inquiry-review` · [catalog](../design-system/README.md) |
 | [PublicPage](../frontend/projects/application/src/lib/public-page/public-page.ts) | `application` | `pattern:marketing-home` · [catalog](../design-system/README.md) |
 | [QuotePage](../frontend/projects/application/src/lib/quote-page/quote-page.ts) | `application` | `pattern:quote-calculator` · [catalog](../design-system/README.md) |
 | [SessionPage](../frontend/projects/application/src/lib/session-page/session-page.ts) | `application` | `pattern:session-review` · [catalog](../design-system/README.md) |
@@ -40,6 +41,7 @@ Template, class and stylesheet remain separate. BEM classes reference the author
 | [SessionPhotoReview](../frontend/projects/domain/src/lib/session-photo-review/session-photo-review.ts) | `domain` | `pattern:session-review` · [catalog](../design-system/README.md) |
 | [SessionDelivery](../frontend/projects/domain/src/lib/session-delivery/session-delivery.ts) | `domain` | `pattern:session-review` · [catalog](../design-system/README.md) |
 | [PrintRequestDetails](../frontend/projects/domain/src/lib/print-request-details/print-request-details.ts) | `domain` | `pattern:print-review` · [catalog](../design-system/README.md) |
+| [InquiryDetails](../frontend/projects/domain/src/lib/inquiry-details/inquiry-details.ts) | `domain` | `pattern:inquiry-review` · [catalog](../design-system/README.md) |
 
 PhotoGrid preserves unavailable placeholders, prevents new selection of processing/failed photos, supports retry after a temporary image failure and emits manual inspection intent. OrderedSelection handles keyboard-accessible ordering; PhotoOrder maps studio photographs to that literal contract. DateTimeField requires an explicit occurrence for ambiguous Toronto times. The catalog, settings, album, print, session-upload, session-review, session-delivery and inbox-details regions consume their typed route service token. Pages compose those regions with navigation and shared feedback.
 

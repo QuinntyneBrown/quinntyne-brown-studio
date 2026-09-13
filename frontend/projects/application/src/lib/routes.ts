@@ -9,6 +9,7 @@ import { SessionPage } from './session-page/session-page';
 import { ClientPage } from './client-page/client-page';
 import { LoginPage } from './login-page/login-page';
 import { PrintInbox } from './print-inbox/print-inbox';
+import { InquiryInbox } from './inquiry-inbox/inquiry-inbox';
 import { RESOURCES } from './resource-definitions';
 const access: CanActivateFn = async (route) => {
   const auth = inject(ACCOUNT_SERVICE),
@@ -68,6 +69,7 @@ export function studioRoutes(site: string): Routes {
           },
           { path: 'sessions/:id', component: SessionPage, data: { role }, canActivate: [access] },
           { path: 'print-requests', component: PrintInbox, data: { role }, canActivate: [access] },
+          { path: 'inquiries', component: InquiryInbox, data: { role }, canActivate: [access] },
         ]
       : [
           { path: '', redirectTo: 'galleries', pathMatch: 'full' },

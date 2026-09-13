@@ -19,6 +19,7 @@ export class StudioFixture {
       "clients",
       "albums",
       "print-requests",
+      "inquiries",
     ].map((key) => [key, []]),
   );
   readonly operations = new Map<
@@ -286,6 +287,28 @@ export class StudioFixture {
           impactRevision: "current",
         }
       );
+    if (service === "inquiry") {
+      if (method === "list")
+        return this.records["inquiries"]
+          .filter((inquiry) => !args[0] || inquiry.state === args[0])
+          .slice()
+          .sort((a, b) =>
+            String(b.submittedAt).localeCompare(String(a.submittedAt)),
+          );
+      if (method === "get")
+        return this.records["inquiries"].find((row) => row.id === args[0]);
+      if (method === "review") {
+        const prior = this.records["inquiries"].find(
+          (row) => row.id === args[0],
+        );
+        return this.save("inquiries", {
+          ...prior,
+          state: "Reviewed",
+          reviewedBy: "administrator-a",
+          reviewedAt: "2026-09-13T10:00:00Z",
+        });
+      }
+    }
     if (service === "print-request") {
       if (method === "list")
         return this.records["print-requests"].filter(

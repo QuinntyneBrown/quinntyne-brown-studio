@@ -1,0 +1,53 @@
+<header class="page__header">
+  <div>
+    <p class="page__eyebrow">Studio / Marketing</p>
+    <h1>Inquiries</h1>
+    <p class="page__description">Messages from the contact page, ready for a reply.</p>
+  </div>
+  <a class="button button--secondary" href="/contact">View contact page ↗</a>
+</header>
+<label class="field"
+  ><span>Inquiry status</span
+  ><select
+    aria-label="Inquiry status"
+    [ngModel]="state.filter()"
+    (ngModelChange)="state.filter.set($event); state.load()"
+    [disabled]="state.loading() || state.busy()"
+  >
+    <option value="">All inquiries</option>
+    <option value="Submitted">Submitted</option>
+    <option value="Reviewed">Reviewed</option>
+  </select></label
+>
+@if (state.message()) {
+  <qbs-notice [message]="state.message()" [error]="state.error()" />
+}
+@if (state.loading()) {
+  <p role="status">Loading…</p>
+} @else if (state.loadFailed()) {
+  <button class="button button--secondary" (click)="state.load()">Retry loading</button>
+} @else if (!state.inquiries().length) {
+  <qbs-empty message="No inquiries yet." />
+}
+<div class="records">
+  @for (inquiry of state.inquiries(); track inquiry.id) {
+    <article class="records__row">
+      <div>
+        <h3>{{ inquiry.name }}</h3>
+        <p class="records__detail">
+          {{ state.interestLabel(inquiry.interest) }} · Received
+          {{ inquiry.submittedAt | date: 'mediumDate' }} · {{ inquiry.reference }}
+        </p>
+      </div>
+      <div class="records__actions">
+        <span class="badge">{{ inquiry.state }}</span>
+        <button class="button button--secondary" (click)="state.selected.set(inquiry)">
+          Open inquiry
+        </button>
+      </div>
+    </article>
+  }
+</div>
+@if (state.selected(); as inquiry) {
+  <qbs-inquiry-details />
+}

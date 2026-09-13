@@ -37,6 +37,7 @@ export class Shell {
     ['Package promotions', '/promotions'],
     ['Client invitations', '/invitations'],
     ['Print requests', '/print-requests'],
+    ['Inquiries', '/inquiries'],
   ];
   clientLinks = [
     ['Your sessions', '/galleries'],

@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { StudioFixture } from "../page-objects/studio-fixture";
 import { SettingsPage } from "../page-objects/settings-page";
+import { InquiryInboxPage } from "../page-objects/inquiry-inbox-page";
 
 const details = {
   email: "hello@example.test",
@@ -91,4 +92,107 @@ test("P10 AC-L2-075-03 a stale save is rejected as a conflict without overwritin
   await settings.message("This record changed. Reload before saving.");
   expect(fixture.studioDetails.email).toBe("second@example.test");
   expect(fixture.studioDetails.version).toBe(2);
+});
+
+function inquiries() {
+  const fixture = new StudioFixture();
+  fixture.records["inquiries"] = [
+    {
+      id: "inquiry-older",
+      version: 1,
+      reference: "QB-IN-1041",
+      name: "Daniel Okafor",
+      email: "daniel@example.test",
+      phone: null,
+      interest: "Headshot",
+      message: "Looking for two headshot looks. <b>Bold?</b>",
+      consentAt: "2026-08-26T14:00:00Z",
+      submittedAt: "2026-08-26T14:00:00Z",
+      state: "Submitted",
+      reviewedBy: null,
+      reviewedAt: null,
+    },
+    {
+      id: "inquiry-newer",
+      version: 1,
+      reference: "QB-IN-1042",
+      name: "Priya Raman",
+      email: "priya@example.test",
+      phone: "416-555-0166",
+      interest: "Wedding",
+      message: "A small September wedding, about forty guests.",
+      consentAt: "2026-09-02T09:30:00Z",
+      submittedAt: "2026-09-02T09:30:00Z",
+      state: "Submitted",
+      reviewedBy: null,
+      reviewedAt: null,
+    },
+  ];
+  return fixture;
+}
+
+// Given stored inquiries, one containing markup, when an administrator opens the inbox and
+// marks one reviewed, then inquiries list newest first with name, interest, submission time
+// and state; opening one shows every value with the markup as text; and the reviewed inquiry
+// shows Reviewed with its review time and cannot be reviewed twice.
+test("P10 AC-L2-074-01 the inbox lists inquiries newest first, shows markup as text, and records a review", async ({
+  page,
+  context,
+}) => {
+  const fixture = inquiries();
+  await fixture.install(context);
+  const inbox = new InquiryInboxPage(page);
+  await inbox.open();
+  await inbox.inquiryCount(2);
+  await inbox.rowOrder(["QB-IN-1042", "QB-IN-1041"]);
+  await inbox.row("QB-IN-1042", "Priya Raman");
+  await inbox.row("QB-IN-1042", "Wedding");
+  await inbox.row("QB-IN-1042", "2026");
+  await inbox.row("QB-IN-1042", "Submitted");
+  await inbox.row("QB-IN-1041", "Headshots");
+  await inbox.openInquiry("QB-IN-1041");
+  await inbox.detail("Reference", "QB-IN-1041");
+  await inbox.detail("Name", "Daniel Okafor");
+  await inbox.detail("Email", "daniel@example.test");
+  await inbox.detail("Phone", "Not provided");
+  await inbox.detail("Interest", "Headshots");
+  await inbox.detail("Message", "Looking for two headshot looks. <b>Bold?</b>");
+  await inbox.click("Mark reviewed");
+  await inbox.message("Inquiry marked reviewed.");
+  await inbox.message("Reviewed on");
+  await inbox.reviewDisabled();
+  expect(
+    fixture.records["inquiries"].find((row) => row.id === "inquiry-older"),
+  ).toMatchObject({ state: "Reviewed", version: 2 });
+  const review = fixture.calls.find(
+    (call) => call.service === "inquiry" && call.method === "review",
+  );
+  expect(review?.args).toEqual(["inquiry-older", 1]);
+  await inbox.filter("Reviewed");
+  await inbox.inquiryCount(1);
+  await inbox.row("QB-IN-1041", "Reviewed");
+  await inbox.filter("Submitted");
+  await inbox.inquiryCount(1);
+  await inbox.row("QB-IN-1042", "Submitted");
+});
+
+// Given an unavailable inquiry service, when the inbox opens, then the failure is distinct
+// from an empty inbox and retrying after recovery shows the empty state.
+test("P10 AC-L2-074-01 failed inbox loading is distinct from no inquiries", async ({
+  page,
+  context,
+}) => {
+  const fixture = new StudioFixture();
+  fixture.failures.set("inquiry.list", {
+    status: 503,
+    message: "The inquiry inbox is unavailable.",
+  });
+  await fixture.install(context);
+  const inbox = new InquiryInboxPage(page);
+  await inbox.open();
+  await inbox.message("The inquiry inbox is unavailable.");
+  await inbox.noEmpty();
+  fixture.failures.delete("inquiry.list");
+  await inbox.retry();
+  await inbox.message("No inquiries yet.");
 });

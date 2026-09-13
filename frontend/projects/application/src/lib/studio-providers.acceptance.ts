@@ -22,6 +22,7 @@ import {
   IClientGalleryService,
   IAlbumService,
   IPrintRequestService,
+  IInquiryService,
   IPhotoService,
   IRetentionService,
   IAnalysisService,
@@ -44,6 +45,7 @@ import {
   CLIENT_GALLERY_SERVICE,
   ALBUM_SERVICE,
   PRINT_REQUEST_SERVICE,
+  INQUIRY_SERVICE,
   PHOTO_SERVICE,
   RETENTION_SERVICE,
   ANALYSIS_SERVICE,
@@ -109,6 +111,7 @@ export function studioProviders(): Provider[] {
       provide: PRINT_REQUEST_SERVICE,
       useFactory: () => controlledService<IPrintRequestService>('print-request'),
     },
+    { provide: INQUIRY_SERVICE, useFactory: () => controlledService<IInquiryService>('inquiry') },
     { provide: PHOTO_SERVICE, useFactory: () => controlledService<IPhotoService>('photo') },
     {
       provide: RETENTION_SERVICE,

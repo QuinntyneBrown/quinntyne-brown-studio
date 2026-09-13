@@ -11,3 +11,4 @@ export * from './lib/session-upload/session-upload';
 export * from './lib/session-photo-review/session-photo-review';
 export * from './lib/session-delivery/session-delivery';
 export * from './lib/print-request-details/print-request-details';
+export * from './lib/inquiry-details/inquiry-details';
