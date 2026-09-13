@@ -10,7 +10,7 @@ public sealed class GetBlogDocumentHandler(IMediator mediator, IConfiguration co
 {
     public Task<BlogDocument> Handle(GetBlogDocumentQuery request, CancellationToken cancellationToken) => request.Format switch
     {
-        "robots" => Task.FromResult(Robots()), "root-robots" => Task.FromResult(RootRobots()), "llms" => LlmsTxt(), "sitemap" => Sitemap(),
+        "robots" => Task.FromResult(Robots()), "llms" => LlmsTxt(), "sitemap" => Sitemap(),
         "rss" => Rss(), "atom" => Atom(), "json" => JsonFeed(),
         _ => throw new ArgumentOutOfRangeException(nameof(request))
     };
@@ -18,8 +18,6 @@ public sealed class GetBlogDocumentHandler(IMediator mediator, IConfiguration co
     private string SiteName => configuration["Site:SiteName"] ?? "Quinntyne Brown Studio";
     private string SiteDescription => configuration["Site:SiteDescription"] ?? "Studio blog";
     private string AuthorName => configuration["Site:AuthorName"] ?? "Quinntyne Brown Studio";
-
-    private BlogDocument RootRobots() => new("User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /client/\nDisallow: /api/\nDisallow: /blog/admin/\nDisallow: /blog/api/\nSitemap: " + BaseUrl + "/sitemap.xml\n", "text/plain");
 
     private BlogDocument Robots()
     {

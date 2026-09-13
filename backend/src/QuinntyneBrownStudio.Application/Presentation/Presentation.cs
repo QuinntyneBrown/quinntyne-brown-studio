@@ -5,7 +5,7 @@ using QuinntyneBrownStudio.Domain.Policies;
 
 namespace QuinntyneBrownStudio.Application.Presentation;
 
-public sealed class Presentation(IStudioStore store)
+public sealed class Presentation(IStudioStore store, IClock clock)
 {
     public const string Notice = "Subject to change following detailed consultation.";
 
@@ -27,6 +27,7 @@ public sealed class Presentation(IStudioStore store)
                 value.PageKey = key;
                 value.PublishedHeading = value.Publish ? value.Heading : prior?.PublishedHeading;
                 value.PublishedBody = value.Publish ? value.Body : prior?.PublishedBody;
+                value.PublishedAt = value.Publish ? clock.UtcNow : prior?.PublishedAt;
                 await tx.Save(value, value.ExpectedVersion);
                 return value;
             }

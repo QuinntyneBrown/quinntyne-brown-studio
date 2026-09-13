@@ -8,4 +8,7 @@ public sealed class MarketingContent : Entity
     public bool Publish { get; set; }
     public string? PublishedHeading { get; set; }
     public string? PublishedBody { get; set; }
+
+    /// <summary>When the published heading and body were last replaced; null until first published.</summary>
+    public DateTimeOffset? PublishedAt { get; set; }
 }
