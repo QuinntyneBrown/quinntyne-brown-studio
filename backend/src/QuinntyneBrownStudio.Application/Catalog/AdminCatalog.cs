@@ -11,7 +11,7 @@ using SchedulingService = QuinntyneBrownStudio.Application.Scheduling.Scheduling
 
 namespace QuinntyneBrownStudio.Application.Catalog;
 
-public sealed class AdminCatalog(IStudioStore store)
+public sealed class AdminCatalog(IStudioStore store, IClock clock)
 {
     public static readonly Guid ConfigurationId = Guid.Parse(
         "11111111-1111-1111-1111-111111111111"
@@ -115,6 +115,7 @@ public sealed class AdminCatalog(IStudioStore store)
                 break;
             case DomainEntities.Photographer p:
                 Rules.Text(p.Name, "name");
+                p.CreatedAt = (old as DomainEntities.Photographer)?.CreatedAt ?? clock.UtcNow;
                 break;
             case DomainEntities.Studio s:
                 Rules.Text(s.Name, "name");
@@ -212,6 +213,9 @@ public sealed class AdminCatalog(IStudioStore store)
                 );
                 if ((await tx.List<DomainEntities.PublicGallery>()).Any(x => x.Id != g.Id && x.Slug == g.Slug))
                     throw new StudioException(409, "Slug already exists.");
+                g.PublishedAt = g.Published
+                    ? (old as DomainEntities.PublicGallery)?.PublishedAt ?? clock.UtcNow
+                    : null;
                 foreach (var photoId in g.PhotoIds)
                 {
                     var photo = await tx.Get<SessionPhoto>(photoId);

@@ -15,7 +15,7 @@ public sealed class Presentation(IStudioStore store)
             async tx =>
             {
                 Rules.Require(
-                    new[] { "home", "services", "contact" }.Contains(key),
+                    new[] { "home", "services", "about", "contact" }.Contains(key),
                     "Unknown page key."
                 );
                 Rules.Text(value.Heading, "heading", 200);
