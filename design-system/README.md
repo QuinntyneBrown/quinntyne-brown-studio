@@ -28,7 +28,7 @@ npm run build
 
 `npm run check:artifact` then serves that artifact under the checked-in navigation configuration and exercises the deep links, the published manifest, the isolated preview, and the missing-asset response, so a routing mistake fails before deployment.
 
-The artifact is `dist/`. Deploy it to Azure Static Web Apps; the build includes `staticwebapp.config.json`, `component-manifest.json`, the isolated preview page, and the navigation fallback that keeps deep links working. [`.github/workflows/deploy-design-system.yml`](../.github/workflows/deploy-design-system.yml) validates, tests, builds, and uploads it. No studio backend, database, or credential is required to browse the result.
+The artifact is `dist/`. Deploy it to Azure Static Web Apps; the build includes `staticwebapp.config.json`, `component-manifest.json`, the isolated preview page, and the navigation fallback that keeps deep links working. [`.github/workflows/deploy-design-system.yml`](../.github/workflows/deploy-design-system.yml) validates, tests, builds, and uploads it. The upload needs the repository secret `SWA_DESIGN_SYSTEM_DEPLOYMENT_TOKEN`, issued once by [`deploy/bootstrap-design-system.py`](../deploy/bootstrap-design-system.py) as described in [the release runbook](../deploy/azure-release.md#design-system-catalog). No studio backend, database, or credential is required to browse the result.
 
 ## Ownership
 

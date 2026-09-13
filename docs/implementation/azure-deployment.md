@@ -15,6 +15,7 @@ origin. These are behavioral criteria, not source-layout tests.
 | AC-AZ-07 | A retained schema-compatible release | Operator requests rollback | Validated files activate without reverse migration | Release acceptance tests |
 | AC-AZ-08 | A push to main with passing verification | GitHub completes packaging | The same run's SHA deploys automatically; failed checks, other branches and PRs do not deploy | Met; run 34203990735 |
 | AC-AZ-09 | Provisioned production resources | Operator executes live qualification | TLS, authentication, persistence, processing, email, shared keys and restore work | Partial; see the live record below |
+| AC-AZ-10 | The tagged shared resource group | The operator bootstraps the catalog host | One Free Static Web App exists there and its deployment token reaches the GitHub secret through standard input only; an unrelated group is refused before any change | Met; `backend/tests/deployment/test_design_system_bootstrap.py` and run 34777740480 attempt 2; see the catalog record below |
 
 Local verification and live provisioning are separate. Bicep compilation validates
 resource declarations; it does not prove subscription permission, model quota,
@@ -62,3 +63,21 @@ Deployment acceptance passed 13 scenarios, including a real two-process lock tes
 Bicep compilation, actionlint, shellcheck, PowerShell parsing, and repository
 architecture/documentation checks passed. Azure provisioning, GitHub workflow
 execution and production qualification have not been performed by these checks.
+
+## Catalog record, 2026-09-13
+
+**Deploy design system** had failed on every push to `main` since it was introduced, always
+at the upload step with `deployment_token was not provided`: no Static Web App existed and
+the repository secret `SWA_DESIGN_SYSTEM_DEPLOYMENT_TOKEN` had never been set. The earlier
+**Verify and package** failure on the same day was a Firefox-only scenario and was already
+resolved by restricting browser acceptance to Chromium.
+
+`deploy/bootstrap-design-system.py` created `qbs-design-system` (Free) in `rg-qbs-shared`
+and stored the token. The first attempt in East US 2 was refused with `too many static
+sites with SKU: Free`; the subscription's other projects already hold ten Free sites there,
+and the same request in West US 2 was accepted, so that region is the script's default.
+Rerunning run 34777740480 then passed every step. The served catalog at
+`https://jolly-sand-0b7b8801e.6.azurestaticapps.net` answers the index, the component
+manifest, the preview page and a deep link with 200, a missing asset with 404, and carries
+the configured cache and security headers. `design.quinntynebrown.studio` is not yet
+attached; that needs the Namecheap CNAME first, as the runbook describes.
