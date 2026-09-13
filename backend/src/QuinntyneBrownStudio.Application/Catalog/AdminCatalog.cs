@@ -36,6 +36,7 @@ public sealed class AdminCatalog(IStudioStore store, IClock clock)
                     && old == null
                     && typeof(T) != typeof(DomainEntities.RateConfiguration)
                     && typeof(T) != typeof(DomainEntities.DiscountConfiguration)
+                    && typeof(T) != typeof(DomainEntities.StudioDetails)
                 )
                     throw new StudioException(404, "Record not found.");
                 var expected = id == null ? 0 : value.ExpectedVersion;
@@ -64,6 +65,15 @@ public sealed class AdminCatalog(IStudioStore store, IClock clock)
 
     private static void Nonnegative(decimal? number, string field) =>
         Rules.Require(number == null || number >= 0, "Must be nonnegative.", field);
+
+    private static string? Optional(string? value, string field, int max)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+            return null;
+        var trimmed = value.Trim();
+        Rules.Require(trimmed.Length <= max, $"Use at most {max} characters.", field);
+        return trimmed;
+    }
 
     private async Task Validate<T>(IStudioTransaction tx, T value, T? old)
         where T : Entity
@@ -142,6 +152,19 @@ public sealed class AdminCatalog(IStudioStore store, IClock clock)
                 );
                 foreach (var rate in r.ServiceRates.Values.Concat(r.CostRates.Values))
                     Nonnegative(rate, "rates");
+                break;
+            case DomainEntities.StudioDetails details:
+                details.Email = Optional(details.Email, "email", 254);
+                details.Phone = Optional(details.Phone, "phone", 50);
+                details.Hours = Optional(details.Hours, "hours", 200);
+                details.ReplyNote = Optional(details.ReplyNote, "replyNote", 200);
+                if (details.Email != null)
+                    Rules.Require(
+                        MailAddress.TryCreate(details.Email, out var studioMail)
+                            && studioMail.Address == details.Email,
+                        "Enter a valid email.",
+                        "email"
+                    );
                 break;
             case DomainEntities.DiscountConfiguration d:
                 var codes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
