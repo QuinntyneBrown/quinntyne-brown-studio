@@ -5,7 +5,6 @@
   "description": "Playwright acceptance suite for the studio applications. Page objects under page-objects/, specs under specs/.",
   "scripts": {
     "test": "playwright test",
-    "test:chromium": "playwright test --project=chromium-mobile --project=chromium-tablet --project=chromium-desktop",
     "report": "playwright show-report",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "demo": "playwright test --config demo.playwright.config.ts",

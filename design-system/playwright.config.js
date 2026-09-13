@@ -17,18 +17,19 @@ export default defineConfig({
     screenshot: "only-on-failure",
   },
   workers: 1,
-  projects: ["chromium", "firefox", "webkit"].flatMap((browserName) => [
+  // Chromium only (AGENTS.md): the three agreed widths are the whole matrix.
+  projects: [
     {
-      name: `${browserName}-mobile`,
-      use: { browserName, viewport: { width: 390, height: 844 } },
+      name: "chromium-mobile",
+      use: { browserName: "chromium", viewport: { width: 390, height: 844 } },
     },
     {
-      name: `${browserName}-tablet`,
-      use: { browserName, viewport: { width: 768, height: 1024 } },
+      name: "chromium-tablet",
+      use: { browserName: "chromium", viewport: { width: 768, height: 1024 } },
     },
     {
-      name: `${browserName}-desktop`,
-      use: { browserName, viewport: { width: 1440, height: 900 } },
+      name: "chromium-desktop",
+      use: { browserName: "chromium", viewport: { width: 1440, height: 900 } },
     },
-  ]),
+  ],
 });

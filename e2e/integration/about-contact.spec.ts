@@ -7,8 +7,8 @@ import { AboutPage } from "../page-objects/marketing/about.page";
 import { ContactPage } from "../page-objects/marketing/contact.page";
 
 // AC-L2-071-01, AC-L2-071-04, AC-L2-072-01 through AC-L2-072-03, AC-L2-073-01, AC-L2-073-02,
-// AC-L2-073-05, AC-L2-074-01 and AC-L2-076-02 in real browsers against the packaged API and
-// the isolated LocalDB database, at 390, 768 and 1440 CSS pixels.
+// AC-L2-073-05, AC-L2-074-01 and AC-L2-076-02 in Chromium against the packaged API and the
+// isolated LocalDB database, at 390, 768 and 1440 CSS pixels.
 const origin = process.env.QBS_SMOKE_ORIGIN ?? "https://localhost:7453";
 const widths = [390, 768, 1440];
 
@@ -24,9 +24,7 @@ function credentials() {
 // shows the studio-spaces empty state, without clipping or horizontal overflow.
 test("AC-L2-071-04 AC-L2-072-02 the empty About and Contact states render at every width", async ({
   browser,
-  browserName,
 }) => {
-  test.skip(browserName !== "chromium", "The unseeded database exists only for the first browser project.");
   for (const width of widths) {
     const context = await browser.newContext({ ignoreHTTPSErrors: true, viewport: { width, height: 900 } });
     try {
@@ -148,13 +146,11 @@ test("AC-L2-071-01 AC-L2-072-01 AC-L2-072-03 AC-L2-076-02 configured pages are r
 // Given the form, when a visitor sends an invalid and then a valid message, with and without
 // script, then errors appear beside their fields with the entries kept, each valid message is
 // confirmed with its reference, and the administrator inbox lists them newest first and records a
-// review. Submissions stay within the five-per-address window, so only Chromium posts.
+// review. The four posts stay within the five-per-address window.
 test("AC-L2-073-01 AC-L2-073-02 AC-L2-073-05 AC-L2-074-01 messages are sent with and without script and reviewed in the inbox", async ({
   page,
   browser,
-  browserName,
 }, info) => {
-  test.skip(browserName !== "chromium", "Submissions are rate limited per client address.");
   const { email, password } = credentials();
   const references: string[] = [];
 

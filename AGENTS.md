@@ -191,6 +191,15 @@ Front end: Playwright, using the Page Object Model.
 - One page object per screen. It owns the selectors and the interactions.
 - Tests state intent; page objects know the DOM. Never put a selector in a test.
 
+### Chromium only
+
+Browser acceptance runs in Chromium and nothing else. Every Playwright
+configuration in the repository (`e2e/`, `design-system/`) declares Chromium
+projects only, at the agreed 390, 768, and 1440 CSS-pixel widths. Do not add
+Firefox or WebKit projects, install those browsers in CI, or spend time on a
+failure that only another engine shows; Chromium at the three widths is the
+accepted evidence for the responsive and keyboard criteria.
+
 ### Never write architecture tests
 
 Never add a test that asserts the shape of the codebase rather than its behavior:

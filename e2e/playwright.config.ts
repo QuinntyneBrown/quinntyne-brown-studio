@@ -9,29 +9,21 @@ export default defineConfig({
   workers: 1,
   reporter: [["list"], ["json", { outputFile: "test-results/results.json" }]],
   use: { trace: "retain-on-failure", screenshot: "only-on-failure" },
-  projects: ["chromium", "firefox", "webkit"].flatMap((browserName) => [
+  // Chromium only (AGENTS.md): the three agreed widths are the whole matrix.
+  projects: [
     {
-      name: `${browserName}-mobile`,
-      use: {
-        browserName: browserName as "chromium",
-        viewport: { width: 390, height: 844 },
-      },
+      name: "chromium-mobile",
+      use: { browserName: "chromium", viewport: { width: 390, height: 844 } },
     },
     {
-      name: `${browserName}-tablet`,
-      use: {
-        browserName: browserName as "chromium",
-        viewport: { width: 768, height: 1024 },
-      },
+      name: "chromium-tablet",
+      use: { browserName: "chromium", viewport: { width: 768, height: 1024 } },
     },
     {
-      name: `${browserName}-desktop`,
-      use: {
-        browserName: browserName as "chromium",
-        viewport: { width: 1440, height: 900 },
-      },
+      name: "chromium-desktop",
+      use: { browserName: "chromium", viewport: { width: 1440, height: 900 } },
     },
-  ]),
+  ],
   webServer: ["marketing", "admin", "client"]
     .map((name, index) => ({
       command: `npx ng serve ${name} --port ${4420 + index} --configuration acceptance`,

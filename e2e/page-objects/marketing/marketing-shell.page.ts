@@ -87,11 +87,7 @@ export class MarketingShellPage {
     await expect(this.menuButton).toHaveAttribute("aria-expanded", "false");
   }
 
-  /**
-   * A link focused after keyboard interaction shows a visible focus ring. Focus moves through
-   * a keyboard press followed by element focus because WebKit's Tab key skips links by platform
-   * convention (Option+Tab reaches them), so a raw Tab walk would not be comparable across engines.
-   */
+  /** A link focused after keyboard interaction shows a visible focus ring. */
   async focusVisibleOnLink(name: RegExp) {
     await this.page.locator("body").press("Tab");
     const link = this.page.locator("main a", { hasText: name }).first();
