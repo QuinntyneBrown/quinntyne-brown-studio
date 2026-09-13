@@ -9,6 +9,7 @@ import {
   RATE_SERVICE,
   DISCOUNT_SERVICE,
   STUDIO_SERVICE,
+  STUDIO_DETAILS_SERVICE,
   CONTENT_SERVICE,
   SCHEDULE_SERVICE,
   CLIENT_GALLERY_SERVICE,
@@ -23,6 +24,7 @@ export class SettingsPageService implements ISettingsPageService {
   private rates = inject(RATE_SERVICE);
   private discounts = inject(DISCOUNT_SERVICE);
   private studios = inject(STUDIO_SERVICE);
+  private studioDetails = inject(STUDIO_DETAILS_SERVICE);
   private content = inject(CONTENT_SERVICE);
   private schedule = inject(SCHEDULE_SERVICE);
   private clients = inject(CLIENT_GALLERY_SERVICE);
@@ -57,6 +59,7 @@ export class SettingsPageService implements ISettingsPageService {
             rates: 'Quote rates',
             discounts: 'Discount rules',
             studios: 'Studios',
+            'studio-details': 'Studio details',
             content: 'Website content',
             schedule: 'Photographer availability',
             invitations: 'Client invitations',
@@ -92,6 +95,17 @@ export class SettingsPageService implements ISettingsPageService {
         this.draft().workingWindows ??= [];
         this.draft().unavailableWindows ??= [];
         this.draft().buffers ??= { before: 30, after: 30 };
+      } else if (k === 'studio-details') {
+        const details = await this.studioDetails.get();
+        this.draft.set({
+          ...this.emptyDraft(),
+          id: details.id,
+          version: details.version,
+          email: details.email ?? '',
+          phone: details.phone ?? '',
+          hours: details.hours ?? '',
+          replyNote: details.replyNote ?? '',
+        });
       } else if (k === 'invitations') {
         this.draft.set(this.emptyDraft());
         this.items.set(await this.clients.clients());
@@ -111,6 +125,9 @@ export class SettingsPageService implements ISettingsPageService {
       version: 0,
       name: '',
       email: '',
+      phone: '',
+      hours: '',
+      replyNote: '',
       hourlyFee: 0,
       enabled: true,
       isBase: false,
@@ -205,6 +222,15 @@ export class SettingsPageService implements ISettingsPageService {
           enabled: this.draft().enabled,
           isBase: this.draft().isBase,
           resolvedAddress: this.draft().resolvedAddress,
+        });
+      else if (k === 'studio-details')
+        await this.studioDetails.save({
+          id: this.draft().id ?? '',
+          version: this.draft().version,
+          email: this.draft().email.trim() || null,
+          phone: this.draft().phone.trim() || null,
+          hours: this.draft().hours.trim() || null,
+          replyNote: this.draft().replyNote.trim() || null,
         });
       else if (k === 'content')
         await this.content.save(this.pageKey(), {

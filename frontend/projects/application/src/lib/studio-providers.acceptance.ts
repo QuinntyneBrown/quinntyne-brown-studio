@@ -14,6 +14,7 @@ import {
   IPrintOptionService,
   IPublicGalleryService,
   IStudioService,
+  IStudioDetailsService,
   IRateService,
   IDiscountService,
   IContentService,
@@ -35,6 +36,7 @@ import {
   PRINT_OPTION_SERVICE,
   PUBLIC_GALLERY_SERVICE,
   STUDIO_SERVICE,
+  STUDIO_DETAILS_SERVICE,
   RATE_SERVICE,
   DISCOUNT_SERVICE,
   CONTENT_SERVICE,
@@ -84,6 +86,10 @@ export function studioProviders(): Provider[] {
       useFactory: () => controlledService<IPublicGalleryService>('public-gallery'),
     },
     { provide: STUDIO_SERVICE, useFactory: () => controlledService<IStudioService>('studio') },
+    {
+      provide: STUDIO_DETAILS_SERVICE,
+      useFactory: () => controlledService<IStudioDetailsService>('studio-details'),
+    },
     { provide: RATE_SERVICE, useFactory: () => controlledService<IRateService>('rate') },
     {
       provide: DISCOUNT_SERVICE,

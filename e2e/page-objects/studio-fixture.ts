@@ -34,6 +34,14 @@ export class StudioFixture {
     weekdayRule: { enabled: false, percentage: 0, weekdays: [] },
     codeRules: [],
   };
+  studioDetails: Record<string, any> = {
+    id: "studio-details",
+    version: 0,
+    email: null,
+    phone: null,
+    hours: null,
+    replyNote: null,
+  };
   schedules: Record<string, any> = {};
   photos: Record<string, any[]> = {};
   retentions: Record<string, any> = {};
@@ -173,6 +181,15 @@ export class StudioFixture {
       if (method === "save")
         this.discounts = { ...args[0], version: this.discounts.version + 1 };
       return this.discounts;
+    }
+    if (service === "studio-details") {
+      if (method === "save")
+        this.studioDetails = {
+          ...args[0],
+          id: "studio-details",
+          version: this.studioDetails.version + 1,
+        };
+      return this.studioDetails;
     }
     if (service === "schedule") {
       if (method === "save")

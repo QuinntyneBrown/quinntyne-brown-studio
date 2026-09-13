@@ -312,6 +312,57 @@
         /></label>
       </div>
     }
+    @case ('studio-details') {
+      <h2>Where people can reach you.</h2>
+      <p class="page__description">
+        These details appear on the public contact page. Leave a field empty to keep it off the
+        page.
+      </p>
+      <div class="form__grid">
+        <label class="field"
+          ><span>Studio email address</span
+          ><input
+            type="email"
+            name="email"
+            [(ngModel)]="state.draft().email"
+            maxlength="254"
+            aria-describedby="studio-details-email-hint"
+        /></label>
+        <label class="field"
+          ><span>Phone number</span
+          ><input type="tel" name="phone" [(ngModel)]="state.draft().phone" maxlength="50"
+        /></label>
+        <label class="field"
+          ><span>Opening hours</span
+          ><input
+            name="hours"
+            [(ngModel)]="state.draft().hours"
+            maxlength="200"
+            aria-describedby="studio-details-hours-hint"
+        /></label>
+        <label class="field"
+          ><span>Typical reply time</span
+          ><input
+            name="replyNote"
+            [(ngModel)]="state.draft().replyNote"
+            maxlength="200"
+            aria-describedby="studio-details-reply-hint"
+        /></label>
+      </div>
+      <p class="text--muted" id="studio-details-email-hint">
+        Inquiry notifications go to the studio email address.
+      </p>
+      <p class="text--muted" id="studio-details-hours-hint">
+        Hours, for example: Monday – Saturday · 09:00 – 18:00.
+      </p>
+      <p class="text--muted" id="studio-details-reply-hint">
+        Reply time, for example: Within two working days.
+      </p>
+      <p class="page__description">
+        Only what you fill in is shown. An empty email or phone field simply leaves that row off the
+        contact page. Nothing is invented for visitors.
+      </p>
+    }
     @case ('invitations') {
       <h2>Invite a client</h2>
       <label class="field"
@@ -330,7 +381,15 @@
       type="submit"
       [disabled]="state.busy() || (state.kind() === 'studios' && !state.draft().resolvedAddress)"
     >
-      {{ state.busy() ? 'Saving…' : state.kind() === 'invitations' ? 'Send invitation' : 'Save' }}
+      {{
+        state.busy()
+          ? 'Saving…'
+          : state.kind() === 'invitations'
+            ? 'Send invitation'
+            : state.kind() === 'studio-details'
+              ? 'Save studio details'
+              : 'Save'
+      }}
     </button>
   </div>
 </form>

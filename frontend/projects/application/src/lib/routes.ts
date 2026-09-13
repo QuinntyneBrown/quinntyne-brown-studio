@@ -52,12 +52,14 @@ export function studioRoutes(site: string): Routes {
             data: { resource: r.key, role },
             canActivate: [access],
           })),
-          ...['rates', 'discounts', 'studios', 'content', 'invitations'].map((kind) => ({
-            path: kind,
-            component: SettingsPage,
-            data: { kind, role },
-            canActivate: [access],
-          })),
+          ...['rates', 'discounts', 'studios', 'studio-details', 'content', 'invitations'].map(
+            (kind) => ({
+              path: kind,
+              component: SettingsPage,
+              data: { kind, role },
+              canActivate: [access],
+            }),
+          ),
           {
             path: 'schedule/:id',
             component: SettingsPage,

@@ -38,6 +38,7 @@ export * from './lib/resolved-location';
 export * from './lib/resource-definition';
 export * from './lib/retention-impact';
 export * from './lib/studio-configuration';
+export * from './lib/studio-details';
 export * from './lib/studio-record';
 export * from './lib/studio-session';
 export * from './lib/time-window';

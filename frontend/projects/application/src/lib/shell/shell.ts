@@ -33,6 +33,7 @@ export class Shell {
     ['Print pricing', '/print-options'],
     ['Public galleries', '/public-galleries'],
     ['Website content', '/content'],
+    ['Studio details', '/studio-details'],
     ['Package promotions', '/promotions'],
     ['Client invitations', '/invitations'],
     ['Print requests', '/print-requests'],

@@ -6,6 +6,9 @@ export interface SettingsDraft {
   version: number;
   name: string;
   email: string;
+  phone: string;
+  hours: string;
+  replyNote: string;
   hourlyFee: string | number;
   enabled: boolean;
   isBase: boolean;

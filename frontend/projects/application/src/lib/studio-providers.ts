@@ -11,6 +11,7 @@ import {
   PrintOptionService,
   PublicGalleryService,
   StudioService,
+  StudioDetailsService,
   RateService,
   DiscountService,
   ContentService,
@@ -50,6 +51,7 @@ import {
   SCHEDULE_SERVICE,
   SESSION_SERVICE,
   STUDIO_SERVICE,
+  STUDIO_DETAILS_SERVICE,
   UPLOAD_SERVICE,
   VENDOR_SERVICE,
 } from '@qbs/api';
@@ -70,6 +72,7 @@ export function studioProviders(): Provider[] {
     { provide: PRINT_OPTION_SERVICE, useClass: PrintOptionService },
     { provide: PUBLIC_GALLERY_SERVICE, useClass: PublicGalleryService },
     { provide: STUDIO_SERVICE, useClass: StudioService },
+    { provide: STUDIO_DETAILS_SERVICE, useClass: StudioDetailsService },
     { provide: RATE_SERVICE, useClass: RateService },
     { provide: DISCOUNT_SERVICE, useClass: DiscountService },
     { provide: CONTENT_SERVICE, useClass: ContentService },
