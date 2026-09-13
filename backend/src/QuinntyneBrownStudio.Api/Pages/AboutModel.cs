@@ -10,11 +10,15 @@ namespace QuinntyneBrownStudio.Api.Pages;
 public class AboutModel(IMediator mediator, IETagGenerator eTagGenerator) : PageModel
 {
     public AboutPageView View { get; private set; } = default!;
+    /// <summary>The relaunch gate (OD-14) applies to this visitor: the portfolio link stays hidden.</summary>
+    public bool ComingSoon { get; private set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
         View = await mediator.Send(new GetAboutPage());
-        var etag = PublicPageETag.Compute("about", View.Fingerprint);
+        ComingSoon = (await mediator.Send(new GetLaunchState())).ComingSoon;
+        // The gate changes what the page shows, so it changes what a cached copy may stand in for.
+        var etag = PublicPageETag.Compute("about", View.Fingerprint + (ComingSoon ? ":gated" : ""));
         if (eTagGenerator.IsMatch(etag, Request.Headers.IfNoneMatch.FirstOrDefault()))
             return StatusCode(304);
         Response.Headers.ETag = etag;

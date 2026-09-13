@@ -55,6 +55,18 @@ Staging is provisioned from the same Bicep template into `rg-qbs-staging` with
    in an ordinary Run Command script, workflow log, or artifact. Execute as `qbs`
    with `/opt/studio/config/production.env`. Remove the bootstrap values afterwards.
 
+## Relaunch gate
+
+`Launch__ComingSoon` (OD-14) keeps the client-rendered marketing pages behind the blog for
+anyone who is not signed in; the quote calculator, `/about`, `/contact`, the blog, and the
+sign-in pages stay open, and a signed-in administrator or client sees everything. The Bicep
+parameter `comingSoon` writes the value into `/opt/studio/config/production.env`; it is `true`
+in both parameter files today. Changing it is an infrastructure change: edit the parameter
+file, merge to `main`, and run **Provision studio infrastructure** with `apply`, which
+rewrites the environment file and restarts the services. For an immediate change on the host,
+edit that file in a recovery session and restart `qbs-api` and `qbs-worker`. While the gate
+is on, the API publishes one `Coming soon` article into an empty blog at startup.
+
 SSH is closed by default. For an interactive recovery session, temporarily allow
 only your current public IP on port 22, use the configured key, then remove that rule.
 Do not add a public self-hosted GitHub runner to the VM.

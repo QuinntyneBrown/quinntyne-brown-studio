@@ -14,6 +14,7 @@ export * from './lib/equipment';
 export * from './lib/field-definition';
 export * from './lib/finalized-photo';
 export * from './lib/inquiry';
+export * from './lib/launch-state';
 export * from './lib/marketing-content';
 export * from './lib/money';
 export * from './lib/photo-page';

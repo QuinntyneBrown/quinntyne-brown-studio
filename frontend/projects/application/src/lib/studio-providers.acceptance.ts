@@ -23,6 +23,7 @@ import {
   IAlbumService,
   IPrintRequestService,
   IInquiryService,
+  ILaunchService,
   IPhotoService,
   IRetentionService,
   IAnalysisService,
@@ -46,6 +47,7 @@ import {
   ALBUM_SERVICE,
   PRINT_REQUEST_SERVICE,
   INQUIRY_SERVICE,
+  LAUNCH_SERVICE,
   PHOTO_SERVICE,
   RETENTION_SERVICE,
   ANALYSIS_SERVICE,
@@ -53,6 +55,8 @@ import {
 } from '@qbs/api';
 import { ACCOUNT_SERVICE } from './account.token';
 import { AccountService } from './account-service';
+import { LAUNCH_GATE_SERVICE } from './launch-gate.token';
+import { LaunchGateService } from './launch-gate-service';
 import { quoteProvider } from './quote-provider';
 export function studioProviders(): Provider[] {
   return [
@@ -65,6 +69,8 @@ export function studioProviders(): Provider[] {
     { provide: CATALOG_SERVICE, useFactory: () => controlledService<ICatalogService>('catalog') },
     { provide: ACCOUNT_SERVICE, useClass: AccountService },
     { provide: AUTH_SERVICE, useFactory: () => controlledService<IAuthService>('auth') },
+    { provide: LAUNCH_SERVICE, useFactory: () => controlledService<ILaunchService>('launch') },
+    { provide: LAUNCH_GATE_SERVICE, useClass: LaunchGateService },
     {
       provide: EQUIPMENT_SERVICE,
       useFactory: () => controlledService<IEquipmentService>('equipment'),

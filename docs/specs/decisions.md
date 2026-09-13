@@ -156,3 +156,15 @@ The About and Contact heading and introduction are `MarketingContent` records un
 An inquiry is stored in the studio document store with `Submitted` and `Reviewed` states before any email is queued. The existing `Email` background job notifies the configured studio email address in plain text, deduplicated by inquiry identifier; no configured address means stored only. Submissions require an antiforgery token, work as a plain form post without script, are validated on the server, reject a filled hidden field, and are rate limited per client address. An inquiry is not a booking, quotation, or reservation. The "About" exclusion in L2-070 refers to the Blog source's own About page, not the studio's.
 
 Search discovery uses one root sitemap: `/sitemap.xml` is a single url set listing the marketing home, `/about`, `/contact`, `/blog`, and every published article, and root `/robots.txt` advertises only that address; `/blog/sitemap.xml` remains for compatibility. Published marketing content records a publication timestamp that supplies each page's last-modified date.
+
+## OD-14 — Coming-soon relaunch gate
+
+Status: **Accepted**, 2026-09-13. Authority: the user's relaunch instruction of 2026-09-13.
+
+The studio is relaunching and its deployed galleries hold no photographs yet. Until they do, the client-rendered marketing pages are not shown to the public. One setting, `Launch:ComingSoon`, turns the gate on; the Bicep `comingSoon` parameter writes it into the host environment as `Launch__ComingSoon`, and it is `true` in the production and staging parameter files. A host or workstation without the setting, including every local development launch, gates nobody.
+
+While the gate is on, a visitor who is not signed in is sent from the home, portfolio, services, prints, promotions, and public gallery pages to `/blog`. The quote calculator, `/about`, `/contact`, the blog, and the administration and client sign-in pages stay open, because the studio still takes inquiries and bookings and because the studio's own accounts sign in through those pages. Both marketing shells offer only the open pages to a gated visitor. A signed-in administrator or client is never gated: the API decides per request from the account cookie, so the same setting shows the owner everything and the public only what exists.
+
+The gate is decided by the API and read by the Angular application through `GET /api/public/launch`; a route guard performs a full navigation to the blog before a gated page renders. The gateway is not involved, so the deployed proxy definition is unchanged. A launch state the API cannot supply gates nobody, since the blog the gate leads to is rendered by that same API.
+
+A gated studio needs a blog page worth landing on. At startup, while the setting is on, the API publishes one `Coming soon` article into a blog that holds no article at all. The article is ordinary content afterwards: the editor can change, unpublish, or delete it, and a blog that already holds any article receives nothing. Turning the setting off relaunches the site; the article stays until an administrator removes it.

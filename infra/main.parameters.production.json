@@ -10,6 +10,7 @@
     "aiCapacity": { "value": 1 },
     "publicOrigin": { "value": "https://quinntynebrown.studio" },
     "redirectHosts": { "value": ["www.quinntynebrown.studio"] },
-    "clientHost": { "value": "clients.quinntynebrown.studio" }
+    "clientHost": { "value": "clients.quinntynebrown.studio" },
+    "comingSoon": { "value": true }
   }
 }

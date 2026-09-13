@@ -13,7 +13,7 @@ The feature pages contain their background, concrete components and interfaces, 
 | `public-presentation` | [Publish promotions](public-presentation/publish-promotions/README.md) | `L2-007` |
 | `public-presentation` | [Present the about page](public-presentation/present-about-page/README.md) | `L2-071` |
 | `public-presentation` | [Receive contact inquiries](public-presentation/receive-contact-inquiries/README.md) | `L2-072`, `L2-073`, `L2-074`, `L2-075` |
-| `public-presentation` | [Serve search-discoverable pages](public-presentation/serve-search-discoverable-pages/README.md) | `L2-076`, `L2-077` |
+| `public-presentation` | [Serve search-discoverable pages](public-presentation/serve-search-discoverable-pages/README.md) | `L2-076`, `L2-077`, `L2-078` |
 | `quotations` | [Calculate a live quote](quotations/calculate-live-quote/README.md) | `L2-008`, `L2-009`, `L2-010`, `L2-011`, `L2-012`, `L2-013`, `L2-055`, `L2-056` |
 | `quotations` | [Apply discounts](quotations/apply-discounts/README.md) | `L2-014`, `L2-015`, `L2-016`, `L2-017`, `L2-057` |
 | `quotations` | [Configure rates](quotations/configure-rates/README.md) | `L2-018`, `L2-055` |
@@ -118,6 +118,7 @@ Every L2 has at least one linked feature. Shared UX and access obligations recur
 | `L2-075` | `L1-019` | [receive-contact-inquiries](public-presentation/receive-contact-inquiries/README.md) |
 | `L2-076` | `L1-020` | [serve-search-discoverable-pages](public-presentation/serve-search-discoverable-pages/README.md) |
 | `L2-077` | `L1-020` | [serve-search-discoverable-pages](public-presentation/serve-search-discoverable-pages/README.md) |
+| `L2-078` | `L1-002` | [serve-search-discoverable-pages](public-presentation/serve-search-discoverable-pages/README.md) |
 
 ## Diagram conventions
 

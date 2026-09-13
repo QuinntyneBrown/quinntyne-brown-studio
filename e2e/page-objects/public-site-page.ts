@@ -1,4 +1,4 @@
-import { expect, Page } from "@playwright/test";
+import { BrowserContext, expect, Page } from "@playwright/test";
 
 export class PublicSitePage {
   constructor(
@@ -7,6 +7,46 @@ export class PublicSitePage {
   ) {}
   async open(path = "") {
     await this.page.goto(`${this.origin}/${path}`);
+  }
+  /**
+   * The blog is a page the API renders; under acceptance the dev server would answer `/blog`
+   * with the application shell, so a stand-in blog page is served in its place.
+   */
+  async serveBlog(context: BrowserContext) {
+    await context.route("**/blog", (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: "text/html",
+        body: "<html><body><h1>From the studio</h1></body></html>",
+      }),
+    );
+  }
+  /** The visitor left the application for the blog rather than seeing a client-rendered page. */
+  async arrivedAtBlog() {
+    await expect(
+      this.page.getByRole("heading", { name: "From the studio", exact: true }),
+    ).toBeVisible();
+    expect(new URL(this.page.url()).pathname).toBe("/blog");
+  }
+  /** The visitor stayed on the requested application page. */
+  async stayedOn(path: string) {
+    await this.loaded();
+    expect(new URL(this.page.url()).pathname).toBe(path);
+  }
+  async brandLink(href: string) {
+    await expect(this.page.locator(".shell__brand").first()).toHaveAttribute("href", href);
+  }
+  async navigationAbsent(label: string) {
+    await expect(
+      this.navigation().getByRole("link", { name: label, exact: true }),
+    ).toHaveCount(0);
+  }
+  async footerLinkAbsent(label: string) {
+    await expect(
+      this.page
+        .getByRole("contentinfo")
+        .getByRole("link", { name: label, exact: true }),
+    ).toHaveCount(0);
   }
   async message(text: string) {
     await expect(

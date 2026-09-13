@@ -10,7 +10,7 @@ The slice owns rendering and discovery only. The About page content is designed 
 
 ## Description
 
-Status: implemented on 2026-09-13 under OD-13; evidence in the [acceptance register](../../acceptance.md).
+Status: implemented on 2026-09-13 under OD-13, extended the same day with the relaunch gate under OD-14; evidence in the [acceptance register](../../acceptance.md).
 
 `MarketingShellLayout` is the marketing shell inside `Pages/Shared/_Layout.cshtml`. Today the layout selects that shell only when `IsBlogListing` is true; the design generalizes the flag to `IsMarketingShell` so About, Contact, and the blog listing share one header, navigation, and footer. The navigation lists Portfolio, Services, About, Blog, Prints, Packages, the quote call to action, and client login, and marks the current page with `aria-current="page"`. The footer links `About the studio`, `Get in touch`, `Our work`, `Blog`, and `Client access`. The mobile menu keeps the existing keyboard-operable button, backdrop, and Escape handling.
 
@@ -26,6 +26,8 @@ The gateway definition in `deploy/linux/gateway.py` lists the addresses the API 
 
 On the Angular side, `Shell` (`shell.ts`, `shell.html`) already links `/blog` with a plain `<a href>` so the browser performs a full navigation to the API-rendered page. `publicLinks` gains About and Contact rendered the same way, and the footer gains the `About the studio`, `Get in touch`, `Our work`, `Blog`, and `Client access` links. `routes.ts` drops the `contact` route and `PublicPage` loses its contact branch, so no client-rendered page competes with the server-rendered one. Every other marketing page stays in the Angular application.
 
+`LaunchGate` is the relaunch behavior recorded in [OD-14](../../../specs/decisions.md#od-14--coming-soon-relaunch-gate). `LaunchOptions` binds the `Launch:ComingSoon` setting; `GetLaunchStateHandler` answers `LaunchState` for the requester, true only while the setting is on and the request carries no signed-in account, and `LaunchController` publishes it at `GET /api/public/launch`. The marketing shell in `_Layout.cshtml` reads the same query: while the gate applies it lists About, Blog, Contact, the quote call to action, and client login, drops `Our work` from the footer, and points the brand at `/blog`; `IndexModel`, `AboutModel`, and `ContactModel` fold the state into their ETags, so a copy cached on one side of the gate never answers for the other, and the About page omits its portfolio link. On the Angular side `LaunchService` (`api`) reads the endpoint through `LAUNCH_SERVICE`, `LaunchGateService` (`application`) holds the state as a signal behind `LAUNCH_GATE_SERVICE`, the `launchGate` guard in `routes.ts` sends a gated visitor to `/blog` by a full navigation before any client-rendered page renders, and `Shell` filters its navigation and footer to the server-rendered links. The quote route carries no guard. A launch state the API cannot supply gates nobody, because the blog the gate leads to comes from the same API. `PublishLaunchArticleCommand` runs at API startup while the setting is on and publishes `LaunchArticle`, the coming-soon post, into a blog that holds no article at all; a blog with any article, published or draft, is left as it is. The Bicep `comingSoon` parameter writes `Launch__ComingSoon` into the host environment, so an unconfigured host, and every local development launch, gates nobody.
+
 Acceptance covers complete HTML without script, canonical and metadata presence, trailing-slash redirects, navigation and footer links in both shells, `304` on an unchanged `ETag` and a new `ETag` after publication, the release health check, sitemap membership with `lastmod`, robots directives, and the no-index header.
 
 **Interfaces**
@@ -35,6 +37,7 @@ Acceptance covers complete HTML without script, canonical and metadata presence,
 - `GET /about` with `If-None-Match` equal to the current ETag `→ 304`
 - `GET /robots.txt → text/plain directives and Sitemap: PublicOrigin/sitemap.xml`
 - `GET /sitemap.xml → application/xml urlset with /, /about, /contact, /blog, and published articles`
+- `GET /api/public/launch → 200 { comingSoon }: true only while Launch:ComingSoon is on and the request is anonymous`
 
 **Behavior ownership**
 
@@ -42,6 +45,8 @@ Acceptance covers complete HTML without script, canonical and metadata presence,
 | --- | --- | --- |
 | `RenderPublicPage` | `AboutModel`, `ContactModel` with `MarketingShellLayout` | Compose page content, metadata, and ETag into one HTML document; answer 304 or 308 when applicable. |
 | `GetSiteDocument` | `GetSiteDocumentHandler` | Build the root robots directives and the site sitemap from published content and articles. |
+| `GetLaunchState` | `GetLaunchStateHandler` | Report whether the relaunch gate applies to the requester; the shells, the guard, and the About ETag read it. |
+| `PublishLaunchArticle` | `PublishLaunchArticleCommandHandler` | Publish the coming-soon article into an empty blog at startup while the gate is configured. |
 
 The [shared architecture](../../architecture.md) defines authorization, wire conventions, persistence, environment boundaries, and delivery constraints. The [decision baseline](../../../specs/decisions.md) supplies exact policies and remaining evidence gates. Shared architecture requirements `L2-038` through `L2-045` and delivery requirements `L2-049` through `L2-054` apply to the implemented layers of this slice.
 
@@ -59,6 +64,7 @@ Source: [L2 requirements](../../../specs/L2.md). Shared interface and delivery o
 | `L2-066` | `L1-001` | Platform interfaces shall follow the approved HTML prototype at 390, 768, and 1440 CSS-pixel widths across Chromium, Firefox, and WebKit, with keyboard-operable controls and readable validation and failure states. |
 | `L2-076` | `L1-020` | The API shall render `/about` and `/contact` as complete HTML documents that include the page content, a page-specific title and meta description, a canonical link built from `PublicOrigin`, Open Graph metadata, and JSON-LD structured data, using the marketing shell that serves the blog listing. The gateway shall route both addresses to the API, the trailing-slash forms shall redirect permanently to the canonical addresses, and the marketing application's navigation and footer shall link to both pages as full navigations. |
 | `L2-077` | `L1-020` | The site's `/robots.txt` shall advertise a sitemap that lists the marketing home, `/about`, `/contact`, and the blog addresses with last-modified dates for administrator-published content, and shall not disallow `/about` or `/contact`. Environments configured as no-index shall keep their `X-Robots-Tag` header on both pages. |
+| `L2-078` | `L1-002` | While the studio is configured as coming soon, the client-rendered marketing pages (home, portfolio, services, prints, promotions, and public galleries) shall send a visitor who is not signed in to `/blog`, while the quote calculator, `/about`, `/contact`, the blog, and the account sign-in pages stay open; both marketing shells shall offer only the open pages to such a visitor; a signed-in administrator or client shall see every page; an unconfigured studio, including local development, shall gate nobody; and a gated studio whose blog is empty shall publish one coming-soon article at startup. |
 
 ## Diagrams
 

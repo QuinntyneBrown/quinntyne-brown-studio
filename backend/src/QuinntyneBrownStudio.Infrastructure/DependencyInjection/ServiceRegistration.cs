@@ -8,6 +8,7 @@ using QuinntyneBrownStudio.Application.Catalog;
 using QuinntyneBrownStudio.Application.Clients;
 using QuinntyneBrownStudio.Application.Photos;
 using QuinntyneBrownStudio.Application.Ports;
+using QuinntyneBrownStudio.Application.Presentation;
 using QuinntyneBrownStudio.Application.Quotations;
 using QuinntyneBrownStudio.Infrastructure.Adapters;
 using QuinntyneBrownStudio.Infrastructure.Identity;
@@ -50,6 +51,7 @@ public static class ServiceRegistration
             services.AddSingleton<IEmailSender, AzureEmailSender>();
             services.AddSingleton<IJobQueue, AzureJobQueue>();
         }
+        services.Configure<LaunchOptions>(config.GetSection("Launch"));
         services.AddSingleton<IClock, SystemClock>();
         services.AddSingleton<IEmailQueue, ProtectedEmailQueue>();
         services.AddSingleton<IRawPreviewConverter, RawPreviewConverter>();

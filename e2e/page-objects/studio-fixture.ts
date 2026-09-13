@@ -4,6 +4,8 @@ import { BrowserContext } from "@playwright/test";
 export class StudioFixture {
   authenticated = true;
   role = "Administrator";
+  /** The relaunch gate (OD-14) as the API reports it for this visitor. */
+  comingSoon = false;
   readonly calls: { service: string; method: string; args: any[] }[] = [];
   readonly records: Record<string, any[]> = Object.fromEntries(
     [
@@ -154,6 +156,8 @@ export class StudioFixture {
       return method === "list"
         ? this.records[args[0]]
         : this.save(args[0], args[1]);
+    if (service === "launch" && method === "state")
+      return { comingSoon: this.comingSoon };
     if (service === "auth") {
       if (method === "session")
         return {

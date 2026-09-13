@@ -11,8 +11,9 @@ const origin = DeployedStudio.origin();
 // when the deployed origin is visited over the certificate its gateway presents,
 // then the marketing site, calculator, blog, administration and client applications
 // are served, the API answers published reads from Azure SQL, and administration data
-// stays refused without an account.
-test("AC-AZ-09 AC-L2-068-01 AC-L2-070-07 AC-L2-076-04 the deployed studio serves every application over trusted TLS", async ({
+// stays refused without an account. While the relaunch gate is on, the marketing home
+// hands an anonymous visitor to the blog instead.
+test("AC-AZ-09 AC-L2-068-01 AC-L2-070-07 AC-L2-076-04 AC-L2-078-02 the deployed studio serves every application over trusted TLS", async ({
   page,
   request,
 }, info) => {
@@ -31,8 +32,14 @@ test("AC-AZ-09 AC-L2-068-01 AC-L2-070-07 AC-L2-076-04 the deployed studio serves
 
   const publicSite = new PublicSitePage(page, origin);
   await publicSite.open();
-  await publicSite.heading("Photography with feeling.");
-  await publicSite.loaded();
+  if (await studio.comingSoon()) {
+    // AC-L2-078-02: while the studio is coming soon an anonymous visitor never sees the
+    // client-rendered home page; the browser leaves for the blog the API renders.
+    await publicSite.arrivedAtBlog();
+  } else {
+    await publicSite.heading("Photography with feeling.");
+    await publicSite.loaded();
+  }
   await publicSite.capture(info.outputPath("marketing-home.png"));
 
   // A deep link proves the gateway falls back to the application shell rather than 404.

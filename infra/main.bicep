@@ -20,6 +20,8 @@ param redirectHosts array = []
 param clientHost string = ''
 @description('Prevent search indexing for non-production origins.')
 param noIndex bool = false
+@description('Keep the client-rendered marketing pages behind the blog until the relaunch; signed-in accounts see everything.')
+param comingSoon bool = false
 
 var suffix = uniqueString(resourceGroup().id)
 var hostname = 'qbs-${suffix}.${location}.cloudapp.azure.com'
@@ -320,5 +322,6 @@ output host object = {
     DataProtection__KeyUri: '${vault.properties.vaultUri}keys/data-protection'
     APPLICATIONINSIGHTS_CONNECTION_STRING: insights.properties.ConnectionString
     Raw__Executable: '/usr/bin/dcraw_emu'
+    Launch__ComingSoon: string(comingSoon)
   }
 }
