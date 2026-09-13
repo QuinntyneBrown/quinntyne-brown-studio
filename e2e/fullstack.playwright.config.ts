@@ -11,8 +11,8 @@ export default defineConfig({
   outputDir: "../.artifacts/platform/fullstack-browser",
   projects: [
     { name: "chromium", use: { browserName: "chromium" } },
-    { name: "firefox-blog", testMatch: "blog.spec.ts", use: { browserName: "firefox" } },
-    { name: "webkit-blog", testMatch: "blog.spec.ts", use: { browserName: "webkit" } },
+    { name: "firefox-pages", testMatch: /(blog|about-contact)\.spec\.ts/, use: { browserName: "firefox" } },
+    { name: "webkit-pages", testMatch: /(blog|about-contact)\.spec\.ts/, use: { browserName: "webkit" } },
   ],
   use: {
     browserName: "chromium",
