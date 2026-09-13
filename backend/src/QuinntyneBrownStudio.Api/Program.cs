@@ -3,8 +3,12 @@ using QuinntyneBrownStudio.Api.Blog.Middleware;
 using Azure.Monitor.OpenTelemetry.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using QuinntyneBrownStudio.Api.Filters;
+using QuinntyneBrownStudio.Application.Blog.Articles.Commands;
+using QuinntyneBrownStudio.Application.Presentation;
 using QuinntyneBrownStudio.Domain.Exceptions;
 using QuinntyneBrownStudio.Infrastructure.DependencyInjection;
 using QuinntyneBrownStudio.Infrastructure.Persistence;
@@ -159,6 +163,10 @@ await using (var scope = app.Services.CreateAsyncScope())
         return;
     }
     await database.Verify();
+    // The relaunch gate (OD-14) needs somewhere to send visitors: an empty blog gets the
+    // coming-soon article, once; a blog that already holds an article is left alone.
+    if (scope.ServiceProvider.GetRequiredService<IOptions<LaunchOptions>>().Value.ComingSoon)
+        await scope.ServiceProvider.GetRequiredService<ISender>().Send(new PublishLaunchArticleCommand());
     if (controlled || args.Contains("--provision-admin"))
     {
         var roles = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();

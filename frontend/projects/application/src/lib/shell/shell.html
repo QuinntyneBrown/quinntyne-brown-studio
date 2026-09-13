@@ -1,8 +1,12 @@
 <a class="shell__skip" href="#main">Skip to content</a>
 @if (site === 'marketing') {
   <header class="shell__public">
-    <a routerLink="/" class="shell__brand">Quinntyne Brown<span>Studio · Photography</span></a
-    ><button
+    @if (gate.comingSoon()) {
+      <a href="/blog" class="shell__brand">Quinntyne Brown<span>Studio · Photography</span></a>
+    } @else {
+      <a routerLink="/" class="shell__brand">Quinntyne Brown<span>Studio · Photography</span></a>
+    }
+    <button
       class="button button--secondary shell__toggle"
       (click)="auth.toggleMenu()"
       [attr.aria-expanded]="auth.menu()"
@@ -16,7 +20,7 @@
       [class.shell__public-nav--open]="auth.menu()"
       aria-label="Main navigation"
     >
-      @for (link of publicLinks; track link[1]) {
+      @for (link of visiblePublicLinks(); track link[1]) {
         @if (link[2]) {
           <a [href]="link[1]">{{ link[0] }}</a>
         } @else {
@@ -36,7 +40,7 @@
   <footer class="shell__footer">
     <span>Quinntyne Brown Studio</span>
     <nav class="shell__footer-nav" aria-label="Footer navigation">
-      @for (link of footerLinks; track link[0]) {
+      @for (link of visibleFooterLinks(); track link[0]) {
         @if (link[2]) {
           <a [href]="link[1]">{{ link[0] }}</a>
         } @else {

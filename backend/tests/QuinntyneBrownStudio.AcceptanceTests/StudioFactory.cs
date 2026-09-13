@@ -5,6 +5,7 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -15,9 +16,13 @@ public sealed class StudioFactory : WebApplicationFactory<Program>
 {
     public QuinntyneBrownStudio.Application.Ports.IPhotoAnalysisService? PhotoAnalysis { get; init; }
     public Action<IServiceCollection>? ConfigurePersistence { get; init; }
+    /// <summary>Configuration the scenario supplies on top of the Testing defaults, such as the relaunch gate.</summary>
+    public IReadOnlyDictionary<string, string?>? Settings { get; init; }
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Testing");
+        if (Settings != null)
+            builder.ConfigureAppConfiguration((_, config) => config.AddInMemoryCollection(Settings));
         builder.ConfigureServices(services => services.AddFakePersistence());
         builder.ConfigureServices(services => ConfigurePersistence?.Invoke(services));
         builder.ConfigureServices(services => { if (PhotoAnalysis != null) services.AddSingleton(PhotoAnalysis); });

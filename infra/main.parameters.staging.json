@@ -11,6 +11,7 @@
     "publicOrigin": { "value": "https://staging.quinntynebrown.studio" },
     "redirectHosts": { "value": [] },
     "clientHost": { "value": "" },
-    "noIndex": { "value": true }
+    "noIndex": { "value": true },
+    "comingSoon": { "value": true }
   }
 }

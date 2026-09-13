@@ -24,9 +24,12 @@ import {
   RetentionService,
   AnalysisService,
   UploadService,
+  LaunchService,
 } from '@qbs/api';
 import { ACCOUNT_SERVICE } from './account.token';
 import { AccountService } from './account-service';
+import { LAUNCH_GATE_SERVICE } from './launch-gate.token';
+import { LaunchGateService } from './launch-gate-service';
 import { AuthService } from '@qbs/api';
 import { quoteProvider } from './quote-provider';
 import { Provider } from '@angular/core';
@@ -42,6 +45,7 @@ import {
   DISCOUNT_SERVICE,
   EQUIPMENT_SERVICE,
   INQUIRY_SERVICE,
+  LAUNCH_SERVICE,
   PHOTOGRAPHER_SERVICE,
   PHOTO_SERVICE,
   PRINT_OPTION_SERVICE,
@@ -66,6 +70,8 @@ export function studioProviders(): Provider[] {
     { provide: CATALOG_SERVICE, useClass: CatalogService },
     { provide: ACCOUNT_SERVICE, useClass: AccountService },
     { provide: AUTH_SERVICE, useClass: AuthService },
+    { provide: LAUNCH_SERVICE, useClass: LaunchService },
+    { provide: LAUNCH_GATE_SERVICE, useClass: LaunchGateService },
     { provide: EQUIPMENT_SERVICE, useClass: EquipmentService },
     { provide: VENDOR_SERVICE, useClass: VendorService },
     { provide: PHOTOGRAPHER_SERVICE, useClass: PhotographerService },

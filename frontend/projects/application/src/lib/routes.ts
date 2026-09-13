@@ -11,6 +11,7 @@ import { LoginPage } from './login-page/login-page';
 import { PrintInbox } from './print-inbox/print-inbox';
 import { InquiryInbox } from './inquiry-inbox/inquiry-inbox';
 import { RESOURCES } from './resource-definitions';
+import { launchGate } from './launch-gate';
 const access: CanActivateFn = async (route) => {
   const auth = inject(ACCOUNT_SERVICE),
     router = inject(Router);
@@ -32,13 +33,21 @@ const accountRoutes: Routes = [
 export function studioRoutes(site: string): Routes {
   if (site === 'marketing')
     return [
-      { path: '', component: PublicPage, data: { kind: 'home' } },
+      // Every client-rendered page waits behind the relaunch gate; the quote calculator, like
+      // the server-rendered About, Blog and Contact pages, stays open to everyone.
+      { path: '', component: PublicPage, data: { kind: 'home' }, canActivate: [launchGate] },
       ...['portfolio', 'services', 'prints', 'promotions'].map((kind) => ({
         path: kind,
         component: PublicPage,
         data: { kind },
+        canActivate: [launchGate],
       })),
-      { path: 'galleries/:slug', component: PublicPage, data: { kind: 'gallery' } },
+      {
+        path: 'galleries/:slug',
+        component: PublicPage,
+        data: { kind: 'gallery' },
+        canActivate: [launchGate],
+      },
       { path: 'quote', component: QuotePage },
       { path: '**', redirectTo: '' },
     ];

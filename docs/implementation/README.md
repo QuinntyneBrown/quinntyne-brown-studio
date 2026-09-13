@@ -14,6 +14,8 @@ The subsequent [LocalDB persistence change](localdb-persistence.md) implements O
 
 The [About and Contact pages brief](about-contact-pages.md) records the OD-13 implementation: the server-rendered About and Contact pages, stored inquiries with their inbox and notification, administrator-edited studio details, and the root sitemap, with the verification behind each acceptance criterion.
 
+The [relaunch gate brief](relaunch-gate.md) records the OD-14 implementation: the `Launch:ComingSoon` setting that keeps the client-rendered marketing pages behind the blog for visitors who are not signed in, the shells that offer only the open pages, and the coming-soon article published into an empty blog.
+
 ## Verification recorded on 2026-09-05
 
 | Check | Recorded result |

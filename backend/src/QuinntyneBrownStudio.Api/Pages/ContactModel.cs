@@ -35,7 +35,9 @@ public class ContactModel(IMediator mediator, IETagGenerator eTagGenerator, ILog
     {
         View = await mediator.Send(new GetContactPage());
         Sent = string.IsNullOrWhiteSpace(sent) ? null : sent.Trim();
-        var etag = PublicPageETag.Compute("contact", View.Fingerprint + "|" + Sent);
+        // The relaunch gate (OD-14) changes the shell, so it changes what a cached copy may stand in for.
+        var gated = (await mediator.Send(new GetLaunchState())).ComingSoon ? "|gated" : "";
+        var etag = PublicPageETag.Compute("contact", View.Fingerprint + "|" + Sent + gated);
         if (eTagGenerator.IsMatch(etag, Request.Headers.IfNoneMatch.FirstOrDefault()))
             return StatusCode(304);
         Response.Headers.ETag = etag;

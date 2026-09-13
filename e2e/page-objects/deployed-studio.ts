@@ -25,6 +25,12 @@ export class DeployedStudio {
       200,
     );
   }
+  /** Whether the relaunch gate (OD-14) applies to an anonymous visitor of this deployment. */
+  async comingSoon() {
+    const response = await this.request.get(`${this.origin}/api/public/launch`);
+    expect(response.status(), "/api/public/launch").toBe(200);
+    return Boolean((await response.json()).comingSoon);
+  }
   /** A published read the API can only answer by reaching its database. */
   async reads(path: string) {
     const response = await this.request.get(`${this.origin}/api/public/${path}`);

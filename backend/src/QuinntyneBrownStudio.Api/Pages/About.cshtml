@@ -37,7 +37,10 @@
             <p>@Model.View.Introduction</p>
             <div class="marketing-actions">
                 <a class="marketing-button" href="/contact">Say hello <span aria-hidden="true">↗</span></a>
+                @if (!Model.ComingSoon)
+                {
                 <a class="marketing-text-link" href="/portfolio">See the work</a>
+                }
             </div>
             <div class="marketing-hero-meta">
                 <span>Since 2018</span>
