@@ -1,7 +1,7 @@
 # Windows and LocalDB operation
 
-For the blog, forward `/blog`, `/blog/*`, and `/robots.txt` to the same API as
-`/api/*`, before the marketing SPA fallback: an address the proxy does not forward is
+For the pages the API renders, forward `/blog`, `/blog/*`, `/about`, `/contact`,
+`/robots.txt`, and `/sitemap.xml` to the same API as `/api/*`, before the marketing SPA fallback: an address the proxy does not forward is
 answered by that fallback with the marketing shell and a 200, so a missing route looks
 like a working page rather than a 404. Set `Blog__StoragePath` to an absolute
 persistent directory writable by the API account, and back it up with the studio

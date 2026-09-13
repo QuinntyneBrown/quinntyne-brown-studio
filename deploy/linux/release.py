@@ -79,11 +79,12 @@ def healthy(origin):
                 subprocess.run(["systemctl", "is-active", "--quiet", service], check=True)
             for path in ["/api/health", "/", "/admin/", "/client/"]:
                 fetch(origin, path)
-            # A status code alone cannot tell the blog apart from the marketing shell the gateway
-            # falls back to, so check what actually answered: the page the API renders carries its
-            # own canonical link, and the feed is not HTML.
-            if f'<link rel="canonical" href="{origin}/blog" />' not in fetch(origin, "/blog")[1]:
-                raise RuntimeError("The gateway did not serve the blog from the API")
+            # A status code alone cannot tell an API-rendered page apart from the marketing shell
+            # the gateway falls back to, so check what actually answered: each page the API renders
+            # carries its own canonical link, and the feed is not HTML.
+            for path in ["/blog", "/about", "/contact"]:
+                if f'<link rel="canonical" href="{origin}{path}" />' not in fetch(origin, path)[1]:
+                    raise RuntimeError(f"The gateway did not serve {path} from the API")
             if "xml" not in fetch(origin, "/blog/feed.xml")[0]:
                 raise RuntimeError("The gateway did not serve the blog feed from the API")
             consecutive += 1

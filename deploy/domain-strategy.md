@@ -96,7 +96,7 @@ quinntynebrown.studio {
     encode gzip
     header Strict-Transport-Security "max-age=31536000; includeSubDomains"
 
-    @backend path /api/* /blog /blog/* /robots.txt
+    @backend path /api/* /blog /blog/* /about /about/ /contact /contact/ /robots.txt /sitemap.xml
     handle @backend {
         reverse_proxy 127.0.0.1:7444
     }
