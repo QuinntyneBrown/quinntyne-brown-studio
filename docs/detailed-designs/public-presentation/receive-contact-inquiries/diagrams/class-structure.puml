@@ -1,0 +1,117 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Class structure - Receive contact inquiries
+skinparam class {
+ BorderColor #344054
+ FontColor #101828
+ BackgroundColor #F9FAFB
+}
+enum ServiceKind {
+ Wedding
+ Event
+ Headshot
+ FamilyPortrait
+}
+class Inquiry {
+ +Guid Id
+ +string Reference
+ +string Name
+ +string Email
+ +string? Phone
+ +ServiceKind Interest
+ +string Message
+ +DateTimeOffset ConsentAt
+ +DateTimeOffset SubmittedAt
+ +string State
+ +Guid? ReviewedBy
+ +DateTimeOffset? ReviewedAt
+ +long Version
+ +MarkReviewed(administratorId: Guid, at: DateTimeOffset): void
+}
+class StudioDetails {
+ +Guid Id
+ +string? Email
+ +string? Phone
+ +string? Hours
+ +string? ReplyNote
+ +long Version
+}
+class SubmitInquiryCommand {
+ +string Name
+ +string Email
+ +string? Phone
+ +string Interest
+ +string Message
+ +bool Consent
+ +string? Honeypot
+}
+class ReviewInquiryCommand {
+ +Guid InquiryId
+ +long ExpectedVersion
+}
+class SaveStudioDetailsCommand {
+ +string? Email
+ +string? Phone
+ +string? Hours
+ +string? ReplyNote
+ +long ExpectedVersion
+}
+class ContactPageView {
+ +string Heading
+ +string Introduction
+ +StudioDetails? Details
+ +ContactStudio[] Studios
+ +AdvanceBooking? AdvanceBooking
+ +Question[] Questions
+}
+class ContactStudio {
+ +string Name
+ +string Address
+ +bool IsBase
+}
+class BackgroundJob {
+ +Guid Id
+ +string Kind
+ +Guid ResourceId
+ +int Attempt
+ +string State
+ +DateTimeOffset AvailableAt
+ +string Payload
+}
+interface IEmailSender {
+ +Send(recipient, subject, body, deduplicationId, ct): Task
+}
+interface IStudioStore {
+ +Run<T>(lockKey, action): Task<T>
+}
+interface IStudioTransaction {
+ +Get<T>(id): Task<T?>
+ +List<T>(): Task<T[]>
+ +Save<T>(value, expectedVersion): Task
+}
+Inquiry --> ServiceKind : has
+SubmitInquiryCommand ..> Inquiry : creates after validation
+ReviewInquiryCommand ..> Inquiry : marks reviewed
+SaveStudioDetailsCommand ..> StudioDetails : replaces
+ContactPageView o-- StudioDetails : optional configured details
+ContactPageView "1" *-- "0..*" ContactStudio : base studio first
+Inquiry ..> BackgroundJob : queues one Email job when an address is configured
+BackgroundJob ..> IEmailSender : delivered by JobProcessor
+IStudioStore ..> IStudioTransaction : scopes one committed unit of work
+IStudioStore o-- Inquiry : persists or supplies inputs
+IStudioStore o-- StudioDetails : persists or supplies inputs
+IStudioStore o-- BackgroundJob : commits with the inquiry
+@enduml

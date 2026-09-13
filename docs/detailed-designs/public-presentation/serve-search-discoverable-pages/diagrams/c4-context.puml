@@ -1,0 +1,12 @@
+@startuml
+!include <C4/C4_Context>
+LAYOUT_WITH_LEGEND()
+title System context - Serve search-discoverable pages
+Person(actor0, "Public visitor", "Opens /about and /contact in a browser")
+Person(actor1, "Search crawler", "Reads robots directives, the sitemap, and page metadata")
+Person(actor2, "Studio administrator", "Publishes the content the pages and sitemap reflect")
+System(studio, "Quinntyne Brown Studio", "Photography studio platform")
+Rel(actor0, studio, "Requests server-rendered pages", "HTTPS")
+Rel(actor1, studio, "Discovers pages through /robots.txt and /sitemap.xml", "HTTPS")
+Rel(actor2, studio, "Publishes About and Contact content")
+@enduml

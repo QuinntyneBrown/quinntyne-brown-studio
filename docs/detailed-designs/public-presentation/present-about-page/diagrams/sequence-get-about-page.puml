@@ -1,0 +1,57 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Behavior - GetAboutPage
+actor "Public visitor" as actor
+box "Frontend - Visitor browser" #E0F2FE
+ participant "Browser" as browser
+end box
+box "Backend - QuinntyneBrownStudio.Api application" #D1FADF
+ participant "AboutPage (AboutModel)" as page
+end box
+box "Backend - QuinntyneBrownStudio.Application and Domain" #ECFDF3
+ participant "GetAboutPageHandler" as handler
+ participant "AboutPageCopy" as copy
+end box
+box "Backend - QuinntyneBrownStudio.Infrastructure" #FFF4E5
+ database "Studio database via IStudioStore" as db
+end box
+actor -> browser : Open /about
+browser -> page : GET /about (full navigation, If-None-Match?)
+page -> page : Apply anonymous input policy
+page -> handler : Dispatch GetAboutPageQuery
+handler -> db : List MarketingContent, Photographer, PublicGallery
+db --> handler : Current snapshot
+alt Published about copy exists
+handler -> handler : Project PublishedHeading and PublishedBody only (L2-071)
+else Draft only or no record
+handler -> copy : Read default heading and introduction (L2-071)
+copy --> handler : Default copy; no draft text
+end
+handler -> handler : Keep active photographers; first is founder and lead (L2-071)
+alt A published gallery exists
+handler -> handler : Hero photograph = cover of the latest published gallery (L2-071)
+else No published gallery
+handler -> handler : Hero photograph = neutral placeholder
+end
+handler --> page : AboutPageView
+page -> page : Compute weak ETag from record versions
+alt ETag matches If-None-Match
+page --> browser : 304 Not Modified
+else Content changed or first request
+page --> browser : 200 HTML in the marketing shell; ETag; Cache-Control: no-cache
+browser --> actor : Present the about page; empty team state when no photographer is active
+end
+@enduml

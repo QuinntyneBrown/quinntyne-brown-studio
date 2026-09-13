@@ -1,0 +1,26 @@
+@startuml
+!include <C4/C4_Component>
+LAYOUT_WITH_LEGEND()
+title Components - Present the about page
+Container_Boundary(frontend, "Frontend - Visitor browser") {
+ Component(browser, "Browser", "User agent", "Requests /about as a full navigation")
+}
+Container_Boundary(api, "Backend - QuinntyneBrownStudio.Api and Application") {
+ Component(page, "AboutPage", "Razor page (About.cshtml, AboutModel)", "Renders AboutPageView in the marketing shell with an ETag")
+ Component(handler, "GetAboutPageHandler", "MediatR", "GetAboutPage")
+ Component(view, "AboutPageView", "Projection", "Copy, team, and hero photograph")
+ Component(copy, "AboutPageCopy", "Static copy", "Default heading, introduction, story, principles, and steps")
+ Component(content, "MarketingContent", "Domain model", "Published about copy")
+ Component(photographer, "Photographer", "Domain model", "Active team members")
+ Component(gallery, "PublicGallery", "Domain model", "Published gallery cover")
+ Component(store, "IStudioStore", "Application port", "Transactional persistence boundary")
+}
+Rel(browser, page, "GET /about", "HTTPS")
+Rel(page, handler, "Dispatches GetAboutPageQuery")
+Rel(handler, view, "Builds")
+Rel(handler, copy, "Reads default and fixed copy")
+Rel(handler, content, "Reads published copy only")
+Rel(handler, photographer, "Lists active photographers")
+Rel(handler, gallery, "Selects latest published cover")
+Rel(handler, store, "Loads state in one scope")
+@enduml

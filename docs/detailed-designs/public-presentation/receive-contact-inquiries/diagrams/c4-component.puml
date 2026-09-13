@@ -1,0 +1,47 @@
+@startuml
+!include <C4/C4_Component>
+LAYOUT_WITH_LEGEND()
+title Components - Receive contact inquiries
+Container_Boundary(frontend, "Frontend - Visitor browser and Admin application") {
+ Component(browser, "Browser", "Full navigation", "Renders /contact and posts the form")
+ Component(inbox, "InquiryInboxPage", "Angular", "Lists and reviews inquiries")
+ Component(editor, "StudioDetailsEditor", "Angular", "Edits public contact details")
+ Component(inquiryClient, "IInquiryService", "Interface and injection token", "Typed inbox service boundary")
+ Component(detailsClient, "IStudioDetailsService", "Interface and injection token", "Typed settings service boundary")
+}
+Container_Boundary(api, "Backend - QuinntyneBrownStudio.Api and Application") {
+ Component(page, "ContactPage", "Razor page", "GET and POST /contact; antiforgery; rate limit contact-inquiries")
+ Component(inquiriesCtrl, "InquiriesController", ".NET controller", "Administrator inbox routes")
+ Component(detailsCtrl, "StudioDetailsController", ".NET controller", "Administrator studio-details routes")
+ Component(handler0, "GetContactPageHandler", "MediatR", "GetContactPage")
+ Component(handler1, "SubmitInquiryHandler", "MediatR", "SubmitInquiry")
+ Component(handler2, "ReviewInquiryHandler", "MediatR", "ListInquiries, GetInquiry, ReviewInquiry")
+ Component(handler3, "SaveStudioDetailsHandler", "MediatR", "GetStudioDetails, SaveStudioDetails")
+ Component(inquiry, "Inquiry", "Domain entity", "Submitted or Reviewed inquiry")
+ Component(details, "StudioDetails", "Domain entity", "Configured public contact details")
+ Component(store, "IStudioStore", "Application port", "Transactional persistence boundary")
+}
+Container_Boundary(infra, "Backend - QuinntyneBrownStudio.Infrastructure") {
+ Component(processor, "JobProcessor", "Worker service", "Delivers Email jobs with bounded retry")
+ Component(sender, "IEmailSender", "Port", "AzureEmailSender or ControlledEmail")
+}
+Rel(browser, page, "GET /contact; POST form", "HTTPS")
+Rel(inbox, inquiryClient, "Consumes token contract")
+Rel(editor, detailsClient, "Consumes token contract")
+Rel(inquiryClient, inquiriesCtrl, "Calls typed controller API", "HTTPS")
+Rel(detailsClient, detailsCtrl, "Calls typed controller API", "HTTPS")
+Rel(page, handler0, "Dispatches request")
+Rel(page, handler1, "Dispatches request")
+Rel(inquiriesCtrl, handler2, "Dispatches request")
+Rel(detailsCtrl, handler3, "Dispatches request")
+Rel(handler0, details, "Reads configured details")
+Rel(handler1, inquiry, "Creates and validates")
+Rel(handler2, inquiry, "Reads and reviews")
+Rel(handler3, details, "Validates and saves")
+Rel(handler0, store, "Loads published content, details, studios, and discounts")
+Rel(handler1, store, "Saves the inquiry and the Email job in one unit")
+Rel(handler2, store, "Loads or saves authorized state")
+Rel(handler3, store, "Loads or saves authorized state")
+Rel(processor, store, "Leases the Email job")
+Rel(processor, sender, "Sends with the inquiry identifier as deduplication id")
+@enduml

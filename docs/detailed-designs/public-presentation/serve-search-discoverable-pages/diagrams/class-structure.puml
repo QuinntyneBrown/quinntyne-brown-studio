@@ -1,0 +1,87 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Class structure - Serve search-discoverable pages
+skinparam class {
+ BorderColor #344054
+ FontColor #101828
+ BackgroundColor #F9FAFB
+}
+class PublicPageMetadata {
+ +string Title
+ +string Description
+ +string CanonicalUrl
+ +string OgType
+ +string? OgImage
+ +string JsonLdType
+}
+class PublicPageETag {
+ +string Value
+ +Compute(versions: long[]): string
+ +Matches(ifNoneMatch: string?): bool
+}
+class MarketingShellLayout {
+ +bool IsMarketingShell
+ +string ActivePath
+ +Render(body, metadata): Html
+}
+abstract class PublicPageModel {
+ +PublicPageMetadata Metadata
+ +PublicPageETag ETag
+ +OnGetAsync(): Task
+}
+class AboutModel
+class ContactModel
+class MarketingContent {
+ +Guid Id
+ +string PageKey
+ +string? PublishedHeading
+ +string? PublishedBody
+ +DateTimeOffset? PublishedAt
+ +long Version
+}
+class GetSiteDocumentQuery {
+ +string Format
+}
+class GetSiteDocumentHandler {
+ +Handle(query: GetSiteDocumentQuery): Task<SiteDocument>
+}
+class SiteDocument {
+ +string Content
+ +string ContentType
+}
+interface IETagGenerator {
+ +IsMatch(etag: string, ifNoneMatch: string?): bool
+}
+interface IStudioStore {
+ +Run<T>(lockKey, action): Task<T>
+}
+class SeoController {
+ +Robots(): Task<IActionResult>
+ +Sitemap(): Task<IActionResult>
+}
+PublicPageModel <|-- AboutModel
+PublicPageModel <|-- ContactModel
+PublicPageModel *-- PublicPageMetadata : supplies to layout
+PublicPageModel *-- PublicPageETag : computes per request
+PublicPageETag ..> IETagGenerator : compares
+PublicPageModel ..> MarketingShellLayout : renders through
+PublicPageModel ..> IStudioStore : loads records and versions
+SeoController ..> GetSiteDocumentQuery : sends
+GetSiteDocumentHandler ..> GetSiteDocumentQuery : handles
+GetSiteDocumentHandler --> SiteDocument : produces
+GetSiteDocumentHandler --> MarketingContent : reads PublishedAt
+GetSiteDocumentHandler ..> IStudioStore : loads published records
+@enduml

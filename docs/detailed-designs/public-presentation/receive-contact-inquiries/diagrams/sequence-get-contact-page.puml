@@ -1,0 +1,59 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Behavior - GetContactPage
+actor "Public visitor" as actor
+box "Frontend - Visitor browser" #E0F2FE
+ participant "Browser" as browser
+end box
+box "Backend - QuinntyneBrownStudio.Api application" #D1FADF
+ participant "ContactPage" as page
+end box
+box "Backend - QuinntyneBrownStudio.Application and Domain" #ECFDF3
+ participant "GetContactPageHandler" as handler
+ participant "ContactPageView" as view
+end box
+box "Backend - QuinntyneBrownStudio.Infrastructure" #FFF4E5
+ database "Studio database via IStudioStore" as db
+end box
+actor -> browser : Open /contact
+browser -> page : GET /contact
+page -> page : Apply anonymous input policy
+page -> handler : Dispatch GetContactPage
+handler -> db : Load published contact content, StudioDetails, enabled studios, active discounts
+db --> handler : Current snapshot
+handler -> view : Compose page (L2-072)
+note right of view
+L2-072, L2-075
+end note
+alt No published contact content
+view --> handler : Default heading and introduction; no draft text
+else Published content
+view --> handler : Published heading and introduction
+end
+alt No configured detail
+view --> handler : Contact card omits the unconfigured rows
+else Configured details
+view --> handler : Email as mailto, phone as tel, hours, reply-time note
+end
+alt No enabled studio
+view --> handler : Locations show the empty state and the on-location entry
+else Enabled studios
+view --> handler : Base studio first, then the other enabled studios, then on location
+end
+handler --> page : ContactPageView
+page --> browser : 200 HTML with form, contact card, locations, map, questions, quote link
+browser --> actor : Present the Contact page
+@enduml

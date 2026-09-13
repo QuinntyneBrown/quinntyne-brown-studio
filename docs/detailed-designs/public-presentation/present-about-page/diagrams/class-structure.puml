@@ -1,0 +1,96 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Class structure - Present the about page
+skinparam class {
+ BorderColor #344054
+ FontColor #101828
+ BackgroundColor #F9FAFB
+}
+class AboutModel {
+ +AboutPageView Page
+ +OnGetAsync(): Task
+}
+class GetAboutPageQuery {
+}
+class GetAboutPageHandler {
+ +Handle(query: GetAboutPageQuery): Task<AboutPageView>
+}
+class AboutPageView {
+ +string Heading
+ +string Introduction
+ +bool IsDefaultCopy
+ +AboutTeamMember[] Team
+ +AboutHeroPhoto? HeroPhoto
+}
+class AboutTeamMember {
+ +string Name
+ +string Role
+}
+class AboutHeroPhoto {
+ +string GalleryTitle
+ +string Url
+}
+class AboutPageCopy <<static>> {
+ +string DefaultHeading
+ +string DefaultIntroduction
+ +string[] Story
+ +(string title, string body)[] Principles
+ +(string title, string body)[] Steps
+}
+class MarketingContent {
+ +Guid Id
+ +string PageKey
+ +string Heading
+ +string Body
+ +bool Publish
+ +string? PublishedHeading
+ +string? PublishedBody
+ +long Version
+}
+class Photographer {
+ +Guid Id
+ +string Name
+ +bool Active
+ +long Version
+}
+class PublicGallery {
+ +Guid Id
+ +string Title
+ +string Slug
+ +Guid[] PhotoIds
+ +bool Published
+ +long Version
+}
+interface IStudioStore {
+ +Run<T>(lockKey, action): Task<T>
+}
+interface IStudioTransaction {
+ +Get<T>(id): Task<T?>
+ +List<T>(): Task<T[]>
+ +Save<T>(value, expectedVersion): Task
+}
+AboutModel ..> GetAboutPageQuery : dispatches
+GetAboutPageHandler ..> GetAboutPageQuery : handles
+GetAboutPageHandler --> AboutPageView : builds
+GetAboutPageHandler ..> AboutPageCopy : reads fixed copy
+GetAboutPageHandler ..> IStudioStore : one read scope
+IStudioStore ..> IStudioTransaction : scopes one unit of work
+IStudioTransaction ..> MarketingContent : lists
+IStudioTransaction ..> Photographer : lists
+IStudioTransaction ..> PublicGallery : lists
+AboutPageView *-- "*" AboutTeamMember
+AboutPageView o-- "0..1" AboutHeroPhoto
+@enduml

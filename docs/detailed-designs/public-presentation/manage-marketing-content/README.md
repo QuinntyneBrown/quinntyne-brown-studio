@@ -48,7 +48,6 @@ Source: [L2 requirements](../../../specs/L2.md). Shared interface and delivery o
 | `L2-003` | `L1-001` | The platform shall restrict administrative content and operations to authorized studio administrators. This is a derived access requirement for the administrative application. |
 | `L2-005` | `L1-002` | Administrators shall be able to update marketing content and configure public galleries through the administrative application without editing application code. |
 | `L2-066` | `L1-001` | Platform interfaces shall follow the approved HTML prototype at 390, 768, and 1440 CSS-pixel widths across Chromium, Firefox, and WebKit, with keyboard-operable controls and readable validation and failure states. |
-
 | `L2-070` | `L1-017` | Reuse the article, search, SEO, editor, and media implementation from `C:/projects/Blog`. The approved exception preserves Razor for the blog, while the public listings at `/blog` and `/blog/articles` use the approved studio mock at `docs/mocks/marketing/blog.html` as their visual source. Article detail, search, and administration retain the imported interface. Studio branding, Identity, SQL persistence, and deployment conventions apply. Newsletters, subscriptions, events, About, source accounts, and source content are excluded. |
 
 ## Diagrams

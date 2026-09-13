@@ -1,0 +1,67 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Behavior - SaveStudioDetails
+actor "Studio administrator" as actor
+box "Frontend - Admin application" #E0F2FE
+ participant "StudioDetailsEditor" as page
+ participant "IStudioDetailsService" as client
+end box
+box "Backend - QuinntyneBrownStudio.Api application" #D1FADF
+ participant "StudioDetailsController" as controller
+end box
+box "Backend - QuinntyneBrownStudio.Application and Domain" #ECFDF3
+ participant "SaveStudioDetailsHandler" as handler
+ participant "StudioDetails" as entity
+end box
+box "Backend - QuinntyneBrownStudio.Infrastructure" #FFF4E5
+ database "Studio database via IStudioStore" as db
+end box
+actor -> page : Edit email, phone, hours, and reply-time note
+page -> client : Build typed request with expectedVersion
+client -> controller : PUT /api/admin/studio-details
+controller -> controller : Authenticate; require Administrator (L2-003)
+alt Access rejected
+controller --> client : 401 or 403; no protected result
+client --> page : Access state
+else Request admitted
+controller -> handler : Dispatch SaveStudioDetails
+handler -> db : Load the StudioDetails record
+db --> handler : Current snapshot or none
+handler -> entity : Validate email format and field limits; apply the change (L2-075)
+note right of entity
+L2-075
+end note
+alt Invalid email or over-length field
+entity --> handler : Field errors
+handler --> controller : Typed failure
+controller --> client : 400 ProblemDetails with the field
+client --> page : Error beside the field; previous details remain in effect
+else Stale version
+entity --> handler : Conflict
+handler --> controller : Typed failure
+controller --> client : 409; newer details preserved
+client --> page : Reload and retry state
+else Save succeeds
+entity --> handler : Validated details
+handler -> db : Commit the record
+db --> handler : Commit acknowledgement
+handler --> controller : Saved StudioDetails
+controller --> client : HTTP success
+client --> page : Deliver the saved record and version
+page --> actor : Present the saved details; the next /contact request and notification read them
+end
+end
+@enduml

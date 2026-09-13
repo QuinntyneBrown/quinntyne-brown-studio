@@ -1,0 +1,72 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Behavior - ReviewInquiry
+actor "Studio administrator" as actor
+box "Frontend - Admin application" #E0F2FE
+ participant "InquiryInboxPage" as page
+ participant "IInquiryService" as client
+end box
+box "Backend - QuinntyneBrownStudio.Api application" #D1FADF
+ participant "InquiriesController" as controller
+end box
+box "Backend - QuinntyneBrownStudio.Application and Domain" #ECFDF3
+ participant "ReviewInquiryHandler" as handler
+ participant "Inquiry" as entity
+end box
+box "Backend - QuinntyneBrownStudio.Infrastructure" #FFF4E5
+ database "Studio database via IStudioStore" as db
+end box
+actor -> page : Open the inquiry inbox
+page -> client : Build typed request
+client -> controller : GET /api/admin/inquiries?state=Submitted
+controller -> controller : Authenticate; require Administrator (L2-074)
+alt Anonymous or client caller
+controller --> client : 401 or 403; no inquiry data
+client --> page : Access state
+else Administrator admitted
+controller -> handler : Dispatch ListInquiries
+handler -> db : Load stored inquiries
+db --> handler : Snapshot
+handler --> controller : Summaries newest first: name, interest, submitted time, state
+controller --> client : HTTP success
+client --> page : Render the inbox; message text rendered as text
+page --> actor : Present the inbox
+actor -> page : Open one inquiry and mark it reviewed
+page -> client : Build typed request with expectedVersion
+client -> controller : POST /api/admin/inquiries/{id}/review
+controller -> handler : Dispatch ReviewInquiry
+handler -> db : Load the inquiry
+db --> handler : Current snapshot
+handler -> entity : Record ReviewedBy and ReviewedAt; State Reviewed (L2-074)
+note right of entity
+L2-074, L2-003
+end note
+alt Stale version
+entity --> handler : Conflict
+handler --> controller : Typed failure
+controller --> client : 409; stored state unchanged
+client --> page : Reload and retry state
+else Review recorded
+entity --> handler : Reviewed inquiry
+handler -> db : Commit the review
+db --> handler : Commit acknowledgement
+handler --> controller : Reviewed inquiry
+controller --> client : HTTP success
+client --> page : Deliver the reviewed inquiry
+page --> actor : Present Reviewed with administrator and time
+end
+end
+@enduml
