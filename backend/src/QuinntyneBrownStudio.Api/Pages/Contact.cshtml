@@ -2,9 +2,16 @@
 @model ContactModel
 @using System.Text.Json
 @using System.Text.RegularExpressions
+@using Microsoft.AspNetCore.Html
 @using QuinntyneBrownStudio.Application.Presentation
 @using QuinntyneBrownStudio.Domain.Enums
 @inject IConfiguration Configuration
+@functions {
+    IHtmlContent Error(string field) =>
+        Model.Errors.TryGetValue(field, out var message)
+            ? new HtmlString($"<span class=\"marketing-field-error\" id=\"error-{field}\">{System.Net.WebUtility.HtmlEncode(message)}</span>")
+            : HtmlString.Empty;
+}
 @{
     var origin = (Configuration["PublicOrigin"] ?? "https://localhost:7443").TrimEnd('/');
     ViewBag.Title = $"Contact | {Configuration["Site:SiteName"] ?? "Quinntyne Brown Studio"}";
@@ -51,26 +58,37 @@
                     <strong>Reference @Model.Sent</strong> — thank you. Your message was sent, and the studio will follow up. No payment or booking is made.
                 </div>
             }
+            else if (Model.Failure != null)
+            {
+                <div class="marketing-notice marketing-notice-error" role="alert">@Model.Failure</div>
+            }
+            else if (Model.Errors.Count > 0)
+            {
+                <div class="marketing-notice marketing-notice-error" role="alert">Nothing was sent yet. Please check the highlighted fields.</div>
+            }
             else
             {
                 <div class="marketing-notice">@Model.View.ReplyNotice</div>
             }
             <div class="marketing-form-grid">
-                <label class="marketing-field"><span>Your name *</span><input name="name" type="text" required maxlength="200" autocomplete="name" /></label>
-                <label class="marketing-field"><span>Email address *</span><input name="email" type="email" required maxlength="254" autocomplete="email" /></label>
+                <label class="marketing-field"><span>Your name *</span><input name="name" type="text" value="@Model.Form.Name" required maxlength="200" autocomplete="name" aria-invalid="@Model.Invalid("name")" aria-describedby="@Model.Describe("name")" />@Error("name")</label>
+                <label class="marketing-field"><span>Email address *</span><input name="email" type="email" value="@Model.Form.Email" required maxlength="254" autocomplete="email" aria-invalid="@Model.Invalid("email")" aria-describedby="@Model.Describe("email")" />@Error("email")</label>
             </div>
             <div class="marketing-form-grid">
-                <label class="marketing-field"><span>Phone (optional)</span><input name="phone" type="tel" maxlength="50" autocomplete="tel" /><span class="marketing-field-hint">Only if you’d rather talk it through.</span></label>
-                <label class="marketing-field"><span>I’m interested in</span><select name="interest">
+                <label class="marketing-field"><span>Phone (optional)</span><input name="phone" type="tel" value="@Model.Form.Phone" maxlength="50" autocomplete="tel" aria-invalid="@Model.Invalid("phone")" aria-describedby="@Model.Describe("phone")" />@Error("phone")<span class="marketing-field-hint">Only if you’d rather talk it through.</span></label>
+                <label class="marketing-field"><span>I’m interested in</span><select name="interest" aria-invalid="@Model.Invalid("interest")" aria-describedby="@Model.Describe("interest")">
                     @foreach (var (kind, label) in interests)
                     {
-                        <option value="@kind">@label</option>
+                        <option value="@kind" selected="@(kind.ToString() == (Model.Form.Interest ?? "Wedding"))">@label</option>
                     }
-                </select></label>
+                </select>@Error("interest")</label>
             </div>
-            <label class="marketing-field"><span>Tell us a little about your plans *</span><textarea name="message" required maxlength="4000"></textarea></label>
+            <label class="marketing-field"><span>Tell us a little about your plans *</span><textarea name="message" required maxlength="4000" aria-invalid="@Model.Invalid("message")" aria-describedby="@Model.Describe("message")">@Model.Form.Message</textarea>@Error("message")</label>
             <label class="marketing-visually-hidden" aria-hidden="true">Website <input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
-            <label class="marketing-checkline"><input name="consent" type="checkbox" value="true" required /> I’m happy for the studio to contact me about this request.</label>
+            <div class="marketing-field">
+                <label class="marketing-checkline"><input name="consent" type="checkbox" value="true" required checked="@Model.Form.Consent" aria-invalid="@Model.Invalid("consent")" aria-describedby="@Model.Describe("consent")" /> I’m happy for the studio to contact me about this request.</label>
+                @Error("consent")
+            </div>
             <div class="marketing-form-actions">
                 <button class="marketing-button" type="submit">Send your message <span aria-hidden="true">↗</span></button>
                 <span class="marketing-muted">No payment or booking is made.</span>
