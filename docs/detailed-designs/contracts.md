@@ -19,6 +19,10 @@ Each route has one controller owner even when more than one feature describes it
 | `/api/admin/sessions/{id}/clients`, `/api/client/galleries` and individual gallery routes | `ClientGalleriesController` | Assignment administration and scoped client projections. |
 | `/api/public/promotions`, `/api/public/print-options`, `/api/public/galleries`, `/api/public/content/{key}`, and the administrative content routes | `PresentationController` | One owner for every anonymous projection; each projection omits unpublished fields, storage keys, and client assignments. |
 | `/api/public/galleries/{slug}/photos/{id}` | `PhotosController` | Public derivative bytes after a current publication check. |
+| `/about`, `/contact`, and their trailing-slash redirects | `AboutModel` and `ContactModel` Razor pages in `QuinntyneBrownStudio.Api` | Server-rendered marketing pages under [OD-13](../specs/decisions.md#od-13--server-rendered-about-and-contact-pages); `GetAboutPageHandler` and `GetContactPageHandler` supply published projections, and `SubmitInquiryHandler` owns the contact form post. |
+| `/robots.txt`, `/sitemap.xml`, and the `/blog` feed and sitemap documents | `SeoController` | `GetSiteDocumentHandler` builds the site sitemap and robots directives; `GetBlogDocumentHandler` keeps the blog feeds. |
+| `/api/admin/inquiries`, `/api/admin/inquiries/{id}`, `/api/admin/inquiries/{id}/review` | `InquiriesController` | Administrator-only inquiry inbox and review. |
+| `/api/admin/studio-details` | `StudioDetailsController` | Studio contact details configuration read by the contact page and inquiry notifications. |
 | Administrative gallery, promotion, equipment, vendor, analysis, retention, print-option, print-request, album, and authentication routes | Corresponding controller named in the feature page | Each controller retains its declared feature route family. |
 
 `IQuoteService`, `IDiscountService`, `IUploadService`, `IPhotoService`, and `IClientGalleryService` are separate consumer contracts. `IClientGalleryService` delegates private image retrieval to `IPhotoService`. The `PhotosController` route still has a single owner. Every consumer contract has a separately declared injection token and replaceable HTTP/mock implementations.
@@ -29,7 +33,8 @@ Feature diagrams name the screen a person uses. The delivered Angular applicatio
 
 | Designed screen | Delivered component | Route |
 | --- | --- | --- |
-| `MarketingPage` | `PublicPage` | `/`, `/portfolio`, `/services`, `/contact` |
+| `MarketingPage` | `PublicPage` | `/`, `/portfolio`, `/services` |
+| `AboutPage`, `ContactPage` | Razor pages `About.cshtml` and `Contact.cshtml` in `QuinntyneBrownStudio.Api`, reached by full navigation | `/about`, `/contact` |
 | `PublicGalleryPage` | `PublicPage` | `/galleries/{slug}` |
 | `PromotionsPage` | `PublicPage` | `/promotions` |
 | `PublicPrintPricesPage` | `PublicPage` | `/prints` |
@@ -41,6 +46,8 @@ Feature diagrams name the screen a person uses. The delivered Angular applicatio
 | `SessionUploadPage`, `SessionPhotoReviewPage`, `PhotoSuggestionsPanel`, `SessionRetentionPanel`, `SessionAccessEditor` | `SessionPage` | `/sessions/{id}` |
 | `ClientGalleriesPage`, `AlbumEditorPage`, `ClientPrintSelectionPage`, `PrintRequestPage` | `ClientPage` | `/galleries`, `/galleries/{id}`, `/albums`, `/albums/{id}`, `/prints` |
 | `PrintRequestInboxPage` | `PrintInbox` | `/print-requests` |
+| `InquiryInboxPage` | `InquiryInbox` | `/inquiries` |
+| `StudioDetailsEditor` | `SettingsPage` | `/studio-details` |
 | `CatalogApplication` | Standalone catalog | The [design-system product](../../design-system/README.md) |
 
 Every screen reaches its services through injection tokens, so a test binds a controlled implementation without touching a component.
@@ -61,6 +68,7 @@ Feature diagrams name one handler per behavior. The delivered application layer 
 | `GetClientGalleriesHandler`, `SetGalleryAssignmentsHandler`, `GetAlbumHandler`, `SaveAlbumHandler`, `SubmitPrintRequestHandler`, `ReviewPrintRequestHandler`, `GetPrintRequestInboxHandler` | `ClientWorkflows` |
 | `ExtendSessionRetentionHandler`, `ProcessRetentionHandler`, `DeleteSessionPhotosHandler`, `ConfirmPhotoDeletionHandler` | `RetentionWorkflows`, with scheduled runs in `QuinntyneBrownStudio.Worker` |
 | `AuthenticateAccountHandler`, `SignOutHandler`, `InviteClientHandler`, `AcceptInvitationHandler`, `RecoverAccountHandler`, `ResetAccountPasswordHandler` | `AuthController` over ASP.NET Identity through `IIdentityAccounts` |
+| `GetAboutPageHandler`, `GetContactPageHandler`, `SubmitInquiryHandler`, `GetInquiryInboxHandler`, `ReviewInquiryHandler`, `GetStudioDetailsHandler`, `SaveStudioDetailsHandler`, `GetSiteDocumentHandler` | MediatR handlers planned under OD-13 in `QuinntyneBrownStudio.Application/Presentation`, `/Inquiries`, `/Catalog/StudioDetails`, and `/Blog/Seo`; delivered names `<TO SUPPLY>` at implementation |
 
 Consolidation does not change the described behavior, its authorization, or its failure outcomes. Each row keeps the transaction and version rules stated in [architecture](architecture.md).
 
@@ -96,9 +104,10 @@ Quote input revisions are client correlation values, not database versions. Rate
 | `RetentionState` | `Active`, `Expired`, `DeletionPending`, `Deleted`; expiry follows the clock, extension restores Active only before deletion, and cleanup completes Deleted |
 | `AccountRole` | `Administrator`, `Client`; a role never implies access to a specific client gallery without assignment |
 | `PrintRequestState` | `Submitted` → `Reviewed`; review stores administrator and time without changing submitted lines |
+| `InquiryState` | `Submitted` → `Reviewed`; review stores administrator and time without changing the submitted message |
 | `CoverageStatus` | `NotImplemented`, `Partial`, `Complete`; displayed as Not implemented, Partial, Complete in evidence tables |
 
-`ServiceKind`, `VendorRole`, `PhotoState`, `AnalysisState`, and `FindingOutcome` are declared enumerations in `QuinntyneBrownStudio.Domain`. The other rows fix a value vocabulary rather than a declared type: `DiscountKind`, `RetentionState`, `PrintRequestState`, `BatchState`, and `AccountRole` travel and store as those exact strings; `WindowKind` is carried by the working, unavailable, and commitment interval sets; `BillingUnit` names the unit a configured rate is charged in; and `CoverageStatus` belongs to the acceptance register rather than to any API response.
+`ServiceKind`, `VendorRole`, `PhotoState`, `AnalysisState`, and `FindingOutcome` are declared enumerations in `QuinntyneBrownStudio.Domain`. The other rows fix a value vocabulary rather than a declared type: `DiscountKind`, `RetentionState`, `PrintRequestState`, `InquiryState`, `BatchState`, and `AccountRole` travel and store as those exact strings; `WindowKind` is carried by the working, unavailable, and commitment interval sets; `BillingUnit` names the unit a configured rate is charged in; and `CoverageStatus` belongs to the acceptance register rather than to any API response.
 
 Stored aggregate `Version` fields are optimistic concurrency tokens. `expectedVersion` is required for updates. `Revision` identifies configuration, impact, or evidence versions where named explicitly; it is not interchangeable with an unrelated aggregate version.
 
@@ -108,7 +117,7 @@ Stored aggregate `Version` fields are optimistic concurrency tokens. `expectedVe
 
 `UploadBatch` owns its manifest entries; each accepted `UploadFile` refers to exactly one `SessionPhoto`. Rejected manifest entries may have no persisted photo. `Session` associates batches and photos without embedding binary data. A preview worker loads the photo identified by its job rather than repeating the entire batch. A photo remains associated with its original session throughout retries.
 
-`JobEnvelope` contains `jobId`, `kind`, `resourceId`, `expectedRevision`, and `attempt`. The delivered kinds are `Preview`, `Analysis`, `Delete`, and `Email`; a retention notice is an `Email` job carrying the expiry revision that produced it. Queue messages contain identifiers, not image bytes or identity tokens. The SQL job record owns state and retry history. Outbox relay tolerates repeat delivery. Handlers acknowledge only after durable outcome recording; transient failures retry with bounded backoff. After five attempts, the job records Failed and an administrator-visible retry action is required. Retention notice retries use the same expiry revision to avoid duplicate notices. `GetOperationStatusHandler` supplies the authorized job-state projection through each feature's status route; it does not rerun background work.
+`JobEnvelope` contains `jobId`, `kind`, `resourceId`, `expectedRevision`, and `attempt`. The delivered kinds are `Preview`, `Analysis`, `Delete`, and `Email`; a retention notice is an `Email` job carrying the expiry revision that produced it, and an inquiry notification is an `Email` job whose resource is the stored inquiry and whose deduplication identifier is the inquiry identifier. Queue messages contain identifiers, not image bytes or identity tokens. The SQL job record owns state and retry history. Outbox relay tolerates repeat delivery. Handlers acknowledge only after durable outcome recording; transient failures retry with bounded backoff. After five attempts, the job records Failed and an administrator-visible retry action is required. Retention notice retries use the same expiry revision to avoid duplicate notices. `GetOperationStatusHandler` supplies the authorized job-state projection through each feature's status route; it does not rerun background work.
 
 `PhotoAccess` checks authenticated identity, assignment, retention, photo readiness, and deletion state. Publication checks instead use explicit public-gallery membership. New publication and print-request writes acquire the same session reference lock used by deletion confirmation. The lock and final reference check occur inside the SQL transaction, preventing a new protected reference from appearing after deletion has been authorized.
 

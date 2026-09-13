@@ -1,0 +1,12 @@
+@startuml
+!include <C4/C4_Context>
+LAYOUT_WITH_LEGEND()
+title System context - Present the about page
+Person(actor0, "Public visitor", "Reads the server-rendered About page")
+Person(actor1, "Studio administrator", "Uses the Admin application")
+System(studio, "Quinntyne Brown Studio", "Photography studio platform")
+System_Ext(search, "Search engine", "Indexes the rendered page")
+Rel(actor0, studio, "Opens /about")
+Rel(actor1, studio, "Publishes about copy and maintains photographers")
+Rel(search, studio, "Crawls /about")
+@enduml

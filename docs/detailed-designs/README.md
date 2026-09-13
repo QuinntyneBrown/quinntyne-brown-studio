@@ -1,6 +1,6 @@
 # Quinntyne Brown Studio — detailed designs
 
-This design set is the approved baseline for the platform, written against the 2026-09-05 requirements. The [HTML prototype](../mocks/README.md) remains the visual reference, and the implementation is in the repository. Three screens differ between the prototype and the requirement set, and the prototype README names them. The [implementation report](../implementation/README.md) records the delivered structure, verification results, and remaining acceptance evidence.
+This design set is the approved baseline for the platform, written against the 2026-09-05 requirements and the 2026-09-13 About and Contact additions under [OD-13](../specs/decisions.md#od-13--server-rendered-about-and-contact-pages). The [HTML prototype](../mocks/README.md) remains the visual reference, and the implementation is in the repository. Three screens differ between the prototype and the requirement set, and the prototype README names them. The [implementation report](../implementation/README.md) records the delivered structure, verification results, and remaining acceptance evidence.
 
 The feature pages contain their background, concrete components and interfaces, exact L2 requirements with L1 parents, and inline rendered diagrams. The [shared architecture](architecture.md), [decision baseline](../specs/decisions.md), and [acceptance register](acceptance.md) establish common contracts and evidence gates.
 
@@ -11,6 +11,9 @@ The feature pages contain their background, concrete components and interfaces, 
 | `public-presentation` | [Publish galleries](public-presentation/publish-galleries/README.md) | `L2-004`, `L2-005`, `L2-063` |
 | `public-presentation` | [Manage marketing content](public-presentation/manage-marketing-content/README.md) | `L2-005` |
 | `public-presentation` | [Publish promotions](public-presentation/publish-promotions/README.md) | `L2-007` |
+| `public-presentation` | [Present the about page](public-presentation/present-about-page/README.md) | `L2-071` |
+| `public-presentation` | [Receive contact inquiries](public-presentation/receive-contact-inquiries/README.md) | `L2-072`, `L2-073`, `L2-074`, `L2-075` |
+| `public-presentation` | [Serve search-discoverable pages](public-presentation/serve-search-discoverable-pages/README.md) | `L2-076`, `L2-077` |
 | `quotations` | [Calculate a live quote](quotations/calculate-live-quote/README.md) | `L2-008`, `L2-009`, `L2-010`, `L2-011`, `L2-012`, `L2-013`, `L2-055`, `L2-056` |
 | `quotations` | [Apply discounts](quotations/apply-discounts/README.md) | `L2-014`, `L2-015`, `L2-016`, `L2-017`, `L2-057` |
 | `quotations` | [Configure rates](quotations/configure-rates/README.md) | `L2-018`, `L2-055` |
@@ -107,6 +110,14 @@ Every L2 has at least one linked feature. Shared UX and access obligations recur
 | `L2-067` | `L1-009` | [suggest-promising-photos](session-photos/suggest-promising-photos/README.md) |
 | `L2-068` | `L1-012` | [deliver-traceable-feature-increments](engineering-delivery/deliver-traceable-feature-increments/README.md) |
 | `L2-069` | `L1-008` | [upload-session-photos](session-photos/upload-session-photos/README.md) |
+| `L2-070` | `L1-017` | [manage-marketing-content](public-presentation/manage-marketing-content/README.md) |
+| `L2-071` | `L1-018` | [present-about-page](public-presentation/present-about-page/README.md) |
+| `L2-072` | `L1-019` | [receive-contact-inquiries](public-presentation/receive-contact-inquiries/README.md) |
+| `L2-073` | `L1-019` | [receive-contact-inquiries](public-presentation/receive-contact-inquiries/README.md) |
+| `L2-074` | `L1-019` | [receive-contact-inquiries](public-presentation/receive-contact-inquiries/README.md) |
+| `L2-075` | `L1-019` | [receive-contact-inquiries](public-presentation/receive-contact-inquiries/README.md) |
+| `L2-076` | `L1-020` | [serve-search-discoverable-pages](public-presentation/serve-search-discoverable-pages/README.md) |
+| `L2-077` | `L1-020` | [serve-search-discoverable-pages](public-presentation/serve-search-discoverable-pages/README.md) |
 
 ## Diagram conventions
 

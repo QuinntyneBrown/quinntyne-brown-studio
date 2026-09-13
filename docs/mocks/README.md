@@ -1,13 +1,13 @@
 # Quinntyne Brown Studio — interactive HTML mocks
 
-Open **index.html** in a modern browser. No installation, backend, build, or internet connection is required. The index links all 69 pages, create/edit variants, error and empty states, and dialog previews.
+Open **index.html** in a modern browser. No installation, backend, build, or internet connection is required. The index links all 73 pages, create/edit variants, error and empty states, and dialog previews.
 
 For consistent shared browser storage across all pages, you can also serve this directory with a static server, for example `npx --yes http-server docs/mocks`, then open the displayed address. This is optional; direct file opening is supported. Some browsers isolate or disable storage on file URLs.
 
 ## Exploring the prototype
 
-- **Marketing:** Start at `marketing/home.html`. Browse photographs, services, print prices, and packages. The blog lists published stories, opens each one as a full article with its featured photograph and related stories, and searches published stories by keyword with relevance or date ordering. The quote calculator itemizes photography, mileage, rental units, parking, meals, assistants, and studio hire.
-- **Admin:** Start at `admin/dashboard.html`. Manage sessions, photographers, schedules, equipment, studios, vendors, pricing, discounts, galleries, content, packages, blog articles, and blog media. Create/edit changes persist in this browser and update the public pages. Uploads and Azure photo suggestions are simulated.
+- **Marketing:** Start at `marketing/home.html`. Browse photographs, services, print prices, and packages. The blog lists published stories, opens each one as a full article with its featured photograph and related stories, and searches published stories by keyword with relevance or date ordering. The quote calculator itemizes photography, mileage, rental units, parking, meals, assistants, and studio hire. The about page introduces the studio story, its working principles, the active photographers, and how a session runs; the contact page pairs the message form with studio details, both studio spaces, an illustrative map, and common questions.
+- **Admin:** Start at `admin/dashboard.html`. Manage sessions, photographers, schedules, equipment, studios, vendors, pricing, discounts, galleries, content, packages, blog articles, blog media, contact-page inquiries, and the studio details shown on the contact page. Create/edit changes persist in this browser and update the public pages. Uploads and Azure photo suggestions are simulated.
 - **Client:** Start at `client/galleries.html`. Select photographs, create and edit albums, choose print sizes and quantities, and send a simulated print request. Requests appear in the client request history.
 - **Access:** Any syntactically valid email and a password of at least eight characters works. Do not enter real credentials. No credentials are saved or sent anywhere.
 - **States:** Use the bottom preview selector or index links. `?state=save-error` and similar links reproduce failures; `?dialog=photo` and other dialog links open the relevant dialog. For recoverable submit/AI failures, the first attempt fails and a retry succeeds. Required-field and real input errors must be corrected.
@@ -15,7 +15,7 @@ For consistent shared browser storage across all pages, you can also serve this 
 
 ## Defaults and boundaries
 
-All people, prices, locations, sessions, and requests are fictional. “Failing portraits” in the brief is interpreted as **family portraits**. Currency is CAD. Quotes and package prices are estimates subject to consultation; taxes, shipping, and final venue/travel details are confirmed by the studio. There is no payment flow.
+All people, prices, locations, sessions, and requests are fictional. The about page story, the studio email and phone number, and the contact map are sample copy and illustration, not live details or a map service. “Failing portraits” in the brief is interpreted as **family portraits**. Currency is CAD. Quotes and package prices are estimates subject to consultation; taxes, shipping, and final venue/travel details are confirmed by the studio. There is no payment flow.
 
 The largest eligible discount applies, without stacking. Sample rules are 10% for at least 90 days in advance, 8% for Tuesdays, and 12% for code `HELLO12`. The advance-day threshold, percentages, weekday, codes, and enabled status are editable. `EXPIRED` and `NOTACODE` demonstrate code errors. Code eligibility can also be previewed from the state selector.
 
@@ -27,7 +27,7 @@ Uploads accept common photos and camera RAW formats, with a 250 MB per-file demo
 
 Blog articles are written in Markdown with a small formatting toolbar; the prototype renders paragraphs, `##`/`###` headings, lists, quotes, bold, italic, and inline code. The web address is created from the title when an article is first saved. Drafts stay private: the public post page answers a draft or unknown article with a 404 view, and search covers published articles only. Featured photographs are chosen from the blog media library, whose uploads accept JPEG, PNG, WebP, and AVIF up to 10 MB; file names and sizes are inspected locally and a bundled photograph stands in for each accepted upload.
 
-Session photographs are representative fixed sample collections. Admin session records and marketing galleries are editable, while the client gallery is a fictional signed-in client’s prepared example. New session records do not ingest actual photographs. Password resets, contact requests, and print requests never send email. System error pages do not enforce access control.
+Session photographs are representative fixed sample collections. Admin session records and marketing galleries are editable, while the client gallery is a fictional signed-in client’s prepared example. New session records do not ingest actual photographs. Contact messages are kept in this browser’s demo data with a `QB-IN-` reference and appear in the admin inquiry inbox; password resets, contact messages, and print requests never send email. The studio email, phone, hours, and reply time on the contact page come from the admin studio-details form, and an empty field is left off the page. System error pages do not enforce access control.
 
 This deliverable is the approved standalone HTML prototype and remains the visual reference for `L2-066`. The production Angular applications now live in [`frontend/`](../../frontend/README.md) and the design system is the separate product in [`design-system/`](../../design-system/README.md); this folder is not built, imported, or deployed by either.
 

@@ -1,0 +1,58 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Behavior - RenderPublicPage
+actor "Public visitor" as actor
+box "Frontend - Visitor browser" #E0F2FE
+ participant "Browser" as browser
+end box
+box "Backend - QuinntyneBrownStudio.Api application" #D1FADF
+ participant "Gateway (Caddy)" as gateway
+ participant "Trailing-slash redirect" as redirect
+ participant "AboutModel / ContactModel" as page
+ participant "MarketingShellLayout" as layout
+end box
+box "Backend - QuinntyneBrownStudio.Application and Domain" #ECFDF3
+ participant "GetAboutPageHandler / GetContactPageHandler" as handler
+ participant "PublicPageMetadata + PublicPageETag" as meta
+end box
+box "Backend - QuinntyneBrownStudio.Infrastructure" #FFF4E5
+ database "Studio database via IStudioStore" as db
+end box
+actor -> browser : Follow About or Contact link (full navigation)
+browser -> gateway : GET /about or /contact (optional If-None-Match)
+gateway -> gateway : Match BACKEND_PATHS and forward to the API (L2-076)
+alt Trailing-slash form requested
+gateway -> redirect : GET /about/ or /contact/
+redirect --> browser : 308 to the canonical address (L2-076)
+browser -> gateway : GET canonical address
+end
+gateway -> page : Forwarded request
+page -> handler : Dispatch page query
+handler -> db : Load published records and versions
+db --> handler : Page view and record versions
+handler --> page : Typed page view
+page -> meta : Build title, description, canonical, Open Graph, JSON-LD type; hash versions into a weak ETag
+meta --> page : Metadata and ETag
+alt If-None-Match equals the current ETag
+page --> browser : 304 Not Modified with ETag (L2-076)
+else Content changed or no validator
+page -> layout : Render body with marketing shell, aria-current, footer links
+layout --> page : Complete HTML document
+page --> browser : 200 text/html, ETag, Cache-Control: no-cache; X-Robots-Tag added by the gateway when noIndex (L2-077)
+end
+browser --> actor : Page readable without script
+note over gateway : Release health check requires the API's canonical link in /about and /contact; a shell fallback fails activation (L2-076)
+@enduml

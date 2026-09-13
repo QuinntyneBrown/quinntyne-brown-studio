@@ -1,0 +1,34 @@
+@startuml
+!include <C4/C4_Component>
+LAYOUT_WITH_LEGEND()
+title Components - Serve search-discoverable pages
+Container_Boundary(frontend, "Frontend - Marketing application and visitor browser") {
+ Component(shell, "Shell", "Angular", "Navigation and footer with full-navigation links to /about, /contact, and /blog")
+ Component(browser, "Browser", "User agent", "Requests the server-rendered pages; sends If-None-Match")
+}
+Container_Boundary(api, "Backend - QuinntyneBrownStudio.Api and Application") {
+ Component(gateway, "Gateway route list", "deploy/linux/gateway.py", "BACKEND_PATHS forwards /about, /contact, /sitemap.xml, and /robots.txt to the API")
+ Component(redirect, "Trailing-slash redirect", "Program.cs middleware", "308 from /about/ and /contact/ to the canonical address")
+ Component(page, "AboutModel and ContactModel", "Razor page models", "Load the page view; supply PublicPageMetadata and PublicPageETag")
+ Component(layout, "MarketingShellLayout", "_Layout.cshtml", "Marketing shell, aria-current navigation, footer, head tags, JSON-LD section")
+ Component(metadata, "PublicPageMetadata", "ViewBag contract", "Title, description, canonical, Open Graph, JSON-LD type")
+ Component(etag, "PublicPageETag", "IETagGenerator", "Weak ETag from record versions; 304 on match")
+ Component(seo, "SeoController", ".NET controller", "GET /robots.txt and GET /sitemap.xml")
+ Component(handler, "GetSiteDocumentHandler", "MediatR", "Builds robots directives and the site sitemap")
+ Component(content, "MarketingContent", "Domain model", "Published fields and PublishedAt")
+ Component(store, "IStudioStore", "Application port", "Transactional persistence boundary")
+}
+Rel(shell, browser, "Emits plain anchors for full navigation")
+Rel(browser, gateway, "GET /about, /contact, /robots.txt, /sitemap.xml", "HTTPS")
+Rel(gateway, redirect, "Forwards routed requests")
+Rel(redirect, page, "Passes canonical addresses")
+Rel(page, metadata, "Supplies")
+Rel(page, etag, "Computes and compares")
+Rel(page, layout, "Renders through")
+Rel(layout, metadata, "Emits head tags from")
+Rel(gateway, seo, "Forwards root discovery documents")
+Rel(seo, handler, "Dispatches GetSiteDocument")
+Rel(handler, content, "Reads PublishedAt for lastmod")
+Rel(handler, store, "Loads published records")
+Rel(page, store, "Loads page records and versions")
+@enduml

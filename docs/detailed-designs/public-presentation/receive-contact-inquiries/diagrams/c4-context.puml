@@ -1,0 +1,12 @@
+@startuml
+!include <C4/C4_Context>
+LAYOUT_WITH_LEGEND()
+title System context - Receive contact inquiries
+Person(actor0, "Public visitor", "Reads the Contact page and sends an inquiry")
+Person(actor1, "Studio administrator", "Uses the Admin application")
+System(studio, "Quinntyne Brown Studio", "Photography studio platform")
+System_Ext(email, "Azure Communication Services Email", "Delivers inquiry notifications")
+Rel(actor0, studio, "Receive contact inquiries")
+Rel(actor1, studio, "Receive contact inquiries")
+Rel(studio, email, "Sends plain-text notifications", "HTTPS")
+@enduml

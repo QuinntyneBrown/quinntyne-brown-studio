@@ -1,0 +1,19 @@
+@startuml
+!include <C4/C4_Container>
+LAYOUT_WITH_LEGEND()
+title Containers - Serve search-discoverable pages
+Person(actor0, "Public visitor", "Uses a browser")
+Person(actor1, "Search crawler", "Reads discovery documents")
+System_Boundary(studio, "Quinntyne Brown Studio") {
+ Container(gateway, "Shared-origin gateway", "Caddy", "Routes /about, /contact, /sitemap.xml, and /robots.txt to the API; serves the Angular builds for other addresses")
+ Container(app1, "Marketing application", "Angular", "Client-rendered pages whose navigation and footer link to the server-rendered pages")
+ Container(api, "QuinntyneBrownStudio.Api", ".NET controllers and Razor pages", "Renders the marketing shell, page metadata, ETag, robots, and sitemap")
+ ContainerDb(db, "Studio database", "Azure SQL", "Published content, photographers, studios, studio details, and articles")
+}
+Rel(actor0, gateway, "Requests pages", "HTTPS")
+Rel(actor1, gateway, "Requests /robots.txt and /sitemap.xml", "HTTPS")
+Rel(gateway, api, "Forwards routed addresses", "HTTP")
+Rel(gateway, app1, "Serves the shell for other marketing addresses", "Static files")
+Rel(app1, api, "Links About and Contact as full navigations", "HTTPS")
+Rel(api, db, "Reads published records and versions", "EF Core")
+@enduml

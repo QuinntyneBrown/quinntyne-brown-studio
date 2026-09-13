@@ -1,0 +1,82 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Behavior - SubmitInquiry
+actor "Public visitor" as actor
+box "Frontend - Visitor browser" #E0F2FE
+ participant "Browser" as browser
+end box
+box "Backend - QuinntyneBrownStudio.Api application" #D1FADF
+ participant "ContactPage" as page
+end box
+box "Backend - QuinntyneBrownStudio.Application and Domain" #ECFDF3
+ participant "SubmitInquiryHandler" as handler
+ participant "Inquiry" as entity
+end box
+box "Backend - QuinntyneBrownStudio.Infrastructure" #FFF4E5
+ database "Studio database via IStudioStore" as db
+ participant "JobProcessor" as processor
+ participant "IEmailSender" as sender
+end box
+actor -> browser : Complete the form and send the message
+browser -> page : POST /contact (plain form post; works without script)
+page -> page : Validate antiforgery token; apply contact-inquiries rate limit (L2-073)
+alt Missing antiforgery token or filled honeypot
+page --> browser : Rejected; nothing stored; no email queued
+else Sixth submission from one address in ten minutes
+page --> browser : 429; nothing stored
+else Request admitted
+page -> handler : Dispatch SubmitInquiry
+handler -> entity : Validate name, email, phone, interest, message, consent, and lengths (L2-073)
+note right of entity
+L2-073, L2-074
+end note
+alt Validation fails
+entity --> handler : Field errors
+handler --> page : Typed failure
+page --> browser : Re-render with each error beside its field; entered values retained
+else Validation succeeds
+entity --> handler : Inquiry with reference, SubmittedAt, State Submitted
+handler -> db : Load StudioDetails
+db --> handler : Configured email address or none
+handler -> db : Save Inquiry and, when an address is configured, one Email BackgroundJob in one unit (L2-074)
+alt Store unavailable
+db --> handler : Failure; nothing committed
+handler --> page : Typed failure
+page --> browser : "Could not be sent" notice; entered values retained; retry stores exactly one inquiry
+else Commit succeeds
+db --> handler : Commit acknowledgement
+handler --> page : Reference identifier
+page --> browser : 303 to /contact?sent={reference}
+browser -> page : GET /contact?sent={reference}
+page --> browser : Confirmation containing the reference; form cleared
+browser --> actor : Present the confirmation
+end
+end
+end
+ref over processor, sender
+Worker leg, after the commit
+end ref
+processor -> db : Lease the Email job
+db --> processor : Protected payload
+processor -> sender : Send(recipient, subject, plain-text body, deduplicationId = inquiry id)
+alt Delivery fails
+sender --> processor : Failure
+processor -> db : Retry with 2^attempt s backoff; Failed after five attempts; inquiry unaffected
+else Delivery succeeds
+sender --> processor : Accepted
+processor -> db : Job Succeeded; a repeated delivery sends no duplicate
+end
+@enduml

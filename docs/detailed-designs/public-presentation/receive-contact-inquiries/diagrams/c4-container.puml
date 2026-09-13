@@ -1,0 +1,20 @@
+@startuml
+!include <C4/C4_Container>
+LAYOUT_WITH_LEGEND()
+title Containers - Receive contact inquiries
+Person(actor0, "Public visitor", "Uses a browser")
+Person(actor1, "Studio administrator", "Uses the Admin application")
+System_Boundary(studio, "Quinntyne Brown Studio") {
+ Container(app1, "Admin application", "Angular", "Inquiry inbox and studio details")
+ Container(api, "QuinntyneBrownStudio.Api", ".NET Razor page and controllers", "Renders /contact; inquiry and studio-details routes")
+ Container(worker, "QuinntyneBrownStudio.Worker", ".NET host", "Delivers Email jobs")
+ ContainerDb(db, "Studio database", "Azure SQL", "Inquiries, studio details, and job records")
+}
+System_Ext(email, "Azure Communication Services Email", "Email delivery")
+Rel(actor0, api, "Requests /contact and posts the form through the shared-origin gateway", "HTTPS")
+Rel(actor1, app1, "Uses", "HTTPS")
+Rel(app1, api, "Calls through shared-origin gateway", "JSON/HTTPS")
+Rel(api, db, "Reads and commits inquiries, details, and jobs", "EF Core")
+Rel(worker, db, "Leases and completes Email jobs", "EF Core")
+Rel(worker, email, "Sends the notification", "HTTPS")
+@enduml

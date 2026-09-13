@@ -70,7 +70,7 @@ Albums contain a required name and an ordered unique selection of accessible pho
 
 ## OD-08 — Presentation
 
-The [HTML prototype](../mocks/README.md) is the approved visual reference. Production follows its white space, task hierarchy, and visual language while applying this decision baseline. Prototype contact submission, request-history extras, permissive login, and simulated Azure responses do not independently establish production scope.
+The [HTML prototype](../mocks/README.md) is the approved visual reference. Production follows its white space, task hierarchy, and visual language while applying this decision baseline. Prototype contact submission, request-history extras, permissive login, and simulated Azure responses do not independently establish production scope. [OD-13](#od-13--server-rendered-about-and-contact-pages) establishes the contact-submission scope.
 
 The viewport matrix is 390 × 844, 768 × 1024, and 1440 × 900 CSS pixels. The browser matrix is the Chromium, Firefox, and WebKit versions pinned by the production Playwright lockfile. Keyboard checks cover navigation, focus visibility, dialogs, input errors, and status announcements. Formal accessibility conformance and quantitative latency budgets are not claimed by this baseline.
 
@@ -144,3 +144,15 @@ See [the release runbook](../../deploy/azure-release.md) and
 [acceptance criteria](../implementation/azure-deployment.md). G-ENV now requires
 Azure SQL restore, VM/managed-identity isolation, TLS, monitoring and external
 service evidence. A local passing suite does not close this gate.
+
+## OD-13 — Server-rendered About and Contact pages
+
+Status: **Accepted**, 2026-09-13. Authority: the user's selections during the About and Contact requirements session.
+
+`/about` and `/contact` are Razor pages rendered by the API, extending the blog's Razor exception to these two marketing pages. The gateway's backend path list routes both addresses to the API and the release health check reads both. The pages use the marketing shell that the blog listing renders, and that shell's navigation gains About and Contact. The Angular marketing application links to both as full navigations and retires its client-rendered `contact` route; the remaining marketing pages stay in the Angular application.
+
+The About and Contact heading and introduction are `MarketingContent` records under the page keys `about` and `contact`, edited in the existing content settings. The story, principles, session steps, and questions are fixed copy from the approved prototype. The About team lists active photographers; Contact locations list enabled studios with the base studio first. Studio contact details (email address, phone number, hours, reply-time note) are one administrator-edited record with no seeded production values.
+
+An inquiry is stored in the studio document store with `Submitted` and `Reviewed` states before any email is queued. The existing `Email` background job notifies the configured studio email address in plain text, deduplicated by inquiry identifier; no configured address means stored only. Submissions require an antiforgery token, work as a plain form post without script, are validated on the server, reject a filled hidden field, and are rate limited per client address. An inquiry is not a booking, quotation, or reservation. The "About" exclusion in L2-070 refers to the Blog source's own About page, not the studio's.
+
+Search discovery uses one root sitemap: `/sitemap.xml` is a single url set listing the marketing home, `/about`, `/contact`, `/blog`, and every published article, and root `/robots.txt` advertises only that address; `/blog/sitemap.xml` remains for compatibility. Published marketing content records a publication timestamp that supplies each page's last-modified date.

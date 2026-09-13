@@ -1,0 +1,48 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Behavior - GetSiteDocument
+actor "Search crawler" as actor
+box "Frontend - Visitor browser" #E0F2FE
+ participant "Crawler" as crawler
+end box
+box "Backend - QuinntyneBrownStudio.Api application" #D1FADF
+ participant "Gateway (Caddy)" as gateway
+ participant "SeoController" as controller
+end box
+box "Backend - QuinntyneBrownStudio.Application and Domain" #ECFDF3
+ participant "GetSiteDocumentHandler" as handler
+ participant "MarketingContent" as content
+end box
+box "Backend - QuinntyneBrownStudio.Infrastructure" #FFF4E5
+ database "Studio database via IStudioStore" as db
+end box
+actor -> crawler : Start discovery
+crawler -> gateway : GET /robots.txt
+gateway -> controller : Forward routed address
+controller -> handler : Dispatch GetSiteDocument("robots")
+handler --> controller : Allow /, disallow /admin/, /client/, /api/, /blog/admin/, /blog/api/; Sitemap: PublicOrigin/sitemap.xml (L2-077)
+controller --> crawler : 200 text/plain
+crawler -> gateway : GET /sitemap.xml
+gateway -> controller : Forward routed address
+controller -> handler : Dispatch GetSiteDocument("sitemap")
+handler -> db : Load published about and contact content and published articles
+db --> handler : Records with versions and publication times
+handler -> content : Read PublishedAt for /about and /contact lastmod (L2-077)
+content --> handler : Publication dates or none
+handler --> controller : urlset with /, /about, /contact, /blog, and each published article as absolute PublicOrigin addresses
+controller --> crawler : 200 application/xml
+crawler --> actor : Pages and dates known for indexing
+@enduml

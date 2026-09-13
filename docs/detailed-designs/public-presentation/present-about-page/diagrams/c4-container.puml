@@ -1,0 +1,16 @@
+@startuml
+!include <C4/C4_Container>
+LAYOUT_WITH_LEGEND()
+title Containers - Present the about page
+Person(actor0, "Public visitor", "Reads the server-rendered About page")
+Person(actor1, "Studio administrator", "Uses the Admin application")
+System_Boundary(studio, "Quinntyne Brown Studio") {
+ Container(app0, "Admin application", "Angular", "Edit about copy and photographers")
+ Container(api, "QuinntyneBrownStudio.Api", ".NET controllers and Razor pages", "Renders /about and serves administration routes")
+ ContainerDb(db, "Studio database", "Azure SQL", "Marketing content, photographers, and public galleries")
+}
+Rel(actor0, api, "GET /about through the shared-origin gateway", "HTTPS")
+Rel(actor1, app0, "Uses", "HTTPS")
+Rel(app0, api, "Calls through shared-origin gateway", "JSON/HTTPS")
+Rel(api, db, "Reads and commits metadata", "EF Core")
+@enduml

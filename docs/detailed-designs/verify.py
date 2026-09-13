@@ -55,7 +55,7 @@ check(len(set(acceptance_ids)) == len(acceptance_ids), "Duplicate acceptance ide
 
 coverage = {rid: [] for rid in requirements}
 features = sorted(BASE.glob("*/*/README.md"))
-check(len(features) == 23, f"Expected 23 feature designs, found {len(features)}")
+check(len(features) == 26, f"Expected 26 feature designs, found {len(features)}")
 for readme in features:
     content = readme.read_text(encoding="utf-8")
     headings = re.findall(r"^## (.+)$", content, re.M)

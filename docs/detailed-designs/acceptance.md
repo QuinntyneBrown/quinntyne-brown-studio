@@ -8,7 +8,7 @@ New backend behavior begins with a failing WebApplicationFactory integration tes
 
 Architecture and process criteria use source, configuration, build, and development-history evidence. Browser tests do not establish licensing, provider accuracy, SQL isolation, or RAW compatibility. Staging integration checks supplement the controlled acceptance tests for those boundaries.
 
-Current reconciliation: **84 Complete / 8 Partial**. Partial entries concern external camera/capacity/AI/environment qualification or unavailable historical test-first records. “Complete” applies to the criterion’s recorded local behavior/review evidence; it does not close an external gate.
+Current reconciliation: **84 Complete / 8 Partial / 25 Not implemented**. Partial entries concern external camera/capacity/AI/environment qualification or unavailable historical test-first records. Not implemented entries are the About and Contact criteria added under OD-13. “Complete” applies to the criterion’s recorded local behavior/review evidence; it does not close an external gate.
 
 ## Scenario coverage
 
@@ -96,6 +96,31 @@ Current reconciliation: **84 Complete / 8 Partial**. Partial entries concern ext
 | `AC-L2-067-01` | Frontend + Backend; external qualification evidence | Partial | [AnalysisFailureAcceptanceTests.cs](../../backend/tests/QuinntyneBrownStudio.AcceptanceTests/AnalysisFailureAcceptanceTests.cs) · `AC_L2_030_02_AC_L2_031_01_AC_L2_067_01_Invalid_advice_preserves_manual_review`<br>[QualificationAcceptanceTests.cs](../../backend/tests/QuinntyneBrownStudio.AcceptanceTests/QualificationAcceptanceTests.cs) · `AC_L2_060_01_AC_L2_067_01_AC_L2_068_01_Missing_inputs_produce_blocked_evidence`<br>**Remaining:** G-AI: malformed-result and outage handling passes; studio annotations, threshold approval and live model evaluation are not supplied. [Qualification instructions](../implementation/qualification.md). | [suggest-promising-photos](session-photos/suggest-promising-photos/README.md) |
 | `AC-L2-068-01` | Backend / deployment; source/build/history evidence | Partial | [LocalDB acceptance](../../backend/tests/QuinntyneBrownStudio.AcceptanceTests/LocalDbAcceptanceTests.cs), [Windows runbook](../../deploy/README.md) and [environment qualification command](../implementation/qualification.md).<br>[QualificationAcceptanceTests.cs](../../backend/tests/QuinntyneBrownStudio.AcceptanceTests/QualificationAcceptanceTests.cs) · `AC_L2_060_01_AC_L2_067_01_AC_L2_068_01_Missing_inputs_produce_blocked_evidence`<br>[deployment.spec.ts](../../e2e/production/deployment.spec.ts) · AC-AZ-09 AC-L2-068-01 the deployed studio serves every application over trusted TLS<br>**Remaining:** G-ENV: local host/database isolation passes, and the [live record](../implementation/azure-deployment.md#live-record-2026-09-08) now qualifies TLS, the managed-identity database roles and application delivery. Backup/restore and the external email, AI, Maps and blob services are not qualified. [Qualification instructions](../implementation/qualification.md). | [deliver-traceable-feature-increments](engineering-delivery/deliver-traceable-feature-increments/README.md) |
 | `AC-L2-069-01` | Frontend + Backend | Complete | [Packaged LocalDB workflow](../../e2e/integration/localdb-platform.spec.ts) · complete LocalDB workflow<br>[scheduling-completion.spec.ts](../../e2e/specs/scheduling-completion.spec.ts) · P03 AC-L2-069-01 session timing uses Toronto date and time controls<br>[Packaged LocalDB workflow](../../e2e/integration/localdb-platform.spec.ts) · complete LocalDB workflow (real HTTP, Identity, storage and JPEG worker). | [upload-session-photos](session-photos/upload-session-photos/README.md) |
+| `AC-L2-071-01` | API and browser | Not implemented | — | [present-about-page](public-presentation/present-about-page/README.md) |
+| `AC-L2-071-02` | API and browser | Not implemented | — | [present-about-page](public-presentation/present-about-page/README.md) |
+| `AC-L2-071-03` | API and browser | Not implemented | — | [present-about-page](public-presentation/present-about-page/README.md) |
+| `AC-L2-071-04` | API and browser | Not implemented | — | [present-about-page](public-presentation/present-about-page/README.md) |
+| `AC-L2-072-01` | API and browser | Not implemented | — | [receive-contact-inquiries](public-presentation/receive-contact-inquiries/README.md) |
+| `AC-L2-072-02` | API and browser | Not implemented | — | [receive-contact-inquiries](public-presentation/receive-contact-inquiries/README.md) |
+| `AC-L2-072-03` | API and browser | Not implemented | — | [receive-contact-inquiries](public-presentation/receive-contact-inquiries/README.md) |
+| `AC-L2-073-01` | API and browser | Not implemented | — | [receive-contact-inquiries](public-presentation/receive-contact-inquiries/README.md) |
+| `AC-L2-073-02` | API and browser | Not implemented | — | [receive-contact-inquiries](public-presentation/receive-contact-inquiries/README.md) |
+| `AC-L2-073-03` | API and browser | Not implemented | — | [receive-contact-inquiries](public-presentation/receive-contact-inquiries/README.md) |
+| `AC-L2-073-04` | API and browser | Not implemented | — | [receive-contact-inquiries](public-presentation/receive-contact-inquiries/README.md) |
+| `AC-L2-073-05` | API and browser | Not implemented | — | [receive-contact-inquiries](public-presentation/receive-contact-inquiries/README.md) |
+| `AC-L2-074-01` | Frontend + Backend | Not implemented | — | [receive-contact-inquiries](public-presentation/receive-contact-inquiries/README.md) |
+| `AC-L2-074-02` | Backend | Not implemented | — | [receive-contact-inquiries](public-presentation/receive-contact-inquiries/README.md) |
+| `AC-L2-074-03` | Backend | Not implemented | — | [receive-contact-inquiries](public-presentation/receive-contact-inquiries/README.md) |
+| `AC-L2-074-04` | Backend | Not implemented | — | [receive-contact-inquiries](public-presentation/receive-contact-inquiries/README.md) |
+| `AC-L2-075-01` | Frontend + Backend | Not implemented | — | [receive-contact-inquiries](public-presentation/receive-contact-inquiries/README.md) |
+| `AC-L2-075-02` | Frontend + Backend | Not implemented | — | [receive-contact-inquiries](public-presentation/receive-contact-inquiries/README.md) |
+| `AC-L2-075-03` | Frontend + Backend | Not implemented | — | [receive-contact-inquiries](public-presentation/receive-contact-inquiries/README.md) |
+| `AC-L2-076-01` | API and browser | Not implemented | — | [serve-search-discoverable-pages](public-presentation/serve-search-discoverable-pages/README.md) |
+| `AC-L2-076-02` | API and browser | Not implemented | — | [serve-search-discoverable-pages](public-presentation/serve-search-discoverable-pages/README.md) |
+| `AC-L2-076-03` | API and browser | Not implemented | — | [serve-search-discoverable-pages](public-presentation/serve-search-discoverable-pages/README.md) |
+| `AC-L2-076-04` | API and deployed browser smoke | Not implemented | — | [serve-search-discoverable-pages](public-presentation/serve-search-discoverable-pages/README.md) |
+| `AC-L2-077-01` | API and browser | Not implemented | — | [serve-search-discoverable-pages](public-presentation/serve-search-discoverable-pages/README.md) |
+| `AC-L2-077-02` | API and deployed browser smoke | Not implemented | — | [serve-search-discoverable-pages](public-presentation/serve-search-discoverable-pages/README.md) |
 
 ## Cross-feature acceptance scenarios
 

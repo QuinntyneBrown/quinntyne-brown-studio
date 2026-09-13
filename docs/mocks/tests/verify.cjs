@@ -34,7 +34,7 @@ const server = http.createServer((req,res)=>{
       const route=`${c.site}/${c.slug}.html`;
       await go(route);
       assert.ok((await page.locator('main').innerText()).length>50,route);
-      const broken=await page.locator('a[href]').evaluateAll(anchors=>anchors.map(a=>a.getAttribute('href')).filter(h=>!h.startsWith('#')&&!h.includes('://')&&!h.startsWith('mailto:')));
+      const broken=await page.locator('a[href]').evaluateAll(anchors=>anchors.map(a=>a.getAttribute('href')).filter(h=>!h.startsWith('#')&&!h.includes('://')&&!h.startsWith('mailto:')&&!h.startsWith('tel:')));
       for(const href of broken)assert.ok(fs.existsSync(path.resolve(root,c.site,href.split('?')[0])),`${route}: broken ${href}`);
       for(const s of c.states){await go(`${route}?state=${s}`);assert.ok(await page.locator('main').count(),`${route} ${s}`);}
       for(const d of c.dialogs){await go(`${route}?dialog=${d}`);assert.equal(await page.locator('dialog').evaluate(el=>el.open),true,`${route} ${d}`);await page.keyboard.press('Escape');assert.equal(await page.locator('dialog').evaluate(el=>el.open),false);}
@@ -78,6 +78,27 @@ const server = http.createServer((req,res)=>{
   await check('Admin content publish updates marketing',async()=>{
     await go('admin/content-editor.html?id=home');await page.locator('[name=heading]').fill('A new studio story.');await page.locator('[data-action=publish]').click();await page.locator('[data-action=confirm-publish]').click();await page.waitForURL('**/content.html?saved=1');await go('marketing/home.html');assert.equal(await page.locator('h1').innerText(),'A new studio story.');
   });
+  await check('Contact message failure, retry and confirmation',async()=>{
+    await go('marketing/contact.html?state=save-error');await page.locator('[name=name]').fill('Sample Visitor');await page.locator('[name=email]').fill('visitor@example.test');await page.locator('[name=message]').fill('A small autumn wedding in Toronto.');await page.locator('[name=consent]').check();await page.getByRole('button',{name:'Send your message'}).click();assert.match(await page.locator('#consultation-form').innerText(),/couldn’t be sent/);assert.equal(await page.locator('[name=name]').inputValue(),'Sample Visitor');await page.getByRole('button',{name:'Send your message'}).click();assert.equal(await page.locator('dialog').evaluate(d=>d.open),true);assert.equal(await page.locator('#dialog-title').innerText(),'A lovely place to begin.');const reference=(await page.locator('dialog').innerText()).match(/Reference (QB-IN-\d+)/i)?.[1];assert.ok(reference,'confirmation shows a reference');await page.keyboard.press('Escape');assert.equal(await page.locator('[name=name]').inputValue(),'');
+    await go('marketing/contact.html');await page.getByRole('button',{name:'Send your message'}).click();assert.ok(await page.locator('#consultation-form .field-error').count());assert.equal(await page.locator('dialog').evaluate(d=>d.open),false);
+    await page.locator('[name=name]').fill('Automated Agent');await page.locator('[name=email]').fill('bot@example.test');await page.locator('[name=message]').fill('Buy now.');await page.locator('[name=consent]').check();await page.locator('[name=website]').fill('https://spam.example');await page.getByRole('button',{name:'Send your message'}).click();assert.equal(await page.locator('dialog').evaluate(d=>d.open),false);assert.equal(await page.evaluate(()=>MockDebug.data.inquiries.some(i=>i.name==='Automated Agent')),false);
+    await go('admin/inquiries.html');assert.match(await page.locator('main').innerText(),/Sample Visitor/);await page.getByRole('link',{name:'Sample Visitor',exact:true}).click();await page.waitForURL('**/inquiry.html?id='+reference);assert.match(await page.locator('main').innerText(),/A small autumn wedding in Toronto/);assert.match(await page.locator('aside .badge').innerText(),/Submitted/);await page.getByRole('button',{name:'Mark reviewed'}).click();assert.match(await page.locator('aside .badge').innerText(),/Reviewed/);assert.equal(await page.getByRole('button',{name:'Mark reviewed'}).isDisabled(),true);
+  });
+  await check('Studio details drive the contact card',async()=>{
+    await reset();await go('admin/studio-details.html');await page.locator('[name=phone]').fill('416-555-0199');await page.locator('[name=hours]').fill('Tuesday – Saturday · 10:00 – 17:00');await page.getByRole('button',{name:'Save studio details'}).click();
+    await go('marketing/contact.html');const card=await page.locator('.contact-card').innerText();assert.match(card,/416-555-0199/);assert.match(card,/Tuesday – Saturday/);assert.match(card,/hello@example\.test/);assert.match(await page.locator('main').innerText(),/Daylight Studio/);
+    await go('admin/studio-details.html');await page.locator('[name=email]').fill('');await page.getByRole('button',{name:'Save studio details'}).click();await go('marketing/contact.html');assert.equal(await page.locator('.contact-card dt').filter({hasText:/^Email$/}).count(),0);assert.equal(await page.locator('.contact-card dt').filter({hasText:/^Phone$/}).count(),1);
+    await go('admin/studio-details.html?state=validation');assert.ok(await page.locator('#studio-details-form .field-error').count());
+    await go('marketing/contact.html?state=empty');const emptyText=await page.locator('main').innerText();assert.match(emptyText,/Studio spaces coming soon/);assert.match(emptyText,/On location, by appointment/);assert.equal(await page.locator('.contact-card dt').filter({hasText:/^Email$/}).count(),0);
+  });
+  await check('About page reflects published content and active photographers',async()=>{
+    await reset();await go('marketing/about.html');assert.match(await page.locator('main').innerText(),/Maya Chen/);assert.match(await page.locator('.hero-image .caption').innerText(),/Ordinary magic/i);
+    await go('admin/gallery-editor.html?id=g3');await page.locator('[data-action=publish]').click();await page.locator('[data-action=confirm-publish]').click();await page.waitForURL('**/galleries.html?saved=1');await go('marketing/about.html');assert.match(await page.locator('.hero-image .caption').innerText(),/In good company/i);
+    await go('marketing/about.html?state=empty');const emptyAbout=await page.locator('main').innerText();assert.match(emptyAbout,/Introductions coming soon/);assert.doesNotMatch(emptyAbout,/0 photographers/);assert.equal(await page.locator('.hero-image .caption').count(),0);
+    await go('admin/content-editor.html?id=about');await page.locator('[name=heading]').fill('A studio built on listening.');await page.locator('[data-action=publish]').click();await page.locator('[data-action=confirm-publish]').click();await page.waitForURL('**/content.html?saved=1');
+    await go('admin/photographer-editor.html?id=ph2');await page.locator('[name=status]').selectOption('Inactive');await page.getByRole('button',{name:'Save photographer',exact:true}).click();await page.waitForURL('**/photographers.html?saved=1');
+    await go('marketing/about.html');assert.equal(await page.locator('h1').innerText(),'A studio built on listening.');assert.doesNotMatch(await page.locator('main').innerText(),/Maya Chen/);
+  });
   await check('Unsaved changes dialog preserves or discards edits',async()=>{
     await go('admin/vendor-editor.html?id=v1');await page.locator('[name=name]').fill('Changed name');await page.getByRole('link',{name:'Cancel',exact:true}).click();assert.equal(await page.locator('dialog').evaluate(d=>d.open),true);await page.locator('[data-action=close-dialog]').last().click();assert.equal(await page.locator('[name=name]').inputValue(),'Changed name');await page.getByRole('link',{name:'Cancel',exact:true}).click();await page.locator('[data-action=confirm-discard]').click();await page.waitForURL('**/vendors.html');
   });
@@ -110,7 +131,7 @@ const server = http.createServer((req,res)=>{
     await reset();
     for(const width of [1440,768,390]){
       await page.setViewportSize({width,height:1000});
-      for(const route of ['marketing/home','marketing/quote','admin/dashboard','admin/schedule','admin/session-editor','admin/upload','client/gallery','client/prints','index']){
+      for(const route of ['marketing/home','marketing/about','marketing/contact','marketing/quote','admin/dashboard','admin/schedule','admin/session-editor','admin/upload','admin/inquiries','admin/studio-details','client/gallery','client/prints','index']){
         await go(route+'.html');const metrics=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,client:document.documentElement.clientWidth}));assert.ok(metrics.scroll<=metrics.client+1,`${route} at ${width}: ${JSON.stringify(metrics)}`);
         if(['marketing/home','admin/dashboard','client/gallery'].includes(route)&&width!==768)await page.screenshot({path:path.join(artifacts,route.replace('/','-')+'-'+width+'.png'),fullPage:true});
       }

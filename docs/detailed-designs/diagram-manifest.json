@@ -235,6 +235,26 @@
     "sourceSha256": "b38509aac779aefb5b04fd2035da453aedbc6812660f9af2a9e4839f10e3c709",
     "imageSha256": "d0bf2b06da8639c5649da96a00d51aae14e10211bedf31c23a3f4f621d901fa6"
   },
+  "public-presentation/present-about-page/diagrams/c4-component.puml": {
+    "sourceSha256": "7363973ab3b185d074b2e42998e53bbbaa54e29228e2fce6591f2093631ce1fa",
+    "imageSha256": "0472a07f7c05a20690580f6b10a3f786099779535964168cc7dc1e60b1ebae6c"
+  },
+  "public-presentation/present-about-page/diagrams/c4-container.puml": {
+    "sourceSha256": "e62f88a88b4ea9b6b0737a98fbbdfca231696be2e36f968eb890ae0689ac36c7",
+    "imageSha256": "c958a847b78d2bca29321a65ca02ada52cbeaa3e7a90a668ee87f659f17c9782"
+  },
+  "public-presentation/present-about-page/diagrams/c4-context.puml": {
+    "sourceSha256": "239efefb5dc47397023ca3a0265798282aab3124f68f428b79142e8a79c1376b",
+    "imageSha256": "d083a00c4228fb901ac2cd783dcee80439764a649195ce70077fe711b4f196a4"
+  },
+  "public-presentation/present-about-page/diagrams/class-structure.puml": {
+    "sourceSha256": "6c670e3d5c8d8a5e9c6f79c1f05c66939e009b304ff5bc5901370ef00e644691",
+    "imageSha256": "5f268d15c339f717d1bc2e9f0d42633ad821eba272aa66dd8c41ea0305d7781e"
+  },
+  "public-presentation/present-about-page/diagrams/sequence-get-about-page.puml": {
+    "sourceSha256": "c7a095159e48ee7ad229426a33e3aa0e28332c37a92e29686def33efa3f9c61f",
+    "imageSha256": "8b32e48cfbd34ef81eaaf35b3dbb451812af0e3a7aa2b5a7d95acdbbb988fa50"
+  },
   "public-presentation/publish-galleries/diagrams/c4-component.puml": {
     "sourceSha256": "da2f94e5b10213775dbab38af7fd604ce36d545dffc6a02e24194aff2149c8c4",
     "imageSha256": "c29f7db238b09b9de03559cfb50a18c0cfb72c230ba55a2538f200d916d115e1"
@@ -282,6 +302,62 @@
   "public-presentation/publish-promotions/diagrams/sequence-save-promotion.puml": {
     "sourceSha256": "fcbfd4c98e0ce499024617e3eed31ffc30d02d9803658ac5c8ae15ff7dcb1853",
     "imageSha256": "aa739ee2f54086eec8f234f00b741e4cf2a79a54a354699cf59c293328ccef60"
+  },
+  "public-presentation/receive-contact-inquiries/diagrams/c4-component.puml": {
+    "sourceSha256": "f5bb8405ed382c5f4dab1387d2fcebda1c2a93b1024c048e9f44f356da24e9b9",
+    "imageSha256": "3b3a16a43e8a44e9ada1d6c88d7e1c4ea4e1c7d9c0f40a49f8ef42dfd7120d90"
+  },
+  "public-presentation/receive-contact-inquiries/diagrams/c4-container.puml": {
+    "sourceSha256": "9f22ee5aeb0baa3eb7aebc3618bbf7352bb8883d6c638fe7a2074b74a0b91517",
+    "imageSha256": "cf47fdf8038e88fbd313318be101fe1395d692cdc403a6880b6498daddb8aa7c"
+  },
+  "public-presentation/receive-contact-inquiries/diagrams/c4-context.puml": {
+    "sourceSha256": "29ffca97b86d8a445e8876cc2a70de71032fa839cc1dd762b0e44230d528e019",
+    "imageSha256": "2d10d38a7ca826b773351a296db0b4bc034e6e6fbece16feba555f186e0efe30"
+  },
+  "public-presentation/receive-contact-inquiries/diagrams/class-structure.puml": {
+    "sourceSha256": "412c00bb925ab61821ec51a55d190f5e44a93cdc1e34e642451b79bab7eac2a0",
+    "imageSha256": "3c54c8e8d9ff1f6472a741a18eb459dbf0dbccedd7a5d1b78ec8a690755be1ff"
+  },
+  "public-presentation/receive-contact-inquiries/diagrams/sequence-get-contact-page.puml": {
+    "sourceSha256": "a32851940b8f88580ce109a9a7c66aac74739bcc8cea4b61f18c122f3fcdbd2c",
+    "imageSha256": "3a86f7e1073ff7823e0a5134728444b212f0ad9f09a4d90b80d4cef65cc24274"
+  },
+  "public-presentation/receive-contact-inquiries/diagrams/sequence-review-inquiry.puml": {
+    "sourceSha256": "64e639a1c7318a3a1fa689a718d52d4e4dfd69c45b65ceb27f608bd0f8c8f383",
+    "imageSha256": "7fa8c73dbf9b06957680f44781bfc566733636fc32bef238b77ff270bc0fddc5"
+  },
+  "public-presentation/receive-contact-inquiries/diagrams/sequence-save-studio-details.puml": {
+    "sourceSha256": "db4499b48214a05a87bd9a2315bd43b1e9e4029099e0e7fa42a8f2f68eba2bd4",
+    "imageSha256": "7b24031894147292fae3a5522a52b913342415d1943b6513041dd3151de1c5fc"
+  },
+  "public-presentation/receive-contact-inquiries/diagrams/sequence-submit-inquiry.puml": {
+    "sourceSha256": "11d62cde022b8a24bfe464debbca39c8ff9282885f8a439a84b6677932a85853",
+    "imageSha256": "9681badccde0b18c3a9363380007781c347a2c911c27301aeaddb59edb766c7b"
+  },
+  "public-presentation/serve-search-discoverable-pages/diagrams/c4-component.puml": {
+    "sourceSha256": "ac14cd7829651e67d991222844ff36e82fb94c22adbc9ea5a4e80d77028a00a6",
+    "imageSha256": "c816dcc956b8eecdd2544aa090caf638084f448132bca238979e507616f1372c"
+  },
+  "public-presentation/serve-search-discoverable-pages/diagrams/c4-container.puml": {
+    "sourceSha256": "e7cb31a193e06d0a00ff32e02aeeeb96951433e5effa858c5dbeb4bc96ced046",
+    "imageSha256": "8838b32f307f7297cd20fab9fed18fced3583763cd89df0e8054339e7c5d4be5"
+  },
+  "public-presentation/serve-search-discoverable-pages/diagrams/c4-context.puml": {
+    "sourceSha256": "a8eefb239e561ee02391226041914aa9f850de8223f5a538c8faef4fbde8b9d0",
+    "imageSha256": "b30b407a53d4a70678fefa2a8f96b4a4dc9c5b8292ccdaade50378f9dfb9a921"
+  },
+  "public-presentation/serve-search-discoverable-pages/diagrams/class-structure.puml": {
+    "sourceSha256": "245ccbfb74b152f77992a774f9738ddb6eaa758ac3dbf467430dc3b438b2ebdb",
+    "imageSha256": "f8d06c08cb06cf192b35d7d518393ca1838550a9e8e305e107515194d742e996"
+  },
+  "public-presentation/serve-search-discoverable-pages/diagrams/sequence-get-site-sitemap.puml": {
+    "sourceSha256": "351cdc9a5902ca870a8dd8115d2080fa562b5073899eda4614b871a82780cde3",
+    "imageSha256": "4754d5d266406746592f2935d999ef53cfc79147ecba929318f7e92ce8e29d3c"
+  },
+  "public-presentation/serve-search-discoverable-pages/diagrams/sequence-render-public-page.puml": {
+    "sourceSha256": "25ab4b0f54121f23ee81136ba0e1e798ed565b5c758f4fd09433b40a85a7b4d0",
+    "imageSha256": "5b798574d8543708532dd2b0c53d815a93af1df4480810f068511fe8d1f25784"
   },
   "quotations/apply-discounts/diagrams/c4-component.puml": {
     "sourceSha256": "49e54545b3d0b0f132f1260d5088fa4e803fe3b143a22f922903a2d9a3bb4f2b",
