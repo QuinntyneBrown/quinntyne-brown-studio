@@ -12,7 +12,14 @@ public sealed class SeoController(IMediator mediator) : ControllerBase
     [HttpGet("/robots.txt")]
     public async Task<IActionResult> RootRobots(CancellationToken ct)
     {
-        var document = await mediator.Send(new GetBlogDocumentQuery("root-robots"), ct);
+        var document = await mediator.Send(new GetSiteDocumentQuery("robots"), ct);
+        return Content(document.Content, document.ContentType);
+    }
+
+    [HttpGet("/sitemap.xml")]
+    public async Task<IActionResult> SiteSitemap(CancellationToken ct)
+    {
+        var document = await mediator.Send(new GetSiteDocumentQuery("sitemap"), ct);
         return Content(document.Content, document.ContentType);
     }
 

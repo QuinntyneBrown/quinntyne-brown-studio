@@ -5,7 +5,8 @@
     ViewBag.Title = $"{Configuration["Site:SiteName"] ?? "Quinntyne Brown Studio"} | Studio Blog";
     ViewBag.Description = Configuration["Site:SiteDescription"] ?? "Photography, stories, and insights from Quinntyne Brown Studio.";
     ViewBag.CanonicalUrl = ((Configuration["PublicOrigin"] ?? "https://localhost:7443").TrimEnd('/') + "/blog")?.TrimEnd('/');
-    ViewBag.IsBlogListing = true;
+    ViewBag.IsMarketingShell = true;
+    ViewBag.ActivePath = "/blog";
 }
 
 <partial name="Shared/_BlogListing" model="Model.Articles" />

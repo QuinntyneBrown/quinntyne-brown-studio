@@ -10,6 +10,8 @@ public sealed class PlatformAcceptanceTests
     [InlineData("equipment")]
     [InlineData("vendors")]
     [InlineData("rates")]
+    [InlineData("studio-details")]
+    [InlineData("inquiries")]
     [InlineData("sessions")]
     [InlineData("public-galleries")]
     [InlineData("print-requests")]

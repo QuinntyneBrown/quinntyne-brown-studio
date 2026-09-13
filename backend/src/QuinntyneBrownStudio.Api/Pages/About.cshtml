@@ -1,0 +1,166 @@
+@page "/about"
+@model AboutModel
+@using System.Text.Json
+@using QuinntyneBrownStudio.Application.Presentation
+@inject IConfiguration Configuration
+@{
+    var origin = (Configuration["PublicOrigin"] ?? "https://localhost:7443").TrimEnd('/');
+    ViewBag.Title = $"About | {Configuration["Site:SiteName"] ?? "Quinntyne Brown Studio"}";
+    ViewBag.Description = Model.View.Introduction;
+    ViewBag.CanonicalUrl = origin + "/about";
+    ViewBag.OgType = "website";
+    ViewBag.OgImage = Model.View.HeroPhoto == null ? null : origin + Model.View.HeroPhoto.Url;
+    ViewBag.IsMarketingShell = true;
+    ViewBag.ActivePath = "/about";
+    var photographers = Model.View.Team.Length;
+    var structuredData = JsonSerializer.Serialize(new Dictionary<string, object?>
+    {
+        ["@context"] = "https://schema.org",
+        ["@type"] = "AboutPage",
+        ["name"] = Model.View.Heading,
+        ["description"] = Model.View.Introduction,
+        ["url"] = origin + "/about",
+        ["about"] = new Dictionary<string, object?>
+        {
+            ["@type"] = "Organization",
+            ["name"] = Configuration["Site:SiteName"] ?? "Quinntyne Brown Studio",
+            ["url"] = origin,
+        },
+    }, new JsonSerializerOptions { WriteIndented = true });
+}
+
+<div class="marketing-page">
+    <section class="marketing-hero">
+        <div class="marketing-hero-copy">
+            <p class="blog-eyebrow">About the studio</p>
+            <h1>@Model.View.Heading</h1>
+            <p>@Model.View.Introduction</p>
+            <div class="marketing-actions">
+                <a class="marketing-button" href="/contact">Say hello <span aria-hidden="true">↗</span></a>
+                <a class="marketing-text-link" href="/portfolio">See the work</a>
+            </div>
+            <div class="marketing-hero-meta">
+                <span>Since 2018</span>
+                <span>Toronto &amp; beyond</span>
+                @if (photographers > 0)
+                {
+                    <span>@photographers photographer@(photographers == 1 ? "" : "s")</span>
+                }
+            </div>
+        </div>
+        <div class="marketing-hero-image">
+            @if (Model.View.HeroPhoto is { } hero)
+            {
+                <img src="@hero.Url" alt="@hero.GalleryTitle" fetchpriority="high" />
+                <div class="marketing-hero-caption">@hero.GalleryTitle</div>
+            }
+            else
+            {
+                <div class="marketing-hero-placeholder">A photograph is on its way</div>
+            }
+        </div>
+    </section>
+
+    <section class="marketing-section story">
+        <div>
+            <p class="blog-eyebrow">How it started</p>
+            <h2>@AboutPageCopy.StoryHeading</h2>
+        </div>
+        <div class="story__body">
+            @foreach (var paragraph in AboutPageCopy.Story)
+            {
+                <p>@paragraph</p>
+            }
+        </div>
+    </section>
+
+    <section class="marketing-section">
+        <div class="marketing-section-head">
+            <div>
+                <p class="blog-eyebrow">What we believe</p>
+                <h2>Three things we won’t compromise on.</h2>
+            </div>
+        </div>
+        <div class="steps">
+            @foreach (var (principle, index) in AboutPageCopy.Principles.Select((value, index) => (value, index)))
+            {
+                <div class="step">
+                    <div class="step__number">0@(index + 1)</div>
+                    <h3>@principle.Title</h3>
+                    <p>@principle.Body</p>
+                </div>
+            }
+        </div>
+    </section>
+
+    <section class="marketing-section">
+        <div class="marketing-section-head">
+            <div>
+                <p class="blog-eyebrow">The people</p>
+                <h2>Behind the camera.</h2>
+            </div>
+            <a class="marketing-text-link" href="/quote">Check availability <span aria-hidden="true">↗</span></a>
+        </div>
+        @if (Model.View.Team.Length == 0)
+        {
+            <div class="marketing-empty">
+                <div class="marketing-empty-symbol" aria-hidden="true">◇</div>
+                <h2>Introductions coming soon</h2>
+                <p>Our photographers will appear here shortly.</p>
+            </div>
+        }
+        else
+        {
+            <div class="team-grid">
+                @foreach (var member in Model.View.Team)
+                {
+                    var initials = string.Concat(member.Name.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(word => word[0])).ToUpperInvariant();
+                    <article class="team-card">
+                        <div class="team-card__mark" aria-hidden="true">@(initials.Length > 2 ? initials[..2] : initials)</div>
+                        <div>
+                            <h3>@member.Name</h3>
+                            <p class="team-card__role">@member.Role</p>
+                        </div>
+                    </article>
+                }
+            </div>
+        }
+        <p class="team-note">@AboutPageCopy.TeamNote</p>
+    </section>
+
+    <section class="marketing-section">
+        <div class="marketing-section-head">
+            <div>
+                <p class="blog-eyebrow">How a session works</p>
+                <h2>From hello to your gallery.</h2>
+            </div>
+        </div>
+        <div class="steps">
+            @foreach (var (step, index) in AboutPageCopy.Steps.Select((value, index) => (value, index)))
+            {
+                <div class="step">
+                    <div class="step__number">0@(index + 1)</div>
+                    <h3>@step.Title</h3>
+                    <p>@step.Body</p>
+                </div>
+            }
+        </div>
+    </section>
+
+    <section class="marketing-section quote-strip">
+        <div>
+            <p class="blog-eyebrow">Thoughtfully planned. Honestly priced.</p>
+            <h2>Let’s make something together.</h2>
+        </div>
+        <div class="marketing-actions">
+            <a class="marketing-button" href="/contact">Get in touch <span aria-hidden="true">↗</span></a>
+            <a class="marketing-text-link" href="/quote">Find your quote</a>
+        </div>
+    </section>
+</div>
+
+@section Head {
+    <script type="application/ld+json">
+    @Html.Raw(structuredData)
+    </script>
+}

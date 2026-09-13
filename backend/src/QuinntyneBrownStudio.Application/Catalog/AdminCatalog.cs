@@ -11,7 +11,7 @@ using SchedulingService = QuinntyneBrownStudio.Application.Scheduling.Scheduling
 
 namespace QuinntyneBrownStudio.Application.Catalog;
 
-public sealed class AdminCatalog(IStudioStore store)
+public sealed class AdminCatalog(IStudioStore store, IClock clock)
 {
     public static readonly Guid ConfigurationId = Guid.Parse(
         "11111111-1111-1111-1111-111111111111"
@@ -36,6 +36,7 @@ public sealed class AdminCatalog(IStudioStore store)
                     && old == null
                     && typeof(T) != typeof(DomainEntities.RateConfiguration)
                     && typeof(T) != typeof(DomainEntities.DiscountConfiguration)
+                    && typeof(T) != typeof(DomainEntities.StudioDetails)
                 )
                     throw new StudioException(404, "Record not found.");
                 var expected = id == null ? 0 : value.ExpectedVersion;
@@ -64,6 +65,15 @@ public sealed class AdminCatalog(IStudioStore store)
 
     private static void Nonnegative(decimal? number, string field) =>
         Rules.Require(number == null || number >= 0, "Must be nonnegative.", field);
+
+    private static string? Optional(string? value, string field, int max)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+            return null;
+        var trimmed = value.Trim();
+        Rules.Require(trimmed.Length <= max, $"Use at most {max} characters.", field);
+        return trimmed;
+    }
 
     private async Task Validate<T>(IStudioTransaction tx, T value, T? old)
         where T : Entity
@@ -115,6 +125,7 @@ public sealed class AdminCatalog(IStudioStore store)
                 break;
             case DomainEntities.Photographer p:
                 Rules.Text(p.Name, "name");
+                p.CreatedAt = (old as DomainEntities.Photographer)?.CreatedAt ?? clock.UtcNow;
                 break;
             case DomainEntities.Studio s:
                 Rules.Text(s.Name, "name");
@@ -141,6 +152,19 @@ public sealed class AdminCatalog(IStudioStore store)
                 );
                 foreach (var rate in r.ServiceRates.Values.Concat(r.CostRates.Values))
                     Nonnegative(rate, "rates");
+                break;
+            case DomainEntities.StudioDetails details:
+                details.Email = Optional(details.Email, "email", 254);
+                details.Phone = Optional(details.Phone, "phone", 50);
+                details.Hours = Optional(details.Hours, "hours", 200);
+                details.ReplyNote = Optional(details.ReplyNote, "replyNote", 200);
+                if (details.Email != null)
+                    Rules.Require(
+                        MailAddress.TryCreate(details.Email, out var studioMail)
+                            && studioMail.Address == details.Email,
+                        "Enter a valid email.",
+                        "email"
+                    );
                 break;
             case DomainEntities.DiscountConfiguration d:
                 var codes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -212,6 +236,9 @@ public sealed class AdminCatalog(IStudioStore store)
                 );
                 if ((await tx.List<DomainEntities.PublicGallery>()).Any(x => x.Id != g.Id && x.Slug == g.Slug))
                     throw new StudioException(409, "Slug already exists.");
+                g.PublishedAt = g.Published
+                    ? (old as DomainEntities.PublicGallery)?.PublishedAt ?? clock.UtcNow
+                    : null;
                 foreach (var photoId in g.PhotoIds)
                 {
                     var photo = await tx.Get<SessionPhoto>(photoId);

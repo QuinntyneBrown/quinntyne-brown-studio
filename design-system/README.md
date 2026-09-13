@@ -1,6 +1,6 @@
 # Quinntyne Brown Studio Design System
 
-The standalone, first-class reference for the studio's foundations, 23 components, 23 responsive screen-pattern states, and 4 dialog scenarios. It has no runtime, validation, test, or build dependency on another folder in this repository, and it can be copied, versioned, and deployed on its own.
+The standalone, first-class reference for the studio's foundations, 26 components, 38 responsive screen-pattern states, and 4 dialog scenarios. It has no runtime, validation, test, or build dependency on another folder in this repository, and it can be copied, versioned, and deployed on its own.
 
 ## Run locally
 

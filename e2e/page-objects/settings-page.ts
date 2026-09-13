@@ -17,6 +17,12 @@ export class SettingsPage {
   async select(label: string, value: string) {
     await this.page.getByLabel(label, { exact: true }).selectOption(value);
   }
+  /** A select wrapped by its label carries the chosen option in its name, so it is found by role. */
+  async choose(label: string, value: string) {
+    await this.page
+      .getByRole("combobox", { name: label, exact: true })
+      .selectOption(value);
+  }
   async check(label: string, checked = true) {
     await this.page.getByLabel(label, { exact: true }).setChecked(checked);
   }

@@ -44,6 +44,78 @@ const patterns = {
     empty: () =>
       `<section class="blog-page"><header class="blog-head"><p class="page__eyebrow">From the studio</p><h1>Blog</h1><p>Notes on making photographs feel easy, personal, and true to the people in them.</p></header><div class="blog-empty"><h2>No articles yet</h2><p>Articles will appear here once they are published. Check back soon.</p></div></section>`,
   },
+  'about-page': {
+    team: () =>
+      `<section class="hero"><div class="hero__copy"><p class="page__eyebrow">About the studio</p><h1>Photographs that feel like you.</h1><p>A small Toronto studio photographing weddings, events, headshots, and family portraits the way they actually feel: unhurried, honest, and a little bit wild.</p><div class="form__actions"><a class="button" href="#">Say hello ↗</a><a href="#">See the work</a></div><div class="hero__meta"><span>Since 2018</span><span>Toronto &amp; beyond</span><span>3 photographers</span></div></div><div class="hero__image"><div class="hero__placeholder"><span>Q B</span><p>Ordinary magic / Weddings</p></div></div></section>
+       <section class="section story"><div><p class="page__eyebrow">How it started</p><h2>A borrowed camera, a friend’s wedding, and a lot of listening.</h2></div><div class="story__body"><p>Quinntyne Brown Studio began in 2018 with one camera and one favour: photographing a friend’s small backyard wedding. The photographs that mattered most weren’t the posed ones.</p><p>That afternoon became the way we work. We plan carefully so that the day itself can be unscripted.</p></div></section>
+       <section class="section"><div class="section__header"><div><p class="page__eyebrow">What we believe</p><h2>Three things we won’t compromise on.</h2></div></div><div class="steps">${[
+         ['Less posing. More being.', 'We give gentle direction and then get out of the way.'],
+         ['Planning that feels like a conversation.', 'Timelines, locations, and the small details are settled together.'],
+         ['Honest pricing, from the first estimate.', 'Photography, travel, and extras are itemized before you commit.'],
+       ]
+         .map(([title, body], index) => `<div class="step"><div class="step__number">0${index + 1}</div><h3>${title}</h3><p>${body}</p></div>`)
+         .join('')}</div></section>
+       <section class="section"><div class="section__header"><div><p class="page__eyebrow">The people</p><h2>Behind the camera.</h2></div><a href="#">Check availability ↗</a></div><div class="team-grid">${[
+         ['QB', 'Quinntyne Brown', 'Founder &amp; lead photographer'],
+         ['MA', 'Mara Adeyemi', 'Photographer'],
+         ['JL', 'Jonah Lindqvist', 'Photographer'],
+       ]
+         .map(([mark, name, role]) => `<article class="team-card"><div class="team-card__mark" aria-hidden="true">${mark}</div><div><h3>${name}</h3><p class="team-card__role">${role}</p></div></article>`)
+         .join('')}</div><p class="team-note">Alongside the studio is a trusted circle of second shooters, makeup artists, and assistants who join us when a day calls for more hands.</p></section>
+       <section class="section quote-strip"><div><p class="page__eyebrow">Thoughtfully planned. Honestly priced.</p><h2>Let’s make something together.</h2></div><div class="form__actions"><a class="button" href="#">Get in touch ↗</a><a href="#">Find your quote</a></div></section>`,
+    empty: () =>
+      `<section class="hero"><div class="hero__copy"><p class="page__eyebrow">About the studio</p><h1>Photographs that feel like you.</h1><p>A small Toronto studio photographing weddings, events, headshots, and family portraits the way they actually feel: unhurried, honest, and a little bit wild.</p><div class="form__actions"><a class="button" href="#">Say hello ↗</a><a href="#">See the work</a></div><div class="hero__meta"><span>Since 2018</span><span>Toronto &amp; beyond</span></div></div><div class="hero__image"><div class="hero__placeholder"><span>Q B</span><p>A photograph is on its way</p></div></div></section>
+       <section class="section"><div class="section__header"><div><p class="page__eyebrow">The people</p><h2>Behind the camera.</h2></div></div><div class="empty-state"><span aria-hidden="true">◇</span><p>Introductions coming soon</p><p class="text--muted">Our photographers will appear here shortly.</p></div></section>`,
+  },
+  'contact-page': {
+    configured: () =>
+      `${header('Get in touch', 'Something beautiful starts with hello.', 'Tell us what you have in mind. We’ll find the right way to capture it.')}
+       <div class="layout__split"><form class="form">${notice('We usually reply within two working days.')}<div class="form__grid">
+       <label class="field"><span>Your name</span><input name="name" maxlength="200" required /></label>
+       <label class="field"><span>Email address</span><input name="email" type="email" maxlength="254" required /></label>
+       <label class="field"><span>Phone (optional)</span><input name="phone" type="tel" maxlength="50" /><small class="text--muted">Only if you’d rather talk it through.</small></label>
+       <label class="field"><span>I’m interested in</span><select name="interest"><option>Wedding</option><option>Event</option><option>Headshots</option><option>Family portraits</option></select></label>
+       </div><label class="field"><span>Tell us a little about your plans</span><textarea name="message" maxlength="4000" required></textarea></label>
+       <div class="field__choices"><label><input type="checkbox" name="consent" required /> I’m happy for the studio to contact me about this request.</label></div>
+       <div class="form__actions"><button class="button" type="button">Send your message ↗</button><span class="text--muted">No payment or booking is made.</span></div></form>
+       <aside class="panel panel--soft contact-card"><p class="page__eyebrow">Toronto, Ontario</p><h2>Come say hello.</h2><dl class="detail-list"><div class="detail-list__row"><dt>Email</dt><dd><a href="#">hello@example.test</a></dd></div><div class="detail-list__row"><dt>Phone</dt><dd><a href="#">416-555-0100</a></dd></div><div class="detail-list__row"><dt>Studio</dt><dd>Daylight Studio<br />120 Sample Street, Toronto</dd></div><div class="detail-list__row"><dt>Hours</dt><dd>Monday – Saturday · 09:00 – 18:00</dd></div><div class="detail-list__row"><dt>Replies</dt><dd>Within two working days</dd></div></dl></aside></div>
+       <section class="section"><div class="section__header"><div><p class="page__eyebrow">Where to find us</p><h2>Two studio spaces. Any location you love.</h2></div><a href="#">Plan a location ↗</a></div><div class="places"><div class="map" role="img" aria-label="Illustrative map showing the Daylight Studio location in Toronto"><svg viewBox="0 0 600 450" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><rect width="600" height="450" fill="#f5f5f0"/><rect y="362" width="600" height="88" fill="#e2e6e1"/><g stroke="#ffffff" stroke-width="14" stroke-linecap="round"><line x1="0" y1="150" x2="600" y2="140"/><line x1="0" y1="262" x2="600" y2="252"/></g><g transform="translate(305 206)"><circle cy="-14" r="18" fill="#242620"/><path d="M-15 -4 L0 30 L15 -4Z" fill="#242620"/><circle cy="-14" r="7" fill="#f5f5f0"/></g></svg><span class="map__label">Daylight Studio · Toronto</span></div><div>
+       <div class="place"><div><h3>Daylight Studio</h3><p class="text--muted">120 Sample Street, Toronto</p></div><div class="place__meta"><span class="badge">Toronto</span><span>By appointment</span></div></div>
+       <div class="place"><div><h3>The White Room</h3><p class="text--muted">48 Example Avenue, Hamilton</p></div><div class="place__meta"><span class="badge">Hamilton</span><span>By appointment</span></div></div>
+       <div class="place"><div><h3>On location</h3><p class="text--muted">Parks, venues, kitchens, and the end of your own street. Travel is itemized in your quote.</p></div><div class="place__meta"><span class="badge">Anywhere</span></div></div></div></div></section>
+       <section class="section"><p class="page__eyebrow">Before you write</p><h2>A few things people ask first.</h2><div class="steps">${[
+         ['How far ahead should we book?', 'Weddings are usually reserved six to twelve months out. Booking at least 90 days ahead also earns 10% off.'],
+         ['Do you travel?', 'Yes. Toronto is home, and round-trip distance is itemized in your estimate.'],
+         ['How do we receive our photographs?', 'Through a private online gallery, edited with care, with fine art prints available to order.'],
+       ]
+         .map(([question, answer]) => `<div class="faq"><h3>${question}</h3><p>${answer}</p></div>`)
+         .join('')}</div></section>
+       <section class="section quote-strip"><div><p class="page__eyebrow">Prefer to start with numbers?</p><h2>Build an estimate in about a minute.</h2></div><a class="button" href="#">Find your quote ↗</a></section>`,
+    empty: () =>
+      `${header('Get in touch', 'Something beautiful starts with hello.', 'Tell us what you have in mind. We’ll find the right way to capture it.')}
+       <div class="layout__split"><form class="form">${notice('We usually reply within two working days.')}<div class="form__grid">
+       <label class="field"><span>Your name</span><input name="name" maxlength="200" required /></label>
+       <label class="field"><span>Email address</span><input name="email" type="email" maxlength="254" required /></label>
+       </div><div class="form__actions"><button class="button" type="button">Send your message ↗</button></div></form>
+       <aside class="panel panel--soft contact-card"><p class="page__eyebrow">Toronto, Ontario</p><h2>Come say hello.</h2><dl class="detail-list"><div class="detail-list__row"><dt>Studio</dt><dd>On location, by appointment</dd></div></dl></aside></div>
+       <section class="section"><div class="section__header"><div><p class="page__eyebrow">Where to find us</p><h2>On location, anywhere you love.</h2></div></div><div class="places"><div class="map" role="img" aria-label="Illustrative map showing the studio location in Toronto"><span class="map__label">Studio · Toronto</span></div><div><div class="empty-state"><span aria-hidden="true">◇</span><p>Studio spaces coming soon</p><p class="text--muted">We photograph on location while our studio spaces are being prepared.</p></div>
+       <div class="place"><div><h3>On location</h3><p class="text--muted">Parks, venues, kitchens, and the end of your own street.</p></div><div class="place__meta"><span class="badge">Anywhere</span></div></div></div></div></section>`,
+    sent: () =>
+      `${header('Get in touch', 'Something beautiful starts with hello.', 'Tell us what you have in mind. We’ll find the right way to capture it.')}
+       <div class="layout__split"><form class="form">${notice('Thank you. Your message was sent with reference QB-IN-1042. The studio will follow up within two working days.')}<div class="form__grid">
+       <label class="field"><span>Your name</span><input name="name" maxlength="200" required /></label>
+       <label class="field"><span>Email address</span><input name="email" type="email" maxlength="254" required /></label>
+       </div><div class="form__actions"><button class="button" type="button">Send your message ↗</button></div></form>
+       <aside class="panel panel--soft contact-card"><p class="page__eyebrow">Toronto, Ontario</p><h2>Come say hello.</h2><dl class="detail-list"><div class="detail-list__row"><dt>Replies</dt><dd>Within two working days</dd></div></dl></aside></div>`,
+    validation: () =>
+      `${header('Get in touch', 'Something beautiful starts with hello.', 'Tell us what you have in mind. We’ll find the right way to capture it.')}
+       <div class="layout__split"><form class="form"><div class="form__grid">
+       <label class="field"><span>Your name</span><input name="name" value="Priya Raman" maxlength="200" required /></label>
+       <label class="field"><span>Email address</span><input name="email" type="email" value="priya@" aria-invalid="true" aria-describedby="error-email" required /><small class="field__error" id="error-email">Enter a valid email address.</small></label>
+       </div><label class="field"><span>Tell us a little about your plans</span><textarea name="message" aria-invalid="true" aria-describedby="error-message" required></textarea><small class="field__error" id="error-message">This field is required.</small></label>
+       <div class="form__actions"><button class="button" type="button">Send your message ↗</button></div></form>
+       <aside class="panel panel--soft contact-card"><p class="page__eyebrow">Toronto, Ontario</p><h2>Come say hello.</h2><p class="text--muted">Nothing was sent. Correct the highlighted fields and try again.</p></aside></div>`,
+  },
   'quote-calculator': {
     calculated: () => `${header('Your estimate', 'Your session, thoughtfully priced.', 'Explore a live estimate, shaped around your plans.')}
       <div class="layout__split"><section class="panel"><h2>The occasion</h2><div class="form__grid">
@@ -151,6 +223,18 @@ const patterns = {
        <p class="price__total">$80.00 CAD</p></section>
        <aside class="panel panel--soft"><h2>Client</h2><p class="records__detail">Amara Bell</p><p class="text--muted">Prices were held at submission.</p></aside></div>`,
   },
+  'inquiry-review': {
+    inbox: () =>
+      `${header('Studio / Marketing', 'Inquiries', 'Messages from the contact page, ready for a reply.', '<a href="#">View contact page ↗</a>')}
+       <div class="records">
+       <article class="records__row"><div><h3>Priya Raman</h3><p class="records__detail">Wedding · Received 2 September 2026 · QB-IN-1041</p></div><div class="records__actions"><span class="badge">Submitted</span><button class="button button--secondary" type="button">Open inquiry</button></div></article>
+       <article class="records__row"><div><h3>Daniel Okafor</h3><p class="records__detail">Headshots · Received 26 August 2026 · QB-IN-1040</p></div><div class="records__actions"><span class="badge">Reviewed</span><button class="button button--secondary" type="button">Open inquiry</button></div></article>
+       </div>`,
+    reviewed: () =>
+      `${header('Marketing / Inquiries', 'Daniel Okafor', 'Headshots · Received 26 August 2026 · QB-IN-1040', '<a href="#">← All inquiries</a>')}
+       <div class="layout__split"><section class="panel"><dl class="detail-list"><div class="detail-list__row"><dt>Reference</dt><dd>QB-IN-1040</dd></div><div class="detail-list__row"><dt>Name</dt><dd>Daniel Okafor</dd></div><div class="detail-list__row"><dt>Email</dt><dd><a href="#">daniel@example.test</a></dd></div><div class="detail-list__row"><dt>Phone</dt><dd class="text--muted">Not provided</dd></div><div class="detail-list__row"><dt>Interest</dt><dd>Headshots</dd></div><div class="detail-list__row"><dt>Received</dt><dd>26 August 2026</dd></div><div class="detail-list__row"><dt>Message</dt><dd>Looking for two headshot looks for a new role. &lt;b&gt;Markup stays text.&lt;/b&gt;</dd></div></dl></section>
+       <aside class="panel panel--soft"><p class="page__eyebrow">Review status</p><span class="badge">Reviewed</span><h2>Looked at, and noted.</h2><p class="text--muted">Reviewed by the studio on 27 August 2026.</p><div class="form__actions"><button class="button" type="button" disabled>Mark reviewed</button></div></aside></div>`,
+  },
   'admin-settings': {
     rates: () =>
       `${header('Studio administration', 'Quote rates', 'Rates drive every quote; a saved change applies to later calculations.')}
@@ -168,6 +252,15 @@ const patterns = {
        <label class="field"><span>Code</span><input name="code" value="HELLO12" /></label>
        <label class="field"><span>Enabled</span><input type="checkbox" checked /></label>
        </div>${notice('A rule starts disabled at zero percent until a studio administrator sets it.')}<div class="form__actions"><button class="button" type="button">Save rules</button></div></form>`,
+    'studio-details': () =>
+      `${header('Studio administration', 'Studio details', 'These details appear on the public contact page. Leave a field empty to keep it off the page.')}
+       <div class="layout__split"><form class="form"><div class="form__grid">
+       <label class="field"><span>Studio email address</span><input name="email" type="email" value="hello@example.test" maxlength="254" /><small class="text--muted">Inquiry notifications go to this address.</small></label>
+       <label class="field"><span>Phone number</span><input name="phone" type="tel" value="416-555-0100" maxlength="50" /></label>
+       <label class="field"><span>Opening hours</span><input name="hours" value="Monday – Saturday · 09:00 – 18:00" maxlength="200" /><small class="text--muted">For example: Monday – Saturday · 09:00 – 18:00</small></label>
+       <label class="field"><span>Typical reply time</span><input name="replyNote" value="Within two working days" maxlength="200" /><small class="text--muted">For example: Within two working days</small></label>
+       </div><div class="form__actions"><button class="button" type="button">Save studio details</button><a href="#">View contact page ↗</a></div></form>
+       <aside class="panel panel--soft"><p class="page__eyebrow">Good to know</p><h2>Only what you fill in is shown.</h2><p class="text--muted">An empty email or phone field simply leaves that row off the contact page. Nothing is invented for visitors.</p></aside></div>`,
   },
   'system-states': {
     'not-found': () =>

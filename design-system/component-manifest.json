@@ -164,6 +164,22 @@
       ]
     },
     {
+      "id": "detail-list",
+      "name": "Detail list",
+      "category": "data",
+      "description": "Labelled facts in reading order: a contact card, an inquiry, a record summary.",
+      "classes": ["detail-list", "detail-list__row"],
+      "states": ["default"],
+      "examples": [
+        {
+          "id": "rows",
+          "title": "Contact details",
+          "description": "Each row pairs a quiet label with its value; unset details are omitted rather than shown blank.",
+          "markup": "<dl class='detail-list'><div class='detail-list__row'><dt>Email</dt><dd><a href='#'>hello@example.test</a></dd></div><div class='detail-list__row'><dt>Phone</dt><dd><a href='#'>416-555-0100</a></dd></div><div class='detail-list__row'><dt>Hours</dt><dd>Monday – Saturday · 09:00 – 18:00</dd></div><div class='detail-list__row'><dt>Replies</dt><dd>Within two working days</dd></div></dl>"
+        }
+      ]
+    },
+    {
       "id": "panel",
       "name": "Panel",
       "category": "layout",
@@ -374,31 +390,14 @@
       "name": "Application shell",
       "category": "layout",
       "description": "The chrome around every screen: the public header, navigation and footer, and the administrative sidebar, top bar, and content column.",
-      "classes": [
-        "shell__brand",
-        "shell__public",
-        "shell__public-nav",
-        "shell__public-main",
-        "shell__footer",
-        "shell__workspace",
-        "shell__sidebar",
-        "shell__side-nav",
-        "shell__link--active",
-        "shell__topbar",
-        "shell__main",
-        "shell__skip",
-        "shell__workspace-main",
-        "shell__toggle",
-        "shell__side-nav--open",
-        "shell__public-nav--open"
-      ],
+      "classes": ["shell__brand", "shell__public", "shell__public-nav", "shell__public-main", "shell__footer", "shell__workspace", "shell__sidebar", "shell__side-nav", "shell__link--active", "shell__topbar", "shell__main", "shell__skip", "shell__workspace-main", "shell__toggle", "shell__side-nav--open", "shell__public-nav--open", "shell__footer-nav"],
       "states": ["public", "workspace", "narrow"],
       "examples": [
         {
           "id": "public",
           "title": "Public chrome",
           "description": "The marketing header, navigation, and footer. The skip link is the first focusable control.",
-          "markup": "<div><a class='shell__skip button' href='#example-main'>Skip to content</a><header class='shell__public'><a class='shell__brand' href='#'>Quinntyne Brown<span>Studio · Photography</span></a><nav class='shell__public-nav' aria-label='Main navigation'><a href='#'>Portfolio</a><a href='#'>Services</a><a href='#'>Prints</a><a class='button' href='#'>Plan a session ↗</a></nav></header><main class='shell__public-main' id='example-main'><p class='text--muted'>Page content sits in this column.</p></main><footer class='shell__footer'><span>Quinntyne Brown Studio</span><span>Thoughtfully photographed.</span></footer></div>"
+          "markup": "<div><a class='shell__skip button' href='#example-main'>Skip to content</a><header class='shell__public'><a class='shell__brand' href='#'>Quinntyne Brown<span>Studio · Photography</span></a><nav class='shell__public-nav' aria-label='Main navigation'><a href='#'>Portfolio</a><a href='#'>Services</a><a href='#'>Prints</a><a class='button' href='#'>Plan a session ↗</a></nav></header><main class='shell__public-main' id='example-main'><p class='text--muted'>Page content sits in this column.</p></main><footer class='shell__footer'><span>Quinntyne Brown Studio</span><nav class='shell__footer-nav' aria-label='Footer navigation'><a href='#'>About the studio</a><a href='#'>Get in touch</a><a href='#'>Our work</a><a href='#'>Blog</a><a href='#'>Client access</a></nav></footer></div>"
         },
         {
           "id": "workspace",
@@ -573,6 +572,44 @@
       ]
     },
     {
+      "id": "about-page",
+      "name": "About page",
+      "description": "The server-rendered About page: published introduction, the studio story, three principles, the active photographers, and how a session works.",
+      "scenarios": [
+        {
+          "id": "team",
+          "name": "Published copy and team"
+        },
+        {
+          "id": "empty",
+          "name": "Default copy, no team, no photograph"
+        }
+      ]
+    },
+    {
+      "id": "contact-page",
+      "name": "Contact page",
+      "description": "The server-rendered Contact page: the message form beside the configured studio details, studio spaces, an illustrative map, and common questions.",
+      "scenarios": [
+        {
+          "id": "configured",
+          "name": "Configured details and studios"
+        },
+        {
+          "id": "empty",
+          "name": "Nothing configured"
+        },
+        {
+          "id": "sent",
+          "name": "Message sent"
+        },
+        {
+          "id": "validation",
+          "name": "Field errors"
+        }
+      ]
+    },
+    {
       "id": "quote-calculator",
       "name": "Quote calculator",
       "description": "The live quote screen: session inputs beside a recalculating total.",
@@ -702,9 +739,24 @@
       ]
     },
     {
+      "id": "inquiry-review",
+      "name": "Inquiry inbox",
+      "description": "The administrative inbox of contact-page inquiries, newest first, and one inquiry opened for review.",
+      "scenarios": [
+        {
+          "id": "inbox",
+          "name": "Submitted inquiries"
+        },
+        {
+          "id": "reviewed",
+          "name": "Reviewed inquiry"
+        }
+      ]
+    },
+    {
       "id": "admin-settings",
       "name": "Configuration editor",
-      "description": "The administrative configuration screens: quote rates and discount rules.",
+      "description": "The administrative configuration screens: quote rates, discount rules, and the studio contact details.",
       "scenarios": [
         {
           "id": "rates",
@@ -713,6 +765,10 @@
         {
           "id": "discounts",
           "name": "Discount rules"
+        },
+        {
+          "id": "studio-details",
+          "name": "Studio details"
         }
       ]
     },

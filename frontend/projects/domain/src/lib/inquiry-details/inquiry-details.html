@@ -1,0 +1,68 @@
+@if (state.selected(); as inquiry) {
+  <div class="layout__split section">
+    <section class="panel">
+      <h2>{{ inquiry.name }}</h2>
+      <dl class="detail-list">
+        <div class="detail-list__row">
+          <dt>Reference</dt>
+          <dd>{{ inquiry.reference }}</dd>
+        </div>
+        <div class="detail-list__row">
+          <dt>Name</dt>
+          <dd>{{ inquiry.name }}</dd>
+        </div>
+        <div class="detail-list__row">
+          <dt>Email</dt>
+          <dd>
+            <a [href]="'mailto:' + inquiry.email">{{ inquiry.email }}</a>
+          </dd>
+        </div>
+        <div class="detail-list__row">
+          <dt>Phone</dt>
+          <dd>
+            @if (inquiry.phone) {
+              <a [href]="'tel:' + inquiry.phone">{{ inquiry.phone }}</a>
+            } @else {
+              <span class="text--muted">Not provided</span>
+            }
+          </dd>
+        </div>
+        <div class="detail-list__row">
+          <dt>Interest</dt>
+          <dd>{{ state.interestLabel(inquiry.interest) }}</dd>
+        </div>
+        <div class="detail-list__row">
+          <dt>Received</dt>
+          <dd>{{ inquiry.submittedAt | date: 'medium' }}</dd>
+        </div>
+        <div class="detail-list__row">
+          <dt>Message</dt>
+          <dd>{{ inquiry.message }}</dd>
+        </div>
+      </dl>
+    </section>
+    <aside class="panel panel--soft">
+      <p class="page__eyebrow">Review status</p>
+      <span class="badge">{{ inquiry.state }}</span>
+      @if (inquiry.state === 'Reviewed') {
+        <h2>Looked at, and noted.</h2>
+        <p class="text--muted">Reviewed on {{ inquiry.reviewedAt | date: 'medium' }}.</p>
+      } @else {
+        <h2>Waiting for a reply.</h2>
+        <p class="text--muted">
+          Marking this inquiry reviewed records who looked at it and when. Replies happen from your
+          own mailbox.
+        </p>
+      }
+      <div class="form__actions">
+        <button
+          class="button"
+          [disabled]="state.busy() || inquiry.state === 'Reviewed'"
+          (click)="state.review()"
+        >
+          Mark reviewed</button
+        ><button class="button button--secondary" (click)="state.selected.set(null)">Close</button>
+      </div>
+    </aside>
+  </div>
+}

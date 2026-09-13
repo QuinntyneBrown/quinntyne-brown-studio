@@ -14,7 +14,7 @@ const types = { '.html': 'text/html', '.js': 'application/javascript', '.css': '
 const tls = { key: readFileSync(key), cert: readFileSync(cert) };
 const handler = (request, response) => {
   const url = new URL(request.url ?? '/', 'https://localhost:7443');
-  if (url.pathname.startsWith('/api/') || /^\/blog(?:\/|$)/.test(url.pathname) || url.pathname === '/robots.txt') {
+  if (url.pathname.startsWith('/api/') || /^\/(?:blog|about|contact)(?:\/|$)/.test(url.pathname) || url.pathname === '/robots.txt' || url.pathname === '/sitemap.xml') {
     const upstream = http.request({ host: '127.0.0.1', port: apiPort, path: request.url, method: request.method, headers: { ...request.headers, 'x-forwarded-proto': 'https' } }, incoming => {
       response.writeHead(incoming.statusCode ?? 502, incoming.headers); incoming.pipe(response);
     });

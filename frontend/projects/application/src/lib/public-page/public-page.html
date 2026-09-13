@@ -45,7 +45,7 @@
     <div>
       <p class="page__eyebrow">Quinntyne Brown Studio</p>
       <h1>{{ state.heading() }}</h1>
-      @if (state.kind() === 'services' || state.kind() === 'contact') {
+      @if (state.kind() === 'services') {
         <p class="page__description">{{ state.body() }}</p>
       }
     </div>
@@ -60,8 +60,6 @@
         </article>
       }
     </div>
-  } @else if (state.kind() === 'contact') {
-    <a class="button" routerLink="/quote">Start with a quote</a>
   } @else if (state.loading()) {
     <p role="status">Loading…</p>
   } @else if (!state.items().length && !state.message()) {

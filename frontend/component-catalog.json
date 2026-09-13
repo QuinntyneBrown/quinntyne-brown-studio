@@ -36,6 +36,26 @@
     "catalogUrl": "/patterns/print-review"
   },
   {
+    "name": "InquiryInbox",
+    "source": "frontend/projects/application/src/lib/inquiry-inbox/inquiry-inbox.ts",
+    "inputs": [
+      "Route data and parameters",
+      "Service contracts via injection tokens"
+    ],
+    "outputs": [
+      "User actions through the documented service contract"
+    ],
+    "states": [
+      "success",
+      "loading",
+      "empty",
+      "validation",
+      "dependency-failure"
+    ],
+    "catalogEntry": "pattern:inquiry-review",
+    "catalogUrl": "/patterns/inquiry-review"
+  },
+  {
     "name": "PublicPage",
     "source": "frontend/projects/application/src/lib/public-page/public-page.ts",
     "inputs": ["Route data and parameters", "Service contracts via injection tokens"],
@@ -232,5 +252,24 @@
     "states": ["success", "loading", "empty", "validation", "dependency-failure"],
     "catalogEntry": "pattern:print-review",
     "catalogUrl": "/patterns/print-review"
+  },
+  {
+    "name": "InquiryDetails",
+    "source": "frontend/projects/domain/src/lib/inquiry-details/inquiry-details.ts",
+    "inputs": [
+      "Route-owned feature state through INQUIRY_INBOX_SERVICE"
+    ],
+    "outputs": [
+      "User intent through the feature service contract"
+    ],
+    "states": [
+      "success",
+      "loading",
+      "empty",
+      "validation",
+      "dependency-failure"
+    ],
+    "catalogEntry": "pattern:inquiry-review",
+    "catalogUrl": "/patterns/inquiry-review"
   }
 ]

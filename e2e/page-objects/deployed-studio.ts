@@ -64,6 +64,28 @@ export class DeployedStudio {
       "xml",
     );
   }
+  /**
+   * The About and Contact pages the API renders (OD-13). As with the blog, a gateway that does
+   * not route them still answers 200 with the marketing shell, so each page must carry the
+   * canonical link the API writes, and the site sitemap must be XML.
+   */
+  async servesTheServerRenderedPages() {
+    for (const path of ["/about", "/contact"]) {
+      const page = await this.request.get(this.origin + path);
+      expect(page.status(), path).toBe(200);
+      expect(await page.text(), path).toContain(
+        `<link rel="canonical" href="${this.origin}${path}" />`,
+      );
+    }
+    const sitemap = await this.request.get(this.origin + "/sitemap.xml");
+    expect(sitemap.status(), "/sitemap.xml").toBe(200);
+    expect(sitemap.headers()["content-type"] ?? "", "/sitemap.xml").toContain(
+      "xml",
+    );
+    expect(await sitemap.text(), "/sitemap.xml").toContain(
+      `<loc>${this.origin}/contact</loc>`,
+    );
+  }
   /** Every name the studio claims but does not serve; each answers permanently, and only that. */
   static aliases() {
     return {

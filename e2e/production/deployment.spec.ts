@@ -12,7 +12,7 @@ const origin = DeployedStudio.origin();
 // then the marketing site, calculator, blog, administration and client applications
 // are served, the API answers published reads from Azure SQL, and administration data
 // stays refused without an account.
-test("AC-AZ-09 AC-L2-068-01 AC-L2-070-07 the deployed studio serves every application over trusted TLS", async ({
+test("AC-AZ-09 AC-L2-068-01 AC-L2-070-07 AC-L2-076-04 the deployed studio serves every application over trusted TLS", async ({
   page,
   request,
 }, info) => {
@@ -25,6 +25,9 @@ test("AC-AZ-09 AC-L2-068-01 AC-L2-070-07 the deployed studio serves every applic
   await studio.redirects("/client", "/client/");
   await studio.servesTheBlog();
   await studio.redirects("/blog/", "/blog", 301);
+  await studio.servesTheServerRenderedPages();
+  await studio.redirects("/about/", "/about");
+  await studio.redirects("/contact/", "/contact");
 
   const publicSite = new PublicSitePage(page, origin);
   await publicSite.open();

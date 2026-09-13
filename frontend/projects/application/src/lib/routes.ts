@@ -9,6 +9,7 @@ import { SessionPage } from './session-page/session-page';
 import { ClientPage } from './client-page/client-page';
 import { LoginPage } from './login-page/login-page';
 import { PrintInbox } from './print-inbox/print-inbox';
+import { InquiryInbox } from './inquiry-inbox/inquiry-inbox';
 import { RESOURCES } from './resource-definitions';
 const access: CanActivateFn = async (route) => {
   const auth = inject(ACCOUNT_SERVICE),
@@ -32,7 +33,7 @@ export function studioRoutes(site: string): Routes {
   if (site === 'marketing')
     return [
       { path: '', component: PublicPage, data: { kind: 'home' } },
-      ...['portfolio', 'services', 'prints', 'promotions', 'contact'].map((kind) => ({
+      ...['portfolio', 'services', 'prints', 'promotions'].map((kind) => ({
         path: kind,
         component: PublicPage,
         data: { kind },
@@ -52,12 +53,14 @@ export function studioRoutes(site: string): Routes {
             data: { resource: r.key, role },
             canActivate: [access],
           })),
-          ...['rates', 'discounts', 'studios', 'content', 'invitations'].map((kind) => ({
-            path: kind,
-            component: SettingsPage,
-            data: { kind, role },
-            canActivate: [access],
-          })),
+          ...['rates', 'discounts', 'studios', 'studio-details', 'content', 'invitations'].map(
+            (kind) => ({
+              path: kind,
+              component: SettingsPage,
+              data: { kind, role },
+              canActivate: [access],
+            }),
+          ),
           {
             path: 'schedule/:id',
             component: SettingsPage,
@@ -66,6 +69,7 @@ export function studioRoutes(site: string): Routes {
           },
           { path: 'sessions/:id', component: SessionPage, data: { role }, canActivate: [access] },
           { path: 'print-requests', component: PrintInbox, data: { role }, canActivate: [access] },
+          { path: 'inquiries', component: InquiryInbox, data: { role }, canActivate: [access] },
         ]
       : [
           { path: '', redirectTo: 'galleries', pathMatch: 'full' },

@@ -35,11 +35,45 @@ export class PublicSitePage {
   async visiblePhotos(count: number) {
     await expect(this.page.locator(".photo-grid img")).toHaveCount(count);
   }
+  navigation() {
+    return this.page.getByRole("navigation", { name: "Main navigation" });
+  }
   async navigate(label: string) {
-    await this.page
-      .getByRole("navigation", { name: "Main navigation" })
+    await this.navigation()
       .getByRole("link", { name: label, exact: true })
       .click();
+  }
+  /** On narrow viewports the navigation sits behind the Menu button; open it with Enter. */
+  async openMenuFromKeyboard() {
+    const toggle = this.page.getByRole("button", { name: "Menu", exact: true });
+    if (!(await toggle.isVisible())) return;
+    await toggle.focus();
+    await this.page.keyboard.press("Enter");
+    await expect(toggle).toHaveAttribute("aria-expanded", "true");
+    await expect(this.navigation()).toBeVisible();
+  }
+  async closeMenuFromKeyboard() {
+    const toggle = this.page.getByRole("button", { name: "Menu", exact: true });
+    if (!(await toggle.isVisible())) return;
+    await toggle.focus();
+    await this.page.keyboard.press("Enter");
+    await expect(toggle).toHaveAttribute("aria-expanded", "false");
+    await expect(this.navigation()).toBeHidden();
+  }
+  async navigationOrder(labels: string[]) {
+    await expect(this.navigation().locator("a")).toHaveText(labels);
+  }
+  async navigationLink(label: string, href: string) {
+    await expect(
+      this.navigation().getByRole("link", { name: label, exact: true }),
+    ).toHaveAttribute("href", href);
+  }
+  async footerLink(label: string, href: string) {
+    await expect(
+      this.page
+        .getByRole("contentinfo")
+        .getByRole("link", { name: label, exact: true }),
+    ).toHaveAttribute("href", href);
   }
   async planSession() {
     await this.page.getByRole("link", { name: "Plan a session" }).click();

@@ -111,7 +111,11 @@ if (builder.Configuration.GetValue<bool>("Gateway:TrustForwardedHeaders"))
     forwarded.KnownProxies.Clear();
 }
 app.UseForwardedHeaders(forwarded);
-app.UseWhen(context => context.Request.Path.StartsWithSegments("/blog"), blog =>
+// The blog, About, and Contact pages render from the API (OD-13) and share the security
+// headers and the canonical-address rules below.
+app.UseWhen(context => context.Request.Path.StartsWithSegments("/blog")
+    || context.Request.Path.StartsWithSegments("/about")
+    || context.Request.Path.StartsWithSegments("/contact"), blog =>
 {
     blog.Use(async (context, next) =>
     {
@@ -120,6 +124,15 @@ app.UseWhen(context => context.Request.Path.StartsWithSegments("/blog"), blog =>
         if (context.Request.Path == "/blog/")
         {
             context.Response.Redirect("/blog" + context.Request.QueryString, permanent: true);
+            return;
+        }
+        if (context.Request.Path.Value is "/about/" or "/contact/")
+        {
+            context.Response.Redirect(
+                context.Request.Path.Value.TrimEnd('/') + context.Request.QueryString,
+                permanent: true,
+                preserveMethod: true
+            );
             return;
         }
         await next();

@@ -43,6 +43,7 @@ public sealed class SqlStudioTransaction(StudioDbContext db) : IStudioTransactio
             PrintRequest p => $"{p.ClientId}:{p.IdempotencyKey}",
             PublicGallery g => g.Slug,
             AccountToken t => t.Digest,
+            Inquiry i => i.Reference,
             _ => null,
         };
         row.Payload = JsonSerializer.Serialize(value, StudioJson.Options);

@@ -14,7 +14,7 @@ CADDYFILE = Path("/etc/caddy/Caddyfile")
 
 # Addresses the API serves. Everything else is a static application build, and anything the
 # gateway does not name here silently becomes the marketing shell.
-BACKEND_PATHS = "/api/* /blog /blog/* /robots.txt"
+BACKEND_PATHS = "/api/* /blog /blog/* /about /about/ /contact /contact/ /robots.txt /sitemap.xml"
 
 
 def origin_of(config):

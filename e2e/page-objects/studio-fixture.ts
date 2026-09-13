@@ -19,6 +19,7 @@ export class StudioFixture {
       "clients",
       "albums",
       "print-requests",
+      "inquiries",
     ].map((key) => [key, []]),
   );
   readonly operations = new Map<
@@ -33,6 +34,14 @@ export class StudioFixture {
     advanceRule: { enabled: false, percentage: 0, threshold: 90 },
     weekdayRule: { enabled: false, percentage: 0, weekdays: [] },
     codeRules: [],
+  };
+  studioDetails: Record<string, any> = {
+    id: "studio-details",
+    version: 0,
+    email: null,
+    phone: null,
+    hours: null,
+    replyNote: null,
   };
   schedules: Record<string, any> = {};
   photos: Record<string, any[]> = {};
@@ -174,6 +183,15 @@ export class StudioFixture {
         this.discounts = { ...args[0], version: this.discounts.version + 1 };
       return this.discounts;
     }
+    if (service === "studio-details") {
+      if (method === "save")
+        this.studioDetails = {
+          ...args[0],
+          id: "studio-details",
+          version: this.studioDetails.version + 1,
+        };
+      return this.studioDetails;
+    }
     if (service === "schedule") {
       if (method === "save")
         this.schedules[args[0]] = {
@@ -269,6 +287,28 @@ export class StudioFixture {
           impactRevision: "current",
         }
       );
+    if (service === "inquiry") {
+      if (method === "list")
+        return this.records["inquiries"]
+          .filter((inquiry) => !args[0] || inquiry.state === args[0])
+          .slice()
+          .sort((a, b) =>
+            String(b.submittedAt).localeCompare(String(a.submittedAt)),
+          );
+      if (method === "get")
+        return this.records["inquiries"].find((row) => row.id === args[0]);
+      if (method === "review") {
+        const prior = this.records["inquiries"].find(
+          (row) => row.id === args[0],
+        );
+        return this.save("inquiries", {
+          ...prior,
+          state: "Reviewed",
+          reviewedBy: "administrator-a",
+          reviewedAt: "2026-09-13T10:00:00Z",
+        });
+      }
+    }
     if (service === "print-request") {
       if (method === "list")
         return this.records["print-requests"].filter(

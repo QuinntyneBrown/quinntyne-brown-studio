@@ -12,6 +12,8 @@ See the [live quote slice brief](live-quote-slice.md) for the subsequent calcula
 
 The subsequent [LocalDB persistence change](localdb-persistence.md) implements OD-10: normal development and production use persistent LocalDB; database fakes are test-only. Its verification supersedes the earlier runtime/deployment descriptions without rewriting historical test results.
 
+The [About and Contact pages brief](about-contact-pages.md) records the OD-13 implementation: the server-rendered About and Contact pages, stored inquiries with their inbox and notification, administrator-edited studio details, and the root sitemap, with the verification behind each acceptance criterion.
+
 ## Verification recorded on 2026-09-05
 
 | Check | Recorded result |

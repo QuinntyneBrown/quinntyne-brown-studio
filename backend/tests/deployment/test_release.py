@@ -166,14 +166,34 @@ class ReleaseAcceptanceTests(unittest.TestCase):
         origin = "https://studio.example"
 
         def answer(url, timeout=10):
-            if url == origin + "/blog":
-                return Answer(f'<link rel="canonical" href="{origin}/blog" />', "text/html; charset=utf-8")
+            for path in ["/blog", "/about", "/contact"]:
+                if url == origin + path:
+                    return Answer(f'<link rel="canonical" href="{origin}{path}" />', "text/html; charset=utf-8")
             if url == origin + "/blog/feed.xml":
                 return Answer("<rss version=\"2.0\" />", "application/rss+xml; charset=utf-8")
             return Answer("<!doctype html>", "text/html; charset=utf-8")
 
         with patch("urllib.request.urlopen", side_effect=answer):
             self.release.healthy(origin)
+
+    # Given a gateway that serves the blog from the API but answers /about or /contact with the
+    # marketing shell, when the release checks its health, then activation fails naming the address.
+    @patch("subprocess.run")
+    @patch("time.sleep")
+    def test_AC_L2_076_04_application_shell_at_about_or_contact_is_not_healthy(self, sleep, run):
+        origin = "https://studio.example"
+        for missing in ["/about", "/contact"]:
+            def answer(url, timeout=10, missing=missing):
+                for path in ["/blog", "/about", "/contact"]:
+                    if url == origin + path and path != missing:
+                        return Answer(f'<link rel="canonical" href="{origin}{path}" />', "text/html; charset=utf-8")
+                if url == origin + "/blog/feed.xml":
+                    return Answer("<rss version=\"2.0\" />", "application/rss+xml; charset=utf-8")
+                return Answer("<!doctype html><html><body>marketing</body></html>", "text/html; charset=utf-8")
+
+            with patch("urllib.request.urlopen", side_effect=answer):
+                with self.assertRaisesRegex(RuntimeError, missing):
+                    self.release.healthy(origin)
 
     # Given an archive escaping its release directory, when unpacked, then no file escapes.
     def test_AC_AZ_05_archive_traversal_is_rejected(self):

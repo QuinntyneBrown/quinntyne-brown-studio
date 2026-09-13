@@ -10,7 +10,7 @@ The slice owns rendering and discovery only. The About page content is designed 
 
 ## Description
 
-Status: designed under OD-13; not yet implemented.
+Status: implemented on 2026-09-13 under OD-13; evidence in the [acceptance register](../../acceptance.md).
 
 `MarketingShellLayout` is the marketing shell inside `Pages/Shared/_Layout.cshtml`. Today the layout selects that shell only when `IsBlogListing` is true; the design generalizes the flag to `IsMarketingShell` so About, Contact, and the blog listing share one header, navigation, and footer. The navigation lists Portfolio, Services, About, Blog, Prints, Packages, the quote call to action, and client login, and marks the current page with `aria-current="page"`. The footer links `About the studio`, `Get in touch`, `Our work`, `Blog`, and `Client access`. The mobile menu keeps the existing keyboard-operable button, backdrop, and Escape handling.
 

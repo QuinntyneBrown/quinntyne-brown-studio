@@ -51,6 +51,7 @@ public static class ServiceRegistration
             services.AddSingleton<IJobQueue, AzureJobQueue>();
         }
         services.AddSingleton<IClock, SystemClock>();
+        services.AddSingleton<IEmailQueue, ProtectedEmailQueue>();
         services.AddSingleton<IRawPreviewConverter, RawPreviewConverter>();
         var keys = services.AddDataProtection().SetApplicationName("QuinntyneBrownStudio");
         if (config["DataProtection:BlobUri"] is { } blob)

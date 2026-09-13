@@ -9,11 +9,8 @@ export default defineConfig({
     ["json", { outputFile: "../.artifacts/platform/fullstack-results.json" }],
   ],
   outputDir: "../.artifacts/platform/fullstack-browser",
-  projects: [
-    { name: "chromium", use: { browserName: "chromium" } },
-    { name: "firefox-blog", testMatch: "blog.spec.ts", use: { browserName: "firefox" } },
-    { name: "webkit-blog", testMatch: "blog.spec.ts", use: { browserName: "webkit" } },
-  ],
+  // Chromium only (AGENTS.md); the specs set their own viewport widths.
+  projects: [{ name: "chromium", use: { browserName: "chromium" } }],
   use: {
     browserName: "chromium",
     ignoreHTTPSErrors: true,
