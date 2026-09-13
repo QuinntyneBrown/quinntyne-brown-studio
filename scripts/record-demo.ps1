@@ -2,7 +2,10 @@ param(
     [string]$Dotnet = 'dotnet',
     [int]$GatewayPort = 7463,
     [int]$ApiPort = 7464,
-    [switch]$KeepRunning
+    [switch]$KeepRunning,
+    # A specific spec (or glob) under e2e/demo to record, e.g. 'demo/blog-post-demo.spec.ts'.
+    # Unset records every demonstration in e2e/demo, as before.
+    [string]$Spec
 )
 # Records the demonstration videos in docs/demo against the packaged applications, a freshly
 # published API and a disposable LocalDB database. It mirrors smoke-platform.ps1 deliberately:
@@ -61,7 +64,10 @@ try {
     if (-not $ready) { throw 'The demo gateway/API did not become ready. See .artifacts/demo/api-error.log.' }
     Write-Output "Recording against $env:PublicOrigin"
     Push-Location (Join-Path $studioRoot 'e2e')
-    try { npx playwright test --config demo.playwright.config.ts; if ($LASTEXITCODE -ne 0) { throw 'The demonstration did not complete. See .artifacts/demo/recordings for the trace.' } }
+    try {
+        if ($Spec) { npx playwright test --config demo.playwright.config.ts $Spec } else { npx playwright test --config demo.playwright.config.ts }
+        if ($LASTEXITCODE -ne 0) { throw 'The demonstration did not complete. See .artifacts/demo/recordings for the trace.' }
+    }
     finally { Pop-Location }
     Write-Output 'Recordings:'
     Get-ChildItem $outputDirectory -Filter '*.webm' | ForEach-Object { Write-Output ("  {0}  {1:N1} MB" -f $_.Name, ($_.Length / 1MB)) }

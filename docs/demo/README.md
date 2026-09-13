@@ -1,16 +1,19 @@
 # The demonstrations
 
-Three recordings of the studio platform, made in one sitting against one database, in this order:
+Four recordings of the studio platform. The first three are made in one sitting against one
+database, in this order; the fourth stands on its own against a separate database:
 
 | | Recording | Length | Size |
 |---|---|---|---|
 | 1 | [**Studio administration**](studio-administration.webm) — the admin application | 3 min 54 s | 11.4 MB |
 | 2 | [**The public site**](marketing-site.webm) — the marketing application | 1 min 52 s | 6.0 MB |
 | 3 | [**The client's collection**](client-delivery.webm) — the client application, then the studio's review | 2 min 03 s | 5.3 MB |
+| 4 | [**Writing a blog post**](blog-post.webm) — the studio's editorial workspace | 1 min 12 s | 3.6 MB |
 
-All three are 1280 × 720 WebM. GitHub will not play a video inline, so the links download it; each
-plays in Chrome, Edge, Firefox, Safari 16.4+, and in VS Code. Watch them in order: the second and
-third show what the first set up.
+All four are 1280 × 720 WebM. GitHub will not play a video inline, so the links download it; each
+plays in Chrome, Edge, Firefox, Safari 16.4+, and in VS Code. Watch the first three in order: the
+second and third show what the first set up. The fourth is independent of all three — it signs in
+with the same bootstrap administrator but neither reads nor depends on anything the others set up.
 
 ## What they are
 
@@ -22,11 +25,13 @@ every rule they demonstrate was enforced by the published ASP.NET Core API; ever
 came out of SQL Server Express LocalDB. The captions are injected into the page as it runs, which
 is why they are pinned to the bottom of the frame rather than floating over it.
 
-They are produced by [`e2e/demo/demo.spec.ts`](../../e2e/demo/demo.spec.ts), a Playwright script
-that uses the same page objects as the acceptance suite. It asserts as it goes, so a recording
-cannot show something that did not happen: the quote's total, the print request's total, the
-count of photographs on each screen and every saved confirmation are checked before the caption
-that describes them appears. If the product breaks, the recording fails rather than lying.
+The first three are produced by [`e2e/demo/demo.spec.ts`](../../e2e/demo/demo.spec.ts), and the
+fourth by [`e2e/demo/blog-post-demo.spec.ts`](../../e2e/demo/blog-post-demo.spec.ts) — both
+Playwright scripts using the same page objects as the acceptance suite. They assert as they go, so
+a recording cannot show something that did not happen: the quote's total, the print request's
+total, the count of photographs on each screen, the article's status badge, and every saved
+confirmation are checked before the caption that describes them appears. If the product breaks,
+the recording fails rather than lying.
 
 The three walkthroughs run in order against one freshly migrated database. Administration
 configures the studio and invites a client; the public site shows what was published and prices
@@ -83,6 +88,22 @@ typed in one recording and seen in another live in [`demo-data.ts`](../../e2e/de
 | 1:34 | **Six — Access is revocable** | The studio unticks her on the session. Her session list is empty and her album keeps its shape with placeholders. |
 | 1:58 | **The client's collection — Access is a decision, at every boundary** | Invitation, assignment, server-priced prints, an immutable review and revocation, in one database. |
 
+## 4 · Writing a blog post
+
+**[`blog-post.webm`](blog-post.webm)** — 1 min 12 s, 3.6 MB.
+
+[![The article editor with a draft's Markdown body and featured image](blog-post-poster.png)](blog-post.webm)
+
+| | | |
+|---|---|---|
+| 0:00 | **A demonstration — Writing a blog post** | From a blank editor to a page anyone can read. |
+| 0:04 | **One — Signing in** | The same bootstrap administrator who runs the rest of the workspace. |
+| 0:14 | **Two — Opening the editor** | The Blog articles link opens the studio's separate editorial workspace on a blank, unsaved draft. |
+| 0:27 | **Three — Writing it** | A title, an abstract, a Markdown body, and a featured image uploaded on the spot. |
+| 0:45 | **Four — Saving and publishing** | Saved as a draft nobody outside the studio can see, then published. |
+| 1:01 | **Five — Reading it on the site** | The same title, body and image, open to the public seconds later. |
+| 1:12 | **Writing a blog post — Blank page to published, in one take** | What was written, saved, published, and read back. |
+
 ## Re-recording them
 
 ```powershell
@@ -91,12 +112,17 @@ typed in one recording and seen in another live in [`demo-data.ts`](../../e2e/de
 
 It publishes the API in Release, migrates a disposable LocalDB database named `QbsDemo_<timestamp>`,
 provisions an administrator with a random password, exports the development certificate, starts
-the API and the HTTPS gateway on ports 7463 and 7464, and runs
+the API and the HTTPS gateway on ports 7463 and 7464, and runs every spec in
+[`e2e/demo/`](../../e2e/demo) under
 [`e2e/demo.playwright.config.ts`](../../e2e/demo.playwright.config.ts). The recordings and their
 poster frames are written straight into this folder; the chapter timings behind the tables above
 land in `.artifacts/demo/chapters/`. When it finishes it stops both processes and drops the
-database. Pass `-KeepRunning` to leave the recorded studio up for a look, and `-Dotnet` to point at
-a .NET 10 SDK that is not the one on `PATH`.
+database. Pass `-KeepRunning` to leave the recorded studio up for a look, `-Dotnet` to point at
+a .NET 10 SDK that is not the one on `PATH`, and `-Spec` to record only one demonstration, e.g.
+
+```powershell
+./scripts/record-demo.ps1 -Spec demo/blog-post-demo.spec.ts
+```
 
 It expects what the rest of the repository expects: the three applications built into
 `frontend/dist` (`npm run build:libs` and `npm run build:apps` in `frontend`), `npm ci` and

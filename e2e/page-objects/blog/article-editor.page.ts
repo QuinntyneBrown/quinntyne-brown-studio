@@ -71,6 +71,13 @@ export class ArticleEditorPage {
     await this.page.locator('#image-chooser-modal').waitFor({ state: 'hidden' });
   }
 
+  async uploadFeaturedImageFile(file: { name: string; mimeType: string; buffer: Buffer }) {
+    await this.featuredImageButton.click();
+    await this.page.locator('#chooser-file-input').setInputFiles(file);
+    await this.page.locator('#upload-btn').click();
+    await this.page.locator('#image-chooser-modal').waitFor({ state: 'hidden' });
+  }
+
   async confirmDelete() {
     await this.delete();
     await this.page.locator('#delete-modal').getByRole('button', { name: 'Delete', exact: true }).click();
