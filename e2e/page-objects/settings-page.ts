@@ -26,6 +26,17 @@ export class SettingsPage {
   async check(label: string, checked = true) {
     await this.page.getByLabel(label, { exact: true }).setChecked(checked);
   }
+  /**
+   * The editor stays mounted across Edit, so a record's flag lands in its checkbox one
+   * change-detection cycle after the click. Assert it before toggling: `setChecked` treats
+   * a box that already shows the wanted state as done, and would skip a click that is
+   * still pending.
+   */
+  async checked(label: string, checked = true) {
+    await expect(this.page.getByLabel(label, { exact: true })).toBeChecked({
+      checked,
+    });
+  }
   async click(label: string) {
     await this.page.getByRole("button", { name: label, exact: true }).click();
   }
