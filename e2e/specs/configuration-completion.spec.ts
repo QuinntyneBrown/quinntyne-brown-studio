@@ -199,6 +199,7 @@ test("P04 AC-L2-005-01 AC-L2-006-01 AC-L2-020-01 content and price publication f
   await settings.click("Save");
   await settings.message("Saved successfully.");
   await settings.edit("home");
+  await settings.checked("Publish this revision");
   await settings.fill("Heading", "Unfinished next story");
   await settings.check("Publish this revision", false);
   await settings.click("Save");
