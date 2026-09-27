@@ -71,6 +71,33 @@ SSH is closed by default. For an interactive recovery session, temporarily allow
 only your current public IP on port 22, use the configured key, then remove that rule.
 Do not add a public self-hosted GitHub runner to the VM.
 
+## Design-system catalog
+
+The catalog is a separate static site and is not part of the studio release. **Deploy
+design system** runs on pushes to `main` that touch `design-system/` and uploads
+`design-system/dist` to one Free Azure Static Web App using the repository secret
+`SWA_DESIGN_SYSTEM_DEPLOYMENT_TOKEN`. Without that secret the upload step fails, and it
+must fail rather than report a deployment that did not happen. After `bootstrap-azure.py`
+has created the tagged shared group, create the host and store the token once:
+
+```powershell
+python deploy/bootstrap-design-system.py
+```
+
+This creates `qbs-design-system` in `rg-qbs-shared` and pipes its deployment token into
+the secret without printing it. Static Web Apps are managed from one of their own regions
+and served globally, so the Canada Central group location does not apply. The script
+defaults to West US 2 because this subscription's ten-site Free quota is already used in
+East US 2 by other projects; when a region is full, `az` refuses with `too many static sites
+with SKU: Free`, and the operator picks another region with `--location`, deletes a site the
+subscription no longer needs, or reruns with `--sku Standard`, which is billed monthly. The
+catalog stays outside `infra/main.bicep` because that template deploys once per environment
+and there is one catalog. To rotate the token, run
+`az staticwebapp secrets reset-api-key -n qbs-design-system -g rg-qbs-shared` and rerun the
+script. To attach `design.quinntynebrown.studio`, create the Namecheap CNAME to the site's
+default hostname, then run
+`az staticwebapp hostname set -n qbs-design-system -g rg-qbs-shared --hostname design.quinntynebrown.studio`.
+
 ## Release behavior
 
 Verification retains Windows/LocalDB API acceptance, all browser scenarios, the
