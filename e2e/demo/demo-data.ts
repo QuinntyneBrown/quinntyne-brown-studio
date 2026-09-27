@@ -129,6 +129,20 @@ export const Album = {
   order: ["okafor-02.jpg", "okafor-05.jpg", "okafor-04.jpg"],
 };
 
+export const BlogPost = {
+  title: "Packing light for a winter elopement",
+  abstract: "What actually earns its place in the bag when a ceremony happens outdoors, in the cold, with two people and no reception to follow.",
+  body:
+    "# Fewer bodies, more batteries\n\n" +
+    "A winter elopement is short, cold and unrepeatable, which argues for less gear rather than more: " +
+    "one camera body warmed under a coat, a single fast prime, and spare batteries kept close to skin " +
+    "because cold drains them in minutes, not hours.\n\n" +
+    "## What stays home\n\n" +
+    "The second body, the long lens, the flash. There is no second take of a couple's first look in the " +
+    "snow, so the fewer decisions made with frozen fingers, the better.",
+  featuredImage: { name: "winter-elopement-cover.jpg", from: "#5f7285", to: "#1c2733", light: "#e7eef4" },
+};
+
 export const PrintRequest = {
   photos: ["okafor-01.jpg", "okafor-03.jpg"],
   notes: "Could the 16 × 20 be framed in oak? We would love to see it before it ships.",
