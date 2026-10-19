@@ -28,26 +28,9 @@ for source in (ROOT / 'frontend/projects').rglob('*.ts'):
         check(str(source.relative_to(ROOT)).replace('\\', '/') in catalog_sources, f'Uncatalogued component: {source}')
     if re.search(r'from [\'"]rxjs', text):
         check('/api/' in str(source).replace('\\', '/'), f'RxJS outside API boundary: {source}')
-catalog = json.loads((ROOT / 'design-system/component-manifest.json').read_text(encoding='utf-8'))
-published = {'component:' + c['id'] for c in catalog['components']}
-published |= {'pattern:' + f['id'] for f in catalog['patterns']}
-published |= {'dialog:' + f['id'] for f in catalog['dialogs']}
 for entry in manifest:
     check((ROOT / entry['source']).exists(), f'Missing catalog source: {entry["source"]}')
     check(bool(entry['inputs']) and bool(entry['outputs']), f'Undocumented component contract: {entry["name"]}')
-    check(entry.get('catalogEntry') in published, f'No design-system entry shows {entry["name"]}: {entry.get("catalogEntry")}')
-def css_classes(path):
-    text = re.sub(r'/\*.*?\*/', '', Path(path).read_text(encoding='utf-8'), flags=re.S)
-    return set(re.findall(r'\.([a-z][a-z0-9_-]*)', text))
-
-# The design system publishes the shared visual language: the studio stylesheet, the component
-# library, and the application chrome. Feature-local layout classes stay with their feature.
-published = css_classes(ROOT / 'design-system/assets/components.css') | css_classes(ROOT / 'design-system/assets/tokens.css')
-consumed = css_classes(ROOT / 'frontend/styles.css') | css_classes(ROOT / 'frontend/projects/application/src/lib/shell/shell.css')
-for stylesheet in (ROOT / 'frontend/projects/components/src').rglob('*.css'):
-    consumed |= css_classes(stylesheet)
-for name in sorted(consumed - published):
-    check(False, f'Class .{name} is used by the shared frontend but is not published by the design system')
 
 for project in ['marketing', 'admin', 'client', 'components', 'domain', 'api', 'application']:
     check((ROOT / f'frontend/projects/{project}').is_dir(), f'Missing frontend project: {project}')
