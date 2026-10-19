@@ -4,12 +4,6 @@
 
 Quinntyne Brown Studio is a photography studio management platform for weddings, events, headshots, and family portraits: a public marketing site with a live quote calculator, print prices, and promotions; an admin app for session photo upload and review, schedules, equipment, rates, vendors, and content; and a client site for galleries, albums, and print requests.
 
-## Speed Is Not the Goal
-
-Quality and completeness beat finishing fast. Finish the whole task - edge cases,
-error paths, no stubs or `TODO`s. If it is bigger than it looked, complete it and
-say what it cost rather than quietly narrowing scope.
-
 ## Technology
 
 - Use .NET for the API.
