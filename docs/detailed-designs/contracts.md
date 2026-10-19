@@ -48,7 +48,7 @@ Feature diagrams name the screen a person uses. The delivered Angular applicatio
 | `PrintRequestInboxPage` | `PrintInbox` | `/print-requests` |
 | `InquiryInboxPage` | `InquiryInbox` | `/inquiries` |
 | `StudioDetailsEditor` | `SettingsPage` | `/studio-details` |
-| `CatalogApplication` | Standalone catalog | The [design-system product](../../design-system/README.md) |
+| `CatalogApplication` | Standalone catalog | The [design-system product](../design-system/README.md) |
 
 Every screen reaches its services through injection tokens, so a test binds a controlled implementation without touching a component.
 

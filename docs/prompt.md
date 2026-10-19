@@ -1,0 +1,58 @@
+- Build a photography studio management platform.
+- Use lots of white space and a radically simple design.
+- Public-facing, responsive marketing web app to showcase photography
+    - Data managed through a responsive admin web app
+    - Quote calculator
+        - Weddings, events, headshots, and family portraits
+        - Account for multiple locations, equipment rental, potential parking costs, lunch costs, assistants, distance, and local studio fees.
+        - Apply discounts via codes, advance booking, or slow-day booking.
+        - Calculate quotes live.
+    - View print prices.
+    - View package promotions (subject to change after detailed consultation).
+- Responsive admin web app
+    - Upload large batches of photos from cameras, including large files.
+    - Review photos from sessions and use Azure AI to suggest which ones are good.
+    - Use lots of white space and a radically simple, focused UX, with no extra features or gold plating.
+    - Configure discounts for bookings made 90 days (configurable) in advance.
+    - Add photographer schedules to determine availability for quotes.
+    - Manage equipment.
+    - Configure galleries on the marketing site.
+    - Manage content for the marketing site.
+    - Configure rates to drive the quote calculator.
+        - Add studios.
+    - Manage preferred vendors.
+        - Makeup artists
+        - Second shooters and assistants
+    - Configure print prices.
+- Client site
+    - Client login
+    - View galleries from sessions.
+    - Request prints and view prices.
+    - Create albums.
+
+- Implementation
+    - Backend
+        - .NET
+        - Clean Architecture
+        - Latest free version of MediatR
+        - Controllers over endpoints
+        - Implement using ATDD: begin with failing integration tests (with a faked database), then add a radically simple implementation of the behaviour to make the tests pass.
+        - Each acceptance criterion implemented fully or partially by the backend has linked acceptance tests.
+    - Frontend
+        - Angular
+        - BEM CSS naming convention
+        - One file per type (no single-file components)
+        - Signals over RxJS
+        - Multi-project workspace
+            - Components
+            - API
+            - Domain
+            - Application project
+        - Implement using ATDD: begin with failing Playwright end-to-end tests using the Page Object Model (with a mocked backend), then add a radically simple implementation of the behaviour to make the tests pass.
+        - Interface-driven service consumption pattern (https://github.com/QuinntyneBrown/interface-driven-service-consumption)
+        - Each acceptance criterion implemented fully or partially by the frontend has linked acceptance tests.
+    - Design system
+        - First-class product
+        - All components listed
+        - Deploy as a static web app.
+        - See https://github.com/QuinntyneBrown/saturdaze/tree/main/design-system for reference.
