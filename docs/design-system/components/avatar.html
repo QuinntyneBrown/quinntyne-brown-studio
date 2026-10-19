@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avatar &mdash; Quinntyne Brown Studio design system</title>
+<meta name="description" content="An avatar is a small round mark that stands for a person: a photographer, a client, the signed-in user. It shows initials, or an icon when there is no name.">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+  <nav class="ds-nav" aria-label="Design system">
+    <div class="ds-nav__brand"><a href="../index.html">QBS DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">&#9790; Dark</button></div>
+    <details open><summary>Foundations</summary><ul>
+      <li><a href="../foundations/color.html">Color</a></li>
+      <li><a href="../foundations/typography.html">Typography</a></li>
+      <li><a href="../foundations/spacing.html">Spacing</a></li>
+      <li><a href="../foundations/layout.html">Layout</a></li>
+      <li><a href="../foundations/elevation.html">Elevation</a></li>
+      <li><a href="../foundations/shape.html">Shape</a></li>
+      <li><a href="../foundations/motion.html">Motion</a></li>
+      <li><a href="../foundations/iconography.html">Iconography</a></li>
+      <li><a href="../foundations/theming.html">Theming</a></li>
+      <li><a href="../foundations/responsive.html">Responsive</a></li>
+      <li><a href="../foundations/accessibility.html">Accessibility</a></li>
+      <li><a href="../foundations/content.html">Content</a></li>
+    </ul></details>
+    <details open><summary>Components</summary><ul>
+      <li><a href="../components/button.html">Button</a></li>
+      <li><a href="../components/button-group.html">Button group</a></li>
+      <li><a href="../components/link.html">Link</a></li>
+      <li><a href="../components/menu.html">Menu</a></li>
+      <li><a href="../components/checkbox.html">Checkbox</a></li>
+      <li><a href="../components/date-navigator.html">Date navigator</a></li>
+      <li><a href="../components/file-upload.html">File upload</a></li>
+      <li><a href="../components/form-field.html">Form field</a></li>
+      <li><a href="../components/form-layout.html">Form layout</a></li>
+      <li><a href="../components/radio-group.html">Radio group</a></li>
+      <li><a href="../components/select.html">Select</a></li>
+      <li><a href="../components/switch.html">Switch</a></li>
+      <li><a href="../components/text-field.html">Text field</a></li>
+      <li><a href="../components/textarea.html">Textarea</a></li>
+      <li><a href="../components/breadcrumb.html">Breadcrumb</a></li>
+      <li><a href="../components/footer.html">Footer</a></li>
+      <li><a href="../components/pagination.html">Pagination</a></li>
+      <li><a href="../components/sidebar.html">Sidebar</a></li>
+      <li><a href="../components/skip-link.html">Skip link</a></li>
+      <li><a href="../components/tabs.html">Tabs</a></li>
+      <li><a href="../components/top-bar.html">Top bar</a></li>
+      <li><a href="../components/accordion.html">Accordion</a></li>
+      <li><a href="../components/card.html">Card</a></li>
+      <li><a href="../components/dialog.html">Dialog</a></li>
+      <li><a href="../components/divider.html">Divider</a></li>
+      <li><a href="../components/layout.html">Layout primitives</a></li>
+      <li><a href="../components/tooltip.html">Tooltip</a></li>
+      <li><a href="../components/avatar.html">Avatar</a></li>
+      <li><a href="../components/badge.html">Badge</a></li>
+      <li><a href="../components/blog-card.html">Blog card</a></li>
+      <li><a href="../components/chip.html">Chip</a></li>
+      <li><a href="../components/cost-summary.html">Cost summary</a></li>
+      <li><a href="../components/description-list.html">Description list</a></li>
+      <li><a href="../components/line-item.html">Line item</a></li>
+      <li><a href="../components/photo-tile.html">Photo tile</a></li>
+      <li><a href="../components/calendar.html">Schedule calendar</a></li>
+      <li><a href="../components/selection-bar.html">Selection bar</a></li>
+      <li><a href="../components/stat.html">Stat</a></li>
+      <li><a href="../components/stepper.html">Stepper</a></li>
+      <li><a href="../components/table.html">Table</a></li>
+      <li><a href="../components/alert.html">Alert</a></li>
+      <li><a href="../components/empty-state.html">Empty state</a></li>
+      <li><a href="../components/error-page.html">Error page</a></li>
+      <li><a href="../components/inline-message.html">Inline message</a></li>
+      <li><a href="../components/progress.html">Progress</a></li>
+      <li><a href="../components/skeleton.html">Skeleton</a></li>
+      <li><a href="../components/spinner.html">Spinner</a></li>
+      <li><a href="../components/toast.html">Toast</a></li>
+    </ul></details>
+    <details open><summary>Patterns</summary><ul>
+      <li><a href="../patterns/forms.html">Forms</a></li>
+      <li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li>
+      <li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li>
+      <li><a href="../patterns/navigation-and-page-structure.html">Navigation and page structure</a></li>
+      <li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li>
+      <li><a href="../patterns/data-tables-and-lists.html">Data tables and lists</a></li>
+      <li><a href="../patterns/notifications.html">Notifications</a></li>
+      <li><a href="../patterns/content-and-tone.html">Content and tone</a></li>
+    </ul></details>
+  </nav>
+
+  <main id="main" class="ds-main">
+    <header class="ds-header">
+      <p class="ds-kicker">Component &amp;middot; Data display</p>
+      <h1>Avatar</h1>
+      <p class="ds-lead">An avatar is a small round mark that stands for a person: a photographer, a client, the signed-in user. It shows initials, or an icon when there is no name.</p>
+      <div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Status: stable</span><span class="ds-pill">Decorative or labelled</span></div>
+      <ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul>
+    </header>
+
+    <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+      <p>Use an avatar beside a name to make people easier to scan in lists, schedules and the account menu. Use a <a href="badge.html">badge</a> for status and a <a href="card.html">card</a> for a full profile.</p>
+      <ul>
+        <li><b>Initials</b> are the default: one or two letters taken from the name.</li>
+        <li><b>Icon</b> stands in when the name is unknown, such as a walk-in inquiry.</li>
+        <li><b>Group</b> overlaps nothing: avatars sit in a row with an overflow count when there are more than four.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+      <div class="ds-anatomy">
+        <figure class="ds-anatomy__figure">
+          <span class="cluster"><span class="avatar avatar--lg" aria-hidden="true">QB</span><span>Quinntyne Brown<br><span class="muted">Photographer</span></span></span>
+          <span class="ds-callout" style="left: 6%; top: 14%;" aria-hidden="true">1</span>
+          <span class="ds-callout" style="left: 78%; top: 20%;" aria-hidden="true">2</span>
+        </figure>
+        <ol class="ds-anatomy__list">
+          <li><div><b>Disc</b><small>Circular container, <code>--radius-full</code>, filled with <code>--color-brand-subtle</code>.</small></div></li>
+          <li><div><b>Initials or icon</b><small>Caption-size type in default ink; an icon is <code>aria-hidden</code>. The name next to it is the accessible name.</small></div></li>
+        </ol>
+      </div>
+    </section>
+    <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+      <p>Initials are the studio default. The adjacent name carries the meaning, so the avatar is hidden from assistive technology unless it stands alone.</p>
+      <h3>Initials and icon</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><span class="avatar" aria-hidden="true">QB</span><span class="avatar" aria-hidden="true">MC</span><span class="avatar" aria-hidden="true"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0"/></svg></span></div>
+        <div class="ds-example__caption"><span>Two letters at most. Use the icon when no name exists.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;span class="avatar" aria-hidden="true"&gt;QB&lt;/span&gt;</code></pre></details>
+      </div>
+      <h3>Paired with a name</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="cluster"><span class="avatar" aria-hidden="true">MC</span><span>Maya Chen<br><span class="muted">Photographer</span></span></div></div>
+        <div class="ds-example__caption"><span>The text is the name; the avatar is decorative.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class="cluster"&gt;
+  &lt;span class="avatar" aria-hidden="true"&gt;MC&lt;/span&gt;
+  &lt;span&gt;Maya Chen&lt;/span&gt;
+&lt;/div&gt;</code></pre></details>
+      </div>
+      <h3>Standing alone (account menu trigger)</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><button class="btn btn--ghost btn--icon" type="button" aria-label="Account menu for Quinntyne Brown"><span class="avatar" aria-hidden="true">QB</span></button></div>
+        <div class="ds-example__caption"><span>When the avatar is the only content of a control, the control carries the name.</span></div>
+      </div>
+      <h3>Group with overflow</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="cluster" role="group" aria-label="Team: Quinntyne Brown, Maya Chen, Noah Williams and 2 more"><span class="avatar" aria-hidden="true">QB</span><span class="avatar" aria-hidden="true">MC</span><span class="avatar" aria-hidden="true">NW</span><span class="avatar" aria-hidden="true">+2</span></div></div>
+        <div class="ds-example__caption"><span>The group is labelled with the full list; the "+2" avatar is the overflow count.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="sizes"><h2><a href="#sizes">Sizes</a></h2>
+      <p>Three sizes: small for dense rows, medium for lists and menus, large for profile headers.</p>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><span class="avatar avatar--sm" aria-hidden="true">QB</span><span class="avatar" aria-hidden="true">QB</span><span class="avatar avatar--lg" aria-hidden="true">QB</span></div>
+        <div class="ds-example__caption"><span>1.5rem (24px), 2rem (32px) and 3rem (48px).</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+      <p>An avatar has no interaction state. When it is the content of a button, the button's states apply. The matrix shows the avatar inside a ghost icon button.</p>
+      <div class="ds-matrix"><table>
+        <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Disabled</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Avatar button</th><td><button class="btn btn--ghost btn--icon" type="button" aria-label="Account menu"><span class="avatar" aria-hidden="true">QB</span></button></td><td><button class="btn btn--ghost btn--icon" type="button" aria-label="Account menu" data-state="hover"><span class="avatar" aria-hidden="true">QB</span></button></td><td><button class="btn btn--ghost btn--icon" type="button" aria-label="Account menu" data-state="focus"><span class="avatar" aria-hidden="true">QB</span></button></td><td><button class="btn btn--ghost btn--icon" type="button" aria-label="Account menu" disabled><span class="avatar" aria-hidden="true">QB</span></button></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Both themes</h3>
+      <div class="ds-themes">
+        <div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><span class="avatar" aria-hidden="true">QB</span><span class="avatar avatar--lg" aria-hidden="true">MC</span><span class="avatar avatar--sm" aria-hidden="true">NW</span></div></div>
+        <div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><span class="avatar" aria-hidden="true">QB</span><span class="avatar avatar--lg" aria-hidden="true">MC</span><span class="avatar avatar--sm" aria-hidden="true">NW</span></div></div>
+      </div>
+      <ul>
+        <li><b>Image failed or missing</b>: fall back to initials, then to the icon. Never show a broken image.</li>
+        <li><b>Loading</b>: use <code>.skeleton.skeleton--circle</code> from <a href="skeleton.html">skeleton</a>.</li>
+        <li><b>Status dot</b> is not part of this component; pair the name with a <a href="badge.html">badge</a> instead.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+      <ul>
+        <li>The avatar never changes size with the viewport; size is chosen by context.</li>
+        <li>In the app top bar the name beside the avatar collapses first; the avatar stays so the account menu keeps a recognisable trigger at 390px.</li>
+        <li>Groups wrap onto a second row rather than overlapping or clipping.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+      <p>The disc uses <code>--color-brand-subtle</code> with default ink. In the dark theme the fill darkens and the ink lightens together, so initials stay above 4.5:1. A product can recolour the fill by overriding <code>--color-brand-subtle</code> on a wrapper.</p>
+    </section>
+    <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+      <h3>Role and pattern</h3>
+      <p>Presentational. When next to a visible name the avatar is <code>aria-hidden="true"</code>. When it is the only content, it sits inside a control or has <code>role="img"</code> with an <code>aria-label</code> that names the person. See the <a href="https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/">APG names and descriptions</a> guidance.</p>
+      <h3>Keyboard</h3>
+      <div class="ds-table-wrap"><table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td><kbd>Tab</kbd></td><td>An avatar is not focusable. If wrapped in a button, the button takes focus.</td></tr><tr><td><kbd>Enter</kbd>, <kbd>Space</kbd></td><td>Activate the wrapping button.</td></tr><tr><td><kbd>Esc</kbd></td><td>Closes a menu opened from an avatar button.</td></tr></tbody></table></div>
+      <h3>Focus</h3>
+      <p>The avatar never takes focus. A wrapping button shows the shared 2px ring around the button, not the disc.</p>
+      <h3>Labelling</h3>
+      <p>Hidden next to a name. Alone: label the control, not the disc ("Account menu for Quinntyne Brown"). For groups label the container with the full list of people.</p>
+      <h3>Contrast</h3>
+      <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);"><div class="ds-pair"><span>Initials on avatar</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-brand-subtle" data-min="4.5"></span></div><div class="ds-pair"><span>Muted caption on surface</span><span class="ds-pair__ratio" data-contrast="--color-fg-muted|--color-bg-surface" data-min="4.5"></span></div></div>
+      <h3>Motion</h3>
+      <p>No motion.</p>
+      <h3>Touch</h3>
+      <p>The disc alone is 24 to 48px and not a target. An avatar button uses the 44px icon button, which exceeds the comfortable target.</p>
+    </section>
+    <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+      <ul>
+        <li>Initials are the first letter of the first and last name in capitals: Quinntyne Brown becomes QB.</li>
+        <li>Use one letter for single names.</li>
+        <li>Never put a person's photo in the disc without alt or a visible name.</li>
+        <li>Overflow counts read "+2", with the full list in the group label.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+      <div class="ds-dodont">
+        <figure class="ds-do"><div class="ds-example__canvas"><div class="cluster"><span class="avatar" aria-hidden="true">MC</span><span>Maya Chen</span></div></div><figcaption>Hide the avatar when the name is visible beside it.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><span class="avatar">Maya Chen</span></div><figcaption>Full names do not fit; use two initials.</figcaption></figure>
+        <figure class="ds-do"><div class="ds-example__canvas"><button class="btn btn--ghost btn--icon" type="button" aria-label="Account menu"><span class="avatar" aria-hidden="true">QB</span></button></div><figcaption>Name the control when the avatar is its only content.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><span class="avatar">QB</span></div><figcaption>Unhidden initials are read aloud as letters, "Q B", with no meaning.</figcaption></figure>
+      </div>
+    </section>
+    <section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+        <tbody>
+          <tr><td>Fill</td><td><code>--color-brand-subtle</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-brand-subtle" data-swatch></i><span data-token="--color-brand-subtle"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-brand-subtle" data-swatch></i><span data-token="--color-brand-subtle"></span></span></td></tr>
+          <tr><td>Initials</td><td><code>--color-fg-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td></tr>
+          <tr><td>Large initials size</td><td><code>--font-size-sm</code></td><td colspan="2"><span data-token="--font-size-sm"></span></td></tr>
+          <tr><td>Shape</td><td><code>--radius-full</code></td><td colspan="2"><span data-token="--radius-full"></span></td></tr>
+          <tr><td>Initials font</td><td><code>--text-caption</code></td><td colspan="2"><span data-token="--text-caption"></span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+    <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+      <pre><code>&lt;span class="avatar" aria-hidden="true"&gt;QB&lt;/span&gt;
+
+&lt;button class="btn btn--ghost btn--icon" type="button" aria-label="Account menu for Quinntyne Brown"&gt;
+  &lt;span class="avatar" aria-hidden="true"&gt;QB&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>.avatar</code></td><td>Base 2rem disc with centred caption text.</td></tr><tr><td><code>.avatar--sm</code></td><td>1.5rem.</td></tr><tr><td><code>.avatar--lg</code></td><td>3rem with sm type.</td></tr><tr><td><code>aria-hidden="true"</code></td><td>Required when a visible name is next to the avatar.</td></tr></tbody></table></div>
+    </section>
+    <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+      <p>Extracted from these mocks:</p>
+      <ul>
+        <li><a href="../../mocks/admin/dashboard.html">admin/dashboard</a> (signed-in user in the top bar (shared admin shell))</li>
+        <li><a href="../../mocks/admin/sessions.html">admin/sessions</a> (the same top bar)</li>
+      </ul>
+      <p>Drift fixed during extraction: the mocks drew a 30px disc with 10px initials; the system moves to the 32px size and the 12px caption type. Photos and status dots were not in the mocks and are not part of the component.</p>
+    </section>
+
+    <footer class="ds-footer"><span>Quinntyne Brown Studio design system &middot; extracted from <a href="../../mocks/index.html">docs/mocks</a></span><a href="#top">Back to top</a></footer>
+  </main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

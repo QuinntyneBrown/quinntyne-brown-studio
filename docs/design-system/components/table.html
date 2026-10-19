@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Table &mdash; Quinntyne Brown Studio design system</title>
+<meta name="description" content="Tables compare records across the same attributes: sessions, print prices, inquiries. They scan quickly, sort, select and act on rows, and scroll sideways on a phone rather than hiding data.">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+  <nav class="ds-nav" aria-label="Design system">
+    <div class="ds-nav__brand"><a href="../index.html">QBS DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">&#9790; Dark</button></div>
+    <details open><summary>Foundations</summary><ul>
+      <li><a href="../foundations/color.html">Color</a></li>
+      <li><a href="../foundations/typography.html">Typography</a></li>
+      <li><a href="../foundations/spacing.html">Spacing</a></li>
+      <li><a href="../foundations/layout.html">Layout</a></li>
+      <li><a href="../foundations/elevation.html">Elevation</a></li>
+      <li><a href="../foundations/shape.html">Shape</a></li>
+      <li><a href="../foundations/motion.html">Motion</a></li>
+      <li><a href="../foundations/iconography.html">Iconography</a></li>
+      <li><a href="../foundations/theming.html">Theming</a></li>
+      <li><a href="../foundations/responsive.html">Responsive</a></li>
+      <li><a href="../foundations/accessibility.html">Accessibility</a></li>
+      <li><a href="../foundations/content.html">Content</a></li>
+    </ul></details>
+    <details open><summary>Components</summary><ul>
+      <li><a href="../components/button.html">Button</a></li>
+      <li><a href="../components/button-group.html">Button group</a></li>
+      <li><a href="../components/link.html">Link</a></li>
+      <li><a href="../components/menu.html">Menu</a></li>
+      <li><a href="../components/checkbox.html">Checkbox</a></li>
+      <li><a href="../components/date-navigator.html">Date navigator</a></li>
+      <li><a href="../components/file-upload.html">File upload</a></li>
+      <li><a href="../components/form-field.html">Form field</a></li>
+      <li><a href="../components/form-layout.html">Form layout</a></li>
+      <li><a href="../components/radio-group.html">Radio group</a></li>
+      <li><a href="../components/select.html">Select</a></li>
+      <li><a href="../components/switch.html">Switch</a></li>
+      <li><a href="../components/text-field.html">Text field</a></li>
+      <li><a href="../components/textarea.html">Textarea</a></li>
+      <li><a href="../components/breadcrumb.html">Breadcrumb</a></li>
+      <li><a href="../components/footer.html">Footer</a></li>
+      <li><a href="../components/pagination.html">Pagination</a></li>
+      <li><a href="../components/sidebar.html">Sidebar</a></li>
+      <li><a href="../components/skip-link.html">Skip link</a></li>
+      <li><a href="../components/tabs.html">Tabs</a></li>
+      <li><a href="../components/top-bar.html">Top bar</a></li>
+      <li><a href="../components/accordion.html">Accordion</a></li>
+      <li><a href="../components/card.html">Card</a></li>
+      <li><a href="../components/dialog.html">Dialog</a></li>
+      <li><a href="../components/divider.html">Divider</a></li>
+      <li><a href="../components/layout.html">Layout primitives</a></li>
+      <li><a href="../components/tooltip.html">Tooltip</a></li>
+      <li><a href="../components/avatar.html">Avatar</a></li>
+      <li><a href="../components/badge.html">Badge</a></li>
+      <li><a href="../components/blog-card.html">Blog card</a></li>
+      <li><a href="../components/chip.html">Chip</a></li>
+      <li><a href="../components/cost-summary.html">Cost summary</a></li>
+      <li><a href="../components/description-list.html">Description list</a></li>
+      <li><a href="../components/line-item.html">Line item</a></li>
+      <li><a href="../components/photo-tile.html">Photo tile</a></li>
+      <li><a href="../components/calendar.html">Schedule calendar</a></li>
+      <li><a href="../components/selection-bar.html">Selection bar</a></li>
+      <li><a href="../components/stat.html">Stat</a></li>
+      <li><a href="../components/stepper.html">Stepper</a></li>
+      <li><a href="../components/table.html">Table</a></li>
+      <li><a href="../components/alert.html">Alert</a></li>
+      <li><a href="../components/empty-state.html">Empty state</a></li>
+      <li><a href="../components/error-page.html">Error page</a></li>
+      <li><a href="../components/inline-message.html">Inline message</a></li>
+      <li><a href="../components/progress.html">Progress</a></li>
+      <li><a href="../components/skeleton.html">Skeleton</a></li>
+      <li><a href="../components/spinner.html">Spinner</a></li>
+      <li><a href="../components/toast.html">Toast</a></li>
+    </ul></details>
+    <details open><summary>Patterns</summary><ul>
+      <li><a href="../patterns/forms.html">Forms</a></li>
+      <li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li>
+      <li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li>
+      <li><a href="../patterns/navigation-and-page-structure.html">Navigation and page structure</a></li>
+      <li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li>
+      <li><a href="../patterns/data-tables-and-lists.html">Data tables and lists</a></li>
+      <li><a href="../patterns/notifications.html">Notifications</a></li>
+      <li><a href="../patterns/content-and-tone.html">Content and tone</a></li>
+    </ul></details>
+  </nav>
+
+  <main id="main" class="ds-main">
+    <header class="ds-header">
+      <p class="ds-kicker">Component &amp;middot; Data display</p>
+      <h1>Table</h1>
+      <p class="ds-lead">Tables compare records across the same attributes: sessions, print prices, inquiries. They scan quickly, sort, select and act on rows, and scroll sideways on a phone rather than hiding data.</p>
+      <div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Status: stable</span><span class="ds-pill">Native <code>&lt;table&gt;</code></span></div>
+      <ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul>
+    </header>
+
+    <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+      <p>Use a table when people compare several attributes of many records or act on rows (open, edit, select). Use a <a href="description-list.html">description list</a> for the attributes of one record, a <a href="card.html">card</a> for a browsable record with an image, and a <a href="photo-tile.html">photo tile</a> grid for photographs.</p>
+      <ul>
+        <li><b>Default</b> is comfortable: used in the admin app for sessions, inquiries, rates and vendors.</li>
+        <li><b>Dense</b> trims row padding for short reference data such as print prices.</li>
+        <li><b>Sortable</b> column headers are buttons that set <code>aria-sort</code>.</li>
+        <li><b>Selectable</b> adds a checkbox column and a <a href="selection-bar.html">selection bar</a> with bulk actions.</li>
+        <li><b>With thumbnails</b> pairs a <code>.table__thumb</code> preview with a file name for media lists.</li>
+        <li>Pagination sits below the table: see <a href="pagination.html">pagination</a> and the <a href="../patterns/data-tables-and-lists.html">data tables and lists</a> pattern.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+      <div class="ds-anatomy">
+        <figure class="ds-anatomy__figure">
+          <div class="table-wrap" role="region" aria-label="Sessions" tabindex="0"><table class="table"><caption>Sessions, sorted by date</caption><thead><tr><th scope="col">Session</th><th scope="col">Date and location</th><th scope="col">Photographer</th><th scope="col">Status</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead><tbody><tr><td>Wedding session<br><span class="muted">Emma &amp; Oliver</span></td><td>17 Oct &middot; Toronto Botanical Garden</td><td>Quinntyne Brown</td><td><span class="badge badge--pending">Ready for review</span></td><td><div class="table__actions"><button class="btn btn--ghost btn--sm" type="button">Open</button><button class="btn btn--ghost btn--sm" type="button">Edit</button></div></td></tr><tr><td>Family portraits<br><span class="muted">The Bennett family</span></td><td>24 Oct &middot; High Park</td><td>Maya Chen</td><td><span class="badge badge--info">Scheduled</span></td><td><div class="table__actions"><button class="btn btn--ghost btn--sm" type="button">Open</button><button class="btn btn--ghost btn--sm" type="button">Edit</button></div></td></tr><tr><td>Headshots<br><span class="muted">Noah Williams</span></td><td>28 Oct &middot; Daylight Studio</td><td>Quinntyne Brown</td><td><span class="badge badge--success">Delivered</span></td><td><div class="table__actions"><button class="btn btn--ghost btn--sm" type="button">Open</button><button class="btn btn--ghost btn--sm" type="button">Edit</button></div></td></tr></tbody></table></div>
+          <span class="ds-callout" style="left: 6%; top: 6%;" aria-hidden="true">1</span>
+          <span class="ds-callout" style="left: 10%; top: 26%;" aria-hidden="true">2</span>
+          <span class="ds-callout" style="left: 86%; top: 62%;" aria-hidden="true">3</span>
+          <span class="ds-callout" style="left: 62%; top: 62%;" aria-hidden="true">4</span>
+        </figure>
+        <ol class="ds-anatomy__list">
+          <li><div><b>Caption</b><small>Names the table and its sort order. Visible, or <code>visually-hidden</code> when a heading already does the job.</small></div></li>
+          <li><div><b>Column headers</b><small><code>&lt;th scope="col"&gt;</code>, overline type in <code>--color-fg-muted</code>. Sortable ones hold a button.</small></div></li>
+          <li><div><b>Row actions</b><small>Ghost small buttons in <code>.table__actions</code>, always the last column, with a visually hidden header.</small></div></li>
+          <li><div><b>Status cell</b><small>A <a href="badge.html">badge</a>: colour, never colour alone, plus the word.</small></div></li>
+        </ol>
+      </div>
+    </section>
+    <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+      <p>Every variant is the same native table with a modifier or an extra column. Pick by task, not by taste.</p>
+      <h3>Default with row actions</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="table-wrap" role="region" aria-label="Sessions" tabindex="0"><table class="table"><caption>Sessions, sorted by date</caption><thead><tr><th scope="col">Session</th><th scope="col">Date and location</th><th scope="col">Photographer</th><th scope="col">Status</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead><tbody><tr><td>Wedding session<br><span class="muted">Emma &amp; Oliver</span></td><td>17 Oct &middot; Toronto Botanical Garden</td><td>Quinntyne Brown</td><td><span class="badge badge--pending">Ready for review</span></td><td><div class="table__actions"><button class="btn btn--ghost btn--sm" type="button">Open</button><button class="btn btn--ghost btn--sm" type="button">Edit</button></div></td></tr><tr><td>Family portraits<br><span class="muted">The Bennett family</span></td><td>24 Oct &middot; High Park</td><td>Maya Chen</td><td><span class="badge badge--info">Scheduled</span></td><td><div class="table__actions"><button class="btn btn--ghost btn--sm" type="button">Open</button><button class="btn btn--ghost btn--sm" type="button">Edit</button></div></td></tr><tr><td>Headshots<br><span class="muted">Noah Williams</span></td><td>28 Oct &middot; Daylight Studio</td><td>Quinntyne Brown</td><td><span class="badge badge--success">Delivered</span></td><td><div class="table__actions"><button class="btn btn--ghost btn--sm" type="button">Open</button><button class="btn btn--ghost btn--sm" type="button">Edit</button></div></td></tr></tbody></table></div></div>
+        <div class="ds-example__caption"><span>The scroll region is focusable so keyboard users can pan it.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class="table-wrap" role="region" aria-label="Sessions" tabindex="0"&gt;
+  &lt;table class="table"&gt;
+    &lt;caption&gt;Sessions, sorted by date&lt;/caption&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th scope="col"&gt;Session&lt;/th&gt;
+        &lt;th scope="col"&gt;Status&lt;/th&gt;
+        &lt;th scope="col"&gt;&lt;span class="visually-hidden"&gt;Actions&lt;/span&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Wedding session&lt;/td&gt;
+        &lt;td&gt;&lt;span class="badge badge--pending"&gt;Ready for review&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;div class="table__actions"&gt;&lt;button class="btn btn--ghost btn--sm" type="button"&gt;Open&lt;/button&gt;&lt;/div&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre></details>
+      </div>
+      <h3>Sortable</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="table-wrap"><table class="table"><caption>Sessions, sorted by date, earliest first</caption><thead><tr><th scope="col" aria-sort="ascending"><button class="btn btn--ghost btn--sm" type="button">Date</button></th><th scope="col" aria-sort="none"><button class="btn btn--ghost btn--sm" type="button">Session</button></th><th scope="col" aria-sort="none"><button class="btn btn--ghost btn--sm" type="button">Photographer</button></th><th scope="col">Status</th></tr></thead><tbody><tr><td>17 Oct</td><td>Wedding session</td><td>Quinntyne Brown</td><td><span class="badge badge--pending">Ready for review</span></td></tr><tr><td>24 Oct</td><td>Family portraits</td><td>Maya Chen</td><td><span class="badge badge--info">Scheduled</span></td></tr><tr><td>28 Oct</td><td>Headshots</td><td>Quinntyne Brown</td><td><span class="badge badge--success">Delivered</span></td></tr></tbody></table></div></div>
+        <div class="ds-example__caption"><span>One column is sorted at a time. The arrow comes from <code>aria-sort</code>; unsorted sortable columns use <code>aria-sort="none"</code>.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;th scope="col" aria-sort="ascending"&gt;
+  &lt;button class="btn btn--ghost btn--sm" type="button"&gt;Date&lt;/button&gt;
+&lt;/th&gt;</code></pre></details>
+      </div>
+      <h3>Selectable with bulk actions</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="selection-bar" role="status" aria-live="polite"><span><strong>1</strong> session selected</span><div class="cluster"><button class="btn btn--ghost btn--sm" type="button">Clear</button><button class="btn btn--sm" type="button">Export</button><button class="btn btn--danger btn--sm" type="button">Archive</button></div></div><div class="table-wrap"><table class="table"><caption>Sessions</caption><thead><tr><th scope="col"><input type="checkbox" aria-label="Select all sessions"></th><th scope="col">Session</th><th scope="col">Status</th></tr></thead><tbody><tr aria-selected="true"><td><input type="checkbox" checked aria-label="Select Wedding session"></td><td>Wedding session</td><td><span class="badge badge--pending">Ready for review</span></td></tr><tr><td><input type="checkbox" aria-label="Select Family portraits"></td><td>Family portraits</td><td><span class="badge badge--info">Scheduled</span></td></tr><tr><td><input type="checkbox" aria-label="Select Headshots"></td><td>Headshots</td><td><span class="badge badge--success">Delivered</span></td></tr></tbody></table></div></div>
+        <div class="ds-example__caption"><span>The header checkbox selects every row on the page. Selected rows set <code>aria-selected="true"</code> and the bar announces the count.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;tr aria-selected="true"&gt;
+  &lt;td&gt;&lt;input type="checkbox" checked aria-label="Select Wedding session"&gt;&lt;/td&gt;
+  &lt;td&gt;Wedding session&lt;/td&gt;
+&lt;/tr&gt;</code></pre></details>
+      </div>
+      <h3>Dense</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="table-wrap"><table class="table table--dense"><caption>Print prices, CAD</caption><thead><tr><th scope="col">Print size</th><th scope="col">Price</th><th scope="col">Availability</th></tr></thead><tbody><tr><td>5 &times; 7 in</td><td>$18.00</td><td><span class="badge badge--success">Available</span></td></tr><tr><td>8 &times; 10 in</td><td>$32.00</td><td><span class="badge badge--success">Available</span></td></tr><tr><td>16 &times; 20 in</td><td>$95.00</td><td><span class="badge badge--error">Unavailable</span></td></tr></tbody></table></div></div>
+        <div class="ds-example__caption"><span><code>.table--dense</code> halves the vertical cell padding. Row hit areas stay at least 24px.</span></div>
+      </div>
+      <h3>With thumbnails</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="table-wrap"><table class="table"><caption>Photos in Wedding session</caption><thead><tr><th scope="col"><span class="visually-hidden">Preview</span></th><th scope="col">File</th><th scope="col">Review</th></tr></thead><tbody><tr><td><img class="table__thumb" src="../../mocks/assets/photos/wedding.jpg" alt="Couple walking through a garden"></td><td>IMG_0412.jpg</td><td><span class="badge badge--success">Approved</span></td></tr><tr><td><img class="table__thumb" src="../../mocks/assets/photos/ceremony.jpg" alt="Guests seated at the ceremony"></td><td>IMG_0418.jpg</td><td><span class="badge badge--pending">Pending</span></td></tr></tbody></table></div></div>
+        <div class="ds-example__caption"><span>Thumbnails always carry <code>alt</code>; the file name column keeps the row identifiable when images fail.</span></div>
+      </div>
+      <h3>Loading (skeleton rows)</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="table-wrap"><table class="table" aria-busy="true"><caption>Sessions, loading</caption><thead><tr><th scope="col">Session</th><th scope="col">Date and location</th><th scope="col">Photographer</th><th scope="col">Status</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead><tbody><tr><td><span class="skeleton skeleton--text"></span></td><td><span class="skeleton skeleton--text"></span></td><td><span class="skeleton skeleton--text"></span></td><td><span class="skeleton skeleton--text"></span></td><td><span class="skeleton skeleton--text"></span></td></tr><tr><td><span class="skeleton skeleton--text"></span></td><td><span class="skeleton skeleton--text"></span></td><td><span class="skeleton skeleton--text"></span></td><td><span class="skeleton skeleton--text"></span></td><td><span class="skeleton skeleton--text"></span></td></tr><tr><td><span class="skeleton skeleton--text"></span></td><td><span class="skeleton skeleton--text"></span></td><td><span class="skeleton skeleton--text"></span></td><td><span class="skeleton skeleton--text"></span></td><td><span class="skeleton skeleton--text"></span></td></tr></tbody></table></div><p class="visually-hidden" role="status">Loading sessions</p></div>
+        <div class="ds-example__caption"><span>Keep the header, replace each cell with a <a href="skeleton.html">skeleton</a> line and set <code>aria-busy="true"</code> on the table. A hidden status announces the wait once.</span></div>
+      </div>
+      <h3>Empty</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="empty-state empty-state--compact"><div class="empty-state__symbol" aria-hidden="true">&#9675;</div><h2>No sessions yet</h2><p>Sessions you book or import appear here.</p><button class="btn btn--primary" type="button">New session</button></div><div class="empty-state empty-state--compact"><h2>No sessions match</h2><p>Try a different photographer or clear the filters.</p><button class="btn" type="button">Clear filters</button></div></div>
+        <div class="ds-example__caption"><span>Replace the whole table. First-run uses one primary action; no results offers to clear filters. See <a href="empty-state.html">empty state</a>.</span></div>
+      </div>
+      <h3>Error</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="alert alert--danger" role="alert"><p>We could not load sessions. Check your connection and try again.</p><button class="btn btn--sm" type="button">Retry</button></div></div>
+        <div class="ds-example__caption"><span>A failed load replaces the rows with an <a href="alert.html">alert</a> and a Retry button. Stale rows stay visible when a refresh fails after a successful load.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="sizes"><h2><a href="#sizes">Sizes</a></h2>
+      <p>Two densities. Comfortable is the default; dense is for reference data that people scan, not act on.</p>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="table-wrap" role="region" aria-label="Sessions" tabindex="0"><table class="table"><caption>Sessions, sorted by date</caption><thead><tr><th scope="col">Session</th><th scope="col">Date and location</th><th scope="col">Photographer</th><th scope="col">Status</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead><tbody><tr><td>Wedding session<br><span class="muted">Emma &amp; Oliver</span></td><td>17 Oct &middot; Toronto Botanical Garden</td><td>Quinntyne Brown</td><td><span class="badge badge--pending">Ready for review</span></td><td><div class="table__actions"><button class="btn btn--ghost btn--sm" type="button">Open</button><button class="btn btn--ghost btn--sm" type="button">Edit</button></div></td></tr><tr><td>Family portraits<br><span class="muted">The Bennett family</span></td><td>24 Oct &middot; High Park</td><td>Maya Chen</td><td><span class="badge badge--info">Scheduled</span></td><td><div class="table__actions"><button class="btn btn--ghost btn--sm" type="button">Open</button><button class="btn btn--ghost btn--sm" type="button">Edit</button></div></td></tr><tr><td>Headshots<br><span class="muted">Noah Williams</span></td><td>28 Oct &middot; Daylight Studio</td><td>Quinntyne Brown</td><td><span class="badge badge--success">Delivered</span></td><td><div class="table__actions"><button class="btn btn--ghost btn--sm" type="button">Open</button><button class="btn btn--ghost btn--sm" type="button">Edit</button></div></td></tr></tbody></table></div><div class="table-wrap"><table class="table table--dense"><caption>Print prices, CAD</caption><thead><tr><th scope="col">Print size</th><th scope="col">Price</th><th scope="col">Availability</th></tr></thead><tbody><tr><td>5 &times; 7 in</td><td>$18.00</td><td><span class="badge badge--success">Available</span></td></tr><tr><td>8 &times; 10 in</td><td>$32.00</td><td><span class="badge badge--success">Available</span></td></tr><tr><td>16 &times; 20 in</td><td>$95.00</td><td><span class="badge badge--error">Unavailable</span></td></tr></tbody></table></div></div>
+        <div class="ds-example__caption"><span>Comfortable cells use <code>--space-5</code> vertical padding; dense uses <code>--space-2</code>.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+      <p>Rows get their state from the real pseudo-class on pointer devices and from <code>data-state</code> in this documentation. Loading, empty and error replace the body or the whole table; they are shown in full under Variants and in miniature here.</p>
+      <div class="ds-matrix"><table>
+        <thead><tr><th scope="col">Variant</th><th scope="col">Comfortable</th><th scope="col">Dense</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Default</th><td><div class="table-wrap"><table class="table "><caption class="visually-hidden">Sessions</caption><thead><tr><th scope="col"><input type="checkbox" aria-label="Select all sessions"></th><th scope="col">Session</th><th scope="col">Status</th></tr></thead><tbody><tr><td><input type="checkbox"  aria-label="Select Wedding session"></td><td>Wedding session</td><td><span class="badge badge--pending">Ready for review</span></td></tr><tr><td><input type="checkbox" aria-label="Select Family portraits"></td><td>Family portraits</td><td><span class="badge badge--info">Scheduled</span></td></tr></tbody></table></div></td><td><div class="table-wrap"><table class="table table--dense"><caption class="visually-hidden">Sessions</caption><thead><tr><th scope="col"><input type="checkbox" aria-label="Select all sessions"></th><th scope="col">Session</th><th scope="col">Status</th></tr></thead><tbody><tr><td><input type="checkbox"  aria-label="Select Wedding session"></td><td>Wedding session</td><td><span class="badge badge--pending">Ready for review</span></td></tr><tr><td><input type="checkbox" aria-label="Select Family portraits"></td><td>Family portraits</td><td><span class="badge badge--info">Scheduled</span></td></tr></tbody></table></div></td></tr>
+          <tr><th scope="row">Row hover</th><td><div class="table-wrap"><table class="table "><caption class="visually-hidden">Sessions</caption><thead><tr><th scope="col"><input type="checkbox" aria-label="Select all sessions"></th><th scope="col">Session</th><th scope="col">Status</th></tr></thead><tbody><tr data-state="hover"><td><input type="checkbox"  aria-label="Select Wedding session"></td><td>Wedding session</td><td><span class="badge badge--pending">Ready for review</span></td></tr><tr><td><input type="checkbox" aria-label="Select Family portraits"></td><td>Family portraits</td><td><span class="badge badge--info">Scheduled</span></td></tr></tbody></table></div></td><td><div class="table-wrap"><table class="table table--dense"><caption class="visually-hidden">Sessions</caption><thead><tr><th scope="col"><input type="checkbox" aria-label="Select all sessions"></th><th scope="col">Session</th><th scope="col">Status</th></tr></thead><tbody><tr data-state="hover"><td><input type="checkbox"  aria-label="Select Wedding session"></td><td>Wedding session</td><td><span class="badge badge--pending">Ready for review</span></td></tr><tr><td><input type="checkbox" aria-label="Select Family portraits"></td><td>Family portraits</td><td><span class="badge badge--info">Scheduled</span></td></tr></tbody></table></div></td></tr>
+          <tr><th scope="row">Row selected</th><td><div class="table-wrap"><table class="table "><caption class="visually-hidden">Sessions</caption><thead><tr><th scope="col"><input type="checkbox" aria-label="Select all sessions"></th><th scope="col">Session</th><th scope="col">Status</th></tr></thead><tbody><tr aria-selected="true"><td><input type="checkbox" checked aria-label="Select Wedding session"></td><td>Wedding session</td><td><span class="badge badge--pending">Ready for review</span></td></tr><tr><td><input type="checkbox" aria-label="Select Family portraits"></td><td>Family portraits</td><td><span class="badge badge--info">Scheduled</span></td></tr></tbody></table></div></td><td><div class="table-wrap"><table class="table table--dense"><caption class="visually-hidden">Sessions</caption><thead><tr><th scope="col"><input type="checkbox" aria-label="Select all sessions"></th><th scope="col">Session</th><th scope="col">Status</th></tr></thead><tbody><tr aria-selected="true"><td><input type="checkbox" checked aria-label="Select Wedding session"></td><td>Wedding session</td><td><span class="badge badge--pending">Ready for review</span></td></tr><tr><td><input type="checkbox" aria-label="Select Family portraits"></td><td>Family portraits</td><td><span class="badge badge--info">Scheduled</span></td></tr></tbody></table></div></td></tr>
+          <tr><th scope="row">Loading</th><td><div class="table-wrap"><table class="table " aria-busy="true"><caption class="visually-hidden">Sessions, loading</caption><tbody><tr><td><span class="skeleton skeleton--text"></span></td><td><span class="skeleton skeleton--text"></span></td></tr><tr><td><span class="skeleton skeleton--text"></span></td><td><span class="skeleton skeleton--text"></span></td></tr></tbody></table></div></td><td><div class="table-wrap"><table class="table table--dense" aria-busy="true"><caption class="visually-hidden">Sessions, loading</caption><tbody><tr><td><span class="skeleton skeleton--text"></span></td><td><span class="skeleton skeleton--text"></span></td></tr><tr><td><span class="skeleton skeleton--text"></span></td><td><span class="skeleton skeleton--text"></span></td></tr></tbody></table></div></td></tr>
+          <tr><th scope="row">Empty</th><td><div class="empty-state empty-state--compact"><h2>No sessions yet</h2><p>Sessions you book appear here.</p></div></td><td><div class="empty-state empty-state--compact"><h2>No sessions yet</h2><p>Sessions you book appear here.</p></div></td></tr>
+          <tr><th scope="row">Error</th><td><div class="alert alert--danger" role="alert"><p>We could not load sessions.</p><button class="btn btn--sm" type="button">Retry</button></div></td><td><div class="alert alert--danger" role="alert"><p>We could not load sessions.</p><button class="btn btn--sm" type="button">Retry</button></div></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Both themes</h3>
+      <div class="ds-themes">
+        <div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><div class="table-wrap" role="region" aria-label="Sessions" tabindex="0"><table class="table"><caption>Sessions, sorted by date</caption><thead><tr><th scope="col">Session</th><th scope="col">Date and location</th><th scope="col">Photographer</th><th scope="col">Status</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead><tbody><tr><td>Wedding session<br><span class="muted">Emma &amp; Oliver</span></td><td>17 Oct &middot; Toronto Botanical Garden</td><td>Quinntyne Brown</td><td><span class="badge badge--pending">Ready for review</span></td><td><div class="table__actions"><button class="btn btn--ghost btn--sm" type="button">Open</button><button class="btn btn--ghost btn--sm" type="button">Edit</button></div></td></tr><tr><td>Family portraits<br><span class="muted">The Bennett family</span></td><td>24 Oct &middot; High Park</td><td>Maya Chen</td><td><span class="badge badge--info">Scheduled</span></td><td><div class="table__actions"><button class="btn btn--ghost btn--sm" type="button">Open</button><button class="btn btn--ghost btn--sm" type="button">Edit</button></div></td></tr><tr><td>Headshots<br><span class="muted">Noah Williams</span></td><td>28 Oct &middot; Daylight Studio</td><td>Quinntyne Brown</td><td><span class="badge badge--success">Delivered</span></td><td><div class="table__actions"><button class="btn btn--ghost btn--sm" type="button">Open</button><button class="btn btn--ghost btn--sm" type="button">Edit</button></div></td></tr></tbody></table></div></div></div>
+        <div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><div class="table-wrap" role="region" aria-label="Sessions" tabindex="0"><table class="table"><caption>Sessions, sorted by date</caption><thead><tr><th scope="col">Session</th><th scope="col">Date and location</th><th scope="col">Photographer</th><th scope="col">Status</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead><tbody><tr><td>Wedding session<br><span class="muted">Emma &amp; Oliver</span></td><td>17 Oct &middot; Toronto Botanical Garden</td><td>Quinntyne Brown</td><td><span class="badge badge--pending">Ready for review</span></td><td><div class="table__actions"><button class="btn btn--ghost btn--sm" type="button">Open</button><button class="btn btn--ghost btn--sm" type="button">Edit</button></div></td></tr><tr><td>Family portraits<br><span class="muted">The Bennett family</span></td><td>24 Oct &middot; High Park</td><td>Maya Chen</td><td><span class="badge badge--info">Scheduled</span></td><td><div class="table__actions"><button class="btn btn--ghost btn--sm" type="button">Open</button><button class="btn btn--ghost btn--sm" type="button">Edit</button></div></td></tr><tr><td>Headshots<br><span class="muted">Noah Williams</span></td><td>28 Oct &middot; Daylight Studio</td><td>Quinntyne Brown</td><td><span class="badge badge--success">Delivered</span></td><td><div class="table__actions"><button class="btn btn--ghost btn--sm" type="button">Open</button><button class="btn btn--ghost btn--sm" type="button">Edit</button></div></td></tr></tbody></table></div></div></div>
+      </div>
+      <ul>
+        <li><b>Row hover</b> uses <code>--color-bg-subtle</code>; it is a convenience, so every action stays reachable by keyboard.</li>
+        <li><b>Row selected</b> uses <code>aria-selected="true"</code> on the row and a checked checkbox: colour is never the only cue. <code>--color-accent-subtle</code> fills the row.</li>
+        <li><b>Sorted</b> shows an arrow after the header text from <code>aria-sort</code>; sorting is announced because the button name stays constant and the header carries the state.</li>
+        <li><b>Loading</b>: skeleton rows, <code>aria-busy="true"</code>, header and caption stay. Under reduced motion the shimmer stops.</li>
+        <li><b>Empty</b>: a compact <a href="empty-state.html">empty state</a> in place of the table with the next step as a button.</li>
+        <li><b>Error</b>: a danger <a href="alert.html">alert</a> with <code>role="alert"</code> and a Retry button.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+      <ul>
+        <li>Strategy: <b>scroll, do not hide</b>. The table stays a table. <code>.table-wrap</code> scrolls on the x axis at every width; header cells do not wrap, so columns keep their natural width and the page itself never scrolls sideways (WCAG 1.4.10 exempts data tables).</li>
+        <li>At 390px the first column (the record name) should stay readable without scrolling, so put the identifying attribute first and keep the table to six columns or fewer. The scroll region has <code>tabindex="0"</code>, <code>role="region"</code> and a label so keyboard users can pan it with the arrow keys.</li>
+        <li>Row actions stay in the last column and may be scrolled out of view. If the primary action must be reachable at 390px, make the first-column text a link to the detail page.</li>
+        <li>For three or fewer attributes and a phone-first flow, render a list of <a href="card.html">cards</a> instead of a table. Do not switch the same data between two DOM structures with CSS alone.</li>
+        <li>Selection bars wrap beneath the toolbar at narrow widths; the count stays first.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+      <p>The table reads only semantic tokens: borders from <code>--color-border-default</code>, header text from <code>--color-fg-muted</code>, hover from <code>--color-bg-subtle</code> and selection from <code>--color-accent-subtle</code>. Nothing needs overriding for dark mode. Status colours come from the <a href="badge.html">badge</a>.
+      <pre><code>.table { --table-row-hover: var(--color-bg-subtle); }</code></pre></p>
+    </section>
+    <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+      <h3>Role and pattern</h3>
+      <p>Native <code>&lt;table&gt;</code> with <code>&lt;caption&gt;</code>, <code>&lt;thead&gt;</code>, <code>scope</code> on headers. Sorting follows the <a href="https://www.w3.org/WAI/ARIA/apg/patterns/table/examples/sortable-table/">APG sortable table</a>: a button inside the <code>&lt;th&gt;</code> and <code>aria-sort</code> on the header. It is <b>not</b> an ARIA grid: cells are not navigated with arrow keys.</p>
+      <h3>Keyboard</h3>
+      <div class="ds-table-wrap"><table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves through sort buttons, checkboxes, row actions and links in DOM order, then out of the table.</td></tr><tr><td><kbd>Enter</kbd>, <kbd>Space</kbd></td><td>On a sort button: sorts, toggling ascending and descending. On a checkbox: <kbd>Space</kbd> toggles. On a row action: activates it.</td></tr><tr><td><kbd>&larr;</kbd> <kbd>&rarr;</kbd></td><td>Pans the focused scroll region sideways.</td></tr><tr><td><kbd>Esc</kbd></td><td>No effect; use Clear in the selection bar.</td></tr></tbody></table></div>
+      <h3>Focus</h3>
+      <p>Every interactive cell shows the shared 2px ring. The scroll region is focusable and shows the ring too. After sorting, focus stays on the sort button; after bulk actions complete, focus returns to the selection bar's first control or the table caption if the bar disappears.</p>
+      <h3>Labelling</h3>
+      <p>The caption (or an <code>aria-label</code> on the region) names the table. Header cells use <code>scope="col"</code>; row headers use <code>scope="row"</code> when the first cell identifies the row. Empty header cells are never left empty: use <code>visually-hidden</code> text such as "Actions". Checkboxes name their row ("Select Wedding session"). A loading table sets <code>aria-busy</code> and a status message; an error uses <code>role="alert"</code>.</p>
+      <h3>Contrast</h3>
+      <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);"><div class="ds-pair"><span>Header text on surface</span><span class="ds-pair__ratio" data-contrast="--color-fg-muted|--color-bg-surface" data-min="4.5"></span></div><div class="ds-pair"><span>Cell text on surface</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-surface" data-min="4.5"></span></div><div class="ds-pair"><span>Cell text on hovered row</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-subtle" data-min="4.5"></span></div><div class="ds-pair"><span>Cell text on selected row</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-accent-subtle" data-min="4.5"></span></div><div class="ds-pair"><span>Row divider on surface (decorative)</span><span class="ds-pair__ratio" data-contrast="--color-border-default|--color-bg-surface" data-min="1.2"></span></div><div class="ds-pair"><span>Focus ring on surface</span><span class="ds-pair__ratio" data-contrast="--color-focus-ring|--color-bg-surface" data-min="3"></span></div></div>
+      <h3>Motion</h3>
+      <p>Row hover has no transition. The skeleton shimmer is decorative and stops under <code>prefers-reduced-motion</code>; the busy state is conveyed by <code>aria-busy</code> and text.</p>
+      <h3>Touch</h3>
+      <p>Row action buttons are small (32px) with 8px between them, meeting the 24px minimum. Checkboxes are 20px native controls inside cells at least 44px tall in the comfortable density; in dense they sit inside a 24px+ row and keep 8px of clearance.</p>
+    </section>
+    <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+      <ul>
+        <li>Column headers are nouns in sentence case, one or two words: "Date and location", not "When and where is it".</li>
+        <li>Dates in tables use a short form ("17 Oct"); put the year in the caption or a group heading if it varies.</li>
+        <li>Money is right-aligned text with the currency in the header, not in each cell: "Price (CAD)".</li>
+        <li>Empty cells show an em dash in <code>--color-fg-muted</code>, never a blank, "N/A" or "null".</li>
+        <li>Row actions are verbs: Open, Edit, Archive. Name the row in the accessible name when needed: "Edit Wedding session".</li>
+        <li>Empty and error copy says what happened and what to do next. See <a href="../patterns/empty-and-error-states.html">empty and error states</a>.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+      <div class="ds-dodont">
+        <figure class="ds-do"><div class="ds-example__canvas"><div class="table-wrap"><table class="table table--dense"><caption>Print prices, CAD</caption><thead><tr><th scope="col">Print size</th><th scope="col">Price</th><th scope="col">Availability</th></tr></thead><tbody><tr><td>5 &times; 7 in</td><td>$18.00</td><td><span class="badge badge--success">Available</span></td></tr><tr><td>8 &times; 10 in</td><td>$32.00</td><td><span class="badge badge--success">Available</span></td></tr><tr><td>16 &times; 20 in</td><td>$95.00</td><td><span class="badge badge--error">Unavailable</span></td></tr></tbody></table></div></div><figcaption>Short reference data in a dense table: three columns, one badge per row, caption names the unit.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><div class="table-wrap"><table class="table"><thead><tr><th>Status</th></tr></thead><tbody><tr><td><span class="badge badge--success">&nbsp;</span></td></tr></tbody></table></div></div><figcaption>A status communicated by a colour swatch alone, a header without <code>scope</code> and no caption.</figcaption></figure>
+        <figure class="ds-do"><div class="ds-example__canvas"><div class="table-wrap"><table class="table"><caption>Sessions, sorted by date</caption><thead><tr><th scope="col" aria-sort="ascending"><button class="btn btn--ghost btn--sm" type="button">Date</button></th></tr></thead><tbody><tr><td>17 Oct</td></tr></tbody></table></div></div><figcaption>Put a real button in sortable headers and set <code>aria-sort</code> on the cell.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><p class="muted">A header that is clickable but not focusable: a <code>&lt;th&gt;</code> with a click handler and <code>cursor: pointer</code>. Keyboard and screen-reader users cannot sort.</p></div><figcaption>Never attach click handlers to a bare <code>&lt;th&gt;</code>.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><p class="muted">Hiding the Price and Status columns at 390px with <code>display: none</code> so the table fits.</p></div><figcaption>Never drop data silently on small screens. Scroll, or switch to cards for the whole view.</figcaption></figure>
+      </div>
+    </section>
+    <section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+        <tbody>
+          <tr><td>Header text</td><td><code>--color-fg-muted</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td></tr>
+          <tr><td>Row divider</td><td><code>--color-border-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-border-default" data-swatch></i><span data-token="--color-border-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-border-default" data-swatch></i><span data-token="--color-border-default"></span></span></td></tr>
+          <tr><td>Row hover</td><td><code>--color-bg-subtle</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-subtle" data-swatch></i><span data-token="--color-bg-subtle"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-subtle" data-swatch></i><span data-token="--color-bg-subtle"></span></span></td></tr>
+          <tr><td>Row selected</td><td><code>--color-accent-subtle</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-accent-subtle" data-swatch></i><span data-token="--color-accent-subtle"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-accent-subtle" data-swatch></i><span data-token="--color-accent-subtle"></span></span></td></tr>
+          <tr><td>Skeleton base</td><td><code>--color-bg-subtle</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-subtle" data-swatch></i><span data-token="--color-bg-subtle"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-subtle" data-swatch></i><span data-token="--color-bg-subtle"></span></span></td></tr>
+          <tr><td>Focus ring</td><td><code>--color-focus-ring</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-focus-ring" data-swatch></i><span data-token="--color-focus-ring"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-focus-ring" data-swatch></i><span data-token="--color-focus-ring"></span></span></td></tr>
+          <tr><td>Cell padding comfortable / dense</td><td><code>--space-5</code> / <code>--space-2</code></td><td colspan="2"><span data-token="--space-5"></span> / <span data-token="--space-2"></span></td></tr>
+          <tr><td>Cell font</td><td><code>--text-body-sm</code></td><td colspan="2"><span data-token="--text-body-sm"></span></td></tr>
+          <tr><td>Header font</td><td><code>--text-overline</code></td><td colspan="2"><span data-token="--text-overline"></span></td></tr>
+          <tr><td>Border width</td><td><code>--border-width-hairline</code></td><td colspan="2"><span data-token="--border-width-hairline"></span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+    <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+      <pre><code>&lt;div class="table-wrap" role="region" aria-label="Sessions" tabindex="0"&gt;
+  &lt;table class="table table--dense"&gt;
+    &lt;caption&gt;Sessions&lt;/caption&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th scope="col" aria-sort="ascending"&gt;&lt;button class="btn btn--ghost btn--sm" type="button"&gt;Date&lt;/button&gt;&lt;/th&gt;
+        &lt;th scope="col"&gt;Status&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr aria-selected="true"&gt;…&lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>.table-wrap</code></td><td>Scroll container with a top rule; add <code>tabindex="0"</code>, <code>role="region"</code> and a label.</td></tr><tr><td><code>.table</code></td><td>The table: full width, collapsed borders, body-sm type.</td></tr><tr><td><code>.table--dense</code></td><td>Smaller vertical cell padding.</td></tr><tr><td><code>.table__actions</code></td><td>Right-aligned row of ghost buttons.</td></tr><tr><td><code>.table__thumb</code></td><td>48 &times; 56px cropped preview image.</td></tr><tr><td><code>aria-sort="ascending|descending|none"</code></td><td>On a <code>&lt;th&gt;</code>: shows the arrow and exposes the sort.</td></tr><tr><td><code>aria-selected="true"</code></td><td>On a <code>&lt;tr&gt;</code>: selected fill.</td></tr><tr><td><code>aria-busy="true"</code></td><td>On the table while loading.</td></tr><tr><td><code>data-state="hover"</code></td><td>Documentation only: forces row hover.</td></tr></tbody></table></div>
+    </section>
+    <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+      <p>Extracted from these mocks:</p>
+      <ul>
+        <li><a href="../../mocks/admin/sessions.html">admin/sessions</a> (sessions table with row actions, empty and error states)</li>
+        <li><a href="../../mocks/admin/dashboard.html">admin/dashboard</a> (summary tables)</li>
+        <li><a href="../../mocks/admin/print-prices.html">admin/print-prices</a> (print price list)</li>
+      </ul>
+      <p>Drift fixed during extraction: the mocks styled the bare <code>table</code>, <code>th</code> and <code>td</code> elements globally and set header text at 9px; the system scopes everything to <code>.table</code> and raises header text to the 12px overline token. Sortable headers, selection, dense, loading, empty and error did not exist in the mocks and were added from the component catalog.</p>
+    </section>
+
+    <footer class="ds-footer"><span>Quinntyne Brown Studio design system &middot; extracted from <a href="../../mocks/index.html">docs/mocks</a></span><a href="#top">Back to top</a></footer>
+  </main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

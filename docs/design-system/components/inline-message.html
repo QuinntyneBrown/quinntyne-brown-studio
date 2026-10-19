@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inline message &mdash; Quinntyne Brown Studio design system</title>
+<meta name="description" content="An inline message is the line of text under a field that says how to fill it in, what went wrong, or that it worked. It is tied to the field by code as well as by position.">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+  <nav class="ds-nav" aria-label="Design system">
+    <div class="ds-nav__brand"><a href="../index.html">QBS DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">&#9790; Dark</button></div>
+    <details open><summary>Foundations</summary><ul>
+      <li><a href="../foundations/color.html">Color</a></li>
+      <li><a href="../foundations/typography.html">Typography</a></li>
+      <li><a href="../foundations/spacing.html">Spacing</a></li>
+      <li><a href="../foundations/layout.html">Layout</a></li>
+      <li><a href="../foundations/elevation.html">Elevation</a></li>
+      <li><a href="../foundations/shape.html">Shape</a></li>
+      <li><a href="../foundations/motion.html">Motion</a></li>
+      <li><a href="../foundations/iconography.html">Iconography</a></li>
+      <li><a href="../foundations/theming.html">Theming</a></li>
+      <li><a href="../foundations/responsive.html">Responsive</a></li>
+      <li><a href="../foundations/accessibility.html">Accessibility</a></li>
+      <li><a href="../foundations/content.html">Content</a></li>
+    </ul></details>
+    <details open><summary>Components</summary><ul>
+      <li><a href="../components/button.html">Button</a></li>
+      <li><a href="../components/button-group.html">Button group</a></li>
+      <li><a href="../components/link.html">Link</a></li>
+      <li><a href="../components/menu.html">Menu</a></li>
+      <li><a href="../components/checkbox.html">Checkbox</a></li>
+      <li><a href="../components/date-navigator.html">Date navigator</a></li>
+      <li><a href="../components/file-upload.html">File upload</a></li>
+      <li><a href="../components/form-field.html">Form field</a></li>
+      <li><a href="../components/form-layout.html">Form layout</a></li>
+      <li><a href="../components/radio-group.html">Radio group</a></li>
+      <li><a href="../components/select.html">Select</a></li>
+      <li><a href="../components/switch.html">Switch</a></li>
+      <li><a href="../components/text-field.html">Text field</a></li>
+      <li><a href="../components/textarea.html">Textarea</a></li>
+      <li><a href="../components/breadcrumb.html">Breadcrumb</a></li>
+      <li><a href="../components/footer.html">Footer</a></li>
+      <li><a href="../components/pagination.html">Pagination</a></li>
+      <li><a href="../components/sidebar.html">Sidebar</a></li>
+      <li><a href="../components/skip-link.html">Skip link</a></li>
+      <li><a href="../components/tabs.html">Tabs</a></li>
+      <li><a href="../components/top-bar.html">Top bar</a></li>
+      <li><a href="../components/accordion.html">Accordion</a></li>
+      <li><a href="../components/card.html">Card</a></li>
+      <li><a href="../components/dialog.html">Dialog</a></li>
+      <li><a href="../components/divider.html">Divider</a></li>
+      <li><a href="../components/layout.html">Layout primitives</a></li>
+      <li><a href="../components/tooltip.html">Tooltip</a></li>
+      <li><a href="../components/avatar.html">Avatar</a></li>
+      <li><a href="../components/badge.html">Badge</a></li>
+      <li><a href="../components/blog-card.html">Blog card</a></li>
+      <li><a href="../components/chip.html">Chip</a></li>
+      <li><a href="../components/cost-summary.html">Cost summary</a></li>
+      <li><a href="../components/description-list.html">Description list</a></li>
+      <li><a href="../components/line-item.html">Line item</a></li>
+      <li><a href="../components/photo-tile.html">Photo tile</a></li>
+      <li><a href="../components/calendar.html">Schedule calendar</a></li>
+      <li><a href="../components/selection-bar.html">Selection bar</a></li>
+      <li><a href="../components/stat.html">Stat</a></li>
+      <li><a href="../components/stepper.html">Stepper</a></li>
+      <li><a href="../components/table.html">Table</a></li>
+      <li><a href="../components/alert.html">Alert</a></li>
+      <li><a href="../components/empty-state.html">Empty state</a></li>
+      <li><a href="../components/error-page.html">Error page</a></li>
+      <li><a href="../components/inline-message.html">Inline message</a></li>
+      <li><a href="../components/progress.html">Progress</a></li>
+      <li><a href="../components/skeleton.html">Skeleton</a></li>
+      <li><a href="../components/spinner.html">Spinner</a></li>
+      <li><a href="../components/toast.html">Toast</a></li>
+    </ul></details>
+    <details open><summary>Patterns</summary><ul>
+      <li><a href="../patterns/forms.html">Forms</a></li>
+      <li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li>
+      <li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li>
+      <li><a href="../patterns/navigation-and-page-structure.html">Navigation and page structure</a></li>
+      <li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li>
+      <li><a href="../patterns/data-tables-and-lists.html">Data tables and lists</a></li>
+      <li><a href="../patterns/notifications.html">Notifications</a></li>
+      <li><a href="../patterns/content-and-tone.html">Content and tone</a></li>
+    </ul></details>
+  </nav>
+
+  <main id="main" class="ds-main">
+    <header class="ds-header">
+      <p class="ds-kicker">Component &amp;middot; Feedback</p>
+      <h1>Inline message</h1>
+      <p class="ds-lead">An inline message is the line of text under a field that says how to fill it in, what went wrong, or that it worked. It is tied to the field by code as well as by position.</p>
+      <div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Status: stable</span><span class="ds-pill">Linked with <code>aria-describedby</code></span></div>
+      <ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul>
+    </header>
+
+    <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+      <p>Use an inline message for feedback about one control. For a message about the whole form or page use an <a href="alert.html">alert</a>; for a passing confirmation use a <a href="toast.html">toast</a>. Inline messages are normally rendered by <a href="form-field.html">form field</a>, which sets up the labelling, but the same classes are used wherever a short note belongs to a nearby element.</p>
+      <ul>
+        <li><b>Hint</b> (<code>.field__hint</code>) explains the format or limit before the person types: "We only use this to reply to your enquiry."</li>
+        <li><b>Error</b> (<code>.field__error</code> or <code>.inline-error</code>) says what is wrong and how to fix it. It replaces nothing: the hint stays.</li>
+        <li><b>Success</b> confirms a value was accepted, for example a discount code applied. It uses the hint style with a leading check icon until a dedicated success class exists.</li>
+      </ul>
+      <p>Validation timing is covered in <a href="../patterns/forms.html">forms</a>: validate on blur, re-validate on input once a field has been marked invalid.</p>
+    </section>
+    <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+      <div class="ds-anatomy">
+        <figure class="ds-anatomy__figure">
+          <label class="field" style="max-width: 20rem; margin: 0;"><span class="field__label">Email</span><input class="input" type="email" value="anna@example" aria-invalid="true" aria-describedby="anatomy-im-hint anatomy-im-err"><span class="field__hint" id="anatomy-im-hint">We only use this to reply to your enquiry.</span><span class="field__error" id="anatomy-im-err">Enter a full email address, like anna@example.com.</span></label>
+          <span class="ds-callout" style="left: 10%; top: 24%;" aria-hidden="true">1</span>
+          <span class="ds-callout" style="left: 12%; top: 58%;" aria-hidden="true">2</span>
+          <span class="ds-callout" style="left: 12%; top: 88%;" aria-hidden="true">3</span>
+        </figure>
+        <ol class="ds-anatomy__list">
+          <li><div><b>Control</b><small>The field the message belongs to. It carries <code>aria-describedby</code> listing the message ids, and <code>aria-invalid="true"</code> for errors.</small></div></li>
+          <li><div><b>Hint</b><small>Muted caption text, always visible, under the control.</small></div></li>
+          <li><div><b>Error</b><small>Caption text in <code>--color-danger-fg</code>, shown below the hint, with a plain-words fix. Optional leading icon so colour is not the only cue.</small></div></li>
+        </ol>
+      </div>
+    </section>
+    <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+      <p>Messages sit directly under the control, <code>--space-1</code> below it, in the caption size.</p>
+      <h3>Hint</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><label class="field" style="max-width: 20rem; margin: 0;"><span class="field__label">Phone</span><input class="input" type="tel" aria-describedby="im-hint-a"><span class="field__hint" id="im-hint-a">Optional. For same-day changes only.</span></label></div>
+        <div class="ds-example__caption"><span>Persistent guidance, muted.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;label class="field"&gt;
+  &lt;span class="field__label"&gt;Phone&lt;/span&gt;
+  &lt;input class="input" type="tel" aria-describedby="phone-hint"&gt;
+  &lt;span class="field__hint" id="phone-hint"&gt;Optional. For same-day changes only.&lt;/span&gt;
+&lt;/label&gt;</code></pre></details>
+      </div>
+      <h3>Error</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><label class="field" style="max-width: 20rem; margin: 0;"><span class="field__label">Session date</span><input class="input" type="text" value="31 February" aria-invalid="true" aria-describedby="im-err-a"><span class="field__error" id="im-err-a"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4 2 20h20L12 4zM12 10v4M12 17h.01"/></svg> Choose a date that exists, like 28 February.</span></label></div>
+        <div class="ds-example__caption"><span>Danger text plus an icon; the input border also turns to the danger colour via <code>aria-invalid</code>.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;input class="input" aria-invalid="true" aria-describedby="date-error"&gt;
+&lt;span class="field__error" id="date-error"&gt;Choose a date that exists, like 28 February.&lt;/span&gt;</code></pre></details>
+      </div>
+      <h3>Success</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><label class="field" style="max-width: 20rem; margin: 0;"><span class="field__label">Promotion code</span><input class="input" type="text" value="SPRING25" aria-describedby="im-ok-a"><span class="field__hint" id="im-ok-a"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg> Code applied: 25% off your quote.</span></label></div>
+        <div class="ds-example__caption"><span>Success is announced with a leading check icon and words.</span></div>
+      </div>
+      <h3>Standalone error</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><p class="inline-error" role="alert" style="margin: 0;">Choose at least one photograph before requesting prints.</p></div>
+        <div class="ds-example__caption"><span><code>.inline-error</code> for a message that is not tied to a single input, for example above a selection. Use <code>role="alert"</code> when it appears after an action.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="sizes" data-na="Inline messages use the caption size, one step below body, and do not have size variants."><h2><a href="#sizes">Sizes</a></h2>
+      <p class="ds-na">Inline messages use the caption size, one step below body, and do not have size variants.</p>
+    </section>
+    <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+      <p>Inline messages are static text; their states belong to the field they describe. The matrix shows how each message type looks beside a field in its main states.</p>
+      <div class="ds-matrix"><table>
+        <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Focus</th><th scope="col">Invalid</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Hint</th><td><label class="field" style="margin: 0;"><span class="visually-hidden">Postcode</span><input class="input" type="text" value="M5V 2T6"><span class="field__hint">Used to estimate travel.</span></label></td><td><label class="field" style="margin: 0;"><span class="visually-hidden">Postcode</span><input class="input" type="text" value="M5V 2T6" data-state="focus"><span class="field__hint">Used to estimate travel.</span></label></td><td><label class="field" style="margin: 0;"><span class="visually-hidden">Postcode</span><input class="input" type="text" value="M5V 2T6" aria-invalid="true"><span class="field__hint">Used to estimate travel.</span></label></td></tr>
+          <tr><th scope="row">Error</th><td><label class="field" style="margin: 0;"><span class="visually-hidden">Postcode</span><input class="input" type="text" value="M5V"><span class="field__error">Enter a full postcode.</span></label></td><td><label class="field" style="margin: 0;"><span class="visually-hidden">Postcode</span><input class="input" type="text" value="M5V" data-state="focus"><span class="field__error">Enter a full postcode.</span></label></td><td><label class="field" style="margin: 0;"><span class="visually-hidden">Postcode</span><input class="input" type="text" value="M5V" aria-invalid="true"><span class="field__error">Enter a full postcode.</span></label></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Both themes</h3>
+      <div class="ds-themes">
+        <div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><label class="field" style="margin: 0; width: 100%;"><span class="field__label">Email</span><input class="input" type="email" value="anna@example" aria-invalid="true"><span class="field__hint">We only use this to reply.</span><span class="field__error">Enter a full email address.</span></label></div></div>
+        <div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><label class="field" style="margin: 0; width: 100%;"><span class="field__label">Email</span><input class="input" type="email" value="anna@example" aria-invalid="true"><span class="field__hint">We only use this to reply.</span><span class="field__error">Enter a full email address.</span></label></div></div>
+      </div>
+      <ul>
+        <li><b>Appearing</b>: an error is inserted without animation and announced because the control's <code>aria-describedby</code> and <code>aria-invalid</code> change; also add the error to the form's error summary on submit.</li>
+        <li><b>Resolved</b>: remove the error when the value becomes valid; keep the hint.</li>
+        <li><b>Loading</b> and <b>disabled</b> do not apply to the message.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+      <ul>
+        <li>Messages wrap under the control at its width; they never truncate.</li>
+        <li>At 390px keep errors to one or two lines. Longer guidance goes in the hint or a help link.</li>
+        <li>Do not float messages beside the control on wide screens: the message remains below so screen magnifier users find it next to the field.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+      <p>Hints use <code>--color-fg-muted</code>, which reaches at least 4.5:1 on the surface in both themes. Errors use <code>--color-danger-fg</code>, a lighter red in the dark theme so contrast is preserved. The invalid border uses <code>--color-danger-solid</code>.</p>
+    </section>
+    <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+      <h3>Role and pattern</h3>
+      <p>Not a widget. The message is associated with its control through <code>aria-describedby</code> (WAI Forms tutorial, "Instructions" and "Validating input"). Errors also set <code>aria-invalid="true"</code> on the control.</p>
+      <h3>Keyboard</h3>
+      <div class="ds-table-wrap"><table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves to the control; the screen reader reads its label, then its description (the hint and error).</td></tr></tbody></table></div>
+      <h3>Focus</h3>
+      <p>Messages are not focusable. On a failed submit, move focus to the first invalid control or to an error summary that links to each one.</p>
+      <h3>Labelling</h3>
+      <p>List the ids of the hint and the error in the control's <code>aria-describedby</code>, hint first. Use an icon plus words for errors and success so colour is never the only signal (WCAG 1.4.1). Do not put <code>role="alert"</code> on every field error; the summary and focus move announce them.</p>
+      <h3>Contrast</h3>
+      <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);"><div class="ds-pair"><span>Hint on surface</span><span class="ds-pair__ratio" data-contrast="--color-fg-muted|--color-bg-surface" data-min="4.5"></span></div><div class="ds-pair"><span>Error on surface</span><span class="ds-pair__ratio" data-contrast="--color-danger-fg|--color-bg-surface" data-min="4.5"></span></div><div class="ds-pair"><span>Error on subtle background</span><span class="ds-pair__ratio" data-contrast="--color-danger-fg|--color-bg-subtle" data-min="4.5"></span></div><div class="ds-pair"><span>Invalid border on surface</span><span class="ds-pair__ratio" data-contrast="--color-danger-solid|--color-bg-surface" data-min="3"></span></div></div>
+      <h3>Motion</h3>
+      <p>No motion. Messages appear and disappear instantly.</p>
+      <h3>Touch</h3>
+      <p>Text only; nothing to tap. If a link appears inside a message, give it 24px of target height or inline spacing.</p>
+    </section>
+    <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+      <ul>
+        <li>Say how to fix it, not only what is wrong: "Enter a full email address, like anna@example.com."</li>
+        <li>Never use "invalid" or "required field" alone. Name the field's expectation.</li>
+        <li>Keep hints short and keep them visible; do not hide format guidance in a placeholder.</li>
+        <li>Sentence case, a full stop at the end, no blame.</li>
+        <li>Success messages say what was accepted: "Code applied: 25% off your quote."</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+      <div class="ds-dodont">
+        <figure class="ds-do"><div class="ds-example__canvas"><label class="field" style="margin: 0;"><span class="field__label">Email</span><input class="input" type="email" value="anna@example" aria-invalid="true"><span class="field__error">Enter a full email address, like anna@example.com.</span></label></div><figcaption>Names the field's expectation and shows an example.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><label class="field" style="margin: 0;"><span class="field__label">Email</span><input class="input" type="email" value="anna@example" aria-invalid="true"><span class="field__error">Invalid input.</span></label></div><figcaption>Says nothing about how to fix it.</figcaption></figure>
+        <figure class="ds-do"><div class="ds-example__canvas"><label class="field" style="margin: 0;"><span class="field__label">Phone</span><input class="input" type="tel" aria-describedby="dd-hint"><span class="field__hint" id="dd-hint">Optional. For same-day changes only.</span></label></div><figcaption>A hint that stays visible, linked with <code>aria-describedby</code>.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><label class="field" style="margin: 0;"><span class="field__label">Phone</span><input class="input" type="tel" placeholder="Optional. For same-day changes only."></label></div><figcaption>Instructions in a placeholder disappear when typing and have weak contrast.</figcaption></figure>
+      </div>
+    </section>
+    <section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+        <tbody>
+          <tr><td>Hint text</td><td><code>--color-fg-muted</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td></tr>
+          <tr><td>Error text</td><td><code>--color-danger-fg</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-danger-fg" data-swatch></i><span data-token="--color-danger-fg"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-danger-fg" data-swatch></i><span data-token="--color-danger-fg"></span></span></td></tr>
+          <tr><td>Invalid border</td><td><code>--color-danger-solid</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-danger-solid" data-swatch></i><span data-token="--color-danger-solid"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-danger-solid" data-swatch></i><span data-token="--color-danger-solid"></span></span></td></tr>
+          <tr><td>Font</td><td><code>--text-caption</code></td><td colspan="2"><span data-token="--text-caption"></span></td></tr>
+          <tr><td>Gap under control</td><td><code>--space-1</code></td><td colspan="2"><span data-token="--space-1"></span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+    <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+      <pre><code>&lt;label class="field"&gt;
+  &lt;span class="field__label"&gt;Email&lt;/span&gt;
+  &lt;input class="input" type="email" aria-invalid="true"
+         aria-describedby="email-hint email-error"&gt;
+  &lt;span class="field__hint" id="email-hint"&gt;We only use this to reply.&lt;/span&gt;
+  &lt;span class="field__error" id="email-error"&gt;Enter a full email address.&lt;/span&gt;
+&lt;/label&gt;</code></pre>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>.field__hint</code></td><td>Muted guidance under a control.</td></tr><tr><td><code>.field__error</code></td><td>Danger-coloured error under a control.</td></tr><tr><td><code>.inline-error</code></td><td>Same style, for use outside <code>.field</code>.</td></tr><tr><td><code>aria-describedby</code></td><td>On the control: ids of hint and error.</td></tr><tr><td><code>aria-invalid="true"</code></td><td>On the control; also turns its border to the danger colour.</td></tr></tbody></table></div>
+    </section>
+    <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+      <p>Extracted from these mocks:</p>
+      <ul>
+        <li><a href="../../mocks/admin/session-editor.html">admin/session-editor</a> (field hints and errors)</li>
+        <li><a href="../../mocks/admin/login.html">admin/login</a> (sign-in errors)</li>
+        <li><a href="../../mocks/marketing/contact.html">marketing/contact</a> (enquiry form validation)</li>
+        <li><a href="../../mocks/admin/upload.html">admin/upload</a> (file format errors)</li>
+      </ul>
+      <p>Drift fixed during extraction: the mocks used <code>.small.muted</code> for hints and <code>.error</code> text with no link to the control. The system gives them named classes and requires <code>aria-describedby</code> and <code>aria-invalid</code>.</p>
+    </section>
+
+    <footer class="ds-footer"><span>Quinntyne Brown Studio design system &middot; extracted from <a href="../../mocks/index.html">docs/mocks</a></span><a href="#top">Back to top</a></footer>
+  </main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

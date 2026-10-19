@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Empty state &mdash; Quinntyne Brown Studio design system</title>
+<meta name="description" content="An empty state fills the space where content would be, says why it is empty, and offers the next step. It turns a dead end into a starting point.">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+  <nav class="ds-nav" aria-label="Design system">
+    <div class="ds-nav__brand"><a href="../index.html">QBS DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">&#9790; Dark</button></div>
+    <details open><summary>Foundations</summary><ul>
+      <li><a href="../foundations/color.html">Color</a></li>
+      <li><a href="../foundations/typography.html">Typography</a></li>
+      <li><a href="../foundations/spacing.html">Spacing</a></li>
+      <li><a href="../foundations/layout.html">Layout</a></li>
+      <li><a href="../foundations/elevation.html">Elevation</a></li>
+      <li><a href="../foundations/shape.html">Shape</a></li>
+      <li><a href="../foundations/motion.html">Motion</a></li>
+      <li><a href="../foundations/iconography.html">Iconography</a></li>
+      <li><a href="../foundations/theming.html">Theming</a></li>
+      <li><a href="../foundations/responsive.html">Responsive</a></li>
+      <li><a href="../foundations/accessibility.html">Accessibility</a></li>
+      <li><a href="../foundations/content.html">Content</a></li>
+    </ul></details>
+    <details open><summary>Components</summary><ul>
+      <li><a href="../components/button.html">Button</a></li>
+      <li><a href="../components/button-group.html">Button group</a></li>
+      <li><a href="../components/link.html">Link</a></li>
+      <li><a href="../components/menu.html">Menu</a></li>
+      <li><a href="../components/checkbox.html">Checkbox</a></li>
+      <li><a href="../components/date-navigator.html">Date navigator</a></li>
+      <li><a href="../components/file-upload.html">File upload</a></li>
+      <li><a href="../components/form-field.html">Form field</a></li>
+      <li><a href="../components/form-layout.html">Form layout</a></li>
+      <li><a href="../components/radio-group.html">Radio group</a></li>
+      <li><a href="../components/select.html">Select</a></li>
+      <li><a href="../components/switch.html">Switch</a></li>
+      <li><a href="../components/text-field.html">Text field</a></li>
+      <li><a href="../components/textarea.html">Textarea</a></li>
+      <li><a href="../components/breadcrumb.html">Breadcrumb</a></li>
+      <li><a href="../components/footer.html">Footer</a></li>
+      <li><a href="../components/pagination.html">Pagination</a></li>
+      <li><a href="../components/sidebar.html">Sidebar</a></li>
+      <li><a href="../components/skip-link.html">Skip link</a></li>
+      <li><a href="../components/tabs.html">Tabs</a></li>
+      <li><a href="../components/top-bar.html">Top bar</a></li>
+      <li><a href="../components/accordion.html">Accordion</a></li>
+      <li><a href="../components/card.html">Card</a></li>
+      <li><a href="../components/dialog.html">Dialog</a></li>
+      <li><a href="../components/divider.html">Divider</a></li>
+      <li><a href="../components/layout.html">Layout primitives</a></li>
+      <li><a href="../components/tooltip.html">Tooltip</a></li>
+      <li><a href="../components/avatar.html">Avatar</a></li>
+      <li><a href="../components/badge.html">Badge</a></li>
+      <li><a href="../components/blog-card.html">Blog card</a></li>
+      <li><a href="../components/chip.html">Chip</a></li>
+      <li><a href="../components/cost-summary.html">Cost summary</a></li>
+      <li><a href="../components/description-list.html">Description list</a></li>
+      <li><a href="../components/line-item.html">Line item</a></li>
+      <li><a href="../components/photo-tile.html">Photo tile</a></li>
+      <li><a href="../components/calendar.html">Schedule calendar</a></li>
+      <li><a href="../components/selection-bar.html">Selection bar</a></li>
+      <li><a href="../components/stat.html">Stat</a></li>
+      <li><a href="../components/stepper.html">Stepper</a></li>
+      <li><a href="../components/table.html">Table</a></li>
+      <li><a href="../components/alert.html">Alert</a></li>
+      <li><a href="../components/empty-state.html">Empty state</a></li>
+      <li><a href="../components/error-page.html">Error page</a></li>
+      <li><a href="../components/inline-message.html">Inline message</a></li>
+      <li><a href="../components/progress.html">Progress</a></li>
+      <li><a href="../components/skeleton.html">Skeleton</a></li>
+      <li><a href="../components/spinner.html">Spinner</a></li>
+      <li><a href="../components/toast.html">Toast</a></li>
+    </ul></details>
+    <details open><summary>Patterns</summary><ul>
+      <li><a href="../patterns/forms.html">Forms</a></li>
+      <li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li>
+      <li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li>
+      <li><a href="../patterns/navigation-and-page-structure.html">Navigation and page structure</a></li>
+      <li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li>
+      <li><a href="../patterns/data-tables-and-lists.html">Data tables and lists</a></li>
+      <li><a href="../patterns/notifications.html">Notifications</a></li>
+      <li><a href="../patterns/content-and-tone.html">Content and tone</a></li>
+    </ul></details>
+  </nav>
+
+  <main id="main" class="ds-main">
+    <header class="ds-header">
+      <p class="ds-kicker">Component &amp;middot; Feedback</p>
+      <h1>Empty state</h1>
+      <p class="ds-lead">An empty state fills the space where content would be, says why it is empty, and offers the next step. It turns a dead end into a starting point.</p>
+      <div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Status: stable</span><span class="ds-pill">Not an error</span></div>
+      <ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul>
+    </header>
+
+    <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+      <p>Use an empty state when a list, table, grid or page has nothing to show. It is not an error: if the content failed to load, say so with an <a href="alert.html">alert</a> or an <a href="error-page.html">error page</a>. See <a href="../patterns/empty-and-error-states.html">empty and error states</a>.</p>
+      <ul>
+        <li><b>First run</b>: nothing has been created yet, so the action is to create something.</li>
+        <li><b>No results</b>: filters or search matched nothing, so the action is to clear them.</li>
+        <li><b>Permission</b>: the person may not see anything here; say who can.</li>
+        <li><b>Compact</b> (<code>.empty-state--compact</code>): inside a card, table body or side panel, with less padding.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+      <div class="ds-anatomy">
+        <figure class="ds-anatomy__figure">
+          <div class="empty-state"><div class="empty-state__symbol" aria-hidden="true">&#9671;</div><h2>No sessions yet</h2><p>Sessions you create will appear here, with their photographs and schedule.</p><a class="btn btn--primary" href="#">Add a session</a></div>
+          <span class="ds-callout" style="left: 48%; top: 14%;" aria-hidden="true">1</span>
+          <span class="ds-callout" style="left: 30%; top: 32%;" aria-hidden="true">2</span>
+          <span class="ds-callout" style="left: 26%; top: 52%;" aria-hidden="true">3</span>
+          <span class="ds-callout" style="left: 40%; top: 80%;" aria-hidden="true">4</span>
+        </figure>
+        <ol class="ds-anatomy__list">
+          <li><div><b>Symbol</b><small>A single decorative glyph in the serif face; <code>aria-hidden</code>. It is not an illustration and carries no meaning.</small></div></li>
+          <li><div><b>Title</b><small>A heading (<code>h2</code> by default) naming the state. Use the level that fits the page outline.</small></div></li>
+          <li><div><b>Explanation</b><small>One sentence, muted, up to 27rem wide: why it is empty and what happens next.</small></div></li>
+          <li><div><b>Action</b><small>One primary <a href="button.html">button</a> (or link), optionally with a secondary link. Container: dashed border on the sunken surface.</small></div></li>
+        </ol>
+      </div>
+    </section>
+    <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+      <p>Pick the variant by cause. The cause decides the words and the action.</p>
+      <h3>First run</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="empty-state"><div class="empty-state__symbol" aria-hidden="true">&#9671;</div><h2>No sessions yet</h2><p>Sessions you create will appear here, with their photographs and schedule.</p><a class="btn btn--primary" href="#">Add a session</a></div></div>
+        <div class="ds-example__caption"><span>The action creates the first item.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class="empty-state"&gt;
+  &lt;div class="empty-state__symbol" aria-hidden="true"&gt;◇&lt;/div&gt;
+  &lt;h2&gt;No sessions yet&lt;/h2&gt;
+  &lt;p&gt;Sessions you create will appear here, with their photographs and schedule.&lt;/p&gt;
+  &lt;a class="btn btn--primary" href="…"&gt;Add a session&lt;/a&gt;
+&lt;/div&gt;</code></pre></details>
+      </div>
+      <h3>No results</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="empty-state"><div class="empty-state__symbol" aria-hidden="true">&#9671;</div><h2>No photographs match</h2><p>Try a different search or clear the filters to see all photographs in this gallery.</p><button class="btn" type="button">Clear filters</button></div></div>
+        <div class="ds-example__caption"><span>The action undoes the narrowing.</span></div>
+      </div>
+      <h3>Permission</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="empty-state"><div class="empty-state__symbol" aria-hidden="true">&#9671;</div><h2>You do not have access to rates</h2><p>Ask the studio owner to give you the Rates role. You can still view sessions and schedules.</p><a class="btn btn--link" href="#">Contact the studio owner</a></div></div>
+        <div class="ds-example__caption"><span>Say who can grant access instead of just saying no.</span></div>
+      </div>
+      <h3>Compact</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="empty-state empty-state--compact"><div class="empty-state__symbol" aria-hidden="true">&#9671;</div><h2>No print requests</h2><p>Requests from this client will appear here.</p></div></div>
+        <div class="ds-example__caption"><span>Inside a card or table body. Often has no action.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="sizes"><h2><a href="#sizes">Sizes</a></h2>
+      <p>Two densities. Full fills a page section; compact fits inside another container.</p>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div style="display: grid; gap: var(--space-4); width: 100%;"><div class="empty-state"><div class="empty-state__symbol" aria-hidden="true">&#9671;</div><h2>Full</h2><p>Padding of 4rem above and below.</p></div><div class="empty-state empty-state--compact"><div class="empty-state__symbol" aria-hidden="true">&#9671;</div><h2>Compact</h2><p>Padding of 2rem above and below.</p></div></div></div>
+        <div class="ds-example__caption"><span><code>--space-16</code> versus <code>--space-8</code> vertical padding.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+      <p>An empty state is static and has no states of its own. The one decision is whether it is the whole content or sits where content will later appear.</p>
+      <div class="ds-matrix"><table>
+        <thead><tr><th scope="col">Variant</th><th scope="col">Full</th><th scope="col">Compact</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">With action</th><td><div class="empty-state"><div class="empty-state__symbol" aria-hidden="true">&#9671;</div><h2>No albums yet</h2><p>Albums you build will appear here.</p><a class="btn btn--primary" href="#">Create an album</a></div></td><td><div class="empty-state empty-state--compact"><div class="empty-state__symbol" aria-hidden="true">&#9671;</div><h2>No albums yet</h2><p>Albums you build will appear here.</p><a class="btn btn--primary" href="#">Create an album</a></div></td></tr>
+          <tr><th scope="row">Without action</th><td><div class="empty-state"><div class="empty-state__symbol" aria-hidden="true">&#9671;</div><h2>No notes</h2><p>Nothing has been added.</p></div></td><td><div class="empty-state empty-state--compact"><div class="empty-state__symbol" aria-hidden="true">&#9671;</div><h2>No notes</h2><p>Nothing has been added.</p></div></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Both themes</h3>
+      <div class="ds-themes">
+        <div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><div class="empty-state empty-state--compact"><div class="empty-state__symbol" aria-hidden="true">&#9671;</div><h2>No sessions yet</h2><p>Sessions you create will appear here.</p><a class="btn btn--primary" href="#">Add a session</a></div></div></div>
+        <div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><div class="empty-state empty-state--compact"><div class="empty-state__symbol" aria-hidden="true">&#9671;</div><h2>No sessions yet</h2><p>Sessions you create will appear here.</p><a class="btn btn--primary" href="#">Add a session</a></div></div></div>
+      </div>
+      <ul>
+        <li><b>Loading</b>: do not show the empty state while data is loading. Show a <a href="skeleton.html">skeleton</a> first.</li>
+        <li><b>Filled</b>: when content arrives the empty state is removed from the DOM.</li>
+        <li>Hover, focus and disabled belong to the action button, not the container.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+      <ul>
+        <li>The explanation is capped at 27rem and centred; the container fills its parent at every width.</li>
+        <li>Below 768px the vertical padding is reduced by one step so the action stays on the first screen.</li>
+        <li>At 390px the primary button can go full width (<code>.btn--block</code>) when it is the only action.</li>
+        <li>Never show an empty state and a populated list at the same time.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+      <p>The container uses the sunken surface (<code>--color-bg-surface-sunken</code>) with a dashed strong border, so it reads as a place waiting for content in both themes. The glyph and explanation use <code>--color-fg-muted</code>; the title uses the default foreground.</p>
+    </section>
+    <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+      <h3>Role and pattern</h3>
+      <p>Static content. It contains a heading and optionally a button or link, so it takes part in the page outline. There is no ARIA role. When the state appears as the result of a filter or search, announce the change in a polite live region ("No photographs match").</p>
+      <h3>Keyboard</h3>
+      <div class="ds-table-wrap"><table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Reaches the action button or link, if any.</td></tr><tr><td><kbd>Enter</kbd>, <kbd>Space</kbd></td><td>Activates the button (<kbd>Enter</kbd> only for a link).</td></tr></tbody></table></div>
+      <h3>Focus</h3>
+      <p>Focus is not moved to the empty state. After a filter or search that causes it, leave focus on the control the person used.</p>
+      <h3>Labelling</h3>
+      <p>The title is the heading. The decorative glyph is <code>aria-hidden="true"</code>. Use <code>h2</code> unless the page outline needs another level; do not skip levels.</p>
+      <h3>Contrast</h3>
+      <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);"><div class="ds-pair"><span>Title on sunken surface</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-surface-sunken" data-min="4.5"></span></div><div class="ds-pair"><span>Explanation on sunken surface</span><span class="ds-pair__ratio" data-contrast="--color-fg-muted|--color-bg-surface-sunken" data-min="4.5"></span></div><div class="ds-pair"><span>Dashed border on page</span><span class="ds-pair__ratio" data-contrast="--color-border-strong|--color-bg-surface-sunken" data-min="1.5"></span></div></div>
+      <h3>Motion</h3>
+      <p>No motion.</p>
+      <h3>Touch</h3>
+      <p>The action button is medium (44px). Place it 24px or more from other targets.</p>
+    </section>
+    <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+      <ul>
+        <li>Title states the fact: "No sessions yet", "No photographs match". Sentence case.</li>
+        <li>Explanation says why and what happens next, in one sentence.</li>
+        <li>The action is a verb phrase naming the object: "Add a session", "Clear filters". One primary action only.</li>
+        <li>Never blame: not "You have no sessions". Never cute: no jokes about missing photographs.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+      <div class="ds-dodont">
+        <figure class="ds-do"><div class="ds-example__canvas"><div class="empty-state empty-state--compact"><div class="empty-state__symbol" aria-hidden="true">&#9671;</div><h2>No sessions yet</h2><p>Sessions you create will appear here.</p><a class="btn btn--primary" href="#">Add a session</a></div></div><figcaption>Says why it is empty and offers the first step.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><div class="empty-state empty-state--compact"><div class="empty-state__symbol" aria-hidden="true">&#9671;</div><h2>Nothing</h2><p></p></div></div><figcaption>Says nothing about why or what to do next.</figcaption></figure>
+        <figure class="ds-do"><div class="ds-example__canvas"><div class="empty-state empty-state--compact"><div class="empty-state__symbol" aria-hidden="true">&#9671;</div><h2>No photographs match</h2><p>Try a different search or clear the filters.</p><button class="btn" type="button">Clear filters</button></div></div><figcaption>No-results state offers to undo the filter.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><div class="empty-state empty-state--compact"><div class="empty-state__symbol" aria-hidden="true">&#9671;</div><h2>Something went wrong</h2><p>The galleries could not be loaded.</p><button class="btn" type="button">Retry</button></div></div><figcaption>A failure is not an empty state. Use an alert or error page.</figcaption></figure>
+      </div>
+    </section>
+    <section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+        <tbody>
+          <tr><td>Surface</td><td><code>--color-bg-surface-sunken</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-surface-sunken" data-swatch></i><span data-token="--color-bg-surface-sunken"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-surface-sunken" data-swatch></i><span data-token="--color-bg-surface-sunken"></span></span></td></tr>
+          <tr><td>Dashed border</td><td><code>--color-border-strong</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-border-strong" data-swatch></i><span data-token="--color-border-strong"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-border-strong" data-swatch></i><span data-token="--color-border-strong"></span></span></td></tr>
+          <tr><td>Glyph and explanation</td><td><code>--color-fg-muted</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td></tr>
+          <tr><td>Title</td><td><code>--color-fg-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td></tr>
+          <tr><td>Padding full / compact</td><td><code>--space-16</code> / <code>--space-8</code></td><td colspan="2"><span data-token="--space-16"></span> / <span data-token="--space-8"></span></td></tr>
+          <tr><td>Title font</td><td><code>--text-h2</code></td><td colspan="2"><span data-token="--text-h2"></span></td></tr>
+          <tr><td>Glyph size</td><td><code>--font-size-2xl</code></td><td colspan="2"><span data-token="--font-size-2xl"></span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+    <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+      <pre><code>&lt;div class="empty-state empty-state--compact"&gt;
+  &lt;div class="empty-state__symbol" aria-hidden="true"&gt;◇&lt;/div&gt;
+  &lt;h2&gt;No print requests&lt;/h2&gt;
+  &lt;p&gt;Requests from this client will appear here.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>.empty-state</code></td><td>Container: dashed border, sunken surface, centred text.</td></tr><tr><td><code>.empty-state__symbol</code></td><td>Decorative glyph.</td></tr><tr><td><code>.empty-state--compact</code></td><td>Reduced padding for use inside other containers.</td></tr><tr><td><code>.empty-state h2</code></td><td>Title; <code>p</code> is the explanation.</td></tr></tbody></table></div>
+    </section>
+    <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+      <p>Extracted from these mocks:</p>
+      <ul>
+        <li><a href="../../mocks/admin/sessions.html">admin/sessions</a> (no sessions)</li>
+        <li><a href="../../mocks/admin/media.html">admin/media</a> (no photographs)</li>
+        <li><a href="../../mocks/client/galleries.html">client/galleries</a> (no galleries)</li>
+        <li><a href="../../mocks/client/requests.html">client/requests</a> (no print requests)</li>
+        <li><a href="../../mocks/assets/app.js">assets/app.js</a> (<code>empty()</code> helper)</li>
+      </ul>
+      <p>Drift fixed during extraction: the mocks' <code>.empty</code> and <code>.symbol</code> classes are renamed <code>.empty-state</code> and <code>.empty-state__symbol</code>, and a compact density is added for use inside cards.</p>
+    </section>
+
+    <footer class="ds-footer"><span>Quinntyne Brown Studio design system &middot; extracted from <a href="../../mocks/index.html">docs/mocks</a></span><a href="#top">Back to top</a></footer>
+  </main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

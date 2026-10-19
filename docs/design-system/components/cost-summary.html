@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cost summary &mdash; Quinntyne Brown Studio design system</title>
+<meta name="description" content="The cost summary lists what a quote or print order costs, line by line, and ends with one total. It updates live as people change their choices.">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+  <nav class="ds-nav" aria-label="Design system">
+    <div class="ds-nav__brand"><a href="../index.html">QBS DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">&#9790; Dark</button></div>
+    <details open><summary>Foundations</summary><ul>
+      <li><a href="../foundations/color.html">Color</a></li>
+      <li><a href="../foundations/typography.html">Typography</a></li>
+      <li><a href="../foundations/spacing.html">Spacing</a></li>
+      <li><a href="../foundations/layout.html">Layout</a></li>
+      <li><a href="../foundations/elevation.html">Elevation</a></li>
+      <li><a href="../foundations/shape.html">Shape</a></li>
+      <li><a href="../foundations/motion.html">Motion</a></li>
+      <li><a href="../foundations/iconography.html">Iconography</a></li>
+      <li><a href="../foundations/theming.html">Theming</a></li>
+      <li><a href="../foundations/responsive.html">Responsive</a></li>
+      <li><a href="../foundations/accessibility.html">Accessibility</a></li>
+      <li><a href="../foundations/content.html">Content</a></li>
+    </ul></details>
+    <details open><summary>Components</summary><ul>
+      <li><a href="../components/button.html">Button</a></li>
+      <li><a href="../components/button-group.html">Button group</a></li>
+      <li><a href="../components/link.html">Link</a></li>
+      <li><a href="../components/menu.html">Menu</a></li>
+      <li><a href="../components/checkbox.html">Checkbox</a></li>
+      <li><a href="../components/date-navigator.html">Date navigator</a></li>
+      <li><a href="../components/file-upload.html">File upload</a></li>
+      <li><a href="../components/form-field.html">Form field</a></li>
+      <li><a href="../components/form-layout.html">Form layout</a></li>
+      <li><a href="../components/radio-group.html">Radio group</a></li>
+      <li><a href="../components/select.html">Select</a></li>
+      <li><a href="../components/switch.html">Switch</a></li>
+      <li><a href="../components/text-field.html">Text field</a></li>
+      <li><a href="../components/textarea.html">Textarea</a></li>
+      <li><a href="../components/breadcrumb.html">Breadcrumb</a></li>
+      <li><a href="../components/footer.html">Footer</a></li>
+      <li><a href="../components/pagination.html">Pagination</a></li>
+      <li><a href="../components/sidebar.html">Sidebar</a></li>
+      <li><a href="../components/skip-link.html">Skip link</a></li>
+      <li><a href="../components/tabs.html">Tabs</a></li>
+      <li><a href="../components/top-bar.html">Top bar</a></li>
+      <li><a href="../components/accordion.html">Accordion</a></li>
+      <li><a href="../components/card.html">Card</a></li>
+      <li><a href="../components/dialog.html">Dialog</a></li>
+      <li><a href="../components/divider.html">Divider</a></li>
+      <li><a href="../components/layout.html">Layout primitives</a></li>
+      <li><a href="../components/tooltip.html">Tooltip</a></li>
+      <li><a href="../components/avatar.html">Avatar</a></li>
+      <li><a href="../components/badge.html">Badge</a></li>
+      <li><a href="../components/blog-card.html">Blog card</a></li>
+      <li><a href="../components/chip.html">Chip</a></li>
+      <li><a href="../components/cost-summary.html">Cost summary</a></li>
+      <li><a href="../components/description-list.html">Description list</a></li>
+      <li><a href="../components/line-item.html">Line item</a></li>
+      <li><a href="../components/photo-tile.html">Photo tile</a></li>
+      <li><a href="../components/calendar.html">Schedule calendar</a></li>
+      <li><a href="../components/selection-bar.html">Selection bar</a></li>
+      <li><a href="../components/stat.html">Stat</a></li>
+      <li><a href="../components/stepper.html">Stepper</a></li>
+      <li><a href="../components/table.html">Table</a></li>
+      <li><a href="../components/alert.html">Alert</a></li>
+      <li><a href="../components/empty-state.html">Empty state</a></li>
+      <li><a href="../components/error-page.html">Error page</a></li>
+      <li><a href="../components/inline-message.html">Inline message</a></li>
+      <li><a href="../components/progress.html">Progress</a></li>
+      <li><a href="../components/skeleton.html">Skeleton</a></li>
+      <li><a href="../components/spinner.html">Spinner</a></li>
+      <li><a href="../components/toast.html">Toast</a></li>
+    </ul></details>
+    <details open><summary>Patterns</summary><ul>
+      <li><a href="../patterns/forms.html">Forms</a></li>
+      <li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li>
+      <li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li>
+      <li><a href="../patterns/navigation-and-page-structure.html">Navigation and page structure</a></li>
+      <li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li>
+      <li><a href="../patterns/data-tables-and-lists.html">Data tables and lists</a></li>
+      <li><a href="../patterns/notifications.html">Notifications</a></li>
+      <li><a href="../patterns/content-and-tone.html">Content and tone</a></li>
+    </ul></details>
+  </nav>
+
+  <main id="main" class="ds-main">
+    <header class="ds-header">
+      <p class="ds-kicker">Component &amp;middot; Data display</p>
+      <h1>Cost summary</h1>
+      <p class="ds-lead">The cost summary lists what a quote or print order costs, line by line, and ends with one total. It updates live as people change their choices.</p>
+      <div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Status: stable</span><span class="ds-pill">Live region</span></div>
+      <ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul>
+    </header>
+
+    <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+      <p>Use a cost summary beside the quote calculator, on the quote summary page and at the end of a print request. Use a <a href="description-list.html">description list</a> for non-monetary facts and a <a href="table.html">table</a> when a bill has many columns (quantity, unit price, tax).</p>
+      <ul>
+        <li><b>Rows</b> are a label and an amount.</li>
+        <li><b>Discount rows</b> are tinted with the success tone and show a minus sign.</li>
+        <li><b>The total row</b> sits below a rule with the amount in the serif display style.</li>
+        <li>Amounts are Canadian dollars unless the row says otherwise, with a currency note on the total.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+      <div class="ds-anatomy">
+        <figure class="ds-anatomy__figure">
+          <div class="stack" role="group" aria-label="Quote summary"><div class="cost-row"><span>Wedding coverage, 6 hours</span><span>$2,400.00</span></div><div class="cost-row"><span>Second photographer</span><span>$600.00</span></div><div class="cost-row cost-row--discount"><span>Engagement session discount</span><span>&minus;$200.00</span></div><div class="cost-row cost-row--total"><span>Estimated total (CAD)</span><strong>$2,800.00</strong></div></div>
+          <span class="ds-callout" style="left: 2%; top: -10%;" aria-hidden="true">1</span>
+          <span class="ds-callout" style="left: 92%; top: -10%;" aria-hidden="true">2</span>
+          <span class="ds-callout" style="left: 2%; top: 56%;" aria-hidden="true">3</span>
+          <span class="ds-callout" style="left: 88%; top: 88%;" aria-hidden="true">4</span>
+        </figure>
+        <ol class="ds-anatomy__list">
+          <li><div><b>Row label</b><small>What is charged, in sentence case with the quantity: "Wedding coverage, 6 hours".</small></div></li>
+          <li><div><b>Amount</b><small>Right-aligned figure with the currency symbol and cents.</small></div></li>
+          <li><div><b>Discount row</b><small>Same layout, success ink, minus sign. Text says what the discount is.</small></div></li>
+          <li><div><b>Total row</b><small>A hairline above, body-lg label, serif 2xl amount.</small></div></li>
+        </ol>
+      </div>
+    </section>
+    <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+      <p>The structure is always rows then a total. Only the rows change.</p>
+      <h3>Itemised</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="stack" role="group" aria-label="Quote summary"><div class="cost-row"><span>Wedding coverage, 6 hours</span><span>$2,400.00</span></div><div class="cost-row"><span>Second photographer</span><span>$600.00</span></div><div class="cost-row cost-row--total"><span>Estimated total (CAD)</span><strong>$3,000.00</strong></div></div></div>
+        <div class="ds-example__caption"><span>Two charges and a total.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class="stack" role="group" aria-label="Quote summary"&gt;
+  &lt;div class="cost-row"&gt;&lt;span&gt;Wedding coverage, 6 hours&lt;/span&gt;&lt;span&gt;$2,400.00&lt;/span&gt;&lt;/div&gt;
+  &lt;div class="cost-row cost-row--total"&gt;&lt;span&gt;Estimated total (CAD)&lt;/span&gt;&lt;strong&gt;$2,400.00&lt;/strong&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+      </div>
+      <h3>With a discount</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="stack" role="group" aria-label="Quote summary"><div class="cost-row"><span>Wedding coverage, 6 hours</span><span>$2,400.00</span></div><div class="cost-row"><span>Second photographer</span><span>$600.00</span></div><div class="cost-row cost-row--discount"><span>Engagement session discount</span><span>&minus;$200.00</span></div><div class="cost-row cost-row--total"><span>Estimated total (CAD)</span><strong>$2,800.00</strong></div></div></div>
+        <div class="ds-example__caption"><span>A negative amount in success ink; the minus sign and the words carry the meaning.</span></div>
+      </div>
+      <h3>Live total</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="stack" role="group" aria-label="Quote summary"><div class="cost-row"><span>Wedding coverage, 6 hours</span><span>$2,400.00</span></div><div class="cost-row cost-row--total"><span>Estimated total (CAD)</span><strong role="status" aria-live="polite">$2,400.00</strong></div></div></div>
+        <div class="ds-example__caption"><span>Only the total is a polite live region, so changes are announced once, not row by row.</span></div>
+      </div>
+      <h3>Recalculating, error and empty</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="stack" style="width: 100%;"><div class="cost-row cost-row--total" aria-busy="true"><span>Estimated total (CAD)</span><strong><span class="skeleton skeleton--title" style="width: 6rem; display: inline-block;"></span></strong></div><div class="alert alert--danger" role="alert"><p>We could not calculate your quote. Your choices are saved.</p><button class="btn btn--sm" type="button">Try again</button></div><p class="muted">Choose a service to see an estimate.</p></div></div>
+        <div class="ds-example__caption"><span>Recalculating keeps the label and replaces the figure with a skeleton; the error never shows a stale total as final.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="sizes" data-na="The summary has one size; it fills its container (a sidebar column or a card)."><h2><a href="#sizes">Sizes</a></h2>
+      <p class="ds-na">The summary has one size; it fills its container (a sidebar column or a card).</p>
+    </section>
+    <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+      <p>A summary has data states instead of interaction states. Any actions (Request quote) belong in a button below, not in the rows.</p>
+      <div class="ds-matrix"><table>
+        <thead><tr><th scope="col">Variant</th><th scope="col">Default</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Itemised</th><td><div class="stack" role="group" aria-label="Quote summary"><div class="cost-row"><span>Wedding coverage, 6 hours</span><span>$2,400.00</span></div><div class="cost-row"><span>Second photographer</span><span>$600.00</span></div><div class="cost-row cost-row--total"><span>Estimated total (CAD)</span><strong>$3,000.00</strong></div></div></td></tr>
+          <tr><th scope="row">With discount</th><td><div class="stack" role="group" aria-label="Quote summary"><div class="cost-row"><span>Wedding coverage, 6 hours</span><span>$2,400.00</span></div><div class="cost-row"><span>Second photographer</span><span>$600.00</span></div><div class="cost-row cost-row--discount"><span>Engagement session discount</span><span>&minus;$200.00</span></div><div class="cost-row cost-row--total"><span>Estimated total (CAD)</span><strong>$2,800.00</strong></div></div></td></tr>
+          <tr><th scope="row">Recalculating</th><td><div class="stack" aria-busy="true"><div class="cost-row"><span>Wedding coverage, 6 hours</span><span><span class="skeleton skeleton--text" style="width: 4rem;"></span></span></div><div class="cost-row cost-row--total"><span>Estimated total (CAD)</span><strong><span class="skeleton skeleton--title" style="width: 6rem; display: inline-block;"></span></strong></div></div></td></tr>
+          <tr><th scope="row">Empty</th><td><p class="muted">Choose a service to see an estimate.</p></td></tr>
+          <tr><th scope="row">Error</th><td><div class="alert alert--danger" role="alert"><p>We could not calculate your quote.</p><button class="btn btn--sm" type="button">Try again</button></div></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Both themes</h3>
+      <div class="ds-themes">
+        <div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><div class="stack" role="group" aria-label="Quote summary"><div class="cost-row"><span>Wedding coverage, 6 hours</span><span>$2,400.00</span></div><div class="cost-row"><span>Second photographer</span><span>$600.00</span></div><div class="cost-row cost-row--discount"><span>Engagement session discount</span><span>&minus;$200.00</span></div><div class="cost-row cost-row--total"><span>Estimated total (CAD)</span><strong>$2,800.00</strong></div></div></div></div>
+        <div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><div class="stack" role="group" aria-label="Quote summary"><div class="cost-row"><span>Wedding coverage, 6 hours</span><span>$2,400.00</span></div><div class="cost-row"><span>Second photographer</span><span>$600.00</span></div><div class="cost-row cost-row--discount"><span>Engagement session discount</span><span>&minus;$200.00</span></div><div class="cost-row cost-row--total"><span>Estimated total (CAD)</span><strong>$2,800.00</strong></div></div></div></div>
+      </div>
+      <ul>
+        <li><b>Updating</b>: change the numbers in place; avoid fading or counting up. Announce the new total once.</li>
+        <li><b>Rounding</b>: show cents on every row and the total, even when whole.</li>
+        <li><b>Taxes</b>: add a row "HST (13%)" before the total, or say "before taxes" in the total label; never leave it ambiguous.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+      <ul>
+        <li>Rows are flex; label wraps, amount stays on the first line to the right. They hold down to 320px.</li>
+        <li>In the two-column quote layout the summary is sticky in the right column from 1100px; below that it sits under the form, above the submit button.</li>
+        <li>The total amount never wraps; very long labels wrap instead.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+      <p>Rows use default ink, discounts <code>--color-success-fg</code>, the total rule <code>--color-border-default</code>. The total figure uses <code>--font-family-serif</code> at <code>--font-size-2xl</code>. No overrides are needed for dark mode.</p>
+    </section>
+    <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+      <h3>Role and pattern</h3>
+      <p>A labelled <code>role="group"</code> of text rows; the total is a polite live region (<code>role="status"</code>) so the new amount is announced after a change, following the <a href="https://www.w3.org/WAI/ARIA/apg/practices/read-me-first/">live-region guidance</a>. Not a table: rows are label and value pairs. If the bill needs columns, use a <a href="table.html">table</a>.</p>
+      <h3>Keyboard</h3>
+      <div class="ds-table-wrap"><table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td><kbd>Tab</kbd></td><td>No stop: the summary is static. A Retry button in the error state is reachable.</td></tr><tr><td><kbd>Enter</kbd>, <kbd>Space</kbd></td><td>Activates Retry.</td></tr><tr><td><kbd>Esc</kbd></td><td>No effect.</td></tr></tbody></table></div>
+      <h3>Focus</h3>
+      <p>No focus target in the normal state. When the calculation fails, do not steal focus; the alert is announced and Retry stays in the tab order.</p>
+      <h3>Labelling</h3>
+      <p>The group is named "Quote summary". Discounts must be negative in text ("&minus;$200.00") and in the label ("discount"). The live region wraps only the total so assistive technology is not flooded.</p>
+      <h3>Contrast</h3>
+      <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);"><div class="ds-pair"><span>Row text on surface</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-surface" data-min="4.5"></span></div><div class="ds-pair"><span>Discount row on surface</span><span class="ds-pair__ratio" data-contrast="--color-success-fg|--color-bg-surface" data-min="4.5"></span></div><div class="ds-pair"><span>Total on surface</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-surface" data-min="4.5"></span></div><div class="ds-pair"><span>Discount on soft card</span><span class="ds-pair__ratio" data-contrast="--color-success-fg|--color-bg-subtle" data-min="4.5"></span></div><div class="ds-pair"><span>Total rule (decorative)</span><span class="ds-pair__ratio" data-contrast="--color-border-default|--color-bg-surface" data-min="1.2"></span></div></div>
+      <h3>Motion</h3>
+      <p>Amounts change instantly; the skeleton shimmer stops under reduced motion.</p>
+      <h3>Touch</h3>
+      <p>No targets in the summary itself. The submit and Retry buttons are the standard 44px and 32px buttons.</p>
+    </section>
+    <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+      <ul>
+        <li>Amounts have the currency symbol and two decimals: "$2,400.00". Negative amounts use the true minus sign (&minus;), not a hyphen.</li>
+        <li>Say "Estimated total" while the quote can change, "Total" once confirmed.</li>
+        <li>State the currency once, on the total: "(CAD)".</li>
+        <li>Discounts name their reason: "Engagement session discount", not "Discount".</li>
+        <li>Never present an estimate as a price you will charge unless the studio has confirmed it.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+      <div class="ds-dodont">
+        <figure class="ds-do"><div class="ds-example__canvas"><div class="stack" role="group" aria-label="Quote summary"><div class="cost-row"><span>Wedding coverage, 6 hours</span><span>$2,400.00</span></div><div class="cost-row"><span>Second photographer</span><span>$600.00</span></div><div class="cost-row cost-row--discount"><span>Engagement session discount</span><span>&minus;$200.00</span></div><div class="cost-row cost-row--total"><span>Estimated total (CAD)</span><strong>$2,800.00</strong></div></div></div><figcaption>Discount in success ink with a minus sign and a reason.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><div class="stack"><div class="cost-row cost-row--discount"><span>Discount</span><span>200</span></div></div></div><figcaption>Colour alone, no currency symbol, no minus sign and no reason.</figcaption></figure>
+        <figure class="ds-do"><div class="ds-example__canvas"><div class="cost-row cost-row--total"><span>Estimated total (CAD)</span><strong role="status" aria-live="polite">$3,000.00</strong></div></div><figcaption>Announce only the total.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><div class="stack" aria-live="assertive"><div class="cost-row"><span>Wedding coverage</span><span>$2,400.00</span></div></div></div><figcaption>An assertive region on every row interrupts and repeats.</figcaption></figure>
+      </div>
+    </section>
+    <section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+        <tbody>
+          <tr><td>Discount ink</td><td><code>--color-success-fg</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-success-fg" data-swatch></i><span data-token="--color-success-fg"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-success-fg" data-swatch></i><span data-token="--color-success-fg"></span></span></td></tr>
+          <tr><td>Row text</td><td><code>--color-fg-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td></tr>
+          <tr><td>Total rule</td><td><code>--color-border-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-border-default" data-swatch></i><span data-token="--color-border-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-border-default" data-swatch></i><span data-token="--color-border-default"></span></span></td></tr>
+          <tr><td>Row gap</td><td><code>--space-3</code></td><td colspan="2"><span data-token="--space-3"></span></td></tr>
+          <tr><td>Row font</td><td><code>--text-body-sm</code></td><td colspan="2"><span data-token="--text-body-sm"></span></td></tr>
+          <tr><td>Total label font</td><td><code>--text-body-lg</code></td><td colspan="2"><span data-token="--text-body-lg"></span></td></tr>
+          <tr><td>Total figure</td><td><code>--font-family-serif</code> / <code>--font-size-2xl</code></td><td colspan="2"><span data-token="--font-family-serif"></span> / <span data-token="--font-size-2xl"></span></td></tr>
+          <tr><td>Total spacing</td><td><code>--space-5</code></td><td colspan="2"><span data-token="--space-5"></span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+    <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+      <pre><code>&lt;div class="stack" role="group" aria-label="Quote summary"&gt;
+&lt;div class="cost-row"&gt;
+&lt;span&gt;Wedding coverage, 6 hours&lt;/span&gt;
+&lt;span&gt;$2,400.00&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="cost-row"&gt;
+&lt;span&gt;Second photographer&lt;/span&gt;
+&lt;span&gt;$600.00&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="cost-row cost-row--discount"&gt;
+&lt;span&gt;Engagement session discount&lt;/span&gt;
+&lt;span&gt;&amp;minus;$200.00&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="cost-row cost-row--total"&gt;
+&lt;span&gt;Estimated total (CAD)&lt;/span&gt;
+&lt;strong&gt;$2,800.00&lt;/strong&gt;
+&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>.cost-row</code></td><td>Label and amount, space between, small gap below.</td></tr><tr><td><code>.cost-row--discount</code></td><td>Success ink for deductions.</td></tr><tr><td><code>.cost-row--total</code></td><td>Rule above, larger label, serif figure in <code>&lt;strong&gt;</code>.</td></tr><tr><td><code>role="status"</code></td><td>On the total amount for live updates.</td></tr></tbody></table></div>
+    </section>
+    <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+      <p>Extracted from these mocks:</p>
+      <ul>
+        <li><a href="../../mocks/marketing/quote-summary.html">marketing/quote-summary</a> (itemised quote with discount and total)</li>
+        <li><a href="../../mocks/marketing/quote.html">marketing/quote</a> (live total beside the calculator)</li>
+        <li><a href="../../mocks/marketing/prints.html">marketing/prints</a> (print price rows)</li>
+      </ul>
+      <p>Drift fixed during extraction: the mocks used <code>.cost-row.total</code> and <code>.discount</code> as stacked classes with 12px text and a separate <code>.serif</code> 32px figure; the system uses BEM modifiers, the 14px body-sm token and an explicit live region on the total.</p>
+    </section>
+
+    <footer class="ds-footer"><span>Quinntyne Brown Studio design system &middot; extracted from <a href="../../mocks/index.html">docs/mocks</a></span><a href="#top">Back to top</a></footer>
+  </main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

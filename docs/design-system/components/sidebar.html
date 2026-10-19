@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sidebar &mdash; Quinntyne Brown Studio design system</title>
+<meta name="description" content="The sidebar is the admin workspace&#x27;s table of contents: every area of the studio, grouped, with the current one marked.">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+  <nav class="ds-nav" aria-label="Design system">
+    <div class="ds-nav__brand"><a href="../index.html">QBS DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">&#9790; Dark</button></div>
+    <details open><summary>Foundations</summary><ul>
+      <li><a href="../foundations/color.html">Color</a></li>
+      <li><a href="../foundations/typography.html">Typography</a></li>
+      <li><a href="../foundations/spacing.html">Spacing</a></li>
+      <li><a href="../foundations/layout.html">Layout</a></li>
+      <li><a href="../foundations/elevation.html">Elevation</a></li>
+      <li><a href="../foundations/shape.html">Shape</a></li>
+      <li><a href="../foundations/motion.html">Motion</a></li>
+      <li><a href="../foundations/iconography.html">Iconography</a></li>
+      <li><a href="../foundations/theming.html">Theming</a></li>
+      <li><a href="../foundations/responsive.html">Responsive</a></li>
+      <li><a href="../foundations/accessibility.html">Accessibility</a></li>
+      <li><a href="../foundations/content.html">Content</a></li>
+    </ul></details>
+    <details open><summary>Components</summary><ul>
+      <li><a href="../components/button.html">Button</a></li>
+      <li><a href="../components/button-group.html">Button group</a></li>
+      <li><a href="../components/link.html">Link</a></li>
+      <li><a href="../components/menu.html">Menu</a></li>
+      <li><a href="../components/checkbox.html">Checkbox</a></li>
+      <li><a href="../components/date-navigator.html">Date navigator</a></li>
+      <li><a href="../components/file-upload.html">File upload</a></li>
+      <li><a href="../components/form-field.html">Form field</a></li>
+      <li><a href="../components/form-layout.html">Form layout</a></li>
+      <li><a href="../components/radio-group.html">Radio group</a></li>
+      <li><a href="../components/select.html">Select</a></li>
+      <li><a href="../components/switch.html">Switch</a></li>
+      <li><a href="../components/text-field.html">Text field</a></li>
+      <li><a href="../components/textarea.html">Textarea</a></li>
+      <li><a href="../components/breadcrumb.html">Breadcrumb</a></li>
+      <li><a href="../components/footer.html">Footer</a></li>
+      <li><a href="../components/pagination.html">Pagination</a></li>
+      <li><a href="../components/sidebar.html">Sidebar</a></li>
+      <li><a href="../components/skip-link.html">Skip link</a></li>
+      <li><a href="../components/tabs.html">Tabs</a></li>
+      <li><a href="../components/top-bar.html">Top bar</a></li>
+      <li><a href="../components/accordion.html">Accordion</a></li>
+      <li><a href="../components/card.html">Card</a></li>
+      <li><a href="../components/dialog.html">Dialog</a></li>
+      <li><a href="../components/divider.html">Divider</a></li>
+      <li><a href="../components/layout.html">Layout primitives</a></li>
+      <li><a href="../components/tooltip.html">Tooltip</a></li>
+      <li><a href="../components/avatar.html">Avatar</a></li>
+      <li><a href="../components/badge.html">Badge</a></li>
+      <li><a href="../components/blog-card.html">Blog card</a></li>
+      <li><a href="../components/chip.html">Chip</a></li>
+      <li><a href="../components/cost-summary.html">Cost summary</a></li>
+      <li><a href="../components/description-list.html">Description list</a></li>
+      <li><a href="../components/line-item.html">Line item</a></li>
+      <li><a href="../components/photo-tile.html">Photo tile</a></li>
+      <li><a href="../components/calendar.html">Schedule calendar</a></li>
+      <li><a href="../components/selection-bar.html">Selection bar</a></li>
+      <li><a href="../components/stat.html">Stat</a></li>
+      <li><a href="../components/stepper.html">Stepper</a></li>
+      <li><a href="../components/table.html">Table</a></li>
+      <li><a href="../components/alert.html">Alert</a></li>
+      <li><a href="../components/empty-state.html">Empty state</a></li>
+      <li><a href="../components/error-page.html">Error page</a></li>
+      <li><a href="../components/inline-message.html">Inline message</a></li>
+      <li><a href="../components/progress.html">Progress</a></li>
+      <li><a href="../components/skeleton.html">Skeleton</a></li>
+      <li><a href="../components/spinner.html">Spinner</a></li>
+      <li><a href="../components/toast.html">Toast</a></li>
+    </ul></details>
+    <details open><summary>Patterns</summary><ul>
+      <li><a href="../patterns/forms.html">Forms</a></li>
+      <li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li>
+      <li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li>
+      <li><a href="../patterns/navigation-and-page-structure.html">Navigation and page structure</a></li>
+      <li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li>
+      <li><a href="../patterns/data-tables-and-lists.html">Data tables and lists</a></li>
+      <li><a href="../patterns/notifications.html">Notifications</a></li>
+      <li><a href="../patterns/content-and-tone.html">Content and tone</a></li>
+    </ul></details>
+  </nav>
+
+  <main id="main" class="ds-main">
+    <header class="ds-header">
+      <p class="ds-kicker">Component &amp;middot; Navigation</p>
+      <h1>Sidebar</h1>
+      <p class="ds-lead">The sidebar is the admin workspace's table of contents: every area of the studio, grouped, with the current one marked.</p>
+      <div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Status: stable</span><span class="ds-pill">Landmark <code>&lt;aside&gt;</code> + <code>&lt;nav&gt;</code></span></div>
+      <ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul>
+    </header>
+
+    <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+      <p>Use the sidebar in the admin app, where there are more than seven destinations and people move between them all day. For a public site with a handful of pages use the <a href="top-bar.html">top bar</a> instead. Inside one area, switch views with <a href="tabs.html">tabs</a>, not more sidebar links.</p>
+      <ul>
+        <li><b>Grouped</b>: destinations sit under quiet group labels (Workspace, Studio, Pricing, Marketing) so a long list can be scanned.</li>
+        <li><b>Current</b>: the active destination has a tinted background and <code>aria-current="page"</code>. Child pages (the session editor, the upload page) keep their parent highlighted.</li>
+        <li><b>Footer</b>: links that leave the workspace ("View website") and the sign-out action sit at the bottom, separated from the destinations.</li>
+        <li><b>Compact (mobile)</b>: below 768px the sidebar is hidden and a menu button in the <a href="top-bar.html">app bar</a> opens it.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+      <div class="ds-anatomy">
+        <figure class="ds-anatomy__figure">
+          <aside class="sidebar" aria-label="Studio workspace" style="width: 100%; max-width: var(--layout-sidebar-width);"><a class="brand" href="#">Quinntyne Brown<span>Photography studio</span></a><nav aria-label="Workspace"><p class="sidebar__group">Workspace</p><a class="sidebar__link" href="#">Overview</a><a class="sidebar__link" href="#" aria-current="page">Sessions</a><a class="sidebar__link" href="#">Availability</a><a class="sidebar__link" href="#">Photographers</a><p class="sidebar__group">Pricing</p><a class="sidebar__link" href="#">Quote rates</a><a class="sidebar__link" href="#">Discounts</a><a class="sidebar__link" href="#">Print pricing</a></nav><div class="sidebar__footer"><a class="sidebar__link" href="#">View website</a><button class="btn btn--ghost btn--sm" type="button">Sign out</button></div></aside>
+          <span class="ds-callout" style="left: 14%; top: 8%;" aria-hidden="true">1</span>
+          <span class="ds-callout" style="left: 14%; top: 21%;" aria-hidden="true">2</span>
+          <span class="ds-callout" style="left: 22%; top: 36%;" aria-hidden="true">3</span>
+          <span class="ds-callout" style="left: 22%; top: 88%;" aria-hidden="true">4</span>
+        </figure>
+        <ol class="ds-anatomy__list">
+          <li><div><b>Brand</b><small>Wordmark linking to the dashboard.</small></div></li>
+          <li><div><b>Group label</b><small><code>.sidebar__group</code>: uppercase overline, not interactive, not a heading link.</small></div></li>
+          <li><div><b>Link</b><small><code>.sidebar__link</code>: at least <code>--control-height-sm</code> tall, 14px text; the current one carries <code>aria-current="page"</code>.</small></div></li>
+          <li><div><b>Footer</b><small><code>.sidebar__footer</code> is pushed to the bottom with <code>margin-top: auto</code>.</small></div></li>
+        </ol>
+      </div>
+    </section>
+    <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+      <p>The sidebar is one component with two content variations: how many groups it carries and whether links show a count.</p>
+      <h3>Grouped (default)</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><aside class="sidebar" aria-label="Studio workspace" style="width: 100%; max-width: var(--layout-sidebar-width);"><a class="brand" href="#">Quinntyne Brown<span>Photography studio</span></a><nav aria-label="Workspace"><p class="sidebar__group">Workspace</p><a class="sidebar__link" href="#">Overview</a><a class="sidebar__link" href="#" aria-current="page">Sessions</a><a class="sidebar__link" href="#">Availability</a><a class="sidebar__link" href="#">Photographers</a><p class="sidebar__group">Pricing</p><a class="sidebar__link" href="#">Quote rates</a><a class="sidebar__link" href="#">Discounts</a><a class="sidebar__link" href="#">Print pricing</a></nav><div class="sidebar__footer"><a class="sidebar__link" href="#">View website</a><button class="btn btn--ghost btn--sm" type="button">Sign out</button></div></aside></div>
+        <div class="ds-example__caption"><span>Groups separate areas. The current page is tinted.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;aside class="sidebar" aria-label="Studio workspace"&gt;
+  &lt;a class="brand" href="/admin"&gt;Quinntyne Brown&lt;span&gt;Photography studio&lt;/span&gt;&lt;/a&gt;
+  &lt;nav aria-label="Workspace"&gt;
+    &lt;p class="sidebar__group"&gt;Workspace&lt;/p&gt;
+    &lt;a class="sidebar__link" href="/admin/sessions" aria-current="page"&gt;Sessions&lt;/a&gt;
+    &lt;a class="sidebar__link" href="/admin/schedule"&gt;Availability&lt;/a&gt;
+  &lt;/nav&gt;
+  &lt;div class="sidebar__footer"&gt;…&lt;/div&gt;
+&lt;/aside&gt;</code></pre></details>
+      </div>
+      <h3>With a count</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><aside class="sidebar" aria-label="Studio workspace" style="width: 100%; max-width: var(--layout-sidebar-width);"><nav aria-label="Marketing"><p class="sidebar__group">Marketing</p><a class="sidebar__link" href="#">Public galleries</a><a class="sidebar__link" href="#" aria-current="page">Inquiries <span class="badge" aria-label="3 new">3</span></a><a class="sidebar__link" href="#">Website content</a></nav></aside></div>
+        <div class="ds-example__caption"><span>A <a href="badge.html">badge</a> after the label counts things that need attention. Give it an <code>aria-label</code> that says what is being counted.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="sizes" data-na="The sidebar has one width, &lt;code&gt;--layout-sidebar-width&lt;/code&gt; (220px). Collapsed-to-icons is not part of this system."><h2><a href="#sizes">Sizes</a></h2>
+      <p class="ds-na">The sidebar has one width, &lt;code&gt;--layout-sidebar-width&lt;/code&gt; (220px). Collapsed-to-icons is not part of this system.</p>
+    </section>
+    <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+      <p>A sidebar link has default, hover, focus and current. Hover and focus are forced with <code>data-state</code>; real pages use <code>:hover</code> and <code>:focus-visible</code>.</p>
+      <div class="ds-matrix"><table>
+        <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Current</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Link</th><td><a class="sidebar__link" href="#">Sessions</a></td><td><a class="sidebar__link" href="#" data-state="hover">Sessions</a></td><td><a class="sidebar__link" href="#" data-state="focus">Sessions</a></td><td><a class="sidebar__link" href="#" aria-current="page">Sessions</a></td></tr>
+          <tr><th scope="row">Link with count</th><td><a class="sidebar__link" href="#">Inquiries <span class="badge" aria-label="3 new">3</span></a></td><td><a class="sidebar__link" href="#" data-state="hover">Inquiries <span class="badge" aria-label="3 new">3</span></a></td><td><a class="sidebar__link" href="#" data-state="focus">Inquiries <span class="badge" aria-label="3 new">3</span></a></td><td><a class="sidebar__link" href="#" aria-current="page">Inquiries <span class="badge" aria-label="3 new">3</span></a></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Both themes</h3>
+      <div class="ds-themes">
+        <div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><aside class="sidebar" aria-label="Studio workspace" style="width: 100%; max-width: var(--layout-sidebar-width);"><a class="brand" href="#">Quinntyne Brown<span>Photography studio</span></a><nav aria-label="Workspace"><p class="sidebar__group">Workspace</p><a class="sidebar__link" href="#">Overview</a><a class="sidebar__link" href="#" aria-current="page">Sessions</a><a class="sidebar__link" href="#">Availability</a><a class="sidebar__link" href="#">Photographers</a><p class="sidebar__group">Pricing</p><a class="sidebar__link" href="#">Quote rates</a><a class="sidebar__link" href="#">Discounts</a><a class="sidebar__link" href="#">Print pricing</a></nav><div class="sidebar__footer"><a class="sidebar__link" href="#">View website</a><button class="btn btn--ghost btn--sm" type="button">Sign out</button></div></aside></div></div>
+        <div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><aside class="sidebar" aria-label="Studio workspace" style="width: 100%; max-width: var(--layout-sidebar-width);"><a class="brand" href="#">Quinntyne Brown<span>Photography studio</span></a><nav aria-label="Workspace"><p class="sidebar__group">Workspace</p><a class="sidebar__link" href="#">Overview</a><a class="sidebar__link" href="#" aria-current="page">Sessions</a><a class="sidebar__link" href="#">Availability</a><a class="sidebar__link" href="#">Photographers</a><p class="sidebar__group">Pricing</p><a class="sidebar__link" href="#">Quote rates</a><a class="sidebar__link" href="#">Discounts</a><a class="sidebar__link" href="#">Print pricing</a></nav><div class="sidebar__footer"><a class="sidebar__link" href="#">View website</a><button class="btn btn--ghost btn--sm" type="button">Sign out</button></div></aside></div></div>
+      </div>
+      <ul>
+        <li><b>Current</b> uses <code>--color-brand-subtle</code> as the background; the text stays <code>--color-fg-default</code> so contrast does not change.</li>
+        <li><b>Open (mobile)</b>: the app shell shows the sidebar as a full-height panel when the menu button has <code>aria-expanded="true"</code>. Focus moves to the first link on open and returns to the button on close.</li>
+        <li><b>Hover on current</b> keeps the current tint; hover never removes the current indicator.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+      <ul>
+        <li>At 768px and wider the sidebar is a persistent 220px column at the left of the workspace, and the content fills the rest.</li>
+        <li>Below 768px (<code>--layout-breakpoint-md</code>) the sidebar is hidden and the app bar shows a Menu button (<code>aria-expanded</code>, <code>aria-controls="sidebar"</code>) that reveals it as a full-height panel.</li>
+        <li>A long list scrolls inside the sidebar; the footer stays reachable by scrolling, not by shrinking the links.</li>
+        <li>Labels wrap onto a second line instead of truncating; the longest current label is "Preferred vendors".</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+      <p>The sidebar uses its own surface token, <code>--color-bg-sidebar</code> (a barely tinted off-white in light, a slightly darker surface in dark), so it separates from the page without a heavy border. Current and hover use <code>--color-brand-subtle</code> and <code>--color-bg-subtle-hover</code>; both flip with the theme.</p>
+    </section>
+    <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+      <h3>Role and pattern</h3>
+      <p>An <code>&lt;aside&gt;</code> (complementary landmark) wrapping a <code>&lt;nav&gt;</code>. Links are plain <code>&lt;a&gt;</code>. This follows the APG <a href="https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/navigation.html">Navigation landmark</a> example. Do not use <code>role="menu"</code>: a sidebar is a list of links, not an application menu.</p>
+      <h3>Keyboard</h3>
+      <div class="ds-table-wrap"><table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves through brand, links and footer actions in order.</td></tr><tr><td><kbd>Enter</kbd></td><td>Follows the focused link.</td></tr><tr><td><kbd>Esc</kbd></td><td>Mobile only: closes the open sidebar and returns focus to the Menu button.</td></tr></tbody></table></div>
+      <h3>Focus</h3>
+      <p>Each link shows the shared focus ring (2px <code>--color-focus-ring</code>, 2px offset). On mobile, opening the sidebar moves focus to its first link and closing it restores focus to the Menu button.</p>
+      <h3>Labelling</h3>
+      <p>Give the landmark and its nav distinct names ("Studio workspace", "Workspace") when more than one is present. Group labels are text; if they should be announced as headings, make them <code>&lt;h2&gt;</code> with the same class. Counts need an <code>aria-label</code> such as "3 new".</p>
+      <h3>Contrast</h3>
+      <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);"><div class="ds-pair"><span>Link on sidebar</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-sidebar" data-min="4.5"></span></div><div class="ds-pair"><span>Group label on sidebar</span><span class="ds-pair__ratio" data-contrast="--color-fg-muted|--color-bg-sidebar" data-min="4.5"></span></div><div class="ds-pair"><span>Link on current tint</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-brand-subtle" data-min="4.5"></span></div><div class="ds-pair"><span>Link on hover</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-subtle-hover" data-min="4.5"></span></div><div class="ds-pair"><span>Focus ring on sidebar</span><span class="ds-pair__ratio" data-contrast="--color-focus-ring|--color-bg-sidebar" data-min="3"></span></div></div>
+      <h3>Motion</h3>
+      <p>No motion. If the mobile panel slides, use <code>--duration-base</code> and remove the slide under <code>prefers-reduced-motion</code>.</p>
+      <h3>Touch</h3>
+      <p>Links are 32px tall plus a 2px margin on desktop, which meets the 24px minimum. In the mobile panel raise the link height to 44px (<code>--target-comfortable</code>).</p>
+    </section>
+    <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+      <ul>
+        <li>Labels are nouns for the area, 1-3 words, sentence case: "Sessions", "Quote rates", "Print pricing".</li>
+        <li>Group labels name a theme, not a verb: Workspace, Studio, Pricing, Marketing.</li>
+        <li>Keep the same order and names on every admin page (WCAG 3.2.3).</li>
+        <li>Links that leave the workspace say so: "View website" with an external cue.</li>
+        <li>Counts show only what needs attention; hide the badge at zero.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+      <div class="ds-dodont">
+        <figure class="ds-do"><div class="ds-example__canvas"><aside class="sidebar" aria-label="Studio workspace" style="width: 100%; max-width: var(--layout-sidebar-width);"><a class="brand" href="#">Quinntyne Brown<span>Photography studio</span></a><nav aria-label="Workspace"><p class="sidebar__group">Workspace</p><a class="sidebar__link" href="#">Overview</a><a class="sidebar__link" href="#" aria-current="page">Sessions</a><a class="sidebar__link" href="#">Availability</a><a class="sidebar__link" href="#">Photographers</a><p class="sidebar__group">Pricing</p><a class="sidebar__link" href="#">Quote rates</a><a class="sidebar__link" href="#">Discounts</a><a class="sidebar__link" href="#">Print pricing</a></nav><div class="sidebar__footer"><a class="sidebar__link" href="#">View website</a><button class="btn btn--ghost btn--sm" type="button">Sign out</button></div></aside></div><figcaption>Group related areas and mark one current.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><aside class="sidebar" aria-label="Studio workspace" style="width: 100%; max-width: var(--layout-sidebar-width);"><nav aria-label="Workspace"><a class="sidebar__link" href="#" aria-current="page">Sessions</a><a class="sidebar__link" href="#" aria-current="page">Availability</a><a class="sidebar__link" href="#">Photographers</a></nav></aside></div><figcaption>Two links marked current. Exactly one link per nav is current.</figcaption></figure>
+        <figure class="ds-do"><div class="ds-example__canvas"><aside class="sidebar" aria-label="Studio workspace" style="width: 100%; max-width: var(--layout-sidebar-width);"><nav aria-label="Workspace"><a class="sidebar__link" href="#">Inquiries <span class="badge" aria-label="3 new">3</span></a></nav></aside></div><figcaption>A count with a meaningful <code>aria-label</code>.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><aside class="sidebar" aria-label="Studio workspace" style="width: 100%; max-width: var(--layout-sidebar-width);"><nav aria-label="Workspace"><a class="sidebar__link" href="#">Inquiries <span class="badge">3</span></a></nav></aside></div><figcaption>A bare number reads as "Inquiries 3"; say what it counts.</figcaption></figure>
+      </div>
+    </section>
+    <section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+        <tbody>
+          <tr><td>Sidebar background</td><td><code>--color-bg-sidebar</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-sidebar" data-swatch></i><span data-token="--color-bg-sidebar"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-sidebar" data-swatch></i><span data-token="--color-bg-sidebar"></span></span></td></tr>
+          <tr><td>Sidebar border</td><td><code>--color-border-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-border-default" data-swatch></i><span data-token="--color-border-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-border-default" data-swatch></i><span data-token="--color-border-default"></span></span></td></tr>
+          <tr><td>Link text</td><td><code>--color-fg-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td></tr>
+          <tr><td>Group label</td><td><code>--color-fg-muted</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td></tr>
+          <tr><td>Current background</td><td><code>--color-brand-subtle</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-brand-subtle" data-swatch></i><span data-token="--color-brand-subtle"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-brand-subtle" data-swatch></i><span data-token="--color-brand-subtle"></span></span></td></tr>
+          <tr><td>Hover background</td><td><code>--color-bg-subtle-hover</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-subtle-hover" data-swatch></i><span data-token="--color-bg-subtle-hover"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-subtle-hover" data-swatch></i><span data-token="--color-bg-subtle-hover"></span></span></td></tr>
+          <tr><td>Focus ring</td><td><code>--color-focus-ring</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-focus-ring" data-swatch></i><span data-token="--color-focus-ring"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-focus-ring" data-swatch></i><span data-token="--color-focus-ring"></span></span></td></tr>
+          <tr><td>Width</td><td><code>--layout-sidebar-width</code></td><td colspan="2"><span data-token="--layout-sidebar-width"></span></td></tr>
+          <tr><td>Link min height</td><td><code>--control-height-sm</code></td><td colspan="2"><span data-token="--control-height-sm"></span></td></tr>
+          <tr><td>Link radius</td><td><code>--radius-sm</code></td><td colspan="2"><span data-token="--radius-sm"></span></td></tr>
+          <tr><td>Padding</td><td><code>--space-5</code> / <code>--space-8</code></td><td colspan="2"><span data-token="--space-5"></span> / <span data-token="--space-8"></span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+    <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+      <pre><code>&lt;aside class="sidebar" id="sidebar" aria-label="Studio workspace"&gt;
+  &lt;a class="brand" href="/admin"&gt;Quinntyne Brown&lt;span&gt;Photography studio&lt;/span&gt;&lt;/a&gt;
+  &lt;nav aria-label="Workspace"&gt;
+    &lt;p class="sidebar__group"&gt;Workspace&lt;/p&gt;
+    &lt;a class="sidebar__link" href="/admin" &gt;Overview&lt;/a&gt;
+    &lt;a class="sidebar__link" href="/admin/sessions" aria-current="page"&gt;Sessions&lt;/a&gt;
+  &lt;/nav&gt;
+  &lt;div class="sidebar__footer"&gt;
+    &lt;a class="sidebar__link" href="/"&gt;View website&lt;/a&gt;
+    &lt;button class="btn btn--ghost btn--sm" type="button"&gt;Sign out&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/aside&gt;</code></pre>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>.sidebar</code></td><td>Column container: 220px, sidebar surface, right border.</td></tr><tr><td><code>.sidebar__group</code></td><td>Group label (overline).</td></tr><tr><td><code>.sidebar__link</code></td><td>A destination: flex row, 32px minimum height.</td></tr><tr><td><code>.sidebar__footer</code></td><td>Bottom block pushed down with <code>margin-top: auto</code>.</td></tr><tr><td><code>aria-current="page"</code></td><td>Current destination: tinted background.</td></tr><tr><td><code>data-state="hover|focus"</code></td><td>Documentation only: forces a state in static pages.</td></tr></tbody></table></div>
+    </section>
+    <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+      <p>Extracted from these mocks:</p>
+      <ul>
+        <li><a href="../../mocks/admin/dashboard.html">admin/dashboard</a> (sidebar with the Workspace group)</li>
+        <li><a href="../../mocks/admin/sessions.html">admin/sessions</a> (Sessions current)</li>
+        <li><a href="../../mocks/admin/upload.html">admin/upload</a> (child page keeps Sessions current)</li>
+        <li><a href="../../mocks/admin/rates.html">admin/rates</a> (Pricing group)</li>
+      </ul>
+      <p>Drift fixed during extraction: the mocks call the pieces <code>.sidebar</code>, <code>.nav-group</code>, <code>.side-link.active</code> and <code>.sidebar-bottom</code>, with <code>active</code> as a class. The system uses BEM-style <code>.sidebar__*</code> and <code>aria-current="page"</code> so the visual state and the announced state cannot diverge. The mock sidebar is an <code>&lt;aside&gt;</code> with no inner <code>&lt;nav&gt;</code>; the system adds one so it is a navigation landmark. The count badge on a link is a system addition; no mock shows one.</p>
+    </section>
+
+    <footer class="ds-footer"><span>Quinntyne Brown Studio design system &middot; extracted from <a href="../../mocks/index.html">docs/mocks</a></span><a href="#top">Back to top</a></footer>
+  </main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

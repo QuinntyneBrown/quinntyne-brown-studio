@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Photo tile &mdash; Quinntyne Brown Studio design system</title>
+<meta name="description" content="A photo tile is one photograph in a grid: a 4:5 crop with a select checkbox, a position label and an optional status badge.">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+  <nav class="ds-nav" aria-label="Design system">
+    <div class="ds-nav__brand"><a href="../index.html">QBS DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">&#9790; Dark</button></div>
+    <details open><summary>Foundations</summary><ul>
+      <li><a href="../foundations/color.html">Color</a></li>
+      <li><a href="../foundations/typography.html">Typography</a></li>
+      <li><a href="../foundations/spacing.html">Spacing</a></li>
+      <li><a href="../foundations/layout.html">Layout</a></li>
+      <li><a href="../foundations/elevation.html">Elevation</a></li>
+      <li><a href="../foundations/shape.html">Shape</a></li>
+      <li><a href="../foundations/motion.html">Motion</a></li>
+      <li><a href="../foundations/iconography.html">Iconography</a></li>
+      <li><a href="../foundations/theming.html">Theming</a></li>
+      <li><a href="../foundations/responsive.html">Responsive</a></li>
+      <li><a href="../foundations/accessibility.html">Accessibility</a></li>
+      <li><a href="../foundations/content.html">Content</a></li>
+    </ul></details>
+    <details open><summary>Components</summary><ul>
+      <li><a href="../components/button.html">Button</a></li>
+      <li><a href="../components/button-group.html">Button group</a></li>
+      <li><a href="../components/link.html">Link</a></li>
+      <li><a href="../components/menu.html">Menu</a></li>
+      <li><a href="../components/checkbox.html">Checkbox</a></li>
+      <li><a href="../components/date-navigator.html">Date navigator</a></li>
+      <li><a href="../components/file-upload.html">File upload</a></li>
+      <li><a href="../components/form-field.html">Form field</a></li>
+      <li><a href="../components/form-layout.html">Form layout</a></li>
+      <li><a href="../components/radio-group.html">Radio group</a></li>
+      <li><a href="../components/select.html">Select</a></li>
+      <li><a href="../components/switch.html">Switch</a></li>
+      <li><a href="../components/text-field.html">Text field</a></li>
+      <li><a href="../components/textarea.html">Textarea</a></li>
+      <li><a href="../components/breadcrumb.html">Breadcrumb</a></li>
+      <li><a href="../components/footer.html">Footer</a></li>
+      <li><a href="../components/pagination.html">Pagination</a></li>
+      <li><a href="../components/sidebar.html">Sidebar</a></li>
+      <li><a href="../components/skip-link.html">Skip link</a></li>
+      <li><a href="../components/tabs.html">Tabs</a></li>
+      <li><a href="../components/top-bar.html">Top bar</a></li>
+      <li><a href="../components/accordion.html">Accordion</a></li>
+      <li><a href="../components/card.html">Card</a></li>
+      <li><a href="../components/dialog.html">Dialog</a></li>
+      <li><a href="../components/divider.html">Divider</a></li>
+      <li><a href="../components/layout.html">Layout primitives</a></li>
+      <li><a href="../components/tooltip.html">Tooltip</a></li>
+      <li><a href="../components/avatar.html">Avatar</a></li>
+      <li><a href="../components/badge.html">Badge</a></li>
+      <li><a href="../components/blog-card.html">Blog card</a></li>
+      <li><a href="../components/chip.html">Chip</a></li>
+      <li><a href="../components/cost-summary.html">Cost summary</a></li>
+      <li><a href="../components/description-list.html">Description list</a></li>
+      <li><a href="../components/line-item.html">Line item</a></li>
+      <li><a href="../components/photo-tile.html">Photo tile</a></li>
+      <li><a href="../components/calendar.html">Schedule calendar</a></li>
+      <li><a href="../components/selection-bar.html">Selection bar</a></li>
+      <li><a href="../components/stat.html">Stat</a></li>
+      <li><a href="../components/stepper.html">Stepper</a></li>
+      <li><a href="../components/table.html">Table</a></li>
+      <li><a href="../components/alert.html">Alert</a></li>
+      <li><a href="../components/empty-state.html">Empty state</a></li>
+      <li><a href="../components/error-page.html">Error page</a></li>
+      <li><a href="../components/inline-message.html">Inline message</a></li>
+      <li><a href="../components/progress.html">Progress</a></li>
+      <li><a href="../components/skeleton.html">Skeleton</a></li>
+      <li><a href="../components/spinner.html">Spinner</a></li>
+      <li><a href="../components/toast.html">Toast</a></li>
+    </ul></details>
+    <details open><summary>Patterns</summary><ul>
+      <li><a href="../patterns/forms.html">Forms</a></li>
+      <li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li>
+      <li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li>
+      <li><a href="../patterns/navigation-and-page-structure.html">Navigation and page structure</a></li>
+      <li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li>
+      <li><a href="../patterns/data-tables-and-lists.html">Data tables and lists</a></li>
+      <li><a href="../patterns/notifications.html">Notifications</a></li>
+      <li><a href="../patterns/content-and-tone.html">Content and tone</a></li>
+    </ul></details>
+  </nav>
+
+  <main id="main" class="ds-main">
+    <header class="ds-header">
+      <p class="ds-kicker">Component &amp;middot; Data display</p>
+      <h1>Photo tile</h1>
+      <p class="ds-lead">A photo tile is one photograph in a grid: a 4:5 crop with a select checkbox, a position label and an optional status badge.</p>
+      <div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Status: stable</span><span class="ds-pill">Selectable image</span></div>
+      <ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul>
+    </header>
+
+    <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+      <p>Use photo tiles to review, choose and order photographs in session galleries, albums and uploads. Use a <a href="card.html">card</a> for a titled item with text and a <a href="blog-card.html">blog card</a> for articles. Tiles are laid out by <code>.photo-grid</code>: two columns on a phone, three from 768px.</p>
+      <ul>
+        <li><b>Plain</b>: image and position label.</li>
+        <li><b>Selectable</b>: a checkbox with a visible "Select" label sits top left; selecting outlines the tile.</li>
+        <li><b>With badge</b>: a <a href="badge.html">badge</a> top right for AI suggested, approved, unavailable.</li>
+        <li><b>Fallback</b>: when the file is missing, a quiet text tile keeps the grid intact.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+      <div class="ds-anatomy">
+        <figure class="ds-anatomy__figure">
+          <div class="photo-grid" style="max-width: 11rem; grid-template-columns: minmax(0, 1fr);"><div class="photo-tile" ><img src="../../mocks/assets/photos/wedding.jpg" alt="Couple walking through a garden"><label class="photo-tile__select"><input type="checkbox"> <span class="visually-hidden">Select photo 01</span><span aria-hidden="true">Select</span></label><span class="badge badge--info">AI suggested</span><span class="photo-tile__label">01 / 24</span></div></div>
+          <span class="ds-callout" style="left: -4%; top: -4%;" aria-hidden="true">1</span>
+          <span class="ds-callout" style="left: 12%; top: 6%;" aria-hidden="true">2</span>
+          <span class="ds-callout" style="left: 88%; top: 10%;" aria-hidden="true">3</span>
+          <span class="ds-callout" style="left: 22%; top: 88%;" aria-hidden="true">4</span>
+        </figure>
+        <ol class="ds-anatomy__list">
+          <li><div><b>Image</b><small>Object-fit cover in a 4:5 frame. Always has <code>alt</code> describing the photograph.</small></div></li>
+          <li><div><b>Select control</b><small>A real checkbox in a label on a surface-coloured chip so it reads on any photo.</small></div></li>
+          <li><div><b>Status badge (optional)</b><small>A badge in the top-right corner; text carries the status.</small></div></li>
+          <li><div><b>Position label</b><small>"01 / 24" on a surface chip bottom left; helps people refer to a photo by number.</small></div></li>
+        </ol>
+      </div>
+    </section>
+    <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+      <p>Tiles live in a <code>.photo-grid</code>. The grid sets the column count and gap.</p>
+      <h3>Plain, selectable and with a badge</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="photo-grid" style="width: 100%;"><div class="photo-tile" ><img src="../../mocks/assets/photos/wedding.jpg" alt="Couple walking through a garden"><label class="photo-tile__select"><input type="checkbox"> <span class="visually-hidden">Select photo 01</span><span aria-hidden="true">Select</span></label><span class="photo-tile__label">01 / 24</span></div><div class="photo-tile" aria-selected="true"><img src="../../mocks/assets/photos/ceremony.jpg" alt="Guests seated at the ceremony"><label class="photo-tile__select"><input type="checkbox" checked> <span class="visually-hidden">Select photo 02</span><span aria-hidden="true">Select</span></label><span class="badge badge--success">Approved</span><span class="photo-tile__label">02 / 24</span></div><div class="photo-tile" ><img src="../../mocks/assets/photos/family.jpg" alt="Family laughing on a lawn"><label class="photo-tile__select"><input type="checkbox"> <span class="visually-hidden">Select photo 03</span><span aria-hidden="true">Select</span></label><span class="badge badge--info">AI suggested</span><span class="photo-tile__label">03 / 24</span></div></div></div>
+        <div class="ds-example__caption"><span>The selected tile has <code>aria-selected="true"</code> and a thick brand outline.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class="photo-grid"&gt;
+  &lt;div class="photo-tile" aria-selected="true"&gt;
+    &lt;img src="wedding.jpg" alt="Couple walking through a garden"&gt;
+    &lt;label class="photo-tile__select"&gt;&lt;input type="checkbox" checked&gt; &lt;span class="visually-hidden"&gt;Select photo 02&lt;/span&gt;&lt;span aria-hidden="true"&gt;Select&lt;/span&gt;&lt;/label&gt;
+    &lt;span class="badge badge--success"&gt;Approved&lt;/span&gt;
+    &lt;span class="photo-tile__label"&gt;02 / 24&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+      </div>
+      <h3>Fallback when the image fails</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="photo-grid" style="max-width: 11rem; grid-template-columns: minmax(0, 1fr);"><div class="photo-tile photo-tile--fallback" role="img" aria-label="Photo 04 could not be loaded">Preview unavailable</div></div></div>
+        <div class="ds-example__caption"><span>Same 4:5 frame, quiet text. The file name stays discoverable elsewhere.</span></div>
+      </div>
+      <h3>Loading</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="photo-grid" style="width: 100%;" aria-busy="true"><div class="photo-tile"><span class="skeleton" style="height: 100%;"></span></div><div class="photo-tile"><span class="skeleton" style="height: 100%;"></span></div><div class="photo-tile"><span class="skeleton" style="height: 100%;"></span></div></div></div>
+        <div class="ds-example__caption"><span>Skeleton tiles keep the 4:5 ratio so rows do not jump.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="sizes" data-na="Tiles have no size options; the grid sets the column width and the 4:5 ratio sets the height."><h2><a href="#sizes">Sizes</a></h2>
+      <p class="ds-na">Tiles have no size options; the grid sets the column width and the 4:5 ratio sets the height.</p>
+    </section>
+    <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+      <p>Hover scales the image 2.5%. Selection adds an outline and a checked box. Focus lands on the checkbox and on the open button.</p>
+      <div class="ds-matrix"><table>
+        <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Hover</th><th scope="col">Selected</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Tile</th><td><div class="photo-grid" style="max-width: 11rem; grid-template-columns: minmax(0, 1fr);"><div class="photo-tile"><img src="../../mocks/assets/photos/couple.jpg" alt="Couple on a bridge"><label class="photo-tile__select"><input type="checkbox"> <span class="visually-hidden">Select photo 05</span><span aria-hidden="true">Select</span></label><span class="photo-tile__label">05 / 24</span></div></div></td><td><div class="photo-grid" style="max-width: 11rem; grid-template-columns: minmax(0, 1fr);"><div class="photo-tile" data-state="hover"><img src="../../mocks/assets/photos/couple.jpg" alt="Couple on a bridge"><label class="photo-tile__select"><input type="checkbox"> <span class="visually-hidden">Select photo 05</span><span aria-hidden="true">Select</span></label><span class="photo-tile__label">05 / 24</span></div></div></td><td><div class="photo-grid" style="max-width: 11rem; grid-template-columns: minmax(0, 1fr);"><div class="photo-tile" aria-selected="true"><img src="../../mocks/assets/photos/couple.jpg" alt="Couple on a bridge"><label class="photo-tile__select"><input type="checkbox"> <span class="visually-hidden">Select photo 05</span><span aria-hidden="true">Select</span></label><span class="photo-tile__label">05 / 24</span></div></div></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Both themes</h3>
+      <div class="ds-themes">
+        <div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><div class="photo-grid" style="width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr));"><div class="photo-tile" ><img src="../../mocks/assets/photos/flowers.jpg" alt="Bouquet on a table"><label class="photo-tile__select"><input type="checkbox"> <span class="visually-hidden">Select photo 06</span><span aria-hidden="true">Select</span></label><span class="photo-tile__label">06 / 24</span></div><div class="photo-tile" aria-selected="true"><img src="../../mocks/assets/photos/gathering.jpg" alt="Guests gathered at dusk"><label class="photo-tile__select"><input type="checkbox" checked> <span class="visually-hidden">Select photo 07</span><span aria-hidden="true">Select</span></label><span class="badge badge--pending">Pending</span><span class="photo-tile__label">07 / 24</span></div></div></div></div>
+        <div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><div class="photo-grid" style="width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr));"><div class="photo-tile" ><img src="../../mocks/assets/photos/flowers.jpg" alt="Bouquet on a table"><label class="photo-tile__select"><input type="checkbox"> <span class="visually-hidden">Select photo 06</span><span aria-hidden="true">Select</span></label><span class="photo-tile__label">06 / 24</span></div><div class="photo-tile" aria-selected="true"><img src="../../mocks/assets/photos/gathering.jpg" alt="Guests gathered at dusk"><label class="photo-tile__select"><input type="checkbox" checked> <span class="visually-hidden">Select photo 07</span><span aria-hidden="true">Select</span></label><span class="badge badge--pending">Pending</span><span class="photo-tile__label">07 / 24</span></div></div></div></div>
+      </div>
+      <ul>
+        <li><b>Focus</b>: the checkbox shows the shared 2px ring; when a tile opens a lightbox the open control also does.</li>
+        <li><b>Selected and disabled</b>: tiles of photos that can no longer be selected (already ordered) disable the checkbox and show an "Ordered" badge.</li>
+        <li><b>Hover</b> is decorative; the scale stops under reduced motion because transitions are zeroed by the motion tokens.</li>
+        <li><b>Bulk selection</b> is announced by the <a href="selection-bar.html">selection bar</a>.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+      <ul>
+        <li>Two columns below 768px, three from 768px, with the gap rising from <code>--space-3</code> to <code>--space-5</code>. Tiles keep a 4:5 ratio.</li>
+        <li>At 480px and below the status badge moves from the top right to the bottom left so it does not collide with the select chip; the select chip tightens.</li>
+        <li>A grid of more than about 60 tiles should paginate or lazy-load; see <a href="pagination.html">pagination</a>.</li>
+        <li>The select chip is always visible; do not reveal it only on hover, because touch screens have no hover.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+      <p>The chips on the photo (select, label, badge) use <code>--color-bg-surface</code> and default ink so they read on any photograph in either theme. The selection outline uses <code>--color-brand</code>. The empty frame uses <code>--color-bg-subtle</code>, the fallback <code>--color-bg-surface-sunken</code>.</p>
+    </section>
+    <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+      <h3>Role and pattern</h3>
+      <p>A group of images with native checkboxes. The grid is a list of images, not an ARIA listbox or grid; selection is the checkbox's state. Where a tile opens a larger view, wrap the image in a button that opens a <a href="dialog.html">dialog</a> (lightbox).</p>
+      <h3>Keyboard</h3>
+      <div class="ds-table-wrap"><table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves checkbox by checkbox (and open buttons) in DOM order.</td></tr><tr><td><kbd>Space</kbd></td><td>Toggles the focused checkbox.</td></tr><tr><td><kbd>Enter</kbd></td><td>Activates the open button, if present.</td></tr><tr><td><kbd>Esc</kbd></td><td>Closes the lightbox and returns focus to the tile that opened it.</td></tr></tbody></table></div>
+      <h3>Focus</h3>
+      <p>The checkbox is the focus target and shows the shared ring. The selected tile's thick outline is additional, not a replacement for the ring. Lightbox: focus returns to the tile's open button on close.</p>
+      <h3>Labelling</h3>
+      <p>Each image has descriptive <code>alt</code> (what is photographed, not the file name). The checkbox has a visually hidden name: "Select photo 02". The visible "Select" text is <code>aria-hidden</code> to avoid double reading. The badge text is read as part of the tile. Announce the selection count in the selection bar's live region.</p>
+      <h3>Contrast</h3>
+      <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);"><div class="ds-pair"><span>Select label on chip</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-surface" data-min="4.5"></span></div><div class="ds-pair"><span>Position label on chip</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-surface" data-min="4.5"></span></div><div class="ds-pair"><span>Selection outline on surface</span><span class="ds-pair__ratio" data-contrast="--color-brand|--color-bg-surface" data-min="3"></span></div><div class="ds-pair"><span>Fallback text on fallback fill</span><span class="ds-pair__ratio" data-contrast="--color-fg-muted|--color-bg-surface-sunken" data-min="4.5"></span></div><div class="ds-pair"><span>Focus ring on surface</span><span class="ds-pair__ratio" data-contrast="--color-focus-ring|--color-bg-surface" data-min="3"></span></div></div>
+      <h3>Motion</h3>
+      <p>Hover scales the image by 2.5% over <code>--duration-deliberate</code>. Reduced motion zeroes the duration. No other animation.</p>
+      <h3>Touch</h3>
+      <p>The checkbox chip is about 28px tall and 20px for the box. On touch screens make the whole chip the label (it is) and keep 8px between neighbouring tiles; opening the photo is the large target.</p>
+    </section>
+    <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+      <ul>
+        <li>Alt text describes the photograph in one sentence: "Couple walking through a garden". Never the file name or "photo".</li>
+        <li>Position labels read "01 / 24", zero-padded to the grid size.</li>
+        <li>Badges say a status word: "Approved", "AI suggested", "Unavailable".</li>
+        <li>Fallback text: "Preview unavailable"; do not blame the person.</li>
+        <li>Checkbox accessible names say "Select photo 02", not "Checkbox".</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+      <div class="ds-dodont">
+        <figure class="ds-do"><div class="ds-example__canvas"><div class="photo-grid" style="max-width: 11rem; grid-template-columns: minmax(0, 1fr);"><div class="photo-tile" ><img src="../../mocks/assets/photos/portrait.jpg" alt="Portrait of a woman in window light"><label class="photo-tile__select"><input type="checkbox"> <span class="visually-hidden">Select photo 08</span><span aria-hidden="true">Select</span></label><span class="photo-tile__label">08 / 24</span></div></div></div><figcaption>Describe the photo in alt and name the checkbox.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><div class="photo-grid" style="max-width: 11rem; grid-template-columns: minmax(0, 1fr);"><div class="photo-tile"><img src="../../mocks/assets/photos/portrait.jpg" alt="IMG_0412.jpg"><span class="photo-tile__label">08 / 24</span></div></div></div><figcaption>File names make poor alt text and there is no way to select.</figcaption></figure>
+        <figure class="ds-do"><div class="ds-example__canvas"><div class="photo-grid" style="max-width: 11rem; grid-template-columns: minmax(0, 1fr);"><div class="photo-tile photo-tile--fallback" role="img" aria-label="Photo 09 could not be loaded">Preview unavailable</div></div></div><figcaption>Keep the frame when an image fails.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><p class="muted">A tile whose select checkbox appears only on hover.</p></div><figcaption>Touch and keyboard users cannot see it. Keep it visible.</figcaption></figure>
+      </div>
+    </section>
+    <section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+        <tbody>
+          <tr><td>Frame</td><td><code>--color-bg-subtle</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-subtle" data-swatch></i><span data-token="--color-bg-subtle"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-subtle" data-swatch></i><span data-token="--color-bg-subtle"></span></span></td></tr>
+          <tr><td>Chips on photo</td><td><code>--color-bg-surface</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-surface" data-swatch></i><span data-token="--color-bg-surface"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-surface" data-swatch></i><span data-token="--color-bg-surface"></span></span></td></tr>
+          <tr><td>Selection outline</td><td><code>--color-brand</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-brand" data-swatch></i><span data-token="--color-brand"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-brand" data-swatch></i><span data-token="--color-brand"></span></span></td></tr>
+          <tr><td>Fallback fill</td><td><code>--color-bg-surface-sunken</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-surface-sunken" data-swatch></i><span data-token="--color-bg-surface-sunken"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-surface-sunken" data-swatch></i><span data-token="--color-bg-surface-sunken"></span></span></td></tr>
+          <tr><td>Grid gap sm / md</td><td><code>--space-3</code> / <code>--space-5</code></td><td colspan="2"><span data-token="--space-3"></span> / <span data-token="--space-5"></span></td></tr>
+          <tr><td>Chip inset</td><td><code>--space-3</code></td><td colspan="2"><span data-token="--space-3"></span></td></tr>
+          <tr><td>Hover motion</td><td><code>--duration-deliberate</code> / <code>--ease-standard</code></td><td colspan="2"><span data-token="--duration-deliberate"></span> / <span data-token="--ease-standard"></span></td></tr>
+          <tr><td>Outline width</td><td><code>--border-width-thick</code></td><td colspan="2"><span data-token="--border-width-thick"></span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+    <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+      <pre><code>&lt;div class="photo-grid"&gt;
+  &lt;div class="photo-tile" aria-selected="true"&gt;
+    &lt;img src="wedding.jpg" alt="Couple walking through a garden"&gt;
+    &lt;label class="photo-tile__select"&gt;
+      &lt;input type="checkbox" checked&gt;
+      &lt;span class="visually-hidden"&gt;Select photo 02&lt;/span&gt;
+      &lt;span aria-hidden="true"&gt;Select&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;span class="badge badge--success"&gt;Approved&lt;/span&gt;
+    &lt;span class="photo-tile__label"&gt;02 / 24&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>.photo-grid</code></td><td>2-column grid; 3 from 768px.</td></tr><tr><td><code>.photo-tile</code></td><td>4:5 frame, hover zoom; positions its chips.</td></tr><tr><td><code>.photo-tile__select</code></td><td>Top-left label wrapping the checkbox.</td></tr><tr><td><code>.photo-tile__label</code></td><td>Bottom-left position chip.</td></tr><tr><td><code>.photo-tile .badge</code></td><td>Top-right status badge.</td></tr><tr><td><code>.photo-tile--fallback</code></td><td>Text tile when the image is missing.</td></tr><tr><td><code>aria-selected="true"</code></td><td>Selected outline.</td></tr></tbody></table></div>
+    </section>
+    <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+      <p>Extracted from these mocks:</p>
+      <ul>
+        <li><a href="../../mocks/admin/review.html">admin/review</a> (review grid with AI suggested badge)</li>
+        <li><a href="../../mocks/client/gallery.html">client/gallery</a> (client gallery with selection)</li>
+        <li><a href="../../mocks/admin/gallery-editor.html">admin/gallery-editor</a> (photos in a gallery)</li>
+      </ul>
+      <p>Drift fixed during extraction: the mocks used <code>.photo-select</code> and <code>.photo-label</code> with 10 to 11px type and hard-coded white chips; the system renames them <code>.photo-tile__select</code> and <code>.photo-tile__label</code>, uses surface tokens and the caption size, and adds an <code>aria-selected</code> outline. The mock's open button (<code>.photo-open</code>) is not yet in the stylesheet.</p>
+    </section>
+
+    <footer class="ds-footer"><span>Quinntyne Brown Studio design system &middot; extracted from <a href="../../mocks/index.html">docs/mocks</a></span><a href="#top">Back to top</a></footer>
+  </main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

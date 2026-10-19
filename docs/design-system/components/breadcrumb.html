@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Breadcrumb &mdash; Quinntyne Brown Studio design system</title>
+<meta name="description" content="A breadcrumb shows where this page sits in the hierarchy and gives a one-click way back up.">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+  <nav class="ds-nav" aria-label="Design system">
+    <div class="ds-nav__brand"><a href="../index.html">QBS DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">&#9790; Dark</button></div>
+    <details open><summary>Foundations</summary><ul>
+      <li><a href="../foundations/color.html">Color</a></li>
+      <li><a href="../foundations/typography.html">Typography</a></li>
+      <li><a href="../foundations/spacing.html">Spacing</a></li>
+      <li><a href="../foundations/layout.html">Layout</a></li>
+      <li><a href="../foundations/elevation.html">Elevation</a></li>
+      <li><a href="../foundations/shape.html">Shape</a></li>
+      <li><a href="../foundations/motion.html">Motion</a></li>
+      <li><a href="../foundations/iconography.html">Iconography</a></li>
+      <li><a href="../foundations/theming.html">Theming</a></li>
+      <li><a href="../foundations/responsive.html">Responsive</a></li>
+      <li><a href="../foundations/accessibility.html">Accessibility</a></li>
+      <li><a href="../foundations/content.html">Content</a></li>
+    </ul></details>
+    <details open><summary>Components</summary><ul>
+      <li><a href="../components/button.html">Button</a></li>
+      <li><a href="../components/button-group.html">Button group</a></li>
+      <li><a href="../components/link.html">Link</a></li>
+      <li><a href="../components/menu.html">Menu</a></li>
+      <li><a href="../components/checkbox.html">Checkbox</a></li>
+      <li><a href="../components/date-navigator.html">Date navigator</a></li>
+      <li><a href="../components/file-upload.html">File upload</a></li>
+      <li><a href="../components/form-field.html">Form field</a></li>
+      <li><a href="../components/form-layout.html">Form layout</a></li>
+      <li><a href="../components/radio-group.html">Radio group</a></li>
+      <li><a href="../components/select.html">Select</a></li>
+      <li><a href="../components/switch.html">Switch</a></li>
+      <li><a href="../components/text-field.html">Text field</a></li>
+      <li><a href="../components/textarea.html">Textarea</a></li>
+      <li><a href="../components/breadcrumb.html">Breadcrumb</a></li>
+      <li><a href="../components/footer.html">Footer</a></li>
+      <li><a href="../components/pagination.html">Pagination</a></li>
+      <li><a href="../components/sidebar.html">Sidebar</a></li>
+      <li><a href="../components/skip-link.html">Skip link</a></li>
+      <li><a href="../components/tabs.html">Tabs</a></li>
+      <li><a href="../components/top-bar.html">Top bar</a></li>
+      <li><a href="../components/accordion.html">Accordion</a></li>
+      <li><a href="../components/card.html">Card</a></li>
+      <li><a href="../components/dialog.html">Dialog</a></li>
+      <li><a href="../components/divider.html">Divider</a></li>
+      <li><a href="../components/layout.html">Layout primitives</a></li>
+      <li><a href="../components/tooltip.html">Tooltip</a></li>
+      <li><a href="../components/avatar.html">Avatar</a></li>
+      <li><a href="../components/badge.html">Badge</a></li>
+      <li><a href="../components/blog-card.html">Blog card</a></li>
+      <li><a href="../components/chip.html">Chip</a></li>
+      <li><a href="../components/cost-summary.html">Cost summary</a></li>
+      <li><a href="../components/description-list.html">Description list</a></li>
+      <li><a href="../components/line-item.html">Line item</a></li>
+      <li><a href="../components/photo-tile.html">Photo tile</a></li>
+      <li><a href="../components/calendar.html">Schedule calendar</a></li>
+      <li><a href="../components/selection-bar.html">Selection bar</a></li>
+      <li><a href="../components/stat.html">Stat</a></li>
+      <li><a href="../components/stepper.html">Stepper</a></li>
+      <li><a href="../components/table.html">Table</a></li>
+      <li><a href="../components/alert.html">Alert</a></li>
+      <li><a href="../components/empty-state.html">Empty state</a></li>
+      <li><a href="../components/error-page.html">Error page</a></li>
+      <li><a href="../components/inline-message.html">Inline message</a></li>
+      <li><a href="../components/progress.html">Progress</a></li>
+      <li><a href="../components/skeleton.html">Skeleton</a></li>
+      <li><a href="../components/spinner.html">Spinner</a></li>
+      <li><a href="../components/toast.html">Toast</a></li>
+    </ul></details>
+    <details open><summary>Patterns</summary><ul>
+      <li><a href="../patterns/forms.html">Forms</a></li>
+      <li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li>
+      <li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li>
+      <li><a href="../patterns/navigation-and-page-structure.html">Navigation and page structure</a></li>
+      <li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li>
+      <li><a href="../patterns/data-tables-and-lists.html">Data tables and lists</a></li>
+      <li><a href="../patterns/notifications.html">Notifications</a></li>
+      <li><a href="../patterns/content-and-tone.html">Content and tone</a></li>
+    </ul></details>
+  </nav>
+
+  <main id="main" class="ds-main">
+    <header class="ds-header">
+      <p class="ds-kicker">Component &amp;middot; Navigation</p>
+      <h1>Breadcrumb</h1>
+      <p class="ds-lead">A breadcrumb shows where this page sits in the hierarchy and gives a one-click way back up.</p>
+      <div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Status: stable</span><span class="ds-pill">APG Breadcrumb</span></div>
+      <ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul>
+    </header>
+
+    <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+      <p>Use a breadcrumb on pages that are two or more levels deep: a photo inside an album inside a session, or an editor inside a catalogue. It complements the <a href="top-bar.html">top bar</a> and <a href="sidebar.html">sidebar</a>; it does not replace them. Do not use it on top-level pages, and do not use it to show the path the person happened to take.</p>
+      <ul>
+        <li><b>Full</b>: every ancestor is a link and the last item is the current page.</li>
+        <li><b>Collapsed</b>: on long trails the middle levels collapse behind an ellipsis button that reveals them in a <a href="menu.html">menu</a>.</li>
+        <li><b>Back link</b>: for one-step editors the mocks use a single "&larr; Back to ..." <a href="link.html">link</a>, which is the right answer when there is only one level up.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+      <div class="ds-anatomy">
+        <figure class="ds-anatomy__figure">
+          <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="#">Your sessions</a></li><li><a href="#">Wedding session</a></li><li><a href="#" aria-current="page">Ceremony</a></li></ol></nav>
+          <span class="ds-callout" style="left: 2%; top: -30%;" aria-hidden="true">1</span>
+          <span class="ds-callout" style="left: 30%; top: -30%;" aria-hidden="true">2</span>
+          <span class="ds-callout" style="left: 70%; top: -30%;" aria-hidden="true">3</span>
+        </figure>
+        <ol class="ds-anatomy__list">
+          <li><div><b>Link</b><small>An ancestor page. Ink text, underlined on hover by the default link style.</small></div></li>
+          <li><div><b>Separator</b><small>A <code>/</code> drawn by CSS <code>li + li::before</code>, so it is never read by screen readers.</small></div></li>
+          <li><div><b>Current page</b><small>The last item, muted, with <code>aria-current="page"</code>; it may be a link or plain text.</small></div></li>
+        </ol>
+      </div>
+    </section>
+    <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+      <p>Breadcrumbs share one markup; collapse the middle when the trail is long.</p>
+      <h3>Full</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="#">Your sessions</a></li><li><a href="#">Wedding session</a></li><li><a href="#" aria-current="page">Ceremony</a></li></ol></nav></div>
+        <div class="ds-example__caption"><span>Three levels: the client's sessions, one session, one gallery.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;nav class="breadcrumb" aria-label="Breadcrumb"&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href="/client/galleries"&gt;Your sessions&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/client/gallery"&gt;Wedding session&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/client/photo" aria-current="page"&gt;Ceremony&lt;/a&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;</code></pre></details>
+      </div>
+      <h3>Collapsed</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="#">Sessions</a></li><li><button class="btn btn--ghost btn--sm" type="button" aria-label="Show 2 hidden levels" aria-haspopup="menu"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h.01M12 12h.01M19 12h.01"/></svg></button></li><li><a href="#">Photo review</a></li><li><a href="#" aria-current="page">Ceremony</a></li></ol></nav></div>
+        <div class="ds-example__caption"><span>Keep the first level, the last two, and an ellipsis button for the rest. The button opens a <a href="menu.html">menu</a> of the hidden ancestors.</span></div>
+      </div>
+      <h3>Back link</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><a class="link" href="#">&larr; Back to sessions</a></div>
+        <div class="ds-example__caption"><span>When there is a single level up, a back link is shorter than a breadcrumb and reads clearly.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="sizes" data-na="The breadcrumb has one size: caption text (12px) in a single line that wraps."><h2><a href="#sizes">Sizes</a></h2>
+      <p class="ds-na">The breadcrumb has one size: caption text (12px) in a single line that wraps.</p>
+    </section>
+    <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+      <p>Only links have states. The current item is not interactive on its own page. Hover on links changes only through <code>:hover</code>; focus and current are shown.</p>
+      <div class="ds-matrix"><table>
+        <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Focus</th><th scope="col">Current page</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Item</th><td><nav class="breadcrumb" aria-label="Example"><ol><li><a href="#">Wedding session</a></li></ol></nav></td><td><nav class="breadcrumb" aria-label="Example"><ol><li><a href="#" data-state="focus">Wedding session</a></li></ol></nav></td><td><nav class="breadcrumb" aria-label="Example"><ol><li><a href="#" aria-current="page">Wedding session</a></li></ol></nav></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Both themes</h3>
+      <div class="ds-themes">
+        <div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="#">Your sessions</a></li><li><a href="#">Wedding session</a></li><li><a href="#" aria-current="page">Ceremony</a></li></ol></nav></div></div>
+        <div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="#">Your sessions</a></li><li><a href="#">Wedding session</a></li><li><a href="#" aria-current="page">Ceremony</a></li></ol></nav></div></div>
+      </div>
+      <ul>
+        <li><b>Current page</b> is muted text with <code>aria-current="page"</code>. Make it a link to the same page, or plain text; both are valid.</li>
+        <li><b>Collapsed</b> adds the ellipsis button, whose accessible name states how many levels are hidden.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+      <ul>
+        <li>The list wraps; each item stays on one line.</li>
+        <li>At 390px show the full trail if it fits on two lines, otherwise collapse to first, ellipsis and parent only.</li>
+        <li>On phones the parent link alone (the back link variant) is often better than a trail.</li>
+        <li>The trail sits above the page title, outside the shell's content padding of the heading, so it lines up with the title's left edge.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+      <p>The breadcrumb uses <code>--color-fg-default</code> for links and <code>--color-fg-muted</code> for the current item and separators. Both flip in the dark theme with no component tokens.</p>
+    </section>
+    <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+      <h3>Role and pattern</h3>
+      <p>WAI-ARIA APG <a href="https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/">Breadcrumb</a>: a <code>&lt;nav aria-label="Breadcrumb"&gt;</code> landmark wrapping an ordered list (<code>&lt;ol&gt;</code>); the current page has <code>aria-current="page"</code>.</p>
+      <h3>Keyboard</h3>
+      <div class="ds-table-wrap"><table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves through the ancestor links in order.</td></tr><tr><td><kbd>Enter</kbd></td><td>Follows the focused link.</td></tr><tr><td><kbd>Enter</kbd>, <kbd>Space</kbd></td><td>On the collapsed ellipsis button: opens the menu of hidden levels.</td></tr></tbody></table></div>
+      <h3>Focus</h3>
+      <p>Links show the shared focus ring (2px <code>--color-focus-ring</code>, 2px offset). The ellipsis button also takes the ring; opening its menu moves focus into the menu and Esc returns it.</p>
+      <h3>Labelling</h3>
+      <p>The landmark is named "Breadcrumb" so it is distinguishable from the main navigation. The ordered list tells assistive tech the number of levels. The ellipsis button's name states what it hides ("Show 2 hidden levels").</p>
+      <h3>Contrast</h3>
+      <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);"><div class="ds-pair"><span>Link on page</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-canvas" data-min="4.5"></span></div><div class="ds-pair"><span>Current item on page</span><span class="ds-pair__ratio" data-contrast="--color-fg-muted|--color-bg-canvas" data-min="4.5"></span></div><div class="ds-pair"><span>Focus ring on page</span><span class="ds-pair__ratio" data-contrast="--color-focus-ring|--color-bg-canvas" data-min="3"></span></div></div>
+      <h3>Motion</h3>
+      <p>No motion.</p>
+      <h3>Touch</h3>
+      <p>Items are text links at 12px with 8px gaps; the target is only the text height, which just meets the 24px minimum when the line height is applied. In touch-first views prefer the back link (44px high) over the trail.</p>
+    </section>
+    <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+      <ul>
+        <li>Use the page's real title for each level, not a generic label: "Wedding session", not "Session".</li>
+        <li>Sentence case, no trailing punctuation.</li>
+        <li>The last item repeats the page's heading, shortened if it is long.</li>
+        <li>Do not put "Home" first on a client or admin trail; the brand already goes home.</li>
+        <li>Back links say where they go: "Back to sessions", not "Back".</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+      <div class="ds-dodont">
+        <figure class="ds-do"><div class="ds-example__canvas"><nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="#">Your sessions</a></li><li><a href="#">Wedding session</a></li><li><a href="#" aria-current="page">Ceremony</a></li></ol></nav></div><figcaption>Ancestors are links; the last item is the current page.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="#">Home</a></li><li><a href="#">Home</a></li><li><a href="#">Click here</a></li></ol></nav></div><figcaption>Vague, repeated labels do not say where each level goes.</figcaption></figure>
+        <figure class="ds-do"><div class="ds-example__canvas"><a class="link" href="#">&larr; Back to sessions</a></div><figcaption>A single level up is clearer as a back link.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="#">Sessions</a></li></ol></nav></div><figcaption>A one-item breadcrumb is just a link with extra markup.</figcaption></figure>
+      </div>
+    </section>
+    <section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+        <tbody>
+          <tr><td>Link</td><td><code>--color-fg-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td></tr>
+          <tr><td>Current item and separators</td><td><code>--color-fg-muted</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td></tr>
+          <tr><td>Focus ring</td><td><code>--color-focus-ring</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-focus-ring" data-swatch></i><span data-token="--color-focus-ring"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-focus-ring" data-swatch></i><span data-token="--color-focus-ring"></span></span></td></tr>
+          <tr><td>Font</td><td><code>--font-size-xs</code></td><td colspan="2"><span data-token="--font-size-xs"></span></td></tr>
+          <tr><td>Item gap</td><td><code>--space-2</code></td><td colspan="2"><span data-token="--space-2"></span></td></tr>
+          <tr><td>Line height</td><td><code>--line-height-normal</code></td><td colspan="2"><span data-token="--line-height-normal"></span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+    <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+      <pre><code>&lt;nav class="breadcrumb" aria-label="Breadcrumb"&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href="/client/galleries"&gt;Your sessions&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/client/gallery"&gt;Wedding session&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" aria-current="page"&gt;Ceremony&lt;/a&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>.breadcrumb</code></td><td>Wrapper on the <code>&lt;nav&gt;</code>; styles its <code>ol</code>, <code>li</code> and <code>a</code>.</td></tr><tr><td><code>li + li::before</code></td><td>Draws the "/" separator.</td></tr><tr><td><code>aria-current="page"</code></td><td>Current item: muted colour.</td></tr><tr><td><code>data-state="focus"</code></td><td>Documentation only: forces a state in static pages.</td></tr></tbody></table></div>
+    </section>
+    <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+      <p>Extracted from these mocks:</p>
+      <ul>
+        <li><a href="../../mocks/client/gallery.html">client/gallery</a> ("Your sessions / date" eyebrow and back link)</li>
+        <li><a href="../../mocks/admin/session.html">admin/session</a> ("Sessions / name" eyebrow)</li>
+        <li><a href="../../mocks/admin/gallery-editor.html">admin/gallery-editor</a> (back link to the list)</li>
+      </ul>
+      <p>Drift fixed during extraction: the mocks have no breadcrumb component. They show the hierarchy as an uppercase eyebrow ("Your sessions / October 17, 2026") above the title and a "&larr; Back to ..." text link. The system turns the eyebrow into a real <code>&lt;nav&gt;&lt;ol&gt;</code> with links and keeps the back link as the one-level form. The collapsed variant is a system addition.</p>
+    </section>
+
+    <footer class="ds-footer"><span>Quinntyne Brown Studio design system &middot; extracted from <a href="../../mocks/index.html">docs/mocks</a></span><a href="#top">Back to top</a></footer>
+  </main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alert &mdash; Quinntyne Brown Studio design system</title>
+<meta name="description" content="An alert is a message that stays on the page until the situation changes: a failed upload, a pending review, a service problem. The mocks call it a notice.">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+  <nav class="ds-nav" aria-label="Design system">
+    <div class="ds-nav__brand"><a href="../index.html">QBS DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">&#9790; Dark</button></div>
+    <details open><summary>Foundations</summary><ul>
+      <li><a href="../foundations/color.html">Color</a></li>
+      <li><a href="../foundations/typography.html">Typography</a></li>
+      <li><a href="../foundations/spacing.html">Spacing</a></li>
+      <li><a href="../foundations/layout.html">Layout</a></li>
+      <li><a href="../foundations/elevation.html">Elevation</a></li>
+      <li><a href="../foundations/shape.html">Shape</a></li>
+      <li><a href="../foundations/motion.html">Motion</a></li>
+      <li><a href="../foundations/iconography.html">Iconography</a></li>
+      <li><a href="../foundations/theming.html">Theming</a></li>
+      <li><a href="../foundations/responsive.html">Responsive</a></li>
+      <li><a href="../foundations/accessibility.html">Accessibility</a></li>
+      <li><a href="../foundations/content.html">Content</a></li>
+    </ul></details>
+    <details open><summary>Components</summary><ul>
+      <li><a href="../components/button.html">Button</a></li>
+      <li><a href="../components/button-group.html">Button group</a></li>
+      <li><a href="../components/link.html">Link</a></li>
+      <li><a href="../components/menu.html">Menu</a></li>
+      <li><a href="../components/checkbox.html">Checkbox</a></li>
+      <li><a href="../components/date-navigator.html">Date navigator</a></li>
+      <li><a href="../components/file-upload.html">File upload</a></li>
+      <li><a href="../components/form-field.html">Form field</a></li>
+      <li><a href="../components/form-layout.html">Form layout</a></li>
+      <li><a href="../components/radio-group.html">Radio group</a></li>
+      <li><a href="../components/select.html">Select</a></li>
+      <li><a href="../components/switch.html">Switch</a></li>
+      <li><a href="../components/text-field.html">Text field</a></li>
+      <li><a href="../components/textarea.html">Textarea</a></li>
+      <li><a href="../components/breadcrumb.html">Breadcrumb</a></li>
+      <li><a href="../components/footer.html">Footer</a></li>
+      <li><a href="../components/pagination.html">Pagination</a></li>
+      <li><a href="../components/sidebar.html">Sidebar</a></li>
+      <li><a href="../components/skip-link.html">Skip link</a></li>
+      <li><a href="../components/tabs.html">Tabs</a></li>
+      <li><a href="../components/top-bar.html">Top bar</a></li>
+      <li><a href="../components/accordion.html">Accordion</a></li>
+      <li><a href="../components/card.html">Card</a></li>
+      <li><a href="../components/dialog.html">Dialog</a></li>
+      <li><a href="../components/divider.html">Divider</a></li>
+      <li><a href="../components/layout.html">Layout primitives</a></li>
+      <li><a href="../components/tooltip.html">Tooltip</a></li>
+      <li><a href="../components/avatar.html">Avatar</a></li>
+      <li><a href="../components/badge.html">Badge</a></li>
+      <li><a href="../components/blog-card.html">Blog card</a></li>
+      <li><a href="../components/chip.html">Chip</a></li>
+      <li><a href="../components/cost-summary.html">Cost summary</a></li>
+      <li><a href="../components/description-list.html">Description list</a></li>
+      <li><a href="../components/line-item.html">Line item</a></li>
+      <li><a href="../components/photo-tile.html">Photo tile</a></li>
+      <li><a href="../components/calendar.html">Schedule calendar</a></li>
+      <li><a href="../components/selection-bar.html">Selection bar</a></li>
+      <li><a href="../components/stat.html">Stat</a></li>
+      <li><a href="../components/stepper.html">Stepper</a></li>
+      <li><a href="../components/table.html">Table</a></li>
+      <li><a href="../components/alert.html">Alert</a></li>
+      <li><a href="../components/empty-state.html">Empty state</a></li>
+      <li><a href="../components/error-page.html">Error page</a></li>
+      <li><a href="../components/inline-message.html">Inline message</a></li>
+      <li><a href="../components/progress.html">Progress</a></li>
+      <li><a href="../components/skeleton.html">Skeleton</a></li>
+      <li><a href="../components/spinner.html">Spinner</a></li>
+      <li><a href="../components/toast.html">Toast</a></li>
+    </ul></details>
+    <details open><summary>Patterns</summary><ul>
+      <li><a href="../patterns/forms.html">Forms</a></li>
+      <li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li>
+      <li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li>
+      <li><a href="../patterns/navigation-and-page-structure.html">Navigation and page structure</a></li>
+      <li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li>
+      <li><a href="../patterns/data-tables-and-lists.html">Data tables and lists</a></li>
+      <li><a href="../patterns/notifications.html">Notifications</a></li>
+      <li><a href="../patterns/content-and-tone.html">Content and tone</a></li>
+    </ul></details>
+  </nav>
+
+  <main id="main" class="ds-main">
+    <header class="ds-header">
+      <p class="ds-kicker">Component &amp;middot; Feedback</p>
+      <h1>Alert</h1>
+      <p class="ds-lead">An alert is a message that stays on the page until the situation changes: a failed upload, a pending review, a service problem. The mocks call it a notice.</p>
+      <div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Status: stable</span><span class="ds-pill">Mocks: notice</span></div>
+      <ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul>
+    </header>
+
+    <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+      <p>Use an alert for information the person needs while they work, and that must still be there if they look away. Use a <a href="toast.html">toast</a> for a passing confirmation, an <a href="inline-message.html">inline message</a> for one field, and a <a href="dialog.html">dialog</a> when they must decide before continuing.</p>
+      <ul>
+        <li><b>Info</b> (the default) gives neutral context: "Photographs are processed within a few minutes."</li>
+        <li><b>Success</b> confirms a completed outcome that stays relevant, such as "3 print requests sent."</li>
+        <li><b>Warning</b> flags something that may go wrong or needs attention soon.</li>
+        <li><b>Danger</b> reports a failure or a blocked task. It is the only tone that may use <code>role="alert"</code> on page load.</li>
+      </ul>
+      <p>An alert can sit inline in a section or span the top of the page as a banner. It can carry one action, and it can be dismissed when it is not critical.</p>
+    </section>
+    <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+      <div class="ds-anatomy">
+        <figure class="ds-anatomy__figure">
+          <div class="alert alert--warning" role="status"><p><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4 2 20h20L12 4zM12 10v4M12 17h.01"/></svg> Two photographs failed to upload.</p><button class="btn btn--sm" type="button">Retry</button><button class="btn btn--sm btn--ghost btn--icon" type="button" aria-label="Dismiss message"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+          <span class="ds-callout" style="left: 6%; top: 20%;" aria-hidden="true">1</span>
+          <span class="ds-callout" style="left: 40%; top: 20%;" aria-hidden="true">2</span>
+          <span class="ds-callout" style="left: 82%; top: 20%;" aria-hidden="true">3</span>
+          <span class="ds-callout" style="left: 94%; top: 78%;" aria-hidden="true">4</span>
+        </figure>
+        <ol class="ds-anatomy__list">
+          <li><div><b>Icon</b><small>Repeats the tone for people who cannot rely on colour. <code>aria-hidden</code>.</small></div></li>
+          <li><div><b>Message</b><small>One or two sentences. States what happened and, for warnings and errors, what to do.</small></div></li>
+          <li><div><b>Action (optional)</b><small>One secondary or ghost small button, such as Retry or View details.</small></div></li>
+          <li><div><b>Dismiss (optional)</b><small>Icon-only ghost button. Never on a danger alert that blocks a task. Container: tone background, border and foreground tokens.</small></div></li>
+        </ol>
+      </div>
+    </section>
+    <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+      <p>Four tones share one structure. Colour is never the only signal: each carries an icon and words.</p>
+      <h3>Tones</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div style="display: grid; gap: var(--space-3); width: 100%;"><div class="alert" role="status"><p><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 11v6M12 7.5h.01M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z"/></svg> Photographs are processed within a few minutes of upload.</p></div><div class="alert alert--success" role="status"><p><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg> Your photographs are ready to review.</p></div><div class="alert alert--warning" role="status"><p><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4 2 20h20L12 4zM12 10v4M12 17h.01"/></svg> Your session ends in 5 minutes. Save your changes.</p></div><div class="alert alert--danger" role="alert"><p><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4 2 20h20L12 4zM12 10v4M12 17h.01"/></svg> We could not save this session. Try again.</p></div></div></div>
+        <div class="ds-example__caption"><span>Info, success, warning, danger. Each repeats the tone in an icon.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class="alert alert--warning" role="status"&gt;
+  &lt;p&gt;Your session ends in 5 minutes. Save your changes.&lt;/p&gt;
+&lt;/div&gt;</code></pre></details>
+      </div>
+      <h3>With action and dismiss</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="alert alert--danger" role="alert"><p><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4 2 20h20L12 4zM12 10v4M12 17h.01"/></svg> Some files need another try. Completed photographs are safe.</p><button class="btn btn--sm" type="button">Retry failed files</button><button class="btn btn--sm btn--ghost btn--icon" type="button" aria-label="Dismiss message"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div></div>
+        <div class="ds-example__caption"><span>The action sits at the end of the row and does not shrink; the message wraps first.</span></div>
+      </div>
+      <h3>Page banner</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="alert alert--warning" role="status"><p><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16v14H4zM4 10h16M8 3v4M16 3v4"/></svg> The studio is closed for bookings until 3 January. Quote requests are still welcome.</p><a class="btn btn--sm" href="#">See opening dates</a></div></div>
+        <div class="ds-example__caption"><span>A persistent banner at the top of the content area, above the page heading. Not dismissible when it describes an ongoing condition.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="sizes" data-na="An alert fills the width of its container and has one density. Its height follows its content."><h2><a href="#sizes">Sizes</a></h2>
+      <p class="ds-na">An alert fills the width of its container and has one density. Its height follows its content.</p>
+    </section>
+    <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+      <p>The alert itself is not interactive, so it has no hover, focus or pressed styling. Its buttons carry the standard button states. What varies is the tone and whether it can be dismissed.</p>
+      <div class="ds-matrix"><table>
+        <thead><tr><th scope="col">Variant</th><th scope="col">Default</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Info</th><td><div class="alert" role="status"><p>Draft saved.</p></div></td></tr>
+          <tr><th scope="row">Success</th><td><div class="alert alert--success" role="status"><p>Request sent.</p></div></td></tr>
+          <tr><th scope="row">Warning</th><td><div class="alert alert--warning" role="status"><p>Check the date.</p></div></td></tr>
+          <tr><th scope="row">Danger</th><td><div class="alert alert--danger" role="alert"><p>Could not save.</p></div></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Both themes</h3>
+      <div class="ds-themes">
+        <div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><div style="display: grid; gap: var(--space-2); width: 100%;"><div class="alert" role="status"><p> Photographs are processed within a few minutes.</p></div><div class="alert alert--success" role="status"><p> Request sent.</p></div><div class="alert alert--warning" role="status"><p> Check the date.</p></div><div class="alert alert--danger" role="alert"><p> Could not save.</p></div></div></div></div>
+        <div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><div style="display: grid; gap: var(--space-2); width: 100%;"><div class="alert" role="status"><p> Photographs are processed within a few minutes.</p></div><div class="alert alert--success" role="status"><p> Request sent.</p></div><div class="alert alert--warning" role="status"><p> Check the date.</p></div><div class="alert alert--danger" role="alert"><p> Could not save.</p></div></div></div></div>
+      </div>
+      <ul>
+        <li><b>Appearing</b>: inserted without animation so the live-region announcement is not delayed.</li>
+        <li><b>Dismissed</b>: removed from the DOM and focus moves to the next focusable element, or to the page heading if there is none.</li>
+        <li><b>Loading</b> and <b>disabled</b> do not apply: an alert reports state, it does not have its own.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+      <ul>
+        <li>The alert fills its container. Below 768px, the row layout wraps: the message takes the full line and the action moves beneath it, left-aligned.</li>
+        <li>Banners span the full content width and sit above the page heading at every size.</li>
+        <li>At 390px keep the message to two lines; longer explanation belongs in the page body with the alert linking to it.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+      <p>Each tone is built from four tokens: background, border, foreground and (for solid uses elsewhere) solid. In the dark theme the backgrounds become very dark tints of the hue and the text and border lighten, so the text pair stays above 7:1. Info uses the olive brand tint, not blue, so the tone belongs to the studio's palette.</p>
+    </section>
+    <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+      <h3>Role and pattern</h3>
+      <p>WAI-ARIA <code>alert</code> role for new, important messages (failures); <code>status</code> role for polite messages. A static alert present at page load needs no live role at all. There is no keyboard interaction on the alert itself. See the APG Alert pattern.</p>
+      <h3>Keyboard</h3>
+      <div class="ds-table-wrap"><table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves to the action and dismiss buttons in DOM order. The alert is not itself focusable.</td></tr><tr><td><kbd>Enter</kbd>, <kbd>Space</kbd></td><td>Activates the focused action or dismiss button.</td></tr><tr><td><kbd>Esc</kbd></td><td>No effect; alerts are not modal.</td></tr></tbody></table></div>
+      <h3>Focus</h3>
+      <p>Focus is never moved to an alert when it appears, except after a failed form submission, where focus moves to the error summary. When a dismissed alert is removed, move focus to the next focusable element or the page heading.</p>
+      <h3>Labelling</h3>
+      <p>The message is the accessible content; no extra label is needed. Use <code>role="alert"</code> only for content that appears after load and needs immediate attention, otherwise <code>role="status"</code> or no role. Dismiss buttons say what they dismiss: <code>aria-label="Dismiss message"</code>.</p>
+      <h3>Contrast</h3>
+      <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);"><div class="ds-pair"><span>Info text</span><span class="ds-pair__ratio" data-contrast="--color-info-fg|--color-info-bg" data-min="4.5"></span></div><div class="ds-pair"><span>Success text</span><span class="ds-pair__ratio" data-contrast="--color-success-fg|--color-success-bg" data-min="4.5"></span></div><div class="ds-pair"><span>Warning text</span><span class="ds-pair__ratio" data-contrast="--color-warning-fg|--color-warning-bg" data-min="4.5"></span></div><div class="ds-pair"><span>Danger text</span><span class="ds-pair__ratio" data-contrast="--color-danger-fg|--color-danger-bg" data-min="4.5"></span></div><div class="ds-pair"><span>Danger border</span><span class="ds-pair__ratio" data-contrast="--color-danger-border|--color-danger-bg" data-min="1"></span></div></div>
+      <h3>Motion</h3>
+      <p>No motion. Alerts appear and disappear instantly so announcements are not delayed.</p>
+      <h3>Touch</h3>
+      <p>Action and dismiss buttons are small (32px) with 16px of padding around them; on touch devices raise them to 44px or give them a 44px hit area.</p>
+    </section>
+    <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+      <ul>
+        <li>Lead with what happened, then what to do: "We could not save this session. Try again."</li>
+        <li>Name the thing: "Two photographs failed to upload", not "Some items failed".</li>
+        <li>Do not blame the person: "That date is unavailable", not "You entered an invalid date".</li>
+        <li>Sentence case, a full stop at the end, no exclamation marks. Keep to two lines.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+      <div class="ds-dodont">
+        <figure class="ds-do"><div class="ds-example__canvas"><div class="alert alert--danger" role="alert"><p><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4 2 20h20L12 4zM12 10v4M12 17h.01"/></svg> We could not save this session. Try again.</p><button class="btn btn--sm" type="button">Try again</button></div></div><figcaption>States the problem and offers the recovery in the same row.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><div class="alert alert--danger" role="status"><p> Error!</p></div></div><figcaption>Says nothing useful and relies on colour alone.</figcaption></figure>
+        <figure class="ds-do"><div class="ds-example__canvas"><div class="alert" role="status"><p><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 11v6M12 7.5h.01M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z"/></svg> Photographs are processed within a few minutes of upload.</p></div></div><figcaption>Neutral context in the info tone, with an icon.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><div style="display: grid; gap: var(--space-2); width: 100%;"><div class="alert alert--warning" role="status"><p> Check the date.</p></div><div class="alert alert--warning" role="status"><p> Check the time.</p></div><div class="alert alert--warning" role="status"><p> Check the location.</p></div></div></div><figcaption>Stacked duplicate alerts. Combine them or use an error summary in the form.</figcaption></figure>
+      </div>
+    </section>
+    <section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+        <tbody>
+          <tr><td>Info background / text / border</td><td><code>--color-info-bg</code> / <code>--color-info-fg</code> / <code>--color-info-border</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-info-bg" data-swatch></i><span data-token="--color-info-bg"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-info-bg" data-swatch></i><span data-token="--color-info-bg"></span></span></td></tr>
+          <tr><td>Success background</td><td><code>--color-success-bg</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-success-bg" data-swatch></i><span data-token="--color-success-bg"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-success-bg" data-swatch></i><span data-token="--color-success-bg"></span></span></td></tr>
+          <tr><td>Success text</td><td><code>--color-success-fg</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-success-fg" data-swatch></i><span data-token="--color-success-fg"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-success-fg" data-swatch></i><span data-token="--color-success-fg"></span></span></td></tr>
+          <tr><td>Success border</td><td><code>--color-success-border</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-success-border" data-swatch></i><span data-token="--color-success-border"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-success-border" data-swatch></i><span data-token="--color-success-border"></span></span></td></tr>
+          <tr><td>Warning background</td><td><code>--color-warning-bg</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-warning-bg" data-swatch></i><span data-token="--color-warning-bg"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-warning-bg" data-swatch></i><span data-token="--color-warning-bg"></span></span></td></tr>
+          <tr><td>Warning text</td><td><code>--color-warning-fg</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-warning-fg" data-swatch></i><span data-token="--color-warning-fg"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-warning-fg" data-swatch></i><span data-token="--color-warning-fg"></span></span></td></tr>
+          <tr><td>Warning border</td><td><code>--color-warning-border</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-warning-border" data-swatch></i><span data-token="--color-warning-border"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-warning-border" data-swatch></i><span data-token="--color-warning-border"></span></span></td></tr>
+          <tr><td>Danger background</td><td><code>--color-danger-bg</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-danger-bg" data-swatch></i><span data-token="--color-danger-bg"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-danger-bg" data-swatch></i><span data-token="--color-danger-bg"></span></span></td></tr>
+          <tr><td>Danger text</td><td><code>--color-danger-fg</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-danger-fg" data-swatch></i><span data-token="--color-danger-fg"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-danger-fg" data-swatch></i><span data-token="--color-danger-fg"></span></span></td></tr>
+          <tr><td>Danger border</td><td><code>--color-danger-border</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-danger-border" data-swatch></i><span data-token="--color-danger-border"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-danger-border" data-swatch></i><span data-token="--color-danger-border"></span></span></td></tr>
+          <tr><td>Radius</td><td><code>--radius-xs</code></td><td colspan="2"><span data-token="--radius-xs"></span></td></tr>
+          <tr><td>Padding / gap</td><td><code>--space-4</code> / <code>--space-5</code></td><td colspan="2"><span data-token="--space-4"></span> / <span data-token="--space-5"></span></td></tr>
+          <tr><td>Font</td><td><code>--text-body-sm</code></td><td colspan="2"><span data-token="--text-body-sm"></span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+    <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+      <pre><code>&lt;div class="alert alert--danger" role="alert"&gt;
+  &lt;p&gt;Some files need another try. Completed photographs are safe.&lt;/p&gt;
+  &lt;button class="btn btn--sm" type="button"&gt;Retry failed files&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>.alert</code></td><td>Base: info tone, flex row, bottom margin.</td></tr><tr><td><code>.alert--success</code> <code>.alert--warning</code> <code>.alert--danger</code></td><td>Tone.</td></tr><tr><td><code>role="alert"</code></td><td>Assertive: new failures only.</td></tr><tr><td><code>role="status"</code></td><td>Polite announcement.</td></tr><tr><td><code>.alert .btn</code></td><td>Action button; does not shrink.</td></tr></tbody></table></div>
+    </section>
+    <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+      <p>Extracted from these mocks:</p>
+      <ul>
+        <li><a href="../../mocks/admin/upload.html">admin/upload</a> (upload failure and partial-success notices)</li>
+        <li><a href="../../mocks/admin/service-error.html">admin/service-error</a> (service unavailable context)</li>
+        <li><a href="../../mocks/client/prints.html">client/prints</a> (print request notices)</li>
+        <li><a href="../../mocks/assets/app.js">assets/app.js</a> (<code>notice()</code> helper)</li>
+      </ul>
+      <p>Drift fixed during extraction: the mocks named this <code>.notice</code> with <code>.error</code> and <code>.success</code> modifiers and always used <code>role="alert"</code> for errors, including on page load. The system renames it <code>.alert</code>, adds a warning tone, and reserves <code>role="alert"</code> for messages that appear after load.</p>
+    </section>
+
+    <footer class="ds-footer"><span>Quinntyne Brown Studio design system &middot; extracted from <a href="../../mocks/index.html">docs/mocks</a></span><a href="#top">Back to top</a></footer>
+  </main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

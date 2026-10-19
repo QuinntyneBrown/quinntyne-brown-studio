@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stat &mdash; Quinntyne Brown Studio design system</title>
+<meta name="description" content="A stat puts one number in front of people with a label and a line of context: sessions this month, photos awaiting review, quotes sent.">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+  <nav class="ds-nav" aria-label="Design system">
+    <div class="ds-nav__brand"><a href="../index.html">QBS DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">&#9790; Dark</button></div>
+    <details open><summary>Foundations</summary><ul>
+      <li><a href="../foundations/color.html">Color</a></li>
+      <li><a href="../foundations/typography.html">Typography</a></li>
+      <li><a href="../foundations/spacing.html">Spacing</a></li>
+      <li><a href="../foundations/layout.html">Layout</a></li>
+      <li><a href="../foundations/elevation.html">Elevation</a></li>
+      <li><a href="../foundations/shape.html">Shape</a></li>
+      <li><a href="../foundations/motion.html">Motion</a></li>
+      <li><a href="../foundations/iconography.html">Iconography</a></li>
+      <li><a href="../foundations/theming.html">Theming</a></li>
+      <li><a href="../foundations/responsive.html">Responsive</a></li>
+      <li><a href="../foundations/accessibility.html">Accessibility</a></li>
+      <li><a href="../foundations/content.html">Content</a></li>
+    </ul></details>
+    <details open><summary>Components</summary><ul>
+      <li><a href="../components/button.html">Button</a></li>
+      <li><a href="../components/button-group.html">Button group</a></li>
+      <li><a href="../components/link.html">Link</a></li>
+      <li><a href="../components/menu.html">Menu</a></li>
+      <li><a href="../components/checkbox.html">Checkbox</a></li>
+      <li><a href="../components/date-navigator.html">Date navigator</a></li>
+      <li><a href="../components/file-upload.html">File upload</a></li>
+      <li><a href="../components/form-field.html">Form field</a></li>
+      <li><a href="../components/form-layout.html">Form layout</a></li>
+      <li><a href="../components/radio-group.html">Radio group</a></li>
+      <li><a href="../components/select.html">Select</a></li>
+      <li><a href="../components/switch.html">Switch</a></li>
+      <li><a href="../components/text-field.html">Text field</a></li>
+      <li><a href="../components/textarea.html">Textarea</a></li>
+      <li><a href="../components/breadcrumb.html">Breadcrumb</a></li>
+      <li><a href="../components/footer.html">Footer</a></li>
+      <li><a href="../components/pagination.html">Pagination</a></li>
+      <li><a href="../components/sidebar.html">Sidebar</a></li>
+      <li><a href="../components/skip-link.html">Skip link</a></li>
+      <li><a href="../components/tabs.html">Tabs</a></li>
+      <li><a href="../components/top-bar.html">Top bar</a></li>
+      <li><a href="../components/accordion.html">Accordion</a></li>
+      <li><a href="../components/card.html">Card</a></li>
+      <li><a href="../components/dialog.html">Dialog</a></li>
+      <li><a href="../components/divider.html">Divider</a></li>
+      <li><a href="../components/layout.html">Layout primitives</a></li>
+      <li><a href="../components/tooltip.html">Tooltip</a></li>
+      <li><a href="../components/avatar.html">Avatar</a></li>
+      <li><a href="../components/badge.html">Badge</a></li>
+      <li><a href="../components/blog-card.html">Blog card</a></li>
+      <li><a href="../components/chip.html">Chip</a></li>
+      <li><a href="../components/cost-summary.html">Cost summary</a></li>
+      <li><a href="../components/description-list.html">Description list</a></li>
+      <li><a href="../components/line-item.html">Line item</a></li>
+      <li><a href="../components/photo-tile.html">Photo tile</a></li>
+      <li><a href="../components/calendar.html">Schedule calendar</a></li>
+      <li><a href="../components/selection-bar.html">Selection bar</a></li>
+      <li><a href="../components/stat.html">Stat</a></li>
+      <li><a href="../components/stepper.html">Stepper</a></li>
+      <li><a href="../components/table.html">Table</a></li>
+      <li><a href="../components/alert.html">Alert</a></li>
+      <li><a href="../components/empty-state.html">Empty state</a></li>
+      <li><a href="../components/error-page.html">Error page</a></li>
+      <li><a href="../components/inline-message.html">Inline message</a></li>
+      <li><a href="../components/progress.html">Progress</a></li>
+      <li><a href="../components/skeleton.html">Skeleton</a></li>
+      <li><a href="../components/spinner.html">Spinner</a></li>
+      <li><a href="../components/toast.html">Toast</a></li>
+    </ul></details>
+    <details open><summary>Patterns</summary><ul>
+      <li><a href="../patterns/forms.html">Forms</a></li>
+      <li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li>
+      <li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li>
+      <li><a href="../patterns/navigation-and-page-structure.html">Navigation and page structure</a></li>
+      <li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li>
+      <li><a href="../patterns/data-tables-and-lists.html">Data tables and lists</a></li>
+      <li><a href="../patterns/notifications.html">Notifications</a></li>
+      <li><a href="../patterns/content-and-tone.html">Content and tone</a></li>
+    </ul></details>
+  </nav>
+
+  <main id="main" class="ds-main">
+    <header class="ds-header">
+      <p class="ds-kicker">Component &amp;middot; Data display</p>
+      <h1>Stat</h1>
+      <p class="ds-lead">A stat puts one number in front of people with a label and a line of context: sessions this month, photos awaiting review, quotes sent.</p>
+      <div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Status: stable</span><span class="ds-pill">Static region</span></div>
+      <ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul>
+    </header>
+
+    <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+      <p>Use a stat for the few numbers that frame a dashboard or a report. Use a <a href="table.html">table</a> for many numbers and a <a href="badge.html">badge</a> for a status word. Show at most four stats in a row; more than that stops being a summary.</p>
+      <ul>
+        <li><b>Plain</b>: label, number, context line.</li>
+        <li><b>With change</b>: the context line carries a <a href="badge.html">badge</a> such as "+4 vs September"; the sign and word, not colour, carry the direction.</li>
+        <li><b>Loading, zero and error</b> keep the card's shape so the page does not jump.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+      <div class="ds-anatomy">
+        <figure class="ds-anatomy__figure">
+          <article class="stat"><span class="eyebrow">Sessions this month</span><div class="stat__number">12</div><p>3 awaiting review</p></article>
+          <span class="ds-callout" style="left: 8%; top: 12%;" aria-hidden="true">1</span>
+          <span class="ds-callout" style="left: 8%; top: 40%;" aria-hidden="true">2</span>
+          <span class="ds-callout" style="left: 8%; top: 76%;" aria-hidden="true">3</span>
+        </figure>
+        <ol class="ds-anatomy__list">
+          <li><div><b>Label</b><small>Overline text naming what is counted. Reads first, so the number is understood in context.</small></div></li>
+          <li><div><b>Number</b><small>Serif, 2xl, tabular figures. One value only.</small></div></li>
+          <li><div><b>Context line</b><small>Caption in muted ink: a period, a comparison or what needs attention.</small></div></li>
+        </ol>
+      </div>
+    </section>
+    <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+      <p>Stats sit in a <a href="layout.html">grid</a> of up to four columns. They have no links or actions of their own; to drill in, put a link in the context line.</p>
+      <h3>Plain</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="grid grid--3" style="width: 100%;"><article class="stat"><span class="eyebrow">Sessions this month</span><div class="stat__number">12</div><p>3 awaiting review</p></article><article class="stat"><span class="eyebrow">Photos to review</span><div class="stat__number">248</div><p>Across 2 sessions</p></article><article class="stat"><span class="eyebrow">Quotes sent</span><div class="stat__number">7</div><p>Last 30 days</p></article></div></div>
+        <div class="ds-example__caption"><span>Three stats in a grid; the grid collapses to one column on phones.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;article class="stat"&gt;
+  &lt;span class="eyebrow"&gt;Sessions this month&lt;/span&gt;
+  &lt;div class="stat__number"&gt;12&lt;/div&gt;
+  &lt;p&gt;3 awaiting review&lt;/p&gt;
+&lt;/article&gt;</code></pre></details>
+      </div>
+      <h3>With change</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><article class="stat" style="max-width: 16rem;"><span class="eyebrow">Revenue this month</span><div class="stat__number">$8,400</div><p><span class="badge badge--success">+$1,200 vs September</span></p></article></div>
+        <div class="ds-example__caption"><span>The sign and the word say the direction; the badge tone repeats it.</span></div>
+      </div>
+      <h3>With a link in the context line</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><article class="stat" style="max-width: 16rem;"><span class="eyebrow">Unread inquiries</span><div class="stat__number">5</div><p><a class="link link--inline" href="#">Open inquiries</a></p></article></div>
+        <div class="ds-example__caption"><span>Drill-in is a real link with a purpose-specific name.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="sizes" data-na="A stat has one size; width comes from its grid cell."><h2><a href="#sizes">Sizes</a></h2>
+      <p class="ds-na">A stat has one size; width comes from its grid cell.</p>
+    </section>
+    <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+      <p>A stat is static. The states below describe data, not interaction.</p>
+      <div class="ds-matrix"><table>
+        <thead><tr><th scope="col">Variant</th><th scope="col">Default</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Value</th><td><article class="stat" style="max-width: 16rem;"><span class="eyebrow">Sessions this month</span><div class="stat__number">12</div><p>3 awaiting review</p></article></td></tr>
+          <tr><th scope="row">Zero</th><td><article class="stat" style="max-width: 16rem;"><span class="eyebrow">Sessions this month</span><div class="stat__number">0</div><p>None booked yet</p></article></td></tr>
+          <tr><th scope="row">Loading</th><td><article class="stat" style="max-width: 16rem;" aria-busy="true"><span class="eyebrow">Sessions this month</span><div class="stat__number"><span class="skeleton skeleton--title"></span></div><p><span class="skeleton skeleton--text"></span></p></article></td></tr>
+          <tr><th scope="row">Error</th><td><article class="stat" style="max-width: 16rem;"><span class="eyebrow">Sessions this month</span><div class="stat__number">&mdash;</div><p>Could not load. <button class="btn btn--link btn--sm" type="button">Retry</button></p></article></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Both themes</h3>
+      <div class="ds-themes">
+        <div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><article class="stat"><span class="eyebrow">Sessions this month</span><div class="stat__number">12</div><p>3 awaiting review</p></article></div></div>
+        <div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><article class="stat"><span class="eyebrow">Sessions this month</span><div class="stat__number">12</div><p>3 awaiting review</p></article></div></div>
+      </div>
+      <ul>
+        <li><b>Zero</b> shows "0", not blank, with a context line that explains the absence.</li>
+        <li><b>Loading</b> uses <a href="skeleton.html">skeleton</a> blocks of the same height and <code>aria-busy="true"</code>. The shimmer stops under reduced motion.</li>
+        <li><b>Error</b> shows an em dash and a Retry link; do not show a stale number as if it were current.</li>
+        <li><b>Updates</b>: when the number changes live (a quote total), put it in a region with <code>aria-live="polite"</code>.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+      <ul>
+        <li>Stats are laid out by the grid: four columns from 1100px, two from 480px, one below. The number does not shrink.</li>
+        <li>On a phone the order of stats is the order of importance, because they stack.</li>
+        <li>The label may wrap to two lines; the number never wraps.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+      <p>Border from <code>--color-border-default</code>, label and context from <code>--color-fg-muted</code>, number from <code>--color-fg-default</code> in the serif family. Nothing needs overriding in dark mode.</p>
+    </section>
+    <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+      <h3>Role and pattern</h3>
+      <p>Static content in an <code>&lt;article&gt;</code> or <code>&lt;div&gt;</code>. The label precedes the number in the DOM so a screen reader hears "Sessions this month, 12, 3 awaiting review". No ARIA role is needed; a grid of stats may be wrapped in a list if the count matters.</p>
+      <h3>Keyboard</h3>
+      <div class="ds-table-wrap"><table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td><kbd>Tab</kbd></td><td>Reaches only a link or button inside the context line.</td></tr><tr><td><kbd>Enter</kbd></td><td>Follows a link in the context line.</td></tr><tr><td><kbd>Esc</kbd></td><td>No effect.</td></tr></tbody></table></div>
+      <h3>Focus</h3>
+      <p>The stat takes no focus. A link or button inside shows the shared ring.</p>
+      <h3>Labelling</h3>
+      <p>The label and number are read in order; do not hide the label. If the number alone appears in a heading, add the label with <code>aria-describedby</code>. Compare-to values must include the sign and the unit in text.</p>
+      <h3>Contrast</h3>
+      <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);"><div class="ds-pair"><span>Number on surface</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-surface" data-min="4.5"></span></div><div class="ds-pair"><span>Label on surface</span><span class="ds-pair__ratio" data-contrast="--color-fg-muted|--color-bg-surface" data-min="4.5"></span></div><div class="ds-pair"><span>Context line on surface</span><span class="ds-pair__ratio" data-contrast="--color-fg-muted|--color-bg-surface" data-min="4.5"></span></div><div class="ds-pair"><span>Positive change text</span><span class="ds-pair__ratio" data-contrast="--color-success-fg|--color-success-bg" data-min="4.5"></span></div></div>
+      <h3>Motion</h3>
+      <p>No count-up animation. The number appears at its value.</p>
+      <h3>Touch</h3>
+      <p>A stat is not a target. A link in the context line is at least 24px high; give it padding where stats are closely packed.</p>
+    </section>
+    <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+      <ul>
+        <li>Labels are nouns for what is counted with a period: "Sessions this month".</li>
+        <li>Numbers use thousands separators and the currency symbol: "$8,400".</li>
+        <li>Context lines are one short sentence fragment; no period.</li>
+        <li>Comparisons name the baseline: "+4 vs September", not "+4".</li>
+        <li>Do not abbreviate to "8.4k" unless space truly forbids it.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+      <div class="ds-dodont">
+        <figure class="ds-do"><div class="ds-example__canvas"><article class="stat"><span class="eyebrow">Sessions this month</span><div class="stat__number">12</div><p>3 awaiting review</p></article></div><figcaption>One number, a clear label and a context line.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><article class="stat"><span class="eyebrow">Overview</span><div class="stat__number">12 / 248 / 7</div><p>sessions, photos, quotes</p></article></div><figcaption>Three numbers in one stat cannot be read or compared.</figcaption></figure>
+        <figure class="ds-do"><div class="ds-example__canvas"><article class="stat" style="max-width: 16rem;"><span class="eyebrow">Revenue this month</span><div class="stat__number">$8,400</div><p><span class="badge badge--success">+$1,200 vs September</span></p></article></div><figcaption>Direction is in the sign and the words.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><article class="stat" style="max-width: 16rem;"><span class="eyebrow">Revenue this month</span><div class="stat__number">$8,400</div><p><span class="badge badge--success">&nbsp;&nbsp;</span></p></article></div><figcaption>A green chip with no text is invisible to many people.</figcaption></figure>
+      </div>
+    </section>
+    <section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+        <tbody>
+          <tr><td>Border</td><td><code>--color-border-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-border-default" data-swatch></i><span data-token="--color-border-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-border-default" data-swatch></i><span data-token="--color-border-default"></span></span></td></tr>
+          <tr><td>Number</td><td><code>--color-fg-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td></tr>
+          <tr><td>Label and context</td><td><code>--color-fg-muted</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td></tr>
+          <tr><td>Padding</td><td><code>--space-5</code></td><td colspan="2"><span data-token="--space-5"></span></td></tr>
+          <tr><td>Number font</td><td><code>--font-family-serif</code> / <code>--font-size-2xl</code></td><td colspan="2"><span data-token="--font-family-serif"></span> / <span data-token="--font-size-2xl"></span></td></tr>
+          <tr><td>Label font</td><td><code>--text-overline</code></td><td colspan="2"><span data-token="--text-overline"></span></td></tr>
+          <tr><td>Context font</td><td><code>--text-caption</code></td><td colspan="2"><span data-token="--text-caption"></span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+    <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+      <pre><code>&lt;div class="grid grid--3"&gt;
+  &lt;article class="stat"&gt;
+    &lt;span class="eyebrow"&gt;Sessions this month&lt;/span&gt;
+    &lt;div class="stat__number"&gt;12&lt;/div&gt;
+    &lt;p&gt;3 awaiting review&lt;/p&gt;
+  &lt;/article&gt;
+&lt;/div&gt;</code></pre>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>.stat</code></td><td>Bordered panel with padding; its <code>&lt;p&gt;</code> is the muted context line.</td></tr><tr><td><code>.stat__number</code></td><td>Large serif figure with tabular numerals.</td></tr><tr><td><code>.eyebrow</code></td><td>Overline label (shared utility).</td></tr><tr><td><code>aria-busy="true"</code></td><td>Loading.</td></tr></tbody></table></div>
+    </section>
+    <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+      <p>Extracted from these mocks:</p>
+      <ul>
+        <li><a href="../../mocks/admin/dashboard.html">admin/dashboard</a> (four summary stats)</li>
+      </ul>
+      <p>Drift fixed during extraction: the mocks named the figure <code>.number</code> and used a 37px size and a small label; the system renames it <code>.stat__number</code> and uses the 2xl token with tabular figures. Loading, zero and error versions were added; the mock showed only a value or a literal 0.</p>
+    </section>
+
+    <footer class="ds-footer"><span>Quinntyne Brown Studio design system &middot; extracted from <a href="../../mocks/index.html">docs/mocks</a></span><a href="#top">Back to top</a></footer>
+  </main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

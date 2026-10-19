@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pagination &mdash; Quinntyne Brown Studio design system</title>
+<meta name="description" content="Pagination splits a long list into pages and lets people step through them or jump to one.">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+  <nav class="ds-nav" aria-label="Design system">
+    <div class="ds-nav__brand"><a href="../index.html">QBS DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">&#9790; Dark</button></div>
+    <details open><summary>Foundations</summary><ul>
+      <li><a href="../foundations/color.html">Color</a></li>
+      <li><a href="../foundations/typography.html">Typography</a></li>
+      <li><a href="../foundations/spacing.html">Spacing</a></li>
+      <li><a href="../foundations/layout.html">Layout</a></li>
+      <li><a href="../foundations/elevation.html">Elevation</a></li>
+      <li><a href="../foundations/shape.html">Shape</a></li>
+      <li><a href="../foundations/motion.html">Motion</a></li>
+      <li><a href="../foundations/iconography.html">Iconography</a></li>
+      <li><a href="../foundations/theming.html">Theming</a></li>
+      <li><a href="../foundations/responsive.html">Responsive</a></li>
+      <li><a href="../foundations/accessibility.html">Accessibility</a></li>
+      <li><a href="../foundations/content.html">Content</a></li>
+    </ul></details>
+    <details open><summary>Components</summary><ul>
+      <li><a href="../components/button.html">Button</a></li>
+      <li><a href="../components/button-group.html">Button group</a></li>
+      <li><a href="../components/link.html">Link</a></li>
+      <li><a href="../components/menu.html">Menu</a></li>
+      <li><a href="../components/checkbox.html">Checkbox</a></li>
+      <li><a href="../components/date-navigator.html">Date navigator</a></li>
+      <li><a href="../components/file-upload.html">File upload</a></li>
+      <li><a href="../components/form-field.html">Form field</a></li>
+      <li><a href="../components/form-layout.html">Form layout</a></li>
+      <li><a href="../components/radio-group.html">Radio group</a></li>
+      <li><a href="../components/select.html">Select</a></li>
+      <li><a href="../components/switch.html">Switch</a></li>
+      <li><a href="../components/text-field.html">Text field</a></li>
+      <li><a href="../components/textarea.html">Textarea</a></li>
+      <li><a href="../components/breadcrumb.html">Breadcrumb</a></li>
+      <li><a href="../components/footer.html">Footer</a></li>
+      <li><a href="../components/pagination.html">Pagination</a></li>
+      <li><a href="../components/sidebar.html">Sidebar</a></li>
+      <li><a href="../components/skip-link.html">Skip link</a></li>
+      <li><a href="../components/tabs.html">Tabs</a></li>
+      <li><a href="../components/top-bar.html">Top bar</a></li>
+      <li><a href="../components/accordion.html">Accordion</a></li>
+      <li><a href="../components/card.html">Card</a></li>
+      <li><a href="../components/dialog.html">Dialog</a></li>
+      <li><a href="../components/divider.html">Divider</a></li>
+      <li><a href="../components/layout.html">Layout primitives</a></li>
+      <li><a href="../components/tooltip.html">Tooltip</a></li>
+      <li><a href="../components/avatar.html">Avatar</a></li>
+      <li><a href="../components/badge.html">Badge</a></li>
+      <li><a href="../components/blog-card.html">Blog card</a></li>
+      <li><a href="../components/chip.html">Chip</a></li>
+      <li><a href="../components/cost-summary.html">Cost summary</a></li>
+      <li><a href="../components/description-list.html">Description list</a></li>
+      <li><a href="../components/line-item.html">Line item</a></li>
+      <li><a href="../components/photo-tile.html">Photo tile</a></li>
+      <li><a href="../components/calendar.html">Schedule calendar</a></li>
+      <li><a href="../components/selection-bar.html">Selection bar</a></li>
+      <li><a href="../components/stat.html">Stat</a></li>
+      <li><a href="../components/stepper.html">Stepper</a></li>
+      <li><a href="../components/table.html">Table</a></li>
+      <li><a href="../components/alert.html">Alert</a></li>
+      <li><a href="../components/empty-state.html">Empty state</a></li>
+      <li><a href="../components/error-page.html">Error page</a></li>
+      <li><a href="../components/inline-message.html">Inline message</a></li>
+      <li><a href="../components/progress.html">Progress</a></li>
+      <li><a href="../components/skeleton.html">Skeleton</a></li>
+      <li><a href="../components/spinner.html">Spinner</a></li>
+      <li><a href="../components/toast.html">Toast</a></li>
+    </ul></details>
+    <details open><summary>Patterns</summary><ul>
+      <li><a href="../patterns/forms.html">Forms</a></li>
+      <li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li>
+      <li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li>
+      <li><a href="../patterns/navigation-and-page-structure.html">Navigation and page structure</a></li>
+      <li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li>
+      <li><a href="../patterns/data-tables-and-lists.html">Data tables and lists</a></li>
+      <li><a href="../patterns/notifications.html">Notifications</a></li>
+      <li><a href="../patterns/content-and-tone.html">Content and tone</a></li>
+    </ul></details>
+  </nav>
+
+  <main id="main" class="ds-main">
+    <header class="ds-header">
+      <p class="ds-kicker">Component &amp;middot; Navigation</p>
+      <h1>Pagination</h1>
+      <p class="ds-lead">Pagination splits a long list into pages and lets people step through them or jump to one.</p>
+      <div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Status: stable</span><span class="ds-pill">Landmark <code>&lt;nav&gt;</code></span></div>
+      <ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul>
+    </header>
+
+    <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+      <p>Use pagination for lists that have a stable order and a known length: sessions in the admin app, blog posts, print requests. People can bookmark a page, return to it, and know how far they are. For a short list, show everything. For a gallery of photos use a "Load more" <a href="button.html">button</a> so the grid does not jump.</p>
+      <ul>
+        <li><b>Numbered</b>: previous, a window of page numbers with ellipses, next. The default for tables on wide screens.</li>
+        <li><b>Simple</b>: only previous and next with a "Page 2 of 8" status. Use it on phones and when the total is unknown.</li>
+        <li><b>With page size</b>: add a <a href="select.html">select</a> for "Rows per page" next to the numbered pagination in dense tables.</li>
+      </ul>
+      <p>Pagination changes the list shown by a <a href="table.html">table</a>; announce the change, and keep sort and filters when moving between pages.</p>
+    </section>
+    <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+      <div class="ds-anatomy">
+        <figure class="ds-anatomy__figure">
+          <nav class="pagination" aria-label="Pagination"><a href="#" rel="prev" aria-label="Previous page"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H5m5-5-5 5 5 5"/></svg></a><a href="#" aria-label="Page 1">1</a><a href="#" aria-current="page" aria-label="Page 2">2</a><a href="#" aria-label="Page 3">3</a><span>&hellip;</span><a href="#" aria-label="Page 8">8</a><a href="#" rel="next" aria-label="Next page"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></nav>
+          <span class="ds-callout" style="left: 8%; top: 118%;" aria-hidden="true">1</span>
+          <span class="ds-callout" style="left: 40%; top: 118%;" aria-hidden="true">2</span>
+          <span class="ds-callout" style="left: 92%; top: 118%;" aria-hidden="true">3</span>
+        </figure>
+        <ol class="ds-anatomy__list">
+          <li><div><b>Previous / next</b><small>Icon-only links with <code>aria-label</code>. Disabled at the ends with <code>aria-disabled="true"</code>.</small></div></li>
+          <li><div><b>Page number</b><small>A link per page; the current one is filled ink with <code>aria-current="page"</code>.</small></div></li>
+          <li><div><b>Ellipsis</b><small>Non-interactive <code>span</code> standing for skipped pages.</small></div></li>
+        </ol>
+      </div>
+    </section>
+    <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+      <p>All variants are one <code>&lt;nav class="pagination"&gt;</code>; they differ in what is inside.</p>
+      <h3>Numbered</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><nav class="pagination" aria-label="Pagination"><a href="#" rel="prev" aria-label="Previous page"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H5m5-5-5 5 5 5"/></svg></a><a href="#" aria-label="Page 1">1</a><a href="#" aria-current="page" aria-label="Page 2">2</a><a href="#" aria-label="Page 3">3</a><span>&hellip;</span><a href="#" aria-label="Page 8">8</a><a href="#" rel="next" aria-label="Next page"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></nav></div>
+        <div class="ds-example__caption"><span>Current page 2 of 8 with an ellipsis before the last page.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;nav class="pagination" aria-label="Pagination"&gt;
+  &lt;a href="?page=1" rel="prev" aria-label="Previous page"&gt;…&lt;/a&gt;
+  &lt;a href="?page=1" aria-label="Page 1"&gt;1&lt;/a&gt;
+  &lt;a href="?page=2" aria-current="page" aria-label="Page 2"&gt;2&lt;/a&gt;
+  &lt;a href="?page=3" aria-label="Page 3"&gt;3&lt;/a&gt;
+  &lt;span&gt;&amp;hellip;&lt;/span&gt;
+  &lt;a href="?page=8" aria-label="Page 8"&gt;8&lt;/a&gt;
+  &lt;a href="?page=3" rel="next" aria-label="Next page"&gt;…&lt;/a&gt;
+&lt;/nav&gt;</code></pre></details>
+      </div>
+      <h3>Simple previous / next</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><nav class="pagination" aria-label="Pagination, simple"><a href="#" rel="prev"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H5m5-5-5 5 5 5"/></svg>Previous</a><span aria-live="polite">Page 2 of 8</span><a href="#" rel="next">Next<svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></nav></div>
+        <div class="ds-example__caption"><span>Fewer targets for narrow screens. The status text is in a polite live region.</span></div>
+      </div>
+      <h3>With page size</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="cluster" style="--cluster-gap: var(--space-6); width: 100%; justify-content: space-between;"><label class="cluster" style="--cluster-gap: var(--space-2);"><span class="muted">Rows per page</span><select class="input" style="width: auto;"><option>10</option><option>25</option><option>50</option></select></label><nav class="pagination" aria-label="Pagination"><a href="#" rel="prev" aria-label="Previous page"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H5m5-5-5 5 5 5"/></svg></a><a href="#" aria-label="Page 1">1</a><a href="#" aria-current="page" aria-label="Page 2">2</a><a href="#" aria-label="Page 3">3</a><span>&hellip;</span><a href="#" aria-label="Page 8">8</a><a href="#" rel="next" aria-label="Next page"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></nav></div></div>
+        <div class="ds-example__caption"><span>The page-size select sits at the left; changing it returns to page 1.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="sizes" data-na="Pagination has one size: 44px square targets (&lt;code&gt;--control-height-md&lt;/code&gt;) at 14px text."><h2><a href="#sizes">Sizes</a></h2>
+      <p class="ds-na">Pagination has one size: 44px square targets (&lt;code&gt;--control-height-md&lt;/code&gt;) at 14px text.</p>
+    </section>
+    <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+      <p>Each control has default, hover, focus, current and disabled. Hover works through <code>:hover</code> only; focus and the others are shown.</p>
+      <div class="ds-matrix"><table>
+        <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Focus</th><th scope="col">Current</th><th scope="col">Disabled</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Page number</th><td><nav class="pagination" aria-label="Example"><a href="#" aria-label="Page 3">3</a></nav></td><td><nav class="pagination" aria-label="Example"><a href="#" aria-label="Page 3" data-state="focus">3</a></nav></td><td><nav class="pagination" aria-label="Example"><a href="#" aria-label="Page 3" aria-current="page">3</a></nav></td><td><nav class="pagination" aria-label="Example"><a href="#" aria-label="Page 3" aria-disabled="true" tabindex="-1">3</a></nav></td></tr>
+          <tr><th scope="row">Previous</th><td><nav class="pagination" aria-label="Example"><a href="#" aria-label="Previous page"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H5m5-5-5 5 5 5"/></svg></a></nav></td><td><nav class="pagination" aria-label="Example"><a href="#" aria-label="Previous page" data-state="focus"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H5m5-5-5 5 5 5"/></svg></a></nav></td><td><nav class="pagination" aria-label="Example"><a href="#" aria-label="Previous page" aria-current="page"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H5m5-5-5 5 5 5"/></svg></a></nav></td><td><nav class="pagination" aria-label="Example"><a href="#" aria-label="Previous page" aria-disabled="true" tabindex="-1"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H5m5-5-5 5 5 5"/></svg></a></nav></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Both themes</h3>
+      <div class="ds-themes">
+        <div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><nav class="pagination" aria-label="Pagination"><a href="#" rel="prev" aria-label="Previous page"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H5m5-5-5 5 5 5"/></svg></a><a href="#" aria-label="Page 1">1</a><a href="#" aria-current="page" aria-label="Page 2">2</a><a href="#" aria-label="Page 3">3</a><span>&hellip;</span><a href="#" aria-label="Page 8">8</a><a href="#" rel="next" aria-label="Next page"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></nav></div></div>
+        <div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><nav class="pagination" aria-label="Pagination"><a href="#" rel="prev" aria-label="Previous page"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H5m5-5-5 5 5 5"/></svg></a><a href="#" aria-label="Page 1">1</a><a href="#" aria-current="page" aria-label="Page 2">2</a><a href="#" aria-label="Page 3">3</a><span>&hellip;</span><a href="#" aria-label="Page 8">8</a><a href="#" rel="next" aria-label="Next page"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></nav></div></div>
+      </div>
+      <ul>
+        <li><b>Disabled</b> previous on page 1 and next on the last page keep their place so the row does not shift; they use <code>aria-disabled="true"</code> and <code>tabindex="-1"</code> because they are links.</li>
+        <li><b>Current</b> uses an ink fill with the inverse text, plus <code>aria-current</code>; the page number is also in the table caption or heading.</li>
+        <li><b>Loading</b>: set <code>aria-busy="true"</code> on the list being paged, not on the pagination.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+      <ul>
+        <li>Numbered pagination shows at most seven items on desktop (first, last, current and two neighbours each side with ellipses).</li>
+        <li>Below 480px (<code>--layout-breakpoint-sm</code>) switch to the simple variant: previous, "Page 2 of 8", next.</li>
+        <li>The row wraps and centres if it does not fit; items keep 44px height.</li>
+        <li>The page-size select stays above the pagination on phones.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+      <p>Pagination reads <code>--color-fg-default</code> on <code>--color-bg-canvas</code>; the current page inverts through <code>--color-accent</code> and <code>--color-fg-on-accent</code>, which swap in the dark theme. Disabled items use <code>--color-fg-disabled</code>, which is intentionally low-contrast.</p>
+    </section>
+    <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+      <h3>Role and pattern</h3>
+      <p>A <code>&lt;nav aria-label="Pagination"&gt;</code> of links. There is no dedicated APG pattern; this follows the Navigation landmark pattern. Page numbers are real links with <code>href</code> so the browser can open them in a new tab and the URL carries the page.</p>
+      <h3>Keyboard</h3>
+      <div class="ds-table-wrap"><table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves through previous, page numbers and next. Disabled items are skipped.</td></tr><tr><td><kbd>Enter</kbd></td><td>Follows the focused link.</td></tr><tr><td><kbd>Space</kbd></td><td>Not used: links activate with Enter only.</td></tr></tbody></table></div>
+      <h3>Focus</h3>
+      <p>Links take the shared ring (2px <code>--color-focus-ring</code>, 2px offset). After a page change, move focus to the list's heading or caption and announce the result ("Showing 11 to 20 of 76 sessions") in a polite live region, so keyboard users do not land back at the top of the page.</p>
+      <h3>Labelling</h3>
+      <p>The nav is labelled "Pagination". Numbers are named "Page 3" through <code>aria-label</code> so the digit is not read alone; the current link keeps its label plus <code>aria-current="page"</code>. Icon-only previous and next links are named explicitly.</p>
+      <h3>Contrast</h3>
+      <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);"><div class="ds-pair"><span>Page number on page</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-canvas" data-min="4.5"></span></div><div class="ds-pair"><span>Current label on fill</span><span class="ds-pair__ratio" data-contrast="--color-fg-on-accent|--color-accent" data-min="4.5"></span></div><div class="ds-pair"><span>Hover background text</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-subtle" data-min="4.5"></span></div><div class="ds-pair"><span>Focus ring on page</span><span class="ds-pair__ratio" data-contrast="--color-focus-ring|--color-bg-canvas" data-min="3"></span></div></div>
+      <h3>Motion</h3>
+      <p>No motion.</p>
+      <h3>Touch</h3>
+      <p>Every item is at least 44px square (<code>--control-height-md</code>) with 4px gaps, meeting the comfortable target.</p>
+    </section>
+    <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+      <ul>
+        <li>Do not label with "Page" visibly; digits and arrows are enough. The accessible names add "Page".</li>
+        <li>Show the range in text near the list: "Showing 11 to 20 of 76 sessions".</li>
+        <li>Simple variant text is "Page 2 of 8", sentence case.</li>
+        <li>Keep the same page size and order when returning to a list.</li>
+        <li>Never paginate fewer than two pages' worth: hide the control when there is one page.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+      <div class="ds-dodont">
+        <figure class="ds-do"><div class="ds-example__canvas"><nav class="pagination" aria-label="Pagination"><a href="#" rel="prev" aria-label="Previous page"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H5m5-5-5 5 5 5"/></svg></a><a href="#" aria-label="Page 1">1</a><a href="#" aria-current="page" aria-label="Page 2">2</a><a href="#" aria-label="Page 3">3</a><span>&hellip;</span><a href="#" aria-label="Page 8">8</a><a href="#" rel="next" aria-label="Next page"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></nav></div><figcaption>Link every page with a real <code>href</code> and name each with <code>aria-label</code>.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><nav class="pagination" aria-label="Pagination"><span>1</span><span>2</span><span>3</span></nav></div><figcaption>Plain spans are not operable; page numbers must be links.</figcaption></figure>
+        <figure class="ds-do"><div class="ds-example__canvas"><nav class="pagination" aria-label="Pagination, simple"><a href="#" rel="prev"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H5m5-5-5 5 5 5"/></svg>Previous</a><span>Page 1 of 3</span><a href="#" rel="next">Next<svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></nav></div><figcaption>On phones, fall back to previous, status and next.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><nav class="pagination" aria-label="Pagination"><a href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">6</a><a href="#">7</a><a href="#">8</a><a href="#">9</a><a href="#">10</a><a href="#">11</a><a href="#">12</a></nav></div><figcaption>Every page number in a row: use first, last, current and neighbours with ellipses.</figcaption></figure>
+      </div>
+    </section>
+    <section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+        <tbody>
+          <tr><td>Text</td><td><code>--color-fg-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td></tr>
+          <tr><td>Current fill</td><td><code>--color-accent</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-accent" data-swatch></i><span data-token="--color-accent"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-accent" data-swatch></i><span data-token="--color-accent"></span></span></td></tr>
+          <tr><td>Current label</td><td><code>--color-fg-on-accent</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-on-accent" data-swatch></i><span data-token="--color-fg-on-accent"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-on-accent" data-swatch></i><span data-token="--color-fg-on-accent"></span></span></td></tr>
+          <tr><td>Hover background</td><td><code>--color-bg-subtle</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-subtle" data-swatch></i><span data-token="--color-bg-subtle"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-subtle" data-swatch></i><span data-token="--color-bg-subtle"></span></span></td></tr>
+          <tr><td>Disabled</td><td><code>--color-fg-disabled</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-disabled" data-swatch></i><span data-token="--color-fg-disabled"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-disabled" data-swatch></i><span data-token="--color-fg-disabled"></span></span></td></tr>
+          <tr><td>Focus ring</td><td><code>--color-focus-ring</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-focus-ring" data-swatch></i><span data-token="--color-focus-ring"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-focus-ring" data-swatch></i><span data-token="--color-focus-ring"></span></span></td></tr>
+          <tr><td>Target size</td><td><code>--control-height-md</code></td><td colspan="2"><span data-token="--control-height-md"></span></td></tr>
+          <tr><td>Gap</td><td><code>--space-1</code></td><td colspan="2"><span data-token="--space-1"></span></td></tr>
+          <tr><td>Radius</td><td><code>--radius-xs</code></td><td colspan="2"><span data-token="--radius-xs"></span></td></tr>
+          <tr><td>Font</td><td><code>--font-size-sm</code></td><td colspan="2"><span data-token="--font-size-sm"></span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+    <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+      <pre><code>&lt;nav class="pagination" aria-label="Pagination"&gt;
+  &lt;a href="?page=1" rel="prev" aria-label="Previous page"&gt;…&lt;/a&gt;
+  &lt;a href="?page=1" aria-label="Page 1"&gt;1&lt;/a&gt;
+  &lt;a href="?page=2" aria-label="Page 2" aria-current="page"&gt;2&lt;/a&gt;
+  &lt;a href="?page=3" aria-label="Page 3"&gt;3&lt;/a&gt;
+  &lt;a href="?page=3" rel="next" aria-label="Next page"&gt;…&lt;/a&gt;
+&lt;/nav&gt;
+&lt;p class="muted" role="status"&gt;Showing 11 to 20 of 76 sessions&lt;/p&gt;</code></pre>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>.pagination</code></td><td>Flex row on the <code>&lt;nav&gt;</code>; links and spans are 44px squares.</td></tr><tr><td><code>aria-current="page"</code></td><td>Current page: ink fill.</td></tr><tr><td><code>aria-disabled="true"</code></td><td>Disabled previous or next: muted, not a target.</td></tr><tr><td><code>data-state="focus"</code></td><td>Documentation only: forces a state in static pages.</td></tr></tbody></table></div>
+    </section>
+    <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+      <p>Extracted from these mocks:</p>
+      <ul>
+        <li><a href="../../mocks/admin/sessions.html">admin/sessions</a> (list that will be paged)</li>
+        <li><a href="../../mocks/admin/inquiries.html">admin/inquiries</a> (inquiries list)</li>
+        <li><a href="../../mocks/marketing/blog.html">marketing/blog</a> (post list)</li>
+      </ul>
+      <p>Drift fixed during extraction: none of the mocks paginate: every list shows its seed data on one page. The component is specified from the component catalogue's requirement and the mocks' list pages so those lists can grow. The system uses 44px targets and links with a real <code>href</code>, which a single-page prototype never needed.</p>
+    </section>
+
+    <footer class="ds-footer"><span>Quinntyne Brown Studio design system &middot; extracted from <a href="../../mocks/index.html">docs/mocks</a></span><a href="#top">Back to top</a></footer>
+  </main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>
