@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Selection bar &mdash; Quinntyne Brown Studio design system</title>
+<meta name="description" content="The selection bar sits above a photo grid or table and shows how many items are selected, with the actions that apply to the selection.">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+  <nav class="ds-nav" aria-label="Design system">
+    <div class="ds-nav__brand"><a href="../index.html">QBS DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">&#9790; Dark</button></div>
+    <details open><summary>Foundations</summary><ul>
+      <li><a href="../foundations/color.html">Color</a></li>
+      <li><a href="../foundations/typography.html">Typography</a></li>
+      <li><a href="../foundations/spacing.html">Spacing</a></li>
+      <li><a href="../foundations/layout.html">Layout</a></li>
+      <li><a href="../foundations/elevation.html">Elevation</a></li>
+      <li><a href="../foundations/shape.html">Shape</a></li>
+      <li><a href="../foundations/motion.html">Motion</a></li>
+      <li><a href="../foundations/iconography.html">Iconography</a></li>
+      <li><a href="../foundations/theming.html">Theming</a></li>
+      <li><a href="../foundations/responsive.html">Responsive</a></li>
+      <li><a href="../foundations/accessibility.html">Accessibility</a></li>
+      <li><a href="../foundations/content.html">Content</a></li>
+    </ul></details>
+    <details open><summary>Components</summary><ul>
+      <li><a href="../components/button.html">Button</a></li>
+      <li><a href="../components/button-group.html">Button group</a></li>
+      <li><a href="../components/link.html">Link</a></li>
+      <li><a href="../components/menu.html">Menu</a></li>
+      <li><a href="../components/checkbox.html">Checkbox</a></li>
+      <li><a href="../components/date-navigator.html">Date navigator</a></li>
+      <li><a href="../components/file-upload.html">File upload</a></li>
+      <li><a href="../components/form-field.html">Form field</a></li>
+      <li><a href="../components/form-layout.html">Form layout</a></li>
+      <li><a href="../components/radio-group.html">Radio group</a></li>
+      <li><a href="../components/select.html">Select</a></li>
+      <li><a href="../components/switch.html">Switch</a></li>
+      <li><a href="../components/text-field.html">Text field</a></li>
+      <li><a href="../components/textarea.html">Textarea</a></li>
+      <li><a href="../components/breadcrumb.html">Breadcrumb</a></li>
+      <li><a href="../components/footer.html">Footer</a></li>
+      <li><a href="../components/pagination.html">Pagination</a></li>
+      <li><a href="../components/sidebar.html">Sidebar</a></li>
+      <li><a href="../components/skip-link.html">Skip link</a></li>
+      <li><a href="../components/tabs.html">Tabs</a></li>
+      <li><a href="../components/top-bar.html">Top bar</a></li>
+      <li><a href="../components/accordion.html">Accordion</a></li>
+      <li><a href="../components/card.html">Card</a></li>
+      <li><a href="../components/dialog.html">Dialog</a></li>
+      <li><a href="../components/divider.html">Divider</a></li>
+      <li><a href="../components/layout.html">Layout primitives</a></li>
+      <li><a href="../components/tooltip.html">Tooltip</a></li>
+      <li><a href="../components/avatar.html">Avatar</a></li>
+      <li><a href="../components/badge.html">Badge</a></li>
+      <li><a href="../components/blog-card.html">Blog card</a></li>
+      <li><a href="../components/chip.html">Chip</a></li>
+      <li><a href="../components/cost-summary.html">Cost summary</a></li>
+      <li><a href="../components/description-list.html">Description list</a></li>
+      <li><a href="../components/line-item.html">Line item</a></li>
+      <li><a href="../components/photo-tile.html">Photo tile</a></li>
+      <li><a href="../components/calendar.html">Schedule calendar</a></li>
+      <li><a href="../components/selection-bar.html">Selection bar</a></li>
+      <li><a href="../components/stat.html">Stat</a></li>
+      <li><a href="../components/stepper.html">Stepper</a></li>
+      <li><a href="../components/table.html">Table</a></li>
+      <li><a href="../components/alert.html">Alert</a></li>
+      <li><a href="../components/empty-state.html">Empty state</a></li>
+      <li><a href="../components/error-page.html">Error page</a></li>
+      <li><a href="../components/inline-message.html">Inline message</a></li>
+      <li><a href="../components/progress.html">Progress</a></li>
+      <li><a href="../components/skeleton.html">Skeleton</a></li>
+      <li><a href="../components/spinner.html">Spinner</a></li>
+      <li><a href="../components/toast.html">Toast</a></li>
+    </ul></details>
+    <details open><summary>Patterns</summary><ul>
+      <li><a href="../patterns/forms.html">Forms</a></li>
+      <li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li>
+      <li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li>
+      <li><a href="../patterns/navigation-and-page-structure.html">Navigation and page structure</a></li>
+      <li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li>
+      <li><a href="../patterns/data-tables-and-lists.html">Data tables and lists</a></li>
+      <li><a href="../patterns/notifications.html">Notifications</a></li>
+      <li><a href="../patterns/content-and-tone.html">Content and tone</a></li>
+    </ul></details>
+  </nav>
+
+  <main id="main" class="ds-main">
+    <header class="ds-header">
+      <p class="ds-kicker">Component &amp;middot; Data display</p>
+      <h1>Selection bar</h1>
+      <p class="ds-lead">The selection bar sits above a photo grid or table and shows how many items are selected, with the actions that apply to the selection.</p>
+      <div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Status: stable</span><span class="ds-pill">Status region</span></div>
+      <ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul>
+    </header>
+
+    <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+      <p>Use a selection bar wherever people choose several items and then act on them: a client picks photographs for prints, an admin approves a batch. It pairs with <a href="photo-tile.html">photo tiles</a> and a <a href="table.html">selectable table</a>. For actions on one item use a <a href="menu.html">menu</a> or a row button.</p>
+      <ul>
+        <li>The count comes first, as plain text, and announces itself politely when it changes.</li>
+        <li>Quiet actions (Select all, Clear) are ghost buttons; the main action is the single primary button.</li>
+        <li>The bar sits in flow above the content; it does not float over it.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+      <div class="ds-anatomy">
+        <figure class="ds-anatomy__figure">
+          <div class="selection-bar" role="region" aria-label="Photo selection"><span role="status" aria-live="polite"><strong>12</strong> photographs selected</span><div class="cluster"><button class="btn btn--ghost btn--sm" type="button">Select all</button><button class="btn btn--ghost btn--sm" type="button" >Clear</button><button class="btn btn--sm" type="button" >Add to album</button><button class="btn btn--primary btn--sm" type="button"  >Request prints</button></div></div>
+          <span class="ds-callout" style="left: 2%; top: -16%;" aria-hidden="true">1</span>
+          <span class="ds-callout" style="left: 56%; top: -16%;" aria-hidden="true">2</span>
+          <span class="ds-callout" style="left: 90%; top: -16%;" aria-hidden="true">3</span>
+        </figure>
+        <ol class="ds-anatomy__list">
+          <li><div><b>Count</b><small>A bold number and a noun, in a polite status region.</small></div></li>
+          <li><div><b>Quiet actions</b><small>Select all and Clear: ghost small buttons.</small></div></li>
+          <li><div><b>Primary action</b><small>One primary button for the main outcome; secondary actions are default buttons.</small></div></li>
+        </ol>
+      </div>
+    </section>
+    <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+      <p>The bar always has the same three parts; only the actions change with the context.</p>
+      <h3>Selection in the client gallery</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="selection-bar" role="region" aria-label="Photo selection"><span role="status" aria-live="polite"><strong>12</strong> photographs selected</span><div class="cluster"><button class="btn btn--ghost btn--sm" type="button">Select all</button><button class="btn btn--ghost btn--sm" type="button" >Clear</button><button class="btn btn--sm" type="button" >Add to album</button><button class="btn btn--primary btn--sm" type="button"  >Request prints</button></div></div></div>
+        <div class="ds-example__caption"><span>Wraps below 768px; the count stays first.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class="selection-bar" role="region" aria-label="Photo selection"&gt;
+  &lt;span role="status" aria-live="polite"&gt;&lt;strong&gt;12&lt;/strong&gt; photographs selected&lt;/span&gt;
+  &lt;div class="cluster"&gt;
+    &lt;button class="btn btn--ghost btn--sm" type="button"&gt;Select all&lt;/button&gt;
+    &lt;button class="btn btn--ghost btn--sm" type="button"&gt;Clear&lt;/button&gt;
+    &lt;button class="btn btn--primary btn--sm" type="button"&gt;Request prints&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+      </div>
+      <h3>Admin review</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="selection-bar" role="region" aria-label="Review selection"><span role="status" aria-live="polite"><strong>5</strong> photographs selected</span><div class="cluster"><button class="btn btn--ghost btn--sm" type="button">Clear</button><button class="btn btn--sm" type="button">Reject</button><button class="btn btn--primary btn--sm" type="button">Approve</button></div></div></div>
+        <div class="ds-example__caption"><span>Reject is a default button, not danger: rejecting is reversible.</span></div>
+      </div>
+      <h3>Table bulk actions</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="selection-bar" role="region" aria-label="Session selection"><span role="status" aria-live="polite"><strong>2</strong> sessions selected</span><div class="cluster"><button class="btn btn--ghost btn--sm" type="button">Clear</button><button class="btn btn--sm" type="button">Export</button><button class="btn btn--danger btn--sm" type="button">Archive 2 sessions</button></div></div></div>
+        <div class="ds-example__caption"><span>A destructive bulk action names its count and opens a confirmation <a href="dialog.html">dialog</a>.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="sizes" data-na="The bar has one size; the buttons inside it are small."><h2><a href="#sizes">Sizes</a></h2>
+      <p class="ds-na">The bar has one size; the buttons inside it are small.</p>
+    </section>
+    <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+      <p>The bar reflects the selection. Pointer and focus states of the buttons come from <a href="button.html">button</a>.</p>
+      <div class="ds-matrix"><table>
+        <thead><tr><th scope="col">Variant</th><th scope="col">Default</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Items selected</th><td><div class="selection-bar" role="region" aria-label="Photo selection"><span role="status" aria-live="polite"><strong>12</strong> photographs selected</span><div class="cluster"><button class="btn btn--ghost btn--sm" type="button">Select all</button><button class="btn btn--ghost btn--sm" type="button">Clear</button><button class="btn btn--sm" type="button">Add to album</button><button class="btn btn--primary btn--sm" type="button" >Request prints</button></div></div></td></tr>
+          <tr><th scope="row">Nothing selected</th><td><div class="selection-bar" role="region" aria-label="Photo selection"><span role="status" aria-live="polite"><strong>0</strong> photographs selected</span><div class="cluster"><button class="btn btn--ghost btn--sm" type="button">Select all</button><button class="btn btn--ghost btn--sm" type="button" disabled>Clear</button><button class="btn btn--sm" type="button" disabled>Add to album</button><button class="btn btn--primary btn--sm" type="button" disabled>Request prints</button></div></div></td></tr>
+          <tr><th scope="row">Working</th><td><div class="selection-bar" role="region" aria-label="Photo selection"><span role="status" aria-live="polite"><strong>12</strong> photographs selected</span><div class="cluster"><button class="btn btn--ghost btn--sm" type="button">Select all</button><button class="btn btn--ghost btn--sm" type="button">Clear</button><button class="btn btn--sm" type="button">Add to album</button><button class="btn btn--primary btn--sm" type="button"  aria-busy="true">Request prints</button></div></div></td></tr>
+          <tr><th scope="row">One selected</th><td><div class="selection-bar" role="region" aria-label="Photo selection"><span role="status" aria-live="polite"><strong>1</strong> photograph selected</span><div class="cluster"><button class="btn btn--ghost btn--sm" type="button">Select all</button><button class="btn btn--ghost btn--sm" type="button">Clear</button><button class="btn btn--sm" type="button">Add to album</button><button class="btn btn--primary btn--sm" type="button" >Request prints</button></div></div></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Both themes</h3>
+      <div class="ds-themes">
+        <div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><div class="selection-bar" role="region" aria-label="Photo selection"><span role="status" aria-live="polite"><strong>12</strong> photographs selected</span><div class="cluster"><button class="btn btn--ghost btn--sm" type="button">Select all</button><button class="btn btn--ghost btn--sm" type="button" >Clear</button><button class="btn btn--sm" type="button" >Add to album</button><button class="btn btn--primary btn--sm" type="button"  >Request prints</button></div></div></div></div>
+        <div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><div class="selection-bar" role="region" aria-label="Photo selection"><span role="status" aria-live="polite"><strong>12</strong> photographs selected</span><div class="cluster"><button class="btn btn--ghost btn--sm" type="button">Select all</button><button class="btn btn--ghost btn--sm" type="button" >Clear</button><button class="btn btn--sm" type="button" >Add to album</button><button class="btn btn--primary btn--sm" type="button"  >Request prints</button></div></div></div></div>
+      </div>
+      <ul>
+        <li><b>Nothing selected</b>: keep the bar visible with actions disabled when the screen is about selecting; hide it when selecting is an occasional action. Disabled buttons need the reason in the count text.</li>
+        <li><b>Working</b>: the pressed action shows its loading state; the other actions stay enabled unless they conflict.</li>
+        <li><b>Result</b>: confirm with a <a href="toast.html">toast</a> or an <a href="inline-message.html">inline message</a> and clear the selection.</li>
+        <li><b>Plural</b>: "1 photograph selected", not "1 photograph(s)".</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+      <ul>
+        <li>The bar is flex-wrap: the count and buttons share one row when they fit and the buttons wrap beneath at narrow widths.</li>
+        <li>Below 480px reduce the actions: keep the primary and Clear; move the rest into a <a href="menu.html">menu</a>.</li>
+        <li>When the list is long, the bar may become sticky at the top of the scroll area; ensure it never covers the focused item (WCAG 2.4.11).</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+      <p>Background <code>--color-bg-subtle</code>, count in default ink. Buttons carry their own theme. In dark mode the bar's fill darkens with the page; the count keeps 4.5:1.</p>
+    </section>
+    <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+      <h3>Role and pattern</h3>
+      <p>A labelled <code>role="region"</code> (or a plain <code>&lt;div&gt;</code> when the page already has landmarks nearby) containing a polite <code>role="status"</code> count and native buttons. No custom widget role.</p>
+      <h3>Keyboard</h3>
+      <div class="ds-table-wrap"><table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves through the buttons in DOM order.</td></tr><tr><td><kbd>Enter</kbd>, <kbd>Space</kbd></td><td>Activates a button.</td></tr><tr><td><kbd>Esc</kbd></td><td>Clears the selection when the bar has focus (optional shortcut).</td></tr><tr><td><kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+<kbd>A</kbd></td><td>Optional: selects all items when focus is in the grid.</td></tr></tbody></table></div>
+      <h3>Focus</h3>
+      <p>Each button shows the shared ring. When Clear empties the selection and the bar hides, focus moves to the first item in the grid. After an action completes, return focus to the primary button, or to the first remaining item.</p>
+      <h3>Labelling</h3>
+      <p>The region is named for what is selected ("Photo selection"). The count region is announced on change: "12 photographs selected". Buttons say what they do to the selection ("Request prints"), not "Go".</p>
+      <h3>Contrast</h3>
+      <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);"><div class="ds-pair"><span>Count on bar</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-subtle" data-min="4.5"></span></div><div class="ds-pair"><span>Ghost button label on bar</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-subtle" data-min="4.5"></span></div><div class="ds-pair"><span>Primary label</span><span class="ds-pair__ratio" data-contrast="--color-fg-on-accent|--color-accent" data-min="4.5"></span></div><div class="ds-pair"><span>Focus ring on bar</span><span class="ds-pair__ratio" data-contrast="--color-focus-ring|--color-bg-subtle" data-min="3"></span></div></div>
+      <h3>Motion</h3>
+      <p>The bar appears without animation. If it slides in, honour reduced motion by cutting the duration to zero.</p>
+      <h3>Touch</h3>
+      <p>Small buttons are 32px with 8px between them (meets 24px). On touch screens below 768px switch the bar's buttons to the default 44px size.</p>
+    </section>
+    <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+      <ul>
+        <li>Counts are numerals with a noun: "12 photographs selected".</li>
+        <li>Actions are verb phrases naming the outcome: "Request prints", "Add to album".</li>
+        <li>Use "Select all" for the loaded page and say "Select all 240" when it extends across pages.</li>
+        <li>Destructive bulk actions repeat the count: "Archive 2 sessions".</li>
+        <li>Do not repeat the count in a toast after the action.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+      <div class="ds-dodont">
+        <figure class="ds-do"><div class="ds-example__canvas"><div class="selection-bar" role="region" aria-label="Photo selection"><span role="status" aria-live="polite"><strong>12</strong> photographs selected</span><div class="cluster"><button class="btn btn--ghost btn--sm" type="button">Select all</button><button class="btn btn--ghost btn--sm" type="button" >Clear</button><button class="btn btn--sm" type="button" >Add to album</button><button class="btn btn--primary btn--sm" type="button"  >Request prints</button></div></div></div><figcaption>Count first, one primary action, quiet actions as ghost buttons.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><div class="selection-bar"><span>12</span><div class="cluster"><button class="btn btn--primary btn--sm" type="button">Go</button><button class="btn btn--primary btn--sm" type="button">Done</button></div></div></div><figcaption>Two primary buttons, vague labels and no noun in the count.</figcaption></figure>
+        <figure class="ds-do"><div class="ds-example__canvas"><div class="selection-bar" role="region" aria-label="Photo selection"><span role="status" aria-live="polite"><strong>0</strong> photographs selected</span><div class="cluster"><button class="btn btn--ghost btn--sm" type="button">Select all</button><button class="btn btn--ghost btn--sm" type="button" disabled>Clear</button><button class="btn btn--sm" type="button" disabled>Add to album</button><button class="btn btn--primary btn--sm" type="button" disabled >Request prints</button></div></div></div><figcaption>Keep a zero state clear and disable actions that need a selection.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><p class="muted">A bar that appears fixed over the photographs it acts on, covering the item that has keyboard focus.</p></div><figcaption>Never cover the focused item.</figcaption></figure>
+      </div>
+    </section>
+    <section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+        <tbody>
+          <tr><td>Fill</td><td><code>--color-bg-subtle</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-subtle" data-swatch></i><span data-token="--color-bg-subtle"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-subtle" data-swatch></i><span data-token="--color-bg-subtle"></span></span></td></tr>
+          <tr><td>Count</td><td><code>--color-fg-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td></tr>
+          <tr><td>Primary action</td><td><code>--color-accent</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-accent" data-swatch></i><span data-token="--color-accent"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-accent" data-swatch></i><span data-token="--color-accent"></span></span></td></tr>
+          <tr><td>Focus ring</td><td><code>--color-focus-ring</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-focus-ring" data-swatch></i><span data-token="--color-focus-ring"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-focus-ring" data-swatch></i><span data-token="--color-focus-ring"></span></span></td></tr>
+          <tr><td>Padding</td><td><code>--space-4</code> / <code>--space-5</code></td><td colspan="2"><span data-token="--space-4"></span> / <span data-token="--space-5"></span></td></tr>
+          <tr><td>Gap</td><td><code>--space-4</code></td><td colspan="2"><span data-token="--space-4"></span></td></tr>
+          <tr><td>Margin below</td><td><code>--space-6</code></td><td colspan="2"><span data-token="--space-6"></span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+    <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+      <pre><code>&lt;div class="selection-bar" role="region" aria-label="Photo selection"&gt;
+&lt;span role="status" aria-live="polite"&gt;
+&lt;strong&gt;12&lt;/strong&gt; photographs selected&lt;/span&gt;
+&lt;div class="cluster"&gt;
+&lt;button class="btn btn--ghost btn--sm" type="button"&gt;Select all&lt;/button&gt;
+&lt;button class="btn btn--ghost btn--sm" type="button" &gt;Clear&lt;/button&gt;
+&lt;button class="btn btn--sm" type="button" &gt;Add to album&lt;/button&gt;
+&lt;button class="btn btn--primary btn--sm" type="button"  &gt;Request prints&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>.selection-bar</code></td><td>Flex-wrap bar on <code>--color-bg-subtle</code>.</td></tr><tr><td><code>role="status"</code> on the count</td><td>Announces the number when it changes.</td></tr><tr><td><code>.cluster</code></td><td>Layout utility for the action group.</td></tr></tbody></table></div>
+    </section>
+    <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+      <p>Extracted from these mocks:</p>
+      <ul>
+        <li><a href="../../mocks/client/gallery.html">client/gallery</a> (select photographs and request prints)</li>
+        <li><a href="../../mocks/admin/review.html">admin/review</a> (batch actions)</li>
+        <li><a href="../../mocks/client/album.html">client/album</a> (selection in an album)</li>
+        <li><a href="../../mocks/client/album-editor.html">client/album-editor</a> (add photographs to an album)</li>
+      </ul>
+      <p>Drift fixed during extraction: the mocks hard-coded a count element with an id (<code>#selected-count</code>) and used quiet buttons with no states; the system makes the count a polite status region and composes the existing button variants.</p>
+    </section>
+
+    <footer class="ds-footer"><span>Quinntyne Brown Studio design system &middot; extracted from <a href="../../mocks/index.html">docs/mocks</a></span><a href="#top">Back to top</a></footer>
+  </main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

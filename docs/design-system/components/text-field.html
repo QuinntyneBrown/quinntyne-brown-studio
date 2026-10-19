@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text field &mdash; Quinntyne Brown Studio design system</title>
+<meta name="description" content="A text field takes a single line of text: a name, an email address, a password, a price or a search term.">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+  <nav class="ds-nav" aria-label="Design system">
+    <div class="ds-nav__brand"><a href="../index.html">QBS DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">&#9790; Dark</button></div>
+    <details open><summary>Foundations</summary><ul>
+      <li><a href="../foundations/color.html">Color</a></li>
+      <li><a href="../foundations/typography.html">Typography</a></li>
+      <li><a href="../foundations/spacing.html">Spacing</a></li>
+      <li><a href="../foundations/layout.html">Layout</a></li>
+      <li><a href="../foundations/elevation.html">Elevation</a></li>
+      <li><a href="../foundations/shape.html">Shape</a></li>
+      <li><a href="../foundations/motion.html">Motion</a></li>
+      <li><a href="../foundations/iconography.html">Iconography</a></li>
+      <li><a href="../foundations/theming.html">Theming</a></li>
+      <li><a href="../foundations/responsive.html">Responsive</a></li>
+      <li><a href="../foundations/accessibility.html">Accessibility</a></li>
+      <li><a href="../foundations/content.html">Content</a></li>
+    </ul></details>
+    <details open><summary>Components</summary><ul>
+      <li><a href="../components/button.html">Button</a></li>
+      <li><a href="../components/button-group.html">Button group</a></li>
+      <li><a href="../components/link.html">Link</a></li>
+      <li><a href="../components/menu.html">Menu</a></li>
+      <li><a href="../components/checkbox.html">Checkbox</a></li>
+      <li><a href="../components/date-navigator.html">Date navigator</a></li>
+      <li><a href="../components/file-upload.html">File upload</a></li>
+      <li><a href="../components/form-field.html">Form field</a></li>
+      <li><a href="../components/form-layout.html">Form layout</a></li>
+      <li><a href="../components/radio-group.html">Radio group</a></li>
+      <li><a href="../components/select.html">Select</a></li>
+      <li><a href="../components/switch.html">Switch</a></li>
+      <li><a href="../components/text-field.html">Text field</a></li>
+      <li><a href="../components/textarea.html">Textarea</a></li>
+      <li><a href="../components/breadcrumb.html">Breadcrumb</a></li>
+      <li><a href="../components/footer.html">Footer</a></li>
+      <li><a href="../components/pagination.html">Pagination</a></li>
+      <li><a href="../components/sidebar.html">Sidebar</a></li>
+      <li><a href="../components/skip-link.html">Skip link</a></li>
+      <li><a href="../components/tabs.html">Tabs</a></li>
+      <li><a href="../components/top-bar.html">Top bar</a></li>
+      <li><a href="../components/accordion.html">Accordion</a></li>
+      <li><a href="../components/card.html">Card</a></li>
+      <li><a href="../components/dialog.html">Dialog</a></li>
+      <li><a href="../components/divider.html">Divider</a></li>
+      <li><a href="../components/layout.html">Layout primitives</a></li>
+      <li><a href="../components/tooltip.html">Tooltip</a></li>
+      <li><a href="../components/avatar.html">Avatar</a></li>
+      <li><a href="../components/badge.html">Badge</a></li>
+      <li><a href="../components/blog-card.html">Blog card</a></li>
+      <li><a href="../components/chip.html">Chip</a></li>
+      <li><a href="../components/cost-summary.html">Cost summary</a></li>
+      <li><a href="../components/description-list.html">Description list</a></li>
+      <li><a href="../components/line-item.html">Line item</a></li>
+      <li><a href="../components/photo-tile.html">Photo tile</a></li>
+      <li><a href="../components/calendar.html">Schedule calendar</a></li>
+      <li><a href="../components/selection-bar.html">Selection bar</a></li>
+      <li><a href="../components/stat.html">Stat</a></li>
+      <li><a href="../components/stepper.html">Stepper</a></li>
+      <li><a href="../components/table.html">Table</a></li>
+      <li><a href="../components/alert.html">Alert</a></li>
+      <li><a href="../components/empty-state.html">Empty state</a></li>
+      <li><a href="../components/error-page.html">Error page</a></li>
+      <li><a href="../components/inline-message.html">Inline message</a></li>
+      <li><a href="../components/progress.html">Progress</a></li>
+      <li><a href="../components/skeleton.html">Skeleton</a></li>
+      <li><a href="../components/spinner.html">Spinner</a></li>
+      <li><a href="../components/toast.html">Toast</a></li>
+    </ul></details>
+    <details open><summary>Patterns</summary><ul>
+      <li><a href="../patterns/forms.html">Forms</a></li>
+      <li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li>
+      <li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li>
+      <li><a href="../patterns/navigation-and-page-structure.html">Navigation and page structure</a></li>
+      <li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li>
+      <li><a href="../patterns/data-tables-and-lists.html">Data tables and lists</a></li>
+      <li><a href="../patterns/notifications.html">Notifications</a></li>
+      <li><a href="../patterns/content-and-tone.html">Content and tone</a></li>
+    </ul></details>
+  </nav>
+
+  <main id="main" class="ds-main">
+    <header class="ds-header">
+      <p class="ds-kicker">Component &amp;middot; Inputs</p>
+      <h1>Text field</h1>
+      <p class="ds-lead">A text field takes a single line of text: a name, an email address, a password, a price or a search term.</p>
+      <div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Status: stable</span><span class="ds-pill">Native <code>&lt;input&gt;</code></span></div>
+      <ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul>
+    </header>
+
+    <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+      <p>Use a text field for short, single-line answers. Use a <a href="textarea.html">textarea</a> for more than a sentence, a <a href="select.html">select</a> or <a href="radio-group.html">radio group</a> for a fixed set of answers, and the native date input for dates. Always place it inside a <a href="form-field.html">form field</a> so it has a label, a hint and an error.</p>
+      <ul>
+        <li>Set the right <code>type</code> and <code>autocomplete</code>: the keyboard, validation and autofill all follow from it.</li>
+        <li><b>Search</b> fields sit in a toolbar and pair with a button.</li>
+        <li><b>Prefix and suffix</b> add units or actions with <code>.input-group</code>.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+      <div class="ds-anatomy">
+        <figure class="ds-anatomy__figure">
+          <div style="width: 100%; max-width: 22rem;"><label class="field__label" for="tf-anat">Package price</label><div class="input-group"><span aria-hidden="true">CAD</span><input class="input" id="tf-anat" type="text" inputmode="decimal" value="2400"></div></div>
+          <span class="ds-callout" style="left: 2%; top: -6%;" aria-hidden="true">1</span>
+          <span class="ds-callout" style="left: 10%; top: 96%;" aria-hidden="true">2</span>
+          <span class="ds-callout" style="left: 46%; top: 96%;" aria-hidden="true">3</span>
+        </figure>
+        <ol class="ds-anatomy__list">
+          <li><div><b>Label</b><small>Above the control, linked with <code>for</code> and <code>id</code>.</small></div></li>
+          <li><div><b>Prefix or suffix (optional)</b><small>A unit or action next to the input; decorative text is <code>aria-hidden</code> and repeated in the label.</small></div></li>
+          <li><div><b>Input</b><small>44px high, 1px <code>--color-border-strong</code> border, <code>--radius-xs</code>, text at <code>--font-size-sm</code>.</small></div></li>
+        </ol>
+      </div>
+    </section>
+    <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+      <p>Types differ by keyboard and validation, not by looks. Every type shares the same border, height and states.</p>
+      <h3>Common types</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="stack" style="width: 100%; max-width: 22rem;"><div><label class="field__label" for="tf-name">Full name</label><input class="input" id="tf-name" type="text" autocomplete="name" value="Amara Okafor"></div><div><label class="field__label" for="tf-email">Email</label><input class="input" id="tf-email" type="email" autocomplete="email" placeholder="name@example.com"></div><div><label class="field__label" for="tf-phone">Phone</label><input class="input" id="tf-phone" type="tel" autocomplete="tel"></div></div></div>
+        <div class="ds-example__caption"><span>Text, email and telephone. Placeholders show format only; the label still names the field.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;label class="field__label" for="email"&gt;Email&lt;/label&gt;
+&lt;input class="input" id="email" type="email" autocomplete="email"&gt;</code></pre></details>
+      </div>
+      <h3>Password with show toggle</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div style="width: 100%; max-width: 22rem;"><label class="field__label" for="tf-pw">Password</label><div class="input-group"><input class="input" id="tf-pw" type="password" autocomplete="current-password" value="studio-secret"><button class="btn btn--icon" type="button" aria-label="Show password" aria-pressed="false"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 11h12v9H6zM8 11V8a4 4 0 0 1 8 0v3"/></svg></button></div></div></div>
+        <div class="ds-example__caption"><span>The toggle is a labelled button with <code>aria-pressed</code>; it never moves focus.</span></div>
+      </div>
+      <h3>Search</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><form role="search" class="input-group" style="width: 100%; max-width: 26rem;"><input class="input" type="search" aria-label="Search sessions" placeholder="Search sessions"><button class="btn btn--primary" type="submit"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM21 21l-5-5"/></svg>Search</button></form></div>
+        <div class="ds-example__caption"><span>Search fields use <code>role="search"</code> on the form and a button, since a magnifier icon alone does not label itself.</span></div>
+      </div>
+      <h3>Prefix and suffix</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div style="width: 100%; max-width: 22rem;"><label class="field__label" for="tf-hours">Coverage</label><div class="input-group"><input class="input" id="tf-hours" type="text" inputmode="numeric" value="8" aria-describedby="tf-hours-unit"><span id="tf-hours-unit">hours</span></div></div></div>
+        <div class="ds-example__caption"><span>The unit follows the value and is tied by <code>aria-describedby</code>.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="sizes"><h2><a href="#sizes">Sizes</a></h2>
+      <p>Medium (44px) is the default. Small is for toolbars and filter rows; large is for the quote calculator and auth screens where the field is the focus.</p>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="stack" style="width: 100%; max-width: 22rem;"><input class="input input--sm" type="text" aria-label="Small field" placeholder="Small, 32px"><input class="input" type="text" aria-label="Medium field" placeholder="Medium, 44px"><input class="input input--lg" type="text" aria-label="Large field" placeholder="Large, 52px"></div></div>
+        <div class="ds-example__caption"><span>Heights: <code>--control-height-sm/md/lg</code>.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+      <p>Hover and focus are forced with <code>data-state</code> for review. Invalid uses <code>aria-invalid</code>; real pages get the rest from <code>:hover</code>, <code>:focus-visible</code> and <code>:disabled</code>.</p>
+      <div class="ds-matrix"><table>
+        <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Invalid</th><th scope="col">Disabled</th><th scope="col">Read-only</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Empty</th><td><input class="input" type="text" aria-label="Venue" placeholder="Venue"></td><td><input class="input" type="text" aria-label="Venue" placeholder="Venue" data-state="hover"></td><td><input class="input" type="text" aria-label="Venue" placeholder="Venue" data-state="focus"></td><td><input class="input" type="text" aria-label="Venue" placeholder="Venue" aria-invalid="true"></td><td><input class="input" type="text" aria-label="Venue" placeholder="Venue" disabled></td><td><input class="input" type="text" aria-label="Venue" placeholder="Venue" readonly></td></tr>
+          <tr><th scope="row">Filled</th><td><input class="input" type="text" aria-label="Venue" value="Harbour hall"></td><td><input class="input" type="text" aria-label="Venue" value="Harbour hall" data-state="hover"></td><td><input class="input" type="text" aria-label="Venue" value="Harbour hall" data-state="focus"></td><td><input class="input" type="text" aria-label="Venue" value="Harbour hall" aria-invalid="true"></td><td><input class="input" type="text" aria-label="Venue" value="Harbour hall" disabled></td><td><input class="input" type="text" aria-label="Venue" value="Harbour hall" readonly></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Both themes</h3>
+      <div class="ds-themes">
+        <div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><input class="input" type="text" aria-label="Default field" value="Wedding session"><input class="input" type="text" aria-label="Invalid field" value="31 February" aria-invalid="true"><input class="input" type="text" aria-label="Disabled field" value="Locked" disabled></div></div>
+        <div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><input class="input" type="text" aria-label="Default field" value="Wedding session"><input class="input" type="text" aria-label="Invalid field" value="31 February" aria-invalid="true"><input class="input" type="text" aria-label="Disabled field" value="Locked" disabled></div></div>
+      </div>
+      <ul>
+        <li><b>Focus</b> thickens nothing; it changes the border to <code>--color-focus-ring</code> and adds the shared ring so the state does not rely on colour alone.</li>
+        <li><b>Disabled</b> removes the field from the tab order and its value from the submission. Prefer <b>read-only</b> when the person should still read, select and copy the value.</li>
+        <li><b>Invalid</b> is paired with a visible error in the <a href="form-field.html">form field</a>; the red border alone never carries the message.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+      <ul>
+        <li>Fields fill their column. At 390px they are full width; a prefix or suffix keeps its natural width and the input shrinks.</li>
+        <li>Font size is at least 16px on touch devices so iOS does not zoom on focus; the token <code>--font-size-sm</code> is raised to 16px under the coarse-pointer query.</li>
+        <li>Do not set a fixed width on a field: size by content with <code>max-width</code> in a layout, not <code>size</code>.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+      <p>Fields read <code>--color-bg-surface</code> for the fill, <code>--color-border-strong</code> for the border and <code>--color-fg-default</code> for text. In the dark theme the fill darkens with the surface and the border lightens so it stays above 3:1. The invalid and focus borders are set through the local <code>--field-border</code> property, which a product can override on the host.</p>
+    </section>
+    <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+      <h3>Role and pattern</h3>
+      <p>Native <code>&lt;input&gt;</code> with a <code>&lt;label&gt;</code> (WAI-ARIA APG Textbox: no custom role is added). Search uses <code>role="search"</code> on the surrounding form.</p>
+      <h3>Keyboard</h3>
+      <div class="ds-table-wrap"><table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves focus into and out of the field.</td></tr><tr><td>Typing, <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>Home</kbd> <kbd>End</kbd></td><td>Native text editing.</td></tr><tr><td><kbd>Enter</kbd></td><td>Submits the enclosing form when it has a submit button.</td></tr><tr><td><kbd>Esc</kbd></td><td>Clears a <code>type="search"</code> field in browsers that support it.</td></tr></tbody></table></div>
+      <h3>Focus</h3>
+      <p>The border switches to <code>--color-focus-ring</code> and the shared 2px ring appears on <code>:focus-visible</code>. Text is selected on focus only when the field is a code or token the person is likely to replace.</p>
+      <h3>Labelling</h3>
+      <p>A visible <code>&lt;label for&gt;</code> is required. Use <code>aria-label</code> only for search and toolbar fields where a visible label would repeat the button. Set <code>autocomplete</code> on name, email, phone and address fields (WCAG 1.3.5). Required fields say "required" in the label as well as setting <code>required</code>.</p>
+      <h3>Contrast</h3>
+      <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);"><div class="ds-pair"><span>Text on field</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-surface" data-min="4.5"></span></div><div class="ds-pair"><span>Border on surface</span><span class="ds-pair__ratio" data-contrast="--color-border-strong|--color-bg-surface" data-min="3"></span></div><div class="ds-pair"><span>Placeholder on field</span><span class="ds-pair__ratio" data-contrast="--color-fg-subtle|--color-bg-surface" data-min="4.5"></span></div><div class="ds-pair"><span>Invalid border on surface</span><span class="ds-pair__ratio" data-contrast="--color-danger-solid|--color-bg-surface" data-min="3"></span></div><div class="ds-pair"><span>Focus ring on surface</span><span class="ds-pair__ratio" data-contrast="--color-focus-ring|--color-bg-surface" data-min="3"></span></div></div>
+      <h3>Motion</h3>
+      <p>The border colour transitions over <code>--duration-fast</code>. Nothing moves.</p>
+      <h3>Touch</h3>
+      <p>Medium and large fields are 44px or taller. The small field (32px) is used in toolbars and filter rows with 8px between neighbours.</p>
+    </section>
+    <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+      <ul>
+        <li>Labels are nouns in sentence case; do not end them with a colon.</li>
+        <li>Placeholders show an example format ("name@example.com"), never an instruction or the label.</li>
+        <li>Do not pre-fill with sample data that looks like a real answer.</li>
+        <li>Name units in the visible text: "Coverage (hours)", not a bare number.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+      <div class="ds-dodont">
+        <figure class="ds-do"><div class="ds-example__canvas"><div><label class="field__label" for="tf-do">Client email</label><input class="input" id="tf-do" type="email" autocomplete="email" placeholder="name@example.com"></div></div><figcaption>Right <code>type</code>, <code>autocomplete</code> and a visible label.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><input class="input" type="text" aria-label="Client email" placeholder="Client email"></div><figcaption>A plain text type for an email, with the label doubling as placeholder.</figcaption></figure>
+        <figure class="ds-do"><div class="ds-example__canvas"><form role="search" class="input-group"><input class="input" type="search" aria-label="Search sessions" placeholder="Search sessions"><button class="btn" type="submit">Search</button></form></div><figcaption>A labelled search field and a named button.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><input class="input" type="text" aria-label="Booking reference" disabled value="Locked"></div><figcaption>A disabled field with no explanation hides why it cannot change; use read-only and say why.</figcaption></figure>
+      </div>
+    </section>
+    <section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+        <tbody>
+          <tr><td>Fill</td><td><code>--color-bg-surface</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-surface" data-swatch></i><span data-token="--color-bg-surface"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-surface" data-swatch></i><span data-token="--color-bg-surface"></span></span></td></tr>
+          <tr><td>Border</td><td><code>--color-border-strong</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-border-strong" data-swatch></i><span data-token="--color-border-strong"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-border-strong" data-swatch></i><span data-token="--color-border-strong"></span></span></td></tr>
+          <tr><td>Text</td><td><code>--color-fg-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td></tr>
+          <tr><td>Placeholder</td><td><code>--color-fg-subtle</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-subtle" data-swatch></i><span data-token="--color-fg-subtle"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-subtle" data-swatch></i><span data-token="--color-fg-subtle"></span></span></td></tr>
+          <tr><td>Invalid border</td><td><code>--color-danger-solid</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-danger-solid" data-swatch></i><span data-token="--color-danger-solid"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-danger-solid" data-swatch></i><span data-token="--color-danger-solid"></span></span></td></tr>
+          <tr><td>Focus ring</td><td><code>--color-focus-ring</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-focus-ring" data-swatch></i><span data-token="--color-focus-ring"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-focus-ring" data-swatch></i><span data-token="--color-focus-ring"></span></span></td></tr>
+          <tr><td>Disabled fill</td><td><code>--color-bg-surface-sunken</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-surface-sunken" data-swatch></i><span data-token="--color-bg-surface-sunken"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-surface-sunken" data-swatch></i><span data-token="--color-bg-surface-sunken"></span></span></td></tr>
+          <tr><td>Height sm / md / lg</td><td><code>--control-height-sm</code> / <code>--control-height-md</code> / <code>--control-height-lg</code></td><td colspan="2"><span data-token="--control-height-sm"></span> / <span data-token="--control-height-md"></span> / <span data-token="--control-height-lg"></span></td></tr>
+          <tr><td>Padding</td><td><code>--space-3</code></td><td colspan="2"><span data-token="--space-3"></span></td></tr>
+          <tr><td>Radius</td><td><code>--radius-xs</code></td><td colspan="2"><span data-token="--radius-xs"></span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+    <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+      <pre><code>&lt;label class="field__label" for="email"&gt;Email&lt;/label&gt;
+&lt;input class="input" id="email" type="email" autocomplete="email" required&gt;
+
+&lt;div class="input-group"&gt;
+  &lt;input class="input" id="hours" inputmode="numeric" aria-describedby="hours-unit"&gt;
+  &lt;span id="hours-unit"&gt;hours&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>.input</code></td><td>The single-line control (also used by select and textarea).</td></tr><tr><td><code>.input--sm</code> <code>.input--lg</code></td><td>Size; omit for medium.</td></tr><tr><td><code>.input-group</code></td><td>Row that joins an input to a prefix, suffix or button.</td></tr><tr><td><code>aria-invalid="true"</code></td><td>Invalid state; also accepts <code>.is-invalid</code>.</td></tr><tr><td><code>disabled</code> <code>readonly</code></td><td>Native states.</td></tr><tr><td><code>data-state="hover|focus"</code></td><td>Documentation only: forces a state in static pages.</td></tr></tbody></table></div>
+    </section>
+    <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+      <p>Extracted from these mocks:</p>
+      <ul>
+        <li><a href="../../mocks/admin/login.html">admin/login</a> (email and password)</li>
+        <li><a href="../../mocks/marketing/contact.html">marketing/contact</a> (name, email, message)</li>
+        <li><a href="../../mocks/marketing/quote.html">marketing/quote</a> (quote inputs)</li>
+        <li><a href="../../mocks/admin/rates.html">admin/rates</a> (price inputs)</li>
+      </ul>
+      <p>Drift fixed during extraction: the mocks styled bare <code>input</code> elements globally with a hard-coded border colour; the system uses a single <code>.input</code> class with a border token that passes 3:1. Mock text at 12px rises to the 14px body-small size (16px on touch).</p>
+    </section>
+
+    <footer class="ds-footer"><span>Quinntyne Brown Studio design system &middot; extracted from <a href="../../mocks/index.html">docs/mocks</a></span><a href="#top">Back to top</a></footer>
+  </main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

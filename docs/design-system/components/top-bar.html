@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Top bar &mdash; Quinntyne Brown Studio design system</title>
+<meta name="description" content="The top bar names the product and gives the way to every top-level destination. It comes in two forms: the public site header and the admin app bar.">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+  <nav class="ds-nav" aria-label="Design system">
+    <div class="ds-nav__brand"><a href="../index.html">QBS DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">&#9790; Dark</button></div>
+    <details open><summary>Foundations</summary><ul>
+      <li><a href="../foundations/color.html">Color</a></li>
+      <li><a href="../foundations/typography.html">Typography</a></li>
+      <li><a href="../foundations/spacing.html">Spacing</a></li>
+      <li><a href="../foundations/layout.html">Layout</a></li>
+      <li><a href="../foundations/elevation.html">Elevation</a></li>
+      <li><a href="../foundations/shape.html">Shape</a></li>
+      <li><a href="../foundations/motion.html">Motion</a></li>
+      <li><a href="../foundations/iconography.html">Iconography</a></li>
+      <li><a href="../foundations/theming.html">Theming</a></li>
+      <li><a href="../foundations/responsive.html">Responsive</a></li>
+      <li><a href="../foundations/accessibility.html">Accessibility</a></li>
+      <li><a href="../foundations/content.html">Content</a></li>
+    </ul></details>
+    <details open><summary>Components</summary><ul>
+      <li><a href="../components/button.html">Button</a></li>
+      <li><a href="../components/button-group.html">Button group</a></li>
+      <li><a href="../components/link.html">Link</a></li>
+      <li><a href="../components/menu.html">Menu</a></li>
+      <li><a href="../components/checkbox.html">Checkbox</a></li>
+      <li><a href="../components/date-navigator.html">Date navigator</a></li>
+      <li><a href="../components/file-upload.html">File upload</a></li>
+      <li><a href="../components/form-field.html">Form field</a></li>
+      <li><a href="../components/form-layout.html">Form layout</a></li>
+      <li><a href="../components/radio-group.html">Radio group</a></li>
+      <li><a href="../components/select.html">Select</a></li>
+      <li><a href="../components/switch.html">Switch</a></li>
+      <li><a href="../components/text-field.html">Text field</a></li>
+      <li><a href="../components/textarea.html">Textarea</a></li>
+      <li><a href="../components/breadcrumb.html">Breadcrumb</a></li>
+      <li><a href="../components/footer.html">Footer</a></li>
+      <li><a href="../components/pagination.html">Pagination</a></li>
+      <li><a href="../components/sidebar.html">Sidebar</a></li>
+      <li><a href="../components/skip-link.html">Skip link</a></li>
+      <li><a href="../components/tabs.html">Tabs</a></li>
+      <li><a href="../components/top-bar.html">Top bar</a></li>
+      <li><a href="../components/accordion.html">Accordion</a></li>
+      <li><a href="../components/card.html">Card</a></li>
+      <li><a href="../components/dialog.html">Dialog</a></li>
+      <li><a href="../components/divider.html">Divider</a></li>
+      <li><a href="../components/layout.html">Layout primitives</a></li>
+      <li><a href="../components/tooltip.html">Tooltip</a></li>
+      <li><a href="../components/avatar.html">Avatar</a></li>
+      <li><a href="../components/badge.html">Badge</a></li>
+      <li><a href="../components/blog-card.html">Blog card</a></li>
+      <li><a href="../components/chip.html">Chip</a></li>
+      <li><a href="../components/cost-summary.html">Cost summary</a></li>
+      <li><a href="../components/description-list.html">Description list</a></li>
+      <li><a href="../components/line-item.html">Line item</a></li>
+      <li><a href="../components/photo-tile.html">Photo tile</a></li>
+      <li><a href="../components/calendar.html">Schedule calendar</a></li>
+      <li><a href="../components/selection-bar.html">Selection bar</a></li>
+      <li><a href="../components/stat.html">Stat</a></li>
+      <li><a href="../components/stepper.html">Stepper</a></li>
+      <li><a href="../components/table.html">Table</a></li>
+      <li><a href="../components/alert.html">Alert</a></li>
+      <li><a href="../components/empty-state.html">Empty state</a></li>
+      <li><a href="../components/error-page.html">Error page</a></li>
+      <li><a href="../components/inline-message.html">Inline message</a></li>
+      <li><a href="../components/progress.html">Progress</a></li>
+      <li><a href="../components/skeleton.html">Skeleton</a></li>
+      <li><a href="../components/spinner.html">Spinner</a></li>
+      <li><a href="../components/toast.html">Toast</a></li>
+    </ul></details>
+    <details open><summary>Patterns</summary><ul>
+      <li><a href="../patterns/forms.html">Forms</a></li>
+      <li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li>
+      <li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li>
+      <li><a href="../patterns/navigation-and-page-structure.html">Navigation and page structure</a></li>
+      <li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li>
+      <li><a href="../patterns/data-tables-and-lists.html">Data tables and lists</a></li>
+      <li><a href="../patterns/notifications.html">Notifications</a></li>
+      <li><a href="../patterns/content-and-tone.html">Content and tone</a></li>
+    </ul></details>
+  </nav>
+
+  <main id="main" class="ds-main">
+    <header class="ds-header">
+      <p class="ds-kicker">Component &amp;middot; Navigation</p>
+      <h1>Top bar</h1>
+      <p class="ds-lead">The top bar names the product and gives the way to every top-level destination. It comes in two forms: the public site header and the admin app bar.</p>
+      <div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Status: stable</span><span class="ds-pill">Landmark <code>&lt;header&gt;</code> + <code>&lt;nav&gt;</code></span></div>
+      <ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul>
+    </header>
+
+    <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+      <p>Every page has exactly one top bar. It stays the same from page to page so people always know where they are and where they can go (WCAG 3.2.3). The destinations inside it are plain <a href="link.html">links</a>; the one call to action is a <a href="button.html">button</a>-styled link.</p>
+      <ul>
+        <li><b>Site header</b> (<code>.site-header</code>) is used on the marketing and client sites: brand on the left, <code>.site-nav</code> on the right, a "Find your quote" call to action as the last item.</li>
+        <li><b>App bar</b> (<code>.app-bar</code>) is used inside the admin workspace next to the <a href="sidebar.html">sidebar</a>: it shows where you are (workspace / page) and who you are signed in as. It carries no destinations; the sidebar does.</li>
+        <li><b>Compact (mobile)</b>: below 768px the nav collapses behind a <code>.nav-toggle</code> button that opens a full-width panel.</li>
+      </ul>
+      <p>Skip past it with a <a href="skip-link.html">skip link</a>. Tabs that switch content inside a page belong in <a href="tabs.html">tabs</a>, not in the top bar.</p>
+    </section>
+    <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+      <div class="ds-anatomy">
+        <figure class="ds-anatomy__figure">
+          <header class="site-header" style="width: 100%;"><a class="brand" href="#">Quinntyne Brown<span>Photography studio</span></a><nav class="site-nav" aria-label="Main"><a href="#">Portfolio</a><a href="#" aria-current="page">Services</a><a href="#">About</a><a href="#">Blog</a><a href="#">Prints</a><a href="#">Contact</a><a class="btn btn--sm" href="#">Find your quote</a></nav></header>
+          <span class="ds-callout" style="left: 6%; top: 28%;" aria-hidden="true">1</span>
+          <span class="ds-callout" style="left: 52%; top: 28%;" aria-hidden="true">2</span>
+          <span class="ds-callout" style="left: 92%; top: 28%;" aria-hidden="true">3</span>
+        </figure>
+        <ol class="ds-anatomy__list">
+          <li><div><b>Brand</b><small><code>.brand</code>: uppercase wordmark with the descriptor underneath. Always a link to the home page.</small></div></li>
+          <li><div><b>Nav links</b><small><code>.site-nav a</code>; the current page carries <code>aria-current="page"</code> and a 1px underline.</small></div></li>
+          <li><div><b>Call to action</b><small>At most one, last in the nav, styled as a small button. It is a link, so it keeps <code>href</code>.</small></div></li>
+        </ol>
+      </div>
+    </section>
+    <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+      <p>Use the site header for public and client pages; use the app bar for the admin workspace.</p>
+      <h3>Site header (marketing)</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><header class="site-header" style="width: 100%;"><a class="brand" href="#">Quinntyne Brown<span>Photography studio</span></a><nav class="site-nav" aria-label="Main"><a href="#">Portfolio</a><a href="#" aria-current="page">Services</a><a href="#">About</a><a href="#">Blog</a><a href="#">Prints</a><a href="#">Contact</a><a class="btn btn--sm" href="#">Find your quote</a></nav></header></div>
+        <div class="ds-example__caption"><span>Brand left, nav right. The current page is underlined and exposed with <code>aria-current</code>.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;header class="site-header"&gt;
+  &lt;a class="brand" href="/"&gt;Quinntyne Brown&lt;span&gt;Photography studio&lt;/span&gt;&lt;/a&gt;
+  &lt;button class="btn btn--sm nav-toggle" type="button" aria-expanded="false" aria-controls="public-nav"&gt;Menu&lt;/button&gt;
+  &lt;nav class="site-nav" id="public-nav" aria-label="Main"&gt;
+    &lt;a href="/portfolio"&gt;Portfolio&lt;/a&gt;
+    &lt;a href="/services" aria-current="page"&gt;Services&lt;/a&gt;
+    &lt;a class="btn btn--sm" href="/quote"&gt;Find your quote&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;</code></pre></details>
+      </div>
+      <h3>Site header (client)</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><header class="site-header" style="width: 100%;"><a class="brand" href="#">Quinntyne Brown<span>Photography studio</span></a><nav class="site-nav" aria-label="Client"><a href="#" aria-current="page">Your sessions</a><a href="#">Albums</a><a href="#">Print requests</a><button class="btn btn--sm" type="button">Emma H. &middot; Sign out</button></nav></header></div>
+        <div class="ds-example__caption"><span>The client site swaps the destinations and ends with the signed-in person and a sign-out button instead of a call to action. The nav gets its own <code>aria-label</code>.</span></div>
+      </div>
+      <h3>App bar (admin)</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="app-bar" style="width: 100%;"><span>Studio workspace <span class="muted">/ Sessions</span></span><span class="cluster" style="--cluster-gap: var(--space-3);"><span>Quinntyne Brown</span><span class="avatar" aria-hidden="true">QB</span></span></div></div>
+        <div class="ds-example__caption"><span>Context on the left, person on the right. In the mobile layout a <code>.nav-toggle</code> button precedes the context and opens the sidebar.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;header class="app-bar"&gt;
+  &lt;button class="btn btn--sm nav-toggle" type="button" aria-expanded="false" aria-controls="sidebar"&gt;Menu&lt;/button&gt;
+  &lt;span&gt;Studio workspace &lt;span class="muted"&gt;/ Sessions&lt;/span&gt;&lt;/span&gt;
+  &lt;span&gt;Quinntyne Brown &lt;span class="avatar" aria-hidden="true"&gt;QB&lt;/span&gt;&lt;/span&gt;
+&lt;/header&gt;</code></pre></details>
+      </div>
+    </section>
+    <section class="ds-section" id="sizes" data-na="The top bar has one size per form: the site header is at least &lt;code&gt;--layout-header-height&lt;/code&gt; (104px) and the app bar at least &lt;code&gt;--layout-topbar-height&lt;/code&gt; (72px)."><h2><a href="#sizes">Sizes</a></h2>
+      <p class="ds-na">The top bar has one size per form: the site header is at least &lt;code&gt;--layout-header-height&lt;/code&gt; (104px) and the app bar at least &lt;code&gt;--layout-topbar-height&lt;/code&gt; (72px).</p>
+    </section>
+    <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+      <p>Top-bar states live on the links and the menu button inside it. The bar itself has no states. Hover on nav links changes the colour to <code>--color-fg-link-hover</code> through <code>:hover</code> only, so it cannot be forced for review; focus and current are shown below.</p>
+      <div class="ds-matrix"><table>
+        <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Focus</th><th scope="col">Current page</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Nav link</th><td><nav class="site-nav" aria-label="Example"><a href="#">Portfolio</a></nav></td><td><nav class="site-nav" aria-label="Example"><a href="#" data-state="focus">Portfolio</a></nav></td><td><nav class="site-nav" aria-label="Example"><a href="#" aria-current="page">Portfolio</a></nav></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Both themes</h3>
+      <div class="ds-themes">
+        <div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><header class="site-header" style="width: 100%;"><a class="brand" href="#">Quinntyne Brown<span>Photography studio</span></a><nav class="site-nav" aria-label="Main"><a href="#">Portfolio</a><a href="#" aria-current="page">Services</a><a href="#">About</a><a href="#">Blog</a><a href="#">Prints</a><a href="#">Contact</a><a class="btn btn--sm" href="#">Find your quote</a></nav></header></div></div>
+        <div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><header class="site-header" style="width: 100%;"><a class="brand" href="#">Quinntyne Brown<span>Photography studio</span></a><nav class="site-nav" aria-label="Main"><a href="#">Portfolio</a><a href="#" aria-current="page">Services</a><a href="#">About</a><a href="#">Blog</a><a href="#">Prints</a><a href="#">Contact</a><a class="btn btn--sm" href="#">Find your quote</a></nav></header></div></div>
+      </div>
+      <ul>
+        <li><b>Menu open</b>: on narrow screens <code>aria-expanded="true"</code> on the toggle and <code>.is-open</code> (or <code>data-state="open"</code>) on <code>.site-nav</code> show the panel, which sits under the bar and spans its full width.</li>
+        <li><b>Current page</b> is conveyed by the underline <i>and</i> <code>aria-current="page"</code>; never by colour alone.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+      <ul>
+        <li>At 768px and wider the nav is inline. Below 768px (<code>--layout-breakpoint-md</code>) <code>.nav-toggle</code> appears and <code>.site-nav</code> becomes a full-width panel that drops from the bottom edge of the bar.</li>
+        <li>In the open panel each link is at least 44px tall (<code>--target-comfortable</code>) and the call to action stays last.</li>
+        <li>Horizontal padding follows <code>--layout-margin</code>: 16px on phones, 32px at 768px, 48px at 1100px.</li>
+        <li>The brand never wraps or truncates; the descriptor line below it is part of the wordmark.</li>
+        <li>Seven links fit at 1100px. Past about seven top-level destinations, group the extras under one link rather than shrinking the type.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+      <p>The bar reads <code>--color-bg-canvas</code> and <code>--color-border-default</code>; links use <code>--color-fg-default</code> and hover to <code>--color-fg-link-hover</code>. Both flip with the theme; no component token is needed. The mobile panel uses <code>--color-bg-surface-raised</code> so it separates from the page in the dark theme.</p>
+    </section>
+    <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+      <h3>Role and pattern</h3>
+      <p>A <code>&lt;header&gt;</code> landmark containing a <code>&lt;nav&gt;</code> with its own <code>aria-label</code>. This is the WAI-ARIA APG <a href="https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/navigation.html">Navigation landmark</a> pattern; the collapsed menu uses the <a href="https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/">Disclosure navigation</a> pattern, not <code>role="menu"</code>.</p>
+      <h3>Keyboard</h3>
+      <div class="ds-table-wrap"><table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves through brand, toggle (mobile), links and the call to action in DOM order.</td></tr><tr><td><kbd>Enter</kbd></td><td>Follows the focused link.</td></tr><tr><td><kbd>Enter</kbd>, <kbd>Space</kbd></td><td>On the menu toggle: opens or closes the panel.</td></tr><tr><td><kbd>Esc</kbd></td><td>Closes an open mobile panel and returns focus to the toggle.</td></tr></tbody></table></div>
+      <h3>Focus</h3>
+      <p>Links and the toggle use the shared focus ring (2px <code>--color-focus-ring</code>, 2px offset). The bar is not sticky by default; if a product makes it sticky, set <code>scroll-padding-top</code> to the bar height so focused content is never hidden behind it (WCAG 2.4.11).</p>
+      <h3>Labelling</h3>
+      <p>Name the landmark when a page has more than one nav: "Main" for the public site, "Client" for the client site, "Footer" for the footer. The toggle's visible text "Menu" is its name; <code>aria-expanded</code> and <code>aria-controls</code> state and target. The avatar is decorative and hidden because the name is printed beside it.</p>
+      <h3>Contrast</h3>
+      <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);"><div class="ds-pair"><span>Link on bar</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-canvas" data-min="4.5"></span></div><div class="ds-pair"><span>Link hover on bar</span><span class="ds-pair__ratio" data-contrast="--color-fg-link-hover|--color-bg-canvas" data-min="4.5"></span></div><div class="ds-pair"><span>App bar text</span><span class="ds-pair__ratio" data-contrast="--color-fg-muted|--color-bg-canvas" data-min="4.5"></span></div><div class="ds-pair"><span>Link in mobile panel</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-surface-raised" data-min="4.5"></span></div><div class="ds-pair"><span>Focus ring on bar</span><span class="ds-pair__ratio" data-contrast="--color-focus-ring|--color-bg-canvas" data-min="3"></span></div></div>
+      <h3>Motion</h3>
+      <p>The bar has no motion of its own. The mobile panel appears without animation, so there is nothing to reduce; if a product animates it, use <code>--duration-base</code> and honour <code>prefers-reduced-motion</code>.</p>
+      <h3>Touch</h3>
+      <p>Nav links are 44px tall in the mobile panel. On desktop the links have 8px of vertical padding and 24px gaps, which meets the 24px minimum target with spacing.</p>
+    </section>
+    <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+      <ul>
+        <li>Nav labels are one or two words, nouns, sentence case: "Portfolio", "Print requests". No verbs except the call to action.</li>
+        <li>The call to action is an action: "Find your quote", not "Quote".</li>
+        <li>Keep labels identical across pages and between the header and footer (WCAG 3.2.4).</li>
+        <li>The descriptor under the brand is a short noun phrase ("Photography studio"). Do not put a tagline there.</li>
+        <li>Show the signed-in person as "Name &middot; Sign out" so the button explains itself.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+      <div class="ds-dodont">
+        <figure class="ds-do"><div class="ds-example__canvas"><nav class="site-nav" aria-label="Main"><a href="#">Portfolio</a><a href="#" aria-current="page">Services</a><a href="#">About</a></nav></div><figcaption>Mark the current page with <code>aria-current</code> and the underline.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><nav class="site-nav" aria-label="Main"><a href="#">Portfolio</a><a href="#">Services</a><a href="#">About</a></nav></div><figcaption>No current-page indicator: people cannot tell where they are.</figcaption></figure>
+        <figure class="ds-do"><div class="ds-example__canvas"><nav class="site-nav" aria-label="Main"><a href="#">Contact</a><a class="btn btn--sm" href="#">Find your quote</a></nav></div><figcaption>One call to action, last, in the nav.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><nav class="site-nav" aria-label="Main"><a class="btn btn--sm" href="#">Find your quote</a><a class="btn btn--sm" href="#">Client login</a><a class="btn btn--sm" href="#">Book now</a></nav></div><figcaption>Three call-to-action buttons compete; the bar turns into a row of ads.</figcaption></figure>
+      </div>
+    </section>
+    <section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+        <tbody>
+          <tr><td>Bar background</td><td><code>--color-bg-canvas</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-canvas" data-swatch></i><span data-token="--color-bg-canvas"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-canvas" data-swatch></i><span data-token="--color-bg-canvas"></span></span></td></tr>
+          <tr><td>Bar border</td><td><code>--color-border-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-border-default" data-swatch></i><span data-token="--color-border-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-border-default" data-swatch></i><span data-token="--color-border-default"></span></span></td></tr>
+          <tr><td>Link</td><td><code>--color-fg-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td></tr>
+          <tr><td>Link hover</td><td><code>--color-fg-link-hover</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-link-hover" data-swatch></i><span data-token="--color-fg-link-hover"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-link-hover" data-swatch></i><span data-token="--color-fg-link-hover"></span></span></td></tr>
+          <tr><td>Mobile panel background</td><td><code>--color-bg-surface-raised</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-surface-raised" data-swatch></i><span data-token="--color-bg-surface-raised"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-surface-raised" data-swatch></i><span data-token="--color-bg-surface-raised"></span></span></td></tr>
+          <tr><td>Focus ring</td><td><code>--color-focus-ring</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-focus-ring" data-swatch></i><span data-token="--color-focus-ring"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-focus-ring" data-swatch></i><span data-token="--color-focus-ring"></span></span></td></tr>
+          <tr><td>Site header min height</td><td><code>--layout-header-height</code></td><td colspan="2"><span data-token="--layout-header-height"></span></td></tr>
+          <tr><td>App bar min height</td><td><code>--layout-topbar-height</code></td><td colspan="2"><span data-token="--layout-topbar-height"></span></td></tr>
+          <tr><td>Horizontal padding</td><td><code>--layout-margin</code></td><td colspan="2"><span data-token="--layout-margin"></span></td></tr>
+          <tr><td>Nav gap</td><td><code>--space-6</code></td><td colspan="2"><span data-token="--space-6"></span></td></tr>
+          <tr><td>Stacking</td><td><code>--z-sticky</code></td><td colspan="2"><span data-token="--z-sticky"></span></td></tr>
+          <tr><td>Link size</td><td><code>--font-size-sm</code></td><td colspan="2"><span data-token="--font-size-sm"></span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+    <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+      <pre><code>&lt;a class="skip-link" href="#main"&gt;Skip to content&lt;/a&gt;
+&lt;header class="site-header"&gt;
+  &lt;a class="brand" href="/"&gt;Quinntyne Brown&lt;span&gt;Photography studio&lt;/span&gt;&lt;/a&gt;
+  &lt;button class="btn btn--sm nav-toggle" type="button" aria-expanded="false" aria-controls="public-nav"&gt;Menu&lt;/button&gt;
+  &lt;nav class="site-nav" id="public-nav" aria-label="Main"&gt;
+    &lt;a href="/portfolio"&gt;Portfolio&lt;/a&gt;
+    &lt;a href="/services" aria-current="page"&gt;Services&lt;/a&gt;
+    &lt;a class="btn btn--sm" href="/quote"&gt;Find your quote&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+&lt;main id="main"&gt;…&lt;/main&gt;</code></pre>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>.site-header</code></td><td>Public/client bar: flex, space-between, bottom border, <code>--z-sticky</code>.</td></tr><tr><td><code>.brand</code></td><td>Uppercase wordmark; the inner <code>span</code> is the descriptor line.</td></tr><tr><td><code>.site-nav</code></td><td>Inline nav; becomes a drop-down panel below 768px.</td></tr><tr><td><code>.nav-toggle</code></td><td>Hidden at 768px and wider; shown as a button below.</td></tr><tr><td><code>.is-open</code> / <code>data-state="open"</code></td><td>On <code>.site-nav</code>: shows the mobile panel.</td></tr><tr><td><code>aria-current="page"</code></td><td>On a nav link: underline and current-page semantics.</td></tr><tr><td><code>.app-bar</code></td><td>Admin bar: context left, person right.</td></tr></tbody></table></div>
+    </section>
+    <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+      <p>Extracted from these mocks:</p>
+      <ul>
+        <li><a href="../../mocks/marketing/home.html">marketing/home</a> (public header with call to action)</li>
+        <li><a href="../../mocks/client/galleries.html">client/galleries</a> (client header with sign-out)</li>
+        <li><a href="../../mocks/admin/dashboard.html">admin/dashboard</a> (admin app bar)</li>
+        <li><a href="../../mocks/admin/sessions.html">admin/sessions</a> (app bar with page title)</li>
+      </ul>
+      <p>Drift fixed during extraction: the mocks build the bar in <code>assets/app.js</code> as <code>.public-header</code>/<code>.public-nav</code> and <code>.app-topbar</code>; the system names them <code>.site-header</code>/<code>.site-nav</code> and <code>.app-bar</code>. Mock nav text at 12px is raised to 14px, the mobile panel gets <code>aria-expanded</code> kept in sync on every toggle, and its 25px padding becomes spacing tokens.</p>
+    </section>
+
+    <footer class="ds-footer"><span>Quinntyne Brown Studio design system &middot; extracted from <a href="../../mocks/index.html">docs/mocks</a></span><a href="#top">Back to top</a></footer>
+  </main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

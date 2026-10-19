@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Form field &mdash; Quinntyne Brown Studio design system</title>
+<meta name="description" content="The form field is the wrapper every input sits in. It owns the label, the hint, the error message and the space between fields, so the control inside can stay simple.">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+  <nav class="ds-nav" aria-label="Design system">
+    <div class="ds-nav__brand"><a href="../index.html">QBS DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">&#9790; Dark</button></div>
+    <details open><summary>Foundations</summary><ul>
+      <li><a href="../foundations/color.html">Color</a></li>
+      <li><a href="../foundations/typography.html">Typography</a></li>
+      <li><a href="../foundations/spacing.html">Spacing</a></li>
+      <li><a href="../foundations/layout.html">Layout</a></li>
+      <li><a href="../foundations/elevation.html">Elevation</a></li>
+      <li><a href="../foundations/shape.html">Shape</a></li>
+      <li><a href="../foundations/motion.html">Motion</a></li>
+      <li><a href="../foundations/iconography.html">Iconography</a></li>
+      <li><a href="../foundations/theming.html">Theming</a></li>
+      <li><a href="../foundations/responsive.html">Responsive</a></li>
+      <li><a href="../foundations/accessibility.html">Accessibility</a></li>
+      <li><a href="../foundations/content.html">Content</a></li>
+    </ul></details>
+    <details open><summary>Components</summary><ul>
+      <li><a href="../components/button.html">Button</a></li>
+      <li><a href="../components/button-group.html">Button group</a></li>
+      <li><a href="../components/link.html">Link</a></li>
+      <li><a href="../components/menu.html">Menu</a></li>
+      <li><a href="../components/checkbox.html">Checkbox</a></li>
+      <li><a href="../components/date-navigator.html">Date navigator</a></li>
+      <li><a href="../components/file-upload.html">File upload</a></li>
+      <li><a href="../components/form-field.html">Form field</a></li>
+      <li><a href="../components/form-layout.html">Form layout</a></li>
+      <li><a href="../components/radio-group.html">Radio group</a></li>
+      <li><a href="../components/select.html">Select</a></li>
+      <li><a href="../components/switch.html">Switch</a></li>
+      <li><a href="../components/text-field.html">Text field</a></li>
+      <li><a href="../components/textarea.html">Textarea</a></li>
+      <li><a href="../components/breadcrumb.html">Breadcrumb</a></li>
+      <li><a href="../components/footer.html">Footer</a></li>
+      <li><a href="../components/pagination.html">Pagination</a></li>
+      <li><a href="../components/sidebar.html">Sidebar</a></li>
+      <li><a href="../components/skip-link.html">Skip link</a></li>
+      <li><a href="../components/tabs.html">Tabs</a></li>
+      <li><a href="../components/top-bar.html">Top bar</a></li>
+      <li><a href="../components/accordion.html">Accordion</a></li>
+      <li><a href="../components/card.html">Card</a></li>
+      <li><a href="../components/dialog.html">Dialog</a></li>
+      <li><a href="../components/divider.html">Divider</a></li>
+      <li><a href="../components/layout.html">Layout primitives</a></li>
+      <li><a href="../components/tooltip.html">Tooltip</a></li>
+      <li><a href="../components/avatar.html">Avatar</a></li>
+      <li><a href="../components/badge.html">Badge</a></li>
+      <li><a href="../components/blog-card.html">Blog card</a></li>
+      <li><a href="../components/chip.html">Chip</a></li>
+      <li><a href="../components/cost-summary.html">Cost summary</a></li>
+      <li><a href="../components/description-list.html">Description list</a></li>
+      <li><a href="../components/line-item.html">Line item</a></li>
+      <li><a href="../components/photo-tile.html">Photo tile</a></li>
+      <li><a href="../components/calendar.html">Schedule calendar</a></li>
+      <li><a href="../components/selection-bar.html">Selection bar</a></li>
+      <li><a href="../components/stat.html">Stat</a></li>
+      <li><a href="../components/stepper.html">Stepper</a></li>
+      <li><a href="../components/table.html">Table</a></li>
+      <li><a href="../components/alert.html">Alert</a></li>
+      <li><a href="../components/empty-state.html">Empty state</a></li>
+      <li><a href="../components/error-page.html">Error page</a></li>
+      <li><a href="../components/inline-message.html">Inline message</a></li>
+      <li><a href="../components/progress.html">Progress</a></li>
+      <li><a href="../components/skeleton.html">Skeleton</a></li>
+      <li><a href="../components/spinner.html">Spinner</a></li>
+      <li><a href="../components/toast.html">Toast</a></li>
+    </ul></details>
+    <details open><summary>Patterns</summary><ul>
+      <li><a href="../patterns/forms.html">Forms</a></li>
+      <li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li>
+      <li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li>
+      <li><a href="../patterns/navigation-and-page-structure.html">Navigation and page structure</a></li>
+      <li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li>
+      <li><a href="../patterns/data-tables-and-lists.html">Data tables and lists</a></li>
+      <li><a href="../patterns/notifications.html">Notifications</a></li>
+      <li><a href="../patterns/content-and-tone.html">Content and tone</a></li>
+    </ul></details>
+  </nav>
+
+  <main id="main" class="ds-main">
+    <header class="ds-header">
+      <p class="ds-kicker">Component &amp;middot; Inputs</p>
+      <h1>Form field</h1>
+      <p class="ds-lead">The form field is the wrapper every input sits in. It owns the label, the hint, the error message and the space between fields, so the control inside can stay simple.</p>
+      <div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Status: stable</span><span class="ds-pill">Wrapper, not a control</span></div>
+      <ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul>
+    </header>
+
+    <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+      <p>Wrap every <a href="text-field.html">text field</a>, <a href="textarea.html">textarea</a> and <a href="select.html">select</a> in a form field. Checkboxes, radios and switches carry their own label and are grouped with a <code>fieldset</code> instead; see <a href="checkbox.html">checkbox</a> and <a href="radio-group.html">radio group</a>. Fields are arranged by <a href="form-layout.html">form layout</a>.</p>
+      <ul>
+        <li><b>Label</b> sits above the control and is always visible; placeholders are not labels.</li>
+        <li><b>Hint</b> explains the format or the consequence before the person types.</li>
+        <li><b>Error</b> replaces nothing: it appears beneath the control and names the problem and how to fix it.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+      <div class="ds-anatomy">
+        <figure class="ds-anatomy__figure">
+          <div class="field" style="width: 100%; max-width: 22rem; margin: 0;"><label class="field__label" for="ff-anat-email">Client email</label><input class="input" id="ff-anat-email" type="email" value="amara@example.com" aria-invalid="true" aria-describedby="ff-anat-hint ff-anat-err"><span class="field__hint" id="ff-anat-hint">We send the gallery link here.</span><span class="field__error" id="ff-anat-err">Enter an email address such as name@example.com.</span></div>
+          <span class="ds-callout" style="left: -4%; top: 6%;" aria-hidden="true">1</span>
+          <span class="ds-callout" style="left: -4%; top: 40%;" aria-hidden="true">2</span>
+          <span class="ds-callout" style="left: -4%; top: 72%;" aria-hidden="true">3</span>
+          <span class="ds-callout" style="left: -4%; top: 92%;" aria-hidden="true">4</span>
+        </figure>
+        <ol class="ds-anatomy__list">
+          <li><div><b>Label</b><small><code>&lt;label for&gt;</code> tied to the control, 14px, always visible.</small></div></li>
+          <li><div><b>Control</b><small>Any input that uses <code>.input</code>; keeps its own border, height and states.</small></div></li>
+          <li><div><b>Hint</b><small>Caption text in muted foreground, linked by <code>aria-describedby</code>.</small></div></li>
+          <li><div><b>Error</b><small>Caption text in the danger foreground with the control's <code>aria-invalid="true"</code>; linked by <code>aria-describedby</code>.</small></div></li>
+        </ol>
+      </div>
+    </section>
+    <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+      <p>The wrapper has one structure; what changes is which of the optional parts are present.</p>
+      <h3>Label only</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="field" style="width: 100%; max-width: 22rem; margin: 0;"><label class="field__label" for="ff-v-phone">Phone</label><input class="input" id="ff-v-phone" type="tel" autocomplete="tel"></div></div>
+        <div class="ds-example__caption"><span>Use when the label alone is enough.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class="field"&gt;
+  &lt;label class="field__label" for="phone"&gt;Phone&lt;/label&gt;
+  &lt;input class="input" id="phone" type="tel" autocomplete="tel"&gt;
+&lt;/div&gt;</code></pre></details>
+      </div>
+      <h3>With hint</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="field" style="width: 100%; max-width: 22rem; margin: 0;"><label class="field__label" for="ff-v-venue">Venue</label><input class="input" id="ff-v-venue" type="text" aria-describedby="ff-v-venue-hint"><span class="field__hint" id="ff-v-venue-hint">Name and city, for travel time.</span></div></div>
+        <div class="ds-example__caption"><span>The hint is read after the label and value.</span></div>
+      </div>
+      <h3>With error</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="field" style="width: 100%; max-width: 22rem; margin: 0;"><label class="field__label" for="ff-v-date">Session date</label><input class="input" id="ff-v-date" type="text" value="31 February" aria-invalid="true" aria-describedby="ff-v-date-err"><span class="field__error" id="ff-v-date-err">Enter a date that exists, such as 28 February.</span></div></div>
+        <div class="ds-example__caption"><span>The error is text, not just a red border.</span></div>
+      </div>
+      <h3>Optional marking</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="field" style="width: 100%; max-width: 22rem; margin: 0;"><label class="field__label" for="ff-v-note">Note for the photographer <span class="muted">(optional)</span></label><input class="input" id="ff-v-note" type="text"></div></div>
+        <div class="ds-example__caption"><span>Mark the exception. When most fields are required, label the optional ones; otherwise label the required ones.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="sizes" data-na="The wrapper has no size; control size is set on the input with &lt;code&gt;.input--sm&lt;/code&gt; or &lt;code&gt;.input--lg&lt;/code&gt;."><h2><a href="#sizes">Sizes</a></h2>
+      <p class="ds-na">The wrapper has no size; control size is set on the input with &lt;code&gt;.input--sm&lt;/code&gt; or &lt;code&gt;.input--lg&lt;/code&gt;.</p>
+    </section>
+    <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+      <p>The wrapper changes with the control it holds. The same label and hint structure supports every state.</p>
+      <div class="ds-matrix"><table>
+        <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Focus</th><th scope="col">Invalid</th><th scope="col">Disabled</th><th scope="col">Read-only</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Label + control</th><td><div class="field" style="margin: 0;"><label class="field__label">Venue<input class="input" type="text" value="Harbour hall"></label></div></td><td><div class="field" style="margin: 0;"><label class="field__label">Venue<input class="input" type="text" value="Harbour hall" data-state="focus"></label></div></td><td><div class="field" style="margin: 0;"><label class="field__label">Venue<input class="input" type="text" value="Harbour hall" aria-invalid="true"></label></div></td><td><div class="field" style="margin: 0;"><label class="field__label">Venue<input class="input" type="text" value="Harbour hall" disabled></label></div></td><td><div class="field" style="margin: 0;"><label class="field__label">Venue<input class="input" type="text" value="Harbour hall" readonly></label></div></td></tr>
+          <tr><th scope="row">With hint</th><td><div class="field" style="margin: 0;"><label class="field__label">Venue<input class="input" type="text" value="Harbour hall"></label><span class="field__hint">Name and city.</span></div></td><td><div class="field" style="margin: 0;"><label class="field__label">Venue<input class="input" type="text" value="Harbour hall" data-state="focus"></label><span class="field__hint">Name and city.</span></div></td><td><div class="field" style="margin: 0;"><label class="field__label">Venue<input class="input" type="text" value="Harbour hall" aria-invalid="true"></label><span class="field__hint">Name and city.</span></div></td><td><div class="field" style="margin: 0;"><label class="field__label">Venue<input class="input" type="text" value="Harbour hall" disabled></label><span class="field__hint">Name and city.</span></div></td><td><div class="field" style="margin: 0;"><label class="field__label">Venue<input class="input" type="text" value="Harbour hall" readonly></label><span class="field__hint">Name and city.</span></div></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Both themes</h3>
+      <div class="ds-themes">
+        <div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><div class="field" style="margin: 0; width: 100%;"><label class="field__label">Session name<input class="input" type="text" value="Wedding session" aria-invalid="true"></label><span class="field__hint">Shown on the gallery page.</span><span class="field__error">Enter a name.</span></div></div></div>
+        <div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><div class="field" style="margin: 0; width: 100%;"><label class="field__label">Session name<input class="input" type="text" value="Wedding session" aria-invalid="true"></label><span class="field__hint">Shown on the gallery page.</span><span class="field__error">Enter a name.</span></div></div></div>
+      </div>
+      <ul>
+        <li><b>Required</b> is stated in words ("required" or "(optional)" in the label) and by the native <code>required</code> attribute. An asterisk alone is not enough.</li>
+        <li><b>Error and hint together</b>: both stay; the error is announced first because it is listed first in <code>aria-describedby</code>.</li>
+        <li><b>Busy</b>: while a field validates on the server, set <code>aria-busy="true"</code> on the wrapper and keep the control editable.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+      <ul>
+        <li>Fields take the width of their column. Below 768px every field is full width; above, two-column layouts come from <a href="form-layout.html">form layout</a>, never from the field.</li>
+        <li>The label never sits beside the control: stacking keeps the label readable at 390px and at 200% zoom.</li>
+        <li>Hints and errors wrap and are never truncated.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+      <p>The wrapper reads <code>--color-fg-default</code> for labels, <code>--color-fg-muted</code> for hints and <code>--color-danger-fg</code> for errors. All three pass 4.5:1 on the canvas and on cards in both themes, so a field can sit on either surface.</p>
+    </section>
+    <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+      <h3>Role and pattern</h3>
+      <p>Native <code>&lt;label for&gt;</code> plus <code>aria-describedby</code>. No ARIA role is added; the control keeps its native role. The error uses <code>aria-invalid="true"</code> on the control.</p>
+      <h3>Keyboard</h3>
+      <div class="ds-table-wrap"><table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves into and out of the control; the label and messages are not tab stops.</td></tr><tr><td>Click or tap the label</td><td>Moves focus to the control and, for checkable inputs, toggles it.</td></tr></tbody></table></div>
+      <h3>Focus</h3>
+      <p>Focus belongs to the control, not the wrapper: the control shows the shared ring and a border in <code>--color-focus-ring</code>. After a failed submit, focus moves to the <a href="form-layout.html">error summary</a>, whose links move focus to the first invalid control.</p>
+      <h3>Labelling</h3>
+      <p>Every control has a visible <code>&lt;label&gt;</code> with matching <code>for</code> and <code>id</code>. Hints and errors have their own ids and are listed in <code>aria-describedby</code>. Errors are not removed on blur until corrected, and are never the only cue: they pair text with the red border.</p>
+      <h3>Contrast</h3>
+      <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);"><div class="ds-pair"><span>Label on canvas</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-canvas" data-min="4.5"></span></div><div class="ds-pair"><span>Hint on canvas</span><span class="ds-pair__ratio" data-contrast="--color-fg-muted|--color-bg-canvas" data-min="4.5"></span></div><div class="ds-pair"><span>Hint on surface</span><span class="ds-pair__ratio" data-contrast="--color-fg-muted|--color-bg-surface" data-min="4.5"></span></div><div class="ds-pair"><span>Error on canvas</span><span class="ds-pair__ratio" data-contrast="--color-danger-fg|--color-bg-canvas" data-min="4.5"></span></div><div class="ds-pair"><span>Error on surface</span><span class="ds-pair__ratio" data-contrast="--color-danger-fg|--color-bg-surface" data-min="4.5"></span></div></div>
+      <h3>Motion</h3>
+      <p>Errors appear without animation. Nothing else moves, so there is nothing to reduce.</p>
+      <h3>Touch</h3>
+      <p>The label is part of the target for checkable inputs and at least 44px tall. Controls themselves are 44px (<code>--control-height-md</code>); the gap between fields is <code>--space-5</code> (24px).</p>
+    </section>
+    <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+      <ul>
+        <li>Labels are short noun phrases in sentence case: "Session date", "Client email". No trailing colon.</li>
+        <li>Hints say what to enter or what happens next, not what the label already says.</li>
+        <li>Errors say what is wrong and how to fix it: "Enter a date that exists, such as 28 February." Never "Invalid input".</li>
+        <li>Do not use placeholder text for anything required to understand the field.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+      <div class="ds-dodont">
+        <figure class="ds-do"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="ff-do-name">Session name</label><input class="input" id="ff-do-name" type="text" value="Wedding session" aria-describedby="ff-do-hint"><span class="field__hint" id="ff-do-hint">Shown to clients on the gallery page.</span></div></div><figcaption>Visible label, hint tied by <code>aria-describedby</code>.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><div class="field"><input class="input" type="text" placeholder="Session name" aria-label="Session name"></div></div><figcaption>A placeholder acting as the label vanishes when typing starts.</figcaption></figure>
+        <figure class="ds-do"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="ff-do-err">Client email</label><input class="input" id="ff-do-err" type="email" aria-invalid="true" aria-describedby="ff-do-err-msg"><span class="field__error" id="ff-do-err-msg">Enter an email address such as name@example.com.</span></div></div><figcaption>The error names the fix and is linked to the control.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="ff-dont-err">Client email</label><input class="input is-invalid" id="ff-dont-err" type="email"></div></div><figcaption>A red border with no message and no <code>aria-invalid</code>.</figcaption></figure>
+      </div>
+    </section>
+    <section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+        <tbody>
+          <tr><td>Label</td><td><code>--color-fg-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td></tr>
+          <tr><td>Hint</td><td><code>--color-fg-muted</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td></tr>
+          <tr><td>Error</td><td><code>--color-danger-fg</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-danger-fg" data-swatch></i><span data-token="--color-danger-fg"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-danger-fg" data-swatch></i><span data-token="--color-danger-fg"></span></span></td></tr>
+          <tr><td>Invalid border</td><td><code>--color-danger-solid</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-danger-solid" data-swatch></i><span data-token="--color-danger-solid"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-danger-solid" data-swatch></i><span data-token="--color-danger-solid"></span></span></td></tr>
+          <tr><td>Space under field</td><td><code>--space-5</code></td><td colspan="2"><span data-token="--space-5"></span></td></tr>
+          <tr><td>Label to control</td><td><code>--space-2</code></td><td colspan="2"><span data-token="--space-2"></span></td></tr>
+          <tr><td>Control to message</td><td><code>--space-1</code></td><td colspan="2"><span data-token="--space-1"></span></td></tr>
+          <tr><td>Label font</td><td><code>--text-label</code></td><td colspan="2"><span data-token="--text-label"></span></td></tr>
+          <tr><td>Message font</td><td><code>--text-caption</code></td><td colspan="2"><span data-token="--text-caption"></span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+    <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+      <pre><code>&lt;div class="field"&gt;
+  &lt;label class="field__label" for="email"&gt;Client email&lt;/label&gt;
+  &lt;input class="input" id="email" type="email" autocomplete="email"
+         aria-invalid="true" aria-describedby="email-hint email-err"&gt;
+  &lt;span class="field__hint" id="email-hint"&gt;We send the gallery link here.&lt;/span&gt;
+  &lt;span class="field__error" id="email-err"&gt;Enter an email address such as name@example.com.&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>.field</code></td><td>Wrapper; sets the space beneath.</td></tr><tr><td><code>.field__label</code></td><td>The visible label.</td></tr><tr><td><code>.field__hint</code></td><td>Help text below the control.</td></tr><tr><td><code>.field__error</code></td><td>Error text below the control.</td></tr><tr><td><code>.input</code></td><td>The control; see <a href="text-field.html">text field</a>.</td></tr><tr><td><code>aria-describedby</code></td><td>On the control, listing hint then error ids.</td></tr><tr><td><code>aria-invalid="true"</code></td><td>On the control when it has an error.</td></tr></tbody></table></div>
+    </section>
+    <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+      <p>Extracted from these mocks:</p>
+      <ul>
+        <li><a href="../../mocks/marketing/contact.html">marketing/contact</a> (contact form fields and errors)</li>
+        <li><a href="../../mocks/marketing/quote.html">marketing/quote</a> (quote calculator fields)</li>
+        <li><a href="../../mocks/admin/session-editor.html">admin/session-editor</a> (session form)</li>
+        <li><a href="../../mocks/admin/login.html">admin/login</a> (email and password fields)</li>
+      </ul>
+      <p>Drift fixed during extraction: the mocks' <code>.field &gt; span</code>, <code>.hint</code>, <code>.field-error</code> and <code>.inline-error</code> were four spellings of the same parts; the system has <code>.field__label</code>, <code>.field__hint</code> and <code>.field__error</code>. Labels rise from 11px to 14px and hints from 11px to the 12px caption.</p>
+    </section>
+
+    <footer class="ds-footer"><span>Quinntyne Brown Studio design system &middot; extracted from <a href="../../mocks/index.html">docs/mocks</a></span><a href="#top">Back to top</a></footer>
+  </main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

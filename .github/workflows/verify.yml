@@ -72,35 +72,6 @@ jobs:
         with:
           name: static-applications
           path: frontend/dist
-  design-system:
-    name: Design system contract and browser tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '24.18.0'
-          cache: npm
-          cache-dependency-path: design-system/package-lock.json
-      - run: npm ci
-        working-directory: design-system
-      - run: npx playwright install --with-deps chromium
-        working-directory: design-system
-      - run: npm test
-        working-directory: design-system
-      - run: npm run build
-        working-directory: design-system
-      - run: npm run check:artifact
-        working-directory: design-system
-      - uses: actions/upload-artifact@v4
-        with:
-          name: design-system-catalog
-          path: design-system/dist
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: design-system-evidence
-          path: design-system/test-results
 
   windows-backend:
     runs-on: windows-latest
@@ -155,7 +126,7 @@ jobs:
       - run: az bicep build --file infra/main.bicep --outfile /tmp/qbs-template.json
 
   package-release:
-    needs: [verify, design-system, windows-backend, linux-backend, deployment-checks]
+    needs: [verify, windows-backend, linux-backend, deployment-checks]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

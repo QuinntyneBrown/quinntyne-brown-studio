@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chip &mdash; Quinntyne Brown Studio design system</title>
+<meta name="description" content="A chip is a compact token for a filter, a selection or a tag. Filter chips toggle, removable chips take themselves out, static chips just label.">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+  <nav class="ds-nav" aria-label="Design system">
+    <div class="ds-nav__brand"><a href="../index.html">QBS DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">&#9790; Dark</button></div>
+    <details open><summary>Foundations</summary><ul>
+      <li><a href="../foundations/color.html">Color</a></li>
+      <li><a href="../foundations/typography.html">Typography</a></li>
+      <li><a href="../foundations/spacing.html">Spacing</a></li>
+      <li><a href="../foundations/layout.html">Layout</a></li>
+      <li><a href="../foundations/elevation.html">Elevation</a></li>
+      <li><a href="../foundations/shape.html">Shape</a></li>
+      <li><a href="../foundations/motion.html">Motion</a></li>
+      <li><a href="../foundations/iconography.html">Iconography</a></li>
+      <li><a href="../foundations/theming.html">Theming</a></li>
+      <li><a href="../foundations/responsive.html">Responsive</a></li>
+      <li><a href="../foundations/accessibility.html">Accessibility</a></li>
+      <li><a href="../foundations/content.html">Content</a></li>
+    </ul></details>
+    <details open><summary>Components</summary><ul>
+      <li><a href="../components/button.html">Button</a></li>
+      <li><a href="../components/button-group.html">Button group</a></li>
+      <li><a href="../components/link.html">Link</a></li>
+      <li><a href="../components/menu.html">Menu</a></li>
+      <li><a href="../components/checkbox.html">Checkbox</a></li>
+      <li><a href="../components/date-navigator.html">Date navigator</a></li>
+      <li><a href="../components/file-upload.html">File upload</a></li>
+      <li><a href="../components/form-field.html">Form field</a></li>
+      <li><a href="../components/form-layout.html">Form layout</a></li>
+      <li><a href="../components/radio-group.html">Radio group</a></li>
+      <li><a href="../components/select.html">Select</a></li>
+      <li><a href="../components/switch.html">Switch</a></li>
+      <li><a href="../components/text-field.html">Text field</a></li>
+      <li><a href="../components/textarea.html">Textarea</a></li>
+      <li><a href="../components/breadcrumb.html">Breadcrumb</a></li>
+      <li><a href="../components/footer.html">Footer</a></li>
+      <li><a href="../components/pagination.html">Pagination</a></li>
+      <li><a href="../components/sidebar.html">Sidebar</a></li>
+      <li><a href="../components/skip-link.html">Skip link</a></li>
+      <li><a href="../components/tabs.html">Tabs</a></li>
+      <li><a href="../components/top-bar.html">Top bar</a></li>
+      <li><a href="../components/accordion.html">Accordion</a></li>
+      <li><a href="../components/card.html">Card</a></li>
+      <li><a href="../components/dialog.html">Dialog</a></li>
+      <li><a href="../components/divider.html">Divider</a></li>
+      <li><a href="../components/layout.html">Layout primitives</a></li>
+      <li><a href="../components/tooltip.html">Tooltip</a></li>
+      <li><a href="../components/avatar.html">Avatar</a></li>
+      <li><a href="../components/badge.html">Badge</a></li>
+      <li><a href="../components/blog-card.html">Blog card</a></li>
+      <li><a href="../components/chip.html">Chip</a></li>
+      <li><a href="../components/cost-summary.html">Cost summary</a></li>
+      <li><a href="../components/description-list.html">Description list</a></li>
+      <li><a href="../components/line-item.html">Line item</a></li>
+      <li><a href="../components/photo-tile.html">Photo tile</a></li>
+      <li><a href="../components/calendar.html">Schedule calendar</a></li>
+      <li><a href="../components/selection-bar.html">Selection bar</a></li>
+      <li><a href="../components/stat.html">Stat</a></li>
+      <li><a href="../components/stepper.html">Stepper</a></li>
+      <li><a href="../components/table.html">Table</a></li>
+      <li><a href="../components/alert.html">Alert</a></li>
+      <li><a href="../components/empty-state.html">Empty state</a></li>
+      <li><a href="../components/error-page.html">Error page</a></li>
+      <li><a href="../components/inline-message.html">Inline message</a></li>
+      <li><a href="../components/progress.html">Progress</a></li>
+      <li><a href="../components/skeleton.html">Skeleton</a></li>
+      <li><a href="../components/spinner.html">Spinner</a></li>
+      <li><a href="../components/toast.html">Toast</a></li>
+    </ul></details>
+    <details open><summary>Patterns</summary><ul>
+      <li><a href="../patterns/forms.html">Forms</a></li>
+      <li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li>
+      <li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li>
+      <li><a href="../patterns/navigation-and-page-structure.html">Navigation and page structure</a></li>
+      <li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li>
+      <li><a href="../patterns/data-tables-and-lists.html">Data tables and lists</a></li>
+      <li><a href="../patterns/notifications.html">Notifications</a></li>
+      <li><a href="../patterns/content-and-tone.html">Content and tone</a></li>
+    </ul></details>
+  </nav>
+
+  <main id="main" class="ds-main">
+    <header class="ds-header">
+      <p class="ds-kicker">Component &amp;middot; Data display</p>
+      <h1>Chip</h1>
+      <p class="ds-lead">A chip is a compact token for a filter, a selection or a tag. Filter chips toggle, removable chips take themselves out, static chips just label.</p>
+      <div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Status: stable</span><span class="ds-pill">Toggle button</span></div>
+      <ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul>
+    </header>
+
+    <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+      <p>Use a chip for choices people can switch on and off ("Weddings", "Headshots") or for items they have added ("Toronto"). Use a <a href="badge.html">badge</a> for a read-only status, <a href="tabs.html">tabs</a> to switch views, and a <a href="checkbox.html">checkbox</a> group when the choices belong in a form.</p>
+      <ul>
+        <li><b>Filter chip</b> is a button with <code>aria-pressed</code>; it narrows a list in place.</li>
+        <li><b>Removable chip</b> carries a labelled remove button.</li>
+        <li><b>Static chip</b> labels without interaction: a tag on a blog post.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+      <div class="ds-anatomy">
+        <figure class="ds-anatomy__figure">
+          <span class="chip">Toronto<button class="btn btn--ghost btn--icon btn--sm" type="button" aria-label="Remove Toronto"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></span>
+          <span class="ds-callout" style="left: 16%; top: -24%;" aria-hidden="true">1</span>
+          <span class="ds-callout" style="left: 90%; top: -24%;" aria-hidden="true">2</span>
+        </figure>
+        <ol class="ds-anatomy__list">
+          <li><div><b>Label</b><small>One or two words in caption type. It is the accessible name.</small></div></li>
+          <li><div><b>Remove button (optional)</b><small>A ghost icon button with a specific label. Only on removable chips.</small></div></li>
+        </ol>
+      </div>
+    </section>
+    <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+      <p>Pick by what the chip does. All variants share the same 32px height and square-ish corners.</p>
+      <h3>Filter chips</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="cluster" role="group" aria-label="Filter sessions by type"><button class="chip" type="button" aria-pressed="true">All</button><button class="chip" type="button" aria-pressed="false">Weddings</button><button class="chip" type="button" aria-pressed="false">Headshots</button><button class="chip" type="button" aria-pressed="false">Family portraits</button></div></div>
+        <div class="ds-example__caption"><span>The pressed chip is filled with <code>--color-brand-subtle</code> and outlined in <code>--color-brand</code>.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class="cluster" role="group" aria-label="Filter sessions by type"&gt;
+  &lt;button class="chip" type="button" aria-pressed="true"&gt;All&lt;/button&gt;
+  &lt;button class="chip" type="button" aria-pressed="false"&gt;Weddings&lt;/button&gt;
+&lt;/div&gt;</code></pre></details>
+      </div>
+      <h3>Removable chips</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="cluster"><span class="chip">Toronto<button class="btn btn--ghost btn--icon btn--sm" type="button" aria-label="Remove Toronto"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></span><span class="chip">Quinntyne Brown<button class="btn btn--ghost btn--icon btn--sm" type="button" aria-label="Remove Quinntyne Brown"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></span></div></div>
+        <div class="ds-example__caption"><span>Each remove button names what it removes.</span></div>
+      </div>
+      <h3>Static chips</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="cluster"><span class="chip">Wedding</span><span class="chip">Outdoor</span><span class="chip">Film</span></div></div>
+        <div class="ds-example__caption"><span>Static chips are text. They are not focusable and do not look interactive; if they hover, make them links.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="sizes" data-na="A chip has one size (32px, &lt;code&gt;--control-height-sm&lt;/code&gt;); a larger target is a button or a card."><h2><a href="#sizes">Sizes</a></h2>
+      <p class="ds-na">A chip has one size (32px, &lt;code&gt;--control-height-sm&lt;/code&gt;); a larger target is a button or a card.</p>
+    </section>
+    <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+      <p>Filter chips share the button's states. Pointer and focus are forced with <code>data-state</code> here; real pages use <code>:hover</code> and <code>:focus-visible</code>.</p>
+      <div class="ds-matrix"><table>
+        <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Pressed</th><th scope="col">Disabled</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Filter chip</th><td><button class="chip" type="button">Weddings</button></td><td><button class="chip" type="button" data-state="hover">Weddings</button></td><td><button class="chip" type="button" data-state="focus">Weddings</button></td><td><button class="chip" type="button" aria-pressed="true">Weddings</button></td><td><button class="chip" type="button" disabled>Weddings</button></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Both themes</h3>
+      <div class="ds-themes">
+        <div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><button class="chip" type="button" aria-pressed="false">Weddings</button><button class="chip" type="button" aria-pressed="true">Headshots</button><span class="chip">Outdoor</span></div></div>
+        <div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><button class="chip" type="button" aria-pressed="false">Weddings</button><button class="chip" type="button" aria-pressed="true">Headshots</button><span class="chip">Outdoor</span></div></div>
+      </div>
+      <ul>
+        <li><b>Pressed</b> uses <code>aria-pressed="true"</code>. Do not change the label when pressed; the state is exposed separately.</li>
+        <li><b>Disabled</b> uses the native attribute and is not focusable. Prefer leaving a chip enabled and explaining why it finds no results.</li>
+        <li><b>Result of a filter</b>: announce the new count in a live region such as the list heading ("12 sessions"); see <a href="../patterns/data-tables-and-lists.html">data tables and lists</a>.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+      <ul>
+        <li>Chips wrap onto new rows inside a <code>.cluster</code>; they never scroll sideways or truncate their label.</li>
+        <li>A very long chip group (more than about eight) moves into a <a href="select.html">select</a> or a <a href="menu.html">menu</a> below 768px.</li>
+        <li>Chip height is 32px; on touch screens leave 8px between chips and keep the group at least 44px from other targets, or raise the chip to a tab.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+      <p>Chips read the surface, border and brand-subtle tokens. Pressed uses <code>--color-brand-subtle</code> and <code>--color-brand</code>; both swap in the dark theme. Override <code>--color-brand</code> on a wrapper to re-colour the pressed outline for another product.</p>
+    </section>
+    <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+      <h3>Role and pattern</h3>
+      <p>A filter chip is a toggle button: native <code>&lt;button type="button"&gt;</code> with <code>aria-pressed</code>, see the <a href="https://www.w3.org/WAI/ARIA/apg/patterns/button/">APG button pattern</a>. A group of chips is a <code>role="group"</code> with an <code>aria-label</code>. Removable chips contain a real button.</p>
+      <h3>Keyboard</h3>
+      <div class="ds-table-wrap"><table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves between chips and remove buttons.</td></tr><tr><td><kbd>Enter</kbd>, <kbd>Space</kbd></td><td>Toggles a filter chip or removes a removable one.</td></tr><tr><td><kbd>Backspace</kbd>, <kbd>Delete</kbd></td><td>On a focused remove button, removes the chip (optional shortcut).</td></tr><tr><td><kbd>Esc</kbd></td><td>No effect.</td></tr></tbody></table></div>
+      <h3>Focus</h3>
+      <p>The shared 2px ring appears on the chip or the remove button on <code>:focus-visible</code>. After removal, focus moves to the next chip, or to the previous one, or to the input that owns the chips if none remain.</p>
+      <h3>Labelling</h3>
+      <p>The text is the name; <code>aria-pressed</code> is the state. Remove buttons use "Remove &lt;label&gt;". Announce removals and filter results in a live region.</p>
+      <h3>Contrast</h3>
+      <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);"><div class="ds-pair"><span>Label on chip</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-surface" data-min="4.5"></span></div><div class="ds-pair"><span>Label on pressed chip</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-brand-subtle" data-min="4.5"></span></div><div class="ds-pair"><span>Label on hovered chip</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-subtle" data-min="4.5"></span></div><div class="ds-pair"><span>Chip border on surface</span><span class="ds-pair__ratio" data-contrast="--color-border-strong|--color-bg-surface" data-min="3"></span></div><div class="ds-pair"><span>Pressed outline on surface</span><span class="ds-pair__ratio" data-contrast="--color-brand|--color-bg-surface" data-min="3"></span></div><div class="ds-pair"><span>Focus ring on surface</span><span class="ds-pair__ratio" data-contrast="--color-focus-ring|--color-bg-surface" data-min="3"></span></div></div>
+      <h3>Motion</h3>
+      <p>No animation on toggle. Background changes instantly.</p>
+      <h3>Touch</h3>
+      <p>The chip is 32px tall and meets the 24px minimum. Keep 8px between chips. Where chips are the primary control on a phone, raise them with the large control height or use <a href="tabs.html">tabs</a>.</p>
+    </section>
+    <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+      <ul>
+        <li>One or two words in sentence case: "Family portraits".</li>
+        <li>Chips for filters name the attribute value, not the action: "Weddings", not "Filter by weddings".</li>
+        <li>Do not mix filter and static chips in one row.</li>
+        <li>Do not add an icon unless it removes ambiguity.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+      <div class="ds-dodont">
+        <figure class="ds-do"><div class="ds-example__canvas"><div class="cluster" role="group" aria-label="Filter sessions by type"><button class="chip" type="button" aria-pressed="true">Weddings</button><button class="chip" type="button" aria-pressed="false">Headshots</button></div></div><figcaption>Group filter chips under a label and use aria-pressed.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><div class="cluster"><span class="chip">Weddings</span><span class="chip">Headshots</span></div></div><figcaption>Chips that filter but are not buttons cannot be reached by keyboard.</figcaption></figure>
+        <figure class="ds-do"><div class="ds-example__canvas"><span class="chip">Toronto<button class="btn btn--ghost btn--icon btn--sm" type="button" aria-label="Remove Toronto"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></span></div><figcaption>Name the object a remove button removes.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><span class="chip">Toronto<button class="btn btn--ghost btn--icon btn--sm" type="button" aria-label="Close"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></span></div><figcaption>"Close" does not say which chip goes away.</figcaption></figure>
+      </div>
+    </section>
+    <section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+        <tbody>
+          <tr><td>Background</td><td><code>--color-bg-surface</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-surface" data-swatch></i><span data-token="--color-bg-surface"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-surface" data-swatch></i><span data-token="--color-bg-surface"></span></span></td></tr>
+          <tr><td>Border</td><td><code>--color-border-strong</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-border-strong" data-swatch></i><span data-token="--color-border-strong"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-border-strong" data-swatch></i><span data-token="--color-border-strong"></span></span></td></tr>
+          <tr><td>Hover</td><td><code>--color-bg-subtle</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-subtle" data-swatch></i><span data-token="--color-bg-subtle"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-subtle" data-swatch></i><span data-token="--color-bg-subtle"></span></span></td></tr>
+          <tr><td>Pressed fill</td><td><code>--color-brand-subtle</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-brand-subtle" data-swatch></i><span data-token="--color-brand-subtle"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-brand-subtle" data-swatch></i><span data-token="--color-brand-subtle"></span></span></td></tr>
+          <tr><td>Pressed outline</td><td><code>--color-brand</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-brand" data-swatch></i><span data-token="--color-brand"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-brand" data-swatch></i><span data-token="--color-brand"></span></span></td></tr>
+          <tr><td>Height</td><td><code>--control-height-sm</code></td><td colspan="2"><span data-token="--control-height-sm"></span></td></tr>
+          <tr><td>Radius</td><td><code>--radius-sm</code></td><td colspan="2"><span data-token="--radius-sm"></span></td></tr>
+          <tr><td>Gap and padding</td><td><code>--space-2</code> / <code>--space-3</code></td><td colspan="2"><span data-token="--space-2"></span> / <span data-token="--space-3"></span></td></tr>
+          <tr><td>Font</td><td><code>--text-caption</code></td><td colspan="2"><span data-token="--text-caption"></span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+    <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+      <pre><code>&lt;button class="chip" type="button" aria-pressed="true"&gt;Weddings&lt;/button&gt;
+
+&lt;span class="chip"&gt;Toronto
+  &lt;button class="btn btn--ghost btn--icon btn--sm" type="button" aria-label="Remove Toronto"&gt;…&lt;/button&gt;
+&lt;/span&gt;
+
+&lt;span class="chip"&gt;Outdoor&lt;/span&gt;</code></pre>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>.chip</code></td><td>Base: bordered, 32px, caption type; on a <code>&lt;button&gt;</code> it gets a pointer.</td></tr><tr><td><code>aria-pressed="true"</code></td><td>Selected look for a filter chip.</td></tr><tr><td><code>disabled</code></td><td>Native disabled; not focusable.</td></tr><tr><td><code>data-state="hover|focus"</code></td><td>Documentation only: forces a state in static pages.</td></tr></tbody></table></div>
+    </section>
+    <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+      <p>Extracted from these mocks:</p>
+      <ul>
+        <li><a href="../../mocks/marketing/portfolio.html">marketing/portfolio</a> (category filter tabs)</li>
+        <li><a href="../../mocks/admin/print-prices.html">admin/print-prices</a> (filter tabs)</li>
+        <li><a href="../../mocks/client/requests.html">client/requests</a> (status filter tabs)</li>
+        <li><a href="../../mocks/admin/dashboard.html">admin/dashboard</a> (filter tabs)</li>
+      </ul>
+      <p>Drift fixed during extraction: the mocks drew filters as 30px pill <code>.tab</code> buttons with an <code>active</code> class; the system keeps pills for <a href="tabs.html">tabs</a> that switch views and introduces the chip for filters and tags, using <code>aria-pressed</code> instead of a class. Padding moves to token steps.</p>
+    </section>
+
+    <footer class="ds-footer"><span>Quinntyne Brown Studio design system &middot; extracted from <a href="../../mocks/index.html">docs/mocks</a></span><a href="#top">Back to top</a></footer>
+  </main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Switch &mdash; Quinntyne Brown Studio design system</title>
+<meta name="description" content="A switch turns one setting on or off, and the change takes effect straight away without a save step.">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+  <nav class="ds-nav" aria-label="Design system">
+    <div class="ds-nav__brand"><a href="../index.html">QBS DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">&#9790; Dark</button></div>
+    <details open><summary>Foundations</summary><ul>
+      <li><a href="../foundations/color.html">Color</a></li>
+      <li><a href="../foundations/typography.html">Typography</a></li>
+      <li><a href="../foundations/spacing.html">Spacing</a></li>
+      <li><a href="../foundations/layout.html">Layout</a></li>
+      <li><a href="../foundations/elevation.html">Elevation</a></li>
+      <li><a href="../foundations/shape.html">Shape</a></li>
+      <li><a href="../foundations/motion.html">Motion</a></li>
+      <li><a href="../foundations/iconography.html">Iconography</a></li>
+      <li><a href="../foundations/theming.html">Theming</a></li>
+      <li><a href="../foundations/responsive.html">Responsive</a></li>
+      <li><a href="../foundations/accessibility.html">Accessibility</a></li>
+      <li><a href="../foundations/content.html">Content</a></li>
+    </ul></details>
+    <details open><summary>Components</summary><ul>
+      <li><a href="../components/button.html">Button</a></li>
+      <li><a href="../components/button-group.html">Button group</a></li>
+      <li><a href="../components/link.html">Link</a></li>
+      <li><a href="../components/menu.html">Menu</a></li>
+      <li><a href="../components/checkbox.html">Checkbox</a></li>
+      <li><a href="../components/date-navigator.html">Date navigator</a></li>
+      <li><a href="../components/file-upload.html">File upload</a></li>
+      <li><a href="../components/form-field.html">Form field</a></li>
+      <li><a href="../components/form-layout.html">Form layout</a></li>
+      <li><a href="../components/radio-group.html">Radio group</a></li>
+      <li><a href="../components/select.html">Select</a></li>
+      <li><a href="../components/switch.html">Switch</a></li>
+      <li><a href="../components/text-field.html">Text field</a></li>
+      <li><a href="../components/textarea.html">Textarea</a></li>
+      <li><a href="../components/breadcrumb.html">Breadcrumb</a></li>
+      <li><a href="../components/footer.html">Footer</a></li>
+      <li><a href="../components/pagination.html">Pagination</a></li>
+      <li><a href="../components/sidebar.html">Sidebar</a></li>
+      <li><a href="../components/skip-link.html">Skip link</a></li>
+      <li><a href="../components/tabs.html">Tabs</a></li>
+      <li><a href="../components/top-bar.html">Top bar</a></li>
+      <li><a href="../components/accordion.html">Accordion</a></li>
+      <li><a href="../components/card.html">Card</a></li>
+      <li><a href="../components/dialog.html">Dialog</a></li>
+      <li><a href="../components/divider.html">Divider</a></li>
+      <li><a href="../components/layout.html">Layout primitives</a></li>
+      <li><a href="../components/tooltip.html">Tooltip</a></li>
+      <li><a href="../components/avatar.html">Avatar</a></li>
+      <li><a href="../components/badge.html">Badge</a></li>
+      <li><a href="../components/blog-card.html">Blog card</a></li>
+      <li><a href="../components/chip.html">Chip</a></li>
+      <li><a href="../components/cost-summary.html">Cost summary</a></li>
+      <li><a href="../components/description-list.html">Description list</a></li>
+      <li><a href="../components/line-item.html">Line item</a></li>
+      <li><a href="../components/photo-tile.html">Photo tile</a></li>
+      <li><a href="../components/calendar.html">Schedule calendar</a></li>
+      <li><a href="../components/selection-bar.html">Selection bar</a></li>
+      <li><a href="../components/stat.html">Stat</a></li>
+      <li><a href="../components/stepper.html">Stepper</a></li>
+      <li><a href="../components/table.html">Table</a></li>
+      <li><a href="../components/alert.html">Alert</a></li>
+      <li><a href="../components/empty-state.html">Empty state</a></li>
+      <li><a href="../components/error-page.html">Error page</a></li>
+      <li><a href="../components/inline-message.html">Inline message</a></li>
+      <li><a href="../components/progress.html">Progress</a></li>
+      <li><a href="../components/skeleton.html">Skeleton</a></li>
+      <li><a href="../components/spinner.html">Spinner</a></li>
+      <li><a href="../components/toast.html">Toast</a></li>
+    </ul></details>
+    <details open><summary>Patterns</summary><ul>
+      <li><a href="../patterns/forms.html">Forms</a></li>
+      <li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li>
+      <li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li>
+      <li><a href="../patterns/navigation-and-page-structure.html">Navigation and page structure</a></li>
+      <li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li>
+      <li><a href="../patterns/data-tables-and-lists.html">Data tables and lists</a></li>
+      <li><a href="../patterns/notifications.html">Notifications</a></li>
+      <li><a href="../patterns/content-and-tone.html">Content and tone</a></li>
+    </ul></details>
+  </nav>
+
+  <main id="main" class="ds-main">
+    <header class="ds-header">
+      <p class="ds-kicker">Component &amp;middot; Inputs</p>
+      <h1>Switch</h1>
+      <p class="ds-lead">A switch turns one setting on or off, and the change takes effect straight away without a save step.</p>
+      <div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Status: stable</span><span class="ds-pill">Checkbox with <code>role="switch"</code></span></div>
+      <ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul>
+    </header>
+
+    <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+      <p>Use a switch for a setting whose state is applied the moment it changes: "Gallery is public", "Email reminders". If the choice is submitted later with a form, use a <a href="checkbox.html">checkbox</a>. If there are more than two states, use a <a href="radio-group.html">radio group</a>. The label names the setting, never the action.</p>
+      <ul>
+        <li><b>Label on the right</b> is the default; the track sits at the start so a column of switches aligns.</li>
+        <li><b>With description</b> adds a muted line saying what turning it on does.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+      <div class="ds-anatomy">
+        <figure class="ds-anatomy__figure">
+          <label class="switch"><input type="checkbox" role="switch" checked><span>Gallery is public</span></label>
+          <span class="ds-callout" style="left: 10%; top: -18%;" aria-hidden="true">1</span>
+          <span class="ds-callout" style="left: 20%; top: 104%;" aria-hidden="true">2</span>
+          <span class="ds-callout" style="left: 68%; top: -18%;" aria-hidden="true">3</span>
+        </figure>
+        <ol class="ds-anatomy__list">
+          <li><div><b>Track</b><small>2.75rem by 1.5rem pill with a 1px border; fills with <code>--color-accent</code> when on.</small></div></li>
+          <li><div><b>Thumb</b><small>A circle that moves 1.25rem; changes colour as well as position so state is not shown by position alone.</small></div></li>
+          <li><div><b>Label</b><small>States the setting. Inside the same label so it is the accessible name and part of the target.</small></div></li>
+        </ol>
+      </div>
+    </section>
+    <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+      <p>Switches are always a single control with a label. Group several under a heading, not a fieldset legend, when they are independent settings.</p>
+      <h3>Label right</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><label class="switch"><input type="checkbox" role="switch" checked><span>Gallery is public</span></label><label class="switch"><input type="checkbox" role="switch"><span>Email reminders</span></label></div>
+        <div class="ds-example__caption"><span>On and off side by side.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;label class="switch"&gt;
+  &lt;input type="checkbox" role="switch" checked&gt;
+  &lt;span&gt;Gallery is public&lt;/span&gt;
+&lt;/label&gt;</code></pre></details>
+      </div>
+      <h3>With description</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><label class="switch" style="align-items: flex-start;"><input type="checkbox" role="switch" checked aria-describedby="sw-desc"><span>Allow downloads<br><small class="muted" id="sw-desc">Clients can save full-resolution photos.</small></span></label></div>
+        <div class="ds-example__caption"><span>The description is tied with <code>aria-describedby</code>.</span></div>
+      </div>
+      <h3>Settings list</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><div class="stack" style="--stack-gap: var(--space-2); width: 100%; max-width: 24rem;"><label class="switch"><input type="checkbox" role="switch" checked><span>Show prices on the quote page</span></label><label class="switch"><input type="checkbox" role="switch"><span>Accept new inquiries</span></label><label class="switch"><input type="checkbox" role="switch" disabled><span>Auto-delete after 12 months</span></label></div></div>
+        <div class="ds-example__caption"><span>One label per switch; each is its own tab stop.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="sizes" data-na="One size: a 2.75rem by 1.5rem track in a 44px row. A larger track would crowd form rows; use the same size in tables and settings."><h2><a href="#sizes">Sizes</a></h2>
+      <p class="ds-na">One size: a 2.75rem by 1.5rem track in a 44px row. A larger track would crowd form rows; use the same size in tables and settings.</p>
+    </section>
+    <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+      <p>The native checkbox provides on, off, focus and disabled; hover and focus are forced with <code>data-state</code> for review.</p>
+      <div class="ds-matrix"><table>
+        <thead><tr><th scope="col">Variant</th><th scope="col">Off</th><th scope="col">On</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Disabled off</th><th scope="col">Disabled on</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Switch</th><td><label class="switch"><input type="checkbox" role="switch" aria-label="Gallery is public"></label></td><td><label class="switch"><input type="checkbox" role="switch" aria-label="Gallery is public" checked></label></td><td><label class="switch"><input type="checkbox" role="switch" aria-label="Gallery is public" data-state="hover"></label></td><td><label class="switch"><input type="checkbox" role="switch" aria-label="Gallery is public" data-state="focus"></label></td><td><label class="switch"><input type="checkbox" role="switch" aria-label="Gallery is public" disabled></label></td><td><label class="switch"><input type="checkbox" role="switch" aria-label="Gallery is public" disabled checked></label></td></tr>
+          <tr><th scope="row">With label</th><td><label class="switch"><input type="checkbox" role="switch">Allow downloads</label></td><td><label class="switch"><input type="checkbox" role="switch" checked>Allow downloads</label></td><td><label class="switch"><input type="checkbox" role="switch" data-state="hover">Allow downloads</label></td><td><label class="switch"><input type="checkbox" role="switch" data-state="focus">Allow downloads</label></td><td><label class="switch"><input type="checkbox" role="switch" disabled>Allow downloads</label></td><td><label class="switch"><input type="checkbox" role="switch" disabled checked>Allow downloads</label></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Both themes</h3>
+      <div class="ds-themes">
+        <div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><label class="switch"><input type="checkbox" role="switch" checked>Gallery is public</label><label class="switch"><input type="checkbox" role="switch">Email reminders</label><label class="switch"><input type="checkbox" role="switch" disabled>Unavailable</label></div></div>
+        <div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><label class="switch"><input type="checkbox" role="switch" checked>Gallery is public</label><label class="switch"><input type="checkbox" role="switch">Email reminders</label><label class="switch"><input type="checkbox" role="switch" disabled>Unavailable</label></div></div>
+      </div>
+      <ul>
+        <li><b>Busy</b>: while the change saves, keep the switch in its new position, set <code>aria-busy="true"</code> on the label and announce the result in a live region. If the save fails, return it to its previous state and say why in an <a href="inline-message.html">inline message</a>.</li>
+        <li><b>Disabled</b> switches are dimmed to 45% and skipped; give the reason in the description.</li>
+        <li><b>Error</b> is never shown on the switch itself; a failed change reverts and explains.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+      <ul>
+        <li>Switches keep their size at every width. In a settings list the label wraps and the switch stays aligned to the first line.</li>
+        <li>At 390px the switch may sit at the end of the row (<code>justify-content: space-between</code> on the container) if the label is long; the order in the DOM does not change.</li>
+        <li>Never put a switch inside a table row without a row label that names the setting.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+      <p>The track uses <code>--color-bg-surface-sunken</code> with a <code>--color-border-strong</code> border when off, and <code>--color-accent</code> when on. The thumb is <code>--color-fg-muted</code> off and <code>--color-fg-on-accent</code> on, so the off and on states differ by fill, thumb colour and position, not by one alone.</p>
+    </section>
+    <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+      <h3>Role and pattern</h3>
+      <p>WAI-ARIA APG <b>Switch</b>, built on a native checkbox: <code>&lt;input type="checkbox" role="switch"&gt;</code>. The browser maps <code>checked</code> to <code>aria-checked</code>; do not add <code>aria-checked</code> by hand.</p>
+      <h3>Keyboard</h3>
+      <div class="ds-table-wrap"><table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves focus to and from the switch.</td></tr><tr><td><kbd>Space</kbd></td><td>Toggles the switch.</td></tr><tr><td><kbd>Enter</kbd></td><td>Optional: toggles (APG allows it); in a form it still submits when the native default applies.</td></tr></tbody></table></div>
+      <h3>Focus</h3>
+      <p>The shared ring (2px <code>--color-focus-ring</code>, 2px offset) is drawn around the track on <code>:focus-visible</code>.</p>
+      <h3>Labelling</h3>
+      <p>The label states the setting in the present tense ("Gallery is public"), so the on and off states read naturally as "on" and "off". Never "Enable public gallery", which reads as an action. Descriptions use <code>aria-describedby</code>.</p>
+      <h3>Contrast</h3>
+      <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);"><div class="ds-pair"><span>Label on canvas</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-canvas" data-min="4.5"></span></div><div class="ds-pair"><span>Off track border on surface</span><span class="ds-pair__ratio" data-contrast="--color-border-strong|--color-bg-surface" data-min="3"></span></div><div class="ds-pair"><span>Off thumb on track</span><span class="ds-pair__ratio" data-contrast="--color-fg-muted|--color-bg-surface-sunken" data-min="3"></span></div><div class="ds-pair"><span>On thumb on track</span><span class="ds-pair__ratio" data-contrast="--color-fg-on-accent|--color-accent" data-min="3"></span></div><div class="ds-pair"><span>On track on surface</span><span class="ds-pair__ratio" data-contrast="--color-accent|--color-bg-surface" data-min="3"></span></div><div class="ds-pair"><span>Focus ring on canvas</span><span class="ds-pair__ratio" data-contrast="--color-focus-ring|--color-bg-canvas" data-min="3"></span></div></div>
+      <h3>Motion</h3>
+      <p>The thumb slides over <code>--duration-fast</code>. Under <code>prefers-reduced-motion</code> the duration is zero and the thumb jumps.</p>
+      <h3>Touch</h3>
+      <p>The row is 44px tall and the label is part of the target. The track itself is 44px by 24px.</p>
+    </section>
+    <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+      <ul>
+        <li>Label the setting, not the action: "Email reminders", not "Turn on email reminders".</li>
+        <li>Use the same noun in the label whether it is on or off.</li>
+        <li>Describe the consequence in the hint when it is not obvious: "Clients can save full-resolution photos."</li>
+        <li>Do not use "on" or "off" text inside the track; the position and colour carry the state.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+      <div class="ds-dodont">
+        <figure class="ds-do"><div class="ds-example__canvas"><label class="switch"><input type="checkbox" role="switch" checked>Gallery is public</label></div><figcaption>Label names the setting; change applies immediately.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><label class="switch"><input type="checkbox" role="switch">Enable public gallery</label></div><figcaption>An action label confuses on and off.</figcaption></figure>
+        <figure class="ds-do"><div class="ds-example__canvas"><label class="switch"><input type="checkbox" role="switch" checked aria-describedby="sw-do-d">Allow downloads</label><span class="field__hint" id="sw-do-d">Clients can save full-resolution photos.</span></div><figcaption>A description that states the effect.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><label class="check"><input type="checkbox" checked>Gallery is public</label></div><figcaption>A checkbox for a setting that applies immediately hides that it is live.</figcaption></figure>
+      </div>
+    </section>
+    <section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+        <tbody>
+          <tr><td>Track on</td><td><code>--color-accent</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-accent" data-swatch></i><span data-token="--color-accent"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-accent" data-swatch></i><span data-token="--color-accent"></span></span></td></tr>
+          <tr><td>Track off</td><td><code>--color-bg-surface-sunken</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-surface-sunken" data-swatch></i><span data-token="--color-bg-surface-sunken"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-surface-sunken" data-swatch></i><span data-token="--color-bg-surface-sunken"></span></span></td></tr>
+          <tr><td>Track border</td><td><code>--color-border-strong</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-border-strong" data-swatch></i><span data-token="--color-border-strong"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-border-strong" data-swatch></i><span data-token="--color-border-strong"></span></span></td></tr>
+          <tr><td>Thumb on</td><td><code>--color-fg-on-accent</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-on-accent" data-swatch></i><span data-token="--color-fg-on-accent"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-on-accent" data-swatch></i><span data-token="--color-fg-on-accent"></span></span></td></tr>
+          <tr><td>Thumb off</td><td><code>--color-fg-muted</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td></tr>
+          <tr><td>Focus ring</td><td><code>--color-focus-ring</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-focus-ring" data-swatch></i><span data-token="--color-focus-ring"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-focus-ring" data-swatch></i><span data-token="--color-focus-ring"></span></span></td></tr>
+          <tr><td>Row height</td><td><code>--target-comfortable</code></td><td colspan="2"><span data-token="--target-comfortable"></span></td></tr>
+          <tr><td>Gap track to label</td><td><code>--space-3</code></td><td colspan="2"><span data-token="--space-3"></span></td></tr>
+          <tr><td>Radius</td><td><code>--radius-full</code></td><td colspan="2"><span data-token="--radius-full"></span></td></tr>
+          <tr><td>Transition</td><td><code>--duration-fast</code> / <code>--ease-standard</code></td><td colspan="2"><span data-token="--duration-fast"></span> / <span data-token="--ease-standard"></span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+    <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+      <pre><code>&lt;label class="switch"&gt;
+  &lt;input type="checkbox" role="switch" checked aria-describedby="downloads-hint"&gt;
+  &lt;span&gt;Allow downloads&lt;/span&gt;
+&lt;/label&gt;
+&lt;span class="field__hint" id="downloads-hint"&gt;Clients can save full-resolution photos.&lt;/span&gt;</code></pre>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>.switch</code></td><td>Label wrapper; styles the checkbox as a track and thumb.</td></tr><tr><td><code>role="switch"</code></td><td>On the input, so assistive technology reports on and off.</td></tr><tr><td><code>checked</code></td><td>On.</td></tr><tr><td><code>disabled</code></td><td>Disabled; 45% opacity.</td></tr><tr><td><code>aria-busy="true"</code></td><td>While the change saves.</td></tr><tr><td><code>data-state="hover|focus"</code></td><td>Documentation only.</td></tr></tbody></table></div>
+    </section>
+    <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+      <p>Extracted from these mocks:</p>
+      <ul>
+        <li><a href="../../mocks/admin/session-editor.html">admin/session-editor</a> (publish and notify options)</li>
+        <li><a href="../../mocks/admin/rates.html">admin/rates</a> (active rate toggle)</li>
+        <li><a href="../../mocks/client/request.html">client/request</a> (delivery options)</li>
+        <li><a href="../../mocks/marketing/contact.html">marketing/contact</a> (newsletter opt-in)</li>
+      </ul>
+      <p>Drift fixed during extraction: the mocks used plain checkboxes for live settings; the system adds a switch for settings that apply instantly, and keeps checkboxes for choices submitted with a form.</p>
+    </section>
+
+    <footer class="ds-footer"><span>Quinntyne Brown Studio design system &middot; extracted from <a href="../../mocks/index.html">docs/mocks</a></span><a href="#top">Back to top</a></footer>
+  </main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

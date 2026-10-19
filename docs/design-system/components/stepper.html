@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stepper &mdash; Quinntyne Brown Studio design system</title>
+<meta name="description" content="A stepper shows the steps of a process in order and where the person is in it: the quote journey, a print request, how a session works.">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+  <nav class="ds-nav" aria-label="Design system">
+    <div class="ds-nav__brand"><a href="../index.html">QBS DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">&#9790; Dark</button></div>
+    <details open><summary>Foundations</summary><ul>
+      <li><a href="../foundations/color.html">Color</a></li>
+      <li><a href="../foundations/typography.html">Typography</a></li>
+      <li><a href="../foundations/spacing.html">Spacing</a></li>
+      <li><a href="../foundations/layout.html">Layout</a></li>
+      <li><a href="../foundations/elevation.html">Elevation</a></li>
+      <li><a href="../foundations/shape.html">Shape</a></li>
+      <li><a href="../foundations/motion.html">Motion</a></li>
+      <li><a href="../foundations/iconography.html">Iconography</a></li>
+      <li><a href="../foundations/theming.html">Theming</a></li>
+      <li><a href="../foundations/responsive.html">Responsive</a></li>
+      <li><a href="../foundations/accessibility.html">Accessibility</a></li>
+      <li><a href="../foundations/content.html">Content</a></li>
+    </ul></details>
+    <details open><summary>Components</summary><ul>
+      <li><a href="../components/button.html">Button</a></li>
+      <li><a href="../components/button-group.html">Button group</a></li>
+      <li><a href="../components/link.html">Link</a></li>
+      <li><a href="../components/menu.html">Menu</a></li>
+      <li><a href="../components/checkbox.html">Checkbox</a></li>
+      <li><a href="../components/date-navigator.html">Date navigator</a></li>
+      <li><a href="../components/file-upload.html">File upload</a></li>
+      <li><a href="../components/form-field.html">Form field</a></li>
+      <li><a href="../components/form-layout.html">Form layout</a></li>
+      <li><a href="../components/radio-group.html">Radio group</a></li>
+      <li><a href="../components/select.html">Select</a></li>
+      <li><a href="../components/switch.html">Switch</a></li>
+      <li><a href="../components/text-field.html">Text field</a></li>
+      <li><a href="../components/textarea.html">Textarea</a></li>
+      <li><a href="../components/breadcrumb.html">Breadcrumb</a></li>
+      <li><a href="../components/footer.html">Footer</a></li>
+      <li><a href="../components/pagination.html">Pagination</a></li>
+      <li><a href="../components/sidebar.html">Sidebar</a></li>
+      <li><a href="../components/skip-link.html">Skip link</a></li>
+      <li><a href="../components/tabs.html">Tabs</a></li>
+      <li><a href="../components/top-bar.html">Top bar</a></li>
+      <li><a href="../components/accordion.html">Accordion</a></li>
+      <li><a href="../components/card.html">Card</a></li>
+      <li><a href="../components/dialog.html">Dialog</a></li>
+      <li><a href="../components/divider.html">Divider</a></li>
+      <li><a href="../components/layout.html">Layout primitives</a></li>
+      <li><a href="../components/tooltip.html">Tooltip</a></li>
+      <li><a href="../components/avatar.html">Avatar</a></li>
+      <li><a href="../components/badge.html">Badge</a></li>
+      <li><a href="../components/blog-card.html">Blog card</a></li>
+      <li><a href="../components/chip.html">Chip</a></li>
+      <li><a href="../components/cost-summary.html">Cost summary</a></li>
+      <li><a href="../components/description-list.html">Description list</a></li>
+      <li><a href="../components/line-item.html">Line item</a></li>
+      <li><a href="../components/photo-tile.html">Photo tile</a></li>
+      <li><a href="../components/calendar.html">Schedule calendar</a></li>
+      <li><a href="../components/selection-bar.html">Selection bar</a></li>
+      <li><a href="../components/stat.html">Stat</a></li>
+      <li><a href="../components/stepper.html">Stepper</a></li>
+      <li><a href="../components/table.html">Table</a></li>
+      <li><a href="../components/alert.html">Alert</a></li>
+      <li><a href="../components/empty-state.html">Empty state</a></li>
+      <li><a href="../components/error-page.html">Error page</a></li>
+      <li><a href="../components/inline-message.html">Inline message</a></li>
+      <li><a href="../components/progress.html">Progress</a></li>
+      <li><a href="../components/skeleton.html">Skeleton</a></li>
+      <li><a href="../components/spinner.html">Spinner</a></li>
+      <li><a href="../components/toast.html">Toast</a></li>
+    </ul></details>
+    <details open><summary>Patterns</summary><ul>
+      <li><a href="../patterns/forms.html">Forms</a></li>
+      <li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li>
+      <li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li>
+      <li><a href="../patterns/navigation-and-page-structure.html">Navigation and page structure</a></li>
+      <li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li>
+      <li><a href="../patterns/data-tables-and-lists.html">Data tables and lists</a></li>
+      <li><a href="../patterns/notifications.html">Notifications</a></li>
+      <li><a href="../patterns/content-and-tone.html">Content and tone</a></li>
+    </ul></details>
+  </nav>
+
+  <main id="main" class="ds-main">
+    <header class="ds-header">
+      <p class="ds-kicker">Component &amp;middot; Data display</p>
+      <h1>Stepper</h1>
+      <p class="ds-lead">A stepper shows the steps of a process in order and where the person is in it: the quote journey, a print request, how a session works.</p>
+      <div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Status: stable</span><span class="ds-pill">Ordered list</span></div>
+      <ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul>
+    </header>
+
+    <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+      <p>Use a stepper to explain or track a short sequence of three to five steps. For long forms with sections use <a href="form-layout.html">form layout</a>; for navigating between peer views use <a href="tabs.html">tabs</a>; for a hierarchy use a <a href="breadcrumb.html">breadcrumb</a>.</p>
+      <ul>
+        <li><b>Explaining</b>: all steps are equal and none is current ("How it works").</li>
+        <li><b>Tracking</b>: one step is current (<code>aria-current="step"</code>); completed steps say so in text.</li>
+        <li>Number is generated from the list, so reordering never leaves wrong figures.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+      <div class="ds-anatomy">
+        <figure class="ds-anatomy__figure">
+          <ol class="steps" style="grid-template-columns: minmax(0, 1fr);"><li class="step" aria-current="step"><h3>Tell us about the day</h3><p>Pick a service and a date.</p></li></ol>
+          <span class="ds-callout" style="left: 2%; top: -4%;" aria-hidden="true">1</span>
+          <span class="ds-callout" style="left: 6%; top: 26%;" aria-hidden="true">2</span>
+          <span class="ds-callout" style="left: 6%; top: 62%;" aria-hidden="true">3</span>
+        </figure>
+        <ol class="ds-anatomy__list">
+          <li><div><b>Rule and number</b><small>A top rule, thick when current, and a serif numeral generated by a CSS counter.</small></div></li>
+          <li><div><b>Title</b><small><code>h3</code> in the h3 type style; a short verb phrase.</small></div></li>
+          <li><div><b>Description</b><small>One sentence in muted ink explaining what happens in the step.</small></div></li>
+        </ol>
+      </div>
+    </section>
+    <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+      <p>The stepper is an ordered list of up to five steps. Choose horizontal for desktop explainers; it stacks to vertical on phones automatically.</p>
+      <h3>Tracking, step 1 current</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><ol class="steps" style="grid-template-columns: repeat(3, minmax(0, 1fr));"><li class="step" aria-current="step"><h3>Tell us about the day</h3><p>Pick a service and a date, and share a few details.</p></li><li class="step"><h3>Review your quote</h3><p>See the estimate update as you change options.</p></li><li class="step"><h3>Confirm with the studio</h3><p>We reply within two working days to lock in the date.</p></li></ol></div>
+        <div class="ds-example__caption"><span>The current step's rule is thick and ink-coloured.</span></div>
+        <details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;ol class="steps"&gt;
+  &lt;li class="step" aria-current="step"&gt;&lt;h3&gt;Tell us about the day&lt;/h3&gt;&lt;p&gt;Pick a service and a date.&lt;/p&gt;&lt;/li&gt;
+  &lt;li class="step"&gt;&lt;h3&gt;Review your quote&lt;/h3&gt;&lt;p&gt;…&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;</code></pre></details>
+      </div>
+      <h3>Explaining (none current)</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><ol class="steps" style="grid-template-columns: repeat(3, minmax(0, 1fr));"><li class="step"><h3>Book a session</h3><p>Choose the service and date that suit you.</p></li><li class="step"><h3>We photograph</h3><p>Your photographer arrives early and works unhurried.</p></li><li class="step"><h3>Receive your gallery</h3><p>Review and order prints in your private client gallery.</p></li></ol></div>
+        <div class="ds-example__caption"><span>Used on the marketing About page. No step is current.</span></div>
+      </div>
+      <h3>With completed steps</h3>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><ol class="steps" style="grid-template-columns: repeat(3, minmax(0, 1fr));"><li class="step"><h3>Details <span class="badge badge--success">Complete</span></h3><p>Wedding coverage, 17 October.</p></li><li class="step" aria-current="step"><h3>Review quote</h3><p>Check the total.</p></li><li class="step"><h3>Confirm</h3><p>Send the request.</p></li></ol></div>
+        <div class="ds-example__caption"><span>A completed step says so in text; do not rely on colour.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="sizes" data-na="The stepper has one size; the number of steps sets the column width."><h2><a href="#sizes">Sizes</a></h2>
+      <p class="ds-na">The stepper has one size; the number of steps sets the column width.</p>
+    </section>
+    <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+      <p>A step is upcoming, current or complete. Current is a real attribute; complete is stated in text beside the title.</p>
+      <div class="ds-matrix"><table>
+        <thead><tr><th scope="col">Variant</th><th scope="col">Upcoming</th><th scope="col">Current</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Step</th><td><ol class="steps" style="grid-template-columns: minmax(0, 1fr);"><li class="step"><h3>Review quote</h3><p>Check the total.</p></li></ol></td><td><ol class="steps" style="grid-template-columns: minmax(0, 1fr);"><li class="step" aria-current="step"><h3>Review quote</h3><p>Check the total.</p></li></ol></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Both themes</h3>
+      <div class="ds-themes">
+        <div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><ol class="steps" style="grid-template-columns: repeat(3, minmax(0, 1fr));"><li class="step" aria-current="step"><h3>Tell us about the day</h3><p>Pick a service and a date, and share a few details.</p></li><li class="step"><h3>Review your quote</h3><p>See the estimate update as you change options.</p></li><li class="step"><h3>Confirm with the studio</h3><p>We reply within two working days to lock in the date.</p></li></ol></div></div>
+        <div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><ol class="steps" style="grid-template-columns: repeat(3, minmax(0, 1fr));"><li class="step" aria-current="step"><h3>Tell us about the day</h3><p>Pick a service and a date, and share a few details.</p></li><li class="step"><h3>Review your quote</h3><p>See the estimate update as you change options.</p></li><li class="step"><h3>Confirm with the studio</h3><p>We reply within two working days to lock in the date.</p></li></ol></div></div>
+      </div>
+      <ul>
+        <li><b>Complete</b>: add <code>&lt;span class="badge badge--success"&gt;Complete&lt;/span&gt;</code> to the title, or write it into the description.</li>
+        <li><b>Error</b>: when a step needs attention, add a <code>badge--error</code> with "Needs attention" and link to the step.</li>
+        <li><b>Responsive</b>: below 768px the steps stack in one column with the same rule and number.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+      <ul>
+        <li>At 768px and wider, three steps sit side by side; below, they stack in order.</li>
+        <li>Five steps are too many for three columns: override <code>grid-template-columns</code> only in a layout wrapper, not by changing the component.</li>
+        <li>The numeral and rule move with the step so each remains self-contained when stacked.</li>
+        <li>Text never truncates; descriptions wrap.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+      <p>Rule colour from <code>--color-border-default</code>; the current rule and the numeral use <code>--color-accent</code> and <code>--color-brand</code>, which swap in the dark theme. Description text uses <code>--color-fg-muted</code>.</p>
+    </section>
+    <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+      <h3>Role and pattern</h3>
+      <p>A native ordered list. The current step uses <code>aria-current="step"</code>; there is no tab role because steps are not interactive. If steps are links, wrap each title in an <code>&lt;a&gt;</code> and keep the list.</p>
+      <h3>Keyboard</h3>
+      <div class="ds-table-wrap"><table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves through any step links in DOM order; plain steps are skipped.</td></tr><tr><td><kbd>Enter</kbd></td><td>Follows a step link.</td></tr><tr><td><kbd>Esc</kbd></td><td>No effect.</td></tr></tbody></table></div>
+      <h3>Focus</h3>
+      <p>Steps take no focus unless they are links. When the person advances, move focus to the heading of the new section, not the stepper.</p>
+      <h3>Labelling</h3>
+      <p>The list reads "list, 3 items". The counter numeral is generated content; screen readers may read it, so do not repeat numbers in the title. The current step is announced as "current step". State completion in text.</p>
+      <h3>Contrast</h3>
+      <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);"><div class="ds-pair"><span>Title on surface</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-surface" data-min="4.5"></span></div><div class="ds-pair"><span>Description on surface</span><span class="ds-pair__ratio" data-contrast="--color-fg-muted|--color-bg-surface" data-min="4.5"></span></div><div class="ds-pair"><span>Numeral on surface</span><span class="ds-pair__ratio" data-contrast="--color-brand|--color-bg-surface" data-min="4.5"></span></div><div class="ds-pair"><span>Current rule on surface</span><span class="ds-pair__ratio" data-contrast="--color-accent|--color-bg-surface" data-min="3"></span></div></div>
+      <h3>Motion</h3>
+      <p>No animation; step changes are instant.</p>
+      <h3>Touch</h3>
+      <p>Plain steps are not targets. Step links should be at least 44px tall in the title row.</p>
+    </section>
+    <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+      <ul>
+        <li>Titles are short verb phrases in sentence case: "Review your quote".</li>
+        <li>Descriptions are one sentence; no more than 20 words.</li>
+        <li>Three to five steps. If you need more, group them.</li>
+        <li>Do not number the titles; the component does it.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+      <div class="ds-dodont">
+        <figure class="ds-do"><div class="ds-example__canvas"><ol class="steps" style="grid-template-columns: minmax(0, 1fr);"><li class="step" aria-current="step"><h3>Review your quote</h3><p>Check the total.</p></li></ol></div><figcaption>Mark the current step with aria-current.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><ol class="steps" style="grid-template-columns: minmax(0, 1fr);"><li class="step"><h3>1. Review your quote</h3><p>Check the total.</p></li></ol></div><figcaption>The counter adds the number; typing it duplicates it.</figcaption></figure>
+        <figure class="ds-do"><div class="ds-example__canvas"><ol class="steps" style="grid-template-columns: minmax(0, 1fr);"><li class="step"><h3>Details <span class="badge badge--success">Complete</span></h3><p>Wedding coverage.</p></li></ol></div><figcaption>Say "Complete" in text.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><div class="steps"><div class="step"><h3>Details</h3></div></div></div><figcaption>Use an ordered list so the sequence is exposed.</figcaption></figure>
+      </div>
+    </section>
+    <section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+      <div class="ds-table-wrap"><table class="ds-table">
+        <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+        <tbody>
+          <tr><td>Rule</td><td><code>--color-border-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-border-default" data-swatch></i><span data-token="--color-border-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-border-default" data-swatch></i><span data-token="--color-border-default"></span></span></td></tr>
+          <tr><td>Current rule</td><td><code>--color-accent</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-accent" data-swatch></i><span data-token="--color-accent"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-accent" data-swatch></i><span data-token="--color-accent"></span></span></td></tr>
+          <tr><td>Numeral</td><td><code>--color-brand</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-brand" data-swatch></i><span data-token="--color-brand"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-brand" data-swatch></i><span data-token="--color-brand"></span></span></td></tr>
+          <tr><td>Description</td><td><code>--color-fg-muted</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td></tr>
+          <tr><td>Gap</td><td><code>--space-6</code></td><td colspan="2"><span data-token="--space-6"></span></td></tr>
+          <tr><td>Title font</td><td><code>--text-h3</code></td><td colspan="2"><span data-token="--text-h3"></span></td></tr>
+          <tr><td>Current rule width</td><td><code>--border-width-thick</code></td><td colspan="2"><span data-token="--border-width-thick"></span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+    <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+      <pre><code>&lt;ol class="steps"&gt;
+  &lt;li class="step"&gt;&lt;h3&gt;Book a session&lt;/h3&gt;&lt;p&gt;Choose the service and date.&lt;/p&gt;&lt;/li&gt;
+  &lt;li class="step" aria-current="step"&gt;&lt;h3&gt;We photograph&lt;/h3&gt;&lt;p&gt;…&lt;/p&gt;&lt;/li&gt;
+  &lt;li class="step"&gt;&lt;h3&gt;Receive your gallery&lt;/h3&gt;&lt;p&gt;…&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>.steps</code></td><td>Ordered list reset with a counter; one column, three from 768px.</td></tr><tr><td><code>.step</code></td><td>A step: top rule, generated numeral via <code>::before</code>.</td></tr><tr><td><code>aria-current="step"</code></td><td>Current step: thick ink rule.</td></tr></tbody></table></div>
+    </section>
+    <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+      <p>Extracted from these mocks:</p>
+      <ul>
+        <li><a href="../../mocks/marketing/about.html">marketing/about</a> (how we work)</li>
+      </ul>
+      <p>Drift fixed during extraction: the mocks hand-numbered each step in a <code>.number</code> block with a pale-olive hex colour that fails 4.5:1; the system generates the numeral with a CSS counter in brand ink. Current and complete states are new.</p>
+    </section>
+
+    <footer class="ds-footer"><span>Quinntyne Brown Studio design system &middot; extracted from <a href="../../mocks/index.html">docs/mocks</a></span><a href="#top">Back to top</a></footer>
+  </main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

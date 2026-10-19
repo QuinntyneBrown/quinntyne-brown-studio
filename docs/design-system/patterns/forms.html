@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forms &mdash; Quinntyne Brown Studio design system</title>
+<meta name="description" content="Layout, validation timing, error summary and submit states for every form in the studio apps.">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+  <nav class="ds-nav" aria-label="Design system">
+    <div class="ds-nav__brand"><a href="../index.html">QBS DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">&#9790; Dark</button></div>
+    <details open><summary>Foundations</summary><ul>
+      <li><a href="../foundations/color.html">Color</a></li>
+      <li><a href="../foundations/typography.html">Typography</a></li>
+      <li><a href="../foundations/spacing.html">Spacing</a></li>
+      <li><a href="../foundations/layout.html">Layout</a></li>
+      <li><a href="../foundations/elevation.html">Elevation</a></li>
+      <li><a href="../foundations/shape.html">Shape</a></li>
+      <li><a href="../foundations/motion.html">Motion</a></li>
+      <li><a href="../foundations/iconography.html">Iconography</a></li>
+      <li><a href="../foundations/theming.html">Theming</a></li>
+      <li><a href="../foundations/responsive.html">Responsive</a></li>
+      <li><a href="../foundations/accessibility.html">Accessibility</a></li>
+      <li><a href="../foundations/content.html">Content</a></li>
+    </ul></details>
+    <details open><summary>Components</summary><ul>
+      <li><a href="../components/button.html">Button</a></li>
+      <li><a href="../components/button-group.html">Button group</a></li>
+      <li><a href="../components/link.html">Link</a></li>
+      <li><a href="../components/menu.html">Menu</a></li>
+      <li><a href="../components/checkbox.html">Checkbox</a></li>
+      <li><a href="../components/date-navigator.html">Date navigator</a></li>
+      <li><a href="../components/file-upload.html">File upload</a></li>
+      <li><a href="../components/form-field.html">Form field</a></li>
+      <li><a href="../components/form-layout.html">Form layout</a></li>
+      <li><a href="../components/radio-group.html">Radio group</a></li>
+      <li><a href="../components/select.html">Select</a></li>
+      <li><a href="../components/switch.html">Switch</a></li>
+      <li><a href="../components/text-field.html">Text field</a></li>
+      <li><a href="../components/textarea.html">Textarea</a></li>
+      <li><a href="../components/breadcrumb.html">Breadcrumb</a></li>
+      <li><a href="../components/footer.html">Footer</a></li>
+      <li><a href="../components/pagination.html">Pagination</a></li>
+      <li><a href="../components/sidebar.html">Sidebar</a></li>
+      <li><a href="../components/skip-link.html">Skip link</a></li>
+      <li><a href="../components/tabs.html">Tabs</a></li>
+      <li><a href="../components/top-bar.html">Top bar</a></li>
+      <li><a href="../components/accordion.html">Accordion</a></li>
+      <li><a href="../components/card.html">Card</a></li>
+      <li><a href="../components/dialog.html">Dialog</a></li>
+      <li><a href="../components/divider.html">Divider</a></li>
+      <li><a href="../components/layout.html">Layout primitives</a></li>
+      <li><a href="../components/tooltip.html">Tooltip</a></li>
+      <li><a href="../components/avatar.html">Avatar</a></li>
+      <li><a href="../components/badge.html">Badge</a></li>
+      <li><a href="../components/blog-card.html">Blog card</a></li>
+      <li><a href="../components/chip.html">Chip</a></li>
+      <li><a href="../components/cost-summary.html">Cost summary</a></li>
+      <li><a href="../components/description-list.html">Description list</a></li>
+      <li><a href="../components/line-item.html">Line item</a></li>
+      <li><a href="../components/photo-tile.html">Photo tile</a></li>
+      <li><a href="../components/calendar.html">Schedule calendar</a></li>
+      <li><a href="../components/selection-bar.html">Selection bar</a></li>
+      <li><a href="../components/stat.html">Stat</a></li>
+      <li><a href="../components/stepper.html">Stepper</a></li>
+      <li><a href="../components/table.html">Table</a></li>
+      <li><a href="../components/alert.html">Alert</a></li>
+      <li><a href="../components/empty-state.html">Empty state</a></li>
+      <li><a href="../components/error-page.html">Error page</a></li>
+      <li><a href="../components/inline-message.html">Inline message</a></li>
+      <li><a href="../components/progress.html">Progress</a></li>
+      <li><a href="../components/skeleton.html">Skeleton</a></li>
+      <li><a href="../components/spinner.html">Spinner</a></li>
+      <li><a href="../components/toast.html">Toast</a></li>
+    </ul></details>
+    <details open><summary>Patterns</summary><ul>
+      <li><a href="../patterns/forms.html">Forms</a></li>
+      <li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li>
+      <li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li>
+      <li><a href="../patterns/navigation-and-page-structure.html">Navigation and page structure</a></li>
+      <li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li>
+      <li><a href="../patterns/data-tables-and-lists.html">Data tables and lists</a></li>
+      <li><a href="../patterns/notifications.html">Notifications</a></li>
+      <li><a href="../patterns/content-and-tone.html">Content and tone</a></li>
+    </ul></details>
+  </nav>
+
+  <main id="main" class="ds-main">
+    <header class="ds-header">
+      <p class="ds-kicker">Pattern</p>
+      <h1>Forms</h1>
+      <p class="ds-lead">Layout, validation timing, error summary and submit states for every form in the studio apps.</p>
+      <div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Pattern</span></div>
+      <ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#when">When to use</a></li><li><a href="#structure">Structure</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#sources">Sources</a></li></ul>
+    </header>
+
+    <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+      <p>Forms are where clients and staff do the real work: requesting a quote, creating a session, uploading photos, submitting a print request. This pattern fixes how <a href="../components/form-field.html">fields</a> are laid out, when they validate, and how errors surface.</p>
+    </section>
+    <section class="ds-section" id="when"><h2><a href="#when">When to use</a></h2>
+      <ul>
+        <li>Use a single column for every form below 768px and for short forms always.</li>
+        <li>Use <a href="../components/form-layout.html">two columns</a> only for editors with many short, related fields (session editor).</li>
+        <li>Group fields in <code>.form-section</code>s with a serif heading when a form has more than seven fields.</li>
+        <li>Use a <a href="dialogs-and-overlays.html">dialog</a> only for forms of one to three fields.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="structure"><h2><a href="#structure">Structure</a></h2>
+      <p>Error state shown. Labels sit above controls, hints below, one primary action last.</p>
+      <div class="ds-example">
+        <div class="ds-example__canvas"><form class="stack" style="width: 100%; max-width: 32rem;" novalidate>
+<div class="error-summary" role="alert" tabindex="-1"><h2>Fix 2 things to continue</h2><ul><li><a href="#pf-date">Session date: choose a date at least two days from now</a></li><li><a href="#pf-email">Email: enter an address like name@example.com</a></li></ul></div>
+<div class="field"><label class="field__label" for="pf-type">Session type</label><select class="input" id="pf-type"><option>Wedding</option><option>Headshots</option></select></div>
+<div class="field"><label class="field__label" for="pf-date">Session date</label><input class="input" id="pf-date" type="date" aria-invalid="true" aria-describedby="pf-date-err"><span class="field__error" id="pf-date-err">Choose a date at least two days from now.</span></div>
+<div class="field"><label class="field__label" for="pf-email">Email</label><input class="input" id="pf-email" type="email" autocomplete="email" aria-invalid="true" aria-describedby="pf-email-err pf-email-hint"><span class="field__hint" id="pf-email-hint">We only use it to reply to your request.</span><span class="field__error" id="pf-email-err">Enter an address like name@example.com.</span></div>
+<div class="form-actions"><button class="btn" type="button">Cancel</button><button class="btn btn--primary" type="submit">Send request</button></div></form></div>
+        <div class="ds-example__caption"><span>Error summary at top links to each invalid field; fields keep what was typed.</span></div>
+      </div>
+    </section>
+    <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+      <div class="ds-matrix"><table>
+        <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Invalid</th><th scope="col">Read-only</th><th scope="col">Disabled</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Text field</th><td><input class="input" type="text" aria-label="Location" value="Distillery District"></td><td><input class="input" type="text" aria-label="Location" value="Distillery District" aria-invalid="true"></td><td><input class="input" type="text" aria-label="Location" value="Distillery District" readonly></td><td><input class="input" type="text" aria-label="Location" value="Distillery District" disabled></td></tr>
+        </tbody>
+      </table></div>
+      <ul>
+        <li><b>Validate on blur</b>, then re-validate on every input once a field has errored. Never validate an empty field the person has not left.</li>
+        <li><b>On submit</b> validate everything, show the error summary, move focus to it and keep every entered value.</li>
+        <li><b>Submitting</b>: the primary button shows its busy state; the form stays editable only if the server supports it, otherwise fields become read-only.</li>
+        <li><b>Server failure</b>: show an <a href="../components/alert.html">alert</a> above the actions with a retry; never clear the draft.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+      <ul>
+        <li>Single column below 768px; the primary action becomes full width and sits last.</li>
+        <li>The summary stays above the fields; fields keep 44px height on touch.</li>
+        <li>Two-column forms align labels above controls at every width.</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+      <ul>
+        <li>Every control has a programmatic label (<code>for</code>/<code>id</code>); placeholders are hints only (3.3.2).</li>
+        <li>Errors: <code>aria-invalid="true"</code> and <code>aria-describedby</code> pointing at the message; the summary is <code>role="alert"</code> with focus moved to it (3.3.1, 3.3.3).</li>
+        <li>Use <code>autocomplete</code> on name, email, phone and address fields (1.3.5).</li>
+        <li>Required fields say "required" in the label text, not by colour or asterisk alone.</li>
+        <li>Changing a select never submits or navigates (3.2.2). Never block paste (3.3.8).</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+      <ul>
+        <li>Labels are nouns ("Session date"), sentence case. Hints say why, not what.</li>
+        <li>Error formula: what is wrong + how to fix it. "Choose a date at least two days from now."</li>
+        <li>Primary button names the outcome: "Send request", "Save session".</li>
+      </ul>
+    </section>
+    <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+      <div class="ds-dodont">
+        <figure class="ds-do"><div class="ds-example__canvas"><div class="field" style="width:100%"><label class="field__label" for="fd1">Email</label><input class="input" id="fd1" type="email" aria-invalid="true" aria-describedby="fd1e" value="sam@"><span class="field__error" id="fd1e">Enter an address like name@example.com.</span></div></div><figcaption>Say how to fix the error and keep what was typed.</figcaption></figure>
+        <figure class="ds-dont"><div class="ds-example__canvas"><div class="field" style="width:100%"><input class="input" type="email" aria-label="Email" placeholder="Email" aria-invalid="true"><span class="field__error">Invalid input</span></div></div><figcaption>A placeholder as the only label and a vague error.</figcaption></figure>
+      </div>
+    </section>
+    <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+      <p>Composed from these mocks:</p>
+      <ul>
+        <li><a href="../../mocks/marketing/quote.html">marketing/quote</a> (quote form)</li>
+        <li><a href="../../mocks/marketing/contact.html">marketing/contact</a> (message form)</li>
+        <li><a href="../../mocks/admin/session-editor.html">admin/session-editor</a> (two-column editor)</li>
+        <li><a href="../../mocks/admin/login.html">admin/login</a> (auth form)</li>
+      </ul>
+      <p>Drift fixed during extraction: mock inputs used a 1.4:1 border (#d7d9ce); the system uses <code>--color-border-strong</code> (4.6:1) so field edges meet 1.4.11. Field labels at 11px are raised to 12px semibold.</p>
+    </section>
+
+    <footer class="ds-footer"><span>Quinntyne Brown Studio design system &middot; extracted from <a href="../../mocks/index.html">docs/mocks</a></span><a href="#top">Back to top</a></footer>
+  </main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>
